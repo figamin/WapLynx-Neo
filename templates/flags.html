@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+<script src="http://static.localhost:8080/settings.js" defer></script>
+<script src="http://static.localhost:8080/api.js" defer></script>
+<script src="http://static.localhost:8080/flags.js" defer></script>
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://localhost:8080" id="navLinkHome">Home</a>
+    <a href="http://localhost:8080/boards.js" id="navBoardList">Boards</a>
+    <a href="http://localhost:8080/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.localhost:8080" id="navArchives">Archives</a>
+    <a href="http://localhost:8080/logs.js" id="navLogs">Logs</a>
+    <a href="http://localhost:8080/account.js" id="navAccount">Account</a>
+    <a href="http://static.localhost:8080/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- page header -->
+  <header>
+    <img src="http://static.localhost:8080/logo.png" alt="Logo by Doke" />
+  </header>
+  
+  <div class="settings">
+    <h3>New Flag</h3>
+    <form
+        action="/createFlag.js"
+        method="post"
+        enctype="multipart/form-data">
+      <input
+        type="hidden"
+        name="boardUri"
+        id="boardIdentifier">
+      <label>Flag Name:
+        <input
+          name="flagName"
+          id="fieldFlagName"
+          type="text">
+      </label>
+      <input
+        type="file"
+        id="files"
+        name="files">
+      <input
+        type="submit"
+        value="Add Flag"
+        id="addFormButton">
+      <input
+        type="button"
+        onClick="addFlag()"
+        class="hidden"
+        value="Add flag"
+        id="addJsButton">
+      <p class="small">Maximum size allowed: <span id="maxSizeLabel"></span></p>
+    </form>
+    <h3>Existing Flags</h3>
+    <div id="flagsDiv"></div>
+  </div>
+
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <div id="footerInfo">
+    </div>
+  </footer>
+
+</body>
+</html>

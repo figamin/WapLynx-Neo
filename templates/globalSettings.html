@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+<script src="http://static.localhost:8080/settings.js" defer></script>
+<script src="http://static.localhost:8080/api.js" defer></script>
+<script src="http://static.localhost:8080/globalSettings.js" defer></script>
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://localhost:8080" id="navLinkHome">Home</a>
+    <a href="http://localhost:8080/boards.js" id="navBoardList">Boards</a>
+    <a href="http://localhost:8080/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.localhost:8080" id="navArchives">Archives</a>
+    <a href="http://localhost:8080/logs.js" id="navLogs">Logs</a>
+    <a href="http://localhost:8080/account.js" id="navAccount">Account</a>
+    <a href="http://static.localhost:8080/posting.html" id="navPosting">Help</a>
+  </nav>
+  
+  <!-- page header -->
+  <header>
+    <img src="http://static.localhost:8080/logo.png" alt="Logo by Doke" />
+  </header>
+  
+  <!-- settings and forms -->
+  <div class="settings">
+  <h3>Global Settings</h3>
+  <form action="/saveGlobalSettings.js" method="post" enctype="multipart/form-data">
+    <label>Address<sup>2</sup>:
+      <input 
+        type="text" 
+        name="address" 
+        id="fieldAddress">
+    </label>
+    <label>Port<sup>2</sup>:
+      <input 
+        type="text" 
+        name="port" 
+        id="fieldPort">
+    </label>
+    <label>Tcp port<sup>2</sup>:
+      <input 
+        type="text" 
+        name="tcpPort" 
+        id="fieldTcpPort">
+    </label>
+    <label>SSL key passphrase
+      <input
+        type="password"
+        name="sslPass"
+        id="fieldSslPass">
+    </label>
+    <label>RSS domain
+      <input
+         type="text"
+         name="rssDomain"
+         id="fieldRssDomain">
+    </label>
+    <label>Front-end directory:
+      <input 
+        type="text" 
+        name="fePath" 
+        id="fieldFePath">
+    </label>
+    <label>Maximum amount of concurrent rebuild messages:
+      <input 
+        type="text" 
+        name="concurrentRebuildMessages" 
+        id="fieldConcurrentRebuildMessages">
+    </label>
+    <label>Boards page size:
+      <input 
+        type="text" 
+        name="boardPageSize" 
+        id="fieldPageSize">
+    </label>
+    <label>Overboard URI:
+      <input 
+        type="text" 
+        name="overboard" 
+        id="fieldOverboard">
+    </label>
+    <label>Amount of threads on the overboard:
+      <input 
+      type="text" 
+      name="overBoardThreadCount" 
+      id="fieldOverBoardThreads">
+    </label>
+    <label>Amount of threads on the multi-board (Warning: resource intensive):
+      <input 
+        type="text" 
+        name="multiboardThreadCount" 
+        id="fieldMultiBoardThreadCount">
+    </label>
+    <label>Number of preview posts:
+      <input 
+        type="text" 
+        name="latestPostsCount" 
+        id="fieldLatestPostsCount">
+    </label>
+    <label>Number of replies before a thread enters auto-sage:
+      <input 
+        type="text" 
+        name="autoSageLimit" 
+        id="fieldAutoSageLimit">
+    </label>
+    <label>Maximum amount of threads per board:
+      <input
+        type="text"
+        name="threadLimit"
+        id="fieldThreadLimit">
+    </label>
+    <label>Temporary directory:
+      <input
+        type="text"
+        name="tempDir"
+        id="fieldTempDir">
+    </label>
+    <label>Sender address for automated e-mails:
+      <input
+        type="email"
+        name="senderEmail"
+        id="fieldSenderEmail">
+    </label>
+    <label>Amount of minutes before a captcha expires:
+      <input
+        type="text"
+        name="captchaExpiration"
+        id="fieldCaptchaExpiration">
+    </label>
+    <label for="fieldAddons">
+      Addons<sup>1</sup> (They will be loaded in the order they appear in the list):
+      </label>
+      <input
+        type="text"
+        name="addons"
+        id="fieldAddons"
+        class="wide">
+    <label>Site title:
+      <input
+        type="text"
+        name="siteTitle"
+        id="fieldSiteTitle">
+    </label>
+    <label>Maximum size for requests (MB):
+      <input
+        type="text"
+        name="maxRequestSize"
+        id="fieldMaxRequestSize">
+    </label>
+    <label>Maximum size for uploaded files (MB):
+      <input
+        type="text"
+        name="maxFileSize"
+        id="fieldMaxFileSize">
+    </label>
+    <label for="fieldAcceptedMimes">Allowed mime-types<sup>1</sup>:
+      <label>
+      <input
+        type="text"
+        name="acceptedMimes"
+        id="fieldAcceptedMimes"
+        class="wide">
+    <label>Maximum number of uploaded files on posting:
+      <input
+        type="text"
+        name="maxFiles"
+        id="fieldMaxFiles">
+    </label>
+    <label>Default ban message to be displayed on banned posts:
+      <input
+        type="text"
+        name="banMessage"
+        id="fieldBanMessage">
+    </label>
+    <label>Default anonymous name:
+      <input
+        type="text"
+        name="anonymousName"
+        id="fieldAnonymousName">
+    </label>
+    <label>Amount of boards to be picked as top boards:
+      <input
+        type="text"
+        name="topBoardsCount"
+        id="fieldTopBoardsCount">
+    </label>
+    <label>Maximum amount of boards per page on boards list:
+      <input
+        type="text"
+        name="boardsPerPage"
+        id="fieldBoardsPerPage">
+    </label>
+    <label>URL for the list of TOR exit node ips:
+      <input
+        type="url"
+        name="torSource"
+        id="fieldTorSource">
+    </label>
+    <label>Path to an optional language pack:
+      <input
+        type="text"
+        name="languagePack"
+        id="fieldLanguagePack">
+    </label>
+    <label>Maximum dimension for thumbnails, for both height and width:
+      <input
+        type="text"
+        name="thumbSize"
+        id="fieldThumbSize">
+    </label>
+    <label>Maximum number of rules in boards:
+      <input
+        type="text"
+        name="maxRules"
+        id="fieldMaxRules">
+    </label>
+    <label>Maximum number of filters in boards:
+      <input
+        type="text"
+        name="maxFilters"
+        id="fieldMaxFilters">
+    </label>
+    <label>Maximum number of tags per board:
+      <input
+        type="text"
+        name="maxTags"
+        id="fieldMaxTags">
+    </label>
+    <label>Maximum number of volunteers in boards:
+      <input
+        type="text"
+        name="maxVolunteers"
+        id="fieldMaxVolunteers">
+    </label>
+    <label>Maximum size for banners (KB):
+      <input
+        type="text"
+        name="maxBannerSize"
+        id="fieldMaxBannerSize">
+    </label>
+    <label>Extension used for thumbnails (Will make all gif thumbs do not animate):
+      <input
+        type="text"
+        id="fieldThumbExtension"
+        name="thumbExtension">
+    </label>
+    <label>Maximum size for flags (KB):
+      <input
+        type="text"
+        name="maxFlagSize"
+        id="fieldMaxFlagSize">
+    </label>
+    <label>Minimum amount of seconds between posts from the same ip:
+      <input
+        type="text"
+        name="floodInterval"
+        id="fieldFloodInterval">
+    </label>
+    <label>Number of latest posts to show on index page:
+      <input
+        type="text"
+        name="globalLatestPosts"
+        id="fieldGlobalLatestPosts">
+    </label>
+    <label>Number of latest images to show on index page:
+      <input
+        type="text"
+        name="globalLatestImages"
+        id="fieldGlobalLatestImages">
+    </label>
+    <label>How many posts a block bypass allows:
+      <input
+        type="text"
+        name="bypassMaxPosts"
+        id="fieldBypassPosts">
+    </label>
+    <label>How many users a block bypass lasts:
+      <input
+        type="text"
+        name="bypassDurationHours"
+        id="fieldBypassHours">
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxGlobalBoardModeration"
+        name="allowGlobalBoardModeration">
+      Allow global staff to moderate boards
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxVerbose"
+        name="verbose">
+      Verbose mode
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxDisable304"
+        name="disable304">
+      Disable http response 304 (Only turn on if you know what you are doing, will consume lots of bandwidth)
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxSsl"
+        name="ssl">
+      SSL<sup>2</sup> (Make sure you have the proper files)
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxDisableFloodCheck"
+        name="disableFloodCheck">
+      Disable flood checks
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxGlobalBanners"
+        name="useGlobalBanners">
+      Make boards use global banners
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxAllowCustomJs"
+        name="allowBoardCustomJs">
+      Allow custom javascript for boards
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxMediaThumb"
+        name="mediaThumb">
+      Generate thumbnails from media files (requires ffmpeg)
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxGlobalCaptcha"
+        name="forceCaptcha">
+      Forces all boards to use captcha
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxMaintenance"
+        name="maintenance">
+      Maintenance mode (Disables input to the server and displays maintenance message)
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxDisableAccountCreation"
+        name="disableAccountCreation">
+      Disable account creation
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxMultipleReports"
+        name="multipleReports">
+      Allow multiple reports at once
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        id="checkboxServeArchive"
+        name="serveArchive">
+      Serve archived threads<sup>2,4</sup>
+    </label>
+    <label>Access for TOR users:
+      <select
+        id="comboTorAccess"
+        name="torAccess">
+      </select>
+    </label>
+    <label>Access for proxy users:
+      <select
+        id="comboProxyAccess"
+        name="proxyAccess">
+      </select>
+    </label>
+    <label>Archive level<sup>3,4</sup>:
+      <select
+        id="comboArchive"
+        name="archiveLevel">
+      </select>
+    </label>
+    <label>Minimum global role for users to be able to see poster's clear IPs:
+      <select
+        id="comboMinClearIpRole"
+        name="clearIpMinRole">
+      </select>
+    </label>
+    <label>Minimum global role required for board creation:
+      <select
+        id="comboBoardCreationRequirement"
+        name="boardCreationRequirement">
+      </select>
+    </label>
+    <label>Bypass mode:
+      <select
+        id="comboBypassMode"
+        name="bypassMode">
+      </select>
+    </label>
+    <br />
+    <input
+      type="submit"
+      value="Save"
+      id="saveFormButton">
+    <input
+      id="saveJSButton"
+      type="button"
+      value="Save"
+      onclick="save()"
+      style="display: none;">
+    </form>
+    <p><sup>1</sup>: Separate values by commas, spaces will be ignored (a,b,c)</p>
+    <p><sup>2</sup>: Requires server restart</p>
+    <p><sup>3</sup>: Requires server restart if changing from/to no archives</p>
+    <p><sup>4</sup>: Requires archive.json to be created and a domain name</p>
+    <p>Those settings are all explained <a href="https://gitgud.io/LynxChan/LynxChan/tree/master/src/be">here</a></p>
+  </div>
+  
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <div id="footerInfo">
+    </div>
+  </footer>
+
+</body>
+</html>

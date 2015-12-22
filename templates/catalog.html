@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://localhost:8080" id="navLinkHome">Home</a>
+    <a href="http://localhost:8080/boards.js" id="navBoardList">Boards</a>
+    <a href="http://localhost:8080/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.localhost:8080" id="navArchives">Archives</a>
+    <a href="http://localhost:8080/logs.js" id="navLogs">Logs</a>
+    <a href="http://localhost:8080/account.js" id="navAccount">Account</a>
+    <a href="http://static.localhost:8080/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- page header -->
+  <header>
+    <img src="http://static.localhost:8080/logo.png" alt="Logo by Doke" />
+  </header>
+  
+  <!-- global message, from static/globalMessage.html -->
+  <div id="globalMessage">
+  </div>
+  
+  <!-- catalog id and the div that holds all the cells -->
+  <p id="catalogId">Catalog of <span id="labelBoard"></span></p>
+    
+  <div id="divThreads" class="catalogDiv"></div>
+
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <div id="footerInfo">
+    </div>
+  </footer>
+
+</body>
+</html>

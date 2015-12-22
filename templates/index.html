@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to any scripts you need here -->
+<script></script>
+<!-- link to your CSS here -->
+<link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://localhost:8080/boards.js" id="navBoardList">Boards</a>
+    <a href="http://localhost:8080/overboard" id="navOverboard">Overboard</a>
+    <a href="http://static.localhost:8080/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <div id="topBox">
+    <img src="http://static.localhost:8080/logo.png" alt="logo" />
+    <p>YOUR TEXT HERE</p>
+  </div>
+  
+  <div id="indexWrapper">
+    <!-- latest images -->
+    <div id="divLatestImages">
+    </div>
+    
+    <div id="innerWrapper">
+      <div id="newsBox">
+        <p>PUT SOMETHING HERE</p>
+      </div>
+      
+      <div id="links">
+        <a href="http://localhost:8080/logs.js">Logs</a>
+        <a href="http://static.localhost:8080/moderation.html">Moderation Manual</a>
+        <a href="http://archive.localhost:8080">Archives</a>
+        <a href="http://localhost:8080/account.js">Account</a>
+        <a href="http://static.localhost:8080/globalRules.html">Global Rules</a>
+        <a href="http://static.localhost:8080/faq.html">F.A.Q.</a>
+      </div>
+      
+      <!-- board list -->
+      <div id="divBoards" class="topBoards">
+        <h3>Top Boards</h3>
+      </div>
+      
+      <!-- latest posts -->
+      <div id="divLatestPosts">
+        <h3>Latest Posts</h3>
+      </div>
+    </div>
+  </div>
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <span>IRC: #InfinityNow &amp; #lynxchan @ rizon.net</span>
+    <a href="https://gitgud.io/groups/InfinityNow">InfinityNow</a>
+    <a href="https://gitgud.io/obongo/8TailedLynx">8TailedLynx</a>
+    <a href="https://gitgud.io/groups/LynxChan">LynxChan</a>
+    <a id="linkEngine"></a>
+  </footer>
+  
+</body>
+</html>

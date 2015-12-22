@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+<script src="http://static.localhost:8080/settings.js" defer></script>
+<script src="http://static.localhost:8080/api.js" defer></script>
+<script src="http://static.localhost:8080/hashBans.js" defer></script>
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://localhost:8080" id="navLinkHome">Home</a>
+    <a href="http://localhost:8080/boards.js" id="navBoardList">Boards</a>
+    <a href="http://localhost:8080/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.localhost:8080" id="navArchives">Archives</a>
+    <a href="http://localhost:8080/logs.js" id="navLogs">Logs</a>
+    <a href="http://localhost:8080/account.js" id="navAccount">Account</a>
+    <a href="http://static.localhost:8080/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- page header -->
+  <header>
+    <img src="http://static.localhost:8080/logo.png" alt="Logo by Doke" />
+  </header>
+  
+  <div class="settings">
+    <form
+      action="/placeHashBan.js"
+      method="post"
+      enctype="multipart/form-data">
+      <label>Hash of the file to be banned:
+        <input
+          type="text"
+          name="hash"
+          id="hashField">
+      </label>
+      <input
+        id="boardIdentifier"
+        type="hidden"
+        name="boardUri">
+      <img
+        id="captchaImage"
+        src="/captcha.js">
+      <div>
+        <input
+          type="button"
+          class="hidden"
+          id="reloadCaptchaButton"
+          onclick="reloadCaptcha()"
+          value="Reload">
+        <input
+          name="captcha"
+          type="text"
+          id="fieldCaptcha"
+          placeholder="Answer">
+        <a
+          class="small"
+          href="/noCookieCaptcha.js">No cookies?</a>
+      </div>
+      <input
+        type="submit"
+        id="createFormButton"
+        value="Place Hash Ban">
+      <input
+        type="button"
+        id="createJsButton"
+        onClick="placeHashBan()"
+        class="hidden"
+        value="Place Hash Ban">
+    </form>
+    <div id="hashBansDiv"></div>
+  </div>
+
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <div id="footerInfo">
+    </div>
+  </footer>
+
+</body>
+</html>
