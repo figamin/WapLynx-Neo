@@ -518,15 +518,15 @@ div.divRefresh label, div.divRefresh input {
 
 #innerWrapper {
     width: 78%;
-    margin: 0 auto 0 auto;
     float: left;
+    padding-right: 0.5em;
 }
 
 #newsBox {
     border: 1px solid #34345c;
     background-color: #d6daf0;
     width: 100%;
-    padding: 0.5em;
+    padding: 0.5em 0 0.5em 0.5em;
 }
 
 #links {
@@ -534,7 +534,7 @@ div.divRefresh label, div.divRefresh input {
     background-color: #d6daf0;
     width: 100%;
     margin: 1em 0 1em 0;
-    padding: 0.5em;
+    padding: 0.5em 0 0.5em 0.5em;
 }
 
 .topBoards {
@@ -542,7 +542,7 @@ div.divRefresh label, div.divRefresh input {
     background-color: #d6daf0;
     width: 100% !important;
     margin: 1em 0 1em 0 !important;
-    padding: 0.5em;
+    padding: 0.5em 0 0.5em 0.5em;
 }
 
 .topBoards h3 {
@@ -558,7 +558,7 @@ div.divRefresh label, div.divRefresh input {
     background-color: #d6daf0;
     width: 100%;
     margin: 1em 0 1em 0;
-    padding: 0.5em;
+    padding: 0.5em 0 0.5em 0.5em;
 }
 
 #divLatestPosts div {
