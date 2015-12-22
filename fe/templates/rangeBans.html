@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.hambubger.com/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+<script src="http://static.hambubger.com/settings.js" async></script>
+<script src="http://static.hambubger.com/api.js" async></script>
+<script src="http://static.hambubger.com/rangeBans.js" async></script>
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://hambubger.com" id="navLinkHome">Home</a>
+    <a href="http://hambubger.com/boards.js" id="navBoardList">Boards</a>
+    <a href="http://hambubger.com/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.hambubger.com" id="navArchives">Archives</a>
+    <a href="http://hambubger.com/logs.js" id="navLogs">Logs</a>
+    <a href="http://hambubger.com/account.js" id="navAccount">Account</a>
+    <a href="http://static.hambubger.com/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- page header -->
+  <header>
+    <img src="http://static.hambubger.com/logo.png" alt="Logo by Doke" />
+  </header>
+  
+  <div class="settings">
+    <form
+        action="/placeRangeBan.js"
+        method="post"
+        enctype="multipart/form-data">
+      <label>Range to be banned:
+        <input
+          type="text"
+          name="range"
+          id="rangeField">
+      </label>
+      <input
+        id="boardIdentifier"
+        type="hidden"
+        name="boardUri">
+      <img
+        id="captchaImage"
+        src="/captcha.js">
+      <div>
+        <input
+          type="button"
+          class="hidden"
+          id="reloadCaptchaButton"
+          onclick="reloadCaptcha()"
+          value="Reload">
+        <input
+          name="captcha"
+          type="text"
+          id="fieldCaptcha"
+          placeholder="Answer">
+        <a
+          class="finePrint"
+          href="/noCookieCaptcha.js">No cookies?</a>
+      </div>
+      <input
+        type="submit"
+        id="createFormButton"
+        value="Place Range Ban">
+      <input
+        type="button"
+        id="createJsButton"
+        onClick="placeRangeBan()"
+        class="hidden"
+        value="Place Range Ban">
+    </form>
+    <div id="rangeBansDiv"></div>
+  </div>
+  
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <div id="footerInfo">
+    </div>
+  </footer>
+
+</body>
+</html>

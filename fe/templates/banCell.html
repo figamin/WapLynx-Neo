@@ -1,0 +1,19 @@
+<p>ID: <span class="idLabel"></span></p>
+<p>Reason: <span class="reasonLabel"></span></p>
+<p>Expiration: <span class="expirationLabel"></span></p>
+<p>Applied By: <span class="appliedByLabel"></span></p>
+<p><span class="appealPanel"></span>Appeal: <span class="appealLabel"></span>
+
+<form class="denyForm" action="/denyAppeal.js" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="banId" class="denyIdentifier">
+  <input type="submit" class="denyFormButton" value="Deny appeal">
+  <input type="button" class="denyJsButton hidden" value="Deny appeal">
+</form>
+
+<form action="/liftBan.js" method="post" enctype="multipart/form-data">
+  <input type="submit" class="liftFormButton" value="Lift">
+  <input type="button" class="liftJsButton hidden" value="Lift">
+  <input type="hidden" class="liftIdentifier" name="banId">
+</form>
+
+<hr />

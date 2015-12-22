@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.hambubger.com/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+<script src="http://static.hambubger.com/settings.js" async></script>
+<script src="http://static.hambubger.com/api.js" async></script>
+<script src="http://static.hambubger.com/login.js" async></script>
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://hambubger.com" id="navLinkHome">Home</a>
+    <a href="http://hambubger.com/boards.js" id="navBoardList">Boards</a>
+    <a href="http://hambubger.com/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.hambubger.com" id="navArchives">Archives</a>
+    <a href="http://hambubger.com/logs.js" id="navLogs">Logs</a>
+    <a href="http://hambubger.com/account.js" id="navAccount">Account</a>
+    <a href="http://static.hambubger.com/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- page header -->
+  <header>
+    <img src="http://static.hambubger.com/logo.png" alt="Logo by Doke" />
+  </header>
+  
+  <!-- global message, from static/globalMessage.html -->
+  <div id="globalMessage">
+  </div>
+    
+  <!-- login/register/recover form -->
+  <div class="settings">
+    <h3>Login</h3>
+    <form
+        action="/login.js"
+        enctype="multipart/form-data"
+        method="post">
+      <label>Login:
+        <input
+          type="text"
+          name="login"
+          id="loginFieldLogin">
+      </label>
+      <label>Password:
+        <input
+          type="password"
+          id="loginFieldPassword"
+          name="password">
+      </label>
+      <input
+        type="submit"
+        id="loginFormButton"
+        value="Login">
+      <input
+        type="button"
+        id="loginJsButton"
+        onclick="loginUser()"
+        value="Login"
+        sclass="hidden">
+    </form>
+    <hr />
+    <div id="divCreation">
+      <h3>Register</h3>
+      <form
+          action="/registerAccount.js"
+          enctype="multipart/form-data"
+          method="post">
+        <label>Login:
+          <input
+            type="text"
+            name="login"
+            id="registerFieldLogin">
+        </label>
+        <label>Password:
+          <input
+            type="password"
+            id="registerFieldPassword"
+            name="password">
+        </label>
+        <label>E-mail:
+          <input
+            type="email"
+            id="registerFieldEmail"
+            name="email">
+        </label>
+        <img
+          id="captchaImage"
+          src="/captcha.js">
+        <div>
+          <input
+            type="button"
+            class="hidden"
+            id="reloadCaptchaButton"
+            onclick="reloadCaptcha()"
+            value="Reload">
+          <input
+            name="captcha"
+            type="text"
+            id="fieldCaptcha"
+            placeholder="Answer">
+          <a
+            class="small"
+            href="/noCookieCaptcha.js">No cookies?</a>
+        </div>
+        <input
+          type="submit"
+          id="registerFormButton"
+          value="Register">
+        <input
+          type="button"
+          id="registerJsButton"
+          onclick="registerAccount()"
+          value="Register"
+          class="hidden">
+      </form>
+    </div>
+    <hr />
+    <h3>Recover account</h3>
+    <form
+        action="/requestAccountRecovery.js"
+        enctype="multipart/form-data"
+        method="post">
+      <label>Login:
+        <input
+          type="text"
+          name="login"
+          id="recoverFieldLogin">
+      </label>
+      <img
+        id="captchaImageRecover"
+        src="/captcha.js">
+      <div>
+        <input
+          type="button"
+          class="hidden"
+          id="reloadCaptchaButtonRecover"
+          onclick="reloadCaptcha()"
+          value="Reload">
+        <input
+          name="captcha"
+          type="text"
+          id="fieldCaptchaRecover"
+          placeholder="Answer">
+        <a
+          class="small"
+          href="/noCookieCaptcha.js">No cookies?</a>
+      </div>
+      <input
+        type="submit"
+        id="recoverFormButton"
+        value="Request Recovery">
+      <input
+        type="button"
+        id="recoverJsButton"
+        onclick="recoverAccount()"
+        value="Request Recovery"
+        class="hidden">
+    </form>
+  </div>
+  
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <div id="footerInfo">
+    </div>
+  </footer>
+
+</body>
+</html>

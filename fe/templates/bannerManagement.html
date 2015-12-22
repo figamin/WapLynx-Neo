@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.hambubger.com/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+<script src="http://static.hambubger.com/settings.js" async></script>
+<script src="http://static.hambubger.com/api.js" async></script>
+<script src="http://static.hambubger.com/bannerManagement.js" async></script>
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://hambubger.com" id="navLinkHome">Home</a>
+    <a href="http://hambubger.com/boards.js" id="navBoardList">Boards</a>
+    <a href="http://hambubger.com/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.hambubger.com" id="navArchives">Archives</a>
+    <a href="http://hambubger.com/logs.js" id="navLogs">Logs</a>
+    <a href="http://hambubger.com/account.js" id="navAccount">Account</a>
+    <a href="http://static.hambubger.com/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- page header -->
+  <header>
+    <img src="http://static.hambubger.com/logo.png" alt="Logo by Doke" />
+  </header>
+  
+  <!-- main content -->
+  <div class="settings">
+    <h3>New Banner</h3>
+    <form action="/createBanner.js" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="boardUri" id="boardIdentifier">
+      <input type="file" id="files" name="files">
+      <input type="submit" value="Add banner" id="addFormButton">
+      <input type="button" onClick="addBanner()" value="Add banner" id="addJsButton" class="hidden">
+      <p>Maximum size allowed: <span id="maxSizeLabel"></span></p>
+    </form>
+  </div>
+  
+  <div id="bannersDiv" class="banners">
+    <h3>Current Banners</h3>
+  </div>
+  
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <div id="footerInfo">
+    </div>
+  </footer>
+
+</body>
+</html>

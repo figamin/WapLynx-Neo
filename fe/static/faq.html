@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.hambubger.com/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://hambubger.com" id="navLinkHome">Home</a>
+    <a href="http://hambubger.com/boards.js" id="navBoardList">Boards</a>
+    <a href="http://hambubger.com/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.hambubger.com" id="navArchives">Archives</a>
+    <a href="http://hambubger.com/logs.js" id="navLogs">Logs</a>
+    <a href="http://hambubger.com/account.js" id="navAccount">Account</a>
+    <a href="http://static.hambubger.com/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- page header -->
+  <header>
+    <img src="http://static.hambubger.com/logo.png" alt="Logo by Doke" />
+  </header>
+  
+  <div id="help">
+  <p><span class="marker">Q:</span> Is it named after the terminal browser lynx?
+  <br>
+  <span class="marker">A:</span> No, it is named after my alias, Stephen Lynx.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> Why does it have a catpcha?
+  <br>
+  <span class="marker">A:</span> Board owners can disable the captcha. I just put
+  captcha on /lynxchan/ to avoid someone spamming and losing the record of
+  feedback and stuff.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> Can it not use Mongo?
+  <br>
+  <span class="marker">A:</span> Hardly, the whole engine revolves around mongo
+  and removing mongo would require the engine to be pretty much rewritten.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> Does it support ogg?
+  <br>
+  <span class="marker">A:</span> Yes. Ogg, ogv, mp3, mp4, and webms.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> Why is it ugly?
+  <br>
+  <span class="marker">A:</span> Because I haven't put much effort into the
+  front-end and the system is modular. Templates are nothing but pure
+  HTML+CSS+JS, so I am counting on other people with more experience in web
+  front-end to produce better work that people will be able to use.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> How hard would it be to use the engine to create a
+  more traditional chan without user boards?
+  <br>
+  <span class="marker">A:</span> Very easy, there are settings that can turn off account creation and board creation by common users and allow only
+  admins and root users to create them. More information can be found in the
+  readmes.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> Will you implement feature X?
+  <br>
+  <span class="marker">A:</span> You can check the features on the roadmap at
+  <a href="https://trello.com/b/JAN7N3OO/lynxchan">Trello.com</a>. I forget to put stuff there often, so
+  you can either ask on /lynxchan/ or using IRC, I am usually at #lynxchan on
+  rizon.net.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> I want to try LynxChan, what do I do?
+  <br>
+  <span class="marker">A:</span> Read both readmes. If you need help, you can
+  drop by the IRC channel.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> How hard is to make a translated version of it?
+  <br>
+  <span class="marker">A:</span> Very easy, the engine uses modular language
+  packs and front-ends. Check <a href="https://gitlab.com/mrseth/LynxChanLocalizations">Gitlab</a> if
+  you wish to use or contribute to localizations. They are outdated and not
+  very well maintained however, since no one has showed an interest in using them
+  yet.</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> Where is the source code?
+  <br>
+  <span class="marker">A:</span> <a href="https://gitlab.com/mrseth/LynxChan">https://gitlab.com/mrseth/LynxChan</a></p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> Do you take donations?
+  <br>
+  <span class="marker">A:</span> Absolutely not. If you really wish to make a
+  monetary contribution, I suggest you pay for advertisements somewhere, host an
+  instance, rent a server and hand it to me so I don't have to pay for one, or
+  hire a front-end developer to make a better front-end.
+  <br>
+  <p><span class="marker">Q:</span> Why Node.js?
+  <br>
+  <span class="marker">A:</span> Because it is the single most efficient
+  scripted runtime environment for http servers.
+  <br>
+  Go is also a good option for http servers IMO, but I believe it is a better
+  fit for systems focused on CPU intensive tasks and there is the compilation
+  overhead.
+  <br>
+  Also, javascript is one of the closest languages to C from a syntax and
+  philosophy point of view and C is mai waifu.</p>
+  <p>>:3</p>
+
+  <br>
+
+  <p><span class="marker">Q:</span> Why mongodb?
+  <br>
+  <span class="marker">A:</span>
+  <br>
+  1- It is built to handle large datasets efficiently
+  <br>
+  2- It is able to store files with metadata.
+  <br>
+  3- It allows you to expand the amount of servers running the database on the
+  fly.
+  <br>
+  4- A chan does not need the overhead of relational databases.
+  <br>
+  5- It makes development faster. Not only do you make queries using the
+  application language, but you don't have to deal with mandatory schema
+  validation.
+  <br>
+  6- It manages its own memcache.</p>
+  
+  </div>
+
+</body>
+</html>

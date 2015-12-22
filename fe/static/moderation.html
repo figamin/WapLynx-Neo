@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.hambubger.com/global.css" type="text/css" rel="stylesheet" />
+<title>Moderation</title>
+<!-- link to any scripts you need here -->
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://hambubger.com" id="navLinkHome">Home</a>
+    <a href="http://hambubger.com/boards.js" id="navBoardList">Boards</a>
+    <a href="http://hambubger.com/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.hambubger.com" id="navArchives">Archives</a>
+    <a href="http://hambubger.com/logs.js" id="navLogs">Logs</a>
+    <a href="http://hambubger.com/account.js" id="navAccount">Account</a>
+    <a href="http://static.hambubger.com/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- page header -->
+  <header>
+    <img src="http://static.hambubger.com/logo.png" alt="Logo by Doke" />
+  </header>
+    
+  <div id="help">
+    <h1>Global moderation</h1>
+    Any account have a numeric global role assigned to it. If this role is lesser
+    than 4, it means the user is in the global staff.
+    <br>
+    Root: 0
+    <br>
+    Admin: 1
+    <br>
+    Volunteer: 2
+    <br>
+    Janitor: 3
+    <br>
+    Anything above 3 or undefined is considered a regular user. Janitors are able
+    to delete any post or thread on the site and to close global reports.
+    <br>
+    Volunteers are able able to lift and issue any kind of global ban.
+    <br>
+    Admins are able to add or remove volunteers and janitors, to delete and
+    transfer boards. They are also able to create boards when board creation is
+    disabled.
+    <br>
+    Roots are able to assign admins.
+    <br>
+    The first admin or root will have to have it's role set using the terminal
+    arguments. Consult the readme.md on src/be for instructions on that. Any role
+    have all the powers of the less
+    <span title="[TRIGGER WARNING] :^)">privileged</span> roles. When your account
+    has access to the global staff tools, a link on your account page will be
+    displayed.
+
+    <h1>Board moderation</h1>
+    A board have it's board owner and board volunteers. Board volunteers are added
+    by the board owner and are able to delete content on the board, lock, pin,
+    make threads cyclic, close board reports and apply bans for the board.
+    <br>
+    Board owners are able to do that, plus they are able to transfer or delete
+    their own boards, add board banners, filters, custom css and rules and change
+    the board settings.
+
+    <h1>Custom CSS</h1>
+    Board owners can add a css file to their boards, just using the upload form on
+    the board management page. To delete the custom css file, click the upload
+    button without entering any files.
+
+    <h1>Reports</h1>
+    Any non-banned user is able to report content, as long as said content haven't
+    been reported yet.
+    <br>
+    Open reports will be displayed on the main moderation page with a link to the
+    reported content and a button to close the report.
+    <br>
+    Closed reports are not deleted and they are available on the closed reports
+    page.
+
+    <h1>Deleting content</h1>
+    As long as you are logged in, your global role and board role will be verified
+    when you try to delete content AS LONG AS YOU DON'T INPUT A PASSWORD.
+    <br>
+    If you input a password, your account will not be validated and the system
+    will try to use the deletion password you provided.
+
+    <h1>Acessing moderation tools</h1>
+    When you open a thread, there will be a link that will lead you to the
+    moderation page for that board and thread, with all the moderation tools for
+    that thread.
+
+    <h1>Thread settings</h1>
+    Threads have 3 settings: pin, lock and cyclic.
+    <br>
+    Pin will make a thread be listed above all others, no matter how long it was
+    it's last bump.
+    <br>
+    Lock will prevent anyone from posting on a thread.
+    <br>
+    Cyclic will make the thread never get into auto-sage. Instead it will delete
+    old posts when it hits the post limit that would trigger auto-sage.
+
+    <h1>Bans</h1>
+    To apply bans, select the checkboxes on the left top corner of postings and
+    write an expiration for the ban. The date format must be parseable using the
+    date parse of javascript.
+    <br>
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse">Technical
+      reference.</a>
+    <br>
+    Bans can be lifted from the bans page that can be accessed from the moderation
+    pages.
+    <br>
+    Optionally, you can enter the ban reason and message. The ban message will be
+    displayed on the post itself instead of the default ban message set in the
+    site configurations. Global staff with the power to apply bans can select the
+    checkbox to apply a global ban.
+    <br>
+    The ban reason will appear for both the user and on the bans list.
+
+    <h1>Range bans</h1>
+    It is also possible to ban entire IP ranges based on the first two parts of
+    it. Notice that the range of the poster's ip can be seen on the moderation
+    page for threads. Enter this range on the box in the range bans page and
+    select to apply it.
+
+    <h1>Hash bans</h1>
+    Files can also be banned, keeping anyone from posting them. Copy the md5 of
+    the file shown in the thread moderation page and input it on the hash bans
+    page.
+
+    <h1>Board settings</h1>
+    There are many ways to customize how a board works in general.
+    <br>
+    Disable captcha will disable captcha for the board completely. Keep in mind
+    that will expose the board to flood, since there are no anti-flood tools in
+    place yet.
+    <br>
+    Force anonymity will disable the name field completely. Role signature can
+    still be used for an user to identify himself to some extent.
+    <br>
+    By default, users can be identified inside threads by an unique id that will
+    use the user's ip. This behavior can be disabled by checking the option to
+    disable thread-wise ids.
+    <br>
+    If the site owner enables archiving, the thread pages are archived if the
+    board option to archive content is enabled.
+    <br>
+    The [code] tag allows for posts to transform text in this tag into a
+    non-formated text that is best used to display code.
+    <br>
+    The name used for anonymous posters, board name and description can also be
+    changed.
+    <br>
+    Board message will be displayed above the posting form and accepts any most of
+    posting markdown plus custom links using [displayed text](address).
+
+    <h1>Filters</h1>
+    Filters change a term for another term.
+
+    <h1>Banners</h1>
+    One can add customized banners for a board, they will be displayed randomly
+    for users.
+
+    <h1>Rules</h1>
+    Rules can be written and will be made visible on the rules.html page of the
+    board.
+  </div>
+
+</body>
+</html>

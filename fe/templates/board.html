@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add metadata about your site here -->
+<meta charset="UTF-8" />
+<!-- link to your CSS here -->
+<link href="http://static.hambubger.com/global.css" type="text/css" rel="stylesheet" />
+<!-- don't add a title, the engine already does that for you -->
+<!-- link to any scripts you need here -->
+<script src="http://static.hambubger.com/settings.js" async></script>
+<script src="http://static.hambubger.com/api.js" async></script>
+<script src="http://static.hambubger.com/board.js" async></script>
+<script src="http://static.hambubger.com/posting.js" async></script>
+</head>
+<body>
+
+  <!-- top of page navigation bar -->
+  <nav>
+    <a href="http://hambubger.com" id="navLinkHome">Home</a>
+    <a href="http://hambubger.com/boards.js" id="navBoardList">Boards</a>
+    <a href="http://hambubger.com/overboard" id="navOverboard">Overboard</a>
+    <!-- get this from static/navStatic.html -->
+    <span id="navStatic"></span>
+    <a href="http://archive.hambubger.com" id="navArchives">Archives</a>
+    <a href="http://hambubger.com/logs.js" id="navLogs">Logs</a>
+    <a href="http://hambubger.com/account.js" id="navAccount">Account</a>
+    <a href="http://static.hambubger.com/posting.html" id="navPosting">Help</a>
+  </nav>
+
+  <!-- board header -->
+  <header class="boardHeader">
+    <img id="bannerImage" />
+    <p id="labelName"></p>
+    <p id="labelDescription"></p>
+    <p><a href="catalog.html">Catalog</a></p>
+    <p><a id="linkManagement">Manage Board</a></p>
+    <p><a id="linkModeration">Board Global Moderation</a></p>
+  </header>
+  
+  <!-- global message, from static/globalMessage.html -->
+  <div id="globalMessage">
+  </div>
+  
+  <!-- new thread box -->
+  <div id="postBox">
+    <form
+      class="form-post"
+      action="../newThread.js"
+      enctype="multipart/form-data"
+      method="post">
+    <table>
+    
+      <tr>
+        <th>Name</th>
+        <td>
+          <div id="divName">
+            <input
+            type="text"
+            id="fieldName"
+            name="name">
+          </div>
+        </td>
+      </tr>
+      
+      <tr>
+        <th>Email</th>
+        <td>
+          <input
+            type="text"
+            id="fieldEmail"
+            name="email">
+        </td>
+      </tr>
+      
+      <tr>
+        <th>Subject</th>
+        <td>
+          <input
+            type="text"
+            id="fieldSubject"
+            name="subject">
+        </td>
+      </tr>
+      
+      <tr>
+        <th>Comment</th>
+        <td>
+          <textarea
+            id="fieldMessage"
+            name="message"></textarea>
+        </td>
+      </tr>
+      
+      <tr>
+        <th>Password</th>
+        <td>
+          <input
+            type="password"
+            name="password"
+            id="fieldPostingPassword">
+        </td>
+      </tr>
+      
+      <tr>
+        <th>File(s)</th>
+          <td>
+            <input
+              type="file"
+              name="files"
+              id="files"
+              multiple>
+          </td>
+      </tr>
+      
+     <tr>
+       <td>
+         <div id="flagsDiv">
+         <select
+           name="flag" 
+           id="flagCombobox">
+           </select>
+         </div>
+       </td>
+       <td>
+         <label>
+           <input
+             type="checkbox"
+             name="spoiler"
+              id="checkboxSpoiler">
+              Spoiler
+          </label>
+        </td>
+      </tr>
+    </table>
+    
+    <div id="captchaDiv">
+      <img src="/captcha.js"
+        id="captchaImage" />
+      <div>
+      <input
+        name="captcha"
+        type="text"
+        id="fieldCaptcha"
+        placeholder="Answer">
+      <input
+        type="button"
+        onClick="reloadCaptcha()"
+        value="Reload"
+        id="reloadCaptchaButton"
+        class="hidden">
+      <a href="/noCookieCaptcha.js" class="small">No cookies?</a>
+      </div>
+    </div>
+    <button
+      type="submit"
+      id="formButton">
+      Create Thread
+    </button>
+    <button
+      type="button"
+      onClick="postThread()"
+      id="jsButton"
+      class="hidden">
+      Create Thread
+    </button>
+    <input
+      type="hidden"
+      name="boardUri"
+      id="boardIdentifier">
+    <p class="small">Remember to follow the <a href="rules.html">rules</a></p>
+    <p class="small">Max file size: <span id="labelMaxFileSize"></span></p>
+    </form>
+  </div>
+
+  <!-- message panel -->
+  <div id="panelMessage">
+    <hr>
+    <div id="divMessage">
+    </div>
+    <hr>
+  </div>
+  
+  <!-- threads list, divThreads holds the threads and the whole thing is wrapped in a form for reporting -->
+  <div id="threadList">
+    <form
+      action="../contentActions.js"
+      method="post"
+      enctype="multipart/form-data">
+        <div id="divThreads">
+        </div>
+        <div id="threadReport">
+          <label>Reason<input
+            type="text"
+            name="reason"
+            id="reportFieldReason">
+          </label>
+          <label>Password<input
+            type="password"
+            name="password"
+            id="deletionFieldPassword">
+          </label>
+          <label class="checkbox"><input
+            type="checkbox"
+            name="global"
+            id="checkboxGlobal">
+            Global
+          </label>
+          <label class="checkbox"><input
+            type="checkbox"
+            name="deleteUploads"
+            id="checkboxOnlyFiles">
+            Delete only files
+          </label>
+          <img src="/captcha.js" id="captchaImageReport" />
+          <input
+            name="captcha"
+            type="text"
+            id="fieldCaptchaReport"
+            placeholder="Answer">
+          <input
+            type="button"
+            class="hidden"
+            id="reloadCaptchaButtonReport"
+            onclick="reloadCaptcha()"
+            value="Reload">
+          <a href="/noCookieCaptcha.js">No cookies?</a>
+          <div class="buttonBox">
+            <input
+              type="submit"
+              id="deleteFormButton"
+              value="Delete"
+              name="action">
+            <input
+              type="button"
+              class="hidden"
+              id="deleteJsButton"
+              onClick="deletePosts()"
+              value="Delete">
+            <input
+              type="submit"
+              id="reportFormButton"
+              value="Report"
+              name="action">
+            <input
+              type="button"
+              class="hidden"
+              id="reportJsButton"
+              onClick="reportPosts()"
+              value="Report">
+          </div>
+        </div>
+      <div class="threadPages">
+        <a href="#top" id="toTop">Top</a>
+        <a id="linkPrevious">&lt;</a>
+        <span id="divPages"></span>
+        <a id="linkNext">&gt;</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- footer, from static/footerInfo.html -->
+  <footer>
+    <div id="footerInfo">
+    </div>
+  </footer>
+
+</body>
+</html>
