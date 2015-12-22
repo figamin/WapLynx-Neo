@@ -4,7 +4,7 @@ Install by cloning into your LynxChan src/ directory. Make sure to check out the
 
 To personalize your chan please replace the logo and favicon in static/ and the default banner in templates/. You can change default thumbnails and spoilers by editing templateSettings.json to point their entries to other files.
 
-This front end currently requires you to set the URI of the overboard as "overboard". You can also add "port": 8080, to your general.json file.
+This front end currently requires you to set the URI of the overboard as "overboard".
 
 If you want do disable anything, just find its ID or CLASS from the HTML template and add it to the CSS file with {display: hidden}, which will remove it from the layout.
 
