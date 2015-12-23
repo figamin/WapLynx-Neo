@@ -77,12 +77,43 @@ nav a {
     display: inline-block;
     text-decoration: none;
     font-size: 70%;
-    margin-left: 1em;
-    margin-right: 0.5em;
+    margin: 0 0.2em 0 0.2em;
     float: left;
 }
 
-/* board list */#divBoards * {border: 1px soild black;}
+nav span {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 70%;
+    margin: 0 0.2em 0 0.2em;
+    float: left;
+}
+
+#navLinkHome:before {
+    font-family: FontAwesome;
+    content: "\f015";
+    margin-right: 0.25em;
+}
+
+#navBoardList:before {
+    font-family: FontAwesome;
+    content: "\f02c";
+    margin-right: 0.25em;
+}
+
+#linkOverboard:before, #navOverboard:before {
+    font-family: FontAwesome;
+    content: "\f069";
+    margin-right: 0.25em;
+}
+
+#navPosting:before {
+    font-family: FontAwesome;
+    content: "\f128";
+    margin-right: 0.25em;
+}
+
+/* board list */
 .boardsHeader {
     font-size: 150%;
 }
@@ -286,7 +317,6 @@ div#divControls input, div#divControls label {
 
 .innerPost, .markedPost {
     background-color: #D6DAF0;
-    white-space: nowrap;
     display: inline-block;
     overflow: hidden;
     padding-right: 0.25em;
@@ -483,6 +513,21 @@ div.divRefresh label, div.divRefresh input {
     font-size: 75%;
 }
 
+.lockIndicator:before {
+    font-family: FontAwesome;
+    content: "\f023";
+}
+
+.pinIndicator:after {
+    font-family: FontAwesome;
+    content: "\f08d";
+}
+
+.cyclicIndicator:after {
+    font-family: FontAwesome;
+    content: "\f021";
+}
+
 /* archive pages */
 #archiveThreadList, #archiveBoardList {
     margin: 1em;
@@ -542,11 +587,43 @@ div.divRefresh label, div.divRefresh input {
 }
 
 #links {
-    border: 1px solid #34345c;
-    background-color: #d6daf0;
-    width: 100%;
-    margin: 1em 0 1em 0;
-    padding: 0.5em 0 0.5em 0.5em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    font-size: 75%;
+    display: inline-block;
+}
+
+#links a {
+    text-decoration: none;
+}
+
+#linkLogs:before {
+    font-family: FontAwesome;
+    content: "\f05e";
+    margin-right: 0.25em;
+}
+
+#linkArchives:before {
+    font-family: FontAwesome;
+    content: "\f187";
+    margin-right: 0.25em;
+}
+
+#linkAccount:before {
+    font-family: FontAwesome;
+    content: "\f013";
+    margin-right: 0.25em;
+}
+
+#linkGlobalRules:before {
+    font-family: FontAwesome;
+    content: "\f128";
+    margin-right: 0.25em;
+}
+
+#linkFaq:before {
+    font-family: FontAwesome;
+    content: "\f129";
+    margin-right: 0.25em;
 }
 
 .topBoards {
@@ -571,6 +648,7 @@ div.divRefresh label, div.divRefresh input {
     width: 100%;
     margin: 1em 0 1em 0;
     padding: 0.5em 0 0.5em 0.5em;
+    overflow: hidden;
 }
 
 #divLatestPosts div {

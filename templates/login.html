@@ -5,6 +5,7 @@
 <meta charset="UTF-8" />
 <!-- link to your CSS here -->
 <link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<link href="http://static.localhost:8080/font-awesome.min.css" type="text/css" rel="stylesheet" />
 <!-- don't add a title, the engine already does that for you -->
 <!-- link to any scripts you need here -->
 <script src="http://static.localhost:8080/settings.js" defer></script>
@@ -15,20 +16,20 @@
 
   <!-- top of page navigation bar -->
   <nav>
-    <a href="http://localhost:8080" id="navLinkHome">Home</a>
-    <a href="http://localhost:8080/boards.js" id="navBoardList">Boards</a>
-    <a href="http://localhost:8080/overboard" id="navOverboard">Overboard</a>
-    <!-- get this from static/navStatic.html -->
-    <span id="navStatic"></span>
-    <a href="http://archive.localhost:8080" id="navArchives">Archives</a>
-    <a href="http://localhost:8080/logs.js" id="navLogs">Logs</a>
-    <a href="http://localhost:8080/account.js" id="navAccount">Account</a>
-    <a href="http://static.localhost:8080/posting.html" id="navPosting">Help</a>
+    <span>[</span>
+    <a href="http://localhost:8080" id="navLinkHome">home</a>
+    <span>/</span>
+    <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
+    <span>/</span>
+    <a href="http://localhost:8080/overboard" id="navOverboard">overboard</a>
+    <span>/</span>
+    <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
+    <span>]</span>
   </nav>
 
   <!-- page header -->
   <header>
-    <img src="http://static.localhost:8080/logo.png" alt="Logo by Doke" />
+    <img src="http://static.localhost:8080/logo.png" alt="logo" />
   </header>
   
   <!-- global message, from static/globalMessage.html -->
@@ -164,12 +165,6 @@
         class="hidden">
     </form>
   </div>
-  
-  <!-- footer, from static/footerInfo.html -->
-  <footer>
-    <div id="footerInfo">
-    </div>
-  </footer>
 
 </body>
 </html>

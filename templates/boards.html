@@ -5,17 +5,23 @@
 <meta charset="UTF-8" />
 <!-- link to your CSS here -->
 <link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<link href="http://static.localhost:8080/font-awesome.min.css" type="text/css" rel="stylesheet" />
 <!-- don't add a title, the engine already does that for you -->
 <!-- link to any scripts you need here -->
 </head>
 <body>
-
-  <!-- top of page navigation bar -->
+  
+    <!-- top of page navigation bar -->
   <nav>
-    <a href="http://localhost:8080" id="navLinkHome">Home</a>
-    <a href="http://localhost:8080/boards.js" id="navBoardList">Boards</a>
-    <a id="linkOverboard">Overboard</a>
-    <a href="http://static.localhost:8080/posting.html" id="navPosting">Help</a>
+    <span>[</span>
+    <a href="http://localhost:8080" id="navLinkHome">home</a>
+    <span>/</span>
+    <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
+    <span>/</span>
+    <a id="linkOverboard">overboard</a>
+    <span>/</span>
+    <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
+    <span>]</span>
   </nav>
   
   <!-- page header -->
@@ -58,12 +64,6 @@
     </div>
     
   </div>
-
-  <!-- footer, from static/footerInfo.html -->
-  <footer>
-    <div id="footerInfo">
-    </div>
-  </footer>
 
 </body>
 </html>
