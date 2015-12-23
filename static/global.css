@@ -377,7 +377,6 @@ div#divControls input, div#divControls label {
 
 .divMessage {
     clear: both;
-    font-size: 125%;
     margin-left: 3em;
     margin-top: 1em;
     margin-bottom: 0.5em;
@@ -413,8 +412,6 @@ div#divControls input, div#divControls label {
 }
 
 .hideLink {
-    color: #000;
-    background: #fff;
     vertical-align: top;
 }
 
@@ -437,6 +434,11 @@ div#divControls input, div#divControls label {
 .labelOmission {
     margin-top: 0.5em;
     margin-left: 0.5em;
+}
+
+/* this is the preview box */
+#panelContent {
+    font-size: 75%;
 }
 
 /* markdown */
@@ -510,6 +512,14 @@ div.divRefresh label, div.divRefresh input {
 
 .catalogCell .divMessage {
     margin: 0;
+    font-size: 75%;
+}
+
+.catalogCell .labelSubject {
+    font-size: 75%;
+}
+
+.threadStats {
     font-size: 75%;
 }
 
