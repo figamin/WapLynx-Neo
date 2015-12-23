@@ -4,6 +4,12 @@ Install by cloning into your LynxChan src/ directory. Make sure to check out the
 
 To personalize your chan please replace the logo and favicon in static/ and the default banner in templates/. You can change default thumbnails and spoilers by editing templateSettings.json to point their entries to other files.
 
+The favicon in the static directory is served from static.{your.domain} and will need to be uploaded into MongoDB manually. To do this you need to get the 
+mongofiles tool and run
+
+> mongofiles -h localhost -d {dbName} -p 27017 -l {/path/to/yourfavicon} put /favicon.ico
+
+
 This front end currently requires you to set the URI of the overboard as "overboard".
 
 If you want do disable anything, just find its ID or CLASS from the HTML template and add it to the CSS file with {display: hidden}, which will remove it from the layout.
