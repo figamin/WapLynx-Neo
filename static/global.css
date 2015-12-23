@@ -400,6 +400,11 @@ div#divControls input, div#divControls label {
     margin-right: 1em;
 }
 
+.uploadDetails {
+    max-width: 250px;
+    word-break: break-all;
+}
+
 .opCell {
     clear: left;
 }
