@@ -392,6 +392,7 @@ div#divControls input, div#divControls label {
 
 .uploadCell {
     margin: 0.25em 1em 0.25em 0.5em;
+    float: left;
 }
 
 .uploadCell img {
