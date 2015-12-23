@@ -15,25 +15,11 @@
     <a href="http://localhost:8080" id="navLinkHome">Home</a>
     <a href="http://localhost:8080/boards.js" id="navBoardList">Boards</a>
     <a href="http://localhost:8080/overboard" id="navOverboard">Overboard</a>
-    <!-- get this from static/navStatic.html -->
-    <span id="navStatic"></span>
-    <a href="http://archive.localhost:8080" id="navArchives">Archives</a>
-    <a href="http://localhost:8080/logs.js" id="navLogs">Logs</a>
-    <a href="http://localhost:8080/account.js" id="navAccount">Account</a>
     <a href="http://static.localhost:8080/posting.html" id="navPosting">Help</a>
   </nav>
 
-  <!-- page header -->
-  <header>
-    <img src="http://static.localhost:8080/logo.png" alt="Logo by Doke" />
-  </header>
-  
-  <!-- global message, from static/globalMessage.html -->
-  <div id="globalMessage">
-  </div>
-  
   <!-- catalog id and the div that holds all the cells -->
-  <p id="catalogId">Catalog of <span id="labelBoard"></span></p>
+  <p id="catalogId"><span class="red">Catalog of </span><a id="labelBoard"></a></p>
     
   <div id="divThreads" class="catalogDiv"></div>
 

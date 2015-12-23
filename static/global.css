@@ -5,7 +5,7 @@
  * global stuff ~17
  * board banners ~135
  * index features ~533
- * 
+ * catalog ~438
  * 
  * 
  * 
@@ -82,53 +82,61 @@ nav a {
     float: left;
 }
 
-/* board list */
-div#divBoards {
+/* board list */#divBoards * {border: 1px soild black;}
+.boardsHeader {
+    font-size: 150%;
+}
+
+#boardsWrapper {
     width: 80%;
+    margin: 1em auto 1em auto;
+}
+
+#divBoards {
     margin: 1em auto 0.5em auto;
 }
 
-div.boardsCell, div.boardsCellHeader {
+.boardsCell, .boardsCellHeader {
     width: 100%;
     margin: 0.25em;
 }
 
-div.boardsCell:nth-of-type(even) span {
+.boardsCell:nth-of-type(odd) span {
     background-color: #d6daf0;
 }
 
-div.boardsCell span {
+.boardsCell span {
     display: inline-block;
-    width: 18%;
+    width: 15%;
     padding: 0.25em;
     text-overflow: ellipsis;
     text-decoration: none;
 }
 
-div.boardsCellHeader span {
+.boardsCellHeader span {
     font-weight: bold;
     display: inline-block;
-    width: 18%;
+    width: 15%;
     border-bottom: 1px solid #000333;
     background-color: #98e;
     padding: 0.25em;
 }
 
-div.search {
-    margin: 1em;
+.search {
+    margin: 1em 0 1em 0;
 }
 
-div#divPages {
-    margin: 0.5em auto;
-    width: 20%;
-    text-align: center;
-}
-
-div#divPages a {
+.search form {
     display: inline-block;
-    margin: 0 auto;
+}
+
+#divPages {
+    display: inline-block;
+    margin-left: 1em;
+}
+
+#divPages a {
     text-decoration: none;
-    background-color: #d6daf0;
     padding: 0 0.25em;
 }
 
@@ -445,8 +453,12 @@ div.divRefresh label, div.divRefresh input {
 
 #catalogId {
     text-align: center;
-    margin: 1em;
-    font-size: 125%;
+    margin: 1.5em 0 1em 0;
+    font-size: 150%;
+}
+
+.red {
+    color: #af0a0f;
 }
 
 .linkThumb img {
@@ -456,19 +468,19 @@ div.divRefresh label, div.divRefresh input {
 
 .catalogCell {
     float: left;
-    width: 16em;
+    width: 10em;
     text-align: center;
-    padding: 0.5em;
-    height: 16em;
+    padding: 0.25em;
+    height: 14em;
     overflow: hidden;
-    background-color: #D6DAF0;
-    margin: 0.5em;
-    border: 1px solid #34345c;
+    background-color: rgba(182, 182, 182 ,0.12);
+    margin: 0.1em;
+    border: 2px solid rgba(111, 111, 111, 0.34);
 }
 
 .catalogCell .divMessage {
     margin: 0;
-    font-size: 100%;
+    font-size: 75%;
 }
 
 /* archive pages */
@@ -518,7 +530,7 @@ div.divRefresh label, div.divRefresh input {
 
 #innerWrapper {
     width: 78%;
-    float: left;
+    float: right;
     padding-right: 0.5em;
 }
 
@@ -567,11 +579,16 @@ div.divRefresh label, div.divRefresh input {
 
 #divLatestImages {
     float: left;
-    max-width: 15%;
+    max-width: 20%;
     padding: 0.5em;
     margin: 0 1em 1.5em auto;
     border: 1px solid #34345c;
     background-color: #d6daf0;
+    text-align: center;
+}
+
+#divLatestImages div {
+    max-width: 100%;
 }
 
 /* CSS for pages that deal with site and account settings and bans */
