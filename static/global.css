@@ -278,7 +278,7 @@ nav span {
 }
 
 /* thread/post report and management form */
-.contentAction, #transferControls, #ipDelete {
+.contentAction {
     clear: both;
     margin-top: 2em;
     background-color: #d6daf0;
@@ -298,12 +298,12 @@ nav span {
     display: inline-block;
 }
 
-#transferControls, #ipDelete {
-    margin: 1em;
-}
-
 .buttonBox {
     margin-top: 0.5em;
+}
+
+#divControls, #transferControls , #ipDelete {
+    margin: 1em;
 }
 
 #divControls input, #divControls label {
@@ -451,10 +451,6 @@ nav span {
 
 .panelIp, .panelProxyIp {
     margin: 0.25em 1em 0.25em 0.5em;
-}
-
-#divControls {
-    margin: 1em;
 }
 
 .panelBacklinks a {
