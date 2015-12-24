@@ -177,22 +177,33 @@ nav span {
 }
 
 /* board banner */
-header.boardHeader p {
+.boardHeader p {
     color: #af0a0f;
 }
 
-header.boardHeader p#labelName {
+.boardHeader p#labelName {
     font-size: 200%;
 }
 
-header.boardHeader p#labelDescription {
+.boardHeader p#labelDescription {
     font-size: 100%;
 }
 
-header.boardHeader a {
+.boardHeader a {
     font-size: 75%;
     display: inline-block;
     text-decoration: none;
+}
+
+#modeBanner {
+    color: #fff;
+    background-color: #e04000;
+    text-align: center;
+    margin: 1em;
+}
+
+#modeBanner h3 {
+    font-size: 95%;
 }
 
 /* post new thread */
@@ -244,7 +255,7 @@ header.boardHeader a {
 }
 
 /* thread/post report and management form */
-.contentAction {
+.contentAction, #transferControls, #ipDelete {
     clear: both;
     margin-top: 2em;
     background-color: #d6daf0;
