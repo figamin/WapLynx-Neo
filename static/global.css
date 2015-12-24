@@ -23,8 +23,13 @@ h3, p, label {
     margin: 0.25em 0;
 }
 
-input, textarea {
+/*input, textarea {
     margin: 0.25em;
+}*/
+
+hr {
+    height: 1px;
+    color: #e9edf3;
 }
 
 a {
@@ -199,11 +204,12 @@ header.boardHeader a {
 
 #postBox table {
     width: 100%;
+    font-size: 75%;
 }
 
 #postBox textarea {
     width: 100%;
-    height: 5em;
+    height: 8em;
 }
 
 .form-post {
@@ -222,55 +228,51 @@ header.boardHeader a {
 
 .form-post th {
     text-align: left;
-    padding: 0.1em 0.2em;
+    padding: 0 1em 0 0.5em;
 }
 
 .form-post th {
     background-color: #98e;
 }
 
-#postBox #captchaDiv {
-    text-align: left;
-}
-    
-#jsButton, #formButton {
-    font: inherit;
-    overflow: visible;
-    text-transform: none;
-    padding: 0.2em 1em 0.25em;
-    background: rgba(255, 255, 255, 0.35) none repeat scroll 0% 0%;
-    border: 1px solid #34345C;
-    box-sizing: border-box;
-    outline: 0px none;
-    cursor: pointer;
-    color: #34345C;
-    font-weight: bold;
-    font-size: 1.07143rem;
-    line-height: 1.4545em;
-    text-align: center;
-    width: 118px;
-    margin: 0px 5px 0px 0px;
-    vertical-align: middle;
-}
-
-/* thread/post report and management form */
-div#threadReport label, div#threadReport img, div.contentAction label, div.contentAction img, div#transferControls, div#ipDelete {
-    display: block;
-}
-
-div#threadReport label.checkbox {
+.spoilerCheckbox, #flagsDiv {
     display: inline-block;
 }
 
-div#transferControls, div#ipDelete {
+#postBox #captchaDiv {
+    text-align: left;
+}
+
+/* thread/post report and management form */
+.contentAction {
+    clear: both;
+    margin-top: 2em;
+    background-color: #d6daf0;
+    border-color: #B7C5D9;
+    border-width: medium 1px 1px medium;
+    border-style: none solid solid none;
+    padding: 0.5em;
+    margin: 2em 0 1em 1em;
+    float: left;
+}
+
+#threadReport label, #threadReport img, .contentAction label, .contentAction img, #transferControls, #ipDelete {
+    display: block;
+}
+
+#threadReport label.checkbox {
+    display: inline-block;
+}
+
+#transferControls, #ipDelete {
     margin: 1em;
 }
 
-div.buttonBox {
+.buttonBox {
     margin-top: 0.5em;
 }
 
-div#divControls input, div#divControls label {
+#divControls input, #divControls label {
     display: inline-block;
 }
 
@@ -307,12 +309,7 @@ div#divControls input, div#divControls label {
 }
 
 .postCell {
-    margin: 0.1em 0;
-}
-
-.opCell hr, div#panelMessage hr {
-    height: 1px;
-    color: #e9edf3;
+    margin: 0.25em 0;
 }
 
 .innerPost, .markedPost {
@@ -398,10 +395,15 @@ div#divControls input, div#divControls label {
 .uploadCell img {
     float: left;
     margin-right: 1em;
+    margin-bottom: 1em;
 }
 
 .opUploadPanel .uploadCell {
     float: none;
+}
+
+.uploadDetails {
+    margin-bottom: 0.5em;
 }
 
 .opCell {
@@ -437,7 +439,7 @@ div#divControls input, div#divControls label {
 }
 
 .contentOmissionIndicator {
-    margin: 0.5em 0;
+    margin: 1em 0;
 }
 
 .labelOmission {
@@ -473,15 +475,18 @@ span.spoiler {
 }
 
 /* refresh timer */
-div.divRefresh {
+.divRefresh {
     display: block;
-    float: right;
+    float: left;
+    clear: both;
+    margin: 0 0 0 1em;
+    padding: 0;
+    height: 1.5em;
 }
 
-div.divRefresh label, div.divRefresh input {
+.divRefresh label, .divRefresh input {
     display: inline-block;
     margin: 0;
-    padding: 0 0.25em;
 }
 
 /* catalog */

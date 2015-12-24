@@ -76,6 +76,18 @@
             type="text"
             id="fieldSubject"
             name="subject">
+          <button
+            type="submit"
+            id="formButton">
+            New Topic
+          </button>
+          <button
+            type="button"
+            onClick="postThread()"
+            id="jsButton"
+            class="hidden">
+            New Topic
+          </button>
         </td>
       </tr>
       
@@ -109,23 +121,21 @@
           </td>
       </tr>
       
-     <tr>
-       <td>
-         <div id="flagsDiv">
-         <select
-           name="flag" 
-           id="flagCombobox">
-           </select>
-         </div>
-       </td>
-       <td>
-         <label>
-           <input
-             type="checkbox"
-             name="spoiler"
+      <tr>
+        <td class="options" colspan="2">
+          <label class="spoilerCheckbox">
+            <input
+              type="checkbox"
+              name="spoiler"
               id="checkboxSpoiler">
               Spoiler
           </label>
+          <div id="flagsDiv">
+            <select
+              name="flag" 
+              id="flagCombobox">
+            </select>
+         </div>
         </td>
       </tr>
     </table>
@@ -148,18 +158,6 @@
       <a href="/noCookieCaptcha.js" class="small">No cookies?</a>
       </div>
     </div>
-    <button
-      type="submit"
-      id="formButton">
-      Create Thread
-    </button>
-    <button
-      type="button"
-      onClick="postThread()"
-      id="jsButton"
-      class="hidden">
-      Create Thread
-    </button>
     <input
       type="hidden"
       name="boardUri"
@@ -185,7 +183,17 @@
       enctype="multipart/form-data">
         <div id="divThreads">
         </div>
-        <div id="threadReport">
+  </div>
+  
+  <div class="threadPages">
+    <hr />
+    <a href="#top" id="toTop">Top</a>
+    <a id="linkPrevious">&lt;</a>
+    <span id="divPages"></span>
+    <a id="linkNext">&gt;</a>
+  </div>
+  
+  <div id="threadReport" class="contentAction">
           <label>Reason<input
             type="text"
             name="reason"
@@ -209,18 +217,20 @@
             Delete only files
           </label>
           <img src="/captcha.js" id="captchaImageReport" />
-          <input
-            name="captcha"
-            type="text"
-            id="fieldCaptchaReport"
-            placeholder="Answer">
-          <input
-            type="button"
-            class="hidden"
-            id="reloadCaptchaButtonReport"
-            onclick="reloadCaptcha()"
-            value="Reload">
-          <a href="/noCookieCaptcha.js">No cookies?</a>
+          <div class="buttonBox">
+            <input
+              name="captcha"
+              type="text"
+              id="fieldCaptchaReport"
+              placeholder="Answer">
+            <input
+              type="button"
+              class="hidden"
+              id="reloadCaptchaButtonReport"
+              onclick="reloadCaptcha()"
+              value="Reload">
+            <a href="/noCookieCaptcha.js" class="small">No cookies?</a>
+          </div>
           <div class="buttonBox">
             <input
               type="submit"
@@ -245,12 +255,6 @@
               onClick="reportPosts()"
               value="Report">
           </div>
-        </div>
-      <div class="threadPages">
-        <a href="#top" id="toTop">Top</a>
-        <a id="linkPrevious">&lt;</a>
-        <span id="divPages"></span>
-        <a id="linkNext">&gt;</a>
       </div>
     </form>
   </div>

@@ -76,6 +76,18 @@
             type="text"
             id="fieldSubject"
             name="subject">
+          <button
+            type="submit"
+            id="formButton">
+            Mew Reply
+          </button>
+          <button
+            type="button"
+            onClick="postReply()"
+            id="jsButton"
+            class="hidden">
+            New Reply
+          </button>
         </td>
       </tr>
       
@@ -109,23 +121,21 @@
           </td>
       </tr>
       
-     <tr>
-       <td>
-         <div id="flagsDiv">
-         <select
-           name="flag" 
-           id="flagCombobox">
-           </select>
-         </div>
-       </td>
-       <td>
-         <label>
-           <input
-             type="checkbox"
-             name="spoiler"
+      <tr>
+        <td class="options" colspan="2">
+          <label class="spoilerCheckbox">
+            <input
+              type="checkbox"
+              name="spoiler"
               id="checkboxSpoiler">
               Spoiler
           </label>
+          <div id="flagsDiv">
+          <select
+            name="flag" 
+            id="flagCombobox">
+            </select>
+          </div>
         </td>
       </tr>
     </table>
@@ -148,18 +158,6 @@
       <a href="/noCookieCaptcha.js" class="small">No cookies?</a>
       </div>
     </div>
-    <button
-      type="submit"
-      id="formButton">
-      Reply
-    </button>
-    <button
-      type="button"
-      onClick="postReply()"
-      id="jsButton"
-      class="hidden">
-      Reply
-    </button>
     <input
       type="hidden"
       name="boardUri"
@@ -235,20 +233,21 @@
       <!-- this is actually where the posts are -->
       <div id="divThreads">
       </div>
-      <!-- refresh timer -->
-      <div class="divRefresh hidden">
-        <label><input
-          type="checkbox"
-          checked
-          onchange="changeRefresh()">
-          Auto <span id="labelRefresh"></span>
-        </label>
-        <input
-          type="button"
-          id="refreshButton"
-          onclick="refreshPosts(true)"
-          value="Refresh">
-      </div>
+  </div>
+  <div class="divRefresh hidden">
+    <hr />
+    <label><input
+      type="checkbox"
+      checked
+      onchange="changeRefresh()">
+      Auto <span id="labelRefresh"></span>
+    </label>
+    <input
+      type="button"
+      id="refreshButton"
+      onclick="refreshPosts(true)"
+      value="Refresh">
+  </div>
       <!-- ban/report/delete/transfer controls -->
       <div class="contentAction">
         <label>Reason<input
@@ -288,67 +287,68 @@
         <img
           id="captchaImageReport"
           src="/captcha.js">
-        <input
-          type="button"
-          class="hidden"
-          id="reloadCaptchaButtonReport"
-          onclick="reloadCaptcha()"
-          value="Reload">
-        <input
-          name="captcha"
-          type="text"
-          id="fieldCaptchaReport"
-          placeholder="Answer">
-        <a class="finePrint" href="/noCookieCaptcha.js">No cookies?</a>
         <div class="buttonBox">
-        <input
-          type="submit"
-          id="deleteFormButton"
-          value="Delete"
-          name="action">
-        <input
-          type="button"
-          class="hidden"
-          id="deleteJsButton"
-          onClick="deletePosts()"
-          value="Delete">
-        <input
-          type="submit"
-          id="inputBan"
-          value="Ban"
-          name="action">
-        <input
-          type="button"
-          class="hidden"
-          id="banJsButton"
-          onClick="banPosts()"
-          value="Ban">
-        <button
-          type="submit"
-          id="inputSpoil"
-          value="spoil"
-          name="action">Spoil files</button>
-        <input
-          type="button"
-          class="hidden"
-          id="spoilJsButton"
-          onClick="spoilFiles()"
-          value="Spoil files">
-        <input
-          type="submit"
-          id="reportFormButton"
-          value="Report"
-          name="action">
-        <input
-          type="button"
-          class="hidden"
-          id="reportJsButton"
-          onClick="reportPosts()"
-          value="Report">
+          <input
+            type="button"
+            class="hidden"
+            id="reloadCaptchaButtonReport"
+            onclick="reloadCaptcha()"
+            value="Reload">
+          <input
+            name="captcha"
+            type="text"
+            id="fieldCaptchaReport"
+            placeholder="Answer">
+          <a class="finePrint" href="/noCookieCaptcha.js">No cookies?</a>
+        </div>
+        <div class="buttonBox">
+          <input
+            type="submit"
+            id="deleteFormButton"
+            value="Delete"
+            name="action">
+          <input
+            type="button"
+            class="hidden"
+            id="deleteJsButton"
+            onClick="deletePosts()"
+            value="Delete">
+          <input
+            type="submit"
+            id="inputBan"
+            value="Ban"
+            name="action">
+          <input
+            type="button"
+            class="hidden"
+            id="banJsButton"
+            onClick="banPosts()"
+            value="Ban">
+          <button
+            type="submit"
+            id="inputSpoil"
+            value="spoil"
+            name="action">Spoil files</button>
+          <input
+            type="button"
+            class="hidden"
+            id="spoilJsButton"
+            onClick="spoilFiles()"
+            value="Spoil files">
+          <input
+            type="submit"
+            id="reportFormButton"
+            value="Report"
+            name="action">
+          <input
+            type="button"
+            class="hidden"
+            id="reportJsButton"
+            onClick="reportPosts()"
+            value="Report">
         </div>
       </div>
     </form>
-  </div>
   
   <!-- thread transfer controls -->
   <div id="transferControls">
