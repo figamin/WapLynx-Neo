@@ -389,7 +389,7 @@ header.boardHeader a {
 
 .uploadCell {
     margin: 0.25em 1em 0.25em 0.5em;
-    float: left;
+    float: none;
 }
 
 .uploadCell img {
@@ -398,8 +398,8 @@ header.boardHeader a {
     margin-bottom: 1em;
 }
 
-.opUploadPanel .uploadCell {
-    float: none;
+.multipleUploads .uploadCell {
+    float: left;
 }
 
 .uploadDetails {
