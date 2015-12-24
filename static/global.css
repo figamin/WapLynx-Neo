@@ -57,7 +57,7 @@ em {
 /* body styles, inherited by whole page */
 body {
     color: #000;
-    background: linear-gradient(#dde2f9, #f9faff) fixed;
+    background: #EEF2FF url("/fade-blue.png") repeat-x scroll 50% 0%;
     font-family: arial, helvetica, sans;
     font-size: 100%;
     margin: 0px;
@@ -430,6 +430,11 @@ nav span {
     float: left;
     margin-right: 1em;
     margin-bottom: 1em;
+}
+
+.multipleUploads .opUploadPanel, .multipleUploads .panelUploads {
+    float: left;
+    width: 100%;
 }
 
 .multipleUploads .uploadCell {
