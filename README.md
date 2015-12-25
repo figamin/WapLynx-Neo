@@ -2,7 +2,8 @@
 
 Install by cloning into your LynxChan src/ directory. Make sure to check out the correct tag.
 
-To personalize your chan please replace the logo and favicon in static/ and the default banner in templates/. You can change default thumbnails and spoilers by editing templateSettings.json to point their entries to other files.
+To personalize your chan please replace the logo and favicon in static/ and the default banner in templates/. You currently need to change the max files 
+number on board.html and thread.html. You can change default thumbnails and spoilers by editing templateSettings.json to point their entries to other files.
 
 The favicon in the static directory is served from static.{your.domain} and will need to be uploaded into MongoDB manually. To do this you need to get the 
 mongofiles tool and run

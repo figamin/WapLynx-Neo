@@ -34,8 +34,6 @@
     <img id="bannerImage" />
     <p id="labelName"></p>
     <p id="labelDescription"></p>
-    <p><a id="linkManagement">Manage Board</a></p>
-    <p><a id="linkMod">Moderate Thread</a></p>
   </header>
   
   <div id="modeBanner">
@@ -172,6 +170,9 @@
       id="threadIdentifier">
     <p class="small">Remember to follow the <a href="../rules.html">rules</a></p>
     <p class="small">Max file size: <span id="labelMaxFileSize"></span></p>
+    <p class="small">Max files: {put a number here}</p>
+    <p><a id="linkManagement" class="small">Manage Board</a></p>
+    <p><a id="linkMod" class="small">Moderate Thread</a></p>
     </form>
   </div>
   
@@ -303,9 +304,9 @@
       <!-- this is actually where the posts are -->
       <div id="divThreads">
       </div>
+      <hr />
   </div>
   <div class="divRefresh hidden">
-    <hr />
     <label><input
       type="checkbox"
       checked
@@ -369,7 +370,7 @@
             type="text"
             id="fieldCaptchaReport"
             placeholder="Answer">
-          <a class="finePrint" href="/noCookieCaptcha.js">No cookies?</a>
+          <a class="small" href="/noCookieCaptcha.js">No cookies?</a>
         </div>
         <div class="buttonBox">
           <input
@@ -420,7 +421,5 @@
       </div>
     </form>
   
-
-
 </body>
 </html>
