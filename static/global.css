@@ -16,74 +16,108 @@
 
 /* global rules to override any browser CSS and to set global values */
 .small {
-    font-size: 75%;
-    text-decoration: none;
+  font-size: 75%;
+  text-decoration: none;
 }
 
 .small a {
-    text-decoration: none;
-}
-    
-h3, p, label {
-    margin: 0.25em 0;
+  text-decoration: none;
 }
 
-/*input, textarea {
-    margin: 0.25em;
-}*/
+h3, p, label {
+  margin: 0.25em 0;
+}
 
 hr {
-    height: 0px;
-    border-width: 1px medium medium;
-    border-style: solid none none;
-    border-color: #b7c5d9;
+  height: 0px;
+  border-width: 1px medium medium;
+  border-style: solid none none;
+  border-color: #073206;
 }
 
 a {
-    color: #34345c;
+  color: #FFB300;
+  text-decoration: none;
+}
+
+a:hover {
+  text-shadow: 0px 0px 5px #117743;
 }
 
 u {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 s {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 strong {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 em {
-    font-style: italic;
+  font-style: italic;
+}
+
+input, button, textarea, select {
+  border: 1px solid #052004;
+  border-radius: 0;
+  font-weight: bold;
+  font-family: shadowrun;
+  background: rgba(50, 30, 8, 0.15);
+  color: #C0840A;
+  padding-left: 0.25em;
+  font-size: 80%;
+}
+
+.text {
+  background: rgba(50, 30, 8, 0.15);
+}
+
+.title {
+  font-family: shadowrun;
+}
+
+.fileBrowser {
+  background: none;
 }
 
 /* import resources here; external CSS, fonts, etc */
-    
+
+@font-face {
+  font-family: "shadowrun";
+  src: url(shadowrun.ttf);
+}
+
+@font-face {
+  font-family: "decker";
+   src: url(decker.ttf);
+}
+
 /* body styles, inherited by whole page */
 body {
-    color: #000;
-    background: #EEF2FF url("/fade-blue.png") repeat-x scroll 50% 0%;
-    font-family: arial, helvetica, sans;
-    font-size: 100%;
-    margin: 0px;
+  color: #C0840A;
+  background: #151515;
+  font-family: decker, monospace, arial, helvetica, sans;
+  font-size: 100%;
+  margin: 0px;
 }
 
 /* header and nav / top of page styles */
 header {
-    width: 50%;
-    margin: 3em auto 0 auto;
-    text-align: center;
+  width: 50%;
+  margin: 3em auto 0 auto;
+  text-align: center;
 }
 
 nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #d6daf0;
-    border-bottom: 1px solid #34345c;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #151515;
+  border-bottom: 1px solid #B0790A;
+  padding-bottom: 3px;
 }
 
 nav a {
@@ -103,26 +137,26 @@ nav span {
 }
 
 #navLinkHome:before {
-    font-family: FontAwesome;
-    content: "\f015";
+    font-family: Icons;
+    content: "\e082";
     margin-right: 0.25em;
 }
 
 #navBoardList:before {
-    font-family: FontAwesome;
-    content: "\f02c";
+    font-family: Icons;
+    content: "\e072";
     margin-right: 0.25em;
 }
 
 #linkOverboard:before, #navOverboard:before {
-    font-family: FontAwesome;
-    content: "\f069";
+    font-family: Icons;
+    content: "\e007";
     margin-right: 0.25em;
 }
 
 #navPosting:before {
-    font-family: FontAwesome;
-    content: "\f128";
+    font-family: Icons;
+    content: "\e09a";
     margin-right: 0.25em;
 }
 
@@ -170,7 +204,7 @@ nav span {
 }
 
 .boardsCell:nth-of-type(odd) span {
-    background-color: #d6daf0;
+    background: rgba(50 ,30 ,8 ,0.3);
 }
 
 .boardsCell span {
@@ -184,8 +218,8 @@ nav span {
 #boardsCellHeader span {
     font-weight: bold;
     display: inline-block;
-    border-bottom: 1px solid #000333;
-    background-color: #98e;
+    border: 1px solid #052004;
+    background: rgba(50 ,30 ,8 ,0.3);
 }
 
 .search {
@@ -198,10 +232,6 @@ nav span {
 
 #divPages {
     display: inline-block;
-    background: #d6daf0;
-    border-color: #b7c5d9;
-    border-width: medium 1px 1px medium;
-    border-style: none solid solid none;
 }
 
 #divPages a {
@@ -211,11 +241,6 @@ nav span {
 
 /* thread and board pages */
 .threadPages {
-    background: #d6daf0;
-    border-color: #b7c5d9;
-    border-width: medium 1px 1px medium;
-    border-style: none solid solid none;
-    padding: 0.25em;
     float: left;
     font-size: 125%;
     margin-top: 0.5em;
@@ -225,26 +250,30 @@ nav span {
     text-decoration: none
 }
 
-.divPages #divPages, .boardPages #divPages {
-    border: none;
-}
-
-.threadPages span {
-    color: #34345c;
-}
-
 .boardPages {
-    background: #d6daf0;
-    border-color: #b7c5d9;
-    border-width: medium 1px 1px medium;
-    border-style: none solid solid none;
-    color: #34345c;
+    color: #C0840A;
     padding: 0.1em 0.25em;
+}
+
+#linkNext:after {
+  font-family: Icons;
+  content: "\e036";
+  margin: 0 0.25em;
+}
+
+#linkPrevious:before {
+  font-family: Icons;
+  content: "\e035";
+  margin: 0 0.25em;
+}
+
+#linkPrevious, #linkNext {
+  vertical-align: middle;
 }
 
 /* board banner */
 .boardHeader p {
-    color: #af0a0f;
+    color: #663E11;
 }
 
 .boardHeader p#labelName {
@@ -262,8 +291,8 @@ nav span {
 }
 
 #modeBanner {
-    color: #fff;
-    background-color: #e04000;
+    color: #C0840A;
+    background-color: #117743;
     text-align: center;
     margin: 1em;
 }
@@ -273,72 +302,113 @@ nav span {
 }
 
 /* post new thread */
-#postBox {
-    margin: 1em auto;
-    padding: 0.5em;
-    text-align: center;
+#postWrapper {
+  margin: 1em auto;
+  width: 50%;
+  text-align: center;
 }
 
-#postBox table {
-    width: 100%;
-    font-size: 75%;
+#postBox {
+  text-align: left;
+  width: 20em;
+  margin: 1em auto;
 }
 
 #postBox textarea {
-    width: 100%;
-    height: 8em;
+  width: 100%;
+  height: 12em;
 }
 
-.form-post {
-    margin: auto;
-    display: inline-block;
+#postBox input, #postBox textarea {
+  margin-top: 0.5em;
 }
 
-#postBox table tr div {
-    display: inline;
+#postBox input:focus, #postBox textarea:focus {
+  box-shadow: 0px 0px 5px 2px #117743;
 }
 
-.form-post td {
-    text-align: left;
-    padding: 0.1em;
+#postWrapper button {
+  width: 8em;
+  margin: 0.5em auto;
+  font-size: 125%;
+  border: 2px outset #117743;
 }
 
-.form-post th {
-    text-align: left;
-    padding: 0 1em 0 0.5em;
+#postWrapper button:active {
+  box-shadow: 0px 0px 5px #117743;
 }
-
-.form-post th {
-    background-color: #98e;
-}
-
 .spoilerCheckbox, #flagsDiv {
-    display: inline-block;
+  display: inline-block;
 }
 
-#postBox #captchaDiv {
-    text-align: left;
+#postWrapper label {
+  font-size: 80%;
+}
+
+#flagsDiv {
+  vertical-align: middle;
+  text-align: left;
+}
+
+#postWrapper #captchaDiv {
+  text-align: left;
+}
+
+input[type=checkbox]#checkboxSpoiler {
+  display: none;
+}
+
+input[type=checkbox]#checkboxSpoiler + label:before {
+  font-family: Icons;
+  content: "\e0db";
+  margin-right: 0.5em;
+  color: #117743;
+  display: inline-block;
+}
+
+input[type=checkbox]#checkboxSpoiler:checked + label:before {
+  font-family: Icons;
+  content: "\e033";
+  margin-right: 0.5em;
+  color: #117743;
+  display: inline-block;
+}
+
+a.rules:after {
+  font-family: Icons;
+  content: "\e052";
+  margin-right: 0.5em;
+  color: #117743;
+  height: 80%;
+  font-size: 80%;
+  padding-left: 0.25em;
+  vertical-align: middle;
 }
 
 /* thread/post report and management form */
 .contentAction {
     clear: both;
     margin-top: 2em;
-    background-color: #d6daf0;
-    border-color: #B7C5D9;
-    border-width: medium 1px 1px medium;
-    border-style: none solid solid none;
+    border: 1px dashed #117743;
     padding: 0.5em;
     margin: 2em 0 1em 1em;
     float: left;
 }
 
-#threadReport label, #threadReport img, .contentAction label, .contentAction img, #transferControls, #ipDelete {
+.contentAction label {
+  font-size: 80%;
+}
+
+#threadReport label, #threadReport img, .contentAction label, .contentAction img, #transferControls, #ipDelete, #threadReport input {
     display: block;
 }
 
-#threadReport label.checkbox {
+#threadReport label.checkbox, #threadReport input[type=checkbox] {
     display: inline-block;
+}
+
+#threadReport #fieldCaptchaReport {
+  display: inline-block;
 }
 
 .buttonBox {
@@ -356,7 +426,7 @@ nav span {
 /* thread list, some elements are in the post section */
 #threadList {
     margin: 1em;
-    font-size: 75%;
+    font-size: 80%;
 }
 
 #panelMessage {
@@ -377,27 +447,25 @@ nav span {
 }
 
 .innerPost, .markedPost {
-    background-color: #D6DAF0;
+    background: rgba(50 ,30 ,8 ,0.15);
     display: inline-block;
     overflow: hidden;
     padding-right: 0.25em;
     max-width: 100%;
-    border-color: #B7C5D9;
-    border-width: medium 1px 1px medium;
-    border-style: none solid solid none;
+    border: 1px solid #052004;
 }
 
 .markedPost {
-    background-color: #D6BAD0;
+  border: 1px dashed #F00;
 }
 
 .linkName {
     font-weight: bold;
-    color: #0F0C5D;
+    color: #323DCD;
 }
 
 .linkName:hover {
-    color: #ff0000;
+    color: #AA0000;
 }
 
 .noEmailName, .noEmailName:hover {
@@ -408,17 +476,21 @@ nav span {
     color: #ff0000;
 }
 
+.labelId {
+  text-shadow: 0px 0px 5px #A00;
+}
+
 .linkSelf {
-    color: #000;
+    color: #555;
     text-decoration: none;
 }
 
 .linkSelf:hover {
-    color: #ff0000;
+    color: #AA0000;
 }
 
 .linkQuote {
-    color: #000;
+    color: #555;
     text-decoration: none;
 }
 
@@ -427,7 +499,7 @@ nav span {
 }
 
 .labelSubject {
-    color: #0F0C5D;
+    color: #AA0000;
     font-weight: bold;
 }
 
@@ -485,6 +557,8 @@ nav span {
 
 .panelBacklinks a {
     padding-left: 0.5em;
+    color: #AA0000;
+    text-decoration: none;
 }
 
 .hideLink {
@@ -514,7 +588,9 @@ nav span {
 
 /* this is the preview box */
 #panelContent {
-    font-size: 75%;
+  font-size: 80%;
+  background: rgba(50 ,30 ,8 ,0.9);
+  border: 1px solid #052004;
 }
 
 /* markdown */
@@ -569,7 +645,7 @@ span.spoiler {
 }
 
 .red {
-    color: #af0a0f;
+    color: #117743;
 }
 
 .linkThumb img {
@@ -584,9 +660,9 @@ span.spoiler {
     padding: 0.25em;
     height: 14em;
     overflow: hidden;
-    background-color: rgba(182, 182, 182 ,0.12);
+    background: rgba(50, 30, 8, 0.15);
     margin: 0.1em;
-    border: 2px solid rgba(111, 111, 111, 0.34);
+    border: 1px solid #117743;
 }
 
 .catalogCell .divMessage {
@@ -603,18 +679,21 @@ span.spoiler {
 }
 
 .lockIndicator:before {
-    font-family: FontAwesome;
-    content: "\f023";
+    font-family: Icons;
+    content: "\e08a";
+    color: #A00;
 }
 
 .pinIndicator:after {
-    font-family: FontAwesome;
-    content: "\f08d";
+    font-family: Icons;
+    content: "\e0a8";
+    color: #A00;
 }
 
 .cyclicIndicator:after {
-    font-family: FontAwesome;
-    content: "\f021";
+    font-family: Icons;
+    content: "\e08c";
+    color: #A00;
 }
 
 /* archive pages */
@@ -636,49 +715,29 @@ span.spoiler {
 }
 
 /* index page */
-#topBox {
-    width: 70%;
-    margin: 2.5em auto 1em auto;
-    border: 1px solid #34345c;
-    background-color: #d6daf0;
-    padding: 0.5em;
-}
-
-#topBox p {
-    display: inline-block;
-    font-size: 80%;
-    vertical-align: top;
-    margin: 1em
-    padding: 0.5em;
-}
-
-#topBox img {
-    width: 10em;
-}
-
 #indexWrapper {
-    width: 70%;
-    margin: 1em auto;
-    padding: 0.5em;
+    width: 80%;
+    margin: 2em auto;
 }
 
-#innerWrapper {
-    width: 78%;
-    float: right;
-    padding-right: 0.5em;
-}
-
-#newsBox {
-    border: 1px solid #34345c;
-    background-color: #d6daf0;
+#logoBox {
     width: 100%;
-    padding: 0.5em 0 0.5em 0.5em;
+    margin: 0 auto 1em auto;
+    text-align: center;
+}
+
+#infoBox {
+    text-align: center;
+    width: 100%;
+    padding: 0.5em;
+    margin: 1em auto 2em;
+    font-size: 120%;
 }
 
 #links {
-    padding: 0.5em 0.5em 0.5em 0.5em;
+    padding: 0.5em;
     font-size: 75%;
-    display: inline-block;
+    text-align: center;
 }
 
 #links a {
@@ -686,84 +745,104 @@ span.spoiler {
 }
 
 #linkLogs:before {
-    font-family: FontAwesome;
-    content: "\f05e";
+    font-family: Icons;
+    content: "\e069";
     margin-right: 0.25em;
 }
 
 #linkArchives:before {
-    font-family: FontAwesome;
-    content: "\f187";
+    font-family: Icons;
+    content: "\e023";
     margin-right: 0.25em;
 }
 
 #linkAccount:before {
-    font-family: FontAwesome;
-    content: "\f013";
+    font-family: Icons;
+    content: "\e081";
     margin-right: 0.25em;
 }
 
 #linkGlobalRules:before {
-    font-family: FontAwesome;
-    content: "\f128";
+    font-family: Icons;
+    content: "\e0c9";
     margin-right: 0.25em;
 }
 
 #linkFaq:before {
-    font-family: FontAwesome;
-    content: "\f129";
+    font-family: Icons;
+    content: "\e06c";
+    margin-right: 0.25em;
+}
+
+#linkEngine:before {
+    font-family: Icons;
+    content: "\e064";
     margin-right: 0.25em;
 }
 
 .topBoards {
-    border: 1px solid #34345c;
-    background-color: #d6daf0;
-    width: 100% !important;
-    margin: 1em 0 1em 0 !important;
-    padding: 0.5em 0 0.5em 0.5em;
+    width: 100%;
+    text-align: center;
+    margin: 1em auto;
 }
 
-.topBoards h3 {
-    margin-bottom: 0.25em;
+.topBoards a {
+    padding: 0.5em 1em;
+    background: #101010;
+    text-decoration: none;
+    margin: 0 0.25em;
 }
 
 .topBoards br {
-    margin-bottom: 0.5em;
+    display: none;
 }
 
 #divLatestPosts {
-    border: 1px solid #34345c;
-    background-color: #d6daf0;
     width: 100%;
-    margin: 1em 0 1em 0;
-    padding: 0.5em 0 0.5em 0.5em;
-    overflow: hidden;
-}
-
-#divLatestPosts div {
-    margin: 0.25em 0;
-}
-
-#divLatestImages {
-    float: left;
-    max-width: 20%;
-    padding: 0.5em;
-    margin: 0 1em 1.5em auto;
-    border: 1px solid #34345c;
-    background-color: #d6daf0;
+    margin: 1em;
     text-align: center;
 }
 
-#divLatestImages div {
-    max-width: 100%;
+#divLatestPosts .latestPostCell {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.5em;
+    background: #101010;
+    margin: 0.5em;
+    max-width: 15%;
+    max-height: 8em;
+    font-size: 75%;
+    border: 1px solid #052004;
+}
+
+.latestPostCell a {
+  display: block;
+}
+
+#divLatestImages {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#divLatestImages .latestImageCell {
+  display: inline-block;
+  max-width: 15%;
+  margin: 0 0.5em;
+}
+
+#divLatestImages img {
+  max-width: 100%;
+  padding: 0.5em;
+  background: #151515;
 }
 
 /* CSS for pages that deal with site and account settings and bans */
 .settings {
-    margin: 1em;
-    width: 40%;
-    border: 1px solid #b7c5d9;
-    padding: 0.5em;
+    margin: 4em 1em 1em;
+    width: auto;
+    border: 1px dashed #117743;
+    padding: 1em;
+    display: inline-block;
 }
 
 label {
@@ -816,7 +895,7 @@ footer {
     clear: both;
     margin-top: 2em;
     text-align: center;
-    background-color: #d6daf0;
+    background-color: #151515;
     padding: 0.25em 0 0.25em 0;
 }
 
