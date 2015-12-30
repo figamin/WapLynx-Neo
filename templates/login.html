@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
-<link href="http://static.localhost:8080/font-awesome.min.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
+<link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
 <script src="http://static.localhost:8080/settings.js" defer></script>
 <script src="http://static.localhost:8080/api.js" defer></script>
 <script src="http://static.localhost:8080/login.js" defer></script>
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
     <span>[</span>
     <a href="http://localhost:8080" id="navLinkHome">home</a>
@@ -27,18 +22,12 @@
     <span>]</span>
   </nav>
 
-  <!-- page header -->
   <header>
     <img src="http://static.localhost:8080/logo.png" alt="logo" />
   </header>
-  
-  <!-- global message, from static/globalMessage.html -->
-  <div id="globalMessage">
-  </div>
-    
-  <!-- login/register/recover form -->
+
   <div class="settings">
-    <h3>Login</h3>
+    <h3 class="title">Login</h3>
     <form
         action="/login.js"
         enctype="multipart/form-data"
@@ -68,7 +57,7 @@
     </form>
     <hr />
     <div id="divCreation">
-      <h3>Register</h3>
+      <h3 class="title">Register</h3>
       <form
           action="/registerAccount.js"
           enctype="multipart/form-data"
@@ -105,10 +94,10 @@
             name="captcha"
             type="text"
             id="fieldCaptcha"
-            placeholder="Answer">
+            placeholder="answer">
           <a
             class="small"
-            href="/noCookieCaptcha.js">No cookies?</a>
+            href="/noCookieCaptcha.js">no cookies?</a>
         </div>
         <input
           type="submit"
@@ -123,7 +112,7 @@
       </form>
     </div>
     <hr />
-    <h3>Recover account</h3>
+    <h3 class="title">Recover Account</h3>
     <form
         action="/requestAccountRecovery.js"
         enctype="multipart/form-data"
@@ -148,10 +137,10 @@
           name="captcha"
           type="text"
           id="fieldCaptchaRecover"
-          placeholder="Answer">
+          placeholder="answer">
         <a
           class="small"
-          href="/noCookieCaptcha.js">No cookies?</a>
+          href="/noCookieCaptcha.js">no cookies?</a>
       </div>
       <input
         type="submit"

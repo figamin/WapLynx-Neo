@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
-<link href="http://static.localhost:8080/font-awesome.min.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
+<link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
 <script src="http://static.localhost:8080/settings.js" defer></script>
 <script src="http://static.localhost:8080/api.js" defer></script>
 <script src="http://static.localhost:8080/thread.js" defer></script>
@@ -15,7 +11,6 @@
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
     <span>[</span>
     <a href="http://localhost:8080" id="navLinkHome">home</a>
@@ -28,7 +23,6 @@
     <span>]</span>
   </nav>
 
-
   <!-- board header -->
   <header class="boardHeader">
     <img id="bannerImage" />
@@ -40,108 +34,84 @@
     <h3>Posting mode: Reply</h3>
   </div>
   
-  <!-- new thread box -->
-  <div id="postBox">
+  <div id="postWrapper">
     <form
-      class="form-post"
-      action="../replyThread.js"
-      enctype="multipart/form-data"
-      method="post">
-    <table>
-    
-      <tr>
-        <th>Name</th>
-        <td>
-          <div id="divName">
-            <input
-            type="text"
-            id="fieldName"
-            name="name">
-          </div>
-        </td>
-      </tr>
-      
-      <tr>
-        <th>Email</th>
-        <td>
+        class="form-post"
+        action="../replyThread.js"
+        enctype="multipart/form-data"
+        method="post">
+      <div id="postBox">
+        <div id="divName">
+          <input
+          type="text"
+          id="fieldName"
+          name="name"
+          placeholder="name"
+          class="text">
+        </div>
+        <div>
           <input
             type="text"
             id="fieldEmail"
-            name="email">
-        </td>
-      </tr>
-      
-      <tr>
-        <th>Subject</th>
-        <td>
+            name="email"
+            class="text"
+            placeholder="email">
+        </div>
+        <div>
           <input
             type="text"
             id="fieldSubject"
-            name="subject">
-          <button
+            name="subject"
+            class="text"
+            placeholder="subject">
+        </div>
+        <div>
+          <textarea
+            id="fieldMessage"
+            name="message"
+            class="text"
+            placeholder="message"></textarea>
+        </div>
+        <div>
+          <input
+            type="password"
+            name="password"
+            id="fieldPostingPassword"
+            class="text"
+            placeholder="password">
+        </div>
+        <input
+          type="file"
+          name="files"
+          id="files"
+          multiple
+          class="fileBrowser">
+        <div>
+          <input
+            type="checkbox"
+            name="spoiler"
+            id="checkboxSpoiler">
+          <label for="checkboxSpoiler" class="spoilerCheckbox">Spoiler</label>
+          <div id="flagsDiv">
+            <select
+              name="flag" 
+              id="flagCombobox">
+            </select>
+          </div>
+        </div>
+      </div>
+      <button
             type="submit"
             id="formButton">
-            Mew Reply
-          </button>
-          <button
+            Post Reply
+      </button>
+      <button
             type="button"
             onClick="postReply()"
             id="jsButton"
             class="hidden">
-            New Reply
-          </button>
-        </td>
-      </tr>
-      
-      <tr>
-        <th>Comment</th>
-        <td>
-          <textarea
-            id="fieldMessage"
-            name="message"></textarea>
-        </td>
-      </tr>
-      
-      <tr>
-        <th>Password</th>
-        <td>
-          <input
-            type="password"
-            name="password"
-            id="fieldPostingPassword">
-        </td>
-      </tr>
-      
-      <tr>
-        <th>File(s)</th>
-          <td>
-            <input
-              type="file"
-              name="files"
-              id="files"
-              multiple>
-          </td>
-      </tr>
-      
-      <tr>
-        <td class="options" colspan="2">
-          <label class="spoilerCheckbox">
-            <input
-              type="checkbox"
-              name="spoiler"
-              id="checkboxSpoiler">
-              Spoiler
-          </label>
-          <div id="flagsDiv">
-          <select
-            name="flag" 
-            id="flagCombobox">
-            </select>
-          </div>
-        </td>
-      </tr>
-    </table>
-    
+            Post Reply
+      </button>
     <div id="captchaDiv">
       <img src="/captcha.js"
         id="captchaImage" />
@@ -150,14 +120,14 @@
         name="captcha"
         type="text"
         id="fieldCaptcha"
-        placeholder="Answer">
+        placeholder="answer">
       <input
         type="button"
         onClick="reloadCaptcha()"
         value="Reload"
         id="reloadCaptchaButton"
         class="hidden">
-      <a href="/noCookieCaptcha.js" class="small">No cookies?</a>
+      <a href="/noCookieCaptcha.js" class="small">no cookies?</a>
       </div>
     </div>
     <input
@@ -170,7 +140,7 @@
       id="threadIdentifier">
     <p class="small">Remember to follow the <a href="../rules.html">rules</a></p>
     <p class="small">Max file size: <span id="labelMaxFileSize"></span></p>
-    <p class="small">Max files: {put a number here}</p>
+    <p class="small">Max files: 5</p>
     <p><a id="linkManagement" class="small">Manage Board</a></p>
     <p><a id="linkMod" class="small">Moderate Thread</a></p>
     </form>

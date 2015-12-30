@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
-<link href="http://static.localhost:8080/font-awesome.min.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
+<link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
   
-    <!-- top of page navigation bar -->
   <nav>
     <span>[</span>
     <a href="http://localhost:8080" id="navLinkHome">home</a>
@@ -24,10 +19,8 @@
     <span>]</span>
   </nav>
   
-  <!-- page header -->
   <header>
     <img src="http://static.localhost:8080/logo.png" alt="logo" />
-    <p class="red boardsHeader">Boards on localhost:8080</p>
   </header>
   
   <div id="boardsWrapper">
@@ -50,11 +43,13 @@
           <input
             type="text"
             name="boardUri"
-            placeholder="Name">
+            placeholder="board"
+            class="text">
           <input
             type="text"
             name="tags"
-            placeholder="Tags">
+            placeholder="tags"
+            class="text">
         <input
           type="submit"
           value="Search">

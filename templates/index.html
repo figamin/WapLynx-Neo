@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to any scripts you need here -->
-<script></script>
-<!-- link to your CSS here -->
 <link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
-<link href="http://static.localhost:8080/font-awesome.min.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
+<link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
     <span>[</span>
     <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
@@ -23,57 +17,37 @@
     <span>]</span>
   </nav>
 
-  <div id="topBox">
-    <img src="http://static.localhost:8080/logo.png" alt="logo" />
-    <p>YOUR TEXT HERE</p>
-  </div>
-  
   <div id="indexWrapper">
-    <!-- latest images -->
-    <div id="divLatestImages">
+    <div id="logoBox" class="title">
+      <img src="http://static.localhost:8080/logo.png" alt="logo" />
     </div>
     
-    <div id="innerWrapper">
-      <div id="newsBox">
-        <p>PUT SOMETHING HERE</p>
-      </div>
+    <div id="infoBox" class="title">
+      <p>Welcome to the shadows.</p>
+    </div>
+  
+    <div id="divLatestImages"></div>
       
-      <!-- board list -->
-      <div id="divBoards" class="topBoards">
-        <h3>Top Boards</h3>
-      </div>
+    <div id="divBoards" class="topBoards title"></div>
       
-      <!-- latest posts -->
-      <div id="divLatestPosts">
-        <h3>Latest Posts</h3>
-      </div>
+    <div id="divLatestPosts"></div>
       
-      <div id="links">
-        <span>[</span>
-        <a href="http://localhost:8080/logs.js" id="linkLogs">logs</a>
-        <span>/</span>
-        <a href="http://archive.localhost:8080" id="linkArchives">archives</a>
-        <span>/</span>
-        <a href="http://localhost:8080/account.js" id="linkAccount">account</a>
-        <span>/</span>
-        <a href="http://static.localhost:8080/globalRules.html" id="linkGlobalRules">global rules</a>
-        <span>/</span>
-        <a href="http://static.localhost:8080/faq.html" id="linkFaq">F.A.Q.</a>
-        <span>]</span>
-      </div>
-      
+    <div id="links" class="title">
+      <span>[</span>
+      <a href="http://localhost:8080/logs.js" id="linkLogs">logs</a>
+      <span>/</span>
+      <a href="http://archive.localhost:8080" id="linkArchives">archives</a>
+      <span>/</span>
+      <a href="http://localhost:8080/account.js" id="linkAccount">account</a>
+      <span>/</span>
+      <a href="http://static.localhost:8080/globalRules.html" id="linkGlobalRules">global rules</a>
+      <span>/</span>
+      <a href="http://static.localhost:8080/faq.html" id="linkFaq">F.A.Q.</a>
+      <span>/</span>
+      <a id="linkEngine"></a>
+      <span>]</span>
     </div>
   </div>
-  <!-- footer, from static/footerInfo.html -->
-  <footer>
-    <span>IRC: #InfinityNow &amp; #lynxchan @ rizon.net</span>
-    <a href="https://gitgud.io/groups/InfinityNow">InfinityNow</a>
-    <a href="https://gitgud.io/obongo/8TailedLynx">8TailedLynx</a>
-    <a href="https://trello.com/b/cwS2BTcg/8tailedlynx">(Trello)</a>
-    <a id="linkEngine"></a>
-    <a href="https://gitgud.io/groups/LynxChan">(Group)</a>
-    <a href="https://trello.com/b/JAN7N3OO/lynxchan">(Trello)</a>
-  </footer>
-  
+
 </body>
 </html>

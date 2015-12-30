@@ -5,7 +5,7 @@
 <meta charset="UTF-8" />
 <!-- link to your CSS here -->
 <link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
-<link href="http://static.localhost:8080/font-awesome.min.css" type="text/css" rel="stylesheet" />
+<link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
 <!-- don't add a title, the engine already does that for you -->
 <!-- link to any scripts you need here -->
 <script src="http://static.localhost:8080/settings.js" defer></script>
@@ -35,9 +35,8 @@
       <input type="submit" value="Delete Board" id="boardFormButton">
       <input type="button" onClick="deleteBoard()" value="Delete Board" id="boardJsButton" class="hidden">
     </form>
-  </div>
+  <hr />
   
-  <div class="settings">
   <form action="/deleteArchivedThread.js" method="post" enctype="multipart/form-data">
     <h3>Delete Thread</h3>
       <label>Board URI:<input type="text" name="boardUri" id="threadBoardField"></label>
@@ -45,9 +44,8 @@
       <input type="submit" value="Delete Thread" id="threadFormButton">
       <input type="button" onClick="deleteThread()" value="Delete Thread" id="threadJsButton" class="hidden">
     </form>
-  </div>
+  <hr />
   
-  <div class="settings">
   <form action="/deleteArchivedUpload.js" method="post" enctype="multipart/form-data">
     <h3>Delete Files</h3>
       <label>Board URI:<input type="text" name="boardUri" id="fileBoardField"></label>

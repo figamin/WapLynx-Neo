@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
-<link href="http://static.localhost:8080/font-awesome.min.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
+<link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
 <script src="http://static.localhost:8080/settings.js" defer></script>
 <script src="http://static.localhost:8080/api.js" defer></script>
 <script src="http://static.localhost:8080/reports.js" defer></script>
@@ -16,7 +12,6 @@
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
     <span>[</span>
     <a href="http://localhost:8080" id="navLinkHome">home</a>
@@ -28,12 +23,16 @@
     <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
     <span>]</span>
   </nav>
-    
+  
+  <header>
+    <img src="http://static.localhost:8080/logo.png" alt="logo" />
+  </header>
+  
   <div class="settings">
     <h2 id="boardLabel"></h2>
     <p><a href="/account.js">Account</a></p>
     <p><a id="linkSelf">Board's front-page</a></p>
-
+    <hr />
     <div id="ownerControlDiv">
       <h3>Add volunteer</h3>
       <form
@@ -65,7 +64,7 @@
           id="addVolunteerFormButton"
           value="Add volunteer">
       </form>
-      
+      <hr />
       <h3>Ownership transfer</h3>
       <form
           action="/transferBoardOwnership.js"
@@ -92,7 +91,7 @@
           id="transferBoardFormButton"
           value="Transfer board">
       </form>
-
+      <hr />
       <h3>Delete board</h3>
       <form
           method="post"
@@ -120,7 +119,7 @@
           onClick="deleteBoard()"
           value="Delete board">
       </form>
-
+      <hr />
       <h3>Custom CSS</h3>
       <p>Upload without any files to delete the custom CSS</p>
       <form
@@ -146,14 +145,14 @@
             class="hidden"
             value="Upload CSS">
       </form>
-
-      <form
+      <hr />
+      <h3>Custom JavaScript</h3>
+      <p>Upload without any files to delete the custom JavaScript</p>
+        <form
           action="/setCustomJs.js"
           method="post"
           id="customJsForm"
           enctype="multipart/form-data">
-        <h3>Custom JavaScript</h3>
-        <p>Upload without any files to delete the custom JavaScript</p>
         <input
             type="hidden"
             name="boardUri"
@@ -173,7 +172,7 @@
             class="hidden"
             value="Upload Js">
       </form>
-
+      <hr />
       <h3>Custom Spoiler</h3>
       <p>Upload without any files to delete the custom spoiler</p>
       <div id="customSpoilerIndicator">
@@ -203,10 +202,10 @@
             value="Upload custom spoiler">
       </form>
     </div>
-    
+    <hr />
     <h3>Volunteers</h3>
     <div id="volunteersDiv"></div>
-
+    <hr />
     <h3>Settings</h3>
     <form
         action="/setBoardSettings.js"
@@ -345,7 +344,7 @@
             value="Save"
             id="saveSettingsFormButton">
     </form>
-
+    <hr />
     <p><a id="bannerManagementLink">Manage banners</a></p>
     <p><a id="filterManagementLink">Manage filters</a></p>
     <p><a id="ruleManagementLink">Manage rules</a></p>
@@ -355,14 +354,12 @@
     <p><a id="hashBansLink">Hash bans</a></p>
     <p><a id="closedReportsLink">Closed reports</a></p>
     <p><a id="bansLink">Bans</a></p>
-
+    <hr />
     <h3>Open reports</h3>
     <div id="reportDiv"></div>
-
+    <hr />
     <h3>Appealed bans</h3>
     <div id="appealedBansPanel"></div>
-
   </div>
-
 </body>
 </html>
