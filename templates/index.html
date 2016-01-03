@@ -6,32 +6,33 @@
 <link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-
   <nav>
-    <span>[</span>
-    <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="http://localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="http://localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="http://localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
-
   <div id="indexWrapper">
     <div id="logoBox" class="title">
       <img src="http://static.localhost:8080/logo.png" alt="logo" />
     </div>
-    
     <div id="infoBox" class="title">
       <p>Welcome to the shadows.</p>
     </div>
-  
     <div id="divLatestImages"></div>
-      
     <div id="divBoards" class="topBoards title"></div>
-      
     <div id="divLatestPosts"></div>
-      
     <div id="links" class="title">
       <span>[</span>
       <a href="http://localhost:8080/logs.js" id="linkLogs">logs</a>
@@ -48,6 +49,5 @@
       <span>]</span>
     </div>
   </div>
-
 </body>
 </html>

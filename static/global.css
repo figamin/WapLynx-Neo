@@ -1,19 +1,4 @@
 /* global CSS values */
-
-/* index of selectors
- * 
- * global stuff ~17
- * board banners ~135
- * index features ~533
- * catalog ~438
- * 
- * 
- * 
- * 
- * 
- * 
- */
-
 /* global rules to override any browser CSS and to set global values */
 .small {
   font-size: 75%;
@@ -32,7 +17,7 @@ hr {
   height: 0px;
   border-width: 1px medium medium;
   border-style: solid none none;
-  border-color: #073206;
+  border-color: #B0790A;
 }
 
 a {
@@ -60,23 +45,33 @@ em {
   font-style: italic;
 }
 
-input, button, textarea, select {
-  border: 1px solid #052004;
-  border-radius: 0;
-  font-weight: bold;
-  font-family: shadowrun;
-  background: rgba(50, 30, 8, 0.15);
-  color: #C0840A;
+input, select, textarea {
+  border: 1px double #07371F;
+  border-radius: 5px;
+  background: #282A2E;
+  color: #ACACAC;
   padding-left: 0.25em;
+  font-family: 'Hack', monospace, sans-serif;
   font-size: 80%;
 }
 
-.text {
-  background: rgba(50, 30, 8, 0.15);
+input[type=button], button {
+  border: 3px double #07371F;
+  border-radius: 5px;
+  background: #16171A;
+  color: #ACACAC;
+  padding-left: 0.25em;
+  font-family: 'Hack', monospace, sans-serif;
+  font-size: 80%;
+  font-weight: bold;
 }
 
+/*.text {
+  background: rgba(50, 30, 8, 0.15);
+}
+*/
 .title {
-  font-family: shadowrun;
+  font-style: bold;
 }
 
 .fileBrowser {
@@ -84,22 +79,19 @@ input, button, textarea, select {
 }
 
 /* import resources here; external CSS, fonts, etc */
-
 @font-face {
-  font-family: "shadowrun";
-  src: url(shadowrun.ttf);
-}
-
-@font-face {
-  font-family: "decker";
-   src: url(decker.ttf);
+  font-family: 'Hack';
+  src: url('hack-regular-webfont.eot?v=2.018');
+  src: url('hack-regular-webfont.eot?#iefix&v=2.018') format('embedded-opentype'), url('hack-regular-webfont.woff2?v=2.018') format('woff2'), url('hack-regular-webfont.woff?v=2.018') format('woff'), url('hack-regular-webfont.ttf?v=2.018') format('truetype'), url('hack-regular-webfont.svg?v=2.018#hackregular') format('svg');
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* body styles, inherited by whole page */
 body {
-  color: #C0840A;
-  background: #151515;
-  font-family: decker, monospace, arial, helvetica, sans;
+  color: #ACACAC;
+  background: #1D1F21;
+  font-family: 'Hack', monospace, sans-serif;
   font-size: 100%;
   margin: 0px;
 }
@@ -118,22 +110,31 @@ nav {
   background-color: #151515;
   border-bottom: 1px solid #B0790A;
   padding-bottom: 3px;
+  font-size: 70%;
+  text-align: center;
 }
 
 nav a {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 70%;
-    margin: 0 0.2em 0 0.2em;
-    float: left;
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 0.2em;
 }
 
 nav span {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 70%;
-    margin: 0 0.2em 0 0.2em;
-    float: left;
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 0.2em;
+}
+
+#navLinkSpan {
+  float: left;
+}
+
+#navBoardsSpan {
+}
+
+#navOptionsSpan {
+  float: right;
 }
 
 #navLinkHome:before {
@@ -144,7 +145,7 @@ nav span {
 
 #navBoardList:before {
     font-family: Icons;
-    content: "\e072";
+    content: "\e03a";
     margin-right: 0.25em;
 }
 
@@ -157,6 +158,12 @@ nav span {
 #navPosting:before {
     font-family: Icons;
     content: "\e09a";
+    margin-right: 0.25em;
+}
+
+#navCatalog:before {
+    font-family: Icons;
+    content: "\e072";
     margin-right: 0.25em;
 }
 
@@ -290,33 +297,30 @@ nav span {
     text-decoration: none;
 }
 
-#modeBanner {
-    color: #C0840A;
-    background-color: #117743;
-    text-align: center;
-    margin: 1em;
-}
-
-#modeBanner h3 {
-    font-size: 95%;
-}
-
 /* post new thread */
 #postWrapper {
-  margin: 1em auto;
-  width: 50%;
   text-align: center;
+  margin: 1em auto;
+}
+
+#newPostFieldset {
+  display: inline-block;
+  padding: 0.5em;
+  border: 1px dashed #117743;
 }
 
 #postBox {
   text-align: left;
-  width: 20em;
-  margin: 1em auto;
+  margin: 0 auto 1em auto;
 }
 
 #postBox textarea {
-  width: 100%;
-  height: 12em;
+  width: 35em;
+  height: 18em;
+}
+
+#postBox div.wider input {
+  width: 20em;
 }
 
 #postBox input, #postBox textarea {
@@ -331,7 +335,6 @@ nav span {
   width: 8em;
   margin: 0.5em auto;
   font-size: 125%;
-  border: 2px outset #117743;
 }
 
 #postWrapper button:active {
@@ -343,15 +346,6 @@ nav span {
 
 #postWrapper label {
   font-size: 80%;
-}
-
-#flagsDiv {
-  vertical-align: middle;
-  text-align: left;
-}
-
-#postWrapper #captchaDiv {
-  text-align: left;
 }
 
 input[type=checkbox]#checkboxSpoiler {
@@ -386,13 +380,13 @@ a.rules:after {
 }
 
 /* thread/post report and management form */
-.contentAction {
-    clear: both;
-    margin-top: 2em;
-    border: 1px dashed #117743;
-    padding: 0.5em;
-    margin: 2em 0 1em 1em;
-    float: left;
+#reportFieldset {
+  clear: both;
+  margin-top: 2em;
+  border: 1px dashed #117743;
+  padding: 0.5em;
+  margin: 2em 0 1em 1em;
+  float: left;
 }
 
 .contentAction label {
@@ -423,6 +417,16 @@ a.rules:after {
     display: inline-block;
 }
 
+#threadLinks {
+  margin: 1em;
+  font-size: 80%;
+}
+
+#boardLinks {
+  margin: 1em 1em 1em 0;
+  font-size: 80%;
+}
+
 /* thread list, some elements are in the post section */
 #threadList {
     margin: 1em;
@@ -447,16 +451,17 @@ a.rules:after {
 }
 
 .innerPost, .markedPost {
-    background: rgba(50 ,30 ,8 ,0.15);
+    background: #282A2E;
     display: inline-block;
     overflow: hidden;
     padding-right: 0.25em;
     max-width: 100%;
-    border: 1px solid #052004;
+    border: 1px solid #117743;
+    border-radius: 5px;
 }
 
 .markedPost {
-  border: 1px dashed #F00;
+  background: #3B162B;
 }
 
 .linkName {
@@ -518,8 +523,7 @@ a.rules:after {
 .divBanMessage {
     color: #ff0000;
     font-weight: bold;
-    margin-top: 1em;
-    margin-left: 1em;
+    margin: 1em;
     font-size: 120%;
 }
 
@@ -628,6 +632,7 @@ span.spoiler {
 .divRefresh label, .divRefresh input {
     display: inline-block;
     margin: 0;
+    font-size: 80%;
 }
 
 /* catalog */
@@ -636,6 +641,7 @@ span.spoiler {
 .catalogDiv {
     width: 95%;
     margin: 1em auto;
+    text-align: center;
 }
 
 #catalogId {
@@ -654,15 +660,16 @@ span.spoiler {
 }
 
 .catalogCell {
-    float: left;
+    display: inline-block;
     width: 10em;
     text-align: center;
     padding: 0.25em;
     height: 14em;
     overflow: hidden;
-    background: rgba(50, 30, 8, 0.15);
+    background: #282A2E;
     margin: 0.1em;
     border: 1px solid #117743;
+    border-radius: 5px;
 }
 
 .catalogCell .divMessage {
@@ -788,7 +795,7 @@ span.spoiler {
 
 .topBoards a {
     padding: 0.5em 1em;
-    background: #101010;
+    background: #282A2E;
     text-decoration: none;
     margin: 0 0.25em;
 }
@@ -804,15 +811,16 @@ span.spoiler {
 }
 
 #divLatestPosts .latestPostCell {
-    display: inline-block;
-    overflow: hidden;
-    padding: 0.5em;
-    background: #101010;
-    margin: 0.5em;
-    max-width: 15%;
-    max-height: 8em;
-    font-size: 75%;
-    border: 1px solid #052004;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.5em;
+  background: #282A2E;
+  margin: 0.5em;
+  max-width: 15%;
+  max-height: 8em;
+  font-size: 75%;
+  border: 1px solid #117743;
+  border-radius: 5px;
 }
 
 .latestPostCell a {
@@ -832,8 +840,8 @@ span.spoiler {
 
 #divLatestImages img {
   max-width: 100%;
-  padding: 0.5em;
-  background: #151515;
+  padding: 5px;
+  background: #282A2E;
 }
 
 /* CSS for pages that deal with site and account settings and bans */

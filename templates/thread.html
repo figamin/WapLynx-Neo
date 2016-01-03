@@ -12,137 +12,142 @@
 <body>
 
   <nav>
-    <span>[</span>
-    <a href="http://localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="http://localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="http://localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="http://localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+      <span>[</span>
+      <a href="../catalog.html" id="navCatalog">Catalog</a>
+      <span>]</span>
+    </span>
   </nav>
 
-  <!-- board header -->
   <header class="boardHeader">
     <img id="bannerImage" />
     <p id="labelName"></p>
     <p id="labelDescription"></p>
   </header>
-  
-  <div id="modeBanner">
-    <h3>Posting mode: Reply</h3>
-  </div>
-  
+
   <div id="postWrapper">
-    <form
-        class="form-post"
-        action="../replyThread.js"
-        enctype="multipart/form-data"
-        method="post">
-      <div id="postBox">
-        <div id="divName">
-          <input
-          type="text"
-          id="fieldName"
-          name="name"
-          placeholder="name"
-          class="text">
-        </div>
-        <div>
-          <input
+    <fieldset id="newPostFieldset">
+      <legend>Mode: Reply</legend>
+      <form
+          class="form-post"
+          action="../replyThread.js"
+          enctype="multipart/form-data"
+          method="post">
+        <div id="postBox">
+          <div id="divName" class="wider">
+            <input
             type="text"
-            id="fieldEmail"
-            name="email"
-            class="text"
-            placeholder="email">
-        </div>
-        <div>
-          <input
-            type="text"
-            id="fieldSubject"
-            name="subject"
-            class="text"
-            placeholder="subject">
-        </div>
-        <div>
-          <textarea
-            id="fieldMessage"
-            name="message"
-            class="text"
-            placeholder="message"></textarea>
-        </div>
-        <div>
-          <input
-            type="password"
-            name="password"
-            id="fieldPostingPassword"
-            class="text"
-            placeholder="password">
-        </div>
-        <input
-          type="file"
-          name="files"
-          id="files"
-          multiple
-          class="fileBrowser">
-        <div>
-          <input
-            type="checkbox"
-            name="spoiler"
-            id="checkboxSpoiler">
-          <label for="checkboxSpoiler" class="spoilerCheckbox">Spoiler</label>
-          <div id="flagsDiv">
-            <select
-              name="flag" 
-              id="flagCombobox">
-            </select>
+            id="fieldName"
+            name="name"
+            placeholder="name"
+            class="text">
+          </div>
+          <div class="wider">
+            <input
+              type="text"
+              id="fieldEmail"
+              name="email"
+              class="text"
+              placeholder="email">
+          </div>
+          <div class="wider">
+            <input
+              type="text"
+              id="fieldSubject"
+              name="subject"
+              class="text"
+              placeholder="subject">
+          </div>
+          <div>
+            <textarea
+              id="fieldMessage"
+              name="message"
+              class="text"
+              placeholder="message"></textarea>
+          </div>
+          <div>
+            <input
+              type="text"
+              name="password"
+              id="fieldPostingPassword"
+              class="text"
+              placeholder="password">
+            <input
+              type="checkbox"
+              name="spoiler"
+              id="checkboxSpoiler">
+            <label for="checkboxSpoiler" class="spoilerCheckbox">Spoiler</label>
+            <div id="flagsDiv">
+              <select
+                name="flag" 
+                id="flagCombobox">
+              </select>
+            </div>
+          </div>
+          <div>
+            <input
+              type="file"
+              name="files"
+              id="files"
+              multiple
+              class="fileBrowser">
           </div>
         </div>
+      <div id="captchaDiv">
+        <img src="/captcha.js"
+          id="captchaImage" />
+        <div>
+        <input
+          name="captcha"
+          type="text"
+          id="fieldCaptcha"
+          placeholder="answer">
+        <input
+          type="button"
+          onClick="reloadCaptcha()"
+          value="Reload"
+          id="reloadCaptchaButton"
+          class="hidden">
+        <a href="/noCookieCaptcha.js" class="small">no cookies?</a>
+        </div>
       </div>
       <button
-            type="submit"
-            id="formButton">
-            Post Reply
+        type="submit"
+        id="formButton">
+        Reply
       </button>
       <button
-            type="button"
-            onClick="postReply()"
-            id="jsButton"
-            class="hidden">
-            Post Reply
-      </button>
-    <div id="captchaDiv">
-      <img src="/captcha.js"
-        id="captchaImage" />
-      <div>
-      <input
-        name="captcha"
-        type="text"
-        id="fieldCaptcha"
-        placeholder="answer">
-      <input
         type="button"
-        onClick="reloadCaptcha()"
-        value="Reload"
-        id="reloadCaptchaButton"
+        onClick="postReply()"
+        id="jsButton"
         class="hidden">
-      <a href="/noCookieCaptcha.js" class="small">no cookies?</a>
-      </div>
-    </div>
-    <input
-      type="hidden"
-      name="boardUri"
-      id="boardIdentifier">
-    <input
-      type="hidden"
-      name="threadId"
-      id="threadIdentifier">
-    <p class="small">Remember to follow the <a href="../rules.html">rules</a></p>
-    <p class="small">Max file size: <span id="labelMaxFileSize"></span></p>
-    <p class="small">Max files: 5</p>
-    <p><a id="linkManagement" class="small">Manage Board</a></p>
-    <p><a id="linkMod" class="small">Moderate Thread</a></p>
+        Reply
+      </button>
+      <input
+        type="hidden"
+        name="boardUri"
+        id="boardIdentifier">
+      <input
+        type="hidden"
+        name="threadId"
+        id="threadIdentifier">
+      <p class="small">Remember to follow the <a href="../rules.html" class="rules">rules</a></p>
+      <p class="small">Max file size: <span id="labelMaxFileSize"></span></p>
+      <p class="small">Max files: 5</p>
+    </fieldset>
     </form>
   </div>
   
@@ -276,6 +281,13 @@
       </div>
       <hr />
   </div>
+  <div id="threadLinks">
+    <span>[</span>
+    <a id="linkManagement">Manage Board</a>
+    <span>/</span>
+    <a id="linkMod">Moderate Thread</a>
+    <span>]</span>
+  </div>
   <div class="divRefresh hidden">
     <label><input
       type="checkbox"
@@ -290,6 +302,8 @@
       value="Refresh">
   </div>
       <!-- ban/report/delete/transfer controls -->
+    <fieldset id="reportFieldset">
+      <legend>Report</legend>
       <div class="contentAction">
         <label>Reason<input
           type="text"
@@ -340,7 +354,7 @@
             type="text"
             id="fieldCaptchaReport"
             placeholder="Answer">
-          <a class="small" href="/noCookieCaptcha.js">No cookies?</a>
+          <a class="small" href="/noCookieCaptcha.js">no cookies?</a>
         </div>
         <div class="buttonBox">
           <input
@@ -389,6 +403,7 @@
             value="Report">
         </div>
       </div>
+      </fieldset>
     </form>
   
 </body>
