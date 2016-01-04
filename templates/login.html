@@ -2,98 +2,148 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
-<link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
-<script src="http://static.localhost:8080/settings.js" defer></script>
-<script src="http://static.localhost:8080/api.js" defer></script>
-<script src="http://static.localhost:8080/login.js" defer></script>
+<link href="//static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<link href="//static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
+<script src="//static.localhost:8080/settings.js" defer></script>
+<script src="//static.localhost:8080/api.js" defer></script>
+<script src="//static.localhost:8080/login.js" defer></script>
 </head>
 <body>
 
   <nav>
-    <span>[</span>
-    <a href="http://localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="http://localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
 
   <header>
-    <img src="http://static.localhost:8080/logo.png" alt="logo" />
+    <img src="//static.localhost:8080/logo.png" alt="logo" />
   </header>
 
-  <div class="settings">
-    <h3 class="title">Login</h3>
-    <form
-        action="/login.js"
-        enctype="multipart/form-data"
-        method="post">
-      <label>Login:
-        <input
-          type="text"
-          name="login"
-          id="loginFieldLogin">
-      </label>
-      <label>Password:
-        <input
-          type="password"
-          id="loginFieldPassword"
-          name="password">
-      </label>
-      <input
-        type="submit"
-        id="loginFormButton"
-        value="Login">
-      <input
-        type="button"
-        id="loginJsButton"
-        onclick="loginUser()"
-        value="Login"
-        class="hidden">
-    </form>
-    <hr />
-    <div id="divCreation">
-      <h3 class="title">Register</h3>
+  <div id="settingsWrapper">
+    <fieldset id="settingsFieldset">
+      <legend class="title">Account</legend>
+      <h3 class="title">Login</h3>
       <form
-          action="/registerAccount.js"
+          action="/login.js"
           enctype="multipart/form-data"
           method="post">
         <label>Login:
           <input
             type="text"
             name="login"
-            id="registerFieldLogin">
+            id="loginFieldLogin">
         </label>
         <label>Password:
           <input
             type="password"
-            id="registerFieldPassword"
+            id="loginFieldPassword"
             name="password">
         </label>
-        <label>E-mail:
+        <input
+          type="submit"
+          id="loginFormButton"
+          value="Login">
+        <input
+          type="button"
+          id="loginJsButton"
+          onclick="loginUser()"
+          value="Login"
+          class="hidden">
+      </form>
+      <hr />
+      <div id="divCreation">
+        <h3 class="title">Register</h3>
+        <form
+            action="/registerAccount.js"
+            enctype="multipart/form-data"
+            method="post">
+          <label>Login:
+            <input
+              type="text"
+              name="login"
+              id="registerFieldLogin">
+          </label>
+          <label>Password:
+            <input
+              type="password"
+              id="registerFieldPassword"
+              name="password">
+          </label>
+          <label>E-mail:
+            <input
+              type="email"
+              id="registerFieldEmail"
+              name="email">
+          </label>
+          <img
+            id="captchaImage"
+            src="/captcha.js">
+          <div>
+            <input
+              type="button"
+              class="hidden"
+              id="reloadCaptchaButton"
+              onclick="reloadCaptcha()"
+              value="Reload">
+            <input
+              name="captcha"
+              type="text"
+              id="fieldCaptcha"
+              placeholder="answer">
+            <a
+              class="small"
+              href="/noCookieCaptcha.js">no cookies?</a>
+          </div>
           <input
-            type="email"
-            id="registerFieldEmail"
-            name="email">
+            type="submit"
+            id="registerFormButton"
+            value="Register">
+          <input
+            type="button"
+            id="registerJsButton"
+            onclick="registerAccount()"
+            value="Register"
+            class="hidden">
+        </form>
+      </div>
+      <hr />
+      <h3 class="title">Recover Account</h3>
+      <form
+          action="/requestAccountRecovery.js"
+          enctype="multipart/form-data"
+          method="post">
+        <label>Login:
+          <input
+            type="text"
+            name="login"
+            id="recoverFieldLogin">
         </label>
         <img
-          id="captchaImage"
+          id="captchaImageRecover"
           src="/captcha.js">
         <div>
           <input
             type="button"
-            class="hidden"
-            id="reloadCaptchaButton"
+            id="reloadCaptchaButtonRecover"
             onclick="reloadCaptcha()"
             value="Reload">
           <input
             name="captcha"
             type="text"
-            id="fieldCaptcha"
+            id="fieldCaptchaRecover"
             placeholder="answer">
           <a
             class="small"
@@ -101,58 +151,16 @@
         </div>
         <input
           type="submit"
-          id="registerFormButton"
-          value="Register">
+          id="recoverFormButton"
+          value="Request Recovery">
         <input
           type="button"
-          id="registerJsButton"
-          onclick="registerAccount()"
-          value="Register"
+          id="recoverJsButton"
+          onclick="recoverAccount()"
+          value="Request Recovery"
           class="hidden">
       </form>
-    </div>
-    <hr />
-    <h3 class="title">Recover Account</h3>
-    <form
-        action="/requestAccountRecovery.js"
-        enctype="multipart/form-data"
-        method="post">
-      <label>Login:
-        <input
-          type="text"
-          name="login"
-          id="recoverFieldLogin">
-      </label>
-      <img
-        id="captchaImageRecover"
-        src="/captcha.js">
-      <div>
-        <input
-          type="button"
-          class="hidden"
-          id="reloadCaptchaButtonRecover"
-          onclick="reloadCaptcha()"
-          value="Reload">
-        <input
-          name="captcha"
-          type="text"
-          id="fieldCaptchaRecover"
-          placeholder="answer">
-        <a
-          class="small"
-          href="/noCookieCaptcha.js">no cookies?</a>
-      </div>
-      <input
-        type="submit"
-        id="recoverFormButton"
-        value="Request Recovery">
-      <input
-        type="button"
-        id="recoverJsButton"
-        onclick="recoverAccount()"
-        value="Request Recovery"
-        class="hidden">
-    </form>
+    </fieldset>
   </div>
 
 </body>

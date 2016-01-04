@@ -4,55 +4,62 @@
 <!-- add metadata about your site here -->
 <meta charset="UTF-8" />
 <!-- link to your CSS here -->
-<link href="http://static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
-<link href="http://static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
+<link href="//static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
+<link href="//static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
 <!-- don't add a title, the engine already does that for you -->
 <!-- link to any scripts you need here -->
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="http://localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="http://localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="http://localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="http://static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
 
-  <!-- page header -->
   <header>
-    <img src="http://static.localhost:8080/logo.png" alt="logo" />
+    <img src="//static.localhost:8080/logo.png" alt="logo" />
   </header>
   
-  <div id="divSolvedCaptcha" class="settings">
-    <h3>Captcha solved. Input this ID as the answer to the captcha when posting: <span id="labelCaptchaId"></span></h3>
-  </div>
-  
-  <div class="settings">
-    <p>No problem! Solve this captcha here instead.</p>
-    <img id="imageCaptcha">
-    <form
-        method="post"
-        action="/solveCaptcha.js"
-        enctype="multipart/form-data">
-      <input
-        type="hidden"
-        name="captchaId"
-        id="inputCaptchaId">
-      <input
-        type="text"
-        name="answer"
-        placeholder="Answer">
-      <input
-        type="submit"
-        value="Solve">
-    </form>
-  </div>
+  <fieldset id="settingsFieldset">
+    <legend>No Cookies?</legend>
+    <div id="divSolvedCaptcha">
+      <h3>Captcha solved. Input this ID as the answer to the captcha when posting: <span id="labelCaptchaId"></span></h3>
+      <hr />
+    </div>
+    <div>
+      <p>No problem! Solve this captcha here instead.</p>
+      <img id="imageCaptcha">
+      <form
+          method="post"
+          action="/solveCaptcha.js"
+          enctype="multipart/form-data">
+        <input
+          type="hidden"
+          name="captchaId"
+          id="inputCaptchaId">
+        <input
+          type="text"
+          name="answer"
+          placeholder="answer">
+        <input
+          type="submit"
+          value="Solve">
+      </form>
+    </div>
+  </fieldset>
 
 </body>
 </html>

@@ -55,7 +55,7 @@ input, select, textarea {
   font-size: 80%;
 }
 
-input[type=button], button {
+input[type=button], input[type=submit], button {
   border: 3px double #07371F;
   border-radius: 5px;
   background: #16171A;
@@ -64,14 +64,11 @@ input[type=button], button {
   font-family: 'Hack', monospace, sans-serif;
   font-size: 80%;
   font-weight: bold;
+  margin-top: 0.5em;
 }
 
-/*.text {
-  background: rgba(50, 30, 8, 0.15);
-}
-*/
 .title {
-  font-style: bold;
+  font-weight: bold;
 }
 
 .fileBrowser {
@@ -461,7 +458,7 @@ a.rules:after {
 }
 
 .markedPost {
-  background: #3B162B;
+  background: rgba(59, 22, 43, 0.4);
 }
 
 .linkName {
@@ -475,18 +472,19 @@ a.rules:after {
 
 .noEmailName, .noEmailName:hover {
     color: #117743;
+    text-shadow: none;
 }
 
 .quoteLink {
     color: #ff0000;
 }
 
-.labelId {
+.labelId:hover {
   text-shadow: 0px 0px 5px #A00;
 }
 
 .linkSelf {
-    color: #555;
+    color: #ACACAC;
     text-decoration: none;
 }
 
@@ -495,7 +493,7 @@ a.rules:after {
 }
 
 .linkQuote {
-    color: #555;
+    color: #ACACAC;
     text-decoration: none;
 }
 
@@ -520,6 +518,9 @@ a.rules:after {
     word-wrap: break-word;
 }
 
+.innerPost .divMessage, .markedPost .divMessage {
+  clear: both;
+}
 .divBanMessage {
     color: #ff0000;
     font-weight: bold;
@@ -593,10 +594,13 @@ a.rules:after {
 /* this is the preview box */
 #panelContent {
   font-size: 80%;
-  background: rgba(50 ,30 ,8 ,0.9);
-  border: 1px solid #052004;
 }
 
+#panelContent .innerPost {
+  border: 1px solid #117743 !important;
+  border-radius: 5px;
+  padding: 0.25em;
+}
 /* markdown */
 .greenText {
     color: #789922;
@@ -775,7 +779,7 @@ span.spoiler {
     margin-right: 0.25em;
 }
 
-#linkFaq:before {
+#linkAbout:before {
     font-family: Icons;
     content: "\e06c";
     margin-right: 0.25em;
@@ -790,7 +794,7 @@ span.spoiler {
 .topBoards {
     width: 100%;
     text-align: center;
-    margin: 1em auto;
+    margin: 1em auto 2em !important;
 }
 
 .topBoards a {
@@ -821,6 +825,7 @@ span.spoiler {
   font-size: 75%;
   border: 1px solid #117743;
   border-radius: 5px;
+  vertical-align: middle;
 }
 
 .latestPostCell a {
@@ -836,6 +841,7 @@ span.spoiler {
   display: inline-block;
   max-width: 15%;
   margin: 0 0.5em;
+  vertical-align: middle;
 }
 
 #divLatestImages img {
@@ -845,44 +851,38 @@ span.spoiler {
 }
 
 /* CSS for pages that deal with site and account settings and bans */
-.settings {
-    margin: 4em 1em 1em;
-    width: auto;
-    border: 1px dashed #117743;
-    padding: 1em;
-    display: inline-block;
+#settingsFieldset {
+  margin: 2em;
+  border: 1px dashed #117743;
+  padding: 1em;
+  display: inline-block;
 }
 
 label {
-    display: block;
+  display: block;
 }
 
 .banners {
-    margin: 1em;
-    width: auto;
-    padding: 0.5em;
+  margin: 1em;
+  width: auto;
+  padding: 0.5em;
 }
 
-.settings textarea {
-    display: block;
-    height: 5em;
+#settingsFieldset textarea {
+  display: block;
+  height: 5em;
 }
 
-.settings hr {
-    height: 1px;
-    color: #e9edf3;
+#settingsFieldset hr {
+  border-color: #117743;
 }
 
 input.wide, textarea.wide {
-    width: 90%;
+  width: 90%;
 }
 
 #redirect, #maint, #hashBan {
     text-align: center;
-}
-
-#divSolvedCaptcha {
-    font-size: 125%;
 }
 
 #labelCaptchaId {
@@ -895,6 +895,18 @@ input.wide, textarea.wide {
 
 #divRules {
     margin: 1em auto;
+}
+
+#staticPageWrapper {
+  margin: 2em auto;
+  text-align: center;
+}
+
+#staticPageFieldset {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border: 1px dashed #117743;
+  text-align: left;
 }
 
 /* footer styles */
@@ -916,4 +928,15 @@ footer a, footer p {
 /* this has to go down here to override anything above it */
 .hidden {
     display: none;
+}
+
+.filteredPost .postInfo, .filteredPost .panelUploads, .filteredPost .divMessage {
+ display: none;
+}
+
+.filteredPost:before {
+  font-family: Icons;
+  content: "\e068";
+  color: #a00;
+  margin: 1em;
 }
