@@ -898,7 +898,7 @@ input.wide, textarea.wide {
 /* footer styles */
 footer {
     width: 100%;
-    margin-top: 3em;
+    margin: 3em 0px 2em 0px;
     text-align: center;
     font-size: 75%;
 }
