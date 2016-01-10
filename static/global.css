@@ -396,10 +396,6 @@ a.rules:after {
     margin: 1em;
 }
 
-#threadList #divThreads, #threadList #threadLinks {
-  font-size: 80%;
-}
-
 #panelMessage {
     margin: 1em;
 }
@@ -418,13 +414,17 @@ a.rules:after {
 }
 
 .innerPost, .markedPost {
-    background: #282A2E;
-    display: inline-block;
-    overflow: hidden;
-    padding-right: 0.25em;
-    max-width: 100%;
-    border: 1px solid #117743;
-    border-radius: 5px;
+  background: #282A2E;
+  display: inline-block;
+  overflow: hidden;
+  padding-right: 0.25em;
+  max-width: 100%;
+  border: 1px solid #117743;
+  border-radius: 5px;
+}
+
+.postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp, .contentOmissionIndicator, .labelOmission, .linkThumb {
+  font-size: 80%;
 }
 
 .markedPost {
@@ -496,7 +496,7 @@ a.rules:after {
     color: #ff0000;
     font-weight: bold;
     margin: 1em;
-    font-size: 120%;
+    font-size: 100%;
 }
 
 .uploadCell {
@@ -562,16 +562,6 @@ a.rules:after {
     margin-left: 0.5em;
 }
 
-/* this is the preview box */
-#panelContent {
-  font-size: 80%;
-}
-
-#panelContent .innerPost {
-  border: 1px solid #117743 !important;
-  border-radius: 5px;
-  padding: 0.25em;
-}
 /* markdown */
 .greenText {
     color: #789922;

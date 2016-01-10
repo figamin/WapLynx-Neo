@@ -211,9 +211,7 @@ function setFullBorder(tooltip) {
   tooltip.innerHTML = '';
   tooltip.appendChild(innerPost);
   
-  innerPost.style['border-style'] = 'solid solid solid solid';
-  innerPost.style['border-width'] = '1px 1px 1px 1px';
-  innerPost.style['border-color'] = '#B7C5D9 #B7C5D9 #B7C5D9 #B7C5D9';
+  innerPost.style['padding'] = '0.25em 0.5em 0.25em 0.5em';
 
 }
 
