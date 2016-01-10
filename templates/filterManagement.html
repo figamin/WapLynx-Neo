@@ -1,74 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="//static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
 <link href="//static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
 <script src="//static.localhost:8080/settings.js" defer></script>
 <script src="//static.localhost:8080/api.js" defer></script>
 <script src="//static.localhost:8080/filterManagement.js" defer></script>
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
   
-  <div class="settings">
-    <h3>New filter</h3>
-    <form
-        action="/createFilter.js"
-        method="post"
-        enctype="multipart/form-data">
-      <input
-        type="hidden"
-        name="boardUri"
-        id="boardIdentifier">
-      <label>Original term:
+  <header>
+    <img src="//static.localhost:8080/logo.png" alt="logo" />
+  </header>
+  
+  <div id="settingsWrapper">
+  
+    <fieldset id="settingsFieldset">
+    
+      <legend>Filters</legend>
+      
+      <form
+          action="/createFilter.js"
+          method="post"
+          enctype="multipart/form-data">
         <input
-          type="text"
-          name="originalTerm"
-          id="fieldOriginalTerm">
-      </label>
-      <label>Replacement term:
+          type="hidden"
+          name="boardUri"
+          id="boardIdentifier">
+        <label>Original term:
+          <input
+            type="text"
+            name="originalTerm"
+            id="fieldOriginalTerm">
+        </label>
+        <label>Replacement term:
+          <input
+            type="text"
+            name="replacementTerm"
+            id="fieldReplacementTerm">
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="caseInsensitive"
+            id="checkboxCaseInsensitive">
+          Case-insensitive
+        </label>
         <input
-          type="text"
-          name="replacementTerm"
-          id="fieldReplacementTerm">
-      </label>
-      <label>
+          type="submit"
+          value="Add filter"
+          id="addFormButton">
         <input
-          type="checkbox"
-          name="caseInsensitive"
-          id="checkboxCaseInsensitive">
-        Case-insensitive
-      </label>
-      <input
-        type="submit"
-        value="Add filter"
-        id="addFormButton">
-      <input
-        type="button"
-        onClick="addFilter()"
-        class="hidden"
-        value="Add filter"
-        id="addJsButton">
-    </form>
-    <h3>Existing filters</h3>
-    <div id="divFilters"></div>
+          type="button"
+          onClick="addFilter()"
+          class="hidden"
+          value="Add filter"
+          id="addJsButton">
+      </form>
+      <hr />
+      <div id="divFilters"></div>
+    </fieldset>
   </div>
 
 </body>

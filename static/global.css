@@ -141,89 +141,56 @@ nav span {
 }
 
 #navBoardList:before {
-    font-family: Icons;
-    content: "\e03a";
-    margin-right: 0.25em;
+  font-family: Icons;
+  content: "\e03a";
+  margin-right: 0.25em;
 }
 
 #linkOverboard:before, #navOverboard:before {
-    font-family: Icons;
-    content: "\e007";
-    margin-right: 0.25em;
+  font-family: Icons;
+  content: "\e007";
+  margin-right: 0.25em;
 }
 
 #navPosting:before {
-    font-family: Icons;
-    content: "\e09a";
-    margin-right: 0.25em;
+  font-family: Icons;
+  content: "\e09a";
+  margin-right: 0.25em;
 }
 
 #navCatalog:before {
-    font-family: Icons;
-    content: "\e072";
-    margin-right: 0.25em;
+  font-family: Icons;
+  content: "\e072";
+  margin-right: 0.25em;
+}
+
+#linkTop:before {
+  font-family: Icons;
+  content: "\e012";
+  margin-right: 0.25em;
+}
+
+#linkBottom:before {
+  font-family: Icons;
+  content: "\e00f";
+  margin-right: 0.25em;
 }
 
 /* board list */
-.boardsHeader {
-    font-size: 150%;
-}
-
 #boardsWrapper {
-    width: 80%;
-    margin: 1em auto 1em auto;
+  width: 80%;
+  margin: 1em auto;
+  text-align: center;
 }
 
-#divBoards {
-    margin: 1em auto 0.5em auto;
-}
-
-#divBoards .col1 {
-    width: 15%;
-}
-
-#divBoards .col2 {
-    width: 20%;
-}
-
-#divBoards .col3 {
-    width: 10%;
-}
-
-#divBoards .col4 {
-    width: 10%;
-}
-
-#divBoards .col5 {
-    width: 10%;
-}
-
-#divBoards .col6 {
-    width: 25%;
-}
-
-.boardsCell, #boardsCellHeader {
-    width: 100%;
-    margin: 0.25em 0 0.25em 0;
-}
-
-.boardsCell:nth-of-type(odd) span {
-    background: rgba(50 ,30 ,8 ,0.3);
+#boardsWrapper #divBoards {
+  margin: 2em 1em 0px;
+  display: inline-block;
+  text-align: left;
 }
 
 .boardsCell span {
-    display: inline-block;
     text-overflow: ellipsis;
-    text-decoration: none;
-    padding: 0.25em;
-    margin: 0.05em;
-}
-
-#boardsCellHeader span {
-    font-weight: bold;
-    display: inline-block;
-    border: 1px solid #052004;
-    background: rgba(50 ,30 ,8 ,0.3);
 }
 
 .search {
@@ -390,7 +357,7 @@ a.rules:after {
   font-size: 80%;
 }
 
-#threadReport label, #threadReport img, .contentAction label, .contentAction img, #transferControls, #ipDelete, #threadReport input {
+#threadReport label, #threadReport img, .contentAction label, .contentAction img, #transferControls, #ipDelete {
     display: block;
 }
 
@@ -427,7 +394,10 @@ a.rules:after {
 /* thread list, some elements are in the post section */
 #threadList {
     margin: 1em;
-    font-size: 80%;
+}
+
+#threadList #divThreads, #threadList #threadLinks {
+  font-size: 80%;
 }
 
 #panelMessage {
@@ -518,9 +488,10 @@ a.rules:after {
     word-wrap: break-word;
 }
 
-.innerPost .divMessage, .markedPost .divMessage {
+.multipleUploads .innerPost .divMessage, .multipleUploads .markedPost .divMessage {
   clear: both;
 }
+
 .divBanMessage {
     color: #ff0000;
     font-weight: bold;
@@ -619,8 +590,8 @@ span.spoiler {
 }
 
 .spoiler:hover {
-    color: #000;
-    background-color: #d6daf0;
+    color: #ACACAC;
+    background: none;
 }
 
 /* refresh timer */
@@ -707,11 +678,6 @@ span.spoiler {
     color: #A00;
 }
 
-/* archive pages */
-#archiveThreadList, #archiveBoardList {
-    margin: 1em;
-}
-
 #archiveThreadList div, #archiveBoardList div {
     margin: 0.25em 0;
 }
@@ -791,17 +757,25 @@ span.spoiler {
     margin-right: 0.25em;
 }
 
+#linkLinks:before {
+    font-family: Icons;
+    content: "\e06a";
+    margin-right: 0.25em;
+}
+
 .topBoards {
     width: 100%;
     text-align: center;
-    margin: 1em auto 2em !important;
+    margin: 1em 0px;
 }
 
 .topBoards a {
-    padding: 0.5em 1em;
-    background: #282A2E;
-    text-decoration: none;
-    margin: 0 0.25em;
+  padding: 0.25em 0.5em;
+  background: #282A2E;
+  text-decoration: none;
+  margin: 0.5em 0.25em;
+  border-radius: 5px;
+  display: inline-block;
 }
 
 .topBoards br {
@@ -848,18 +822,26 @@ span.spoiler {
   max-width: 100%;
   padding: 5px;
   background: #282A2E;
+  border-radius: 5px;
 }
 
 /* CSS for pages that deal with site and account settings and bans */
+#settingsWrapper {
+  text-align: center;
+  width: 80%;
+  margin: 2em auto;
+}
+
 #settingsFieldset {
-  margin: 2em;
   border: 1px dashed #117743;
   padding: 1em;
   display: inline-block;
+  text-align: left;
 }
 
-label {
+#settingsWrapper input {
   display: block;
+  margin: 0.5em 0.5em 0.5em 0px;
 }
 
 .banners {
@@ -873,28 +855,32 @@ label {
   height: 5em;
 }
 
+#settingsFieldset label {
+  display: block;
+}
+
+#settingsFieldset label input {
+  display: inline-block;
+}
+
 #settingsFieldset hr {
   border-color: #117743;
+}
+
+#settingsWrapper .captchaDiv input {
+  display: inline-block;
 }
 
 input.wide, textarea.wide {
   width: 90%;
 }
 
-#redirect, #maint, #hashBan {
+#redirect, #maint {
     text-align: center;
 }
 
 #labelCaptchaId {
     color: #ff0000;
-}
-
-#rules {
-    text-align: center;
-}
-
-#divRules {
-    margin: 1em auto;
 }
 
 #staticPageWrapper {
@@ -912,17 +898,9 @@ input.wide, textarea.wide {
 /* footer styles */
 footer {
     width: 100%;
-    clear: both;
-    margin-top: 2em;
+    margin-top: 3em;
     text-align: center;
-    background-color: #151515;
-    padding: 0.25em 0 0.25em 0;
-}
-
-footer a, footer p {
-    margin: 0 0.5em 0.5em 0.5em;
-    text-decoration: none;
-    
+    font-size: 75%;
 }
 
 /* this has to go down here to override anything above it */

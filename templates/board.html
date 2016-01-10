@@ -27,6 +27,10 @@
     </span>
     <span id="navOptionsSpan">
       <span>[</span>
+      <a href="#" id="linkTop"></a>
+      <span>/</span>
+      <a href="#footer" id="linkBottom"></a>
+      <span>/</span>
       <a href="catalog.html" id="navCatalog">catalog</a>
       <span>]</span>
     </span>
@@ -174,7 +178,6 @@
           <a id="linkModeration">global manage]</a>
         </div>
       </div>
-  </div>
   
     <fieldset id="reportFieldset">
       <legend>Report</legend>
@@ -205,49 +208,68 @@
               Delete only files
             </label>
           </div>
+          
           <img src="/captcha.js" id="captchaImageReport" />
+          
           <div class="buttonBox">
+          
             <input
               name="captcha"
               type="text"
               id="fieldCaptchaReport"
               placeholder="answer">
+              
             <input
               type="button"
               class="hidden"
               id="reloadCaptchaButtonReport"
               onclick="reloadCaptcha()"
               value="Reload">
+              
             <a href="/noCookieCaptcha.js" class="small">no cookies?</a>
+            
           </div>
+          
           <div class="buttonBox">
+          
             <input
               type="submit"
               id="deleteFormButton"
               value="Delete"
               name="action">
+              
             <input
               type="button"
               class="hidden"
               id="deleteJsButton"
               onClick="deletePosts()"
               value="Delete">
+              
             <input
               type="submit"
               id="reportFormButton"
               value="Report"
               name="action">
+              
             <input
               type="button"
               class="hidden"
               id="reportJsButton"
               onClick="reportPosts()"
               value="Report">
+              
           </div>
-      </div>
+          
+        </div>
+        
       </fieldset>
+      
     </form>
+    
   </div>
-
+  
+  <footer id="footer">
+  </footer>
+  
 </body>
 </html>

@@ -1,50 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="//static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
 <link href="//static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
 
 
-  <!-- page header -->
   <header>
     <img src="//static.localhost:8080/logo.png" alt="logo" />
   </header>
   
-  <!-- ban info -->
-  <div class="settings">
-    <p>You are banned from <span id="boardLabel"></span> until <span id="expirationLabel"></span></p>
-    <p>Reason: <span id="reasonLabel"></span></p>
-    <p>Ban ID: <span id="idLabel"></span></p>
-  </div>
+  <div id="settingsWrapper">
   
-  <!-- ban appeal form -->
-  <div class="settings" id="formAppeal">
-    <form action="/appealBan.js" id="formAppeal" method="post" enctype="multipart/form-data">
-      <h3>Appeal Ban</h3>
-      <input type="hidden" name="banId" id="idIdentifier">
-      <textarea name="appeal" id="fieldAppeal" placeholder="Appeal your ban here."></textarea>
-      <input type="submit" value="Appeal Ban" id="buttonFormAppeal">
-    </form>
+    <fieldset id="settingsFieldset">
+    
+      <legend>Banned</legend>
+      
+      <p>You are banned from <span id="boardLabel"></span> until <span id="expirationLabel"></span></p>
+      <p>Reason: <span id="reasonLabel"></span></p>
+      <p>Ban ID: <span id="idLabel"></span></p>
+      
+      <hr />
+      
+      <form
+          action="/appealBan.js"
+          id="formAppeal"
+          method="post"
+          enctype="multipart/form-data">
+      
+        <h3>Appeal Ban</h3>
+      
+        <input
+          type="hidden"
+          name="banId"
+          id="idIdentifier">
+        
+        <textarea
+          name="appeal"
+          id="fieldAppeal"
+          placeholder="Appeal your ban here."></textarea>
+        
+        <input
+          type="submit"
+          value="Appeal Ban"
+          id="buttonFormAppeal">
+        
+      </form>
+    
+    </fieldset>
+    
   </div>
 
 </body>

@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="//static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
 <link href="//static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
 <script src="//static.localhost:8080/settings.js" defer></script>
 <script src="//static.localhost:8080/api.js" defer></script>
 <script src="//static.localhost:8080/edit.js" defer></script>
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
 
-  <!-- page header -->
   <header>
     <img src="//static.localhost:8080/logo.png" alt="logo" />
   </header>
   
-  <div class="settings">
-    <form
-        action="/saveEdit.js"
-        method="post"
-        enctype="multipart/form-data">
-      <label for="fieldMessage">
-        <span style="vertical-align: top;">Edit Message:</span>
-      </label>
-      <textarea
-        name="message"
-        id="fieldMessage"
-        class="wide"></textarea>
-      <input
-        type="hidden"
-        name="boardUri"
-        id="boardIdentifier">
-      <input
-        type="hidden"
-        name="threadId"
-        id="threadIdentifier">
-      <input
-        type="hidden"
-        name="postId"
-        id="postIdentifier">
-      <input
-        type="submit"
-        id="saveFormButton"
-        value="Save">
-      <input
-        class="hidden"
-        onclick="save()"
-        type="button"
-        id="saveJsButton"
-        value="Save">
-    </form>
+  <div id="settingsWrapper">
+  
+    <fieldset id="settingsFieldset">
+    
+      <legend>Edit</legend>
+      
+      <form
+          action="/saveEdit.js"
+          method="post"
+          enctype="multipart/form-data">
+      
+        <textarea
+          name="message"
+          id="fieldMessage"
+          class="wide"></textarea>
+        <input
+          type="hidden"
+          name="boardUri"
+          id="boardIdentifier">
+        <input
+          type="hidden"
+          name="threadId"
+          id="threadIdentifier">
+        <input
+          type="hidden"
+          name="postId"
+          id="postIdentifier">
+        <input
+          type="submit"
+          id="saveFormButton"
+          value="Save">
+        <input
+          class="hidden"
+          onclick="save()"
+          type="button"
+          id="saveJsButton"
+          value="Save">
+      </form>
+      
+    </fieldset>
+    
   </div>
 
 </body>

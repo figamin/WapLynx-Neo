@@ -14,21 +14,34 @@
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
+
+  <header>
+    <img src="//static.localhost:8080/logo.png" alt="logo" />
+  </header>
   
-  <div class="settings">
-    <h3>New rule</h3>
+  <div id="settingsWrapper">
+  
+    <fieldset id="settingsFieldset">
+    
+      <legend>Rules</legend>
+      
     <form
         action="/createRule.js"
         method="post"
@@ -52,8 +65,9 @@
         value="Add Rule"
         id="addJsButton">
     </form>
-    <h3>Current rules</h3>
+    <hr />
     <div id="divRules"></div>
+    </fieldset>
   </div>
 
 </body>

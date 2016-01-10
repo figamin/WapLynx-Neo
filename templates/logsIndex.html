@@ -11,25 +11,35 @@
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
 
-  <!-- page header -->
   <header>
     <img src="//static.localhost:8080/logo.png" alt="logo" />
   </header>
+  
+  <div id="settingsWrapper">
+  
+    <fieldset id="settingsFieldset">
+    
+      <legend>Logs</legend>
 
-  <div id="logSearch" class="settings">
+  <div id="logSearch">
     <form method="get" action="logs.js">
       <label>Year
         <input type="text" name="year" placeholder="YYYY">
@@ -37,9 +47,9 @@
       <input type="submit" value="Search">
     </form>
   </div>
-  
-  <div id="divDates" class="settings">
-    <h3>Log Entries</h3>
+  <hr />
+  <div id="divDates"></div>
+  </fieldset>
   </div>
 
 </body>

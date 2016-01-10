@@ -14,25 +14,34 @@
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
 
-  <!-- page header -->
   <header>
     <img src="//static.localhost:8080/logo.png" alt="logo" />
   </header>
   
-  <div class="settings">
+  <div id="settingsWrapper">
+  
+    <fieldset id="settingsFieldset">
+    
+      <legend>Proxy Bans</legend>
+      
     <form
         action="/placeProxyBan.js"
         method="post"
@@ -77,7 +86,9 @@
         class="hidden"
         value="Place proxy ban">
     </form>
+    <hr />
     <div id="proxyBansDiv"></div>
+    </fieldset>
   </div>
 
 </body>

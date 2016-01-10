@@ -1,78 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="//static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
 <link href="//static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
 <script src="//static.localhost:8080/settings.js" defer></script>
 <script src="//static.localhost:8080/api.js" defer></script>
 <script src="//static.localhost:8080/hashBans.js" defer></script>
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
+
+  <header>
+    <img src="//static.localhost:8080/logo.png" alt="logo" />
+  </header>
   
-  <div class="settings">
-    <form
-      action="/placeHashBan.js"
-      method="post"
-      enctype="multipart/form-data">
-      <label>Hash of the file to be banned:
+  <div id="settingsWrapper">
+  
+    <fieldset id="settingsFieldset">
+    
+      <legend>Hash Bans</legend>
+      
+      <form
+        action="/placeHashBan.js"
+        method="post"
+        enctype="multipart/form-data">
+        <label>Hash of the file to be banned:
+          <input
+            type="text"
+            name="hash"
+            id="hashField">
+        </label>
         <input
-          type="text"
-          name="hash"
-          id="hashField">
-      </label>
-      <input
-        id="boardIdentifier"
-        type="hidden"
-        name="boardUri">
-      <img
-        id="captchaImage"
-        src="/captcha.js">
-      <div>
+          id="boardIdentifier"
+          type="hidden"
+          name="boardUri">
+        <img
+          id="captchaImage"
+          src="/captcha.js">
+        <div>
+          <input
+            type="button"
+            class="hidden"
+            id="reloadCaptchaButton"
+            onclick="reloadCaptcha()"
+            value="Reload">
+          <input
+            name="captcha"
+            type="text"
+            id="fieldCaptcha"
+            placeholder="Answer">
+          <a
+            class="small"
+            href="/noCookieCaptcha.js">No cookies?</a>
+        </div>
+        <input
+          type="submit"
+          id="createFormButton"
+          value="Place Hash Ban">
         <input
           type="button"
+          id="createJsButton"
+          onClick="placeHashBan()"
           class="hidden"
-          id="reloadCaptchaButton"
-          onclick="reloadCaptcha()"
-          value="Reload">
-        <input
-          name="captcha"
-          type="text"
-          id="fieldCaptcha"
-          placeholder="Answer">
-        <a
-          class="small"
-          href="/noCookieCaptcha.js">No cookies?</a>
-      </div>
-      <input
-        type="submit"
-        id="createFormButton"
-        value="Place Hash Ban">
-      <input
-        type="button"
-        id="createJsButton"
-        onClick="placeHashBan()"
-        class="hidden"
-        value="Place Hash Ban">
-    </form>
-    <div id="hashBansDiv"></div>
+          value="Place Hash Ban">
+      </form>
+      <hr />
+      <div id="hashBansDiv"></div>
+    </fieldset>
   </div>
 
 </body>

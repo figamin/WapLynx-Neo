@@ -201,9 +201,16 @@ function processImageLink(link) {
 
 function setFullBorder(tooltip) {
 
-  tooltip.style['background-color'] = 'transparent';
-
   var innerPost = tooltip.getElementsByClassName('innerPost')[0];
+  
+  var parent = innerPost.parentNode;
+  
+  var temp = document.createElement('div');
+  temp.appendChild(innerPost);
+  
+  tooltip.innerHTML = '';
+  tooltip.appendChild(innerPost);
+  
   innerPost.style['border-style'] = 'solid solid solid solid';
   innerPost.style['border-width'] = '1px 1px 1px 1px';
   innerPost.style['border-color'] = '#B7C5D9 #B7C5D9 #B7C5D9 #B7C5D9';
@@ -283,7 +290,6 @@ function processQuote(quote, backLink) {
   var tooltip = document.createElement('div');
   tooltip.style.display = 'none';
   tooltip.style.position = 'absolute';
-  tooltip.style['background-color'] = '#ffffff';
 
   document.body.appendChild(tooltip);
 

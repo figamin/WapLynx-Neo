@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="//static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
 <link href="//static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
 <script src="//static.localhost:8080/settings.js" defer></script>
 <script src="//static.localhost:8080/api.js" defer></script>
 <script src="//static.localhost:8080/reports.js" defer></script>
@@ -15,85 +11,94 @@
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
 
-  <!-- page header -->
   <header>
     <img src="//static.localhost:8080/logo.png" alt="logo" />
   </header>
   
-  <div class="settings">
-    <h2 id="labelTitle"></h2>
-    <p>Owner: <span id="labelOwner"></span></p>
+  <div id="settingsWrapper">
   
-    <p>Last seen: <span id="labelLastSeen"></span></p>
-    <div>
+    <fieldset id="settingsFieldset">
+    
+      <legend id="labelTitle"></legend>
+      
+      <p>Owner: <span id="labelOwner"></span></p>
+  
+      <p>Last seen: <span id="labelLastSeen"></span></p>
+      <div>
         <form
             method="post"
             action="/transferBoardOwnership.js"
             enctype="multipart/form-data">
-        <label>User login:
-            <input
-            type="text"
-            name="login"
-            id="fieldTransferLogin"
-            name="userLogin">
-        </label>
-        <input
-            type="hidden"
-            name="boardUri"
-            id="boardTransferIdentifier">
-        <input
-            type="submit"
-            value="Transfer board"
-            id="transferFormButton">
-        <input
-            type="button"
-            onclick="transferBoard()"
-            class="hidden"
-            value="Transfer board"
-            id="transferJsButton">
+          <label>User login:
+              <input
+              type="text"
+              name="login"
+              id="fieldTransferLogin"
+              name="userLogin">
+          </label>
+          <input
+              type="hidden"
+              name="boardUri"
+              id="boardTransferIdentifier">
+          <input
+              type="submit"
+              value="Transfer board"
+              id="transferFormButton">
+          <input
+              type="button"
+              onclick="transferBoard()"
+              class="hidden"
+              value="Transfer board"
+              id="transferJsButton">
         </form>
-    </div>
-    <div>
+      </div>
+      <div>
         <form
             method="post"
             action="/deleteBoard.js"
             enctype="multipart/form-data">
-        <label>
+          <label>
+            <input
+              type="checkbox"
+              name="confirmDeletion"
+              id="confirmDelCheckbox">
+            Yes, I wish to delete this board
+          </label>
           <input
-            type="checkbox"
-            name="confirmDeletion"
-            id="confirmDelCheckbox">
-          Yes, I wish to delete this board
-        </label>
-        <input
-          type="hidden"
-          name="boardUri"
-          id="boardDeletionIdentifier">
-        <input
-          type="submit"
-          value="Delete board"
-          id="deleteFormButton">
-        <input
-          type="button"
-          onclick="deleteBoard()"
-          class="hidden"
-          value="Delete board"
-          id="deleteJsButton">
+            type="hidden"
+            name="boardUri"
+            id="boardDeletionIdentifier">
+          <input
+            type="submit"
+            value="Delete board"
+            id="deleteFormButton">
+          <input
+            type="button"
+            onclick="deleteBoard()"
+            class="hidden"
+            value="Delete board"
+            id="deleteJsButton">
         </form>
-    </div>
+      </div>
+    </fieldset>
   </div>
 
 </body>

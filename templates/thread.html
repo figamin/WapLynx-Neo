@@ -27,6 +27,10 @@
     </span>
     <span id="navOptionsSpan">
       <span>[</span>
+      <a href="#" id="linkTop"></a>
+      <span>/</span>
+      <a href="#footer" id="linkBottom"></a>
+      <span>/</span>
       <a href="../catalog.html" id="navCatalog">Catalog</a>
       <span>]</span>
     </span>
@@ -273,138 +277,140 @@
   <!-- posts, much of the naming is shared with the thread list from the board page -->
   <div id="threadList">
     <form
-      method="post"
-      action="../../contentActions.js"
-      enctype="multipart/form-data">
+        method="post"
+        action="../contentActions.js"
+        enctype="multipart/form-data">
       <!-- this is actually where the posts are -->
-      <div id="divThreads">
-      </div>
+      <div id="divThreads"></div>
       <hr />
-  </div>
-  <div id="threadLinks">
-    <span>[</span>
-    <a id="linkManagement">Manage Board</a>
-    <span>/</span>
-    <a id="linkMod">Moderate Thread</a>
-    <span>]</span>
-  </div>
-  <div class="divRefresh hidden">
-    <label><input
-      type="checkbox"
-      checked
-      onchange="changeRefresh()">
-      Auto <span id="labelRefresh"></span>
-    </label>
-    <input
-      type="button"
-      id="refreshButton"
-      onclick="refreshPosts(true)"
-      value="Refresh">
-  </div>
-      <!-- ban/report/delete/transfer controls -->
-    <fieldset id="reportFieldset">
-      <legend>Report</legend>
-      <div class="contentAction">
-        <label>Reason<input
-          type="text"
-          id="reportFieldReason"
-          name="reason">
-        </label>
-        <div id="divBanInput">
-        <label>Expiration:<input
-          type="text"
-          id="fieldExpiration"
-          name="expiration">
-        </label>
-        <label>Ban message:<input
-          type="text"
-          id="fieldbanMessage"
-          name="banMessage">
-        </label>
-        </div>
-        <label>Password:<input
-          type="password"
-          id="deletionFieldPassword"
-          name="password">
-        </label>
-        <label><input
-          type="checkbox"
-          id="checkboxGlobal"
-          name="global">
-          Global
-        </label>
-        <label><input
-          type="checkbox"
-          id="checkboxOnlyFiles"
-          name="deleteUploads">
-          Delete only files
-        </label>
-        <img
-          id="captchaImageReport"
-          src="/captcha.js">
-        <div class="buttonBox">
-          <input
-            type="button"
-            class="hidden"
-            id="reloadCaptchaButtonReport"
-            onclick="reloadCaptcha()"
-            value="Reload">
-          <input
-            name="captcha"
-            type="text"
-            id="fieldCaptchaReport"
-            placeholder="Answer">
-          <a class="small" href="/noCookieCaptcha.js">no cookies?</a>
-        </div>
-        <div class="buttonBox">
-          <input
-            type="submit"
-            id="deleteFormButton"
-            value="Delete"
-            name="action">
-          <input
-            type="button"
-            class="hidden"
-            id="deleteJsButton"
-            onClick="deletePosts()"
-            value="Delete">
-          <input
-            type="submit"
-            id="inputBan"
-            value="Ban"
-            name="action">
-          <input
-            type="button"
-            class="hidden"
-            id="banJsButton"
-            onClick="banPosts()"
-            value="Ban">
-          <button
-            type="submit"
-            id="inputSpoil"
-            value="spoil"
-            name="action">Spoil files</button>
-          <input
-            type="button"
-            class="hidden"
-            id="spoilJsButton"
-            onClick="spoilFiles()"
-            value="Spoil files">
-          <input
-            type="submit"
-            id="reportFormButton"
-            value="Report"
-            name="action">
-          <input
-            type="button"
-            class="hidden"
-            id="reportJsButton"
-            onClick="reportPosts()"
-            value="Report">
-        </div>
+      <div id="threadLinks">
+        <span>[</span>
+        <a id="linkManagement">Manage Board</a>
+        <span>/</span>
+        <a id="linkMod">Moderate Thread</a>
+        <span>]</span>
       </div>
+      <div class="divRefresh hidden">
+        <label><input
+          type="checkbox"
+          checked
+          onchange="changeRefresh()">
+          Auto <span id="labelRefresh"></span>
+        </label>
+        <input
+          type="button"
+          id="refreshButton"
+          onclick="refreshPosts(true)"
+          value="Refresh">
+      </div>
+      <!-- ban/report/delete/transfer controls -->
+      <fieldset id="reportFieldset">
+        <legend>Report</legend>
+        <div class="contentAction">
+          <label>Reason<input
+            type="text"
+            id="reportFieldReason"
+            name="reason">
+          </label>
+          <div id="divBanInput">
+            <label>Expiration:<input
+              type="text"
+              id="fieldExpiration"
+              name="expiration">
+            </label>
+            <label>Ban message:<input
+              type="text"
+              id="fieldbanMessage"
+              name="banMessage">
+            </label>
+          </div>
+          <label>Password:<input
+            type="password"
+            id="deletionFieldPassword"
+            name="password">
+          </label>
+          <label><input
+            type="checkbox"
+            id="checkboxGlobal"
+            name="global">
+            Global
+          </label>
+          <label><input
+            type="checkbox"
+            id="checkboxOnlyFiles"
+            name="deleteUploads">
+            Delete only files
+          </label>
+          <img
+            id="captchaImageReport"
+            src="/captcha.js">
+          <div class="buttonBox">
+            <input
+              type="button"
+              class="hidden"
+              id="reloadCaptchaButtonReport"
+              onclick="reloadCaptcha()"
+              value="Reload">
+            <input
+              name="captcha"
+              type="text"
+              id="fieldCaptchaReport"
+              placeholder="Answer">
+            <a class="small" href="/noCookieCaptcha.js">no cookies?</a>
+          </div>
+          <div class="buttonBox">
+            <input
+              type="submit"
+              id="deleteFormButton"
+              value="Delete"
+              name="action">
+            <input
+              type="button"
+              class="hidden"
+              id="deleteJsButton"
+              onClick="deletePosts()"
+              value="Delete">
+            <input
+              type="submit"
+              id="inputBan"
+              value="Ban"
+              name="action">
+            <input
+              type="button"
+              class="hidden"
+              id="banJsButton"
+              onClick="banPosts()"
+              value="Ban">
+            <button
+              type="submit"
+              id="inputSpoil"
+              value="spoil"
+              name="action">Spoil files</button>
+            <input
+              type="button"
+              class="hidden"
+              id="spoilJsButton"
+              onClick="spoilFiles()"
+              value="Spoil files">
+            <input
+              type="submit"
+              id="reportFormButton"
+              value="Report"
+              name="action">
+            <input
+              type="button"
+              class="hidden"
+              id="reportJsButton"
+              onClick="reportPosts()"
+              value="Report">
+          </div>
+        </div>
       </fieldset>
     </form>
+  </div>
+  
+  <footer id="footer">
+  </footer>
   
 </body>
 </html>

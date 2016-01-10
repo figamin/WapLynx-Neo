@@ -1,66 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- add metadata about your site here -->
 <meta charset="UTF-8" />
-<!-- link to your CSS here -->
 <link href="//static.localhost:8080/global.css" type="text/css" rel="stylesheet" />
 <link href="//static.localhost:8080/open-iconic.css" type="text/css" rel="stylesheet" />
-<!-- don't add a title, the engine already does that for you -->
-<!-- link to any scripts you need here -->
 <script src="//static.localhost:8080/settings.js" defer></script>
 <script src="//static.localhost:8080/api.js" defer></script>
 <script src="//static.localhost:8080/flags.js" defer></script>
 </head>
 <body>
 
-  <!-- top of page navigation bar -->
   <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
   </nav>
+
+  <header>
+    <img src="//static.localhost:8080/logo.png" alt="logo" />
+  </header>
   
-  <div class="settings">
-    <h3>New Flag</h3>
-    <form
-        action="/createFlag.js"
-        method="post"
-        enctype="multipart/form-data">
-      <input
-        type="hidden"
-        name="boardUri"
-        id="boardIdentifier">
-      <label>Flag Name:
+  <div id="settingsWrapper">
+  
+    <fieldset id="settingsFieldset">
+    
+      <legend>Flags</legend>
+      
+      <form
+          action="/createFlag.js"
+          method="post"
+          enctype="multipart/form-data">
         <input
-          name="flagName"
-          id="fieldFlagName"
-          type="text">
-      </label>
-      <input
-        type="file"
-        id="files"
-        name="files">
-      <input
-        type="submit"
-        value="Add Flag"
-        id="addFormButton">
-      <input
-        type="button"
-        onClick="addFlag()"
-        class="hidden"
-        value="Add flag"
-        id="addJsButton">
-      <p class="small">Maximum size allowed: <span id="maxSizeLabel"></span></p>
-    </form>
-    <h3>Existing Flags</h3>
-    <div id="flagsDiv"></div>
+          type="hidden"
+          name="boardUri"
+          id="boardIdentifier">
+        <label>Flag Name:
+          <input
+            name="flagName"
+            id="fieldFlagName"
+            type="text">
+        </label>
+        <input
+          type="file"
+          id="files"
+          name="files">
+        <input
+          type="submit"
+          value="Add Flag"
+          id="addFormButton">
+        <input
+          type="button"
+          onClick="addFlag()"
+          class="hidden"
+          value="Add flag"
+          id="addJsButton">
+        <p class="small">Maximum size allowed: <span id="maxSizeLabel"></span></p>
+      </form>
+      <hr />
+      <div id="flagsDiv"></div>
+    </fieldset>
   </div>
 
 </body>

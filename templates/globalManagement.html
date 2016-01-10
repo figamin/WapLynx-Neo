@@ -11,54 +11,91 @@
 <script src="//static.localhost:8080/bans.js" defer></script>
 </head>
 <body>
+  
+  <nav>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
+  </nav>
+  
   <header>
     <img src="//static.localhost:8080/logo.png" alt="logo" />
   </header>
   
-  <nav>
-    <span>[</span>
-    <a href="//localhost:8080" id="navLinkHome">home</a>
-    <span>/</span>
-    <a href="//localhost:8080/boards.js" id="navBoardList">boards</a>
-    <span>/</span>
-    <a href="//localhost:8080/overboard" id="navOverboard">overboard</a>
-    <span>/</span>
-    <a href="//static.localhost:8080/posting.html" id="navPosting">help</a>
-    <span>]</span>
-  </nav>
+  <div id="settingsWrapper">
   
-  <div class="settings">
-    <p>Logged in as: <strong><span id="userLabel"></span></strong></p>
-    <hr />
-    <h3>Add user to global staff</h3>
-    <form id="addStaffForm" method="post" enctype="multipart/form-data" action="/setGlobalRole.js">
-      <label>Username:<input type="text" name="login" id="fieldLogin"></label>
-      <label>Role:<select name="role" id="newStaffCombo"></select></label>
-      <input type="submit" id="addFormButton" value="Add user">
-      <input type="button" onClick="addUser()" class="hidden" id="addJsButton" value="Add user">
-    </form>
-    <hr />
-    <div id="divStaff">
-      <h3>Global Staff Tools</h3>
-      <ul>
-        <li><a id="globalSettingsLink" href="/globalSettings.js">Global Settings</a></li>
-        <li><a id="globalBannersLink" href="/bannerManagement.js">Global Banners</a></li>
-        <li><a id="archiveDeletionLink" href="/archiveDeletion.js">Archive deletion</a></li>
-        <li><a id="bansLink" href="/bans.js"> Bans</a></li>
-        <li><a id="rangeBansLink" href="/rangeBans.js">Range Bans</a></li>
-        <li><a id="proxyBansLink" href="/proxyBans.js">Proxy Bans</a></li>
-        <li><a id="hashBansLink" href="/hashBans.js">Hash Bans</a></li>
-        <li><a href="/closedReports.js">Closed Reports</a></li>
-      </ul>
-    </div>
-    <hr />
-    <div id="reportDiv">
-      <h3>Open Reports</h3>
-    </div>
-    <hr />
-    <div id="appealedBansPanel">
-      <h3>Appealed Bans</h3>
-    </div>
+    <fieldset id="settingsFieldset">
+      
+      <legend>Global Management</legend>
+    
+      <p>Logged in as: <strong><span id="userLabel"></span></strong></p>
+      
+      <hr />
+      
+      <h3>Add user to global staff</h3>
+      
+      <form id="addStaffForm" method="post" enctype="multipart/form-data" action="/setGlobalRole.js">
+      
+        <label>Username:
+          <input type="text" name="login" id="fieldLogin">
+        </label>
+        
+        <label>Role:
+          <select name="role" id="newStaffCombo"></select>
+        </label>
+        
+        <input type="submit" id="addFormButton" value="Add user">
+        
+        <input type="button" onClick="addUser()" class="hidden" id="addJsButton" value="Add user">
+        
+      </form>
+      
+      <hr />
+      
+      <div id="divStaff">
+      
+        <h3>Global Staff Tools</h3>
+        
+        <ul>
+          <li><a id="globalSettingsLink" href="/globalSettings.js">Global Settings</a></li>
+          <li><a id="globalBannersLink" href="/bannerManagement.js">Global Banners</a></li>
+          <li><a id="archiveDeletionLink" href="/archiveDeletion.js">Archive deletion</a></li>
+          <li><a id="bansLink" href="/bans.js"> Bans</a></li>
+          <li><a id="rangeBansLink" href="/rangeBans.js">Range Bans</a></li>
+          <li><a id="proxyBansLink" href="/proxyBans.js">Proxy Bans</a></li>
+          <li><a id="hashBansLink" href="/hashBans.js">Hash Bans</a></li>
+          <li><a href="/closedReports.js">Closed Reports</a></li>
+        </ul>
+        
+      </div>
+      
+      <hr />
+      
+      <div id="reportDiv">
+        <h3>Open Reports</h3>
+      </div>
+      
+      <hr />
+      
+      <div id="appealedBansPanel">
+        <h3>Appealed Bans</h3>
+      </div>
+      
+    </fieldset>
+    
   </div>
+  
 </body>
 </html>
