@@ -766,6 +766,7 @@ span.spoiler {
   margin: 0.5em 0.25em;
   border-radius: 5px;
   display: inline-block;
+  font-size: 90%;
 }
 
 .topBoards br {
