@@ -908,6 +908,10 @@ footer {
     display: none;
 }
 
+#settingsWrapper input.hidden {
+  display: none;
+}
+
 .filteredPost .postInfo, .filteredPost .panelUploads, .filteredPost .divMessage {
  display: none;
 }
