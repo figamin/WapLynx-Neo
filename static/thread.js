@@ -17,7 +17,7 @@ var markedPosting;
 var limitRefreshWait = 10 * 60;
 var originalButtonText;
 
-var postCellTemplate = '<div class="innerPost">
+var postCellTemplate = '<div class="innerPost">'
       +                '<div class="postInfo title">'
       +                '<input type="checkbox" class="deletionCheckBox">'
       +                '<span class="labelSubject"></span>'
