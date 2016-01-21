@@ -43,22 +43,27 @@
   </header>
   
   <div id="postWrapper">
+      
     <fieldset id="newPostFieldset">
       <legend>Mode: Thread</legend>
+        
       <form
           class="form-post"
           action="../newThread.js"
           enctype="multipart/form-data"
           method="post">
+            
         <div id="postBox">
+            
           <div id="divName" class="wider">
             <input
-            type="text"
-            id="fieldName"
-            name="name"
-            placeholder="name"
-            class="text">
+              type="text"
+              id="fieldName"
+              name="name"
+              placeholder="name"
+              class="text">
           </div>
+            
           <div class="wider">
             <input
               type="text"
@@ -67,6 +72,7 @@
               class="text"
               placeholder="email">
           </div>
+            
           <div class="wider">
             <input
               type="text"
@@ -75,6 +81,7 @@
               class="text"
               placeholder="subject">
           </div>
+          
           <div>
             <textarea
               id="fieldMessage"
@@ -82,25 +89,32 @@
               class="text"
               placeholder="message"></textarea>
           </div>
+            
           <div>
+            
             <input
               type="test"
               name="password"
               id="fieldPostingPassword"
               class="text"
               placeholder="password">
+              
             <input
               type="checkbox"
               name="spoiler"
               id="checkboxSpoiler">
+              
             <label for="checkboxSpoiler" class="spoilerCheckbox">Spoiler</label>
+              
             <div id="flagsDiv">
               <select
                 name="flag" 
                 id="flagCombobox">
               </select>
             </div>
+              
           </div>
+            
           <div>
             <input
               type="file"
@@ -109,104 +123,134 @@
               multiple
               class="fileBrowser">
           </div>
+          
         </div>
-      <div id="captchaDiv">
-        <img src="/captcha.js"
-          id="captchaImage" />
-        <div>
-        <input
-          name="captcha"
-          type="text"
-          id="fieldCaptcha"
-          placeholder="answer">
-        <input
+          
+        <div id="captchaDiv">
+          
+          <img src="/captcha.js"
+            id="captchaImage" />
+            
+          <div>
+            
+            <input
+              name="captcha"
+              type="text"
+              id="fieldCaptcha"
+              placeholder="answer">
+              
+            <input
+              type="button"
+              onClick="reloadCaptcha()"
+              value="Reload"
+              id="reloadCaptchaButton"
+              class="hidden">
+              
+            <a href="/noCookieCaptcha.js" class="small">no cookies?</a>
+            
+          </div>
+          
+        </div>
+        
+        <button
+          type="submit"
+          id="formButton">
+          Post
+        </button>
+        
+        <button
           type="button"
-          onClick="reloadCaptcha()"
-          value="Reload"
-          id="reloadCaptchaButton"
+          onClick="postThread()"
+          id="jsButton"
           class="hidden">
-        <a href="/noCookieCaptcha.js" class="small">no cookies?</a>
-        </div>
-      </div>
-      <button
-        type="submit"
-        id="formButton">
-        Post
-      </button>
-      <button
-        type="button"
-        onClick="postThread()"
-        id="jsButton"
-        class="hidden">
-        Post
-      </button>
-      <input
-        type="hidden"
-        name="boardUri"
-        id="boardIdentifier">
-      <p class="small">Remember to follow the <a href="rules.html" class="rules">rules</a></p>
-      <p class="small">Max file size: <span id="labelMaxFileSize"></span></p>
-      <p class="small">Max files: 5</p>
+          Post
+        </button>
+        
+        <input
+          type="hidden"
+          name="boardUri"
+          id="boardIdentifier">
+        
+        <p class="small">Remember to follow the <a href="rules.html" class="rules">rules</a></p>
+        <p class="small">Max file size: <span id="labelMaxFileSize"></span></p>
+        <p class="small">Max files: 5</p>
+        
       </form>
+      
     </fieldset>
+    
   </div>
 
   <div id="panelMessage">
     <hr>
-    <div id="divMessage">
-    </div>
+    <div id="divMessage"></div>
     <hr>
   </div>
   
   <div id="threadList">
+  
     <form
         action="../contentActions.js"
         method="post"
         enctype="multipart/form-data">
-      <div id="divThreads">
-      </div>
+        
+      <div id="divThreads"></div>
+      
       <hr />
+      
       <div class="threadPages">
+      
         <span class="divPages">[
           <a id="linkPrevious"></a>
           <span id="divPages"></span>
           <a id="linkNext"></a>
         ]</span>
+        
         <div id="boardLinks">
-          <a id="linkManagement">[manage</a>
+          <span>[</span>
+          <a id="linkManagement">manage</a>
           <span>/</span>
-          <a id="linkModeration">global manage]</a>
+          <a id="linkModeration">global manage</a>
+          <span>]</span>
         </div>
+        
       </div>
   
-    <fieldset id="reportFieldset">
-      <legend>Report</legend>
-      <div id="threadReport" class="contentAction">
+      <fieldset id="reportFieldset">
+        <legend>Report</legend>
+        
+        <div id="threadReport" class="contentAction">
+        
           <input
             type="text"
             name="reason"
             id="reportFieldReason"
             placeholder="reason">
           </label>
+          
           <input
             type="password"
             name="password"
             id="deletionFieldPassword"
             placeholder="password">
           </label>
+          
           <div>
+          
             <label class="checkbox"><input
               type="checkbox"
               name="global"
               id="checkboxGlobal">
               Global
             </label>
+            
             <label class="checkbox"><input
               type="checkbox"
               name="deleteUploads"
               id="checkboxOnlyFiles">
               Delete only files
             </label>
+            
           </div>
           
           <img src="/captcha.js" id="captchaImageReport" />
@@ -268,8 +312,7 @@
     
   </div>
   
-  <footer id="footer">
-  </footer>
+  <footer id="footer"></footer>
   
 </body>
 </html>
