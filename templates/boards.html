@@ -36,22 +36,40 @@
     </div>
     
     <div class="search">
+    
       <form
           action="/boards.js"
           method="get">
+          
         <input
           type="text"
           name="boardUri"
           placeholder="board"
           class="text">
+          
         <input
           type="text"
           name="tags"
           placeholder="tags"
           class="text">
+          
         <input
           type="submit"
           value="search">
+          
+        <label>Sort
+          <select name="sorting">
+            <option value=''>Most popular</option>
+            <option value='1'>Least popular</option>
+            <option value='2'>Most posts first</option>
+            <option value='3'>Least posts first</option>
+            <option value='4'>Highest PPH first</option>
+            <option value='5'>Lowest PPH first</option>
+            <option value='6'>Alphabetic order</option>
+            <option value='7'>Reverse alphabetic order</option>
+          </select>
+        </label>
+          
       </form>
     </div>
 

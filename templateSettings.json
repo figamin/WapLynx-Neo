@@ -28,6 +28,8 @@
   "filterCell": "filterCell.html",
   "globalSettingsPage": "globalSettings.html",
   "gManagement": "globalManagement.html",
+  "graphsIndexPage": "graphsIndex.html",
+  "graphIndexCell": "graphIndexCell.html",
   "hashBanPage": "hashBansPage.html",
   "hashBanCellDisplay": "hashBanCellDisplay.html",
   "hashBansPage": "hashBans.html",

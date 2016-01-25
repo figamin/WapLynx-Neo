@@ -249,6 +249,10 @@ if (!DISABLE_JS) {
       setting : 'clearIpMinRole',
       type : 'combo'
     }
+    checkboxFrontPageStats : {
+      setting : 'frontPageStats',
+      type : 'boolean'
+    }
   };
 
 }

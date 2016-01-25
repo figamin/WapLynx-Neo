@@ -658,67 +658,71 @@ span.spoiler {
 }
 
 .lockIndicator:before {
-    font-family: Icons;
-    content: "\e08a";
-    color: #A00;
+  font-family: Icons;
+  content: "\e08a";
+  color: #A00;
 }
 
 .pinIndicator:after {
-    font-family: Icons;
-    content: "\e0a8";
-    color: #A00;
+  font-family: Icons;
+  content: "\e0a8";
+  color: #A00;
 }
 
 .cyclicIndicator:after {
-    font-family: Icons;
-    content: "\e08c";
-    color: #A00;
+  font-family: Icons;
+  content: "\e08c";
+  color: #A00;
 }
 
 #archiveThreadList div, #archiveBoardList div {
-    margin: 0.25em 0;
+  margin: 0.25em 0;
 }
 
 /* index page */
 #indexWrapper {
-    width: 80%;
-    margin: 2em auto;
+  width: 80%;
+  margin: 2em auto;
 }
 
 #logoBox {
-    width: 100%;
-    margin: 0 auto 1em auto;
-    text-align: center;
+  width: 100%;
+  margin: 0 auto 1em auto;
+  text-align: center;
 }
 
 #infoBox {
-    text-align: center;
-    width: 100%;
-    padding: 0.5em;
-    margin: 1em auto 2em;
-    font-size: 120%;
+  text-align: center;
+  width: 100%;
+  padding: 0.5em;
+  margin: 1em auto 2em;
+  font-size: 120%;
 }
 
 #links {
-    padding: 0.5em;
-    font-size: 75%;
-    text-align: center;
+  padding: 0.5em;
+  font-size: 75%;
+  text-align: center;
 }
 
 #links a {
-    text-decoration: none;
+  text-decoration: none;
+}
+
+#indexStats {
+  text-align: center;
 }
 
 #linkLogs:before {
-    font-family: Icons;
-    content: "\e069";
-    margin-right: 0.25em;
+  font-family: Icons;
+  content: "\e069";
+  margin-right: 0.25em;
 }
 
 #linkArchives:before {
-    font-family: Icons;
-    content: "\e023";
-    margin-right: 0.25em;
+  font-family: Icons;
+  content: "\e023";
+  margin-right: 0.25em;
 }
 
 #linkAccount:before {
