@@ -1,34 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="/.static/css/global.css">
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<link href="/.static/global.css" type="text/css" rel="stylesheet" />
+<link rel="icon" type="image/gif" href="/.static/favicon.gif" />
+<script src="/.static/settings.js" defer></script>
+<script src="/.static/api.js" defer></script>
+<script src="/.static/login.js" defer></script>
 </head>
 <body>
-  <img
-    class="logo"
-    src="/.static/logo.png"
-    title="Logo by Doke">
 
-  <form
-    method="get"
-    action="graphs.js">
+  <nav>
+    <span id="navLinkSpan">
+      <span>[</span>
+      <a href="//localhost:8080" id="navLinkHome">home</a>
+      <span>/</span>
+      <a href="/boards.js" id="navBoardList">boards</a>
+      <span>/</span>
+      <a href="/overboard" id="navOverboard">overboard</a>
+      <span>/</span>
+      <a href="/.static/posting.html" id="navPosting">help</a>
+      <span>]</span>
+    </span>
+    <span id="navBoardsSpan">
+    </span>
+    <span id="navOptionsSpan">
+    </span>
+  </nav>
 
-    Year:
-    <input
-      type="text"
-      name="year"
-      placeholder="YYYY">
+  <header>
+    <img src="/.static/logo.png" alt="logo" />
+  </header>
+  
+  <div id="settingsWrapper">
+  
+    <fieldset id="settingsFieldset">
+      
+      <legend>Graphs</legend>
 
-    <input
-      type="submit"
-      value="Search">
+      <form
+          method="get"
+          action="graphs.js">
 
-  </form>
-  <br>
-  <div id="divDates"></div>
+        <label>Year:
+          <input
+            type="text"
+            name="year"
+            placeholder="YYYY">
+        </label>
+
+        <input
+          type="submit"
+          value="Search">
+
+      </form>
+    
+      <hr />
+  
+      <div id="divDates"></div>
+      
+    </fieldset>
+  
+  </div>
+  
 </body>
 </html>
