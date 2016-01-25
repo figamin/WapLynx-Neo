@@ -97,8 +97,8 @@ function sendThreadData(files, captchaId) {
   } else if (!forcedAnon && typedName.length > 32) {
     alert('Name is too long, keep it under 32 characters.');
     return;
-  } else if (typedMessage.length > 2048) {
-    alert('Message is too long, keep it under 2048 characters.');
+  } else if (typedMessage.length > 4096) {
+    alert('Message is too long, keep it under 4096 characters.');
     return;
   } else if (typedEmail.length > 64) {
     alert('Email is too long, keep it under 64 characters.');

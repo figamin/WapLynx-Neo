@@ -24,8 +24,8 @@ function save() {
 
   if (!typedMessage.length) {
     alert('A message is mandatory.');
-  } else if (typedMessage.length > 2048) {
-    alert('Message too long, keep it under 2048 characters.');
+  } else if (typedMessage.length > 4096) {
+    alert('Message too long, keep it under 4096 characters.');
   } else {
 
     var parameters = {

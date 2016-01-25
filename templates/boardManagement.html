@@ -70,16 +70,19 @@
             type="hidden"
             name="boardUri"
             id="addVolunteerBoardIdentifier">
+            
           <input
             type="button"
             onClick="addVolunteer()"
             id="addVolunteerJsButton"
             value="Add volunteer"
             class="hidden">
+            
           <input
             type="submit"
             id="addVolunteerFormButton"
             value="Add volunteer">
+            
         </form>
         
         <hr />
@@ -90,26 +93,31 @@
             action="/transferBoardOwnership.js"
             method="post"
             enctype="multipart/form-data">
+            
           <label>User login:
             <input
               type="text"
               name="login"
               id="transferBoardFieldLogin">
           </label>
+          
           <input
             type="hidden"
             name="boardUri"
             id="transferBoardIdentifier">
+            
           <input
             type="button"
             onClick="transferBoard()"
             id="transferBoardJsButton"
             value="Transfer board"
             class="hidden">
+            
           <input
             type="submit"
             id="transferBoardFormButton"
             value="Transfer board">
+            
         </form>
         
         <hr />
@@ -120,6 +128,7 @@
             method="post"
             action="/deleteBoard.js"
             enctype="multipart/form-data">
+            
           <label>
             <input
               type="checkbox"
@@ -127,20 +136,24 @@
               id="confirmDelCheckbox">
             Yes, I wish to delete this board
           </label>
+          
           <input
             id="deletionIdentifier"
             name="boardUri"
             type="hidden">
+            
           <input
             type="submit"
             value="Delete board"
             id="deleteBoardFormButton">
+            
           <input
             type="button"
             class="hidden"
             id="deleteBoardJsButton"
             onClick="deleteBoard()"
             value="Delete board">
+            
         </form>
         
         <hr />
@@ -153,24 +166,29 @@
             action="/setCustomCss.js"
             method="post"
             enctype="multipart/form-data">
+            
           <input
               type="hidden"
               name="boardUri"
               id="customCssIdentifier">
+              
           <input
               type="file"
               id="files"
               name="files">
+              
           <input
               id="cssFormButton"
               type="submit"
               value="Upload CSS">
+              
           <input
               type="button"
               onclick="setCss()"
               id="cssJsButton"
               class="hidden"
               value="Upload CSS">
+              
         </form>
         
         <hr />
@@ -184,24 +202,29 @@
             method="post"
             id="customJsForm"
             enctype="multipart/form-data">
+            
           <input
               type="hidden"
               name="boardUri"
               id="customJsIdentifier">
+              
           <input
               type="file"
               id="JsFiles"
               name="files">
+              
           <input
               id="jsFormButton"
               type="submit"
               value="Upload Js">
+              
           <input
               type="button"
               onclick="setJs()"
               id="jsJsButton"
               class="hidden"
               value="Upload Js">
+              
         </form>
         
         <hr />
@@ -218,200 +241,272 @@
             action="/setCustomSpoiler.js"
             method="post"
             enctype="multipart/form-data">
+            
           <input
-              type="hidden"
-              name="boardUri"
-              id="customSpoilerIdentifier">
+            type="hidden"
+            name="boardUri"
+            id="customSpoilerIdentifier">
+              
           <input
-              type="file"
-              id="filesSpoiler"
-              name="files">
+            type="file"
+            id="filesSpoiler"
+            name="files">
+              
           <input
-              id="spoilerFormButton"
-              type="submit"
-              value="Upload custom spoiler">
+            id="spoilerFormButton"
+            type="submit"
+            value="Upload custom spoiler">
+              
           <input
-              type="button"
-              onclick="setSpoiler()"
-              id="spoilerJsButton"
-              class="hidden"
-              value="Upload custom spoiler">
+            type="button"
+            onclick="setSpoiler()"
+            id="spoilerJsButton"
+            class="hidden"
+            value="Upload custom spoiler">
+              
         </form>
 
-      <hr />
+        <hr />
+        
+        <h3>Volunteers</h3>
+        
+        <div id="volunteersDiv"></div>
+        
+        <hr />
+        
+        <h3>Settings</h3>
       
-      <h3>Volunteers</h3>
-      
-      <div id="volunteersDiv"></div>
-      
-      <hr />
-      
-      <h3>Settings</h3>
-      
-      <form
-          action="/setBoardSettings.js"
-          method="post"
-          enctype="multipart/form-data">
-        <input
-              type="hidden"
-              id="boardSettingsIdentifier"
-              name="boardUri">
-        <label>Board name:
+        <form
+            action="/setBoardSettings.js"
+            method="post"
+            enctype="multipart/form-data">
+          
           <input
+            type="hidden"
+            id="boardSettingsIdentifier"
+            name="boardUri">
+            
+          <label>Board name:
+            <input
               id="boardNameField"
               type="text"
               name="boardName">
           </label>
-        <label for="boardDescriptionField">Board description:</label>
-        <input
-              id="boardDescriptionField"
-              type="text"
-              name="boardDescription"
-              class="wide">
-        <label>Anonymous name:
+            
+          <label for="boardDescriptionField">Board description:</label>
           <input
+            id="boardDescriptionField"
+            type="text"
+            name="boardDescription"
+            class="wide">
+            
+          <label>Anonymous name:
+            <input
               id="anonymousNameField"
               type="text"
               name="anonymousName">
-        </label>
-        <label>Hourly thread limit (locks thread creation temporarily if exceeded):
-          <input
+          </label>
+          
+          <label>Maximum files<sup>2</sup>:
+            <input
+              id="maxFilesField"
+              type="text"
+              name="maxFiles">
+          </label>
+        
+          <label>Max file size<sup>2</sup>:
+            <input
+              id="maxFileSizeField"
+              type="text"
+              name="maxFileSizeMB">
+          </label>
+        
+          <label>Thread limit<sup>2</sup>:
+            <input
+              id="maxThreadFields"
+              type="text"
+              name="maxThreadCount">
+          </label>
+          
+          <label>Reply limit (autosage)<sup>2</sup>:
+            <input
+              id="autoSageLimitField"
+              type="text"
+              name="autoSageLimit">
+          </label>
+          
+          <label>Allowed file types<sup>1,2</sup>:
+            <input
+              id="validMimesField"
+              type="text"
+              name="acceptedMimes"
+              class="wide"> 
+          </label>
+          
+          <label>Hourly thread limit (locks thread creation temporarily if exceeded):
+            <input
               id="hourlyThreadLimitField"
               type="text"
               name="hourlyThreadLimit">
-        </label>
-        <label>Enable captcha if this many threads are created within one hour:
-          <input
+          </label>
+        
+          <label>Enable captcha if this many threads are created within one hour:
+            <input
               id="autoCaptchaThresholdField"
               type="text"
               name="autoCaptchaLimit">
-        </label>
-        <label for="tagsField">Tags (separate with commas):</label>
-        <input
-              type="text"
-              id="tagsField"
-              name="tags"
-              class="wide">
-        <label for="boardMessageField">Board Message:</label>
-        <textarea
-              name="boardMessage"
-              id="boardMessageField"
-              class="wide"></textarea>
-        <label>
+          </label>
+          
+          <label for="tagsField">Tags (separate with commas):</label>
           <input
+            type="text"
+            id="tagsField"
+            name="tags"
+            class="wide">
+            
+          <label for="boardMessageField">Board Message:</label>
+          <textarea
+            name="boardMessage"
+            id="boardMessageField"
+            class="wide"></textarea>
+            
+          <label>
+            <input
               type="checkbox"
               name="disableIds"
               id="disableIdsCheckbox">
-          Disable thread-wise ids
-        </label>
-        <label>
-          <input
+            Disable thread-wise ids
+          </label>
+          
+          <label>
+            <input
               type="checkbox"
               name="requireThreadFile"
               id="requireFileCheckbox">
-          Require at least one file for new threads
-        </label>
-        <label>
-          <input
+            Require at least one file for new threads
+          </label>
+          
+          <label>
+            <input
               type="checkbox"
               name="blockDeletion"
               id="blockDeletionCheckbox">
-          Block users from deleting their posts
-        </label>
-        <label>
-          <input
+            Block users from deleting their posts
+          </label>
+        
+          <label>
+            <input
               type="checkbox"
               name="archive"
               id="enableArchiveCheckbox">
-          Archive content
-        </label>
-        <label>
-          <input
+            Archive content
+          </label>
+          
+          <label>
+            <input
               type="checkbox"
               name="allowCode"
               id="allowCodeCheckbox">
-          Allow use of code tags
-        </label>
-        <label>
-          <input
+            Allow use of code tags
+          </label>
+          
+          <label>
+            <input
               type="checkbox"
               name="disableCaptcha"
               id="disableCaptchaCheckbox">
-          Disable captcha
-        </label>
-        <label>
-          <input
+            Disable captcha
+          </label>
+          
+          <label>
+            <input
               type="checkbox"
               name="unindex"
               id="unindexCheckbox">
-          Don't index on top boards and board list.
-        </label>
-        <label>
-          <input
+            Don't index on top boards and board list.
+          </label>
+        
+          <label>
+            <input
               type="checkbox"
               name="forceAnonymity"
               id="forceAnonymityCheckbox">
             Force anonymity
-        </label>
-        <label>
-          <input
+          </label>
+          
+          <label>
+            <input
               type="checkbox"
               name=early404
               id="early404Checkbox">
-          Early 404: threads that are not replied at least 5 times will be deleted after an hour.
-        </label>
-        <label>
+            Early 404: threads that are not replied at least 5 times will be deleted after an hour.
+          </label>
+          
+          <label>
+            <input
+              type="checkbox"
+              name="locationFlags"
+              id="locationCheckBox">
+            Location Flags
+          </label>
+          
+          <label>
+            <input
+              type="checkbox"
+              name="uniqueFiles"
+              id="uniqueFilesCheckbox">
+            Unique Files
+          </label>
+          
+          <label>
+            <input
+              type="checkbox"
+              name="uniquePosts"
+              id="uniquePostsCheckbox">
+            Unique Posts
+          </label>
+          
           <input
-            type="checkbox"
-            name="uniqueFiles"
-            id="uniqueFilesCheckbox">
-          Unique Files
-        </label>
-        <label>
+            type="button"
+            value="Save"
+            onClick="saveSettings()"
+            class="hidden"
+            id="saveSettingsJsButton">
           <input
-            type="checkbox"
-            name="uniquePosts"
-            id="uniquePostsCheckbox">
-          Unique Posts
-        </label>
-        <input
-              type="button"
-              value="Save"
-              onClick="saveSettings()"
-              class="hidden"
-              id="saveSettingsJsButton">
-        <input
-              type="submit"
-              value="Save"
-              id="saveSettingsFormButton">
-      </form>
+            type="submit"
+            value="Save"
+            id="saveSettingsFormButton">
+            
+          <p>1: Separate elements with commas</p>
+          <p>2: Will be ignored if values are higher than the global equivalent or are not present on the global equivalent</p>
+          
+        </form>
       
-      <p><a id="bannerManagementLink">Manage banners</a></p>
-      <p><a id="filterManagementLink">Manage filters</a></p>
-      <p><a id="ruleManagementLink">Manage rules</a></p>
-      <p><a id="flagManagementLink">Manage flags</a></p>
+        <p><a id="bannerManagementLink">Manage banners</a></p>
+        <p><a id="filterManagementLink">Manage filters</a></p>
+        <p><a id="ruleManagementLink">Manage rules</a></p>
+        <p><a id="flagManagementLink">Manage flags</a></p>
+        
+        <hr />
+        
+      </div>
+    
+      <p><a id="rangeBansLink">Range bans</a></p>
+      <p><a id="hashBansLink">Hash bans</a></p>
+      <p><a id="bansLink">Bans</a></p>
+      <p><a id="closedReportsLink">Closed reports</a></p>
       
       <hr />
       
-    </div>
-    
-    <p><a id="proxyBansLink">Proxy Bans</a></p>
-    <p><a id="rangeBansLink">Range bans</a></p>
-    <p><a id="hashBansLink">Hash bans</a></p>
-    <p><a id="bansLink">Bans</a></p>
-    <p><a id="closedReportsLink">Closed reports</a></p>
-    
-    <hr />
-    
-    <h3>Open reports</h3>
-    
-    <div id="reportDiv"></div>
-    
-    <hr />
-    
-    <h3>Appealed bans</h3>
-    
-    <div id="appealedBansPanel"></div>
+      <h3>Open reports</h3>
+      
+      <div id="reportDiv"></div>
+      
+      <hr />
+      
+      <h3>Appealed bans</h3>
+      
+      <div id="appealedBansPanel"></div>
     
     </fieldset>
     

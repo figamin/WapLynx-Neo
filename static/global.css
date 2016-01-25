@@ -184,6 +184,12 @@ nav span {
   margin-right: 0.25em;
 }
 
+#linkBack:before {
+  font-family: Icons;
+  content: "\e003";
+  margin-right: 0.25em;
+}
+
 /* board list */
 #boardsWrapper {
   width: 80%;
@@ -488,6 +494,12 @@ a.rules:after {
     font-weight: bold;
 }
 
+.labelRole:before {
+  font-family: Icons;
+  content: "\e0dc";
+  color: #A00;
+}
+
 .divMessage {
     margin-left: 3em;
     margin-top: 1em;
@@ -504,6 +516,12 @@ a.rules:after {
     font-weight: bold;
     margin: 1em;
     font-size: 100%;
+}
+
+.divBanMessage:before {
+  font-family: Icons;
+  content: "\e0d8";
+  color: #A00;
 }
 
 .uploadCell {
@@ -567,6 +585,11 @@ a.rules:after {
 .labelOmission {
     margin-top: 0.5em;
     margin-left: 0.5em;
+}
+
+.imgFlag {
+  max-width: 16px;
+  max-height: 16px;
 }
 
 /* markdown */
@@ -675,6 +698,12 @@ span.spoiler {
   color: #A00;
 }
 
+.bumpLockIndicator:after {
+  font-family: Icons;
+  content: "\e0db";
+  color: #A00;
+}
+
 #archiveThreadList div, #archiveBoardList div {
   margin: 0.25em 0;
 }
@@ -716,6 +745,12 @@ span.spoiler {
 #linkLogs:before {
   font-family: Icons;
   content: "\e069";
+  margin-right: 0.25em;
+}
+
+#linkGraphs:before {
+  font-family: Icons;
+  content: "\e018";
   margin-right: 0.25em;
 }
 

@@ -7,13 +7,11 @@ if (!DISABLE_JS) {
     document.getElementById('addVolunteerJsButton').style.display = 'inline';
     document.getElementById('transferBoardJsButton').style.display = 'inline';
     document.getElementById('deleteBoardJsButton').style.display = 'inline';
-    document.getElementById('saveSettingsJsButton').style.display = 'inline';
     document.getElementById('cssJsButton').style.display = 'inline';
     document.getElementById('spoilerJsButton').style.display = 'inline';
 
     document.getElementById('spoilerFormButton').style.display = 'none';
     document.getElementById('cssFormButton').style.display = 'none';
-    document.getElementById('saveSettingsFormButton').style.display = 'none';
     document.getElementById('deleteBoardFormButton').style.display = 'none';
     document.getElementById('addVolunteerFormButton').style.display = 'none';
     document.getElementById('transferBoardFormButton').style.display = 'none';
@@ -24,8 +22,6 @@ if (!DISABLE_JS) {
       document.getElementById('jsFormButton').style.display = 'none';
     }
 
-    boardIdentifier = document.getElementById('addVolunteerBoardIdentifier').value;
-
     var volunteerDiv = document.getElementById('volunteersDiv');
 
     for (var i = 0; i < volunteerDiv.childNodes.length; i++) {
@@ -33,6 +29,10 @@ if (!DISABLE_JS) {
 
     }
   }
+  
+  boardIdentifier = document.getElementById('boardSettingsIdentifier').value;
+  document.getElementById('saveSettingsJsButton').style.display = 'inline';
+  document.getElementById('saveSettingsFormButton').style.display = 'none';
 
   setupReportButtons();
 
@@ -192,6 +192,15 @@ function saveSettings() {
       .trim();
   var typedAutoCaptcha = document.getElementById('autoCaptchaThresholdField').value
       .trim();
+      
+  var typedAutoSage = document.getElementById('autoSageLimitField').value
+      .trim();
+  var typedFileLimit = document.getElementById('maxFilesField').value.trim();
+  var typedFileSize = document.getElementById('maxFileSizeField').value.trim();
+  var typedTypedMimes = document.getElementById('validMimesField').value
+      .split(',');
+  var typedThreadLimit = document.getElementById('maxThreadFields').value
+      .trim();
 
   if (typedHourlyLimit.length && isNaN(typedHourlyLimit)) {
     alert('Invalid hourly limit.');
@@ -253,6 +262,10 @@ function saveSettings() {
     settings.push('forceAnonymity');
   }
 
+  if (document.getElementById('locationCheckBox').checked) {
+    settings.push('locationFlags');
+  }
+  
   var typedTags = document.getElementById('tagsField').value.split(',');
 
   apiRequest('setBoardSettings', {
@@ -264,7 +277,12 @@ function saveSettings() {
     anonymousName : typedAnonymousName,
     boardDescription : typedDescription,
     boardUri : boardIdentifier,
-    settings : settings
+    settings : settings,
+    autoSageLimit : typedAutoSage,
+    maxThreadCount : typedThreadLimit,
+    maxFileSizeMB : typedFileSize,
+    acceptedMimes : typedTypedMimes,
+    maxFiles : typedFileLimit
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
