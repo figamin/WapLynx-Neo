@@ -53,11 +53,7 @@
           placeholder="tags"
           class="text">
           
-        <input
-          type="submit"
-          value="search">
-          
-        <label>Sort
+        <div id="boardsSort">
           <select name="sorting">
             <option value=''>Most popular</option>
             <option value='1'>Least popular</option>
@@ -68,7 +64,12 @@
             <option value='6'>Alphabetic order</option>
             <option value='7'>Reverse alphabetic order</option>
           </select>
-        </label>
+        </div>
+        
+        <input
+          type="submit"
+          value="search"
+          id="searchButton">
           
       </form>
     </div>

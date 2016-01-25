@@ -215,6 +215,10 @@ nav span {
     display: inline-block;
 }
 
+#boardsSort, #searchButton {
+  margin-top: 1em;
+}
+
 #divPages {
     display: inline-block;
 }
@@ -728,7 +732,7 @@ span.spoiler {
   font-size: 120%;
 }
 
-#links {
+#links, #divStats {
   padding: 0.5em;
   font-size: 75%;
   text-align: center;
@@ -736,10 +740,6 @@ span.spoiler {
 
 #links a {
   text-decoration: none;
-}
-
-#indexStats {
-  text-align: center;
 }
 
 #linkLogs:before {
