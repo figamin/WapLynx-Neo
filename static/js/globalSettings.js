@@ -13,20 +13,48 @@ if (!DISABLE_JS) {
       setting : 'slaves',
       type : 'array'
     },
+    checkboxGlobalBanners : {
+      type : 'boolean',
+      setting : 'useGlobalBanners',
+    },
     fieldMaster : {
       setting : 'master',
+      type : 'string'
+    },
+    fieldTorPort : {
+      setting : 'torPort',
       type : 'string'
     },
     fieldAddress : {
       setting : 'address',
       type : 'string'
     },
+    fieldMediaPageSize : {
+      setting : 'mediaPageSize',
+      type : 'string'
+    },
+    fieldBypassHours : {
+      type : 'string',
+      setting : 'bypassDurationHours',
+    },
     fieldRssDomain : {
       setting : 'rssDomain',
       type : 'string'
     },
+    fieldInactivityThreshold : {
+      setting : 'inactivityThreshold',
+      type : 'string'
+    },
+    fieldCSP : {
+      setting : 'CSP',
+      type : 'string'
+    },
     fieldPort : {
       setting : 'port',
+      type : 'string'
+    },
+    fieldSfwOverboard : {
+      setting : 'sfwOverboard',
       type : 'string'
     },
     fieldMultiBoardThreadCount : {
@@ -53,24 +81,20 @@ if (!DISABLE_JS) {
       setting : 'bypassMaxPosts',
       type : 'string'
     },
-    fieldBypassPosts : {
-      setting : 'bypassMaxPosts',
-      type : 'string'
-    },
     fieldOverboard : {
       setting : 'overboard',
       type : 'string'
     },
     fieldPageSize : {
-      setting : 'boardPageSize',
+      setting : 'pageSize',
       type : 'string'
     },
     fieldMaxTags : {
-      setting : 'maxTags',
+      setting : 'maxBoardTags',
       type : 'string'
     },
     fieldLatestPostsCount : {
-      setting : 'latestPostsCount',
+      setting : 'latestPostCount',
       type : 'string'
     },
     fieldAutoSageLimit : {
@@ -78,7 +102,7 @@ if (!DISABLE_JS) {
       type : 'string'
     },
     fieldThreadLimit : {
-      setting : 'threadLimit',
+      setting : 'maxThreadCount',
       type : 'string'
     },
     fieldSiteTitle : {
@@ -86,11 +110,11 @@ if (!DISABLE_JS) {
       type : 'string'
     },
     fieldTempDir : {
-      setting : 'tempDir',
+      setting : 'tempDirectory',
       type : 'string'
     },
     fieldSenderEmail : {
-      setting : 'senderEmail',
+      setting : 'emailSender',
       type : 'string'
     },
     fieldCaptchaExpiration : {
@@ -98,11 +122,11 @@ if (!DISABLE_JS) {
       type : 'string'
     },
     fieldMaxRequestSize : {
-      setting : 'maxRequestSize',
+      setting : 'maxRequestSizeMB',
       type : 'string'
     },
     fieldMaxFileSize : {
-      setting : 'maxFileSize',
+      setting : 'maxFileSizeMB',
       type : 'string'
     },
     fieldMaxFiles : {
@@ -110,11 +134,11 @@ if (!DISABLE_JS) {
       type : 'string'
     },
     fieldBanMessage : {
-      setting : 'banMessage',
+      setting : 'defaultBanMessage',
       type : 'string'
     },
     fieldAnonymousName : {
-      setting : 'anonymousName',
+      setting : 'defaultAnonymousName',
       type : 'string'
     },
     fieldTopBoardsCount : {
@@ -130,11 +154,11 @@ if (!DISABLE_JS) {
       type : 'string'
     },
     fieldLanguagePack : {
-      setting : 'languagePack',
+      setting : 'languagePackPath',
       type : 'string'
     },
     fieldMaxRules : {
-      setting : 'maxRules',
+      setting : 'maxBoardRules',
       type : 'string'
     },
     fieldThumbSize : {
@@ -146,7 +170,7 @@ if (!DISABLE_JS) {
       type : 'string'
     },
     fieldMaxVolunteers : {
-      setting : 'maxVolunteers',
+      setting : 'maxBoardVolunteers',
       type : 'string'
     },
     fieldGlobalLatestImages : {
@@ -154,11 +178,11 @@ if (!DISABLE_JS) {
       type : 'string'
     },
     fieldMaxBannerSize : {
-      setting : 'maxBannerSize',
+      setting : 'maxBannerSizeKB',
       type : 'string'
     },
     fieldMaxFlagSize : {
-      setting : 'maxFlagSize',
+      setting : 'maxFlagSizeKB',
       type : 'string'
     },
     fieldThumbExtension : {
@@ -166,7 +190,7 @@ if (!DISABLE_JS) {
       type : 'string'
     },
     fieldFloodInterval : {
-      setting : 'floodInterval',
+      setting : 'floodTimerSec',
       type : 'string'
     },
     checkboxVerbose : {
@@ -179,6 +203,14 @@ if (!DISABLE_JS) {
     },
     checkboxAllowCustomJs : {
       setting : 'allowBoardCustomJs',
+      type : 'boolean'
+    },
+    checkboxAutoPruneFiles : {
+      setting : 'autoPruneFiles',
+      type : 'boolean'
+    },
+    checkboxFrontPageStats : {
+      setting : 'frontPageStats',
       type : 'boolean'
     },
     checkboxSsl : {
@@ -205,8 +237,8 @@ if (!DISABLE_JS) {
       setting : 'multipleReports',
       type : 'boolean'
     },
-    checkboxGlobalBanners : {
-      setting : 'useGlobalBanners',
+    checkboxSFWLatestImages : {
+      setting : 'onlySfwLatestImages',
       type : 'boolean'
     },
     checkboxDisableFloodCheck : {
@@ -229,10 +261,6 @@ if (!DISABLE_JS) {
       setting : 'torAccess',
       type : 'combo'
     },
-    comboTorAccess : {
-      setting : 'torAccess',
-      type : 'combo'
-    },
     comboBoardCreationRequirement : {
       setting : 'boardCreationRequirement',
       type : 'combo'
@@ -244,10 +272,6 @@ if (!DISABLE_JS) {
     comboMinClearIpRole : {
       setting : 'clearIpMinRole',
       type : 'combo'
-    },
-    checkboxFrontPageStats : {
-      setting : 'frontPageStats',
-      type : 'boolean'
     }
   };
 

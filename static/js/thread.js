@@ -17,27 +17,17 @@ var markedPosting;
 var limitRefreshWait = 10 * 60;
 var originalButtonText;
 
-var postCellTemplate = '<div class="innerPost">'
-      +                '<div class="postInfo title">'
-      +                '<input type="checkbox" class="deletionCheckBox">'
-      +                '<span class="labelSubject"></span>'
-      +                '<a class="linkName"></a>'
-      +                '<img class="imgFlag">'
-      +                '<span class="labelRole"></span>'
-      +                '<span class="labelCreated"></span>'
-      +                '<span class="spanId"> Id:<span class="labelId"></span></span>'
-      +                ' <a class="linkPreview">[Preview]</a>'
-      +                ' <a class="linkSelf">No.</a>'
-      +                '<a class="linkQuote"></a>'
-      +                ' <span class="panelBacklinks"></span>'
-      +                '</div>'
-      +                '<div class="panelUploads"></div>'
-      +                '<div class="divMessage"></div>'
-      +                '<div class="divBanMessage"></div>'
-      +                '<div class="labelLastEdit"></div>'
-      +                '</div>';
+var postCellTemplate = '<div class="innerPost"><input type="checkbox" '
+    + 'class="deletionCheckBox"> <span class="labelSubject"></span>'
+    + '<a class="linkName"></a> <img class="imgFlag"> '
+    + '<span class="labelRole"></span> <span class="labelCreated"></span>'
+    + '<span class="spanId"> Id: <span class="labelId"></span></span>'
+    + ' <a class="linkPreview">[Preview]</a> <a class="linkSelf">No.</a>'
+    + ' <a class="linkQuote"></a> <span class="panelBacklinks"> </span>'
+    + '<div class="panelUploads"></div><div class="divMessage" /></div>'
+    + '<div class="divBanMessage"></div><div class="labelLastEdit"></div><br></div>';
 
-var uploadCell = '<a class="nameLink" target="blank"></a>'
+var uploadCell = '<a class="nameLink" target="blank">Open file</a>'
     + ' ( <span class="sizeLabel"></span> '
     + '<span class="dimensionLabel"></span> '
     + '<a class="originalNameLink"></a> )<br>'
@@ -51,6 +41,8 @@ if (!DISABLE_JS) {
 
   boardUri = document.getElementById('boardIdentifier').value;
   var divPosts = document.getElementsByClassName('divPosts')[0];
+
+  setDragAndDrop();
 
   document.getElementsByClassName('divRefresh')[0].style.display = 'inline';
 
@@ -185,18 +177,6 @@ function processPostingQuote(link) {
 
 }
 
-function reloadCaptcha() {
-  document.cookie = 'captchaid=; path=/;';
-
-  if (document.getElementById('captchaDiv')) {
-    document.getElementById('captchaImage').src = '/captcha.js#'
-        + new Date().toString();
-  }
-
-  document.getElementById('captchaImageReport').src = '/captcha.js#'
-      + new Date().toString();
-}
-
 function saveThreadSettings() {
 
   apiRequest('changeThreadSettings', {
@@ -225,8 +205,8 @@ var replyCallback = function(status, data) {
   if (status === 'ok') {
     document.getElementById('fieldMessage').value = '';
     document.getElementById('fieldSubject').value = '';
-    document.getElementById('files').type = 'text';
-    document.getElementById('files').type = 'file';
+
+    clearSelectedFiles();
 
     setTimeout(function() {
       refreshPosts();
@@ -334,7 +314,6 @@ function setUploadLinks(cell, file) {
 
   var nameLink = cell.getElementsByClassName('nameLink')[0];
   nameLink.href = file.path;
-  nameLink.innerHTML = file.name;
 
   var originalLink = cell.getElementsByClassName('originalNameLink')[0];
   originalLink.innerHTML = file.originalName;
@@ -646,31 +625,12 @@ function sendReplyData(files, captchaId) {
 
 }
 
-function iterateSelectedFiles(currentIndex, files, fileChooser, captchaId) {
-
-  if (currentIndex < fileChooser.files.length) {
-    var reader = new FileReader();
-
-    reader.onloadend = function(e) {
-
-      files.push({
-        name : fileChooser.files[currentIndex].name,
-        content : reader.result
-      });
-
-      iterateSelectedFiles(currentIndex + 1, files, fileChooser, captchaId);
-
-    };
-
-    reader.readAsDataURL(fileChooser.files[currentIndex]);
-  } else {
-    sendReplyData(files, captchaId);
-  }
-
-}
-
 function processFilesToPost(captchaId) {
-  iterateSelectedFiles(0, [], document.getElementById('files'), captchaId);
+
+  getFilestToUpload(function gotFiles(files) {
+    sendReplyData(files, captchaId);
+  });
+
 }
 
 function postReply() {
@@ -688,17 +648,21 @@ function postReply() {
       return;
     }
 
-    var parsedCookies = getCookies();
+    if (typedCaptcha.length == 24) {
+      processFilesToPost(typedCaptcha);
+    } else {
+      var parsedCookies = getCookies();
 
-    apiRequest('solveCaptcha', {
+      apiRequest('solveCaptcha', {
 
-      captchaId : parsedCookies.captchaid,
-      answer : typedCaptcha
-    }, function solvedCaptcha(status, data) {
+        captchaId : parsedCookies.captchaid,
+        answer : typedCaptcha
+      }, function solvedCaptcha(status, data) {
 
-      processFilesToPost(parsedCookies.captchaid);
+        processFilesToPost(parsedCookies.captchaid);
 
-    });
+      });
+    }
 
   }
 

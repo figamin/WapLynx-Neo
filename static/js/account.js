@@ -19,14 +19,6 @@ if (!DISABLE_JS) {
 
 }
 
-function reloadCaptcha() {
-  document.cookie = 'captchaid=; path=/;';
-
-  document.getElementById('captchaImage').src = '/captcha.js#'
-      + new Date().toString();
-
-}
-
 function logout() {
 
   document.cookie = 'login=invalid+login';

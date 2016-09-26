@@ -55,7 +55,7 @@ input, select, textarea {
   font-size: 80%;
 }
 
-input[type=button], input[type=submit], button {
+input[type=button], input[type=submit], button, #dropzone, .selectedCell {
   border: 3px double #07371F;
   border-radius: 5px;
   background: #16171A;
@@ -78,23 +78,23 @@ input[type=button], input[type=submit], button {
 /* import resources here; external CSS, fonts, etc */
 @font-face {
   font-family: 'Hack';
-  src: url('hack-regular-webfont.eot?v=2.018');
-  src: url('hack-regular-webfont.eot?#iefix&v=2.018') format('embedded-opentype'),
-    url('hack-regular-webfont.woff2?v=2.018') format('woff2'),
-    url('hack-regular-webfont.woff?v=2.018') format('woff'),
-    url('hack-regular-webfont.ttf?v=2.018') format('truetype'),
-    url('hack-regular-webfont.svg?v=2.018#hackregular') format('svg');
+  src: url('../hack-regular-webfont.eot?v=2.018');
+  src: url('../hack-regular-webfont.eot?#iefix&v=2.018')
+    format('embedded-opentype'), url('../hack-regular-webfont.woff2?v=2.018')
+    format('woff2'), url('../hack-regular-webfont.woff?v=2.018') format('woff'),
+    url('../hack-regular-webfont.ttf?v=2.018') format('truetype'),
+    url('../hack-regular-webfont.svg?v=2.018#hackregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Icons';
-  src: url('open-iconic.eot');
-  src: url('pen-iconic.eot?#iconic-sm') format('embedded-opentype'),
-    url('open-iconic.woff') format('woff'), url('open-iconic.ttf')
-    format('truetype'), url('open-iconic.otf') format('opentype'),
-    url('open-iconic.svg#iconic-sm') format('svg');
+  src: url('../open-iconic.eot');
+  src: url('../open-iconic.eot?#iconic-sm') format('embedded-opentype'),
+    url('../open-iconic.woff') format('woff'), url('open-iconic.ttf')
+    format('truetype'), url('../open-iconic.otf') format('opentype'),
+    url('../open-iconic.svg#iconic-sm') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -958,4 +958,34 @@ footer {
   content: "\e068";
   color: #a00;
   margin: 1em;
+}
+
+/* drag and drop */
+.selectedCell, #dropzone {
+  top: 5px;
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 5px 0px;
+}
+
+.selectedCell {
+  margin-top: 10px;
+}
+
+#dropzone {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease 0s;
+}
+
+.removeButton {
+  cursor: pointer;
+  color: rgba(125, 125, 125, 0.5);
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.removeButton:hover {
+  color: #7D7D7D;
 }

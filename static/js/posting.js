@@ -15,8 +15,10 @@ if (!DISABLE_JS) {
   if (document.getElementById('deleteJsButton')) {
     document.getElementById('deleteJsButton').style.display = 'inline';
     document.getElementById('reportJsButton').style.display = 'inline';
+    document.getElementById('reportFormButton').style.display = 'none';
+    document.getElementById('deleteFormButton').style.display = 'none';
 
-    if (!board && document.getElementById('inputBan')) {
+    if (!board && document.getElementById('divMod')) {
 
       document.getElementById('banJsButton').style.display = 'inline';
       document.getElementById('spoilJsButton').style.display = 'inline';
@@ -25,8 +27,6 @@ if (!DISABLE_JS) {
       document.getElementById('inputSpoil').style.display = 'none';
     }
 
-    document.getElementById('reportFormButton').style.display = 'none';
-    document.getElementById('deleteFormButton').style.display = 'none';
   }
 
   var imageLinks = document.getElementsByClassName('imgLink');
@@ -202,16 +202,18 @@ function processImageLink(link) {
 function setFullBorder(tooltip) {
 
   var innerPost = tooltip.getElementsByClassName('innerPost')[0];
-  
+
   var parent = innerPost.parentNode;
-  
+
   var temp = document.createElement('div');
   temp.appendChild(innerPost);
-  
+
   tooltip.innerHTML = '';
   tooltip.appendChild(innerPost);
-  
-  innerPost.style['padding'] = '0.25em 0.5em 0.25em 0.5em';
+
+  innerPost.style['border-style'] = 'solid solid solid solid';
+  innerPost.style['border-width'] = '1px 1px 1px 1px';
+  innerPost.style['border-color'] = '#B7C5D9 #B7C5D9 #B7C5D9 #B7C5D9';
 
 }
 
@@ -393,21 +395,14 @@ function spoilFiles() {
 
 }
 
-function banPosts() {
+function applyBans(captcha) {
   var typedReason = document.getElementById('reportFieldReason').value.trim();
   var typedExpiration = document.getElementById('fieldExpiration').value.trim();
   var typedMessage = document.getElementById('fieldbanMessage').value.trim();
-
-  var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
   var expiration = Date.parse(typedExpiration || '');
+  var range = document.getElementById('checkboxRange').checked;
 
-  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
-    return;
-  } else if (/\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
-    return;
-  } else if (isNaN(expiration)) {
+  if (isNaN(expiration) && !range) {
     alert('Invalid expiration');
 
     return;
@@ -417,7 +412,8 @@ function banPosts() {
 
   apiRequest('banUsers', {
     reason : typedReason,
-    captcha : typedCaptcha,
+    captcha : captcha,
+    range : range,
     expiration : typedExpiration,
     banMessage : typedMessage,
     global : document.getElementById('checkboxGlobal').checked,
@@ -432,6 +428,37 @@ function banPosts() {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
+}
+
+function banPosts() {
+
+  var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
+
+  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
+    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
+    return;
+  } else if (/\W/.test(typedCaptcha)) {
+    alert('Invalid captcha.');
+    return;
+  }
+
+  if (typedCaptcha.length == 24) {
+    applyBans(typedCaptcha);
+  } else {
+    var parsedCookies = getCookies();
+
+    apiRequest('solveCaptcha', {
+
+      captchaId : parsedCookies.captchaid,
+      answer : typedCaptcha
+    }, function solvedCaptcha(status, data) {
+
+      applyBans(parsedCookies.captchaid);
+
+      reloadCaptcha();
+    });
+  }
+
 }
 
 function getSelectedContent() {
@@ -503,10 +530,16 @@ function deletePosts() {
 
   var toDelete = getSelectedContent();
 
+  if (!toDelete.length) {
+    alert('Nothing selected');
+    return;
+  }
+
   var redirect = '/' + toDelete[0].board + '/';
 
   apiRequest('deleteContent', {
     password : typedPassword,
+    deleteMedia : document.getElementById('checkboxMediaDeletion').checked,
     deleteUploads : document.getElementById('checkboxOnlyFiles').checked,
     postings : toDelete
   }, function requestComplete(status, data) {

@@ -4,7 +4,9 @@ if (!DISABLE_JS) {
 
   document.getElementById('transferJsButton').style.display = 'inline';
   document.getElementById('deleteJsButton').style.display = 'inline';
+  document.getElementById('saveSpecialJsButton').style.display = 'inline';
 
+  document.getElementById('saveSpecialFormButton').style.display = 'none';
   document.getElementById('deleteFormButton').style.display = 'none';
   document.getElementById('transferFormButton').style.display = 'none';
 
@@ -43,6 +45,29 @@ function deleteBoard() {
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
+  });
+
+}
+
+function saveSpecialSettings() {
+
+  var specialSettings = [];
+
+  if (document.getElementById('checkboxSfw').checked) {
+    specialSettings.push('sfw');
+  }
+
+  apiRequest('setSpecialBoardSettings', {
+    boardUri : boardIdentifier,
+    specialSettings : specialSettings
+  }, function requestComplete(status, data) {
+
+    if (status === 'ok') {
+      alert('Special settings saved');
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+
   });
 
 }

@@ -7,14 +7,6 @@ if (!DISABLE_JS) {
 
 }
 
-function reloadCaptcha() {
-  document.cookie = 'captchaid=; path=/;';
-
-  document.getElementById('captchaImage').src = '/captcha.js#'
-      + new Date().toString();
-
-}
-
 function blockBypass() {
 
   var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();

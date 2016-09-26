@@ -7,6 +7,8 @@ if (!DISABLE_JS) {
 
   hiddenCaptcha = !document.getElementById('captchaDiv');
 
+  setDragAndDrop();
+
   var postButton = document.getElementById('jsButton');
   postButton.style.display = 'inline';
   postButton.disabled = false;
@@ -22,23 +24,10 @@ if (!DISABLE_JS) {
     document.getElementById('fieldPostingPassword').value = savedPassword;
     document.getElementById('deletionFieldPassword').value = savedPassword;
   }
-  
+
   document.getElementById('reloadCaptchaButtonReport').style.display = 'inline';
 
   document.getElementById('formButton').style.display = 'none';
-
-}
-
-function reloadCaptcha() {
-  document.cookie = 'captchaid=; path=/;';
-
-  if (document.getElementById('captchaDiv')) {
-    document.getElementById('captchaImage').src = '/captcha.js#'
-        + new Date().toString();
-  }
-
-  document.getElementById('captchaImageReport').src = '/captcha.js#'
-      + new Date().toString();
 
 }
 
@@ -134,31 +123,12 @@ function sendThreadData(files, captchaId) {
 
 }
 
-function iterateSelectedFiles(currentIndex, files, fileChooser, captchaId) {
-
-  if (currentIndex < fileChooser.files.length) {
-    var reader = new FileReader();
-
-    reader.onloadend = function(e) {
-
-      files.push({
-        name : fileChooser.files[currentIndex].name,
-        content : reader.result
-      });
-
-      iterateSelectedFiles(currentIndex + 1, files, fileChooser, captchaId);
-
-    };
-
-    reader.readAsDataURL(fileChooser.files[currentIndex]);
-  } else {
-    sendThreadData(files, captchaId);
-  }
-
-}
-
 function processFilesToPost(captchaId) {
-  iterateSelectedFiles(0, [], document.getElementById('files'), captchaId);
+
+  getFilestToUpload(function gotFiles(files) {
+    sendThreadData(files, captchaId);
+  });
+
 }
 
 function postThread() {
@@ -176,17 +146,21 @@ function postThread() {
       return;
     }
 
-    var parsedCookies = getCookies();
+    if (typedCaptcha.length == 24) {
+      processFilesToPost(typedCaptcha);
+    } else {
+      var parsedCookies = getCookies();
 
-    apiRequest('solveCaptcha', {
+      apiRequest('solveCaptcha', {
 
-      captchaId : parsedCookies.captchaid,
-      answer : typedCaptcha
-    }, function solvedCaptcha(status, data) {
+        captchaId : parsedCookies.captchaid,
+        answer : typedCaptcha
+      }, function solvedCaptcha(status, data) {
 
-      processFilesToPost(parsedCookies.captchaid);
+        processFilesToPost(parsedCookies.captchaid);
 
-    });
+      });
+    }
 
   }
 

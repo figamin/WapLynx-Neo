@@ -6,21 +6,12 @@
   href="/.static/css/global.css"
   type="text/css"
   rel="stylesheet" />
-<script
-  src="/.static/js/settings.js"
-  defer></script>
-<script
-  src="/.static/js/api.js"
-  defer></script>
-<script
-  src="/.static/js/account.js"
-  defer></script>
 </head>
 <body>
 
   <nav>
     <span id="navLinkSpan"> <span>[</span> <a
-        href="/localhost:8080"
+        href="/"
         id="navLinkHome">home</a> <span>/</span> <a
         href="/boards.js"
         id="navBoardList">boards</a> <span>/</span> <a
@@ -146,6 +137,8 @@
 
       <h3>Owned Boards</h3>
       <div id="ownedDiv"></div>
+      <hr />
+
       <h3>Volunteered Boards</h3>
       <div id="volunteeredDiv"></div>
 
@@ -176,7 +169,11 @@
 
           <img
             src="/captcha.js"
+            class="captchaImage"
             id="captchaImage" />
+
+          <br>
+          <span class="captchaTimer"></span>
 
           <div class="captchaDiv">
 
@@ -220,4 +217,11 @@
   </div>
 
 </body>
+
+<script src="/.static/js/settings.js"></script>
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/account.js"></script>
+<script src="/.static/js/captcha.js"></script>
+
+
 </html>

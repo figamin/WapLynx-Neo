@@ -6,24 +6,12 @@
   href="/.static/css/global.css"
   type="text/css"
   rel="stylesheet" />
-<script
-  src="/.static/js/settings.js"
-  defer></script>
-<script
-  src="/.static/js/api.js"
-  defer></script>
-<script
-  src="/.static/js/board.js"
-  defer></script>
-<script
-  src="/.static/js/posting.js"
-  defer></script>
 </head>
 <body>
 
   <nav>
     <span id="navLinkSpan"> <span>[</span> <a
-        href="/localhost:8080"
+        href="/"
         id="navLinkHome">home</a> <span>/</span> <a
         href="/boards.js"
         id="navBoardList">boards</a> <span>/</span> <a
@@ -101,7 +89,7 @@
           <div>
 
             <input
-              type="test"
+              type="text"
               name="password"
               id="fieldPostingPassword"
               class="text"
@@ -123,6 +111,17 @@
               </select>
             </div>
 
+          </div>
+
+          <div
+            style="display: none;"
+            id="dragAndDropDiv">
+            <div id="dropzone">
+              Drag files to upload or
+              <br>
+              click here to select them
+            </div>
+            <div id="selectedDiv"></div>
           </div>
 
           <div>
@@ -244,14 +243,14 @@
             name="reason"
             id="reportFieldReason"
             placeholder="reason">
-          </label>
+
 
           <input
             type="password"
             name="password"
             id="deletionFieldPassword"
             placeholder="password">
-          </label>
+
 
           <div>
 
@@ -267,7 +266,11 @@
 
           <img
             src="/captcha.js"
+            class="captchaImage"
             id="captchaImageReport" />
+
+          <br>
+          <span class="captchaTimer"></span>
 
           <div class="buttonBox">
 
@@ -331,4 +334,13 @@
   <footer id="footer"></footer>
 
 </body>
+
+<script src="/.static/js/settings.js"></script>
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/crypt.js"></script>
+<script src="/.static/js/upload.js"></script>
+<script src="/.static/js/board.js"></script>
+<script src="/.static/js/posting.js"></script>
+<script src="/.static/js/captcha.js"></script>
+
 </html>
