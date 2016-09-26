@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/.static/css/global.css">
+</head>
+<body>
+  <img
+    class="logo"
+    src="/.static/logo.png"
+    title="Logo by Doke">
+
+  <form
+    action="/mediaManagement.js"
+    method="GET">
+    <button
+      type="submit"
+      value="1"
+      name="orphaned">Show only orphaned files</button>
+  </form>
+  <br>
+
+  <form
+    action="/deleteMedia.js"
+    method="POST"
+    enctype="multipart/form-data">
+    <input
+      value="Delete selected media"
+      type="submit"
+      id="deleteFormButton">
+    <input
+      value="Delete selected media"
+      type="button"
+      id="deleteJsButton"
+      onclick="deleteMedia()"
+      style="display: none;">
+
+    <div id="filesDiv"></div>
+  </form>
+  <div id="pagesDiv"></div>
+
+</body>
+<script src="/.static/js/settings.js"></script>
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/mediaManagement.js"></script>
+
+</html>

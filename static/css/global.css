@@ -1,0 +1,961 @@
+/* global CSS values */
+/* global rules to override any browser CSS and to set global values */
+.small {
+  font-size: 75%;
+  text-decoration: none;
+}
+
+.small a {
+  text-decoration: none;
+}
+
+h3, p, label {
+  margin: 0.25em 0;
+}
+
+hr {
+  height: 0px;
+  border-width: 1px medium medium;
+  border-style: solid none none;
+  border-color: #B0790A;
+}
+
+a {
+  color: #FFB300;
+  text-decoration: none;
+}
+
+a:hover {
+  text-shadow: 0px 0px 5px #117743;
+}
+
+u {
+  text-decoration: underline;
+}
+
+s {
+  text-decoration: line-through;
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+input, select, textarea {
+  border: 1px double #07371F;
+  border-radius: 5px;
+  background: #282A2E;
+  color: #ACACAC;
+  padding-left: 0.25em;
+  font-family: 'Hack', monospace, sans-serif;
+  font-size: 80%;
+}
+
+input[type=button], input[type=submit], button {
+  border: 3px double #07371F;
+  border-radius: 5px;
+  background: #16171A;
+  color: #ACACAC;
+  padding-left: 0.25em;
+  font-family: 'Hack', monospace, sans-serif;
+  font-size: 80%;
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.fileBrowser {
+  background: none;
+}
+
+/* import resources here; external CSS, fonts, etc */
+@font-face {
+  font-family: 'Hack';
+  src: url('hack-regular-webfont.eot?v=2.018');
+  src: url('hack-regular-webfont.eot?#iefix&v=2.018') format('embedded-opentype'),
+    url('hack-regular-webfont.woff2?v=2.018') format('woff2'),
+    url('hack-regular-webfont.woff?v=2.018') format('woff'),
+    url('hack-regular-webfont.ttf?v=2.018') format('truetype'),
+    url('hack-regular-webfont.svg?v=2.018#hackregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Icons';
+  src: url('open-iconic.eot');
+  src: url('pen-iconic.eot?#iconic-sm') format('embedded-opentype'),
+    url('open-iconic.woff') format('woff'), url('open-iconic.ttf')
+    format('truetype'), url('open-iconic.otf') format('opentype'),
+    url('open-iconic.svg#iconic-sm') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* body styles, inherited by whole page */
+body {
+  color: #ACACAC;
+  background: #1D1F21;
+  font-family: 'Hack', monospace, sans-serif;
+  font-size: 100%;
+  margin: 0px;
+}
+
+/* header and nav / top of page styles */
+header {
+  width: 50%;
+  margin: 3em auto 0 auto;
+  text-align: center;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #151515;
+  border-bottom: 1px solid #B0790A;
+  padding-bottom: 3px;
+  font-size: 70%;
+  text-align: center;
+}
+
+nav a {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 0.2em;
+}
+
+nav span {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 0.2em;
+}
+
+#navLinkSpan {
+  float: left;
+}
+
+#navBoardsSpan {
+  
+}
+
+#navOptionsSpan {
+  float: right;
+}
+
+#navLinkHome:before {
+  font-family: Icons;
+  content: "\e082";
+  margin-right: 0.25em;
+}
+
+#navBoardList:before {
+  font-family: Icons;
+  content: "\e03a";
+  margin-right: 0.25em;
+}
+
+#linkOverboard:before, #navOverboard:before {
+  font-family: Icons;
+  content: "\e007";
+  margin-right: 0.25em;
+}
+
+#navPosting:before {
+  font-family: Icons;
+  content: "\e09a";
+  margin-right: 0.25em;
+}
+
+#navCatalog:before {
+  font-family: Icons;
+  content: "\e072";
+  margin-right: 0.25em;
+}
+
+#linkTop:before {
+  font-family: Icons;
+  content: "\e012";
+  margin-right: 0.25em;
+}
+
+#linkBottom:before {
+  font-family: Icons;
+  content: "\e00f";
+  margin-right: 0.25em;
+}
+
+#linkBack:before {
+  font-family: Icons;
+  content: "\e003";
+  margin-right: 0.25em;
+}
+
+/* board list */
+#boardsWrapper {
+  width: 80%;
+  margin: 1em auto;
+  text-align: center;
+}
+
+#boardsWrapper #divBoards {
+  margin: 2em 1em 0px;
+  display: inline-block;
+  text-align: left;
+}
+
+.boardsCell span {
+  text-overflow: ellipsis;
+}
+
+.search {
+  margin: 1em 0 1em 0;
+}
+
+.search form {
+  display: inline-block;
+}
+
+#boardsSort, #searchButton {
+  margin-top: 1em;
+}
+
+#divPages {
+  display: inline-block;
+}
+
+#divPages a {
+  text-decoration: none;
+  padding: 0 0.25em;
+}
+
+/* thread and board pages */
+.threadPages {
+  float: left;
+  margin-top: 0.5em;
+}
+
+.threadPages a {
+  text-decoration: none
+}
+
+.boardPages {
+  color: #C0840A;
+  padding: 0.1em 0.25em;
+}
+
+#linkNext:after {
+  font-family: Icons;
+  content: "\e036";
+  margin: 0 0.25em;
+}
+
+#linkPrevious:before {
+  font-family: Icons;
+  content: "\e035";
+  margin: 0 0.25em;
+}
+
+#linkPrevious, #linkNext {
+  vertical-align: middle;
+}
+
+/* board banner */
+.boardHeader p {
+  color: #663E11;
+}
+
+.boardHeader p#labelName {
+  font-size: 200%;
+}
+
+.boardHeader p#labelDescription {
+  font-size: 100%;
+}
+
+.boardHeader a {
+  font-size: 75%;
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* post new thread */
+#postWrapper {
+  text-align: center;
+  margin: 1em auto;
+}
+
+#newPostFieldset {
+  display: inline-block;
+  padding: 0.5em;
+  border: 1px dashed #117743;
+}
+
+#postBox {
+  text-align: left;
+  margin: 0 auto 1em auto;
+}
+
+#postBox textarea {
+  width: 28em;
+  height: 12em;
+}
+
+#postBox div.wider input {
+  width: 20em;
+}
+
+#postBox input, #postBox textarea {
+  margin-top: 0.5em;
+}
+
+#postBox input:focus, #postBox textarea:focus {
+  box-shadow: 0px 0px 5px 2px #117743;
+}
+
+#postWrapper button {
+  width: 8em;
+  margin: 0.5em auto;
+  font-size: 125%;
+}
+
+#postWrapper button:active {
+  box-shadow: 0px 0px 5px #117743;
+}
+
+.spoilerCheckbox, #flagsDiv {
+  display: inline-block;
+}
+
+#postWrapper label {
+  font-size: 80%;
+}
+
+input[type=checkbox]#checkboxSpoiler {
+  display: none;
+}
+
+input[type=checkbox]#checkboxSpoiler+label:before {
+  font-family: Icons;
+  content: "\e0db";
+  margin-right: 0.5em;
+  color: #117743;
+  display: inline-block;
+}
+
+input[type=checkbox]#checkboxSpoiler:checked+label:before {
+  font-family: Icons;
+  content: "\e033";
+  margin-right: 0.5em;
+  color: #117743;
+  display: inline-block;
+}
+
+a.rules:after {
+  font-family: Icons;
+  content: "\e052";
+  margin-right: 0.5em;
+  color: #117743;
+  height: 80%;
+  font-size: 80%;
+  padding-left: 0.25em;
+  vertical-align: middle;
+}
+
+/* thread/post report and management form */
+#reportFieldset {
+  clear: both;
+  margin-top: 2em;
+  border: 1px dashed #117743;
+  padding: 0.5em;
+  margin: 2em 0 1em 1em;
+  float: left;
+}
+
+.contentAction label {
+  font-size: 80%;
+}
+
+#threadReport label, #threadReport img, .contentAction label, .contentAction img,
+  #transferControls, #ipDelete {
+  display: block;
+}
+
+#threadReport label.checkbox, #threadReport input[type=checkbox] {
+  display: inline-block;
+}
+
+#threadReport #fieldCaptchaReport {
+  display: inline-block;
+}
+
+.buttonBox {
+  margin-top: 0.5em;
+}
+
+#divControls, #transferControls, #ipDelete {
+  margin: 1em;
+}
+
+#divControls input, #divControls label {
+  display: inline-block;
+}
+
+#threadLinks {
+  margin: 1em;
+  font-size: 80%;
+}
+
+#boardLinks {
+  margin: 1em 1em 1em 0;
+  font-size: 80%;
+}
+
+/* thread list, some elements are in the post section */
+#threadList {
+  margin: 1em;
+}
+
+#panelMessage {
+  margin: 1em;
+}
+
+#divMessage {
+  text-align: center;
+}
+
+/* posts */
+.divPosts {
+  margin: 1em 0;
+}
+
+.postCell {
+  margin: 0.25em 0;
+}
+
+.innerPost, .markedPost {
+  background: #282A2E;
+  display: inline-block;
+  overflow: hidden;
+  padding-right: 0.25em;
+  max-width: 100%;
+  border: 1px solid #117743;
+  border-radius: 5px;
+}
+
+.postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
+  .contentOmissionIndicator, .labelOmission, .linkThumb {
+  font-size: 80%;
+}
+
+.markedPost {
+  background: rgba(59, 22, 43, 0.4);
+}
+
+.linkName {
+  font-weight: bold;
+  color: #323DCD;
+}
+
+.linkName:hover {
+  color: #AA0000;
+}
+
+.noEmailName, .noEmailName:hover {
+  color: #117743;
+  text-shadow: none;
+}
+
+.quoteLink {
+  color: #ff0000;
+}
+
+.labelId:hover {
+  text-shadow: 0px 0px 5px #A00;
+}
+
+.linkSelf {
+  color: #ACACAC;
+  text-decoration: none;
+}
+
+.linkSelf:hover {
+  color: #AA0000;
+}
+
+.linkQuote {
+  color: #ACACAC;
+  text-decoration: none;
+}
+
+.linkQuote:hover {
+  color: #ff0000;
+}
+
+.labelSubject {
+  color: #AA0000;
+  font-weight: bold;
+}
+
+.labelRole {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.labelRole:before {
+  font-family: Icons;
+  content: "\e0dc";
+  color: #A00;
+}
+
+.divMessage {
+  margin-left: 3em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  word-wrap: break-word;
+}
+
+.multipleUploads .innerPost .divMessage, .multipleUploads .markedPost .divMessage
+  {
+  clear: both;
+}
+
+.divBanMessage {
+  color: #ff0000;
+  font-weight: bold;
+  margin: 1em;
+  font-size: 100%;
+}
+
+.divBanMessage:before {
+  font-family: Icons;
+  content: "\e0d8";
+  color: #A00;
+}
+
+.uploadCell {
+  margin: 0.25em 1em 0.25em 0.5em;
+  float: none;
+}
+
+.uploadCell img {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.multipleUploads .opUploadPanel, .multipleUploads .panelUploads {
+  float: left;
+  width: 100%;
+}
+
+.multipleUploads .uploadCell {
+  float: left;
+}
+
+.uploadDetails {
+  margin-bottom: 0.5em;
+}
+
+.opCell {
+  clear: left;
+}
+
+.panelIp, .panelProxyIp {
+  margin: 0.25em 1em 0.25em 0.5em;
+}
+
+.panelBacklinks a {
+  padding-left: 0.5em;
+  color: #AA0000;
+  text-decoration: none;
+}
+
+.hideLink {
+  vertical-align: top;
+}
+
+.aa {
+  font-family: Mona, "MS PGothic", "ＭＳ Ｐゴシック", sans-serif;
+  display: block !important;
+  font-size: 12pt;
+  line-height: 1.1;
+}
+
+.labelLastEdit {
+  margin-top: 0.75em;
+  margin-left: 0.75em;
+}
+
+.contentOmissionIndicator {
+  margin: 1em 0;
+}
+
+.labelOmission {
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+}
+
+.imgFlag {
+  max-width: 16px;
+  max-height: 16px;
+}
+
+/* markdown */
+.greenText {
+  color: #789922;
+}
+
+.redText {
+  color: #AF0A0F;
+  font-weight: bold;
+  font-size: 125%;
+}
+
+span.spoiler {
+  background: #000;
+  color: #000;
+  padding: 0 1px;
+}
+
+.spoiler:hover {
+  color: #ACACAC;
+  background: none;
+}
+
+/* refresh timer */
+.divRefresh {
+  display: block;
+  float: left;
+  clear: both;
+  margin: 0 0 0 1em;
+  padding: 0;
+  height: 1.5em;
+}
+
+.divRefresh label, .divRefresh input {
+  display: inline-block;
+  margin: 0;
+  font-size: 80%;
+}
+
+/* catalog */
+
+/* this is important since the catalog cell container shares the same id as the actual threads container on other pages */
+.catalogDiv {
+  width: 95%;
+  margin: 1em auto;
+  text-align: center;
+}
+
+#catalogId {
+  text-align: center;
+  margin: 1.5em 0 1em 0;
+  font-size: 150%;
+}
+
+.red {
+  color: #117743;
+}
+
+.linkThumb img {
+  max-height: 128px;
+  max-width: 128px;
+}
+
+.catalogCell {
+  display: inline-block;
+  width: 10em;
+  text-align: center;
+  padding: 0.25em;
+  height: 14em;
+  overflow: hidden;
+  background: #282A2E;
+  margin: 0.1em;
+  border: 1px solid #117743;
+  border-radius: 5px;
+}
+
+.catalogCell .divMessage {
+  margin: 0;
+  font-size: 75%;
+}
+
+.catalogCell .labelSubject {
+  font-size: 75%;
+}
+
+.threadStats {
+  font-size: 75%;
+}
+
+.lockIndicator:before {
+  font-family: Icons;
+  content: "\e08a";
+  color: #A00;
+}
+
+.pinIndicator:after {
+  font-family: Icons;
+  content: "\e0a8";
+  color: #A00;
+}
+
+.cyclicIndicator:after {
+  font-family: Icons;
+  content: "\e08c";
+  color: #A00;
+}
+
+.bumpLockIndicator:after {
+  font-family: Icons;
+  content: "\e0db";
+  color: #A00;
+}
+
+/* index page */
+#indexWrapper {
+  width: 80%;
+  margin: 2em auto;
+}
+
+#logoBox {
+  width: 100%;
+  margin: 0 auto 1em auto;
+  text-align: center;
+}
+
+#infoBox {
+  text-align: center;
+  width: 100%;
+  padding: 0.5em;
+  margin: 1em auto 2em;
+  font-size: 120%;
+}
+
+#links, #divStats {
+  padding: 0.5em;
+  font-size: 75%;
+  text-align: center;
+}
+
+#links a {
+  text-decoration: none;
+}
+
+#linkLogs:before {
+  font-family: Icons;
+  content: "\e069";
+  margin-right: 0.25em;
+}
+
+#linkGraphs:before {
+  font-family: Icons;
+  content: "\e018";
+  margin-right: 0.25em;
+}
+
+#linkAccount:before {
+  font-family: Icons;
+  content: "\e081";
+  margin-right: 0.25em;
+}
+
+#linkGlobalRules:before {
+  font-family: Icons;
+  content: "\e0c9";
+  margin-right: 0.25em;
+}
+
+#linkAbout:before {
+  font-family: Icons;
+  content: "\e06c";
+  margin-right: 0.25em;
+}
+
+#linkEngine:before {
+  font-family: Icons;
+  content: "\e064";
+  margin-right: 0.25em;
+}
+
+#linkLinks:before {
+  font-family: Icons;
+  content: "\e06a";
+  margin-right: 0.25em;
+}
+
+#linkContact:before {
+  font-family: Icons;
+  content: "\e05c";
+  margin-right: 0.25em;
+}
+
+.topBoards {
+  width: 100%;
+  text-align: center;
+  margin: 1em 0px;
+}
+
+.topBoards a {
+  padding: 0.25em 0.5em;
+  background: #282A2E;
+  text-decoration: none;
+  margin: 0.5em 0.25em;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 90%;
+}
+
+.topBoards br {
+  display: none;
+}
+
+#divLatestPosts {
+  width: 100%;
+  margin: 1em;
+  text-align: center;
+}
+
+#divLatestPosts .latestPostCell {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.5em;
+  background: #282A2E;
+  margin: 0.5em;
+  max-width: 15%;
+  max-height: 8em;
+  font-size: 75%;
+  border: 1px solid #117743;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+.latestPostCell a {
+  display: block;
+}
+
+#divLatestImages {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#divLatestImages .latestImageCell {
+  display: inline-block;
+  max-width: 15%;
+  margin: 0 0.5em;
+  vertical-align: middle;
+}
+
+#divLatestImages img {
+  max-width: 100%;
+  padding: 5px;
+  background: #282A2E;
+  border-radius: 5px;
+}
+
+/* CSS for pages that deal with site and account settings and bans */
+#settingsWrapper {
+  text-align: center;
+  width: 80%;
+  margin: 2em auto;
+}
+
+#settingsFieldset {
+  border: 1px dashed #117743;
+  padding: 1em;
+  display: inline-block;
+  text-align: left;
+}
+
+#settingsWrapper input {
+  display: block;
+  margin: 0.5em 0.5em 0.5em 0px;
+}
+
+.banners {
+  margin: 1em;
+  width: auto;
+  padding: 0.5em;
+}
+
+#settingsFieldset textarea {
+  display: block;
+  height: 5em;
+}
+
+#settingsFieldset label {
+  display: block;
+}
+
+#settingsFieldset label input {
+  display: inline-block;
+}
+
+#settingsFieldset hr {
+  border-color: #117743;
+}
+
+#settingsWrapper .captchaDiv input {
+  display: inline-block;
+}
+
+input.wide, textarea.wide {
+  width: 90%;
+}
+
+#redirect, #maint {
+  text-align: center;
+}
+
+#labelCaptchaId {
+  color: #ff0000;
+}
+
+#staticPageWrapper {
+  margin: 2em auto;
+  text-align: center;
+}
+
+#staticPageFieldset {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border: 1px dashed #117743;
+  text-align: left;
+}
+
+/* footer styles */
+footer {
+  width: 100%;
+  margin: 3em 0px 2em 0px;
+  text-align: center;
+  font-size: 75%;
+}
+
+/* this has to go down here to override anything above it */
+.hidden {
+  display: none;
+}
+
+#settingsWrapper input.hidden {
+  display: none;
+}
+
+.filteredPost .postInfo, .filteredPost .panelUploads, .filteredPost .divMessage
+  {
+  display: none;
+}
+
+.filteredPost:before {
+  font-family: Icons;
+  content: "\e068";
+  color: #a00;
+  margin: 1em;
+}

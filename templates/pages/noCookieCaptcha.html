@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/localhost:8080"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
+
+  <header>
+    <img
+      src="/.static/logo.png"
+      alt="logo" />
+  </header>
+
+  <fieldset id="settingsFieldset">
+    <legend>No Cookies?</legend>
+    <div id="divSolvedCaptcha">
+      <h3>
+        Captcha solved. Input this ID as the answer to the captcha when posting:
+        <span id="labelCaptchaId"></span>
+      </h3>
+      <hr />
+    </div>
+    <div>
+      <p>No problem! Solve this captcha here instead.</p>
+      <img id="imageCaptcha">
+      <form
+        method="post"
+        action="/solveCaptcha.js"
+        enctype="multipart/form-data">
+        <input
+          type="hidden"
+          name="captchaId"
+          id="inputCaptchaId">
+        <input
+          type="text"
+          name="answer"
+          placeholder="answer">
+        <input
+          type="submit"
+          value="Solve">
+      </form>
+    </div>
+  </fieldset>
+
+</body>
+</html>

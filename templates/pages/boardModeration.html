@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+<script
+  src="/.static/js/settings.js"
+  defer></script>
+<script
+  src="/.static/js/api.js"
+  defer></script>
+<script
+  src="/.static/js/reports.js"
+  defer></script>
+<script
+  src="/.static/js/boardModeration.js"
+  defer></script>
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
+
+  <header>
+    <img
+      src="/.static/logo.png"
+      alt="logo" />
+  </header>
+
+  <div id="settingsWrapper">
+
+    <fieldset id="settingsFieldset">
+
+      <legend id="labelTitle"></legend>
+
+      <p>
+        Owner: <span id="labelOwner"></span>
+      </p>
+
+      <p>
+        Last seen: <span id="labelLastSeen"></span>
+      </p>
+      <div>
+        <form
+          method="post"
+          action="/transferBoardOwnership.js"
+          enctype="multipart/form-data">
+          <label>User login: <input
+              type="text"
+              name="login"
+              id="fieldTransferLogin"
+              name="userLogin">
+          </label>
+          <input
+            type="hidden"
+            name="boardUri"
+            id="boardTransferIdentifier">
+          <input
+            type="submit"
+            value="Transfer board"
+            id="transferFormButton">
+          <input
+            type="button"
+            onclick="transferBoard()"
+            class="hidden"
+            value="Transfer board"
+            id="transferJsButton">
+        </form>
+      </div>
+      <div>
+        <form
+          method="post"
+          action="/deleteBoard.js"
+          enctype="multipart/form-data">
+          <label> <input
+              type="checkbox"
+              name="confirmDeletion"
+              id="confirmDelCheckbox"> Yes, I wish to delete this board
+          </label>
+          <input
+            type="hidden"
+            name="boardUri"
+            id="boardDeletionIdentifier">
+          <input
+            type="submit"
+            value="Delete board"
+            id="deleteFormButton">
+          <input
+            type="button"
+            onclick="deleteBoard()"
+            class="hidden"
+            value="Delete board"
+            id="deleteJsButton">
+        </form>
+      </div>
+
+      <div>
+        <form
+          method="post"
+          enctype="multipart/form-data"
+          action="/setSpecialBoardSettings.js">
+          <input
+            type="checkbox"
+            name="sfw"
+            id="checkboxSfw">
+          Safe for work board
+          <br>
+          <input
+            type="hidden"
+            name="boardUri"
+            id="specialSettingsIdentifier">
+          <input
+            type="submit"
+            value="Save special settings"
+            id="saveSpecialFormButton">
+          <input
+            type="button"
+            onclick="saveSpecialSettings()"
+            style="display: none;"
+            value="Save special settings"
+            id="saveSpecialJsButton">
+        </form>
+      </div>
+
+    </fieldset>
+  </div>
+
+</body>
+</html>

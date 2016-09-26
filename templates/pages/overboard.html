@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+<script
+  src="/.static/js/settings.js"
+  defer></script>
+<script
+  src="/.static/js/api.js"
+  defer></script>
+<script
+  src="/.static/js/overboard.js"
+  defer></script>
+<script
+  src="/.static/js/posting.js"
+  defer></script>
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/localhost:8080"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> <span>[</span>
+      <a
+        href="#"
+        id="linkTop"></a> <span>/</span> <a
+        href="#footer"
+        id="linkBottom"></a> <span>]</span>
+    </span>
+  </nav>
+
+  <header class="boardHeader">
+    <img
+      id="bannerImage"
+      src="/randomBanner.js" />
+  </header>
+
+  <div id="threadList">
+    <div id="divThreads"></div>
+  </div>
+
+  <footer id="footer"> </footer>
+
+</body>
+</html>

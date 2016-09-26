@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Contact</title>
 <meta charset="UTF-8" />
 <link
   href="/.static/css/global.css"
   type="text/css"
   rel="stylesheet" />
-<link
-  href="/.static/css/open-iconic.css"
-  type="text/css"
-  rel="stylesheet" />
+<script
+  src="/.static/js/settings.js"
+  defer></script>
+<script
+  src="/.static/js/api.js"
+  defer></script>
+<script
+  src="/.static/js/login.js"
+  defer></script>
 </head>
 <body>
+
   <nav>
     <span id="navLinkSpan"> <span>[</span> <a
         href="/localhost:8080"
@@ -32,13 +37,35 @@
       alt="logo" />
   </header>
 
-  <div id="staticPageWrapper">
-    <fieldset id="staticPageFieldset">
-      <legend>Contact</legend>
-      <p>Tox @
-        F846F3CB999DE959665F49376913B67A39D5D9B25991EC5C589A0378AE70E96A41B7AD112EBC</p>
-      <p>Cryptocat - tron@penumbra \\I'll try to keep this open</p>
+  <div id="settingsWrapper">
+
+    <fieldset id="settingsFieldset">
+
+      <legend>Graphs</legend>
+
+      <form
+        method="get"
+        action="graphs.js">
+
+        <label>Year: <input
+            type="text"
+            name="year"
+            placeholder="YYYY">
+        </label>
+
+        <input
+          type="submit"
+          value="Search">
+
+      </form>
+
+      <hr />
+
+      <div id="divDates"></div>
+
     </fieldset>
+
   </div>
+
 </body>
 </html>

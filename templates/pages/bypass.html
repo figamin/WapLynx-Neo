@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+<script
+  src="/.static/js/settings.js"
+  defer></script>
+<script
+  src="/.static/js/api.js"
+  defer></script>
+<script
+  src="/.static/js/bypass.js"
+  defer></script>
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/localhost:8080"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
+
+  <header>
+    <img
+      src="/.static/logo.png"
+      alt="logo" />
+  </header>
+
+  <div id="settingsWrapper">
+
+    <fieldset id="settingsFieldset">
+
+      <legend>Bypass</legend>
+
+      <h3>
+        Warning: Block bypasses require cookies to work
+        </h4>
+        <p>
+          <span id="indicatorValidBypass">You have a valid block bypass.</span>
+        </p>
+        <hr />
+        <h3>Renew bypass</h3>
+        <form
+          action="/renewBypass.js"
+          enctype="multipart/form-data"
+          method="post">
+          <img
+            id="captchaImage"
+            src="/captcha.js">
+          <input
+            type="button"
+            style="display: none;"
+            id="reloadCaptchaButton"
+            onclick="reloadCaptcha()"
+            value="Reload">
+          <input
+            name="captcha"
+            type="text"
+            id="fieldCaptcha"
+            placeholder="Answer">
+          <input
+            type="submit"
+            id="bypassFormButton"
+            value="Renew block bypass">
+          <input
+            type="button"
+            id="bypassJsButton"
+            onclick="blockBypass()"
+            value="Renew block bypass"
+            class="hidden">
+        </form>
+    </fieldset>
+  </div>
+
+</body>
+</html>

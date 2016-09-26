@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+<script
+  src="/.static/js/settings.js"
+  defer></script>
+<script
+  src="/.static/js/api.js"
+  defer></script>
+<script
+  src="/.static/js/globalSettings.js"
+  defer></script>
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/localhost:8080"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
+
+  <header>
+    <img
+      src="/.static/logo.png"
+      alt="logo" />
+  </header>
+
+  <div id="settingsWrapper">
+
+    <fieldset id="settingsFieldset">
+      <legend>Global Settings</legend>
+      <form
+        action="/saveGlobalSettings.js"
+        enctype="multipart/form-data"
+        method="post">
+
+        <h3>HTTP settings</h3>
+        Address**:
+        <input
+          type="text"
+          name="address"
+          id="fieldAddress">
+        <br>
+        Port**:
+        <input
+          type="text"
+          name="port"
+          id="fieldPort">
+        <br>
+        Tor Port**:
+        <input
+          type="text"
+          name="torPort"
+          id="fieldTorPort">
+        <br>
+        SSL key passphrase:
+        <input
+          type="password"
+          name="sslPass"
+          id="fieldSslPass">
+        <br>
+        CSP directives (e.g: "default-src 'self'", without the quotations):
+        <input
+          type="text"
+          name="CSP"
+          id="fieldCSP">
+        <br>
+        Maximum size for requests (MB):
+        <input
+          type="text"
+          name="maxRequestSizeMB"
+          id="fieldMaxRequestSize">
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxDisable304"
+          name="disable304">
+        Disable http response 304 (Only turn on if you know what you are doing,
+        will consume lots more of bandwidth)
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxSsl"
+          name="ssl">
+        SSL** (Make sure you have the proper files)
+        <br>
+
+        <h3>System settings</h3>
+        Master Ip:
+        <input
+          type="text"
+          name="master"
+          id="fieldMaster">
+        <br>
+        Slaves ips*:
+        <input
+          type="text"
+          name="slaves"
+          id="fieldSlaves">
+        <br>
+        Front-end directory:
+        <input
+          type="text"
+          name="fePath"
+          id="fieldFePath">
+        <br>
+        Url for the list of TOR exit node ips:
+        <input
+          type="text"
+          name="torSource"
+          id="fieldTorSource">
+        <br>
+        Path to an optional language pack:
+        <input
+          type="text"
+          name="languagePackPath"
+          id="fieldLanguagePack">
+        <br>
+        Extension used for thumbnails (Will make all gif thumbs do not animate):
+        <input
+          type="text"
+          id="fieldThumbExtension"
+          name="thumbExtension">
+        <br>
+        Temporary directory:
+        <input
+          type="text"
+          name="tempDirectory"
+          id="fieldTempDir">
+        <br>
+
+        <h3>Posting settings</h3>
+        Maximum size for uploaded files (MB):
+        <input
+          type="text"
+          name="maxFileSizeMB"
+          id="fieldMaxFileSize">
+        <br>
+        Allowed mime-types*:
+        <input
+          type="text"
+          name="acceptedMimes"
+          id="fieldAcceptedMimes">
+        <br>
+        Maximum number of uploaded files on posting:
+        <input
+          type="text"
+          name="maxFiles"
+          id="fieldMaxFiles">
+        <br>
+        Minimum amount of seconds between posts from the same ip:
+        <input
+          type="text"
+          name="floodTimerSec"
+          id="fieldFloodInterval">
+        <br>
+        How many posts a block bypass allows:
+        <input
+          type="text"
+          name="bypassMaxPosts"
+          id="fieldBypassPosts">
+        <br>
+        How many hours a block bypass lasts:
+        <input
+          type="text"
+          name="bypassDurationHours"
+          id="fieldBypassHours">
+        <br>
+        Default anonymous name:
+        <input
+          type="text"
+          name="defaultAnonymousName"
+          id="fieldAnonymousName">
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxDisableFloodCheck"
+          name="disableFloodCheck">
+        Disable flood checks
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxGlobalCaptcha"
+          name="forceCaptcha">
+        Forces all boards to use captcha
+        <br>
+        Access for TOR users:
+        <select
+          id="comboTorAccess"
+          name="torAccess">
+        </select>
+        <br>
+        Bypass mode:
+        <select
+          id="comboBypassMode"
+          name="bypassMode">
+        </select>
+        <br>
+
+        <h3>Display Limits</h3>
+        Amount of latest posts to show on front-page:
+        <input
+          type="text"
+          name="globalLatestPosts"
+          id="fieldGlobalLatestPosts">
+        <br>
+        Amount of latest images to show on front-page:
+        <input
+          type="text"
+          name="globalLatestImages"
+          id="fieldGlobalLatestImages">
+        <br>
+        Amount of threads on the multi-board:
+        <input
+          type="text"
+          name="multiboardThreadCount"
+          id="fieldMultiBoardThreadCount">
+        <br>
+        Number of preview posts:
+        <input
+          type="text"
+          name="latestPostCount"
+          id="fieldLatestPostsCount">
+        <br>
+        Maximum amount of threads per board:
+        <input
+          type="text"
+          name="maxThreadCount"
+          id="fieldThreadLimit">
+        <br>
+        Boards page size:
+        <input
+          type="text"
+          name="pageSize"
+          id="fieldPageSize">
+        <br>
+        Amount of boards to be picked as top boards:
+        <input
+          type="text"
+          name="topBoardsCount"
+          id="fieldTopBoardsCount">
+        <br>
+        Maximum amount of boards per page on boards list:
+        <input
+          type="text"
+          name="boardsPerPage"
+          id="fieldBoardsPerPage">
+        <br>
+        Amount of threads on the overboard:
+        <input
+          type="text"
+          name="overBoardThreadCount"
+          id="fieldOverBoardThreads">
+        <br>
+        Size of media management pages:
+        <input
+          type="text"
+          name="mediaPageSize"
+          id="fieldMediaPageSize">
+        <br>
+
+        <h3>Board limits</h3>
+        Maximum size for flags (KB):
+        <input
+          type="text"
+          name="maxFlagSizeKB"
+          id="fieldMaxFlagSize">
+        <br>
+        Maximum number of rules in boards:
+        <input
+          type="text"
+          name="maxBoardRules"
+          id="fieldMaxRules">
+        <br>
+        Maximum number of filters in boards:
+        <input
+          type="text"
+          name="maxFilters"
+          id="fieldMaxFilters">
+        <br>
+        Maximum number of tags per board:
+        <input
+          type="text"
+          name="maxBoardTags"
+          id="fieldMaxTags">
+        <br>
+        Maximum number of volunteers in boards:
+        <input
+          type="text"
+          name="maxBoardVolunteers"
+          id="fieldMaxVolunteers">
+        <br>
+        Maximum size for banners (KB):
+        <input
+          type="text"
+          name="maxBannerSizeKB"
+          id="fieldMaxBannerSize">
+        <br>
+
+        <h3>Variables</h3>
+        Number of replies before a thread enters auto-sage:
+        <input
+          type="text"
+          name="autoSageLimit"
+          id="fieldAutoSageLimit">
+        <br>
+        Mark accounts after these many days of inactivity**:
+        <input
+          type="text"
+          name="inactivityThreshold"
+          id="fieldInactivityThreshold">
+        <br>
+        Maximum dimension for thumbnails, for both height and width:
+        <input
+          type="text"
+          name="thumbSize"
+          id="fieldThumbSize">
+        <br>
+        Sender address for automated e-mails:
+        <input
+          type="text"
+          name="emailSender"
+          id="fieldSenderEmail">
+        <br>
+        Amount of minutes before a captcha expires:
+        <input
+          type="text"
+          name="captchaExpiration"
+          id="fieldCaptchaExpiration">
+        <br>
+        Site title:
+        <input
+          type="text"
+          name="siteTitle"
+          id="fieldSiteTitle">
+        <br>
+        Default ban message to be displayed on banned posts:
+        <input
+          type="text"
+          name="defaultBanMessage"
+          id="fieldBanMessage">
+        <br>
+        RSS link domain:
+        <input
+          type="text"
+          name="rssDomain"
+          id="fieldRssDomain">
+        <br>
+        Maximum amount of concurrent rebuild messages(Increase if your site's
+        pages are taking too long to update):
+        <input
+          type="text"
+          name="concurrentRebuildMessages"
+          id="fieldConcurrentRebuildMessages">
+        <br>
+        Overboard uri:
+        <input
+          type="text"
+          name="overboard"
+          id="fieldOverboard">
+        <br>
+        SFW overboard uri:
+        <input
+          type="text"
+          name="sfwOverboard"
+          id="fieldSfwOverboard">
+        <br>
+
+        <h3>Misc</h3>
+        Addons*/**(They will be loaded in the order they appear in this list):
+        <input
+          type="text"
+          name="addons"
+          id="fieldAddons">
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxGlobalBoardModeration"
+          name="allowGlobalBoardModeration">
+        Allow global staff to moderate boards
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxGlobalBanners"
+          name="useGlobalBanners">
+        Make boards use global banners
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxAllowCustomJs"
+          name="allowBoardCustomJs">
+        Allow board custom javascript
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxVerbose"
+          name="verbose">
+        Verbose mode
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxMediaThumb"
+          name="mediaThumb">
+        Generate thumbnails from media files (requires ffmpeg installed)
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxFrontPageStats"
+          name="frontPageStats">
+        Display total post count and total unique ips on front-page
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxAutoPruneFiles"
+          name="autoPruneFiles">
+        Prune orphaned files weekly**
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxMaintenance"
+          name="maintenance">
+        Maintenance mode (Disables input to the server and let users know it is
+        under maintenance)
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxDisableAccountCreation"
+          name="disableAccountCreation">
+        Disable account creation
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxSFWLatestImages"
+          name="onlySfwLatestImages">
+        Display only SFW images on the front-page
+        <br>
+        <input
+          type="checkbox"
+          id="checkboxMultipleReports"
+          name="multipleReports">
+        Allow multiple reports at once
+        <br>
+        Minimum global role for users to be able to see poster's clear ips:
+        <select
+          id="comboMinClearIpRole"
+          name="clearIpMinRole">
+        </select>
+        <br>
+        Minimum global role required for board creation:
+        <select
+          id="comboBoardCreationRequirement"
+          name="boardCreationRequirement">
+        </select>
+        <br>
+        <br>
+        <input
+          type="submit"
+          value="Save"
+          id="saveFormButton">
+
+        <input
+          id="saveJSButton"
+          type="button"
+          value="Save"
+          onclick="save()"
+          style="display: none;">
+
+      </form>
+
+      <p>
+        <sup>1</sup>: Separate values by commas, spaces will be ignored (a,b,c)
+      </p>
+      <p>
+        <sup>2</sup>: Requires server restart
+      </p>
+      <p>
+        Those settings are all explained
+        <a href="https://gitgud.io/LynxChan/LynxChan/tree/master/src/be">here</a>
+      </p>
+
+    </fieldset>
+
+  </div>
+
+</body>
+</html>

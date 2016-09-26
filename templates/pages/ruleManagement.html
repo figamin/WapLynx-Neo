@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+<script
+  src="/.static/js/settings.js"
+  defer></script>
+<script
+  src="/.static/js/api.js"
+  defer></script>
+<script
+  src="/.static/js/ruleManagement.js"
+  defer></script>
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/localhost:8080"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
+
+  <header>
+    <img
+      src="/.static/logo.png"
+      alt="logo" />
+  </header>
+
+  <div id="settingsWrapper">
+
+    <fieldset id="settingsFieldset">
+
+      <legend>Rules</legend>
+
+      <form
+        action="/createRule.js"
+        method="post"
+        enctype="multipart/form-data">
+        <input
+          type="hidden"
+          name="boardUri"
+          id="boardIdentifier">
+        <input
+          type="text"
+          name="rule"
+          id="fieldRule">
+        <input
+          type="submit"
+          value="Add Rule"
+          id="addFormButton">
+        <input
+          type="button"
+          onClick="addRule()"
+          class="hidden"
+          value="Add Rule"
+          id="addJsButton">
+      </form>
+
+      <hr />
+
+      <div id="divRules"></div>
+
+    </fieldset>
+
+  </div>
+
+</body>
+</html>

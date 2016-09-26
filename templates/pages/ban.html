@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/localhost:8080"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
+
+
+  <header>
+    <img
+      src="/.static/logo.png"
+      alt="logo" />
+  </header>
+
+  <div id="settingsWrapper">
+
+    <fieldset id="settingsFieldset">
+
+      <legend>Banned</legend>
+
+      <p>
+        You are banned from <span id="boardLabel"></span> until <span
+          id="expirationLabel"></span>
+      </p>
+      <p>
+        Reason: <span id="reasonLabel"></span>
+      </p>
+      <p>
+        Ban ID: <span id="idLabel"></span>
+      </p>
+
+      <hr />
+
+      <form
+        action="/appealBan.js"
+        id="formAppeal"
+        method="post"
+        enctype="multipart/form-data">
+
+        <h3>Appeal Ban</h3>
+
+        <input
+          type="hidden"
+          name="banId"
+          id="idIdentifier">
+
+        <textarea
+          name="appeal"
+          id="fieldAppeal"
+          placeholder="Appeal your ban here."></textarea>
+
+        <input
+          type="submit"
+          value="Appeal Ban"
+          id="buttonFormAppeal">
+
+      </form>
+
+    </fieldset>
+
+  </div>
+
+</body>
+</html>

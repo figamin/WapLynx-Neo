@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/localhost:8080"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
+
+  <div id="indexWrapper">
+
+    <div
+      id="logoBox"
+      class="title">
+      <img
+        src="/.static/logo.png"
+        alt="logo" />
+    </div>
+
+    <div
+      id="infoBox"
+      class="title">
+      <p>Penumbra</p>
+      <p>Welcome to the shadows</p>
+    </div>
+
+    <div
+      id="divBoards"
+      class="topBoards title"></div>
+
+    <div id="divLatestImages"></div>
+
+    <div id="divLatestPosts"></div>
+
+    <div
+      id="links"
+      class="title">
+      <span>[</span>
+      <a
+        href="/logs.js"
+        id="linkLogs">logs</a>
+      <span>/</span>
+      <a
+        href="/graphs.js"
+        id="linkGraphs">daily graphs</a>
+      <span>/</span>
+      <a
+        href="/.static/globalRules.html"
+        id="linkGlobalRules">global rules</a>
+      <span>/</span>
+      <a
+        href="/.static/links.html"
+        id="linkLinks">links</a>
+      <span>/</span>
+      <a
+        href="/.static/about.html"
+        id="linkAbout">about</a>
+      <span>/</span>
+      <a
+        href="/.static/contact.html"
+        id="linkContact">contact</a>
+      <span>/</span>
+      <a id="linkEngine"></a>
+      <span>/</span>
+      <a
+        href="/account.js"
+        id="linkAccount">account</a>
+      <span>]</span>
+    </div>
+
+    <div id="divStats">
+      <span>[</span> <span>Total posts: <span id="labelTotalPosts"></span></span>
+      <span>/</span> <span>Posts in last hour: <span id="labelTotalPPH"></span></span>
+      <span>/</span> <span>Unique recent IPs: <span id="labelTotalIps"></span></span>
+      <span>/</span> <span>Total boards: <span id="labelTotalBoards"></span></span>
+      <span>]</span>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>The owners and operators of this site have not received any
+      secret court orders and are not subject to any gag orders</span>
+  </footer>
+
+</body>
+</html>
