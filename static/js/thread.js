@@ -693,7 +693,7 @@ function startTimer(time) {
 
 function changeRefresh() {
 
-  if (autoRefresh) {
+  if (!document.getElementById('checkboxChangeRefresh').checked) {
     labelRefresh.innerHTML = '';
     clearInterval(refreshTimer);
   } else {

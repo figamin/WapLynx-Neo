@@ -50,9 +50,11 @@ input, select, textarea {
   border-radius: 5px;
   background: #282A2E;
   color: #ACACAC;
+  margin-left: 0.5em;
   padding-left: 0.25em;
   font-family: 'Hack', monospace, sans-serif;
   font-size: 80%;
+  padding-left: 0.25em;
 }
 
 input[type=button], input[type=submit], button, #dropzone, .selectedCell {
@@ -65,6 +67,7 @@ input[type=button], input[type=submit], button, #dropzone, .selectedCell {
   font-size: 80%;
   font-weight: bold;
   margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .title {
@@ -314,6 +317,7 @@ nav span {
 
 #postBox input, #postBox textarea {
   margin-top: 0.5em;
+  margin-left: 0;
 }
 
 #postBox input:focus, #postBox textarea:focus {
@@ -394,10 +398,6 @@ a.rules:after {
 
 #threadReport #fieldCaptchaReport {
   display: inline-block;
-}
-
-.buttonBox {
-  margin-top: 0.5em;
 }
 
 #divControls, #transferControls, #ipDelete {
@@ -905,6 +905,10 @@ span.spoiler {
 
 #settingsWrapper .captchaDiv input {
   display: inline-block;
+}
+
+.subCaptchaDiv {
+  text-align: left;
 }
 
 input.wide, textarea.wide {

@@ -6,18 +6,6 @@
   href="/.static/css/global.css"
   type="text/css"
   rel="stylesheet" />
-<script
-  src="/.static/js/settings.js"
-  defer></script>
-<script
-  src="/.static/js/api.js"
-  defer></script>
-<script
-  src="/.static/js/thread.js"
-  defer></script>
-<script
-  src="/.static/js/posting.js"
-  defer></script>
 </head>
 <body>
 
@@ -129,6 +117,17 @@
 
           <div>
 
+            <div
+              style="display: none;"
+              id="dragAndDropDiv">
+              <div id="dropzone">
+                Drag files to upload or
+                <br>
+                click here to select them
+              </div>
+              <div id="selectedDiv"></div>
+            </div>
+
             <input
               type="file"
               name="files"
@@ -143,23 +142,25 @@
         <div id="captchaDiv">
 
           <img
+            class="captchaImage"
             src="/captcha.js"
             id="captchaImage" />
 
-          <div>
-
-            <input
-              name="captcha"
-              type="text"
-              id="fieldCaptcha"
-              placeholder="answer">
-
+          <div class="subCaptchaDiv">
             <input
               type="button"
               onClick="reloadCaptcha()"
               value="Reload"
               id="reloadCaptchaButton"
               class="hidden">
+            <span class="captchaTimer"></span>
+            <br>
+
+            <input
+              name="captcha"
+              type="text"
+              id="fieldCaptcha"
+              placeholder="answer">
 
             <a
               href="/noCookieCaptcha.js"
@@ -360,6 +361,7 @@
       <div class="divRefresh hidden">
 
         <label><input
+            id="checkboxChangeRefresh"
             type="checkbox"
             checked
             onchange="changeRefresh()"> Auto <span id="labelRefresh"></span>
@@ -374,7 +376,7 @@
       </div>
 
       <fieldset id="reportFieldset">
-        <legend>Report</legend>
+        <legend>Report/Ban</legend>
 
         <div class="contentAction">
 
@@ -395,108 +397,110 @@
               name="deleteUploads"> Delete only files </label>
 
           <img
+            class="captchaImage"
             id="captchaImageReport"
             src="/captcha.js">
 
-          <div class="buttonBox">
+          <input
+            type="button"
+            class="hidden"
+            id="reloadCaptchaButtonReport"
+            onclick="reloadCaptcha()"
+            value="Reload">
+          <span class="captchaTimer"></span>
+          <br>
+
+
+          <input
+            name="captcha"
+            type="text"
+            id="fieldCaptchaReport"
+            placeholder="answer">
+
+          <a
+            class="small"
+            href="/noCookieCaptcha.js">no cookies?</a>
+
+          <br>
+
+          <input
+            type="submit"
+            id="deleteFormButton"
+            value="Delete"
+            name="action">
+
+          <input
+            type="button"
+            class="hidden"
+            id="deleteJsButton"
+            onClick="deletePosts()"
+            value="Delete">
+
+          <input
+            type="submit"
+            id="reportFormButton"
+            value="Report"
+            name="action">
+
+          <input
+            type="button"
+            class="hidden"
+            id="reportJsButton"
+            onClick="reportPosts()"
+            value="Report">
+
+          <div id="divMod">
+
+            <p>Moderation</p>
+            <label>Expiration<input
+                type="text"
+                id="fieldExpiration"
+                name="expiration">
+            </label> <label>Ban Message<input
+                type="text"
+                id="fieldbanMessage"
+                name="banMessage">
+            </label>
 
             <input
-              type="button"
-              class="hidden"
-              id="reloadCaptchaButtonReport"
-              onclick="reloadCaptcha()"
-              value="Reload">
-
-            <input
-              name="captcha"
-              type="text"
-              id="fieldCaptchaReport"
-              placeholder="answer">
-
-            <a
-              class="small"
-              href="/noCookieCaptcha.js">no cookies?</a>
-
-          </div>
-
-          <div class="buttonBox">
-
+              type="checkbox"
+              id="checkboxRange"
+              name="range">
+            Range ban
+            <br>
             <input
               type="submit"
-              id="deleteFormButton"
-              value="Delete"
+              id="inputBan"
+              value="Ban"
               name="action">
 
             <input
               type="button"
               class="hidden"
-              id="deleteJsButton"
-              onClick="deletePosts()"
-              value="Delete">
+              id="banJsButton"
+              onClick="banPosts()"
+              value="Ban">
 
-            <div id="divMod">
-
-              <label>Expiration<input
-                  type="text"
-                  id="fieldExpiration"
-                  name="expiration">
-              </label> <label>Ban Message<input
-                  type="text"
-                  id="fieldbanMessage"
-                  name="banMessage">
-              </label>
-
-              <input
-                type="checkbox"
-                id="checkboxRange"
-                name="range">
-              Range ban
-
-              <input
-                type="submit"
-                id="inputBan"
-                value="Ban"
-                name="action">
-
-              <input
-                type="button"
-                class="hidden"
-                id="banJsButton"
-                onClick="banPosts()"
-                value="Ban">
-
-              <button
-                type="submit"
-                id="inputSpoil"
-                value="spoil"
-                name="action">Spoil Files</button>
-
-              <input
-                type="button"
-                class="hidden"
-                id="spoilJsButton"
-                onClick="spoilFiles()"
-                value="Spoil files">
-            </div>
-
-            <input
+            <button
               type="submit"
-              id="reportFormButton"
-              value="Report"
-              name="action">
+              id="inputSpoil"
+              value="spoil"
+              name="action">Spoil Files</button>
 
             <input
               type="button"
               class="hidden"
-              id="reportJsButton"
-              onClick="reportPosts()"
-              value="Report">
+              id="spoilJsButton"
+              onClick="spoilFiles()"
+              value="Spoil files">
 
           </div>
 
         </div>
 
+
       </fieldset>
+
 
     </form>
 
@@ -505,4 +509,13 @@
   <footer id="footer"></footer>
 
 </body>
+
+<script src="/.static/js/settings.js"></script>
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/crypt.js"></script>
+<script src="/.static/js/upload.js"></script>
+<script src="/.static/js/thread.js"></script>
+<script src="/.static/js/posting.js"></script>
+<script src="/.static/js/captcha.js"></script>
+
 </html>

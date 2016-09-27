@@ -94,22 +94,22 @@
             name="email"
             placeholder="email">
 
-          <img
-            id="captchaImage"
-            class="captchaImage"
-            src="/captcha.js">
-
-          <br>
-          <span class="captchaTimer"></span>
-
           <div class="captchaDiv">
 
+            <img
+              id="captchaImage"
+              class="captchaImage"
+              src="/captcha.js">
+
+            <br>
             <input
               type="button"
-              class="hidden"
               id="reloadCaptchaButton"
               onclick="reloadCaptcha()"
               value="reload">
+            <span class="captchaTimer"></span>
+
+            <br>
 
             <input
               name="captcha"
@@ -120,7 +120,6 @@
             <a
               class="small"
               href="/noCookieCaptcha.js">no cookies?</a>
-
           </div>
 
           <input
@@ -153,21 +152,23 @@
             id="recoverFieldLogin"
             placeholder="login">
 
-          <img
-            id="captchaImageRecover"
-            class="captchaImage"
-            src="/captcha.js">
-
-          <br>
-          <span class="captchaTimer"></span>
-
           <div class="captchaDiv">
 
+            <img
+              id="captchaImageRecover"
+              class="captchaImage"
+              src="/captcha.js">
+
+            <br>
             <input
               type="button"
               id="reloadCaptchaButtonRecover"
               onclick="reloadCaptcha()"
               value="reload">
+            <span class="captchaTimer"></span>
+
+            <br>
+
 
             <input
               name="captcha"
@@ -178,7 +179,6 @@
             <a
               class="small"
               href="/noCookieCaptcha.js">no cookies?</a>
-
           </div>
 
           <input
@@ -192,7 +192,6 @@
             onclick="recoverAccount()"
             value="request recovery"
             class="hidden">
-
         </form>
 
       </div>

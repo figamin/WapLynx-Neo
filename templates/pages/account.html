@@ -34,7 +34,7 @@
 
       <legend>Account</legend>
       <h3 class="title">
-        logged in as: <span id="labelLogin"></span>
+        Logged in as: <span id="labelLogin"></span>
       </h3>
 
       <form action="/logout.js">
@@ -167,22 +167,21 @@
               id="newBoardFieldDescription">
           </label>
 
-          <img
-            src="/captcha.js"
-            class="captchaImage"
-            id="captchaImage" />
-
-          <br>
-          <span class="captchaTimer"></span>
-
           <div class="captchaDiv">
+            <img
+              src="/captcha.js"
+              class="captchaImage"
+              id="captchaImage" />
 
+            <br>
             <input
               type="button"
               onClick="reloadCaptcha()"
               value="Reload"
               id="reloadCaptchaButton"
               class="hidden">
+            <span class="captchaTimer"></span>
+            <br>
 
             <input
               type="text"
