@@ -6,15 +6,6 @@
   href="/.static/css/global.css"
   type="text/css"
   rel="stylesheet" />
-<script
-  src="/.static/js/settings.js"
-  defer></script>
-<script
-  src="/.static/js/api.js"
-  defer></script>
-<script
-  src="/.static/js/rangeBans.js"
-  defer></script>
 </head>
 <body>
 
@@ -47,7 +38,9 @@
         action="/placeRangeBan.js"
         method="post"
         enctype="multipart/form-data">
-        <label>Range to be banned: <input
+        <label>
+          Range to be banned:
+          <input
             type="text"
             name="range"
             id="rangeField">
@@ -56,25 +49,35 @@
           id="boardIdentifier"
           type="hidden"
           name="boardUri">
-        <img
-          id="captchaImage"
-          src="/captcha.js">
-        <div>
+
+        <div class="captchaDiv">
+
+          <img
+            class="captchaImage"
+            id="captchaImage"
+            src="/captcha.js">
+
+          <br>
           <input
             type="button"
             class="hidden"
             id="reloadCaptchaButton"
             onclick="reloadCaptcha()"
             value="Reload">
+          <span class="captchaTimer"></span>
+          <br>
+
           <input
             name="captcha"
             type="text"
             id="fieldCaptcha"
             placeholder="Answer">
           <a
-            class="finePrint"
+            class="small"
             href="/noCookieCaptcha.js">No cookies?</a>
+
         </div>
+
         <input
           type="submit"
           id="createFormButton"
@@ -86,10 +89,12 @@
           class="hidden"
           value="Place Range Ban">
       </form>
-      <hr />
       <div id="rangeBansDiv"></div>
     </fieldset>
   </div>
-
 </body>
+<script src="/.static/js/settings.js"></script>
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/rangeBans.js"></script>
+<script src="/.static/js/captcha.js"></script>
 </html>

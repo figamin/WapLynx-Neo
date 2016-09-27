@@ -17,20 +17,19 @@ var markedPosting;
 var limitRefreshWait = 10 * 60;
 var originalButtonText;
 
-var postCellTemplate = '<div class="innerPost"><input type="checkbox" '
-    + 'class="deletionCheckBox"> <span class="labelSubject"></span>'
-    + '<a class="linkName"></a> <img class="imgFlag"> '
-    + '<span class="labelRole"></span> <span class="labelCreated"></span>'
-    + '<span class="spanId"> Id: <span class="labelId"></span></span>'
-    + ' <a class="linkPreview">[Preview]</a> <a class="linkSelf">No.</a>'
-    + ' <a class="linkQuote"></a> <span class="panelBacklinks"> </span>'
-    + '<div class="panelUploads"></div><div class="divMessage" /></div>'
-    + '<div class="divBanMessage"></div><div class="labelLastEdit"></div><br></div>';
+var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
+    + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
+    + '</span><a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
+    + '</span> <span class="labelCreated"></span> <span class="spanId"> Id: <span '
+    + 'class="labelId"></span></span> <a class="linkPreview">[Preview]</a> <a '
+    + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
+    + '</span></div><div class="panelUploads"></div><div class="divMessage"></div>'
+    + '<div class="divBanMessage"></div><div class="labelLastEdit"></div></div>';
 
-var uploadCell = '<a class="nameLink" target="blank">Open file</a>'
-    + ' ( <span class="sizeLabel"></span> '
-    + '<span class="dimensionLabel"></span> '
-    + '<a class="originalNameLink"></a> )<br>'
+var uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
+    + 'Open file</a>(<span class="sizeLabel"></span> <span class="dimensionLabel">'
+    + '</span><a class="originalNameLink"></a>)</div><div class="divHash"><span>'
+    + 'MD5: <span class="labelHash"></span></span></div>'
     + '<a class="imgLink" target="blank"></a>';
 
 var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];

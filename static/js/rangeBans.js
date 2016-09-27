@@ -13,10 +13,10 @@ if (!DISABLE_JS) {
   document.getElementById('createFormButton').style.display = 'none';
   document.getElementById('createJsButton').style.display = 'inline';
 
-  var rangeBansDiv = document.getElementById('rangeBansDiv');
+  var rangeBanCells = document.getElementsByClassName('rangeBanCell');
 
-  for (var j = 0; j < rangeBansDiv.childNodes.length; j++) {
-    processRangeBanCell(rangeBansDiv.childNodes[j]);
+  for (var j = 0; j < rangeBanCells.length; j++) {
+    processRangeBanCell(rangeBanCells[j]);
   }
 }
 

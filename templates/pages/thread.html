@@ -216,16 +216,27 @@
       method="post"
       enctype="multipart/form-data">
 
-      <label><input
+      <label>
+        <input
           name="lock"
           id="checkboxLock"
-          type="checkbox"> Lock </label> <label><input
+          type="checkbox">
+        Lock
+      </label>
+      <label>
+        <input
           name="pin"
           id="checkboxPin"
-          type="checkbox"> Pin </label> <label><input
+          type="checkbox">
+        Pin
+      </label>
+      <label>
+        <input
           type="checkbox"
           name="cyclic"
-          id="checkboxCyclic"> Cyclic </label>
+          id="checkboxCyclic">
+        Cyclic
+      </label>
 
       <input
         type="hidden"
@@ -274,7 +285,9 @@
         name="threadId"
         id="transferThreadIdentifier">
 
-      <label>Destination board:<input
+      <label>
+        Destination board:
+        <input
           type="text"
           id="fieldDestinationBoard"
           name="boardUriDestination">
@@ -306,12 +319,17 @@
 
       <p>Delete all from IP</p>
 
-      <label> Non-hashed ip:<input
+      <label>
+        Non-hashed ip:
+        <input
           type="text"
           name="ip"
           id="ipField">
-      </label> <label>Delete only from these boards(Ex:"b v", leaving blank will
-        delete from all boards)<input
+      </label>
+      <label>
+        Delete only from these boards(Ex:"b v", leaving blank will delete from
+        all boards)
+        <input
           type="text"
           name="boards"
           id="fieldBoards">
@@ -360,11 +378,13 @@
 
       <div class="divRefresh hidden">
 
-        <label><input
+        <label>
+          <input
             id="checkboxChangeRefresh"
             type="checkbox"
             checked
-            onchange="changeRefresh()"> Auto <span id="labelRefresh"></span>
+            onchange="changeRefresh()">
+          Auto <span id="labelRefresh"></span>
         </label>
 
         <input
@@ -376,26 +396,49 @@
       </div>
 
       <fieldset id="reportFieldset">
-        <legend>Report/Ban</legend>
+        <legend>Actions</legend>
 
         <div class="contentAction">
 
-          <label>Reason<input
+          <label>
+            Reason
+            <input
               type="text"
               id="reportFieldReason"
               name="reason">
-          </label> <label>Password<input
+          </label>
+          <label>
+            Password
+            <input
               type="password"
               id="deletionFieldPassword"
               name="password">
-          </label> <label><input
+          </label>
+          <label>
+            <input
               type="checkbox"
               id="checkboxGlobal"
-              name="global"> Global </label> <label><input
+              name="global">
+            Global
+          </label>
+          <label>
+            <input
               type="checkbox"
               id="checkboxOnlyFiles"
-              name="deleteUploads"> Delete only files </label>
-
+              name="deleteUploads">
+            Delete only files
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              id="checkboxMediaDeletion"
+              name="deleteMedia">
+            Delete media (Actually removes the saved files from the server,
+            standard file deletion only removes the reference to the selected
+            posts)
+          </label>
+          <br>
+          <p>Captcha (required for bans and reports)</p>
           <img
             class="captchaImage"
             id="captchaImageReport"
@@ -409,7 +452,6 @@
             value="Reload">
           <span class="captchaTimer"></span>
           <br>
-
 
           <input
             name="captcha"
@@ -450,13 +492,18 @@
             value="Report">
 
           <div id="divMod">
-
-            <p>Moderation</p>
-            <label>Expiration<input
+            <hr>
+            <p>Moderation actions</p>
+            <label>
+              Expiration
+              <input
                 type="text"
                 id="fieldExpiration"
                 name="expiration">
-            </label> <label>Ban Message<input
+            </label>
+            <label>
+              Ban Message
+              <input
                 type="text"
                 id="fieldbanMessage"
                 name="banMessage">
