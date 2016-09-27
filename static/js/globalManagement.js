@@ -9,22 +9,10 @@ if (!DISABLE_JS) {
 
   setupReportButtons();
 
-  var staffDiv = document.getElementById('divStaff');
+  var staffCells = document.getElementsByClassName('staffCell');
 
-  if (staffDiv) {
-
-    for (var i = 0; i < staffDiv.childNodes.length; i++) {
-      var cell = staffDiv.childNodes[i];
-
-      if (cell.className === 'staffCell') {
-
-        processCell(cell);
-      } else {
-        console.log(cell.className);
-      }
-
-    }
-
+  for (var i = 0; i < staffCells.length; i++) {
+    processCell(staffCells[i]);
   }
 
 }

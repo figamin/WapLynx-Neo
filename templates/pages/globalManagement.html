@@ -50,7 +50,7 @@
       <legend>Global Management</legend>
 
       <p>
-        Logged in as: <strong><span id="userLabel"></span></strong>
+        <strong><span id="userLabel"></span></strong>
       </p>
 
       <hr />
@@ -63,11 +63,16 @@
         enctype="multipart/form-data"
         action="/setGlobalRole.js">
 
-        <label>Username: <input
+        <label>
+          Username:
+          <input
             type="text"
             name="login"
             id="fieldLogin">
-        </label> <label>Role: <select
+        </label>
+        <label>
+          Role:
+          <select
             name="role"
             id="newStaffCombo"></select>
         </label>

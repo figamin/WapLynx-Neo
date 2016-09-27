@@ -1,9 +1,9 @@
 function setupReportButtons() {
 
-  var reportDiv = document.getElementById('reportDiv');
+  var reports = document.getElementsByClassName('reportCell');
 
-  for (var j = 0; j < reportDiv.childNodes.length; j++) {
-    processReportCell(reportDiv.childNodes[j]);
+  for (var j = 0; j < reports.length; j++) {
+    processReportCell(reports[j]);
   }
 }
 
