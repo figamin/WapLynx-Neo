@@ -53,12 +53,16 @@
       <p>
         Last seen: <span id="labelLastSeen"></span>
       </p>
+      <hr>
       <div>
+        <p class="title">Ownership Transfer</p>
         <form
           method="post"
           action="/transferBoardOwnership.js"
           enctype="multipart/form-data">
-          <label>User login: <input
+          <label>
+            User login:
+            <input
               type="text"
               name="login"
               id="fieldTransferLogin"
@@ -80,15 +84,19 @@
             id="transferJsButton">
         </form>
       </div>
+      <hr>
       <div>
+        <p class="title">Board Deletion</p>
         <form
           method="post"
           action="/deleteBoard.js"
           enctype="multipart/form-data">
-          <label> <input
+          <label>
+            <input
               type="checkbox"
               name="confirmDeletion"
-              id="confirmDelCheckbox"> Yes, I wish to delete this board
+              id="confirmDelCheckbox">
+            Yes, I wish to delete this board
           </label>
           <input
             type="hidden"
@@ -106,18 +114,20 @@
             id="deleteJsButton">
         </form>
       </div>
-
+      <hr>
       <div>
+        <p class="title">Special Settings</p>
         <form
           method="post"
           enctype="multipart/form-data"
           action="/setSpecialBoardSettings.js">
-          <input
-            type="checkbox"
-            name="sfw"
-            id="checkboxSfw">
-          Safe for work board
-          <br>
+          <label>
+            <input
+              type="checkbox"
+              name="sfw"
+              id="checkboxSfw">
+            Safe for work board
+          </label>
           <input
             type="hidden"
             name="boardUri"

@@ -6,15 +6,6 @@
   href="/.static/css/global.css"
   type="text/css"
   rel="stylesheet" />
-<script
-  src="/.static/js/settings.js"
-  defer></script>
-<script
-  src="/.static/js/api.js"
-  defer></script>
-<script
-  src="/.static/js/bypass.js"
-  defer></script>
 </head>
 <body>
 
@@ -43,32 +34,41 @@
 
       <legend>Bypass</legend>
 
-      <h3>
-        Warning: Block bypasses require cookies to work
-        </h4>
-        <p>
-          <span id="indicatorValidBypass">You have a valid block bypass.</span>
-        </p>
-        <hr />
-        <h3>Renew bypass</h3>
-        <form
-          action="/renewBypass.js"
-          enctype="multipart/form-data"
-          method="post">
+      <h3>Warning: Block bypasses require cookies to work</h3>
+      <p>
+        <span id="indicatorValidBypass">You have a valid block bypass.</span>
+      </p>
+      <hr />
+      <h3>Renew bypass</h3>
+      <form
+        action="/renewBypass.js"
+        enctype="multipart/form-data"
+        method="post">
+
+        <div class="captchaDiv">
+
           <img
+            class="captchaImage"
             id="captchaImage"
             src="/captcha.js">
+          <br>
           <input
             type="button"
             style="display: none;"
             id="reloadCaptchaButton"
             onclick="reloadCaptcha()"
             value="Reload">
+          <span class="captchaTimer"></span>
+          <br>
           <input
             name="captcha"
             type="text"
             id="fieldCaptcha"
             placeholder="Answer">
+          <a
+            href="/noCookieCaptcha.js"
+            class="small">no cookies?</a>
+          <br>
           <input
             type="submit"
             id="bypassFormButton"
@@ -79,9 +79,14 @@
             onclick="blockBypass()"
             value="Renew block bypass"
             class="hidden">
-        </form>
+        </div>
+      </form>
     </fieldset>
   </div>
 
 </body>
+<script src="/.static/js/settings.js"></script>
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/bypass.js"></script>
+<script src="/.static/js/captcha.js"></script>
 </html>
