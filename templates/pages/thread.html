@@ -45,7 +45,7 @@
 
       <form
         class="form-post"
-        action="../replyThread.js"
+        action="/replyThread.js"
         enctype="multipart/form-data"
         method="post">
 
@@ -216,50 +216,51 @@
       method="post"
       enctype="multipart/form-data">
 
-      <label>
+      <fieldset id="settingsFieldset">
+        <legend>Thread Settings</legend>
+
+        <label>
+          <input
+            name="lock"
+            id="checkboxLock"
+            type="checkbox">
+          Lock
+        </label>
+        <label>
+          <input
+            name="pin"
+            id="checkboxPin"
+            type="checkbox">
+          Pin
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="cyclic"
+            id="checkboxCyclic">
+          Cyclic
+        </label>
+
         <input
-          name="lock"
-          id="checkboxLock"
-          type="checkbox">
-        Lock
-      </label>
-      <label>
+          type="hidden"
+          name="boardUri"
+          id="controlBoardIdentifier">
         <input
-          name="pin"
-          id="checkboxPin"
-          type="checkbox">
-        Pin
-      </label>
-      <label>
+          type="hidden"
+          name="threadId"
+          id="controlThreadIdentifier">
         <input
-          type="checkbox"
-          name="cyclic"
-          id="checkboxCyclic">
-        Cyclic
-      </label>
+          type="submit"
+          id="settingsFormButon"
+          value="Save">
 
-      <input
-        type="hidden"
-        name="boardUri"
-        id="controlBoardIdentifier">
-
-      <input
-        type="hidden"
-        name="threadId"
-        id="controlThreadIdentifier">
-
-      <input
-        type="submit"
-        id="settingsFormButon"
-        value="Save">
-
-      <input
-        type="button"
-        id="settingsJsButon"
-        onClick="saveThreadSettings()"
-        class="hidden"
-        value="Save">
-
+        <input
+          type="button"
+          id="settingsJsButon"
+          onClick="saveThreadSettings()"
+          class="hidden"
+          value="Save">
+      </fieldset>
     </form>
 
   </div>
@@ -273,38 +274,38 @@
       id="formTransfer"
       class="formTransfer">
 
-      <p>Transfer to different board</p>
+      <fieldset id="settingsFieldset">
+        <legend>Transfer Thread</legend>
 
-      <input
-        type="hidden"
-        name="boardUri"
-        id="transferBoardIdentifier">
-
-      <input
-        type="hidden"
-        name="threadId"
-        id="transferThreadIdentifier">
-
-      <label>
-        Destination board:
         <input
-          type="text"
-          id="fieldDestinationBoard"
-          name="boardUriDestination">
-      </label>
+          type="hidden"
+          name="boardUri"
+          id="transferBoardIdentifier">
 
-      <input
-        type="submit"
-        id="transferFormButton"
-        value="Transfer thread">
+        <input
+          type="hidden"
+          name="threadId"
+          id="transferThreadIdentifier">
 
-      <input
-        type="button"
-        class="hidden"
-        onclick="transfer()"
-        id="transferJsButton"
-        value="Transfer thread">
+        <label>
+          Destination board:
+          <input
+            type="text"
+            id="fieldDestinationBoard"
+            name="boardUriDestination">
+        </label>
+        <input
+          type="submit"
+          id="transferFormButton"
+          value="Transfer thread">
 
+        <input
+          type="button"
+          class="hidden"
+          onclick="transfer()"
+          id="transferJsButton"
+          value="Transfer thread">
+      </fieldset>
     </form>
 
   </div>
@@ -317,36 +318,36 @@
       action="/deleteFromIp.js"
       enctype="multipart/form-data">
 
-      <p>Delete all from IP</p>
+      <fieldset id="settingsFieldset">
+        <legend>Delete from IP</legend>
 
-      <label>
-        Non-hashed ip:
+        <label>
+          Non-hashed ip:
+          <input
+            type="text"
+            name="ip"
+            id="ipField">
+        </label>
+        <label>
+          Delete only from these boards(Ex:"b v", leaving blank will delete from
+          all boards)
+          <input
+            type="text"
+            name="boards"
+            id="fieldBoards">
+        </label>
         <input
-          type="text"
-          name="ip"
-          id="ipField">
-      </label>
-      <label>
-        Delete only from these boards(Ex:"b v", leaving blank will delete from
-        all boards)
+          type="button"
+          value="Delete"
+          onclick="deleteFromIp()"
+          id="deleteFromIpJsButton"
+          class="hidden">
+
         <input
-          type="text"
-          name="boards"
-          id="fieldBoards">
-      </label>
-
-      <input
-        type="button"
-        value="Delete"
-        onclick="deleteFromIp()"
-        id="deleteFromIpJsButton"
-        class="hidden">
-
-      <input
-        value="Delete"
-        type="submit"
-        id="deleteFromIpFormButton">
-
+          value="Delete"
+          type="submit"
+          id="deleteFromIpFormButton">
+      </fieldset>
     </form>
 
   </div>
@@ -361,7 +362,7 @@
 
     <form
       method="post"
-      action="../contentActions.js"
+      action="/contentActions.js"
       enctype="multipart/form-data">
 
       <div id="divThreads"></div>

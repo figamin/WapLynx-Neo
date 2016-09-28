@@ -376,10 +376,10 @@ a.rules:after {
 /* thread/post report and management form */
 #reportFieldset {
   clear: both;
-  margin-top: 2em;
+  margin-top: 1em;
   border: 1px dashed #117743;
   padding: 0.5em;
-  margin: 2em 0 1em 1em;
+  margin-bottom: 1em;
   float: left;
 }
 
