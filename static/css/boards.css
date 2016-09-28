@@ -1,0 +1,33 @@
+/*Elements used exclusively on the board listing*/
+#boardsWrapper {
+  width: 80%;
+  margin: 1em auto;
+  text-align: center;
+}
+
+#boardsWrapper #divBoards {
+  margin: 2em 1em 0px;
+  display: inline-block;
+  text-align: left;
+}
+
+.boardsCell span {
+  text-overflow: ellipsis;
+}
+
+.search {
+  margin: 1em 0 1em 0;
+}
+
+.search form {
+  display: inline-block;
+}
+
+#boardsSort, #searchButton {
+  margin-top: 1em;
+}
+
+.boardPages {
+  color: #C0840A;
+  padding: 0.1em 0.25em;
+}

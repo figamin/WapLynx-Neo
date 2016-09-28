@@ -1,0 +1,28 @@
+/*Elements that show on threads on both catalogs and regular posting places*/
+.lockIndicator:before {
+  font-family: Icons;
+  content: "\e08a";
+  color: #A00;
+}
+
+.pinIndicator:after {
+  font-family: Icons;
+  content: "\e0a8";
+  color: #A00;
+}
+
+.cyclicIndicator:after {
+  font-family: Icons;
+  content: "\e08c";
+  color: #A00;
+}
+
+.bumpLockIndicator:after {
+  font-family: Icons;
+  content: "\e0db";
+  color: #A00;
+}
+
+.contentAction label, .contentAction img {
+  display: block;
+}

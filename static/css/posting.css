@@ -1,0 +1,326 @@
+/*Used for places where posts are displayed*/
+.postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
+  .contentOmissionIndicator, .labelOmission {
+  font-size: 80%;
+}
+
+.divPosts {
+  margin: 1em 0;
+}
+
+.postCell {
+  margin: 0.25em 0;
+}
+
+.innerPost, .markedPost {
+  background: #282A2E;
+  display: inline-block;
+  overflow: hidden;
+  padding-right: 0.5em;
+  padding-left: 0.25em;
+  padding-top: 0.25em;
+  max-width: 100%;
+  border: 1px solid #117743;
+  border-radius: 5px;
+}
+
+.markedPost {
+  background: rgba(59, 22, 43, 0.4);
+}
+
+.linkName {
+  font-weight: bold;
+  color: #323DCD;
+}
+
+.linkName:hover {
+  color: #AA0000;
+}
+
+.noEmailName, .noEmailName:hover {
+  color: #117743;
+  text-shadow: none;
+}
+
+.quoteLink {
+  color: #ff0000;
+}
+
+.labelId:hover {
+  text-shadow: 0px 0px 5px #A00;
+}
+
+.linkSelf {
+  color: #ACACAC;
+  text-decoration: none;
+}
+
+.linkSelf:hover {
+  color: #AA0000;
+}
+
+.linkQuote {
+  color: #ACACAC;
+  text-decoration: none;
+}
+
+.linkQuote:hover {
+  color: #ff0000;
+}
+
+.labelSubject {
+  color: #AA0000;
+  font-weight: bold;
+}
+
+.labelRole {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.labelRole:before {
+  font-family: Icons;
+  content: "\e0dc";
+  color: #A00;
+}
+
+.divMessage {
+  margin-left: 3em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  word-wrap: break-word;
+}
+
+.multipleUploads .innerPost .divMessage, .multipleUploads .markedPost .divMessage
+  {
+  clear: both;
+}
+
+.divBanMessage {
+  color: #ff0000;
+  font-weight: bold;
+  margin: 1em;
+  font-size: 100%;
+}
+
+.divBanMessage:before {
+  font-family: Icons;
+  content: "\e0d8";
+  color: #A00;
+}
+
+.uploadCell {
+  margin: 0.25em 1em 0.25em 0.5em;
+  float: none;
+}
+
+.uploadCell img {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.multipleUploads .opUploadPanel, .multipleUploads .panelUploads {
+  float: left;
+  width: 100%;
+}
+
+.multipleUploads .uploadCell {
+  float: left;
+}
+
+.uploadDetails {
+  margin-bottom: 0.5em;
+}
+
+.opCell {
+  clear: left;
+}
+
+.panelIp, .panelProxyIp {
+  margin: 0.25em 1em 0.25em 0.5em;
+}
+
+.panelBacklinks a {
+  padding-left: 0.5em;
+  color: #AA0000;
+  text-decoration: none;
+}
+
+.hideLink {
+  vertical-align: top;
+}
+
+.aa {
+  font-family: Mona, "MS PGothic", "ＭＳ Ｐゴシック", sans-serif;
+  display: block !important;
+  font-size: 12pt;
+  line-height: 1.1;
+}
+
+.labelLastEdit {
+  margin-top: 0.75em;
+  margin-left: 0.75em;
+}
+
+.contentOmissionIndicator {
+  margin: 1em 0;
+}
+
+.labelOmission {
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+}
+
+.imgFlag {
+  max-width: 16px;
+  max-height: 16px;
+}
+
+/*Board header*/
+.boardHeader p {
+  color: #663E11;
+}
+
+.boardHeader p#labelName {
+  font-size: 200%;
+}
+
+.boardHeader p#labelDescription {
+  font-size: 100%;
+}
+
+.boardHeader a {
+  font-size: 75%;
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Posting form */
+#postWrapper {
+  text-align: center;
+  margin: 1em auto;
+}
+
+#newPostFieldset {
+  display: inline-block;
+  padding: 0.5em;
+  border: 1px dashed #117743;
+}
+
+#postBox {
+  text-align: left;
+  margin: 0 auto 1em auto;
+}
+
+#postBox textarea {
+  width: 28em;
+  height: 12em;
+}
+
+#postBox div.wider input {
+  width: 20em;
+}
+
+#postBox input, #postBox textarea {
+  margin-top: 0.5em;
+  margin-left: 0;
+}
+
+#postBox input:focus, #postBox textarea:focus {
+  box-shadow: 0px 0px 5px 2px #117743;
+}
+
+#postWrapper button {
+  width: 8em;
+  margin: 0.5em auto;
+  font-size: 125%;
+}
+
+#postWrapper button:active {
+  box-shadow: 0px 0px 5px #117743;
+}
+
+.spoilerCheckbox, #flagsDiv {
+  display: inline-block;
+}
+
+#postWrapper label {
+  font-size: 80%;
+}
+
+input[type=checkbox]#checkboxSpoiler {
+  display: none;
+}
+
+input[type=checkbox]#checkboxSpoiler+label:before {
+  font-family: Icons;
+  content: "\e0db";
+  margin-right: 0.5em;
+  color: #117743;
+  display: inline-block;
+}
+
+input[type=checkbox]#checkboxSpoiler:checked+label:before {
+  font-family: Icons;
+  content: "\e033";
+  margin-right: 0.5em;
+  color: #117743;
+  display: inline-block;
+}
+
+/*Drag and drop, not exactly used on all places where this css is linked but meh*/
+.selectedCell, #dropzone {
+  top: 5px;
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 5px 0px;
+}
+
+.selectedCell {
+  margin-top: 10px;
+}
+
+#dropzone {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease 0s;
+}
+
+.removeButton {
+  cursor: pointer;
+  color: rgba(125, 125, 125, 0.5);
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.removeButton:hover {
+  color: #7D7D7D;
+}
+/*Actions form*/
+#reportFieldset {
+  clear: both;
+  margin-top: 1em;
+  border: 1px dashed #117743;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  float: left;
+}
+
+#threadList {
+  margin: 1em;
+}
+
+#panelMessage {
+  margin: 1em;
+}
+
+#divMessage {
+  text-align: center;
+}
+
+.contentAction label, #divControls label, #transferControls label, #ipDelete label
+  {
+  font-size: 80%;
+}

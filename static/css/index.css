@@ -1,0 +1,140 @@
+/*Elements exclusive to the front-page*/
+#indexWrapper {
+  width: 80%;
+  margin: 2em auto;
+}
+
+#logoBox {
+  width: 100%;
+  margin: 0 auto 1em auto;
+  text-align: center;
+}
+
+#infoBox {
+  text-align: center;
+  width: 100%;
+  padding: 0.5em;
+  margin: 1em auto 2em;
+  font-size: 120%;
+}
+
+#links, #divStats {
+  padding: 0.5em;
+  font-size: 75%;
+  text-align: center;
+}
+
+#links a {
+  text-decoration: none;
+}
+
+#linkLogs:before {
+  font-family: Icons;
+  content: "\e069";
+  margin-right: 0.25em;
+}
+
+#linkGraphs:before {
+  font-family: Icons;
+  content: "\e018";
+  margin-right: 0.25em;
+}
+
+#linkAccount:before {
+  font-family: Icons;
+  content: "\e081";
+  margin-right: 0.25em;
+}
+
+#linkGlobalRules:before {
+  font-family: Icons;
+  content: "\e0c9";
+  margin-right: 0.25em;
+}
+
+#linkAbout:before {
+  font-family: Icons;
+  content: "\e06c";
+  margin-right: 0.25em;
+}
+
+#linkEngine:before {
+  font-family: Icons;
+  content: "\e064";
+  margin-right: 0.25em;
+}
+
+#linkLinks:before {
+  font-family: Icons;
+  content: "\e06a";
+  margin-right: 0.25em;
+}
+
+#linkContact:before {
+  font-family: Icons;
+  content: "\e05c";
+  margin-right: 0.25em;
+}
+
+.topBoards {
+  width: 100%;
+  text-align: center;
+  margin: 1em 0px;
+}
+
+.topBoards a {
+  padding: 0.25em 0.5em;
+  background: #282A2E;
+  text-decoration: none;
+  margin: 0.5em 0.25em;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 90%;
+}
+
+.topBoards br {
+  display: none;
+}
+
+#divLatestPosts {
+  width: 100%;
+  margin: 1em;
+  text-align: center;
+}
+
+#divLatestPosts .latestPostCell {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.5em;
+  background: #282A2E;
+  margin: 0.5em;
+  max-width: 15%;
+  max-height: 8em;
+  font-size: 75%;
+  border: 1px solid #117743;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+.latestPostCell a {
+  display: block;
+}
+
+#divLatestImages {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#divLatestImages .latestImageCell {
+  display: inline-block;
+  max-width: 15%;
+  margin: 0 0.5em;
+  vertical-align: middle;
+}
+
+#divLatestImages img {
+  max-width: 100%;
+  padding: 5px;
+  background: #282A2E;
+  border-radius: 5px;
+}
