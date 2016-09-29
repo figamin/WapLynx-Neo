@@ -65,19 +65,26 @@
         method="post"
         enctype="multipart/form-data">
 
-        <label>E-mail: <input
+        <label>
+          E-mail:
+          <input
             type="email"
             name="email"
             id="emailField">
-        </label> <label> <input
+        </label>
+        <label>
+          <input
             type="checkbox"
             name="alwaysSignRole"
-            id="checkboxAlwaysSign">Always use role signature
-        </label> <label> <input
+            id="checkboxAlwaysSign">
+          Always use role signature
+        </label>
+        <label>
+          <input
             type="checkbox"
             name="lockEnabled"
-            id="checkboxLock">Lock account for 24 hours after too many
-          failed login attempts
+            id="checkboxLock">
+          Lock account for 24 hours after too many failed login attempts
         </label>
 
         <p>If you entered an email you will receive a link to unlock it
@@ -105,15 +112,23 @@
         method="post"
         enctype="multipart/form-data">
 
-        <label>Current Password: <input
+        <label>
+          Current Password:
+          <input
             type="password"
             name="password"
             id="fieldPassword">
-        </label> <label>New Password: <input
+        </label>
+        <label>
+          New Password:
+          <input
             type="password"
             name="newPassword"
             id="fieldNewPassword">
-        </label> <label>Confirm New Password: <input
+        </label>
+        <label>
+          Confirm New Password:
+          <input
             type="password"
             name="confirmation"
             id="fieldConfirmation">
@@ -153,15 +168,23 @@
           enctype="multipart/form-data"
           method="post">
 
-          <label>Board URI: <input
+          <label>
+            Board URI:
+            <input
               type="text"
               name="boardUri"
               id="newBoardFieldUri">
-          </label> <label>Board Name: <input
+          </label>
+          <label>
+            Board Name:
+            <input
               type="text"
               name="boardName"
               id="newBoardFieldName">
-          </label> <label>Board Description: <input
+          </label>
+          <label>
+            Board Description:
+            <input
               type="text"
               name="boardDescription"
               id="newBoardFieldDescription">
@@ -185,6 +208,7 @@
 
             <input
               type="text"
+              class="captchaField"
               name="captcha"
               id="fieldCaptcha"
               placeholder="answer">

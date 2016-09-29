@@ -104,12 +104,7 @@ function setQr() {
     return;
   }
 
-  var captcha = false;
   var flags = false;
-
-  if (document.getElementById('captchaDiv')) {
-    captcha = true;
-  }
 
   if (document.getElementById('flagsDiv')) {
     flags = true;
@@ -156,10 +151,10 @@ function setQr() {
   qrhtml += '<div id="selectedDivQr"></div></td> </tr> <tr><td colspan="2"> ';
   qrhtml += '</td> </tr>';
 
-  if (captcha) {
+  if (!hiddenCaptcha) {
     qrhtml += '<tr><td colspan="2"><img src="/captcha.js" class="captchaImage"/></td></tr>';
     qrhtml += '<tr><td colspan="2"><input type="button" onClick="reloadCaptcha()" value="Reload"> <span class="captchaTimer"></span></td></tr>';
-    qrhtml += '<tr><td><input name="captcha" type="text" id="QRfieldCaptcha" placeholder="Answer"></td>';
+    qrhtml += '<tr><td><input name="captcha" type="text" class="captchaField" id="QRfieldCaptcha" placeholder="Answer"></td>';
     qrhtml += '<td><a href="/noCookieCaptcha.js" target="_blank" class="small">No cookies?</a></td></tr>';
   }
 
@@ -258,7 +253,7 @@ function setQr() {
             .getElementById('checkboxSpoiler').checked;
       });
 
-  if (captcha) {
+  if (!hiddenCaptcha) {
     // Copy current vars
 
     var qrCaptchaField = document.getElementById('QRfieldCaptcha');
@@ -336,4 +331,26 @@ function setQRReplyText(text) {
     qrReplyButton.innerHTML = text;
   }
 
+}
+
+function clearQRAfterPosting() {
+
+  var qrMessageField = document.getElementById('qrbody');
+
+  if (!qrMessageField) {
+    return;
+  }
+
+  document.getElementById('qrsubject').value = '';
+  qrMessageField.value = '';
+
+}
+
+function setQRReplyEnabled(enabled) {
+
+  var qrReplyButton = document.getElementById('qrbutton');
+
+  if (qrReplyButton) {
+    qrReplyButton.disabled = !enabled;
+  }
 }

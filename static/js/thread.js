@@ -205,7 +205,7 @@ var replyCallback = function(status, data) {
   if (status === 'ok') {
     document.getElementById('fieldMessage').value = '';
     document.getElementById('fieldSubject').value = '';
-
+    clearQRAfterPosting();
     clearSelectedFiles();
 
     setTimeout(function() {
@@ -222,10 +222,10 @@ replyCallback.stop = function() {
   setQRReplyText(originalButtonText);
 
   replyButton.disabled = false;
+  setQRReplyEnabled(true);
 
   if (!hiddenCaptcha) {
     reloadCaptcha();
-    document.getElementById('fieldCaptcha').value = '';
   }
 };
 
@@ -614,6 +614,7 @@ function sendReplyData(files, captchaId) {
   replyButton.innerHTML = 'Uploading 0%';
   setQRReplyText(replyButton.innerHTML);
   replyButton.disabled = true;
+  setQRReplyEnabled(false);
 
   apiRequest('replyThread', {
     name : forcedAnon ? null : typedName,

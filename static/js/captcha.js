@@ -11,6 +11,12 @@ function reloadCaptcha() {
     captchaImages[i].src = '/captcha.js?d=' + new Date().toString();
   }
 
+  var captchaFields = document.getElementsByClassName('captchaField');
+
+  for (var i = 0; i < captchaFields.length; i++) {
+    captchaFields[i].value = '';
+  }
+
 }
 
 var updateFunction = function updateElements() {

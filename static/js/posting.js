@@ -441,16 +441,19 @@ function banPosts() {
   } else {
     var parsedCookies = getCookies();
 
+    var captchaSolvingCallback = function(status, data) {
+      applyBans(parsedCookies.captchaid);
+    }
+
+    captchaSolvingCallback.stop = function() {
+      reloadCaptcha();
+    }
+
     apiRequest('solveCaptcha', {
 
       captchaId : parsedCookies.captchaid,
       answer : typedCaptcha
-    }, function solvedCaptcha(status, data) {
-
-      applyBans(parsedCookies.captchaid);
-
-      reloadCaptcha();
-    });
+    }, captchaSolvingCallback);
   }
 
 }
@@ -485,6 +488,21 @@ function getSelectedContent() {
 
 }
 
+var reportCallback = function(status, data) {
+
+  if (status === 'ok') {
+
+    alert('Content reported');
+
+  } else {
+    alert(status + ': ' + JSON.stringify(data));
+  }
+}
+
+reportCallback.stop = function() {
+  reloadCaptcha()
+};
+
 function reportPosts() {
 
   var typedReason = document.getElementById('reportFieldReason').value.trim();
@@ -505,16 +523,7 @@ function reportPosts() {
     captcha : typedCaptcha,
     global : document.getElementById('checkboxGlobal').checked,
     postings : toReport
-  }, function requestComplete(status, data) {
-
-    if (status === 'ok') {
-
-      alert('Content reported');
-
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
+  }, reportCallback);
 }
 
 function deletePosts() {
