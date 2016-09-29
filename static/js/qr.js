@@ -4,6 +4,7 @@
 var shouldMove = false;
 var referenceContainer;
 var diffX;
+var diffY;
 var eWi;
 var eHe;
 var cWi;
@@ -28,7 +29,8 @@ function startMoving(evt) {
   divTop = divTop.replace('px', '');
   divLeft = divLeft.replace('px', '');
 
-  diffX = (window.innerWidth - posX) - divLeft, diffY = posY - divTop;
+  diffX = (window.innerWidth - posX) - divLeft;
+  diffY = posY - divTop;
 
 }
 
@@ -66,36 +68,36 @@ document.onmousemove = function(evt) {
 
 }
 
-function toggleQr() {
-  if (isQrEnabled() == true) {
-    console.log('Disabling QR');
-    localStorage.setItem("disableqr", 'true');
-  } else {
-    console.log('Enabling QR');
-    localStorage.removeItem("disableqr");
-  }
-}
-
-function isQrEnabled() {
-  return localStorage.getItem("disableqr") ? false : true;
-}
-
 function showQr(quote) {
 
-  if (isQrEnabled()) {
-    setQr();
-  } else {
-    return;
-  }
+  setQr();
 
-  if (document.getElementById('quick-reply') !== null) {
-    document.getElementById('qrbody').value += '>>' + quote + '\n';
-  }
+  document.getElementById('qrbody').value += '>>' + quote + '\n';
 
   var selectedText = window.getSelection();
   if (selectedText != '') {
     document.getElementById('qrbody').value += '>' + selectedText + '\n';
+    document.getElementById('fieldMessage').value += '>' + selectedText + '\n';
   }
+}
+
+function registerSync(source, destination, field, event) {
+
+  var sourceElement = document.getElementById(source);
+  var destinationElement = document.getElementById(destination);
+
+  destinationElement[field] = sourceElement[field];
+
+  sourceElement.addEventListener(event, function() {
+    if (destinationElement) {
+      destinationElement[field] = sourceElement[field];
+    }
+  });
+
+  destinationElement.addEventListener(event, function() {
+    sourceElement[field] = destinationElement[field];
+  });
+
 }
 
 function setQr() {
@@ -104,15 +106,9 @@ function setQr() {
     return;
   }
 
-  var flags = false;
+  var flags = document.getElementById('flagsDiv') ? true : false;
 
-  if (document.getElementById('flagsDiv')) {
-    flags = true;
-  }
-
-  var QRshowname = document.getElementById('fieldName');
-  var boardName = document.getElementById('boardIdentifier').value;
-  var threadNum = document.getElementById('threadIdentifier').value;
+  var QRshowname = document.getElementById('fieldName') ? true : false;
 
   var qrhtml = '<div id="quick-reply" style="right: 25px; top: 50px;">';
   qrhtml += '<div id="post-form-inner">';
@@ -167,147 +163,29 @@ function setQr() {
 
   divid = document.getElementById('quick-reply')
 
+  registerSync('fieldEmail', 'qremail', 'value', 'input');
+  registerSync('fieldSubject', 'qrsubject', 'value', 'input');
+  registerSync('fieldMessage', 'qrbody', 'value', 'input');
+  registerSync('fieldPostingPassword', 'qrpassword', 'value', 'input');
+  registerSync('checkboxSpoiler', 'qrcheckboxSpoiler', 'checked', 'change');
+
   if (flags) {
 
     document.getElementById('qrFlagsDiv').innerHTML = document
         .getElementById('flagsDiv').innerHTML.replace('flagCombobox',
         'qrFlagCombobox');
 
-    var qrFlags = document.getElementById('qrFlagCombobox');
-    var defaultFlags = document.getElementById('flagCombobox');
-
-    qrFlags.value = defaultFlags.value;
-
-    defaultFlags.addEventListener('change', function() {
-      qrFlags.value = defaultFlags.value;
-    });
-
-    qrFlags.addEventListener('change', function() {
-      defaultFlags.value = qrFlags.value;
-    });
+    registerSync('flagCombobox', 'qrFlagCombobox', 'value', 'change');
 
   }
 
-  // Copy current vars
   if (QRshowname) {
-
-    var qrNameField = document.getElementById('qrname');
-    var defaultNameField = document.getElementById('fieldName');
-
-    qrNameField.value = defaultNameField.value;
-
-    defaultNameField.addEventListener('input', function(e) {
-      qrNameField.value = defaultNameField.value;
-    });
-
-    qrNameField.addEventListener('input', function(e) {
-      defaultNameField.value = qrNameField.value;
-    });
+    registerSync('fieldName', 'qrname', 'value', 'input');
   }
-
-  document.getElementById('qremail').value = document
-      .getElementById('fieldEmail').value;
-  document.getElementById('qrsubject').value = document
-      .getElementById('fieldSubject').value;
-  document.getElementById('qrbody').value = document
-      .getElementById('fieldMessage').value;
-  document.getElementById('qrpassword').value = document
-      .getElementById('fieldPostingPassword').value;
-  document.getElementById('qrcheckboxSpoiler').checked = document
-      .getElementById('checkboxSpoiler').checked;
-
-  // Sync it
-
-  document.getElementById('fieldEmail').addEventListener(
-      'input',
-      function(e) {
-        document.getElementById('qremail').value = document
-            .getElementById('fieldEmail').value;
-      });
-
-  document.getElementById('fieldSubject').addEventListener(
-      'input',
-      function(e) {
-        document.getElementById('qrsubject').value = document
-            .getElementById('fieldSubject').value;
-      });
-
-  document.getElementById('fieldMessage').addEventListener(
-      'input',
-      function(e) {
-        document.getElementById('qrbody').value = document
-            .getElementById('fieldMessage').value;
-      });
-
-  document.getElementById('fieldPostingPassword').addEventListener(
-      'input',
-      function(e) {
-        document.getElementById('qrpassword').value = document
-            .getElementById('fieldPostingPassword').value;
-      });
-
-  document.getElementById('checkboxSpoiler').addEventListener(
-      'change',
-      function(e) {
-        document.getElementById('qrcheckboxSpoiler').checked = document
-            .getElementById('checkboxSpoiler').checked;
-      });
 
   if (!hiddenCaptcha) {
-    // Copy current vars
-
-    var qrCaptchaField = document.getElementById('QRfieldCaptcha');
-    var defaultCaptchaField = document.getElementById('fieldCaptcha');
-
-    qrCaptchaField.value = defaultCaptchaField.value;
-
-    // Sync it
-    defaultCaptchaField.addEventListener('input', function(e) {
-      qrCaptchaField.value = defaultCaptchaField.value;
-    });
-
-    // And the other way around
-    qrCaptchaField.addEventListener('input', function(e) {
-      defaultCaptchaField.value = qrCaptchaField.value;
-    });
+    registerSync('fieldCaptcha', 'QRfieldCaptcha', 'value', 'input');
   }
-
-  // And the other way around
-
-  document.getElementById('qremail').addEventListener(
-      'input',
-      function(e) {
-        document.getElementById('fieldEmail').value = document
-            .getElementById('qremail').value;
-      });
-
-  document.getElementById('qrsubject').addEventListener(
-      'input',
-      function(e) {
-        document.getElementById('fieldSubject').value = document
-            .getElementById('qrsubject').value;
-      });
-
-  document.getElementById('qrbody').addEventListener(
-      'input',
-      function(e) {
-        document.getElementById('fieldMessage').value = document
-            .getElementById('qrbody').value;
-      });
-
-  document.getElementById('qrpassword').addEventListener(
-      'input',
-      function(e) {
-        document.getElementById('fieldPostingPassword').value = document
-            .getElementById('qrpassword').value;
-      });
-
-  document.getElementById('qrcheckboxSpoiler').addEventListener(
-      'change',
-      function(e) {
-        document.getElementById('checkboxSpoiler').checked = document
-            .getElementById('qrcheckboxSpoiler').checked;
-      });
 
   setDragAndDrop(true);
 
