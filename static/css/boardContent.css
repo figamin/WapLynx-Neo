@@ -1,0 +1,123 @@
+/*Elements shown on board and thread pages*/
+#reportFieldset {
+  clear: both;
+  margin-top: 1em;
+  border: 1px dashed #117743;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  float: left;
+}
+
+.selectedCell, #dropzone {
+  top: 5px;
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 5px 0px;
+}
+
+.selectedCell {
+  margin-top: 10px;
+}
+
+#dropzone {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease 0s;
+}
+
+.removeButton {
+  cursor: pointer;
+  color: rgba(125, 125, 125, 0.5);
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.removeButton:hover {
+  color: #7D7D7D;
+}
+
+#panelMessage {
+  margin: 1em;
+}
+
+#postBox div.wider input, #flagsDiv, #flagsDiv select {
+  width: 100%;
+}
+
+#flagsDiv {
+  margin-top: 0.5em;
+}
+
+#postBox textarea {
+  width: 100%;
+  height: 12em;
+}
+
+#newPostFieldset {
+  display: inline-block;
+  border: 1px dashed #117743;
+  padding-right: 0.75em;
+  width: 25em;
+}
+
+#postWrapper {
+  text-align: center;
+  margin: 1em auto;
+}
+
+#postBox {
+  text-align: left;
+  margin: 0 auto 1em auto;
+}
+
+#postBox input, #postBox textarea {
+  margin-top: 0.5em;
+}
+
+#postBox input:focus, #postBox textarea:focus {
+  box-shadow: 0px 0px 5px 2px #117743;
+}
+
+#postWrapper button {
+  width: 8em;
+  margin: 0.5em auto;
+  font-size: 125%;
+}
+
+#postWrapper button:active {
+  box-shadow: 0px 0px 5px #117743;
+}
+
+.spoilerCheckbox, #flagsDiv {
+  display: inline-block;
+}
+
+#postWrapper label {
+  font-size: 80%;
+}
+
+input[type=checkbox]#checkboxSpoiler {
+  display: none;
+}
+
+input[type=checkbox]#checkboxSpoiler+label:before {
+  font-family: Icons;
+  content: "\e0db";
+  margin-right: 0.5em;
+  color: #117743;
+  display: inline-block;
+}
+
+input[type=checkbox]#checkboxSpoiler:checked+label:before {
+  font-family: Icons;
+  content: "\e033";
+  margin-right: 0.5em;
+  color: #117743;
+  display: inline-block;
+}
+
+#boardContentLinks {
+  margin-top: 0.5em;
+  font-size: 80%;
+}

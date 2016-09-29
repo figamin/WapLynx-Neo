@@ -1,9 +1,6 @@
 /*Elements exclusive from the thread page*/
 .divRefresh {
   display: block;
-  float: left;
-  clear: both;
-  margin: 0 0 0 1em;
   padding: 0;
   height: 1.5em;
 }
@@ -11,11 +8,6 @@
 .divRefresh label, .divRefresh input {
   display: inline-block;
   margin: 0;
-  font-size: 80%;
-}
-
-#threadLinks {
-  margin: 1em;
   font-size: 80%;
 }
 

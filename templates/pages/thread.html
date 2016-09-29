@@ -18,6 +18,10 @@
   href="/.static/css/threadPage.css"
   type="text/css"
   rel="stylesheet" />
+<link
+  href="/.static/css/boardContent.css"
+  type="text/css"
+  rel="stylesheet" />
 </head>
 <body>
 
@@ -381,14 +385,6 @@
 
       <hr />
 
-      <div id="threadLinks">
-        <span>[</span>
-        <a id="linkManagement">Manage Board</a>
-        <span>/</span>
-        <a id="linkMod">Moderate Thread</a>
-        <span>]</span>
-      </div>
-
       <div class="divRefresh hidden">
 
         <label>
@@ -406,6 +402,14 @@
           onclick="refreshPosts(true)"
           value="Refresh">
 
+      </div>
+
+      <div id=boardContentLinks>
+        <span>[</span>
+        <a id="linkManagement">Manage Board</a>
+        <span>/</span>
+        <a id="linkMod">Moderate Thread</a>
+        <span>]</span>
       </div>
 
       <fieldset id="reportFieldset">

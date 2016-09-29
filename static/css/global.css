@@ -1,5 +1,3 @@
-/* global CSS values */
-/* global rules to override any browser CSS and to set global values */
 .small {
   font-size: 75%;
   text-decoration: none;
@@ -17,7 +15,7 @@ hr {
   height: 0px;
   border-width: 1px medium medium;
   border-style: solid none none;
-  border-color: #B0790A;
+  border-color: #117743;
 }
 
 a {
@@ -50,11 +48,8 @@ input, select, textarea {
   border-radius: 5px;
   background: #282A2E;
   color: #ACACAC;
-  margin-left: 0.5em;
-  padding-left: 0.25em;
   font-family: 'Hack', monospace, sans-serif;
   font-size: 80%;
-  padding-left: 0.25em;
 }
 
 input[type=button], input[type=submit], button, #dropzone, .selectedCell {
@@ -282,10 +277,6 @@ span.spoiler {
   display: inline-block;
 }
 
-#settingsFieldset hr {
-  border-color: #117743;
-}
-
 #settingsWrapper .captchaDiv input {
   display: inline-block;
 }
@@ -295,7 +286,7 @@ span.spoiler {
 }
 
 input.wide, textarea.wide {
-  width: 90%;
+  width: 100%;
 }
 
 #redirect, #maint {

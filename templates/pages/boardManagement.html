@@ -67,7 +67,9 @@
           method="post"
           enctype="multipart/form-data">
 
-          <label>User login: <input
+          <label>
+            User login:
+            <input
               type="text"
               name="login"
               id="addVolunteerFieldLogin">
@@ -106,7 +108,9 @@
           method="post"
           enctype="multipart/form-data">
 
-          <label>User login: <input
+          <label>
+            User login:
+            <input
               type="text"
               name="login"
               id="transferBoardFieldLogin">
@@ -140,10 +144,12 @@
           action="/deleteBoard.js"
           enctype="multipart/form-data">
 
-          <label> <input
+          <label>
+            <input
               type="checkbox"
               name="confirmDeletion"
-              id="confirmDelCheckbox"> Yes, I wish to delete this board
+              id="confirmDelCheckbox">
+            Yes, I wish to delete this board
           </label>
 
           <input
@@ -295,53 +301,77 @@
             id="boardSettingsIdentifier"
             name="boardUri">
 
-          <label>Board name: <input
+          <label>
+            Board name:
+            <input
               id="boardNameField"
               type="text"
               name="boardName">
-          </label> <label for="boardDescriptionField">Board description:</label>
-          <input
+          </label>
+          <label for="boardDescriptionField">Board description:</label>
+          <textarea
             id="boardDescriptionField"
-            type="text"
             name="boardDescription"
-            class="wide">
+            class="wide"></textarea>
 
-          <label>Anonymous name: <input
+          <label>
+            Anonymous name:
+            <input
               id="anonymousNameField"
               type="text"
               name="anonymousName">
-          </label> <label>Maximum files<sup>2</sup>: <input
+          </label>
+          <label>
+            Maximum files<sup>2</sup>:
+            <input
               id="maxFilesField"
               type="text"
               name="maxFiles">
-          </label> <label>Max file size<sup>2</sup>: <input
+          </label>
+          <label>
+            Max file size<sup>2</sup>:
+            <input
               id="maxFileSizeField"
               type="text"
               name="maxFileSizeMB">
-          </label> <label>Thread limit<sup>2</sup>: <input
+          </label>
+          <label>
+            Thread limit<sup>2</sup>:
+            <input
               id="maxThreadFields"
               type="text"
               name="maxThreadCount">
-          </label> <label>Reply limit (autosage)<sup>2</sup>: <input
+          </label>
+          <label>
+            Reply limit (autosage)<sup>2</sup>:
+            <input
               id="autoSageLimitField"
               type="text"
               name="autoSageLimit">
-          </label> <label>Allowed file types<sup>1,2</sup>: <input
+          </label>
+          <label>
+            Allowed file types<sup>1,2</sup>:
+            <input
               id="validMimesField"
               type="text"
               name="acceptedMimes"
               class="wide">
-          </label> <label>Hourly thread limit (locks thread creation temporarily
-            if exceeded): <input
+          </label>
+          <label>
+            Hourly thread limit (locks thread creation temporarily if exceeded):
+            <input
               id="hourlyThreadLimitField"
               type="text"
               name="hourlyThreadLimit">
-          </label> <label>Enable captcha if this many threads are created within
-            one hour: <input
+          </label>
+          <label>
+            Enable captcha if this many threads are created within one hour:
+            <input
               id="autoCaptchaThresholdField"
               type="text"
               name="autoCaptchaLimit">
-          </label> <label for="tagsField">Tags (separate with commas):</label>
+          </label>
+          <label for="tagsField">Tags (separate with commas):</label>
           <input
             type="text"
             id="tagsField"
@@ -354,53 +384,82 @@
             id="boardMessageField"
             class="wide"></textarea>
 
-          <label> <input
+          <label>
+            <input
               type="checkbox"
               name="disableIds"
-              id="disableIdsCheckbox"> Disable thread-wise ids
-          </label> <label> <input
+              id="disableIdsCheckbox">
+            Disable thread-wise ids
+          </label>
+          <label>
+            <input
               type="checkbox"
               name="requireThreadFile"
-              id="requireFileCheckbox"> Require at least one file for
-            new threads
-          </label> <label> <input
+              id="requireFileCheckbox">
+            Require at least one file for new threads
+          </label>
+          <label>
+            <input
               type="checkbox"
               name="blockDeletion"
-              id="blockDeletionCheckbox"> Block users from deleting
-            their posts
-          </label> <label> <input
+              id="blockDeletionCheckbox">
+            Block users from deleting their posts
+          </label>
+          <label>
+            <input
               type="checkbox"
               name="allowCode"
-              id="allowCodeCheckbox"> Allow use of code tags
-          </label> <label> Captcha mode: <select
+              id="allowCodeCheckbox">
+            Allow use of code tags
+          </label>
+          <label>
+            Captcha mode:
+            <select
               id="captchaModeComboBox"
               name="captchaMode"></select>
-          </label> <label> <input
+          </label>
+          <label>
+            <input
               type="checkbox"
               name="unindex"
-              id="unindexCheckbox"> Don't index on top boards and board
-            list.
-          </label> <label> <input
+              id="unindexCheckbox">
+            Don't index on top boards and board list.
+          </label>
+          <label>
+            <input
               type="checkbox"
               name="forceAnonymity"
-              id="forceAnonymityCheckbox"> Force anonymity
-          </label> <label> <input
+              id="forceAnonymityCheckbox">
+            Force anonymity
+          </label>
+          <label>
+            <input
               type="checkbox"
               name=early404
-              id="early404Checkbox"> Early 404: threads that are not
-            replied at least 5 times will be deleted after an hour.
-          </label> <label> <input
+              id="early404Checkbox">
+            Early 404: threads that are not replied at least 5 times will be
+            deleted after an hour.
+          </label>
+          <label>
+            <input
               type="checkbox"
               name="locationFlags"
-              id="locationCheckBox"> Location Flags
-          </label> <label> <input
+              id="locationCheckBox">
+            Location Flags
+          </label>
+          <label>
+            <input
               type="checkbox"
               name="uniqueFiles"
-              id="uniqueFilesCheckbox"> Unique Files
-          </label> <label> <input
+              id="uniqueFilesCheckbox">
+            Unique Files
+          </label>
+          <label>
+            <input
               type="checkbox"
               name="uniquePosts"
-              id="uniquePostsCheckbox"> Unique Posts
+              id="uniquePostsCheckbox">
+            Unique Posts
           </label>
 
           <input

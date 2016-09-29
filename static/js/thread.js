@@ -43,7 +43,7 @@ if (!DISABLE_JS) {
 
   setDragAndDrop();
 
-  document.getElementsByClassName('divRefresh')[0].style.display = 'inline';
+  document.getElementsByClassName('divRefresh')[0].style.display = 'block';
 
   refreshLabel = document.getElementById('labelRefresh');
 
