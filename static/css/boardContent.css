@@ -8,7 +8,7 @@
   float: left;
 }
 
-.selectedCell, #dropzone {
+.selectedCell, .dropzone {
   top: 5px;
   text-align: center;
   margin-bottom: 5px;
@@ -19,9 +19,8 @@
   margin-top: 10px;
 }
 
-#dropzone {
+.dropzone {
   cursor: pointer;
-  position: relative;
   transition: all 0.2s ease 0s;
 }
 
@@ -56,9 +55,12 @@
 
 #newPostFieldset {
   display: inline-block;
-  border: 1px dashed #117743;
   padding-right: 0.75em;
   width: 25em;
+}
+
+#newPostFieldset, #quick-reply table {
+  border: 1px dashed #117743;
 }
 
 #postWrapper {
@@ -68,7 +70,6 @@
 
 #postBox {
   text-align: left;
-  margin: 0 auto 1em auto;
 }
 
 #postBox input, #postBox textarea {
@@ -87,10 +88,6 @@
 
 #postWrapper button:active {
   box-shadow: 0px 0px 5px #117743;
-}
-
-.spoilerCheckbox, #flagsDiv {
-  display: inline-block;
 }
 
 #postWrapper label {

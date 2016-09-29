@@ -80,13 +80,6 @@ function addToKnownPostsForBackLinks(posting) {
 
 }
 
-/* Expanded images have the class 'imgExpanded' */
-function setClickableImage(link) {
-  link.onclick = function(mouseEvent) {
-    return expandImage(mouseEvent, link);
-  };
-}
-
 /* mouseEvent.target -> link */
 function expandImage(mouseEvent, link) {
   /* return: false -> Don't follow link, true -> Follow link */
@@ -192,7 +185,9 @@ function processImageLink(link) {
 
   if (mime.indexOf('image/') > -1) {
 
-    setClickableImage(link);
+    link.onclick = function(mouseEvent) {
+      return expandImage(mouseEvent, link);
+    };
 
   } else if (playableTypes.indexOf(mime) > -1) {
     setPlayer(link, mime);
@@ -211,10 +206,9 @@ function setFullBorder(tooltip) {
   tooltip.innerHTML = '';
   tooltip.appendChild(innerPost);
 
-  innerPost.style['border-style'] = 'solid solid solid solid';
-  innerPost.style['border-width'] = '1px 1px 1px 1px';
-  innerPost.style['border-color'] = '#B7C5D9 #B7C5D9 #B7C5D9 #B7C5D9';
-
+  innerPost.style['border-style'] = 'solid';
+  innerPost.style['border-width'] = '1px';
+  innerPost.style['border-color'] = '#117743';
 }
 
 function addBackLink(quoteUrl, quote) {

@@ -27,10 +27,9 @@ var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
     + '<div class="divBanMessage"></div><div class="labelLastEdit"></div></div>';
 
 var uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
-    + 'Open file</a>(<span class="sizeLabel"></span> <span class="dimensionLabel">'
-    + '</span><a class="originalNameLink"></a>)</div><div class="divHash"><span>'
-    + 'MD5: <span class="labelHash"></span></span></div>'
-    + '<a class="imgLink" target="blank"></a>';
+    + 'Open file</a> (<span class="sizeLabel"></span> <span class="dimensionLabel">'
+    + '</span> <a class="originalNameLink"></a>)</div><a class="imgLink" '
+    + 'target="blank"></a>';
 
 var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
 
@@ -170,6 +169,8 @@ function processPostingQuote(link) {
   link.onclick = function() {
     var toQuote = link.href.match(/#q(\d+)/);
 
+    showQr(toQuote[1]);
+
     document.getElementById('fieldMessage').value += '>>' + toQuote[1] + '\n';
 
   };
@@ -217,6 +218,9 @@ var replyCallback = function(status, data) {
 
 replyCallback.stop = function() {
   replyButton.innerHTML = originalButtonText;
+
+  setQRReplyText(originalButtonText);
+
   replyButton.disabled = false;
 
   if (!hiddenCaptcha) {
@@ -231,6 +235,8 @@ replyCallback.progress = function(info) {
     var newText = 'Uploading ' + Math.floor((info.loaded / info.total) * 100)
         + '%';
     replyButton.innerHTML = newText;
+
+    setQRReplyText(newText);
   }
 };
 
@@ -606,6 +612,7 @@ function sendReplyData(files, captchaId) {
 
   originalButtonText = replyButton.innerHTML;
   replyButton.innerHTML = 'Uploading 0%';
+  setQRReplyText(replyButton.innerHTML);
   replyButton.disabled = true;
 
   apiRequest('replyThread', {

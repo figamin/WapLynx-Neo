@@ -4,6 +4,7 @@ var selectedCell = '<div class="removeButton">✖</div>'
 
 var selectedFiles = [];
 var selectedDiv;
+var selectedDivQr;
 
 function addSelectedFile(file) {
 
@@ -16,12 +17,27 @@ function addSelectedFile(file) {
   nameLabel.innerHTML = file.name;
 
   var removeButton = cell.getElementsByClassName('removeButton')[0];
+
   removeButton.onclick = function() {
-    selectedDiv.removeChild(cell);
+    var index = selectedFiles.indexOf(file);
+
+    selectedDiv.removeChild(selectedDiv.childNodes[index]);
+
+    if (selectedDivQr) {
+      selectedDivQr.removeChild(selectedDivQr.childNodes[index]);
+    }
+
     selectedFiles.splice(selectedFiles.indexOf(file), 1);
   };
 
   selectedFiles.push(file);
+
+  if (selectedDivQr) {
+    var clonedCell = cell.cloneNode(true);
+    clonedCell.getElementsByClassName('removeButton')[0].onclick = removeButton.onclick;
+    selectedDivQr.appendChild(clonedCell);
+  }
+
   selectedDiv.appendChild(cell);
 
 }
@@ -32,16 +48,24 @@ function clearSelectedFiles() {
   while (selectedDiv.firstChild) {
     selectedDiv.removeChild(selectedDiv.firstChild);
   }
+
+  if (selectedDivQr) {
+    while (selectedDivQr.firstChild) {
+      selectedDivQr.removeChild(selectedDivQr.firstChild);
+    }
+  }
 }
 
-function setDragAndDrop() {
+function setDragAndDrop(qr) {
 
   var fileInput = document.getElementById('files')
-  fileInput.style.display = 'none';
 
-  document.getElementById('dragAndDropDiv').style.display = 'block';
+  if (!qr) {
+    fileInput.style.display = 'none';
+    document.getElementById('dragAndDropDiv').style.display = 'block';
+  }
 
-  var drop = document.getElementById('dropzone');
+  var drop = document.getElementById(qr ? 'dropzoneQr' : 'dropzone');
   drop.onclick = function() {
     fileInput.click();
   };
@@ -56,7 +80,11 @@ function setDragAndDrop() {
     fileInput.type = "file";
   };
 
-  selectedDiv = document.getElementById('selectedDiv');
+  if (!qr) {
+    selectedDiv = document.getElementById('selectedDiv');
+  } else {
+    selectedDivQr = document.getElementById('selectedDivQr');
+  }
 
   drop.addEventListener('dragover', function handleDragOver(event) {
 

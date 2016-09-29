@@ -52,7 +52,7 @@ input, select, textarea {
   font-size: 80%;
 }
 
-input[type=button], input[type=submit], button, #dropzone, .selectedCell {
+input[type=button], input[type=submit], button, .dropzone, .selectedCell {
   border: 3px double #07371F;
   border-radius: 5px;
   background: #16171A;

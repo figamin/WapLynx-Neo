@@ -14,3 +14,119 @@
 #divControls, #transferControls, #ipDelete {
   margin: 1em;
 }
+
+#quick-reply {
+  position: fixed;
+  float: right;
+  padding: 0 0 0 0;
+  width: 300px;
+  z-index: 100;
+  display: block;
+}
+
+#quick-reply #post-form-inner {
+  min-width: 300px;
+}
+
+#quick-reply .post-table tr td:nth-child(2) {
+  width: 40%;
+  text-align: left;
+  padding-left: 0.25em;
+}
+
+#quick-reply tr td:nth-child(2) input[type="submit"] {
+  width: 99%;
+}
+
+.spoilerCheckbox {
+  font-size: 80%;
+}
+
+#quick-reply th, #quick-reply td {
+  margin: 0;
+  padding: 0;
+}
+
+#quick-reply th {
+  text-align: center;
+  padding: 2px 0;
+  border: 1px solid #222;
+}
+
+#quick-reply th .handle {
+  float: left;
+  width: 100%;
+  display: inline-block;
+}
+
+#quick-reply th .close-btn {
+  float: right;
+  padding: 0 5px;
+}
+
+#quick-reply input[type="text"], #quick-reply select {
+  width: 100%;
+  padding: 2px;
+  font-size: 10pt;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#quick-reply select {
+  padding: 2px;
+  font-size: 10pt;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#QRcaptchaDiv {
+  text-align: center;
+}
+
+#quick-reply textarea {
+  min-width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 10pt;
+  resize: both;
+}
+
+#quick-reply input[type="file"] {
+  padding: 5px 2px;
+}
+
+#quick-reply .nonsense {
+  display: none;
+}
+
+#quick-reply td.recaptcha {
+  text-align: center;
+  padding: 0 0 1px 0;
+}
+
+#quick-reply td.recaptcha span {
+  display: inline-block;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+#quick-reply td.recaptcha-response {
+  padding: 0 0 1px 0;
+}
+
+#quick-reply table {
+  background: #1D1F21;
+  padding: 0.25em;
+  margin: 0;
+  width: 100%;
+  margin: 0;
+}
+
+.handle, .close-btn {
+  cursor: move;
+}
