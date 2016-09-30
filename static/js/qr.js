@@ -11,6 +11,10 @@ var cWi;
 var cHe;
 var divid;
 
+document.onmousedown = function() {
+  return !shouldMove;
+};
+
 function startMoving(evt) {
 
   shouldMove = true;
