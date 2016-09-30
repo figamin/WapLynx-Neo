@@ -388,6 +388,12 @@
 
       <div class="divRefresh hidden">
 
+        <input
+          type="button"
+          id="refreshButton"
+          onclick="refreshPosts(true)"
+          value="Refresh">
+
         <label>
           <input
             id="checkboxChangeRefresh"
@@ -396,12 +402,6 @@
             onchange="changeRefresh()">
           Auto <span id="labelRefresh"></span>
         </label>
-
-        <input
-          type="button"
-          id="refreshButton"
-          onclick="refreshPosts(true)"
-          value="Refresh">
 
       </div>
 
@@ -586,5 +586,6 @@
 <script src="/.static/js/posting.js"></script>
 <script src="/.static/js/captcha.js"></script>
 <script src="/.static/js/qr.js"></script>
+<script src="/.static/js/hiding.js"></script>
 
 </html>

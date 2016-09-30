@@ -545,8 +545,7 @@ var refreshCallback = function(error, data) {
 };
 
 refreshCallback.stop = function() {
-  refreshButton.style.display = 'inline';
-
+  refreshButton.disabled = false;
 };
 
 function refreshPosts(manual) {
@@ -557,7 +556,7 @@ function refreshPosts(manual) {
     clearInterval(refreshTimer);
   }
 
-  refreshButton.style.display = 'none';
+  refreshButton.disabled = true;
 
   localRequest('/' + boardUri + '/res/' + threadId + '.json', refreshCallback);
 

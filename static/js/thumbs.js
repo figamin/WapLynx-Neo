@@ -1,3 +1,24 @@
+var playableTypes = [ 'video/webm', 'audio/mpeg', 'video/mp4', 'video/ogg',
+    'audio/ogg', 'audio/webm' ];
+
+var videoTypes = [ 'video/webm', 'video/mp4', 'video/ogg' ];
+
+if (!DISABLE_JS) {
+
+  var imageLinks = document.getElementsByClassName('imgLink');
+
+  var temporaryImageLinks = [];
+
+  for (var i = 0; i < imageLinks.length; i++) {
+    temporaryImageLinks.push(imageLinks[i]);
+  }
+
+  for (i = 0; i < temporaryImageLinks.length; i++) {
+    processImageLink(temporaryImageLinks[i]);
+  }
+
+}
+
 function expandImage(mouseEvent, link) {
 
   if (mouseEvent.which === 2 || mouseEvent.ctrlKey) {

@@ -1,15 +1,3 @@
-var loadedPreviews = [];
-var loadingPreviews = [];
-var loadedContent = {};
-var quoteReference = {};
-
-var playableTypes = [ 'video/webm', 'audio/mpeg', 'video/mp4', 'video/ogg',
-    'audio/ogg', 'audio/webm' ];
-
-var videoTypes = [ 'video/webm', 'video/mp4', 'video/ogg' ];
-
-var knownPosts = {};
-
 if (!DISABLE_JS) {
 
   if (document.getElementById('deleteJsButton')) {
@@ -28,50 +16,6 @@ if (!DISABLE_JS) {
     }
 
   }
-
-  var imageLinks = document.getElementsByClassName('imgLink');
-
-  var temporaryImageLinks = [];
-
-  for (var i = 0; i < imageLinks.length; i++) {
-    temporaryImageLinks.push(imageLinks[i]);
-  }
-
-  for (i = 0; i < temporaryImageLinks.length; i++) {
-    processImageLink(temporaryImageLinks[i]);
-  }
-
-  var posts = document.getElementsByClassName('postCell');
-
-  for (i = 0; i < posts.length; i++) {
-    addToKnownPostsForBackLinks(posts[i])
-  }
-
-  var threads = document.getElementsByClassName('opCell');
-
-  for (i = 0; i < threads.length; i++) {
-    addToKnownPostsForBackLinks(threads[i])
-  }
-
-  var quotes = document.getElementsByClassName('quoteLink');
-  for (i = 0; i < quotes.length; i++) {
-    var quote = quotes[i];
-
-    processQuote(quote);
-  }
-}
-
-function addToKnownPostsForBackLinks(posting) {
-
-  var postBoard = posting.dataset.boarduri;
-
-  var list = knownPosts[postBoard] || {};
-  knownPosts[postBoard] = list;
-
-  list[posting.id] = {
-    added : [],
-    container : posting.getElementsByClassName('panelBacklinks')[0]
-  };
 
 }
 

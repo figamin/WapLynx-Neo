@@ -1,4 +1,31 @@
 /*Used for places where posts are displayed*/
+.hideButton {
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+.unhideButton {
+  cursor: pointer;
+  font-size: 80%;
+}
+
+.hideButton::BEFORE {
+  font-family: 'Icons';
+  content: '\e0db';
+}
+
+.hideMenu {
+  border: 1px dashed #117743;
+  background: #1d1f21;
+  padding: 0.25em;
+}
+
+.hideMenu label {
+  display: block;
+  font-size: 80%;
+  cursor: pointer;
+}
+
 .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
   .contentOmissionIndicator, .labelOmission {
   font-size: 80%;
@@ -30,7 +57,7 @@
 
 .linkName {
   font-weight: bold;
-  color: #323DCD;
+  color: #34ED97;
 }
 
 .linkName:hover {
@@ -69,7 +96,7 @@
 }
 
 .labelSubject {
-  color: #AA0000;
+  color: #34ED3A;
   font-weight: bold;
 }
 

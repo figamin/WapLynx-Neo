@@ -1,3 +1,46 @@
+var loadedPreviews = [];
+var loadingPreviews = [];
+var loadedContent = {};
+var quoteReference = {};
+
+var knownPosts = {};
+
+if (!DISABLE_JS) {
+
+  var posts = document.getElementsByClassName('postCell');
+
+  for (var i = 0; i < posts.length; i++) {
+    addToKnownPostsForBackLinks(posts[i])
+  }
+
+  var threads = document.getElementsByClassName('opCell');
+
+  for (i = 0; i < threads.length; i++) {
+    addToKnownPostsForBackLinks(threads[i])
+  }
+
+  var quotes = document.getElementsByClassName('quoteLink');
+  for (i = 0; i < quotes.length; i++) {
+    var quote = quotes[i];
+
+    processQuote(quote);
+  }
+}
+
+function addToKnownPostsForBackLinks(posting) {
+
+  var postBoard = posting.dataset.boarduri;
+
+  var list = knownPosts[postBoard] || {};
+  knownPosts[postBoard] = list;
+
+  list[posting.id] = {
+    added : [],
+    container : posting.getElementsByClassName('panelBacklinks')[0]
+  };
+
+}
+
 function addBackLink(quoteUrl, quote) {
 
   var matches = quoteUrl.match(/\/(\w+)\/res\/\d+\.html\#(\d+)/);
@@ -62,6 +105,13 @@ function addBackLink(quoteUrl, quote) {
 
     }
 
+  }
+
+  var quotes = document.getElementsByClassName('quoteLink');
+  for (i = 0; i < quotes.length; i++) {
+    var quote = quotes[i];
+
+    processQuote(quote);
   }
 
 }

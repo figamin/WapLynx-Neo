@@ -23,7 +23,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:hover, .hideButton:hover {
   text-shadow: 0px 0px 5px #117743;
 }
 
