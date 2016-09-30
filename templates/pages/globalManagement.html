@@ -53,15 +53,14 @@
         <strong><span id="userLabel"></span></strong>
       </p>
 
-      <hr />
-
-      <h3>Add user to global staff</h3>
 
       <form
         id="addStaffForm"
         method="post"
         enctype="multipart/form-data"
         action="/setGlobalRole.js">
+        <hr />
+        <h3>Add user to global staff</h3>
 
         <label>
           Username:
@@ -91,32 +90,46 @@
 
       </form>
 
-      <hr />
-
       <div id="divStaff">
-
-        <h3>Global Staff Tools</h3>
-
-        <ul>
-          <li><a
-              id="globalSettingsLink"
-              href="/globalSettings.js">Global Settings</a></li>
-          <li><a
-              id="globalBannersLink"
-              href="/bannerManagement.js">Global Banners</a></li>
-          <li><a
-              id="bansLink"
-              href="/bans.js"> Bans</a></li>
-          <li><a
-              id="rangeBansLink"
-              href="/rangeBans.js">Range Bans</a></li>
-          <li><a
-              id="hashBansLink"
-              href="/hashBans.js">Hash Bans</a></li>
-          <li><a href="/closedReports.js">Closed Reports</a></li>
-        </ul>
-
+        <hr />
+        <h3>Global Staff</h3>
       </div>
+      <hr>
+
+      <a
+        id="globalSettingsLink"
+        href="/globalSettings.js">
+        Global Settings
+        <br>
+      </a>
+      <a
+        id="globalBannersLink"
+        href="/bannerManagement.js">
+        Global Banners
+        <br>
+      </a>
+      <a
+        id="bansLink"
+        href="/bans.js">
+        Bans
+        <br>
+      </a>
+      <a
+        id="rangeBansLink"
+        href="/rangeBans.js">
+        Range Bans
+        <br>
+      </a>
+      <a
+        id="hashBansLink"
+        href="/hashBans.js">
+        Hash Bans
+        <br>
+      </a>
+      <a href="/mediaManagement.js">Media management</a>
+      <br>
+      <a href="/closedReports.js">Closed Reports</a>
+
 
       <hr />
 

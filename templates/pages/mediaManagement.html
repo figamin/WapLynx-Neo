@@ -8,39 +8,64 @@
   href="/.static/css/global.css">
 </head>
 <body>
-  <img
-    class="logo"
-    src="/.static/logo.png"
-    title="Logo by Doke">
 
-  <form
-    action="/mediaManagement.js"
-    method="GET">
-    <button
-      type="submit"
-      value="1"
-      name="orphaned">Show only orphaned files</button>
-  </form>
-  <br>
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
 
-  <form
-    action="/deleteMedia.js"
-    method="POST"
-    enctype="multipart/form-data">
-    <input
-      value="Delete selected media"
-      type="submit"
-      id="deleteFormButton">
-    <input
-      value="Delete selected media"
-      type="button"
-      id="deleteJsButton"
-      onclick="deleteMedia()"
-      class="hidden">
+  <header>
+    <img
+      src="/.static/logo.png"
+      alt="logo" />
+  </header>
 
-    <div id="filesDiv"></div>
-  </form>
-  <div id="pagesDiv"></div>
+  <div id="settingsWrapper">
+
+    <fieldset id="settingsFieldset">
+
+      <legend>Media Management</legend>
+
+      <form
+        action="/mediaManagement.js"
+        method="GET">
+        <button
+          type="submit"
+          value="1"
+          name="orphaned">Show only orphaned files</button>
+      </form>
+
+      <form
+        action="/deleteMedia.js"
+        method="POST"
+        enctype="multipart/form-data">
+        <input
+          value="Delete selected media"
+          type="submit"
+          id="deleteFormButton">
+        <input
+          value="Delete selected media"
+          type="button"
+          id="deleteJsButton"
+          onclick="deleteMedia()"
+          class="hidden">
+
+        <div id="filesDiv"></div>
+      </form>
+      <hr>
+      <div id="pagesDiv"></div>
+
+    </fieldset>
+
+  </div>
 
 </body>
 <script src="/.static/js/settings.js"></script>
