@@ -19,7 +19,7 @@ var originalButtonText;
 
 var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
     + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
-    + '</span><a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
+    + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
     + '</span> <span class="labelCreated"></span> <span class="spanId"> Id: <span '
     + 'class="labelId"></span></span> <a class="linkPreview">[Preview]</a> <a '
     + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
@@ -478,15 +478,15 @@ function addPost(post) {
 
   var links = postCell.getElementsByClassName('imgLink');
 
-  var fuckYou = [];
+  var temporaryImageLinks = [];
 
   for (var i = 0; i < links.length; i++) {
-    fuckYou.push(links[i]);
+    temporaryImageLinks.push(links[i]);
   }
 
-  for (var i = 0; i < fuckYou.length; i++) {
+  for (var i = 0; i < temporaryImageLinks.length; i++) {
 
-    processImageLink(fuckYou[i]);
+    processImageLink(temporaryImageLinks[i]);
   }
 
   divPosts.appendChild(postCell);
