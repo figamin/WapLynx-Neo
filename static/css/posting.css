@@ -2,14 +2,16 @@
 .hideButton {
   margin-left: 0.5em;
   cursor: pointer;
+  color: #FFB300;
 }
 
 .unhideButton {
   cursor: pointer;
+  color: #FFB300;
   font-size: 80%;
 }
 
-.hideButton::BEFORE {
+.hideButton::before {
   font-family: 'Icons';
   content: '\e0db';
 }
