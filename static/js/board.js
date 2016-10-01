@@ -1,33 +1,49 @@
 var board = true;
 var originalButtonText;
-var boardUri = document.getElementById('boardIdentifier').value;
+
+var identifierElement = document.getElementById('boardIdentifier');
+var boardUri = identifierElement ? identifierElement.value : null;
+
 var hiddenCaptcha;
+var messageLimit;
 
 if (!DISABLE_JS) {
 
   hiddenCaptcha = !document.getElementById('captchaDiv');
 
-  setDragAndDrop();
+  if (identifierElement) {
 
-  var postButton = document.getElementById('jsButton');
-  postButton.style.display = 'inline';
-  postButton.disabled = false;
+    messageLimit = +document.getElementById('labelMessageLength').innerHTML;
 
-  if (document.getElementById('captchaDiv')) {
-    document.getElementById('reloadCaptchaButton').style.display = 'inline';
+    if (document.getElementById('divUpload')) {
+      setDragAndDrop();
+    }
 
+    var postButton = document.getElementById('jsButton');
+    postButton.style.display = 'inline';
+    postButton.disabled = false;
+    document.getElementById('formButton').style.display = 'none';
+
+    if (!hiddenCaptcha) {
+      document.getElementById('reloadCaptchaButton').style.display = 'inline';
+    }
+
+    var savedPassword = getSavedPassword();
+
+    if (savedPassword && savedPassword.length) {
+
+      document.getElementById('fieldPostingPassword').value = savedPassword;
+
+      if (document.getElementById('deletionFieldPassword')) {
+        document.getElementById('deletionFieldPassword').value = savedPassword;
+      }
+
+    }
   }
 
-  var savedPassword = getSavedPassword();
-
-  if (savedPassword && savedPassword.length) {
-    document.getElementById('fieldPostingPassword').value = savedPassword;
-    document.getElementById('deletionFieldPassword').value = savedPassword;
+  if (document.getElementById('reloadCaptchaButtonReport')) {
+    document.getElementById('reloadCaptchaButtonReport').style.display = 'inline';
   }
-
-  document.getElementById('reloadCaptchaButtonReport').style.display = 'inline';
-
-  document.getElementById('formButton').style.display = 'none';
 
 }
 
@@ -86,8 +102,8 @@ function sendThreadData(files, captchaId) {
   } else if (!forcedAnon && typedName.length > 32) {
     alert('Name is too long, keep it under 32 characters.');
     return;
-  } else if (typedMessage.length > 4096) {
-    alert('Message is too long, keep it under 4096 characters.');
+  } else if (typedMessage.length > messageLimit) {
+    alert('Message is too long, keep it under ' + messageLimit + ' characters.');
     return;
   } else if (typedEmail.length > 64) {
     alert('Email is too long, keep it under 64 characters.');
@@ -108,12 +124,14 @@ function sendThreadData(files, captchaId) {
   postButton.innerHTML = 'Uploading 0%';
   postButton.disabled = true;
 
+  var spoilerCheckBox = document.getElementById('checkboxSpoiler');
+
   apiRequest('newThread', {
     name : forcedAnon ? null : typedName,
     flag : hiddenFlags ? null : selectedFlag,
     captcha : captchaId,
     password : typedPassword,
-    spoiler : document.getElementById('checkboxSpoiler').checked,
+    spoiler : spoilerCheckBox ? spoilerCheckBox.checked : false,
     subject : typedSubject,
     message : typedMessage,
     email : typedEmail,

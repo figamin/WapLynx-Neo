@@ -10,7 +10,9 @@ if (!DISABLE_JS) {
 
       document.getElementById('banJsButton').style.display = 'inline';
       document.getElementById('spoilJsButton').style.display = 'inline';
+      document.getElementById('ipDeletionJsButton').style.display = 'inline';
 
+      document.getElementById('inputIpDelete').style.display = 'none';
       document.getElementById('inputBan').style.display = 'none';
       document.getElementById('inputSpoil').style.display = 'none';
     }
@@ -38,24 +40,17 @@ function spoilFiles() {
 
 function applyBans(captcha) {
   var typedReason = document.getElementById('reportFieldReason').value.trim();
-  var typedExpiration = document.getElementById('fieldExpiration').value.trim();
+  var typedDuration = document.getElementById('fieldDuration').value.trim();
   var typedMessage = document.getElementById('fieldbanMessage').value.trim();
-  var expiration = Date.parse(typedExpiration || '');
-  var range = document.getElementById('checkboxRange').checked;
-
-  if (isNaN(expiration) && !range) {
-    alert('Invalid expiration');
-
-    return;
-  }
+  var banType = document.getElementById('comboBoxBanTypes').selectedIndex;
 
   var toBan = getSelectedContent();
 
   apiRequest('banUsers', {
     reason : typedReason,
     captcha : captcha,
-    range : range,
-    expiration : typedExpiration,
+    banType : banType,
+    duration : typedDuration,
     banMessage : typedMessage,
     global : document.getElementById('checkboxGlobal').checked,
     postings : toBan
@@ -73,6 +68,11 @@ function applyBans(captcha) {
 
 function banPosts() {
 
+  if (!document.getElementsByClassName('panelRange').length) {
+    applyBans();
+    return;
+  }
+
   var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
 
   if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
@@ -88,19 +88,16 @@ function banPosts() {
   } else {
     var parsedCookies = getCookies();
 
-    var captchaSolvingCallback = function(status, data) {
-      applyBans(parsedCookies.captchaid);
-    }
-
-    captchaSolvingCallback.stop = function() {
-      reloadCaptcha();
-    }
-
     apiRequest('solveCaptcha', {
 
       captchaId : parsedCookies.captchaid,
       answer : typedCaptcha
-    }, captchaSolvingCallback);
+    }, function solvedCaptcha(status, data) {
+
+      applyBans(parsedCookies.captchaid);
+
+      reloadCaptcha();
+    });
   }
 
 }
@@ -192,6 +189,30 @@ function deletePosts() {
     deleteMedia : document.getElementById('checkboxMediaDeletion').checked,
     deleteUploads : document.getElementById('checkboxOnlyFiles').checked,
     postings : toDelete
+  }, function requestComplete(status, data) {
+
+    if (status === 'ok') {
+
+      alert(data.removedThreads + ' threads and ' + data.removedPosts
+          + ' posts were successfully deleted.');
+
+      window.location.pathname = redirect;
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+
+}
+
+function deleteFromIpOnBoard() {
+
+  var selected = getSelectedContent();
+
+  var redirect = '/' + selected[0].board + '/';
+
+  apiRequest('deleteFromIpOnBoard', {
+    postings : selected
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {

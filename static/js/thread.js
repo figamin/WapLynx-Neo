@@ -16,6 +16,10 @@ var hiddenCaptcha = !document.getElementById('captchaDiv');
 var markedPosting;
 var limitRefreshWait = 10 * 60;
 var originalButtonText;
+var messageLimit;
+var unreadPosts = 0;
+var originalTitle = document.title;
+var lastPost;
 
 var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
     + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
@@ -37,13 +41,32 @@ var guiEditInfo = 'Edited last time by {$login} on {$date}.';
 
 if (!DISABLE_JS) {
 
+  document.onscroll = function() {
+
+    if (!unreadPosts) {
+      return;
+    }
+
+    var rect = lastPost.getBoundingClientRect();
+
+    if (rect.bottom < window.innerHeight) {
+      unreadPosts = 0;
+
+      document.title = originalTitle;
+    }
+
+  };
+
   boardUri = document.getElementById('boardIdentifier').value;
   var divPosts = document.getElementsByClassName('divPosts')[0];
 
-  setDragAndDrop();
+  if (document.getElementById('divUpload')) {
+    setDragAndDrop();
+  }
 
   document.getElementsByClassName('divRefresh')[0].style.display = 'block';
 
+  messageLimit = +document.getElementById('labelMessageLength').innerHTML;
   refreshLabel = document.getElementById('labelRefresh');
 
   refreshButton = document.getElementById('refreshButton');
@@ -322,7 +345,8 @@ function setUploadLinks(cell, file) {
 
   var originalLink = cell.getElementsByClassName('originalNameLink')[0];
   originalLink.innerHTML = file.originalName;
-  originalLink.href = file.path + '/alias/' + file.originalName;
+  originalLink.href = file.path;
+  originalLink.setAttribute('download', file.originalName);
 }
 
 function getUploadCellBase() {
@@ -371,7 +395,9 @@ function setPostHideableElements(postCell, post) {
   }
 
   if (post.id) {
-    postCell.getElementsByClassName('labelId')[0].innerHTML = post.id;
+    var labelId = postCell.getElementsByClassName('labelId')[0];
+    labelId.setAttribute('style', 'background-color: #' + post.id);
+    labelId.innerHTML = post.id;
   } else {
     var spanId = postCell.getElementsByClassName('spanId')[0];
     spanId.parentNode.removeChild(spanId);
@@ -392,6 +418,10 @@ function setPostHideableElements(postCell, post) {
   if (post.flag) {
     imgFlag.src = post.flag;
     imgFlag.title = post.flagName;
+
+    if (post.flagCode) {
+      imgFlag.className += ' flag' + post.flagCode;
+    }
   } else {
     removeElement(imgFlag);
   }
@@ -464,6 +494,8 @@ function setPostInnerElements(boardUri, threadId, post, postCell) {
 
 function addPost(post) {
 
+  unreadPosts++;
+
   var postCell = document.createElement('div');
   postCell.innerHTML = postCellTemplate;
 
@@ -485,9 +517,10 @@ function addPost(post) {
   }
 
   for (var i = 0; i < temporaryImageLinks.length; i++) {
-
     processImageLink(temporaryImageLinks[i]);
   }
+
+  lastPost = postCell;
 
   divPosts.appendChild(postCell);
 
@@ -535,6 +568,8 @@ var refreshCallback = function(error, data) {
         }
 
       }
+
+      document.title = '(' + unreadPosts + ') ' + originalTitle;
     }
   }
 
@@ -591,8 +626,8 @@ function sendReplyData(files, captchaId) {
   } else if (!forcedAnon && typedName.length > 32) {
     alert('Name is too long, keep it under 32 characters.');
     return;
-  } else if (typedMessage.length > 4096) {
-    alert('Message is too long, keep it under 4096 characters.');
+  } else if (typedMessage.length > messageLimit) {
+    alert('Message is too long, keep it under ' + messageLimit + ' characters.');
     return;
   } else if (typedEmail.length > 64) {
     alert('E-mail is too long, keep it under 64 characters.');
@@ -609,6 +644,8 @@ function sendReplyData(files, captchaId) {
     savePassword(typedPassword);
   }
 
+  var spoilerCheckBox = document.getElementById('checkboxSpoiler');
+
   originalButtonText = replyButton.innerHTML;
   replyButton.innerHTML = 'Uploading 0%';
   setQRReplyText(replyButton.innerHTML);
@@ -620,7 +657,7 @@ function sendReplyData(files, captchaId) {
     flag : hiddenFlags ? null : selectedFlag,
     captcha : captchaId,
     subject : typedSubject,
-    spoiler : document.getElementById('checkboxSpoiler').checked,
+    spoiler : spoilerCheckBox ? spoilerCheckBox.checked : false,
     password : typedPassword,
     message : typedMessage,
     email : typedEmail,

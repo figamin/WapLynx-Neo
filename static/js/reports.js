@@ -1,34 +1,30 @@
-function setupReportButtons() {
+function closeReports(report) {
 
-  var reports = document.getElementsByClassName('reportCell');
+  var reports = document.getElementById('reportDiv').childNodes;
 
-  for (var j = 0; j < reports.length; j++) {
-    processReportCell(reports[j]);
+  var ids = [];
+
+  for (var i = 0; i < reports.length; i++) {
+
+    var checkbox = reports[i].getElementsByClassName('closureCheckbox')[0];
+
+    if (checkbox.checked) {
+      ids.push(checkbox.name.substring(7));
+    }
+
   }
-}
 
-function processReportCell(cell) {
+  if (!ids.length) {
+    return;
+  }
 
-  var button = cell.getElementsByClassName('closeJsButton')[0];
-  button.style.display = 'inline';
-
-  button.onclick = function() {
-    closeReport(cell.getElementsByClassName('idIdentifier')[0].value);
-  };
-
-  cell.getElementsByClassName('closeFormButton')[0].style.display = 'none';
-
-}
-
-function closeReport(report) {
-  apiRequest('closeReport', {
-    reportId : report
+  apiRequest('closeReports', {
+    reports : ids,
+    deleteContent : document.getElementById('deleteContentCheckbox').checked
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
       location.reload(true);
-
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

@@ -9,7 +9,9 @@ if (!DISABLE_JS) {
     document.getElementById('deleteBoardJsButton').style.display = 'inline';
     document.getElementById('cssJsButton').style.display = 'inline';
     document.getElementById('spoilerJsButton').style.display = 'inline';
+    document.getElementById('closeReportsJsButton').style.display = 'inline';
 
+    document.getElementById('closeReportsFormButton').style.display = 'none';
     document.getElementById('spoilerFormButton').style.display = 'none';
     document.getElementById('cssFormButton').style.display = 'none';
     document.getElementById('deleteBoardFormButton').style.display = 'none';
@@ -33,8 +35,6 @@ if (!DISABLE_JS) {
   boardIdentifier = document.getElementById('boardSettingsIdentifier').value;
   document.getElementById('saveSettingsJsButton').style.display = 'inline';
   document.getElementById('saveSettingsFormButton').style.display = 'none';
-
-  setupReportButtons();
 
 }
 
@@ -256,6 +256,10 @@ function saveSettings() {
 
   if (document.getElementById('locationCheckBox').checked) {
     settings.push('locationFlags');
+  }
+
+  if (document.getElementById('textBoardCheckbox').checked) {
+    settings.push('textBoard');
   }
 
   var typedTags = document.getElementById('tagsField').value.split(',');

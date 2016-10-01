@@ -1,13 +1,16 @@
 if (!DISABLE_JS) {
 
-  document.getElementById('registerJsButton').style.display = 'inline';
+  if (document.getElementById('divCreation')) {
+    document.getElementById('registerJsButton').style.display = 'inline';
+    document.getElementById('registerFormButton').style.display = 'none';
+    document.getElementById('reloadCaptchaButton').style.display = 'inline';
+  }
+
   document.getElementById('loginJsButton').style.display = 'inline';
   document.getElementById('recoverJsButton').style.display = 'inline';
-  document.getElementById('reloadCaptchaButton').style.display = 'inline';
   document.getElementById('reloadCaptchaButtonRecover').style.display = 'inline';
 
   document.getElementById('recoverFormButton').style.display = 'none';
-  document.getElementById('registerFormButton').style.display = 'none';
   document.getElementById('loginFormButton').style.display = 'none';
 
 }

@@ -1,12 +1,13 @@
 var boardIdentifier;
 var threadIdentififer;
 var postIdentifier;
+var messageLimit;
 
 if (!DISABLE_JS) {
   document.getElementById('saveJsButton').style.display = 'inline';
-
   document.getElementById('saveFormButton').style.display = 'none';
 
+  messageLimit = +document.getElementById('labelMessageLength').innerHTML;
   boardIdentifier = document.getElementById('boardIdentifier').value;
 
   var threadElement = document.getElementById('threadIdentifier');
@@ -24,8 +25,8 @@ function save() {
 
   if (!typedMessage.length) {
     alert('A message is mandatory.');
-  } else if (typedMessage.length > 4096) {
-    alert('Message too long, keep it under 4096 characters.');
+  } else if (typedMessage.length > messageLimit) {
+    alert('Message too long, keep it under ' + messageLimit + ' characters.');
   } else {
 
     var parameters = {

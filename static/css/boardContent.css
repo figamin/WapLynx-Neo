@@ -53,6 +53,10 @@
   height: 12em;
 }
 
+#divUpload {
+  text-align: center;
+}
+
 #newPostFieldset {
   display: inline-block;
   padding-right: 0.75em;
@@ -63,7 +67,7 @@
   border: 1px dashed #117743;
 }
 
-#postWrapper {
+#postingForm {
   text-align: center;
   margin: 1em auto;
 }
@@ -80,17 +84,17 @@
   box-shadow: 0px 0px 5px 2px #117743;
 }
 
-#postWrapper button {
+#postingForm button {
   width: 8em;
   margin: 0.5em auto;
   font-size: 125%;
 }
 
-#postWrapper button:active {
+#postingForm button:active {
   box-shadow: 0px 0px 5px #117743;
 }
 
-#postWrapper label {
+#postingForm label {
   font-size: 80%;
 }
 

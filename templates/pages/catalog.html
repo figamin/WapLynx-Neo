@@ -14,6 +14,10 @@
   href="/.static/css/thread.css"
   type="text/css"
   rel="stylesheet" />
+<link
+  href="/.static/css/boardContent.css"
+  type="text/css"
+  rel="stylesheet" />
 </head>
 <body>
 
@@ -37,8 +41,11 @@
       id="labelBoard"></a>
   </p>
 
-  <div id="postingForm">
 
+  <div id="postingForm">
+    <button
+      id="togglePosting"
+      class="hidden">Post thread</button>
     <fieldset id="newPostFieldset">
       <legend>Mode: Thread</legend>
 
@@ -213,4 +220,13 @@
     class="catalogDiv"></div>
 
 </body>
+
+<script src="/.static/js/settings.js"></script>
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/crypt.js"></script>
+<script src="/.static/js/upload.js"></script>
+<script src="/.static/js/board.js"></script>
+<script src="/.static/js/captcha.js"></script>
+<script src="/.static/js/catalog.js"></script>
+
 </html>

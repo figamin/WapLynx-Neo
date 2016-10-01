@@ -17,12 +17,36 @@ if (!DISABLE_JS) {
       type : 'boolean',
       setting : 'useGlobalBanners',
     },
+    checkboxDisableCatalogPosting : {
+      type : 'boolean',
+      setting : 'disableCatalogPosting',
+    },
+    checkboxAllowTorFiles : {
+      type : 'boolean',
+      setting : 'allowTorFiles',
+    },
+    checkboxAllowTorPosting : {
+      type : 'boolean',
+      setting : 'allowTorPosting',
+    },
+    fieldIpExpiration : {
+      type : 'string',
+      setting : 'ipExpirationDays'
+    },
     fieldMaster : {
       setting : 'master',
       type : 'string'
     },
+    fieldMessageLength : {
+      setting : 'messageLength',
+      type : 'string'
+    },
     fieldTorPort : {
       setting : 'torPort',
+      type : 'string'
+    },
+    fieldSpamIpsSource : {
+      setting : 'spamIpsSource',
       type : 'string'
     },
     fieldAddress : {
@@ -197,12 +221,20 @@ if (!DISABLE_JS) {
       setting : 'verbose',
       type : 'boolean'
     },
+    checkboxFfmpegGifs : {
+      setting : 'ffmpegGifs',
+      type : 'boolean'
+    },
     checkboxDisable304 : {
       setting : 'disable304',
       type : 'boolean'
     },
     checkboxAllowCustomJs : {
       setting : 'allowBoardCustomJs',
+      type : 'boolean'
+    },
+    checkboxDisableSpamCheck : {
+      setting : 'disableSpamCheck',
       type : 'boolean'
     },
     checkboxAutoPruneFiles : {
@@ -219,6 +251,10 @@ if (!DISABLE_JS) {
     },
     checkboxGlobalBoardModeration : {
       setting : 'allowGlobalBoardModeration',
+      type : 'boolean'
+    },
+    checkboxSpamBypass : {
+      setting : 'allowSpamBypass',
       type : 'boolean'
     },
     checkboxMediaThumb : {
@@ -256,10 +292,6 @@ if (!DISABLE_JS) {
     fieldAddons : {
       setting : 'addons',
       type : 'array'
-    },
-    comboTorAccess : {
-      setting : 'torAccess',
-      type : 'combo'
     },
     comboBoardCreationRequirement : {
       setting : 'boardCreationRequirement',

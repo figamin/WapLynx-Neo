@@ -111,17 +111,23 @@
       Cyclic will make the thread never get into auto-sage. Instead it will
       delete old posts when it hits the post limit that would trigger auto-sage.
 
-      <h1>Bans</h1>
+      <h1 id="banSection">Bans</h1>
       To apply bans, select the checkboxes on the left top corner of postings
-      and write an expiration for the ban. The date format must be parseable
-      using the date parse of javascript.
+      and write a duration for the ban. The format used is the following:
       <br>
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse">Technical
-        reference.</a>
+      <b>y</b>: amount of years.
       <br>
-      Bans can be lifted from the bans page that can be accessed from the
-      moderation pages.
+      <b>M</b>: amount of months.
+      <br>
+      <b>d</b>: amount of days.
+      <br>
+      <b>h</b>: amount of hours.
+      <br>
+      <b>m</b>: amount of minutes.
+      <br>
+      So if you write "2d 1h" it will create a 49 hour ban. The order of amounts
+      and spacing doesn`t matter. The same could be "1h 2d". Bans can be lifted
+      from the bans page that can be accessed from the moderation pages.
       <br>
       Optionally, you can enter the ban reason and message. The ban message will
       be displayed on the post itself instead of the default ban message set in

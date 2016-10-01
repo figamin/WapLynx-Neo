@@ -54,7 +54,7 @@
     <p id="labelDescription"></p>
   </header>
 
-  <div id="postWrapper">
+  <div id="postingForm">
 
     <fieldset id="newPostFieldset">
       <legend>Mode: Reply</legend>
@@ -518,11 +518,12 @@
             <hr>
             <p>Moderation actions</p>
             <label>
-              Expiration
+              Ban duration (Defaults to 5 years):
               <input
                 type="text"
-                id="fieldExpiration"
-                name="expiration">
+                id="fieldDuration"
+                name="duration">
+              <a href="/.static/moderation.html#banSection">Duration format</a>
             </label>
             <label>
               Ban Message
@@ -532,12 +533,29 @@
                 name="banMessage">
             </label>
 
-            <input
-              type="checkbox"
-              id="checkboxRange"
-              name="range">
-            Range ban
+            Ban type: <select
+              name="banType"
+              id="comboBoxBanTypes">
+              <option value="0">Regular ban</option>
+              <option value="1">Range ban (1/2 octects)</option>
+              <option value="2">Range ban (3/4 octects)</option>
+            </select>
             <br>
+
+            <button
+              type="submit"
+              id="inputIpDelete"
+              value="ip-deletion"
+              name="action">Delete by ip on this board</button>
+
+            <input
+              type="button"
+              style="display: none;"
+              id="ipDeletionJsButton"
+              onClick="deleteFromIpOnBoard()"
+              value="Delete by ip on this board">
+
+
             <input
               type="submit"
               id="inputBan"

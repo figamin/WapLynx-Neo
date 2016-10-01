@@ -70,8 +70,7 @@
             id="fieldLogin">
         </label>
         <label>
-          Role:
-          <select
+          Role: <select
             name="role"
             id="newStaffCombo"></select>
         </label>
@@ -133,9 +132,27 @@
 
       <hr />
 
-      <div id="reportDiv">
-        <h3>Open Reports</h3>
-      </div>
+      <h3>Open reports</h3>
+      <form
+        method="post"
+        action="/closeReports.js"
+        enctype="multipart/form-data">
+        <div id="reportDiv"></div>
+        <input
+          type="checkbox"
+          name="deleteContent"
+          id="deleteContentCheckbox">
+        Delete reported content after closing the reports
+        <br>
+        <button
+          type="submit"
+          id="closeReportsFormButton">Close selected reports</button>
+        <button
+          id="closeReportsJsButton"
+          type="button"
+          style="display: none;"
+          onclick="closeReports()">Close selected reports</button>
+      </form>
 
       <hr />
 
