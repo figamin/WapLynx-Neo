@@ -37,6 +37,177 @@
       id="labelBoard"></a>
   </p>
 
+  <div id="postingForm">
+
+    <fieldset id="newPostFieldset">
+      <legend>Mode: Thread</legend>
+
+      <form
+        class="form-post"
+        action="/newThread.js"
+        enctype="multipart/form-data"
+        method="post">
+
+        <div id="postBox">
+
+          <div
+            id="divName"
+            class="wider">
+            <input
+              type="text"
+              id="fieldName"
+              name="name"
+              placeholder="Name"
+              class="text">
+          </div>
+
+          <div class="wider">
+            <input
+              type="text"
+              id="fieldEmail"
+              name="email"
+              class="text"
+              placeholder="E-mail">
+          </div>
+
+          <div class="wider">
+            <input
+              type="text"
+              id="fieldSubject"
+              name="subject"
+              class="text"
+              placeholder="Subject">
+          </div>
+
+          <div>
+            <textarea
+              id="fieldMessage"
+              name="message"
+              class="text"
+              placeholder="Message"></textarea>
+          </div>
+
+          <div>
+
+            <input
+              type="text"
+              name="password"
+              id="fieldPostingPassword"
+              class="text"
+              placeholder="Password">
+
+            <input
+              type="checkbox"
+              name="spoiler"
+              id="checkboxSpoiler">
+
+            <label for="checkboxSpoiler">Spoiler</label>
+
+
+          </div>
+          <div id="flagsDiv">
+            <select
+              name="flag"
+              id="flagCombobox">
+            </select>
+          </div>
+
+          <div id="divUpload">
+            <div
+              class="hidden"
+              id="dragAndDropDiv">
+              <div
+                class="dropzone"
+                id="dropzone">
+                Drag files to upload or
+                <br>
+                click here to select them
+              </div>
+              <div id="selectedDiv"></div>
+            </div>
+
+            <div>
+              <input
+                type="file"
+                name="files"
+                id="files"
+                multiple
+                class="fileBrowser">
+            </div>
+
+            <p class="small">
+              Max file size: <span id="labelMaxFileSize"></span>
+            </p>
+            <p class="small">
+              Max files: <span id="labelMaxFiles"></span>
+            </p>
+          </div>
+
+        </div>
+
+        <div id="captchaDiv">
+
+          <img
+            class="captchaImage"
+            src="/captcha.js"
+            id="captchaImage" />
+
+          <div class="subCaptchaDiv">
+            <input
+              type="button"
+              onClick="reloadCaptcha()"
+              value="Reload"
+              id="reloadCaptchaButton"
+              class="hidden">
+            <span class="captchaTimer"></span>
+            <br>
+
+            <input
+              name="captcha"
+              type="text"
+              class="captchaField"
+              id="fieldCaptcha"
+              placeholder="answer">
+
+            <a
+              href="/noCookieCaptcha.js"
+              class="small">no cookies?</a>
+
+          </div>
+
+        </div>
+
+        <button
+          type="submit"
+          id="formButton">Post</button>
+
+        <button
+          type="button"
+          onClick="postThread()"
+          id="jsButton"
+          class="hidden">Post</button>
+
+        <input
+          type="hidden"
+          name="boardUri"
+          id="boardIdentifier">
+
+        <p class="small">
+          Remember to follow the
+          <a
+            href="rules.html"
+            class="rules">rules</a>
+        </p>
+        <p class="small">
+          Max message length: <span id="labelMessageLength"></span>
+        </p>
+
+      </form>
+
+    </fieldset>
+
+  </div>
+
   <div
     id="divThreads"
     class="catalogDiv"></div>

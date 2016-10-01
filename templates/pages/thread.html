@@ -129,8 +129,7 @@
 
           </div>
 
-          <div>
-
+          <div id="divUpload">
             <div
               class="hidden"
               id="dragAndDropDiv">
@@ -144,13 +143,21 @@
               <div id="selectedDiv"></div>
             </div>
 
-            <input
-              type="file"
-              name="files"
-              id="files"
-              multiple
-              class="fileBrowser">
+            <div>
+              <input
+                type="file"
+                name="files"
+                id="files"
+                multiple
+                class="fileBrowser">
+            </div>
 
+            <p class="small">
+              Max file size: <span id="labelMaxFileSize"></span>
+            </p>
+            <p class="small">
+              Max files: <span id="labelMaxFiles"></span>
+            </p>
           </div>
 
         </div>
@@ -214,10 +221,7 @@
             class="rules">rules</a>
         </p>
         <p class="small">
-          Max file size: <span id="labelMaxFileSize"></span>
-        </p>
-        <p class="small">
-          Max files: <span id="labelMaxFiles"></span>
+          Max message length: <span id="labelMessageLength"></span>
         </p>
 
       </form>
