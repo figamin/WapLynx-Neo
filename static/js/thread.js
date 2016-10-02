@@ -536,6 +536,8 @@ function addPost(post) {
     processQuote(quote);
   }
 
+  setHideMenu(postCell.getElementsByClassName('deletionCheckBox')[0]);
+
   processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
 
 }
