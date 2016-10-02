@@ -104,7 +104,7 @@
               placeholder="Message"></textarea>
           </div>
 
-          <div>
+          <div class="wider">
 
             <input
               type="text"
@@ -112,20 +112,12 @@
               id="fieldPostingPassword"
               class="text"
               placeholder="Password">
-
-            <input
-              type="checkbox"
-              name="spoiler"
-              id="checkboxSpoiler">
-
-            <label for="checkboxSpoiler">Spoiler</label>
-
-            <div id="flagsDiv">
-              <select
-                name="flag"
-                id="flagCombobox">
-              </select>
-            </div>
+          </div>
+          <div id="flagsDiv">
+            <select
+              name="flag"
+              id="flagCombobox">
+            </select>
 
           </div>
 
@@ -150,6 +142,15 @@
                 id="files"
                 multiple
                 class="fileBrowser">
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                name="spoiler"
+                id="checkboxSpoiler">
+
+              <label for="checkboxSpoiler">Spoiler</label>
             </div>
 
             <p class="small">
@@ -432,7 +433,7 @@
           <label>
             Password
             <input
-              type="password"
+              type="text"
               id="deletionFieldPassword"
               name="password">
           </label>

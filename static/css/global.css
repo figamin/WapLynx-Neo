@@ -255,6 +255,8 @@ span.spoiler {
 
 #settingsWrapper input {
   display: block;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 .banners {
@@ -282,6 +284,10 @@ span.spoiler {
 
 .subCaptchaDiv {
   text-align: left;
+}
+
+.captchaTimer {
+  font-size: 80%;
 }
 
 input.wide, textarea.wide {

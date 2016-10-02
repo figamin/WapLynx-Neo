@@ -102,23 +102,13 @@
               placeholder="Message"></textarea>
           </div>
 
-          <div>
-
+          <div class="wider">
             <input
               type="text"
               name="password"
               id="fieldPostingPassword"
               class="text"
               placeholder="Password">
-
-            <input
-              type="checkbox"
-              name="spoiler"
-              id="checkboxSpoiler">
-
-            <label for="checkboxSpoiler">Spoiler</label>
-
-
           </div>
           <div id="flagsDiv">
             <select
@@ -128,6 +118,7 @@
           </div>
 
           <div id="divUpload">
+
             <div
               class="hidden"
               id="dragAndDropDiv">
@@ -148,6 +139,15 @@
                 id="files"
                 multiple
                 class="fileBrowser">
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                name="spoiler"
+                id="checkboxSpoiler">
+
+              <label for="checkboxSpoiler">Spoiler</label>
             </div>
 
             <p class="small">
@@ -271,7 +271,7 @@
           <label>
             Password
             <input
-              type="password"
+              type="text"
               id="deletionFieldPassword"
               name="password">
           </label>

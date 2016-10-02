@@ -68,21 +68,21 @@ function setDragAndDrop(qr) {
   if (!qr) {
     fileInput.style.display = 'none';
     document.getElementById('dragAndDropDiv').style.display = 'block';
+
+    fileInput.onchange = function() {
+
+      for (var i = 0; i < fileInput.files.length; i++) {
+        addSelectedFile(fileInput.files[i]);
+      }
+
+      fileInput.type = "text";
+      fileInput.type = "file";
+    };
   }
 
   var drop = document.getElementById(qr ? 'dropzoneQr' : 'dropzone');
   drop.onclick = function() {
     fileInput.click();
-  };
-
-  fileInput.onchange = function() {
-
-    for (var i = 0; i < fileInput.files.length; i++) {
-      addSelectedFile(fileInput.files[i]);
-    }
-
-    fileInput.type = "text";
-    fileInput.type = "file";
   };
 
   if (!qr) {
