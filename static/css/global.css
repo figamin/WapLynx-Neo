@@ -7,6 +7,10 @@
   text-decoration: none;
 }
 
+#themeSelector {
+  font-size: 100%
+}
+
 h3, p, label {
   margin: 0.25em 0;
 }

@@ -20,10 +20,9 @@ if (!DISABLE_JS) {
   }
 
   var quotes = document.getElementsByClassName('quoteLink');
-  for (i = 0; i < quotes.length; i++) {
-    var quote = quotes[i];
 
-    processQuote(quote);
+  for (i = 0; i < quotes.length; i++) {
+    processQuote(quotes[i]);
   }
 }
 
@@ -105,13 +104,6 @@ function addBackLink(quoteUrl, quote) {
 
     }
 
-  }
-
-  var quotes = document.getElementsByClassName('quoteLink');
-  for (i = 0; i < quotes.length; i++) {
-    var quote = quotes[i];
-
-    processQuote(quote);
   }
 
 }
