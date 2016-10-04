@@ -543,15 +543,22 @@ function addPost(post) {
 
   setPostInnerElements(boardUri, threadId, post, postCell);
 
+  var messageLinks = postCell.getElementsByClassName('divMessage')[0]
+      .getElementsByTagName('a');
+
+  for (var i = 0; i < messageLinks.length; i++) {
+    processLinkForEmbed(messageLinks[i]);
+  }
+
   var links = postCell.getElementsByClassName('imgLink');
 
   var temporaryImageLinks = [];
 
-  for (var i = 0; i < links.length; i++) {
+  for (i = 0; i < links.length; i++) {
     temporaryImageLinks.push(links[i]);
   }
 
-  for (var i = 0; i < temporaryImageLinks.length; i++) {
+  for (i = 0; i < temporaryImageLinks.length; i++) {
     processImageLink(temporaryImageLinks[i]);
   }
 
@@ -565,7 +572,7 @@ function addPost(post) {
 
   var quotes = postCell.getElementsByClassName('quoteLink');
 
-  for (var i = 0; i < quotes.length; i++) {
+  for (i = 0; i < quotes.length; i++) {
     var quote = quotes[i];
 
     processQuote(quote);
