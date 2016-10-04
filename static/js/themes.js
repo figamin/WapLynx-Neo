@@ -8,23 +8,40 @@ var themes = [ {
   id : 'jungle'
 } ];
 
+var customCss;
+var addedTheme;
+
 function updateCss() {
 
-  var selectedTheme;
+  if (addedTheme) {
+    addedTheme.parentNode.removeChild(addedTheme);
+    addedTheme = null;
+  }
 
   for (var i = 0; i < themes.length; i++) {
     var theme = themes[i];
 
-    if (theme.id !== localStorage.selectedTheme && theme.element.parentNode) {
-      theme.element.parentNode.removeChild(theme.element);
-    } else if (theme.id === localStorage.selectedTheme) {
-      document.head.appendChild(theme.element);
+    if (theme.id === localStorage.selectedTheme) {
+      addedTheme = theme.element;
+      document.head.insertBefore(theme.element, customCss);
     }
   }
 
 }
 
 if (!DISABLE_JS) {
+
+  for (var i = 0; i < document.head.children.length; i++) {
+    var element = document.head.children[i];
+
+    if (element.rel === 'stylesheet'
+        && element.href.indexOf('/custom.css') > -1) {
+
+      customCss = element;
+      break;
+    }
+
+  }
 
   for (var i = 0; i < themes.length; i++) {
     themes[i].element = document.createElement('link');

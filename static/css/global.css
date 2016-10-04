@@ -94,7 +94,7 @@ input[type=button], input[type=submit], button, .dropzone, .selectedCell {
   font-family: 'Icons';
   src: url('../open-iconic.eot');
   src: url('../open-iconic.eot?#iconic-sm') format('embedded-opentype'),
-    url('../open-iconic.woff') format('woff'), url('open-iconic.ttf')
+    url('../open-iconic.woff') format('woff'), url('../open-iconic.ttf')
     format('truetype'), url('../open-iconic.otf') format('opentype'),
     url('../open-iconic.svg#iconic-sm') format('svg');
   font-weight: normal;
