@@ -31,3 +31,39 @@
   color: #C0840A;
   padding: 0.1em 0.25em;
 }
+
+#divBoardsLegend {
+  width: 100%;
+  text-align: right;
+  display: inline-block;
+}
+
+#divBoards {
+  width: 100%;
+}
+
+#legend {
+  width: 15%;
+  text-align: left;
+  display: inline-block;
+}
+
+.boardsCellHeader {
+  width: 85%;
+  display: inline-table;
+}
+
+.boardsCellStats {
+  width: 15%;
+  display: inline-table;
+}
+
+.boardsCellTags, .divDescription {
+  display: block;
+}
+
+.cellComponent {
+  width: 33%;
+  text-align: center;
+  display: inherit;
+}
