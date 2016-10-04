@@ -131,12 +131,17 @@ function setQr() {
   }
 
   qrhtml += '<tr><td colspan="2">';
-  qrhtml += '<input id="qremail" type="text" name="email" maxlength="40" autocomplete="off" placeholder="Email">';
-  qrhtml += '</td> </tr> <tr><td>';
-  qrhtml += '<input id="qrsubject" type="text" name="subject" maxlength="100" autocomplete="off" placeholder="Subject ">';
-  qrhtml += '</td><td class="submit">';
-  qrhtml += '<button accesskey="s" id="qrbutton" type="button" onclick="postReply()" name="post" >Reply</td>';
-  qrhtml += ' </tr> <tr><td colspan="2"><textarea name="message" id="qrbody" rows="5" placeholder="Comment">';
+  qrhtml += '<input id="qremail" type="text" name="email" maxlength="40" ';
+  qrhtml += 'autocomplete="off" placeholder="Email">';
+  qrhtml += '</td> </tr> ';
+
+  qrhtml += '<tr><td colspan="2">';
+  qrhtml += '<input id="qrsubject" type="text" name="subject" maxlength="100"';
+  qrhtml += 'autocomplete="off" placeholder="Subject ">';
+  qrhtml += '</td>';
+  qrhtml += '</tr>';
+
+  qrhtml += '<tr><td colspan="2"><textarea name="message" id="qrbody" rows="5" placeholder="Comment">';
   qrhtml += '</textarea></td></tr> ';
 
   qrhtml += '<tr><td colspan="2">';
@@ -150,17 +155,27 @@ function setQr() {
     qrhtml += ' <tr><td colspan="2"><div class="dropzone" id="dropzoneQr">';
     qrhtml += 'Drag files to upload or<br> click here to select them</div>';
     qrhtml += '<div id="selectedDivQr"></div></td> </tr>';
-    qrhtml += '<tr><td colspan="2"><input type="checkbox" name="spoiler" id="qrcheckboxSpoiler">';
+
+    qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
+    qrhtml += 'name="spoiler" id="qrcheckboxSpoiler">';
     qrhtml += '<label for="qrcheckboxSpoiler" class="spoilerCheckbox">Spoiler</label></td> </tr>';
 
   }
 
   if (!hiddenCaptcha) {
     qrhtml += '<tr><td colspan="2"><img src="/captcha.js" class="captchaImage"/></td></tr>';
-    qrhtml += '<tr><td colspan="2"><input type="button" onClick="reloadCaptcha()" value="Reload"> <span class="captchaTimer"></span></td></tr>';
-    qrhtml += '<tr><td><input name="captcha" type="text" class="captchaField" id="QRfieldCaptcha" placeholder="Answer"></td>';
+
+    qrhtml += '<tr><td colspan="2"><input type="button" onClick="reloadCaptcha()"';
+    qrhtml += ' value="Reload"> <span class="captchaTimer"></span></td></tr>';
+
+    qrhtml += '<tr><td><input name="captcha" type="text" class="captchaField" ';
+    qrhtml += 'id="QRfieldCaptcha" placeholder="Answer"></td>';
     qrhtml += '<td><a href="/noCookieCaptcha.js" target="_blank" class="small">No cookies?</a></td></tr>';
   }
+
+  qrhtml += '<tr> <td colspan="2" class="centered">';
+  qrhtml += '<button accesskey="s" id="qrbutton" type="button" onclick="postReply()" name="post">Reply';
+  qrhtml += '</td></tr>';
 
   qrhtml += '</tbody> </table></div></div>';
 
