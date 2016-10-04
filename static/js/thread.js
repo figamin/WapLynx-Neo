@@ -27,13 +27,21 @@ var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
     + '</span> <span class="labelCreated"></span> <span class="spanId"> Id: <span '
     + 'class="labelId"></span></span> <a class="linkPreview">[Preview]</a> <a '
     + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
-    + '</span></div><div class="panelUploads"></div><div class="divMessage"></div>'
+    + '</span></div>'
+    + '<div>'
+    + '<span class="panelIp"> <span class="panelRange"> Broad'
+    + 'range(1/2 octets): <span class="labelBroadRange"> </span> <br>'
+    + 'Narrow range(3/4 octets): <span class="labelNarrowRange"> </span> <br>'
+    + '</span> Ip: <span class="labelIp"></span></span>'
+    + '</div>'
+    + '<div class="panelUploads"></div><div class="divMessage"></div>'
     + '<div class="divBanMessage"></div><div class="labelLastEdit"></div></div>';
 
 var uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
     + 'Open file</a> (<span class="sizeLabel"></span> <span class="dimensionLabel">'
-    + '</span> <a class="originalNameLink"></a>)</div><a class="imgLink" '
-    + 'target="blank"></a>';
+    + '</span> <a class="originalNameLink"></a>)</div>'
+    + '<div class="divHash"><span>MD5: <span class="labelHash"></span></span></div>'
+    + '<a class="imgLink" ' + 'target="blank"></a>';
 
 var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
 
@@ -72,6 +80,10 @@ if (!DISABLE_JS) {
   refreshButton = document.getElementById('refreshButton');
 
   threadId = document.getElementsByClassName('opCell')[0].id;
+
+  var refreshURL = document.getElementById('divMod') ? '/mod.js?boardUri='
+      + boardUri + '&threadId=' + threadId + '&json=1' : '/' + boardUri
+      + '/res/' + threadId + '.json';
 
   if (document.getElementById('controlThreadIdentifier')) {
     document.getElementById('settingsJsButon').style.display = 'inline';
@@ -381,6 +393,12 @@ function setUploadCell(node, files) {
       removeElement(dimensionLabel);
     }
 
+    if (file.md5) {
+      cell.getElementsByClassName('labelHash')[0].innerHTML = file.md5;
+    } else {
+      removeElement(cell.getElementsByClassName('divHash')[0]);
+    }
+
     node.appendChild(cell);
   }
 
@@ -424,6 +442,23 @@ function setPostHideableElements(postCell, post) {
     }
   } else {
     removeElement(imgFlag);
+  }
+
+  if (!post.ip) {
+    removeElement(postCell.getElementsByClassName('panelIp')[0]);
+  } else {
+
+    postCell.getElementsByClassName('labelIp')[0].innerHTML = post.ip;
+
+    if (!post.broadRange) {
+      removeElement(postCell.getElementsByClassName('panelRange')[0]);
+    } else {
+
+      postCell.getElementsByClassName('labelBroadRange')[0].innerHTML = post.broadRange;
+      postCell.getElementsByClassName('labelNarrowRange')[0].innerHTML = post.narrowRange;
+
+    }
+
   }
 
 }
@@ -595,7 +630,7 @@ function refreshPosts(manual) {
 
   refreshButton.disabled = true;
 
-  localRequest('/' + boardUri + '/res/' + threadId + '.json', refreshCallback);
+  localRequest(refreshURL, refreshCallback);
 
 }
 
