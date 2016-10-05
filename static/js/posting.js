@@ -1,50 +1,3 @@
-function processLinkForEmbed(link) {
-
-  if (link.href.indexOf('youtube.com/watch') < 0) {
-    return;
-  }
-
-  var videoId = link.href.split('v=')[1];
-
-  if (!videoId) {
-    return;
-  }
-
-  var ampersandPosition = videoId.indexOf('&');
-  videoId = videoId.substring(0, ampersandPosition < 0 ? videoId.length
-      : ampersandPosition);
-
-  link.style.display = 'inline';
-
-  var finalHTML = embedHTML.replace('{$id}', videoId);
-
-  var div = document.createElement('div');
-  div.innerHTML = finalHTML;
-
-  div.style.display = 'none';
-
-  var embedButton = document.createElement('span');
-
-  embedButton.innerHTML = '[Embed]';
-  embedButton.setAttribute('class', 'embedButton');
-
-  embedButton.onclick = function() {
-
-    var embedDisplay = div.style.display;
-
-    div.style.display = link.style.display;
-    link.style.display = embedDisplay;
-
-    embedButton.innerHTML = embedDisplay === 'none' ? '[Remove embed]'
-        : '[Embed]';
-
-  };
-
-  link.parentNode.insertBefore(embedButton, link.nextSibling);
-  link.parentNode.insertBefore(div, link.nextSibling);
-
-}
-
 if (!DISABLE_JS) {
 
   if (document.getElementById('deleteJsButton')) {
@@ -66,19 +19,6 @@ if (!DISABLE_JS) {
 
   }
 
-  var messages = document.getElementsByClassName('divMessage');
-
-  var embedHTML = '<iframe width="400" height="305" src="https://www.youtube.com/embed/{$id}" frameborder="0" allowfullscreen></iframe>';
-
-  for (var i = 0; i < messages.length; i++) {
-
-    var links = messages[i].getElementsByTagName('a');
-
-    for (var j = 0; j < links.length; j++) {
-      processLinkForEmbed(links[j]);
-    }
-
-  }
 }
 
 function spoilFiles() {
