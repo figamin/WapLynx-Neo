@@ -1,11 +1,9 @@
 /*Elements shown on board and thread pages*/
-#reportFieldset {
-  clear: both;
+.reportFieldset {
   margin-top: 1em;
   border: 1px dashed #117743;
   padding: 0.5em;
   margin-bottom: 1em;
-  float: left;
 }
 
 .selectedCell, .dropzone {

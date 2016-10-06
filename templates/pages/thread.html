@@ -418,18 +418,10 @@
         <span>]</span>
       </div>
 
-      <fieldset id="reportFieldset">
-        <legend>Actions</legend>
+      <fieldset class="reportFieldset">
+        <legend>Delete</legend>
 
         <div class="contentAction">
-
-          <label>
-            Reason
-            <input
-              type="text"
-              id="reportFieldReason"
-              name="reason">
-          </label>
           <label>
             Password
             <input
@@ -440,28 +432,53 @@
           <label>
             <input
               type="checkbox"
-              id="checkboxGlobal"
-              name="global">
-            Global
-          </label>
-          <label>
-            <input
-              type="checkbox"
               id="checkboxOnlyFiles"
               name="deleteUploads">
-            Delete only files
+            Delete only files (Removes the file reference to the posts)
           </label>
           <label>
             <input
               type="checkbox"
               id="checkboxMediaDeletion"
               name="deleteMedia">
-            Delete media (Actually removes the saved files from the server,
-            standard file deletion only removes the reference to the selected
-            posts)
+            Delete media (Removes the saved files from the server)
           </label>
-          <br>
-          <p>Captcha (required for bans and reports)</p>
+          <input
+            type="submit"
+            id="deleteFormButton"
+            value="Delete"
+            name="action">
+
+          <input
+            type="button"
+            class="hidden"
+            id="deleteJsButton"
+            onClick="deletePosts()"
+            value="Delete">
+        </div>
+      </fieldset>
+
+      <fieldset class="reportFieldset">
+        <legend>Report/Ban</legend>
+
+        <div class="contentAction">
+
+          <label>
+            Reason (used on reports and bans)
+            <input
+              type="text"
+              id="reportFieldReason"
+              name="reason">
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              id="checkboxGlobal"
+              name="global">
+            Global (used on reports and bans)
+          </label>
+          <p>Captcha (required for reports and bans by board staff)</p>
           <img
             class="captchaImage"
             id="captchaImageReport"
@@ -488,19 +505,6 @@
             href="/noCookieCaptcha.js">no cookies?</a>
 
           <br>
-
-          <input
-            type="submit"
-            id="deleteFormButton"
-            value="Delete"
-            name="action">
-
-          <input
-            type="button"
-            class="hidden"
-            id="deleteJsButton"
-            onClick="deletePosts()"
-            value="Delete">
 
           <input
             type="submit"
@@ -552,7 +556,7 @@
 
             <input
               type="button"
-              style="display: none;"
+              class="hidden"
               id="ipDeletionJsButton"
               onClick="deleteFromIpOnBoard()"
               value="Delete by ip on this board">

@@ -256,8 +256,48 @@
 
       </div>
 
-      <fieldset id="reportFieldset">
-        <legend>Actions</legend>
+      <fieldset class="reportFieldset">
+        <legend>Delete</legend>
+
+        <div class="contentAction">
+          <label>
+            Password
+            <input
+              type="text"
+              id="deletionFieldPassword"
+              name="password">
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              id="checkboxOnlyFiles"
+              name="deleteUploads">
+            Delete only files (Removes the file reference to the posts)
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              id="checkboxMediaDeletion"
+              name="deleteMedia">
+            Delete media (Removes the saved files from the server)
+          </label>
+          <input
+            type="submit"
+            id="deleteFormButton"
+            value="Delete"
+            name="action">
+
+          <input
+            type="button"
+            class="hidden"
+            id="deleteJsButton"
+            onClick="deletePosts()"
+            value="Delete">
+        </div>
+      </fieldset>
+
+      <fieldset class="reportFieldset">
+        <legend>Report</legend>
 
         <div class="contentAction">
 
@@ -269,38 +309,12 @@
               name="reason">
           </label>
           <label>
-            Password
-            <input
-              type="text"
-              id="deletionFieldPassword"
-              name="password">
-          </label>
-          <label>
             <input
               type="checkbox"
               id="checkboxGlobal"
               name="global">
             Global
           </label>
-          <label>
-            <input
-              type="checkbox"
-              id="checkboxOnlyFiles"
-              name="deleteUploads">
-            Delete only files
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              id="checkboxMediaDeletion"
-              name="deleteMedia">
-            Delete media (Actually removes the saved files from the server,
-            standard file deletion only removes the reference to the selected
-            posts)
-          </label>
-
-          <br>
-          <p>Captcha (required for bans and reports)</p>
           <img
             class="captchaImage"
             id="captchaImageReport"
@@ -327,19 +341,6 @@
             href="/noCookieCaptcha.js"
             class="small">no cookies?</a>
           <br>
-
-          <input
-            type="submit"
-            id="deleteFormButton"
-            value="Delete"
-            name="action">
-
-          <input
-            type="button"
-            class="hidden"
-            id="deleteJsButton"
-            onClick="deletePosts()"
-            value="Delete">
 
           <input
             type="submit"
