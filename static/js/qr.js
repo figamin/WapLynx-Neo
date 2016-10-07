@@ -122,7 +122,7 @@ function setQr() {
   qrhtml += '<span class="handle" ';
   qrhtml += 'onmousedown=\'startMoving(event);\' ';
   qrhtml += 'onmouseup=\'shouldMove = false\'><a class="close-btn"';
-  qrhtml += ' onclick="document.getElementById(\'quick-reply\').remove();">×</a>';
+  qrhtml += ' onclick="document.getElementById(\'quick-reply\').remove();"></a>';
   qrhtml += 'Quick Reply</span></th> </tr>';
 
   if (QRshowname) {

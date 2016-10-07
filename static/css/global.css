@@ -22,13 +22,18 @@ hr {
   border-color: #117743;
 }
 
-a {
+a, .navClickable {
   color: #FFB300;
   text-decoration: none;
 }
 
-a:hover, .hideButton:hover, .unhideButton:hover, .embedButton:hover {
+a:hover, .hideButton:hover, .unhideButton:hover, .embedButton:hover,
+  .navClickable:hover, #closeWatcherMenuButton:hover, .watchButton {
   text-shadow: 0px 0px 5px #117743;
+}
+
+.navClickable, .watchButton {
+  cursor: pointer
 }
 
 u {
@@ -128,13 +133,7 @@ nav {
   text-align: center;
 }
 
-nav a {
-  display: inline-block;
-  text-decoration: none;
-  margin: 0 0.2em;
-}
-
-nav span {
+nav span, nav a {
   display: inline-block;
   text-decoration: none;
   margin: 0 0.2em;

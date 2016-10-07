@@ -1,0 +1,10 @@
+#watcherButton::before {
+  font-family: 'Icons';
+  content: '\e065';
+  margin-right: 0.25em;
+}
+
+#closeWatcherMenuButton::before, .close-btn::before {
+  font-family: 'Icons';
+  content: '\e0db';
+}
