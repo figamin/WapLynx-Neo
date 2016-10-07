@@ -5,6 +5,13 @@
   color: #FFB300;
 }
 
+.reportFieldset {
+  margin-top: 1em;
+  border: 1px dashed #117743;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
 .labelId {
   color: #ffffff;
   padding: 0.25em;

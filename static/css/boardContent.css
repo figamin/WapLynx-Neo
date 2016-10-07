@@ -1,11 +1,4 @@
 /*Elements shown on board and thread pages*/
-.reportFieldset {
-  margin-top: 1em;
-  border: 1px dashed #117743;
-  padding: 0.5em;
-  margin-bottom: 1em;
-}
-
 .selectedCell, .dropzone {
   top: 5px;
   text-align: center;
