@@ -1,3 +1,5 @@
+var watchedMenu;
+
 if (!DISABLE_JS) {
 
   var postingLink = document.getElementById('navPosting');
@@ -16,7 +18,7 @@ if (!DISABLE_JS) {
 
   postingLink.parentNode.insertBefore(watcherButton, referenceNode);
 
-  var watchedMenu = document.createElement('div');
+  watchedMenu = document.createElement('div');
   watchedMenu.innerHTML = 'Watched threads';
 
   var showingWatched = false;
@@ -73,12 +75,39 @@ if (!DISABLE_JS) {
     processOP(ops[i]);
   }
 
+  var storedWatchedData = localStorage.watchedData;
+
+  if (storedWatchedData) {
+    storedWatchedData = JSON.parse(storedWatchedData);
+
+    for ( var board in storedWatchedData) {
+
+      if (storedWatchedData.hasOwnProperty(board)) {
+
+        var threads = storedWatchedData[board];
+
+        for ( var thread in threads) {
+          if (threads.hasOwnProperty(thread)) {
+            addWatchedCell(board, thread, threads[thread]);
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+function addWatchedCell(board, thread, watchData) {
+
+  var cell = document.createElement('div');
+  cell.innerHTML = board + '/' + thread + ' (' + watchData.newPosts + ')';
+
+  watchedMenu.appendChild(cell);
+
 }
 
 function processOP(op) {
-
-  // TODO
-  return;
 
   var checkBox = op.getElementsByClassName('deletionCheckBox')[0];
 
@@ -88,7 +117,38 @@ function processOP(op) {
   var thread = nameParts[1];
 
   var watchButton = document.createElement('span');
-
   watchButton.setAttribute('class', 'watchButton');
+
+  checkBox.parentNode.insertBefore(watchButton,
+      checkBox.nextSibling.nextSibling);
+
+  watchButton.onclick = function() {
+
+    var storedWatchedData = localStorage.watchedData;
+
+    if (storedWatchedData) {
+      storedWatchedData = JSON.parse(storedWatchedData);
+    } else {
+      storedWatchedData = {};
+    }
+
+    var boardThreads = storedWatchedData[board] || {};
+
+    if (boardThreads[thread]) {
+      return;
+    }
+
+    boardThreads[thread] = {
+      lastSeen : new Date(),
+      newPosts : 0
+    };
+
+    storedWatchedData[board] = boardThreads;
+
+    localStorage.watchedData = JSON.stringify(storedWatchedData);
+
+    addWatchedCell(board, thread, boardThreads[thread]);
+
+  };
 
 }
