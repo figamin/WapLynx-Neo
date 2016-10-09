@@ -1,5 +1,6 @@
 /*Used for places where posts are displayed*/
-.hideButton, .embedButton, #closeWatcherMenuButton, .watchButton {
+.hideButton, .embedButton, #closeWatcherMenuButton, .watchButton,
+  .watchedCellCloseButton {
   margin-left: 0.5em;
   cursor: pointer;
   color: #FFB300;

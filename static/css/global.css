@@ -28,7 +28,8 @@ a, .navClickable {
 }
 
 a:hover, .hideButton:hover, .unhideButton:hover, .embedButton:hover,
-  .navClickable:hover, #closeWatcherMenuButton:hover, .watchButton:hover {
+  .navClickable:hover, #closeWatcherMenuButton:hover, .watchButton:hover,
+  .watchedCellCloseButton:hover {
   text-shadow: 0px 0px 5px #117743;
 }
 

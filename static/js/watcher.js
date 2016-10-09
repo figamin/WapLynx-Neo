@@ -19,7 +19,12 @@ if (!DISABLE_JS) {
   postingLink.parentNode.insertBefore(watcherButton, referenceNode);
 
   watchedMenu = document.createElement('div');
-  watchedMenu.innerHTML = 'Watched threads';
+
+  var watchedMenuLabel = document.createElement('span');
+  watchedMenuLabel.innerHTML = 'Watched threads';
+  watchedMenuLabel.setAttribute('class', 'watchedMenuLabel');
+
+  watchedMenu.appendChild(watchedMenuLabel);
 
   var showingWatched = false;
 
@@ -100,10 +105,47 @@ if (!DISABLE_JS) {
 
 function addWatchedCell(board, thread, watchData) {
 
-  var cell = document.createElement('div');
-  cell.innerHTML = board + '/' + thread + ' (' + watchData.newPosts + ')';
+  var cellWrapper = document.createElement('div');
 
-  watchedMenu.appendChild(cell);
+  var cell = document.createElement('div');
+  cell.setAttribute('class', 'watchedCell');
+
+  var label = document.createElement('span');
+  label.setAttribute('class', 'watchedCellLabel watchedMenuLabel');
+  label.innerHTML = board + '/' + thread;
+  cell.appendChild(label);
+
+  var button = document.createElement('span');
+  button.setAttribute('class', 'watchedCellCloseButton');
+  cell.appendChild(button);
+
+  button.onclick = function() {
+
+    watchedMenu.removeChild(cellWrapper);
+
+    var storedWatchedData = localStorage.watchedData;
+
+    if (!storedWatchedData) {
+      return;
+    }
+
+    storedWatchedData = JSON.parse(storedWatchedData);
+
+    var boardThreads = storedWatchedData[board];
+
+    if (!boardThreads || !boardThreads[thread]) {
+      return;
+    }
+
+    delete boardThreads[thread];
+
+    localStorage.watchedData = JSON.stringify(storedWatchedData);
+
+  }
+
+  cellWrapper.appendChild(cell);
+  cellWrapper.appendChild(document.createElement('hr'));
+  watchedMenu.appendChild(cellWrapper);
 
 }
 
@@ -139,8 +181,7 @@ function processOP(op) {
     }
 
     boardThreads[thread] = {
-      lastSeen : new Date(),
-      newPosts : 0
+      lastSeen : new Date()
     };
 
     storedWatchedData[board] = boardThreads;

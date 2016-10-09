@@ -9,7 +9,22 @@
   content: '\e065';
 }
 
-#closeWatcherMenuButton::before, .close-btn::before {
+#closeWatcherMenuButton::before, .close-btn::before, .watchedCellCloseButton::before
+  {
   font-family: 'Icons';
   content: '\e0db';
+}
+
+.watchedCell {
+  display: table;
+  width: 100%;
+}
+
+.watchedCellLabel {
+  display: table-cell;
+  width: 90%;
+}
+
+.watchedMenuLabel {
+  font-size: 80%
 }
