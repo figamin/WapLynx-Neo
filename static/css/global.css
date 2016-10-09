@@ -3,6 +3,10 @@
   text-decoration: none;
 }
 
+.clearer {
+  clear: both;
+}
+
 .small a {
   text-decoration: none;
 }
