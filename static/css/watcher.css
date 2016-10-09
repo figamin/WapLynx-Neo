@@ -28,3 +28,10 @@
 .watchedMenuLabel {
   font-size: 80%
 }
+
+.watchedNotification::before {
+  font-family: 'Icons';
+  content: '\e0D8';
+  margin-left: 0.25em;
+  color: #A00;
+}

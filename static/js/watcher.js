@@ -1,5 +1,9 @@
 var watchedMenu;
 
+var isInThread = document.getElementById('threadIdentifier') ? true : false;
+
+var elementRelation = {};
+
 if (!DISABLE_JS) {
 
   var postingLink = document.getElementById('navPosting');
@@ -80,26 +84,147 @@ if (!DISABLE_JS) {
     processOP(ops[i]);
   }
 
+  var storedWatchedData = getStoredWatchedData();
+
+  for ( var board in storedWatchedData) {
+
+    if (storedWatchedData.hasOwnProperty(board)) {
+
+      var threads = storedWatchedData[board];
+
+      for ( var thread in threads) {
+        if (threads.hasOwnProperty(thread)) {
+
+          addWatchedCell(board, thread, threads[thread]);
+        }
+      }
+    }
+
+  }
+
+  scheduleWatchedThreadsCheck();
+
+}
+
+function getStoredWatchedData() {
+
   var storedWatchedData = localStorage.watchedData;
 
   if (storedWatchedData) {
     storedWatchedData = JSON.parse(storedWatchedData);
+  } else {
+    storedWatchedData = {};
+  }
 
-    for ( var board in storedWatchedData) {
+  return storedWatchedData;
 
-      if (storedWatchedData.hasOwnProperty(board)) {
+}
 
-        var threads = storedWatchedData[board];
+function iterateWatchedThreads(urls, index) {
 
-        for ( var thread in threads) {
-          if (threads.hasOwnProperty(thread)) {
-            addWatchedCell(board, thread, threads[thread]);
+  index = index || 0;
+
+  if (index >= urls.length) {
+    scheduleWatchedThreadsCheck();
+    return;
+  }
+
+  var url = urls[index];
+
+  localRequest('/' + url.board + '/res/' + url.thread + '.json',
+      function gotThreadInfo(error, data) {
+
+        if (error) {
+          iterateWatchedThreads(urls, ++index);
+          return;
+        }
+
+        data = JSON.parse(data);
+
+        var posts = data.posts;
+
+        if (posts) {
+
+          var lastPost = posts[posts.length - 1];
+
+          var parsedCreation = new Date(lastPost.creation);
+
+          var storedWatchedData = getStoredWatchedData();
+
+          var watchData = storedWatchedData[url.board][url.thread];
+
+          if (parsedCreation.getTime() > watchData.lastReplied) {
+            watchData.lastReplied = parsedCreation.getTime();
+            localStorage.watchedData = JSON.stringify(storedWatchedData);
           }
+
+          if (watchData.lastSeen >= watchData.lastReplied) {
+            elementRelation[url.board][url.thread].style.display = 'none';
+          } else {
+            elementRelation[url.board][url.thread].style.display = 'inline';
+          }
+
+        }
+
+        iterateWatchedThreads(urls, ++index);
+
+      });
+
+}
+
+function runWatchedThreadsCheck() {
+
+  var index = index || 0;
+
+  localStorage.lastWatchCheck = new Date().getTime();
+
+  var urls = [];
+
+  var storedWatchedData = getStoredWatchedData();
+
+  for ( var board in storedWatchedData) {
+
+    if (storedWatchedData.hasOwnProperty(board)) {
+
+      var threads = storedWatchedData[board];
+
+      for ( var thread in threads) {
+        if (threads.hasOwnProperty(thread)) {
+
+          if (isInThread && board == boardUri && thread == threadId) {
+            threads[thread].lastSeen = new Date().getTime();
+            localStorage.watchedData = JSON.stringify(storedWatchedData);
+          }
+
+          urls.push({
+            board : board,
+            thread : thread
+          });
         }
       }
-
     }
+
   }
+
+  iterateWatchedThreads(urls);
+}
+
+function scheduleWatchedThreadsCheck() {
+
+  var lastCheck = localStorage.lastWatchCheck;
+
+  if (!lastCheck) {
+    runWatchedThreadsCheck();
+    return;
+  }
+
+  lastCheck = new Date(+lastCheck);
+
+  lastCheck.setUTCMinutes(lastCheck.getUTCMinutes() + 5);
+
+  setTimeout(function() {
+    runWatchedThreadsCheck();
+  }, lastCheck.getTime() - new Date().getTime());
 
 }
 
@@ -110,10 +235,30 @@ function addWatchedCell(board, thread, watchData) {
   var cell = document.createElement('div');
   cell.setAttribute('class', 'watchedCell');
 
-  var label = document.createElement('span');
-  label.setAttribute('class', 'watchedCellLabel watchedMenuLabel');
+  var labelWrapper = document.createElement('span');
+  labelWrapper.setAttribute('class', 'watchedCellLabel watchedMenuLabel');
+
+  var label = document.createElement('a');
   label.innerHTML = board + '/' + thread;
-  cell.appendChild(label);
+  label.href = '/' + board + '/res/' + thread + '.html';
+  labelWrapper.appendChild(label);
+
+  var notification = document.createElement('span');
+  notification.setAttribute('class', 'watchedNotification');
+
+  if (!elementRelation[board]) {
+    elementRelation[board] = {};
+  }
+
+  elementRelation[board][thread] = notification;
+
+  if (watchData.lastSeen >= watchData.lastReplied) {
+    notification.style.display = 'none';
+  }
+
+  labelWrapper.appendChild(notification);
+
+  cell.appendChild(labelWrapper);
 
   var button = document.createElement('span');
   button.setAttribute('class', 'watchedCellCloseButton');
@@ -123,13 +268,7 @@ function addWatchedCell(board, thread, watchData) {
 
     watchedMenu.removeChild(cellWrapper);
 
-    var storedWatchedData = localStorage.watchedData;
-
-    if (!storedWatchedData) {
-      return;
-    }
-
-    storedWatchedData = JSON.parse(storedWatchedData);
+    var storedWatchedData = getStoredWatchedData();
 
     var boardThreads = storedWatchedData[board];
 
@@ -166,13 +305,7 @@ function processOP(op) {
 
   watchButton.onclick = function() {
 
-    var storedWatchedData = localStorage.watchedData;
-
-    if (storedWatchedData) {
-      storedWatchedData = JSON.parse(storedWatchedData);
-    } else {
-      storedWatchedData = {};
-    }
+    var storedWatchedData = getStoredWatchedData();
 
     var boardThreads = storedWatchedData[board] || {};
 
@@ -181,7 +314,8 @@ function processOP(op) {
     }
 
     boardThreads[thread] = {
-      lastSeen : new Date()
+      lastSeen : new Date().getTime(),
+      lastReplied : new Date().getTime()
     };
 
     storedWatchedData[board] = boardThreads;
