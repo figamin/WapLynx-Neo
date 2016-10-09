@@ -158,7 +158,10 @@ function iterateWatchedThreads(urls, index) {
             localStorage.watchedData = JSON.stringify(storedWatchedData);
           }
 
-          if (watchData.lastSeen >= watchData.lastReplied) {
+          if (!elementRelation[url.board]
+              || !elementRelation[url.board][url.thread]) {
+            addWatchedCell(url.board, url.thread, watchData);
+          } else if (watchData.lastSeen >= watchData.lastReplied) {
             elementRelation[url.board][url.thread].style.display = 'none';
           } else {
             elementRelation[url.board][url.thread].style.display = 'inline';
