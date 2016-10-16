@@ -562,6 +562,18 @@ function addPost(post) {
     processImageLink(temporaryImageLinks[i]);
   }
 
+  var shownFiles = postCell.getElementsByClassName('uploadCell');
+
+  for (var i = 0; i < shownFiles.length; i++) {
+    processFileForHiding(shownFiles[i]);
+  }
+
+  var hiddenMedia = getHiddenMedia();
+
+  for (i = 0; i < hiddenMedia.length; i++) {
+    updateHiddenFiles(hiddenMedia[i], true);
+  }
+
   lastPost = postCell;
 
   divPosts.appendChild(postCell);
