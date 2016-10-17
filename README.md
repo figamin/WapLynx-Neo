@@ -12,7 +12,7 @@ mongofiles tool and run
 
 This front end currently requires you to set the URI of the overboard as "overboard".
 
-For the javascript to work, you will have to create a file named settings.js in the static directory and declare the following variables in it:
+For the javascript to work, you will have to create a file named settings.js in the static/js directory and declare the following variables in it:
 * VERBOSE: if true, it will print incoming and outcoming data from the api.
 * DISABLE_JS: if true, javascript will not be used.
 
