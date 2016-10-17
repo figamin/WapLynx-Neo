@@ -17,11 +17,12 @@ if (!DISABLE_JS) {
 
 function processLinkForEmbed(link) {
 
-  if (link.href.indexOf('youtube.com/watch') < 0) {
+  if (link.href.indexOf('youtube.com/watch') < 0
+      && link.href.indexOf('youtu.be/') < 0) {
     return;
   }
 
-  var videoId = link.href.split('v=')[1];
+  var videoId = link.href.split('v=')[1] || link.href.split('/')[3];
 
   if (!videoId) {
     return;
