@@ -302,6 +302,7 @@ function processOP(op) {
 
   var watchButton = document.createElement('span');
   watchButton.setAttribute('class', 'watchButton');
+  watchButton.title = "Watch Thread";
 
   checkBox.parentNode.insertBefore(watchButton,
       checkBox.nextSibling.nextSibling);
