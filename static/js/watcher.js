@@ -1,7 +1,7 @@
 var watchedMenu;
 
 var isInThread = document.getElementById('threadIdentifier') ? true : false;
-
+var watcherAlertCounter = 0;
 var elementRelation = {};
 
 if (!DISABLE_JS) {
@@ -19,6 +19,10 @@ if (!DISABLE_JS) {
   watcherButton.innerHTML = 'watched threads';
   watcherButton.id = 'watcherButton';
   watcherButton.setAttribute('class', 'navClickable');
+
+  var watcherCounter = document.createElement('span');
+
+  watcherButton.appendChild(watcherCounter);
 
   postingLink.parentNode.insertBefore(watcherButton, referenceNode);
 
@@ -95,6 +99,11 @@ if (!DISABLE_JS) {
       for ( var thread in threads) {
         if (threads.hasOwnProperty(thread)) {
 
+          if (isInThread && board == boardUri && thread == threadId) {
+            threads[thread].lastSeen = new Date().getTime();
+            localStorage.watchedData = JSON.stringify(storedWatchedData);
+          }
+
           addWatchedCell(board, thread, threads[thread]);
         }
       }
@@ -102,8 +111,15 @@ if (!DISABLE_JS) {
 
   }
 
+  updateWatcherCounter();
+
   scheduleWatchedThreadsCheck();
 
+}
+
+function updateWatcherCounter() {
+  watcherCounter.innerHTML = watcherAlertCounter ? '(' + watcherAlertCounter
+      + ')' : '';
 }
 
 function getStoredWatchedData() {
@@ -125,6 +141,7 @@ function iterateWatchedThreads(urls, index) {
   index = index || 0;
 
   if (index >= urls.length) {
+    updateWatcherCounter();
     scheduleWatchedThreadsCheck();
     return;
   }
@@ -164,6 +181,7 @@ function iterateWatchedThreads(urls, index) {
           } else if (watchData.lastSeen >= watchData.lastReplied) {
             elementRelation[url.board][url.thread].style.display = 'none';
           } else {
+            watcherAlertCounter++;
             elementRelation[url.board][url.thread].style.display = 'inline';
           }
 
@@ -177,7 +195,7 @@ function iterateWatchedThreads(urls, index) {
 
 function runWatchedThreadsCheck() {
 
-  var index = index || 0;
+  watcherAlertCounter = 0;
 
   localStorage.lastWatchCheck = new Date().getTime();
 
@@ -257,6 +275,8 @@ function addWatchedCell(board, thread, watchData) {
 
   if (watchData.lastSeen >= watchData.lastReplied) {
     notification.style.display = 'none';
+  } else {
+    watcherAlertCounter++;
   }
 
   labelWrapper.appendChild(notification);
