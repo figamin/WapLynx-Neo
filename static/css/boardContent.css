@@ -15,6 +15,11 @@
   transition: all 0.2s ease 0s;
 }
 
+.dragAndDropThumb {
+  max-height: 100px;
+  max-width: 100px;
+}
+
 .removeButton {
   cursor: pointer;
   color: rgba(125, 125, 125, 0.5);

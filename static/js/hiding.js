@@ -143,6 +143,10 @@ function setHideMenu(checkbox) {
 
   var boardData = storedHidingData[board];
 
+  if (!boardData) {
+    return;
+  }
+
   if (boardData.posts.indexOf(post || thread) > -1) {
     postHideButton.onclick();
   }

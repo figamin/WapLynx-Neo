@@ -67,7 +67,7 @@ function addFlag() {
 
   var reader = new FileReader();
 
-  reader.onloadend = function(e) {
+  reader.onloadend = function() {
 
     var files = [ {
       name : file.name,

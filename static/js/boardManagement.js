@@ -72,7 +72,7 @@ function setJs() {
 
   var reader = new FileReader();
 
-  reader.onloadend = function(e) {
+  reader.onloadend = function() {
 
     // style exception, too simple
     makeJsRequest([ {
@@ -117,7 +117,7 @@ function setSpoiler() {
 
   var reader = new FileReader();
 
-  reader.onloadend = function(e) {
+  reader.onloadend = function() {
 
     // style exception, too simple
     makeSpoilerRequest([ {
@@ -166,7 +166,7 @@ function setCss() {
 
   var reader = new FileReader();
 
-  reader.onloadend = function(e) {
+  reader.onloadend = function() {
 
     // style exception, too simple
     makeCssRequest([ {

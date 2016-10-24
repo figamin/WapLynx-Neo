@@ -6,6 +6,18 @@ var selectedFiles = [];
 var selectedDiv;
 var selectedDivQr;
 
+function addDndCell(cell, removeButton) {
+
+  if (selectedDivQr) {
+    var clonedCell = cell.cloneNode(true);
+    clonedCell.getElementsByClassName('removeButton')[0].onclick = removeButton.onclick;
+    selectedDivQr.appendChild(clonedCell);
+  }
+
+  selectedDiv.appendChild(cell);
+
+}
+
 function addSelectedFile(file) {
 
   var cell = document.createElement('div');
@@ -32,13 +44,26 @@ function addSelectedFile(file) {
 
   selectedFiles.push(file);
 
-  if (selectedDivQr) {
-    var clonedCell = cell.cloneNode(true);
-    clonedCell.getElementsByClassName('removeButton')[0].onclick = removeButton.onclick;
-    selectedDivQr.appendChild(clonedCell);
-  }
+  if (!file.type.indexOf('image/')) {
 
-  selectedDiv.appendChild(cell);
+    var fileReader = new FileReader();
+
+    fileReader.onloadend = function() {
+
+      var dndThumb = document.createElement('img');
+      dndThumb.src = fileReader.result;
+      dndThumb.setAttribute('class', 'dragAndDropThumb');
+      cell.appendChild(dndThumb);
+
+      addDndCell(cell, removeButton);
+
+    };
+
+    fileReader.readAsDataURL(file);
+
+  } else {
+    addDndCell(cell, removeButton);
+  }
 
 }
 
@@ -115,7 +140,7 @@ function checkExistance(file, callback) {
 
   var reader = new FileReader();
 
-  reader.onloadend = function(e) {
+  reader.onloadend = function() {
 
     var mime = file.type;
     var md5 = SparkMD5.ArrayBuffer.hash(reader.result);
@@ -181,7 +206,7 @@ function getFilestToUpload(callback, currentIndex, files) {
 
         var reader = new FileReader();
 
-        reader.onloadend = function(e) {
+        reader.onloadend = function() {
 
           files.push({
             name : selectedFiles[currentIndex].name,
