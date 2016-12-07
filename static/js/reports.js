@@ -1,4 +1,4 @@
-function closeReports(report) {
+function closeReports() {
 
   var reports = document.getElementById('reportDiv').childNodes;
 

@@ -2,12 +2,13 @@ if (!DISABLE_JS) {
 
   if (document.getElementById('addStaffForm')) {
     document.getElementById('addJsButton').style.display = 'inline';
-    document.getElementById('closeReportsJsButton').style.display = 'inline';
 
-    document.getElementById('closeReportsFormButton').style.display = 'none';
     document.getElementById('addFormButton').style.display = 'none';
 
   }
+
+  document.getElementById('closeReportsFormButton').style.display = 'none';
+  document.getElementById('closeReportsJsButton').style.display = 'inline';
 
   var staffCells = document.getElementsByClassName('staffCell');
 
