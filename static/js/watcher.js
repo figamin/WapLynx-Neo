@@ -82,7 +82,7 @@ if (!DISABLE_JS) {
     closeWatcherMenuButton.onclick();
   });
 
-  var ops = document.getElementsByClassName('opHead');
+  var ops = document.getElementsByClassName('innerOP');
 
   for (var i = 0; i < ops.length; i++) {
     processOP(ops[i]);
@@ -260,7 +260,7 @@ function addWatchedCell(board, thread, watchData) {
   labelWrapper.setAttribute('class', 'watchedCellLabel watchedMenuLabel');
 
   var label = document.createElement('a');
-  label.innerHTML = board + '/' + thread;
+  label.innerHTML = watchData.label || (board + '/' + thread);
   label.href = '/' + board + '/res/' + thread + '.html';
   labelWrapper.appendChild(label);
 
@@ -337,9 +337,20 @@ function processOP(op) {
       return;
     }
 
+    var subject = op.getElementsByClassName('labelSubject');
+    var message = op.getElementsByClassName('divMessage')[0];
+
+    var label = (subject.length ? subject[0].innerHTML : null)
+        || message.innerHTML.substr(0, 16).trim();
+
+    if (!label.length) {
+      label = null;
+    }
+
     boardThreads[thread] = {
       lastSeen : new Date().getTime(),
-      lastReplied : new Date().getTime()
+      lastReplied : new Date().getTime(),
+      label : label
     };
 
     storedWatchedData[board] = boardThreads;
