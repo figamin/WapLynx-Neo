@@ -1,5 +1,16 @@
 if (!DISABLE_JS) {
 
+  var autoRefresh;
+  var searchDelay = 1000;
+  var refreshTimer;
+  var limitRefreshWait = 10 * 60;
+  var loadingData = false;
+  var catalogThreads;
+  var lastRefresh;
+  var currentRefresh;
+  var refreshingButton = document.getElementById('catalogRefreshButton');
+  var catalogDiv = document.getElementById('divThreads');
+
   var indicatorsRelation = {
     pinned : 'pinIndicator',
     locked : 'lockIndicator',
@@ -7,31 +18,105 @@ if (!DISABLE_JS) {
     autoSage : 'bumpLockIndicator'
   };
 
+  var refreshCheckBox = document.getElementById('autoCatalogRefreshCheckBox');
+  var refreshLabel = document.getElementById('catalogRefreshLabel');
+  var originalAutoRefreshText = refreshLabel.innerHTML;
+  var searchField = document.getElementById('catalogSearchField');
+
   var catalogCellTemplate = '<a class="linkThumb"></a>';
-  catalogCellTemplate += '<p class="threadStats">R:';
-  catalogCellTemplate += '<span class="labelReplies"></span>';
-  catalogCellTemplate += '/ I:';
-  catalogCellTemplate += '<span class="labelImages"></span>';
-  catalogCellTemplate += '/ P:';
+  catalogCellTemplate += '<p class="threadStats">R: ';
+  catalogCellTemplate += '<span class="labelReplies"></span> / I: ';
+  catalogCellTemplate += '<span class="labelImages"></span> / P: ';
   catalogCellTemplate += '<span class="labelPage"></span>';
   catalogCellTemplate += '<span class="lockIndicator" title="Locked"></span>';
   catalogCellTemplate += '<span class="pinIndicator" title="Sticky"></span>';
   catalogCellTemplate += '<span class="cyclicIndicator" title="Cyclical Thread"></span>';
   catalogCellTemplate += '<span class="bumpLockIndicator" title="Bumplocked"></span>';
-  catalogCellTemplate += '</p>';
-  catalogCellTemplate += '<p><span class="labelSubject"></span></p>';
+  catalogCellTemplate += '</p><p><span class="labelSubject"></span></p>';
   catalogCellTemplate += '<div class="divMessage"></div>';
 
-  var catalogDiv = document.getElementById('divThreads');
-  var loadingData = false;
   var searchTimer;
-  var catalogThreads;
+
+  var storedHidingData = localStorage.hidingData;
+
+  if (storedHidingData) {
+    storedHidingData = JSON.parse(storedHidingData);
+  } else {
+    storedHidingData = {};
+  }
+
+  initCatalog();
+}
+
+function startTimer(time) {
+
+  if (time > limitRefreshWait) {
+    time = limitRefreshWait;
+  }
+
+  currentRefresh = time;
+  lastRefresh = time;
+  refreshLabel.innerHTML = originalAutoRefreshText + ' ' + currentRefresh;
+  refreshTimer = setInterval(function checkTimer() {
+    currentRefresh--;
+
+    if (!currentRefresh) {
+      clearInterval(refreshTimer);
+      refreshCatalog();
+      refreshLabel.innerHTML = originalAutoRefreshText;
+    } else {
+      refreshLabel.innerHTML = originalAutoRefreshText + ' ' + currentRefresh;
+    }
+
+  }, 1000);
+}
+
+function changeCatalogRefresh() {
+
+  autoRefresh = refreshCheckBox.checked;
+
+  if (!autoRefresh) {
+    refreshLabel.innerHTML = originalAutoRefreshText;
+    clearInterval(refreshTimer);
+  } else {
+    startTimer(5);
+  }
+
+}
+
+function refreshCatalog(manual) {
+
+  if (autoRefresh) {
+    clearInterval(refreshTimer);
+  }
+
+  var currentData = JSON.stringify(catalogThreads);
+
+  getCatalogData(function refreshed(error) {
+
+    if (error) {
+      return;
+    }
+
+    var changed = currentData != JSON.stringify(catalogThreads);
+
+    if (autoRefresh) {
+      startTimer(manual || changed ? 5 : lastRefresh * 2);
+    }
+
+    search();
+
+  });
+
+}
+
+function initCatalog() {
+
+  changeCatalogRefresh();
 
   var boardUri = window.location.toString().match(/\/(\w+)\/catalog.html/)[1];
 
   document.getElementById('divTools').style.display = 'inline-block';
-
-  var searchField = document.getElementById('catalogSearchField');
 
   searchField.addEventListener('input', function() {
 
@@ -40,8 +125,9 @@ if (!DISABLE_JS) {
     }
 
     searchTimer = setTimeout(function() {
-      search(searchField.value);
-    }, 1000);
+      searchTime = null;
+      search();
+    }, searchDelay);
 
   });
 
@@ -60,14 +146,6 @@ if (!DISABLE_JS) {
   }
 
   var links = document.getElementsByClassName('linkThumb');
-
-  var storedHidingData = localStorage.hidingData;
-
-  if (storedHidingData) {
-    storedHidingData = JSON.parse(storedHidingData);
-  } else {
-    storedHidingData = {};
-  }
 
   for (var i = 0; i < links.length; i++) {
 
@@ -147,24 +225,27 @@ function setCell(thread) {
 
 }
 
-function search(term) {
+function search() {
 
   if (!catalogThreads) {
     return;
   }
 
-  term = term.toLowerCase();
+  var term = searchField.value.toLowerCase();
 
   while (catalogDiv.firstChild) {
     catalogDiv.removeChild(catalogDiv.firstChild);
   }
 
+  var boardData = storedHidingData[boardUri];
+
   for (var i = 0; i < catalogThreads.length; i++) {
 
     var thread = catalogThreads[i];
 
-    if (term.length && thread.message.toLowerCase().indexOf(term) < 0
-        && (thread.subject || '').toLowerCase().indexOf(term) < 0) {
+    if ((boardData && boardData.threads.indexOf(thread.threadId.toString()) > -1)
+        || (term.length && thread.message.toLowerCase().indexOf(term) < 0 && (thread.subject || '')
+            .toLowerCase().indexOf(term) < 0)) {
       continue;
     }
 
@@ -174,7 +255,7 @@ function search(term) {
 
 }
 
-function getCatalogData() {
+function getCatalogData(callback) {
 
   if (loadingData) {
     return;
@@ -188,11 +269,18 @@ function getCatalogData() {
     loadingData = false;
 
     if (error) {
-      console.log(error);
+      if (callback) {
+        callback(error);
+      } else {
+        console.log(error);
+      }
       return;
     }
 
     catalogThreads = JSON.parse(data);
+    if (callback) {
+      callback();
+    }
 
   });
 

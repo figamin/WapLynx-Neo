@@ -792,14 +792,14 @@ function startTimer(time) {
 
 function changeRefresh() {
 
-  if (!document.getElementById('checkboxChangeRefresh').checked) {
+  autoRefresh = document.getElementById('checkboxChangeRefresh').checked;
+
+  if (!autoRefresh) {
     labelRefresh.innerHTML = '';
     clearInterval(refreshTimer);
   } else {
     startTimer(5);
   }
-
-  autoRefresh = !autoRefresh;
 
 }
 

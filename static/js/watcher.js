@@ -164,25 +164,28 @@ function iterateWatchedThreads(urls, index) {
 
           var lastPost = posts[posts.length - 1];
 
-          var parsedCreation = new Date(lastPost.creation);
+          if (lastPost) {
 
-          var storedWatchedData = getStoredWatchedData();
+            var parsedCreation = new Date(lastPost.creation);
 
-          var watchData = storedWatchedData[url.board][url.thread];
+            var storedWatchedData = getStoredWatchedData();
 
-          if (parsedCreation.getTime() > watchData.lastReplied) {
-            watchData.lastReplied = parsedCreation.getTime();
-            localStorage.watchedData = JSON.stringify(storedWatchedData);
-          }
+            var watchData = storedWatchedData[url.board][url.thread];
 
-          if (!elementRelation[url.board]
-              || !elementRelation[url.board][url.thread]) {
-            addWatchedCell(url.board, url.thread, watchData);
-          } else if (watchData.lastSeen >= watchData.lastReplied) {
-            elementRelation[url.board][url.thread].style.display = 'none';
-          } else {
-            watcherAlertCounter++;
-            elementRelation[url.board][url.thread].style.display = 'inline';
+            if (parsedCreation.getTime() > watchData.lastReplied) {
+              watchData.lastReplied = parsedCreation.getTime();
+              localStorage.watchedData = JSON.stringify(storedWatchedData);
+            }
+
+            if (!elementRelation[url.board]
+                || !elementRelation[url.board][url.thread]) {
+              addWatchedCell(url.board, url.thread, watchData);
+            } else if (watchData.lastSeen >= watchData.lastReplied) {
+              elementRelation[url.board][url.thread].style.display = 'none';
+            } else {
+              watcherAlertCounter++;
+              elementRelation[url.board][url.thread].style.display = 'inline';
+            }
           }
 
         }
