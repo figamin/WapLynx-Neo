@@ -1,14 +1,17 @@
 function closeReports() {
 
-  var reports = document.getElementById('reportDiv').childNodes;
+  var reportDiv = document.getElementById('reportDiv');
 
   var ids = [];
+  var cells = [];
 
-  for (var i = 0; i < reports.length; i++) {
+  for (var i = 0; i < reportDiv.childNodes.length; i++) {
 
-    var checkbox = reports[i].getElementsByClassName('closureCheckbox')[0];
+    var checkbox = reportDiv.childNodes[i]
+        .getElementsByClassName('closureCheckbox')[0];
 
     if (checkbox.checked) {
+      cells.push(reportDiv.childNodes[i]);
       ids.push(checkbox.name.substring(7));
     }
 
@@ -24,7 +27,11 @@ function closeReports() {
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-      location.reload(true);
+
+      for (i = 0; i < cells.length; i++) {
+        reportDiv.removeChild(cells[i]);
+      }
+
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

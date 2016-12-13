@@ -2,6 +2,29 @@ var boardIdentifier;
 
 if (!DISABLE_JS) {
 
+  var volunteerCellTemplate = '<span class="userLabel"></span> ';
+  volunteerCellTemplate += '<input ';
+  volunteerCellTemplate += 'type="hidden" ';
+  volunteerCellTemplate += 'class="userIdentifier" ';
+  volunteerCellTemplate += 'name="login">';
+  volunteerCellTemplate += '<input ';
+  volunteerCellTemplate += 'type="hidden" ';
+  volunteerCellTemplate += 'class="boardIdentifier" ';
+  volunteerCellTemplate += 'name="boardUri">';
+  volunteerCellTemplate += '<input ';
+  volunteerCellTemplate += 'type="hidden" ';
+  volunteerCellTemplate += 'name="add" ';
+  volunteerCellTemplate += 'value=false>';
+  volunteerCellTemplate += '<input ';
+  volunteerCellTemplate += 'type="button" ';
+  volunteerCellTemplate += 'class="removeJsButton" ';
+  volunteerCellTemplate += 'value="Remove Volunteer" ';
+  volunteerCellTemplate += 'class="hidden"> ';
+  volunteerCellTemplate += '<input ';
+  volunteerCellTemplate += 'type="submit" ';
+  volunteerCellTemplate += 'class="removeFormButton" ';
+  volunteerCellTemplate += 'value="Remove Volunteer">';
+
   if (document.getElementById('ownerControlDiv')) {
 
     document.getElementById('addVolunteerJsButton').style.display = 'inline';
@@ -30,7 +53,7 @@ if (!DISABLE_JS) {
   }
 
   boardIdentifier = document.getElementById('boardSettingsIdentifier').value;
-  document.getElementById('closeReportsJsButton').style.display = 'inline';  
+  document.getElementById('closeReportsJsButton').style.display = 'inline';
   document.getElementById('closeReportsFormButton').style.display = 'none';
   document.getElementById('saveSettingsJsButton').style.display = 'inline';
   document.getElementById('saveSettingsFormButton').style.display = 'none';
@@ -73,12 +96,10 @@ function setJs() {
 
   reader.onloadend = function() {
 
-    // style exception, too simple
     makeJsRequest([ {
       name : file.name,
       content : reader.result
     } ]);
-    // style exception, too simple
 
   };
 
@@ -307,10 +328,64 @@ function processVolunteerCell(cell) {
 
 function addVolunteer() {
   setVolunteer(document.getElementById('addVolunteerFieldLogin').value.trim(),
-      true);
+      true, function(error) {
+
+        if (error) {
+          alert(error);
+        } else {
+          document.getElementById('addVolunteerFieldLogin').value = '';
+        }
+
+      });
+
 }
 
-function setVolunteer(user, add) {
+function setVolunteersDiv(volunteers) {
+  var volunteersDiv = document.getElementById('volunteersDiv');
+
+  while (volunteersDiv.firstChild) {
+    volunteersDiv.removeChild(volunteersDiv.firstChild);
+  }
+
+  for (var i = 0; i < volunteers.length; i++) {
+
+    var cell = document.createElement('form');
+    cell.innerHTML = volunteerCellTemplate;
+
+    cell.getElementsByClassName('userIdentifier')[0].setAttribute('value',
+        volunteers[i]);
+
+    cell.getElementsByClassName('userLabel')[0].innerHTML = volunteers[i];
+
+    cell.getElementsByClassName('boardIdentifier')[0].setAttribute('value',
+        boardIdentifier);
+
+    processVolunteerCell(cell);
+
+    volunteersDiv.appendChild(cell);
+  }
+}
+
+function refreshVolunteers() {
+
+  localRequest('/boardManagement.js?json=1&boardUri=' + boardIdentifier,
+      function gotData(error, data) {
+
+        if (error) {
+          alert(error);
+        } else {
+
+          var parsedData = JSON.parse(data);
+
+          setVolunteersDiv(parsedData.volunteers || []);
+
+        }
+
+      });
+
+}
+
+function setVolunteer(user, add, callback) {
 
   apiRequest('setVolunteer', {
     login : user,
@@ -320,7 +395,11 @@ function setVolunteer(user, add) {
 
     if (status === 'ok') {
 
-      location.reload(true);
+      if (callback) {
+        callback();
+      }
+
+      refreshVolunteers();
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
