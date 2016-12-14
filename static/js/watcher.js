@@ -160,32 +160,29 @@ function iterateWatchedThreads(urls, index) {
 
         var posts = data.posts;
 
-        if (posts) {
+        if (posts && posts.length) {
 
           var lastPost = posts[posts.length - 1];
 
-          if (lastPost) {
+          var parsedCreation = new Date(lastPost.creation);
 
-            var parsedCreation = new Date(lastPost.creation);
+          var storedWatchedData = getStoredWatchedData();
 
-            var storedWatchedData = getStoredWatchedData();
+          var watchData = storedWatchedData[url.board][url.thread];
 
-            var watchData = storedWatchedData[url.board][url.thread];
+          if (parsedCreation.getTime() > watchData.lastReplied) {
+            watchData.lastReplied = parsedCreation.getTime();
+            localStorage.watchedData = JSON.stringify(storedWatchedData);
+          }
 
-            if (parsedCreation.getTime() > watchData.lastReplied) {
-              watchData.lastReplied = parsedCreation.getTime();
-              localStorage.watchedData = JSON.stringify(storedWatchedData);
-            }
-
-            if (!elementRelation[url.board]
-                || !elementRelation[url.board][url.thread]) {
-              addWatchedCell(url.board, url.thread, watchData);
-            } else if (watchData.lastSeen >= watchData.lastReplied) {
-              elementRelation[url.board][url.thread].style.display = 'none';
-            } else {
-              watcherAlertCounter++;
-              elementRelation[url.board][url.thread].style.display = 'inline';
-            }
+          if (!elementRelation[url.board]
+              || !elementRelation[url.board][url.thread]) {
+            addWatchedCell(url.board, url.thread, watchData);
+          } else if (watchData.lastSeen >= watchData.lastReplied) {
+            elementRelation[url.board][url.thread].style.display = 'none';
+          } else {
+            watcherAlertCounter++;
+            elementRelation[url.board][url.thread].style.display = 'inline';
           }
 
         }
