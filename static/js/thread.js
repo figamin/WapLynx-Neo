@@ -20,6 +20,8 @@ var messageLimit;
 var unreadPosts = 0;
 var originalTitle = document.title;
 var lastPost;
+var highLightedIds = [];
+var idsRelation = {};
 
 var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
     + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
@@ -144,6 +146,54 @@ if (!DISABLE_JS) {
   for (var i = 0; i < postingQuotes.length; i++) {
     processPostingQuote(postingQuotes[i]);
   }
+
+  var ids = document.getElementsByClassName('labelId');
+
+  for (i = 0; i < ids.length; i++) {
+    processIdLabel(ids[i]);
+  }
+}
+
+function processIdLabel(label) {
+
+  var id = label.innerHTML;
+
+  var array = idsRelation[id] || [];
+  idsRelation[id] = array;
+
+  var cell = label.parentNode.parentNode.parentNode;
+
+  array.push(cell);
+
+  label.onmouseover = function() {
+    label.innerHTML = id + ' (' + array.length + ')';
+  }
+
+  label.onmouseout = function() {
+    label.innerHTML = id;
+  }
+
+  label.onclick = function() {
+
+    var index = highLightedIds.indexOf(id);
+
+    if (index > -1) {
+      highLightedIds.splice(index, 1);
+    } else {
+      highLightedIds.push(id);
+    }
+
+    for (var i = 0; i < array.length; i++) {
+      var cellToChange = array[i];
+
+      if (cellToChange.className === 'innerOP') {
+        continue;
+      }
+
+      cellToChange.className = index > -1 ? 'innerPost' : 'markedPost';
+    }
+
+  };
 
 }
 
@@ -416,6 +466,9 @@ function setPostHideableElements(postCell, post) {
     var labelId = postCell.getElementsByClassName('labelId')[0];
     labelId.setAttribute('style', 'background-color: #' + post.id);
     labelId.innerHTML = post.id;
+
+    processIdLabel(labelId);
+
   } else {
     var spanId = postCell.getElementsByClassName('spanId')[0];
     spanId.parentNode.removeChild(spanId);
