@@ -2,6 +2,7 @@ var boardUri;
 var threadId;
 var board = false;
 var replyButton;
+var fullRefresh = false;
 var refreshButton;
 var lastReplyId = 0;
 var lastRefreshWaiting = 0;
@@ -582,7 +583,9 @@ function setPostInnerElements(boardUri, threadId, post, postCell) {
 
 function addPost(post) {
 
-  unreadPosts++;
+  if (!fullRefresh) {
+    unreadPosts++;
+  }
 
   var postCell = document.createElement('div');
   postCell.innerHTML = postCellTemplate;
@@ -655,6 +658,17 @@ var refreshCallback = function(error, data) {
     return;
   }
 
+  if (fullRefresh) {
+    lastReplyId = 0;
+    unreadPosts = 0;
+    while (divPosts.firstChild) {
+      divPosts.removeChild(divPosts.firstChild);
+    }
+
+    document.title = originalTitle;
+
+  }
+
   var receivedData = JSON.parse(data);
 
   var posts = receivedData.posts;
@@ -678,7 +692,10 @@ var refreshCallback = function(error, data) {
 
       }
 
-      document.title = '(' + unreadPosts + ') ' + originalTitle;
+      if (!fullRefresh) {
+        document.title = '(' + unreadPosts + ') ' + originalTitle;
+      }
+
     }
   }
 
@@ -692,9 +709,10 @@ refreshCallback.stop = function() {
   refreshButton.disabled = false;
 };
 
-function refreshPosts(manual) {
+function refreshPosts(manual, full) {
 
   manualRefresh = manual;
+  fullRefresh = full;
 
   if (autoRefresh) {
     clearInterval(refreshTimer);

@@ -90,21 +90,21 @@ if (!DISABLE_JS) {
 
   var storedWatchedData = getStoredWatchedData();
 
-  for ( var board in storedWatchedData) {
+  for ( var currentBoard in storedWatchedData) {
 
-    if (storedWatchedData.hasOwnProperty(board)) {
+    if (storedWatchedData.hasOwnProperty(currentBoard)) {
 
-      var threads = storedWatchedData[board];
+      var threads = storedWatchedData[currentBoard];
 
       for ( var thread in threads) {
         if (threads.hasOwnProperty(thread)) {
 
-          if (isInThread && board == boardUri && thread == threadId) {
+          if (isInThread && currentBoard == boardUri && thread == threadId) {
             threads[thread].lastSeen = new Date().getTime();
             localStorage.watchedData = JSON.stringify(storedWatchedData);
           }
 
-          addWatchedCell(board, thread, threads[thread]);
+          addWatchedCell(currentBoard, thread, threads[thread]);
         }
       }
     }

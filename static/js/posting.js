@@ -182,8 +182,6 @@ function deletePosts() {
     return;
   }
 
-  var redirect = '/' + toDelete[0].board + '/';
-
   apiRequest('deleteContent', {
     password : typedPassword,
     deleteMedia : document.getElementById('checkboxMediaDeletion').checked,
@@ -196,7 +194,11 @@ function deletePosts() {
       alert(data.removedThreads + ' threads and ' + data.removedPosts
           + ' posts were successfully deleted.');
 
-      window.location.pathname = redirect;
+      if (!board && !data.removedThreads) {
+        refreshPosts(true, true);
+      } else {
+        window.location.pathname = '/' + toDelete[0].board + '/';
+      }
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
