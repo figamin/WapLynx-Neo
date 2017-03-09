@@ -6,6 +6,10 @@
   color: #FFB300;
 }
 
+.imgExpanded {
+  max-width: 100%;
+}
+
 .reportFieldset {
   margin-top: 1em;
   border: 1px dashed #117743;
@@ -245,7 +249,7 @@
   text-align: center;
 }
 
-.contentAction label, #divControls label, #transferControls label, #ipDelete label
-  {
+.contentAction label, #divControls label, #transferControls label,
+  #ipDelete label {
   font-size: 80%;
 }

@@ -11,12 +11,12 @@
   text-decoration: none;
 }
 
-.imgLink img {
+.imgLink img, .latestImageCell img, .mediaCell img, .catalogCell img {
   image-orientation: from-image;
 }
 
 #themeSelector {
-  font-size: 100%
+  font-size: 100%;
 }
 
 h3, p, label {
