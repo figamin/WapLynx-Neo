@@ -150,6 +150,10 @@ function apiRequest(page, parameters, delegate) {
 
   xhr.onreadystatechange = function connectionStateChanged() {
 
+    if (parameters.captcha) {
+      reloadCaptcha();
+    }
+
     if (xhr.readyState == 4) {
 
       if (delegate.hasOwnProperty('stop')) {

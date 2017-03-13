@@ -89,14 +89,10 @@ function banPosts() {
     var parsedCookies = getCookies();
 
     apiRequest('solveCaptcha', {
-
       captchaId : parsedCookies.captchaid,
       answer : typedCaptcha
     }, function solvedCaptcha(status, data) {
-
       applyBans(parsedCookies.captchaid);
-
-      reloadCaptcha();
     });
   }
 
@@ -142,10 +138,6 @@ var reportCallback = function(status, data) {
     alert(status + ': ' + JSON.stringify(data));
   }
 }
-
-reportCallback.stop = function() {
-  reloadCaptcha()
-};
 
 function reportPosts() {
 

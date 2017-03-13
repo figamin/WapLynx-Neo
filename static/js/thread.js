@@ -309,10 +309,6 @@ replyCallback.stop = function() {
 
   replyButton.disabled = false;
   setQRReplyEnabled(true);
-
-  if (!hiddenCaptcha) {
-    reloadCaptcha();
-  }
 };
 
 replyCallback.progress = function(info) {
