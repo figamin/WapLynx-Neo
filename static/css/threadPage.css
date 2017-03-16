@@ -72,16 +72,12 @@
   padding: 2px;
   font-size: 10pt;
   box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
 }
 
 #quick-reply select {
   padding: 2px;
   font-size: 10pt;
   box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
 }
 
 #QRcaptchaDiv {
@@ -91,8 +87,6 @@
 #quick-reply textarea {
   min-width: 100%;
   box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   font-size: 10pt;
   resize: both;
 }
