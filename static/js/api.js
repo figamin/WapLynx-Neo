@@ -63,12 +63,35 @@ function handleConnectionResponse(xhr, delegate) {
   } else if (response.status === 'blank') {
     alert('Parameter ' + response.data + ' was sent in blank.');
   } else if (response.status === 'bypassable') {
-    if (window
-        .confirm('You are blocked, but you can use the block bypass to post. Do you want to get a block bypass?')) {
 
+    var popup = document.createElement('div');
+    popup.id = 'bypassPopUp';
+
+    var popupInner = document.createElement('div');
+    popupInner.id = 'bypassPopUpInner';
+
+    var popupText = document.createElement('span');
+    popupText.innerHTML = 'You are blocked, but you can use the block bypass to post. Do you want to get a block bypass?';
+    popupText.id = 'popupText';
+
+    var cancelButton = document.createElement('button');
+    cancelButton.innerHTML = 'No';
+    cancelButton.onclick = function() {
+      document.body.removeChild(popup);
+    };
+
+    var confirmButton = document.createElement('button');
+    confirmButton.innerHTML = 'Yes';
+    confirmButton.onclick = function() {
       window.open('/blockBypass.js');
+    };
 
-    }
+    popupInner.appendChild(popupText);
+    popupInner.appendChild(cancelButton);
+    popupInner.appendChild(confirmButton);
+    popup.appendChild(popupInner);
+    document.body.appendChild(popup);
+
   } else if (response.status === 'tooLarge') {
     alert('Request refused because it was too large');
   } else if (response.status === 'construction') {
