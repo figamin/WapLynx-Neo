@@ -163,7 +163,13 @@ function setQr() {
   }
 
   if (!hiddenCaptcha) {
-    qrhtml += '<tr><td colspan="2"><img src="/captcha.js" class="captchaImage"/></td></tr>';
+
+    var parts = document.getElementById('captchaImage').src.split('/');
+
+    var lastPart = '/' + parts[parts.length - 1];
+
+    qrhtml += '<tr><td colspan="2"><img src="' + lastPart;
+    qrhtml += '" class="captchaImage"/></td></tr>';
 
     qrhtml += '<tr><td colspan="2"><input type="button" onClick="reloadCaptcha()"';
     qrhtml += ' value="Reload"> <span class="captchaTimer"></span></td></tr>';
