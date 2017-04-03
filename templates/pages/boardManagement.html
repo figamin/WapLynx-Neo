@@ -366,6 +366,14 @@
             name="maxThreadCount">
         </label>
         <label>
+          For how many days a non-cyclic thread is allowed to be bumped after
+          it's creation:
+          <input
+            id="maxBumpAgeField"
+            type="text"
+            name="maxBumpAge">
+        </label>
+        <label>
           Reply limit (autosage)<sup>2</sup>:
           <input
             id="autoSageLimitField"
@@ -471,11 +479,10 @@
           deleted after they leave the top 1/3 threads.
         </label>
         <label>
-          <input
-            type="checkbox"
-            name="locationFlags"
-            id="locationCheckBox">
-          Location Flags
+          Location flags:
+          <select
+            id="locationComboBox"
+            name="locationFlagMode"></select>
         </label>
         <label>
           <input

@@ -135,6 +135,14 @@
             id="fieldSpamIpsSource">
         </label>
         <label>
+          Url for the list of incremental spammer ips(Requirements for the file
+          format are specified on src/be/readme):
+          <input
+            type="text"
+            name="incSpamIpsSource"
+            id="fieldIncrementalSpamIpsSource">
+        </label>
+        <label>
           Path to an optional language pack:
           <input
             type="text"
@@ -239,13 +247,6 @@
         <label>
           <input
             type="checkbox"
-            id="checkboxAllowTorPosting"
-            name="allowTorPosting">
-          Allow TOR users to post
-        </label>
-        <label>
-          <input
-            type="checkbox"
             id="checkboxAllowTorFiles"
             name="allowTorFiles">
           Allow TOR users to post files
@@ -259,6 +260,13 @@
           list, so users are still able to post)
         </label>
         <label>
+          TOR posting permission level:
+          <select
+            id="comboTorPostingLevel"
+            name="torPostingLevel">
+          </select>
+        </label>
+        <label>
           <input
             type="checkbox"
             id="checkboxSpamBypass"
@@ -267,7 +275,8 @@
           bypass is not disabled
         </label>
         <label>
-          Bypass mode: <select
+          Bypass mode:
+          <select
             id="comboBypassMode"
             name="bypassMode">
           </select>
@@ -409,6 +418,13 @@
             name="autoSageLimit"
             id="fieldAutoSageLimit">
         </label>
+        Maximum size for custom flag names:
+        <label>
+          <input
+            type="text"
+            name=flagNameLength
+            id="fieldFlagNameLength">
+        </label>
         <label>
           Mark accounts after these many days of inactivity<sup>2</sup>:
           <input
@@ -486,6 +502,69 @@
         <label>
           <input
             type="checkbox"
+            id="checkboxVerboseApis"
+            name="verboseApis">
+          Verbose APIs mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxVerboseStatic"
+            name="verboseStatic">
+          Verbose static serving mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxVerboseGridfs"
+            name="verboseGridfs">
+          Verbose gridfs mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxVerboseQueue"
+            name="verboseQueue">
+          Verbose message queue mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxVerboseMisc"
+            name="verboseMisc">
+          Verbose miscellaneous mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxVerboseGenerator"
+            name="verboseGenerator">
+          Verbose generator mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxVerbose"
+            name="verbose">
+          Full verbose mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxUseAlternativeLanguages"
+            name="useAlternativeLanguages">
+          Use alternative languages
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxBlockedReport"
+            name="allowBlockedToReport">
+          Allow blocked or banned users to report
+        </label>
+        <label>
+          <input
+            type="checkbox"
             id="checkboxFfmpegGifs"
             name="ffmpegGifs">
           Use ffmpeg to generate animated gif thumbnails (requires ffmpeg
@@ -519,13 +598,6 @@
             id="checkboxAllowCustomJs"
             name="allowBoardCustomJs">
           Allow board custom javascript
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            id="checkboxVerbose"
-            name="verbose">
-          Verbose mode
         </label>
         <label>
           <input
@@ -578,13 +650,15 @@
           Allow multiple reports at once
         </label>
         <label>
-          Minimum global role for users to be able to see poster's clear ips: <select
+          Minimum global role for users to be able to see poster's clear ips:
+          <select
             id="comboMinClearIpRole"
             name="clearIpMinRole">
           </select>
         </label>
         <label>
-          Minimum global role required for board creation: <select
+          Minimum global role required for board creation:
+          <select
             id="comboBoardCreationRequirement"
             name="boardCreationRequirement">
           </select>

@@ -769,6 +769,8 @@ function sendReplyData(files, captchaId) {
 
   var spoilerCheckBox = document.getElementById('checkboxSpoiler');
 
+  var noFlagCheckBox = document.getElementById('checkboxNoFlag');
+
   originalButtonText = replyButton.innerHTML;
   replyButton.innerHTML = 'Uploading 0%';
   setQRReplyText(replyButton.innerHTML);
@@ -780,6 +782,7 @@ function sendReplyData(files, captchaId) {
     flag : hiddenFlags ? null : selectedFlag,
     captcha : captchaId,
     subject : typedSubject,
+    noFlag : noFlagCheckBox ? noFlagCheckBox.checked : false,
     spoiler : spoilerCheckBox ? spoilerCheckBox.checked : false,
     password : typedPassword,
     message : typedMessage,

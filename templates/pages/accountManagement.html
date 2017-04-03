@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/.static/css/global.css">
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/.static/css/posting.css">
+</head>
+<body>
+
+  <nav>
+    <span id="navLinkSpan"> <span>[</span> <a
+        href="/"
+        id="navLinkHome">home</a> <span>/</span> <a
+        href="/boards.js"
+        id="navBoardList">boards</a> <span>/</span> <a
+        href="/overboard"
+        id="navOverboard">overboard</a> <span>/</span> <a
+        href="/.static/posting.html"
+        id="navPosting">help</a> <span>]</span>
+    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
+  </nav>
+
+  <header>
+    <img
+      src="/.static/logo.png"
+      alt="logo" />
+  </header>
+
+  <div id="settingsWrapper">
+
+    <fieldset id="settingsFieldset">
+
+      E-mail: <span id="emailLabel"></span>
+      <br>
+      Last seen: <span id="lastSeenLabel"></span>
+      <br>
+      Global role: <span id="globalRoleLabel"></span>
+      <hr>
+      <h3>Owned boards</h3>
+      <div id="ownedBoardsDiv"></div>
+      <hr>
+      <h3>Volunteered boards</h3>
+      <div id="volunteeredBoardsDiv"></div>
+      <hr>
+      <div id="deletionForm">
+        <h3>Delete account</h3>
+
+        <form
+          action="/deleteAccount.js"
+          method="post"
+          enctype="multipart/form-data">
+
+          <input
+            id="confirmationCheckbox"
+            type="checkbox"
+            name="confirmation">
+          Yes, I wish to transfer all this user's boards to me and then delete
+          his account.
+          <br>
+          <input
+            type="hidden"
+            id="userIdentifier"
+            name="account">
+
+          <input
+            id="deleteAccountFormButton"
+            type="submit"
+            value="Delete account">
+
+          <input
+            id="deleteAccountJsButton"
+            type="button"
+            onclick="deleteAccount()"
+            style="display: none;"
+            value="Delete account">
+        </form>
+      </div>
+    </fieldset>
+
+  </div>
+</body>
+<script src="/.static/js/settings.js"></script>
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/accountManagement.js"></script>
+<script src="/.static/js/themes.js"></script>
+
+</html>

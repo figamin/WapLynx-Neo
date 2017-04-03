@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <link
-  href="/.static/css/global.css"
+  rel="stylesheet"
   type="text/css"
-  rel="stylesheet" />
+  href="/.static/css/global.css">
 </head>
 <body>
 
@@ -32,47 +32,53 @@
 
     <fieldset id="settingsFieldset">
 
-      <legend>New Banner</legend>
+      <legend>New language</legend>
 
       <form
-        action="/createBanner.js"
+        action="/addLanguage.js"
         method="post"
         enctype="multipart/form-data">
 
+        Header values*:
         <input
-          type="hidden"
-          name="boardUri"
-          id="boardIdentifier">
+          type="text"
+          name="headerValues"
+          id="fieldHeaderValues">
+        <br>
 
+        Front-end:
         <input
-          type="file"
-          id="files"
-          name="files">
+          type="text"
+          name="frontEnd"
+          id="fieldFrontEnd">
+        <br>
+
+        Language pack:
+        <input
+          type="text"
+          name="languagePack"
+          id="fieldLanguagePack">
+        <br>
 
         <input
           type="submit"
-          value="Add banner"
+          value="Add language"
           id="addFormButton">
 
         <input
           type="button"
-          onClick="addBanner()"
-          value="Add banner"
-          id="addJsButton"
-          class="hidden">
-
-        <p>
-          Maximum size allowed: <span id="maxSizeLabel"></span>
-        </p>
+          onClick="addLanguage()"
+          style="display: none;"
+          value="Add language"
+          id="addJsButton">
+        <br>
 
       </form>
-
       <hr>
-
-      <div
-        id="bannersDiv"
-        class="banners"></div>
-
+      <h3>Existing languages</h3>
+      <div id="languagesDiv"></div>
+      <br>
+      *: separate values by commas, spaces will be ignored (a, b,c)
     </fieldset>
 
   </div>
@@ -81,7 +87,7 @@
 
 <script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
-<script src="/.static/js/bannerManagement.js"></script>
+<script src="/.static/js/languages.js"></script>
 <script src="/.static/js/themes.js"></script>
 
 </html>

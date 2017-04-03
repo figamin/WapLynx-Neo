@@ -17,6 +17,38 @@ if (!DISABLE_JS) {
       type : 'boolean',
       setting : 'useGlobalBanners',
     },
+    checkboxVerboseGenerator : {
+      type : 'boolean',
+      setting : 'verboseGenerator',
+    },
+    checkboxVerboseQueue : {
+      type : 'boolean',
+      setting : 'verboseQueue',
+    },
+    checkboxVerboseGridfs : {
+      type : 'boolean',
+      setting : 'verboseGridfs',
+    },
+    checkboxBlockedReport : {
+      type : 'boolean',
+      setting : 'allowBlockedToReport',
+    },
+    checkboxVerboseMisc : {
+      type : 'boolean',
+      setting : 'verboseMisc',
+    },
+    checkboxVerboseStatic : {
+      type : 'boolean',
+      setting : 'verboseStatic',
+    },
+    checkboxVerboseApis : {
+      type : 'boolean',
+      setting : 'verboseApis',
+    },
+    checkboxDisableCatalogPosting : {
+      type : 'boolean',
+      setting : 'disableCatalogPosting',
+    },
     checkboxDisableCatalogPosting : {
       type : 'boolean',
       setting : 'disableCatalogPosting',
@@ -25,13 +57,17 @@ if (!DISABLE_JS) {
       type : 'boolean',
       setting : 'allowTorFiles',
     },
-    checkboxAllowTorPosting : {
+    checkboxUseAlternativeLanguages : {
       type : 'boolean',
-      setting : 'allowTorPosting',
+      setting : 'useAlternativeLanguages',
     },
     fieldIpExpiration : {
       type : 'string',
       setting : 'ipExpirationDays'
+    },
+    fieldIncrementalSpamIpsSource : {
+      type : 'string',
+      setting : 'incSpamIpsSource'
     },
     fieldMaster : {
       setting : 'master',
@@ -169,6 +205,10 @@ if (!DISABLE_JS) {
       setting : 'topBoardsCount',
       type : 'string'
     },
+    fieldFlagNameLength : {
+      setting : 'flagNameLength',
+      type : 'string'
+    },
     fieldBoardsPerPage : {
       setting : 'boardsPerPage',
       type : 'string'
@@ -300,6 +340,10 @@ if (!DISABLE_JS) {
     comboBypassMode : {
       setting : 'bypassMode',
       type : 'combo'
+    },
+    comboTorPostingLevel : {
+      type : 'combo',
+      setting : 'torPostingLevel',
     },
     comboMinClearIpRole : {
       setting : 'clearIpMinRole',

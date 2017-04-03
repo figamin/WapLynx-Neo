@@ -295,7 +295,8 @@ span.spoiler {
   display: block;
 }
 
-#settingsFieldset label input {
+#settingsFieldset label input, #settingsFieldset div form input,
+  #settingsFieldset form input {
   display: inline-block;
 }
 

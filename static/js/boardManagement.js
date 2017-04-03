@@ -212,7 +212,7 @@ function saveSettings() {
       .trim();
   var typedAutoCaptcha = document.getElementById('autoCaptchaThresholdField').value
       .trim();
-
+  var typedMaxBumpAge = document.getElementById('maxBumpAgeField').value.trim();
   var typedAutoSage = document.getElementById('autoSageLimitField').value
       .trim();
   var typedFileLimit = document.getElementById('maxFilesField').value.trim();
@@ -224,6 +224,9 @@ function saveSettings() {
 
   if (typedHourlyLimit.length && isNaN(typedHourlyLimit)) {
     alert('Invalid hourly limit.');
+    return;
+  } else if (typedMaxBumpAge.length && isNaN(typedMaxBumpAge)) {
+    alert('Invalid maximum age for bumping.');
     return;
   } else if (typedAutoCaptcha.length && isNaN(typedAutoCaptcha)) {
     alert('Invalid auto captcha treshold.');
@@ -274,10 +277,6 @@ function saveSettings() {
     settings.push('forceAnonymity');
   }
 
-  if (document.getElementById('locationCheckBox').checked) {
-    settings.push('locationFlags');
-  }
-
   if (document.getElementById('textBoardCheckbox').checked) {
     settings.push('textBoard');
   }
@@ -286,32 +285,37 @@ function saveSettings() {
 
   var combo = document.getElementById('captchaModeComboBox');
 
-  apiRequest('setBoardSettings', {
-    boardName : typedName,
-    captchaMode : combo.options[combo.selectedIndex].value,
-    boardMessage : typedMessage,
-    autoCaptchaLimit : typedAutoCaptcha,
-    hourlyThreadLimit : typedHourlyLimit,
-    tags : typedTags,
-    anonymousName : typedAnonymousName,
-    boardDescription : typedDescription,
-    boardUri : boardIdentifier,
-    settings : settings,
-    autoSageLimit : typedAutoSage,
-    maxThreadCount : typedThreadLimit,
-    maxFileSizeMB : typedFileSize,
-    acceptedMimes : typedTypedMimes,
-    maxFiles : typedFileLimit,
-  }, function requestComplete(status, data) {
+  var locationCombo = document.getElementById('locationComboBox');
 
-    if (status === 'ok') {
+  apiRequest(
+      'setBoardSettings',
+      {
+        boardName : typedName,
+        captchaMode : combo.options[combo.selectedIndex].value,
+        boardMessage : typedMessage,
+        autoCaptchaLimit : typedAutoCaptcha,
+        locationFlagMode : locationCombo.options[locationCombo.selectedIndex].value,
+        hourlyThreadLimit : typedHourlyLimit,
+        tags : typedTags,
+        anonymousName : typedAnonymousName,
+        boardDescription : typedDescription,
+        boardUri : boardIdentifier,
+        settings : settings,
+        autoSageLimit : typedAutoSage,
+        maxThreadCount : typedThreadLimit,
+        maxFileSizeMB : typedFileSize,
+        acceptedMimes : typedTypedMimes,
+        maxFiles : typedFileLimit,
+      }, function requestComplete(status, data) {
 
-      location.reload(true);
+        if (status === 'ok') {
 
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
+          location.reload(true);
+
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
+        }
+      });
 
 }
 

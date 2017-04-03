@@ -50,8 +50,10 @@ function addFlag() {
 
   var typedName = document.getElementById('fieldFlagName').value.trim();
 
-  if (typedName.length > 16) {
-    alert('Flag name too long, keep it under 16 character.');
+  var maxLength = +document.getElementById('maxNameLengthLabel').innerHTML;
+
+  if (typedName.length > maxLength) {
+    alert('Flag name too long, keep it under ' + maxLength + ' characters.');
     return;
   } else if (!typedName.length) {
     alert('A name is mandatory for the flag.');

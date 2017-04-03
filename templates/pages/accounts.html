@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <link
-  href="/.static/css/global.css"
+  rel="stylesheet"
   type="text/css"
-  rel="stylesheet" />
+  href="/.static/css/global.css">
 </head>
+
 <body>
 
   <nav>
@@ -29,59 +30,49 @@
   </header>
 
   <div id="settingsWrapper">
-
     <fieldset id="settingsFieldset">
 
-      <legend>New Banner</legend>
-
+      <legend>Add Account</legend>
       <form
-        action="/createBanner.js"
+        action="/addAccount.js"
         method="post"
         enctype="multipart/form-data">
 
+        Login:
         <input
-          type="hidden"
-          name="boardUri"
-          id="boardIdentifier">
-
+          type="text"
+          id="fieldLogin"
+          name="login">
+        <br>
+        Password:
         <input
-          type="file"
-          id="files"
-          name="files">
-
+          type="password"
+          id="fieldPassword"
+          name="password">
+        <br>
         <input
+          id="addAccountFormButton"
           type="submit"
-          value="Add banner"
-          id="addFormButton">
+          value="Add Account">
 
         <input
+          id="addAccountJsButton"
           type="button"
-          onClick="addBanner()"
-          value="Add banner"
-          id="addJsButton"
-          class="hidden">
-
-        <p>
-          Maximum size allowed: <span id="maxSizeLabel"></span>
-        </p>
+          style="display: none;"
+          onclick="addAccount()"
+          value="Add Account">
 
       </form>
-
       <hr>
-
-      <div
-        id="bannersDiv"
-        class="banners"></div>
+      <div id="divAccounts"></div>
 
     </fieldset>
-
   </div>
-
 </body>
 
 <script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
-<script src="/.static/js/bannerManagement.js"></script>
+<script src="/.static/js/accounts.js"></script>
 <script src="/.static/js/themes.js"></script>
 
 </html>

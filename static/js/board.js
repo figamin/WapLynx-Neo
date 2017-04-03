@@ -122,11 +122,14 @@ function sendThreadData(files, captchaId) {
 
   var spoilerCheckBox = document.getElementById('checkboxSpoiler');
 
+  var noFlagCheckBox = document.getElementById('checkboxNoFlag');
+
   apiRequest('newThread', {
     name : forcedAnon ? null : typedName,
     flag : hiddenFlags ? null : selectedFlag,
     captcha : captchaId,
     password : typedPassword,
+    noFlag : noFlagCheckBox ? noFlagCheckBox.checked : false,
     spoiler : spoilerCheckBox ? spoilerCheckBox.checked : false,
     subject : typedSubject,
     message : typedMessage,
