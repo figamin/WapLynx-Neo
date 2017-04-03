@@ -84,6 +84,7 @@ function handleConnectionResponse(xhr, delegate) {
     confirmButton.innerHTML = 'Yes';
     confirmButton.onclick = function() {
       window.open('/blockBypass.js');
+      document.body.removeChild(popup);
     };
 
     popupInner.appendChild(popupText);
