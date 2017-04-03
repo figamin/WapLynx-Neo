@@ -143,6 +143,7 @@ nav {
   padding-bottom: 3px;
   font-size: 70%;
   text-align: center;
+  z-index: 1;
 }
 
 nav span, nav a {
