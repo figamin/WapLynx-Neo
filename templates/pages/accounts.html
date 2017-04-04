@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
 <link
   rel="stylesheet"
   type="text/css"
@@ -33,24 +35,26 @@
   <div id="settingsWrapper">
     <fieldset id="settingsFieldset">
 
-      <legend>Add Account</legend>
+      <legend>Accounts</legend>
       <form
         action="/addAccount.js"
         method="post"
         enctype="multipart/form-data">
 
-        Login:
+        <h3>Add account</h3>
+
         <input
           type="text"
           id="fieldLogin"
-          name="login">
-        <br>
-        Password:
+          name="login"
+          placeholder="login">
+
         <input
           type="password"
           id="fieldPassword"
-          name="password">
-        <br>
+          name="password"
+          placeholder="password">
+
         <input
           id="addAccountFormButton"
           type="submit"
@@ -65,6 +69,7 @@
 
       </form>
       <hr>
+      <h3>Existing Accounts</h3>
       <div id="divAccounts"></div>
 
     </fieldset>

@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
 <link
   rel="stylesheet"
   type="text/css"
@@ -33,32 +35,28 @@
 
     <fieldset id="settingsFieldset">
 
-      <legend>New language</legend>
-
+      <legend>Languages</legend>
+      <h3>New language</h3>
       <form
         action="/addLanguage.js"
         method="post"
         enctype="multipart/form-data">
 
-        Header values*:
         <input
           type="text"
           name="headerValues"
-          id="fieldHeaderValues">
-        <br>
-
-        Front-end:
+          id="fieldHeaderValues"
+          placeholder="header values*">
         <input
           type="text"
           name="frontEnd"
-          id="fieldFrontEnd">
-        <br>
-
-        Language pack:
+          id="fieldFrontEnd"
+          placeholder="front-end">
         <input
           type="text"
           name="languagePack"
-          id="fieldLanguagePack">
+          id="fieldLanguagePack"
+          placeholder="language pack">
         <br>
 
         <input

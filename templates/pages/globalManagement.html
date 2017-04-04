@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
 <link
   href="/.static/css/global.css"
   type="text/css"
@@ -42,7 +44,6 @@
       <p>
         <strong><span id="userLabel"></span></strong>
       </p>
-
 
       <form
         id="addStaffForm"
@@ -131,22 +132,21 @@
       <a href="/mediaManagement.js">Media management</a>
       <br>
       <a href="/closedReports.js">Closed Reports</a>
-
-
-      <hr />
-
+      <hr>
       <h3>Open reports</h3>
       <form
         method="post"
         action="/closeReports.js"
         enctype="multipart/form-data">
         <div id="reportDiv"></div>
-        <input
-          type="checkbox"
-          name="deleteContent"
-          id="deleteContentCheckbox">
-        Delete reported content after closing the reports
-        <br>
+
+        <label>
+          <input
+            type="checkbox"
+            name="deleteContent"
+            id="deleteContentCheckbox">
+          Delete reported content after closing the reports
+        </label>
         <button
           type="submit"
           id="closeReportsFormButton">Close selected reports</button>
