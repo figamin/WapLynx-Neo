@@ -19,7 +19,7 @@ if (!DISABLE_JS) {
 
 }
 
-function expandImage(mouseEvent, link) {
+function expandImage(mouseEvent, link, mime) {
 
   if (mouseEvent.which === 2 || mouseEvent.ctrlKey) {
     return true;
@@ -42,7 +42,7 @@ function expandImage(mouseEvent, link) {
   } else {
     var expandedSrc = link.href;
 
-    if (thumb.src === expandedSrc) {
+    if (thumb.src === expandedSrc && mime !== 'image/svg+xml') {
       return false;
     }
 
@@ -113,7 +113,7 @@ function processImageLink(link) {
   if (mime.indexOf('image/') > -1) {
 
     link.onclick = function(mouseEvent) {
-      return expandImage(mouseEvent, link);
+      return expandImage(mouseEvent, link, mime);
     };
 
   } else if (playableTypes.indexOf(mime) > -1) {
