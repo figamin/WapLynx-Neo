@@ -33,11 +33,17 @@ function addSelectedFile(file) {
   removeButton.onclick = function() {
     var index = selectedFiles.indexOf(file);
 
-    selectedDiv.removeChild(selectedDiv.childNodes[index]);
-
     if (selectedDivQr) {
-      selectedDivQr.removeChild(selectedDivQr.childNodes[index]);
+
+      for (var i = 0; i < selectedDiv.childNodes.length; i++) {
+        if (selectedDiv.childNodes[i] === cell) {
+          selectedDivQr.removeChild(selectedDivQr.childNodes[i]);
+        }
+      }
+
     }
+
+    selectedDiv.removeChild(cell);
 
     selectedFiles.splice(selectedFiles.indexOf(file), 1);
   };
