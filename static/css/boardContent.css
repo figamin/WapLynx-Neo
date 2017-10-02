@@ -95,11 +95,11 @@
   font-size: 80%;
 }
 
-input[type=checkbox]#checkboxSpoiler {
+input[type=checkbox].postingCheckbox {
   display: none;
 }
 
-input[type=checkbox]#checkboxSpoiler+label:before {
+input[type=checkbox].postingCheckbox+label:before {
   font-family: Icons;
   content: "\e0db";
   margin-right: 0.5em;
@@ -107,7 +107,7 @@ input[type=checkbox]#checkboxSpoiler+label:before {
   display: inline-block;
 }
 
-input[type=checkbox]#checkboxSpoiler:checked+label:before {
+input[type=checkbox].postingCheckbox:checked+label:before {
   font-family: Icons;
   content: "\e033";
   margin-right: 0.5em;

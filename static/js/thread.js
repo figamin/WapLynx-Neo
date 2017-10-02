@@ -802,7 +802,7 @@ function processFilesToPost(captchaId) {
 
 }
 
-function postReply() {
+function processReplyRequest() {
 
   if (hiddenCaptcha) {
     processFilesToPost();
@@ -827,13 +827,41 @@ function postReply() {
         captchaId : parsedCookies.captchaid,
         answer : typedCaptcha
       }, function solvedCaptcha(status, data) {
-
         processFilesToPost(parsedCookies.captchaid);
-
       });
     }
 
   }
+
+}
+
+function postReply() {
+
+  localRequest('/blockBypass.js?json=1',
+      function checked(error, response) {
+
+        if (error) {
+          alert(error);
+          return;
+        }
+
+        var data = JSON.parse(response);
+
+        var alwaysUseBypass = document
+            .getElementById('alwaysUseBypassCheckBox').checked;
+
+        if (!data.valid
+            && (data.mode == 2 || (data.mode == 1 && alwaysUseBypass))) {
+
+          if (window.confirm('You need a block bypass.')) {
+            window.open('/blockBypass.js');
+          }
+
+        } else {
+          processReplyRequest();
+        }
+
+      });
 
 }
 

@@ -69,6 +69,10 @@ if (!DISABLE_JS) {
       type : 'string',
       setting : 'incSpamIpsSource'
     },
+    checkboxPreemptiveCaching : {
+      type : 'boolean',
+      setting : 'preemptiveCaching',
+    },
     fieldMaster : {
       setting : 'master',
       type : 'string'
@@ -285,9 +289,9 @@ if (!DISABLE_JS) {
       setting : 'frontPageStats',
       type : 'boolean'
     },
-    checkboxSsl : {
+    comboSsl : {
       setting : 'ssl',
-      type : 'boolean'
+      type : 'combo'
     },
     checkboxGlobalBoardModeration : {
       setting : 'allowGlobalBoardModeration',

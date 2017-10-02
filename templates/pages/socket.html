@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0">
 <link
-  rel="stylesheet"
+  href="/.static/css/global.css"
   type="text/css"
-  href="/.static/css/global.css">
+  rel="stylesheet" />
 </head>
 <body>
 
@@ -35,56 +35,32 @@
 
     <fieldset id="settingsFieldset">
 
-      <legend>Media Management</legend>
+      <legend>Socket Control</legend>
+
+      Status: <span id="statusLabel"></span>
 
       <form
-        action="/mediaManagement.js"
-        method="GET">
-        Search:
-        <input
-          name="filter"
-          type="text">
-
-        <label>
-          <input
-            type="checkbox"
-            value="1"
-            id="orphanedCheckbox"
-            name="orphaned">
-          Show only orphaned files
-        </label>
-
-        <button type="submit">Filter</button>
-      </form>
-
-      <form
-        action="/deleteMedia.js"
-        method="POST"
-        enctype="multipart/form-data">
-        <input
-          value="Delete selected media"
+        method="get"
+        action="/restartSocket.js">
+        <button
           type="submit"
-          id="deleteFormButton">
-        <input
-          value="Delete selected media"
+          id="restartFormButton">Restart socket</button>
+        <button
           type="button"
-          id="deleteJsButton"
-          onclick="deleteMedia()"
-          class="hidden">
-
-        <div id="filesDiv"></div>
+          class="hidden"
+          onclick="restartSocket()"
+          id="restartJsButton">Restart socket</button>
       </form>
-      <hr>
-      <div id="pagesDiv"></div>
 
     </fieldset>
 
   </div>
 
 </body>
+
 <script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
-<script src="/.static/js/mediaManagement.js"></script>
 <script src="/.static/js/themes.js"></script>
+<script src="/.static/js/socketControl.js"></script>
 
 </html>

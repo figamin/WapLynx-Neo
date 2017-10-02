@@ -116,13 +116,29 @@
               placeholder="Password">
           </div>
 
-          <div id="noFlagDiv">
+          <div
+            id="noFlagDiv"
+            class="centered">
             <input
               type="checkbox"
+              class="postingCheckbox"
               id="checkboxNoFlag"
               name="noFlag">
-            Don't show location
+            <label for="checkboxNoFlag">Don't show location</label>
           </div>
+
+          <div
+            id="alwaysUseBypassDiv"
+            class="centered"
+            style="display: hidden;">
+            <input
+              type="checkbox"
+              class="postingCheckbox"
+              id="alwaysUseBypassCheckBox">
+            <label for="alwaysUseBypassCheckBox">Make sure I have a
+              block bypass</label>
+          </div>
+
           <div id="flagsDiv">
             <select
               name="flag"
@@ -158,6 +174,7 @@
               <input
                 type="checkbox"
                 name="spoiler"
+                class="postingCheckbox"
                 id="checkboxSpoiler">
 
               <label for="checkboxSpoiler">Spoiler</label>
@@ -617,7 +634,7 @@
 <script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
 <script src="/.static/js/crypt.js"></script>
-<script src="/.static/js/upload.js"></script>
+<script src="/.static/js/postCommon.js"></script>
 <script src="/.static/js/thread.js"></script>
 <script src="/.static/js/thumbs.js"></script>
 <script src="/.static/js/tooltips.js"></script>

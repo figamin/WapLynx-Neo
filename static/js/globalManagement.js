@@ -2,7 +2,9 @@ if (!DISABLE_JS) {
 
   if (document.getElementById('addStaffForm')) {
     document.getElementById('addJsButton').style.display = 'inline';
+    document.getElementById('massBanJsButton').style.display = 'inline';
 
+    document.getElementById('massBanFormButton').style.display = 'none';
     document.getElementById('addFormButton').style.display = 'none';
 
   }
@@ -58,6 +60,56 @@ function setUser(login, role) {
     if (status === 'ok') {
 
       location.reload(true);
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+
+}
+
+function massBan() {
+
+  var ipField = document.getElementById('fieldIps');
+  var reasonField = document.getElementById('fieldReason');
+  var durationField = document.getElementById('fieldDuration');
+
+  var typedIps = ipField.value.trim();
+
+  var ipArray = typedIps.split(',');
+
+  var finalIpArray = [];
+
+  for (var i = 0; i < ipArray.length; i++) {
+
+    var ip = ipArray[i].trim();
+
+    if (ip.length) {
+      finalIpArray.push(ip);
+    }
+
+  }
+
+  if (!finalIpArray.length) {
+    alert('No ips informed');
+    return;
+  }
+
+  var typedReason = reasonField.value;
+  var typedDuration = durationField.value;
+
+  apiRequest('massBan.js', {
+    ips : finalIpArray,
+    reason : typedReason,
+    duration : typedDuration
+  }, function requestCompleted(status, data) {
+
+    if (status === 'ok') {
+      ipField.value = '';
+      reasonField.value = '';
+      durationField.value = '';
+
+      alert('Mass ban applied.');
 
     } else {
       alert(status + ': ' + JSON.stringify(data));

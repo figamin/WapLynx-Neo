@@ -92,11 +92,11 @@
           doing, will consume lots more of bandwidth)
         </label>
         <label>
-          <input
-            type="checkbox"
-            id="checkboxSsl"
-            name="ssl">
           SSL<sup>2</sup> (Make sure you have the proper files)
+          <select
+            id="comboSsl"
+            name="ssl">
+          </select>
         </label>
         <hr>
 
@@ -508,6 +508,13 @@
             id="checkboxVerboseApis"
             name="verboseApis">
           Verbose APIs mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            id="checkboxPreemptiveCaching"
+            name="preemptiveCaching">
+          Use preemptive caching
         </label>
         <label>
           <input

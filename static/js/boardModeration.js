@@ -57,6 +57,10 @@ function saveSpecialSettings() {
     specialSettings.push('sfw');
   }
 
+  if (document.getElementById('checkboxLocked').checked) {
+    specialSettings.push('locked');
+  }
+
   apiRequest('setSpecialBoardSettings', {
     boardUri : boardIdentifier,
     specialSettings : specialSettings

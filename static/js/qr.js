@@ -126,26 +126,40 @@ function setQr() {
   qrhtml += 'Quick Reply</span></th> </tr>';
 
   if (QRshowname) {
-    qrhtml += '<tr><td colspan="2"><input id="qrname" type="text" name="name"';
+    qrhtml += '<tr><td colspan="2"><input id="qrname" type="text"';
     qrhtml += ' maxlength="35" autocomplete="off" placeholder="Name"></td> </tr>';
   }
 
   qrhtml += '<tr><td colspan="2">';
-  qrhtml += '<input id="qremail" type="text" name="email" maxlength="40" ';
+  qrhtml += '<input id="qremail" type="text" maxlength="40" ';
   qrhtml += 'autocomplete="off" placeholder="Email">';
   qrhtml += '</td> </tr> ';
 
   qrhtml += '<tr><td colspan="2">';
-  qrhtml += '<input id="qrsubject" type="text" name="subject" maxlength="100"';
+  qrhtml += '<input id="qrsubject" type="text" maxlength="100"';
   qrhtml += 'autocomplete="off" placeholder="Subject ">';
   qrhtml += '</td>';
   qrhtml += '</tr>';
 
-  qrhtml += '<tr><td colspan="2"><textarea name="message" id="qrbody" rows="5" placeholder="Comment">';
+  qrhtml += '<tr><td colspan="2"><textarea id="qrbody" rows="5" placeholder="Comment">';
   qrhtml += '</textarea></td></tr> ';
 
   qrhtml += '<tr><td colspan="2">';
-  qrhtml += '<input id="qrpassword" type="text" name="password" placeholder="Password"></td></tr>';
+  qrhtml += '<input id="qrpassword" type="text" placeholder="Password"></td></tr>';
+
+  var noFlagDiv = document.getElementById('noFlagDiv');
+
+  if (noFlagDiv) {
+    qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
+    qrhtml += 'id="qrcheckboxNoFlag" class="postingCheckbox">';
+    qrhtml += '<label for="qrcheckboxNoFlag" class="spoilerCheckbox">';
+    qrhtml += 'Don\'t show location</label></td></tr>';
+  }
+
+  qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
+  qrhtml += 'id="qralwaysUseBypassCheckBox" class="postingCheckbox">';
+  qrhtml += '<label for="qralwaysUseBypassCheckBox" class="spoilerCheckbox">';
+  qrhtml += 'Make sure I have a block bypass</label></td></tr>';
 
   if (flags) {
     qrhtml += '<tr><td colspan="2"><div id="qrFlagsDiv"></div></td></tr>';
@@ -157,7 +171,7 @@ function setQr() {
     qrhtml += '<div id="selectedDivQr"></div></td> </tr>';
 
     qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
-    qrhtml += 'name="spoiler" id="qrcheckboxSpoiler">';
+    qrhtml += 'id="qrcheckboxSpoiler" class="postingCheckbox">';
     qrhtml += '<label for="qrcheckboxSpoiler" class="spoilerCheckbox">Spoiler</label></td> </tr>';
 
   }
@@ -174,13 +188,13 @@ function setQr() {
     qrhtml += '<tr><td colspan="2"><input type="button" onClick="reloadCaptcha()"';
     qrhtml += ' value="Reload"> <span class="captchaTimer"></span></td></tr>';
 
-    qrhtml += '<tr><td><input name="captcha" type="text" class="captchaField" ';
+    qrhtml += '<tr><td><input type="text" class="captchaField" ';
     qrhtml += 'id="QRfieldCaptcha" placeholder="Answer"></td>';
     qrhtml += '<td><a href="/noCookieCaptcha.js" target="_blank" class="small">No cookies?</a></td></tr>';
   }
 
   qrhtml += '<tr> <td colspan="2" class="centered">';
-  qrhtml += '<button accesskey="s" id="qrbutton" type="button" onclick="postReply()" name="post">Reply';
+  qrhtml += '<button accesskey="s" id="qrbutton" type="button" onclick="postReply()">Reply';
   qrhtml += '</td></tr>';
 
   qrhtml += '</tbody> </table></div></div>';
@@ -196,6 +210,12 @@ function setQr() {
   registerSync('fieldSubject', 'qrsubject', 'value', 'input');
   registerSync('fieldMessage', 'qrbody', 'value', 'input');
   registerSync('fieldPostingPassword', 'qrpassword', 'value', 'input');
+  registerSync('alwaysUseBypassCheckBox', 'qralwaysUseBypassCheckBox',
+      'checked', 'change');
+
+  if (noFlagDiv) {
+    registerSync('checkboxNoFlag', 'qrcheckboxNoFlag', 'checked', 'change');
+  }
 
   if (!textBoard) {
     registerSync('checkboxSpoiler', 'qrcheckboxSpoiler', 'checked', 'change');

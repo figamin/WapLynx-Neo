@@ -23,7 +23,11 @@ function save() {
 
   var typedMessage = document.getElementById('fieldMessage').value.trim();
 
-  if (!typedMessage.length) {
+  var typedSubject = document.getElementById('fieldSubject').value.trim();
+
+  if (typedSubject.length > 128) {
+    alert('Subject too long, keep it under 128 characters.');
+  } else if (!typedMessage.length) {
     alert('A message is mandatory.');
   } else if (typedMessage.length > messageLimit) {
     alert('Message too long, keep it under ' + messageLimit + ' characters.');
@@ -31,7 +35,8 @@ function save() {
 
     var parameters = {
       boardUri : boardIdentifier,
-      message : typedMessage
+      message : typedMessage,
+      subject : typedSubject
     };
 
     if (postIdentifier) {

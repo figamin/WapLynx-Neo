@@ -6,6 +6,22 @@ var selectedFiles = [];
 var selectedDiv;
 var selectedDivQr;
 
+if (!DISABLE_JS && typeof (Storage) !== "undefined") {
+
+  document.getElementById('alwaysUseBypassDiv').display = 'inline';
+
+  var bypassCheckBox = document.getElementById('alwaysUseBypassCheckBox');
+
+  if (JSON.parse(localStorage.ensureBypass)) {
+    bypassCheckBox.checked = true;
+  }
+
+  bypassCheckBox.addEventListener('change', function() {
+    localStorage.setItem("ensureBypass", bypassCheckBox.checked);
+  });
+
+}
+
 function addDndCell(cell, removeButton) {
 
   if (selectedDivQr) {

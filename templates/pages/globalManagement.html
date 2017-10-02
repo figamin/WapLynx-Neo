@@ -94,6 +94,12 @@
         <br>
       </a>
       <a
+        id="socketLink"
+        href="/socketControl.js">
+        Unix socket
+        <br>
+      </a>
+      <a
         id="languagesLink"
         href="/languages.js">
         Alternative languages
@@ -161,6 +167,47 @@
 
       <div id="appealedBansPanel">
         <h3>Appealed Bans</h3>
+      </div>
+
+      <div id="massBanPanel">
+        <form
+          method="post"
+          action="/massBan.js"
+          enctype="multipart/form-data">
+          <h3>Mass bans</h3>
+
+          <label>
+            Clear text ips, separated by commas:
+            <input
+              type="text"
+              name="ips"
+              id="fieldIps">
+          </label>
+          <label>
+            Ban duration:
+            <input
+              type="text"
+              name="duration"
+              id="fieldDuration">
+          </label>
+          <label>
+            Ban reason:
+            <input
+              type="text"
+              name="reason"
+              id="fieldReason">
+          </label>
+          <label>
+            <button
+              type="submit"
+              id="massBanFormButton">Ban</button>
+            <button
+              onclick="massBan()"
+              type="button"
+              style="display: none;"
+              id="massBanJsButton">Ban</button>
+          </label>
+        </form>
       </div>
 
     </fieldset>
