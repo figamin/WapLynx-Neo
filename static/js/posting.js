@@ -75,15 +75,12 @@ function banPosts() {
 
   var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
 
-  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
-    return;
-  } else if (/\W/.test(typedCaptcha)) {
+  if (typedCaptcha && /\W/.test(typedCaptcha)) {
     alert('Invalid captcha.');
     return;
   }
 
-  if (typedCaptcha.length == 24) {
+  if (typedCaptcha.length == 24 || !typedCaptcha) {
     applyBans(typedCaptcha);
   } else {
     var parsedCookies = getCookies();
