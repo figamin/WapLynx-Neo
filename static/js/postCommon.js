@@ -8,6 +8,24 @@ var selectedDivQr;
 
 if (!DISABLE_JS && typeof (Storage) !== "undefined") {
 
+  var savedPassword = localStorage.deletionPassword;
+
+  if (savedPassword) {
+
+    document.getElementById('fieldPostingPassword').value = savedPassword;
+
+    if (document.getElementById('deletionFieldPassword')) {
+      document.getElementById('deletionFieldPassword').value = savedPassword;
+    }
+
+  }
+
+  var forcedAnon = !document.getElementById('fieldName');
+
+  if (!forcedAnon) {
+    document.getElementById('fieldName').value = localStorage.name || '';
+  }
+
   document.getElementById('alwaysUseBypassDiv').display = 'inline';
 
   var bypassCheckBox = document.getElementById('alwaysUseBypassCheckBox');

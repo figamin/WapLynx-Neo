@@ -247,23 +247,3 @@ function localRequest(address, callback) {
 
   xhr.send();
 }
-
-function savePassword(password) {
-
-  if (typeof (Storage) === "undefined") {
-    return;
-  }
-
-  localStorage.setItem("deletionPassword", password);
-
-}
-
-function getSavedPassword() {
-
-  if (typeof (Storage) === "undefined") {
-    return;
-  }
-
-  return localStorage.deletionPassword;
-
-}

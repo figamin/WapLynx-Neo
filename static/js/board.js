@@ -28,17 +28,6 @@ if (!DISABLE_JS) {
       document.getElementById('reloadCaptchaButton').style.display = 'inline';
     }
 
-    var savedPassword = getSavedPassword();
-
-    if (savedPassword && savedPassword.length) {
-
-      document.getElementById('fieldPostingPassword').value = savedPassword;
-
-      if (document.getElementById('deletionFieldPassword')) {
-        document.getElementById('deletionFieldPassword').value = savedPassword;
-      }
-
-    }
   }
 
   if (document.getElementById('reloadCaptchaButtonReport')) {
@@ -84,6 +73,9 @@ function sendThreadData(files, captchaId) {
 
   if (!forcedAnon) {
     var typedName = document.getElementById('fieldName').value.trim();
+
+    localStorage.setItem('name', typedName);
+
   }
 
   var typedEmail = document.getElementById('fieldEmail').value.trim();
@@ -112,9 +104,7 @@ function sendThreadData(files, captchaId) {
     return;
   }
 
-  if (typedPassword.length) {
-    savePassword(typedPassword);
-  }
+  localStorage.setItem('deletionPassword', typedPassword);
 
   originalButtonText = postButton.innerHTML;
   postButton.innerHTML = 'Uploading 0%';

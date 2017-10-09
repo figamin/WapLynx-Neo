@@ -106,13 +106,6 @@ if (!DISABLE_JS) {
 
   }
 
-  var savedPassword = getSavedPassword();
-
-  if (savedPassword && savedPassword.length) {
-    document.getElementById('fieldPostingPassword').value = savedPassword;
-    document.getElementById('deletionFieldPassword').value = savedPassword;
-  }
-
   replyButton = document.getElementById('jsButton');
   replyButton.style.display = 'inline';
   replyButton.disabled = false;
@@ -733,6 +726,7 @@ function sendReplyData(files, captchaId) {
 
   if (!forcedAnon) {
     var typedName = document.getElementById('fieldName').value.trim();
+    localStorage.setItem('name', typedName);
   }
 
   var typedEmail = document.getElementById('fieldEmail').value.trim();
@@ -763,9 +757,7 @@ function sendReplyData(files, captchaId) {
     return;
   }
 
-  if (typedPassword.length) {
-    savePassword(typedPassword);
-  }
+  localStorage.setItem('deletionPassword', typedPassword);
 
   var spoilerCheckBox = document.getElementById('checkboxSpoiler');
 
