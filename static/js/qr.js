@@ -1,80 +1,103 @@
 //I didn't write this originally.
 //I just tried to make it less shit.
 
-var shouldMove = false;
-var referenceContainer;
-var diffX;
-var diffY;
-var eWi;
-var eHe;
-var cWi;
-var cHe;
-var divid;
+var qrInfo = {}
 
-document.onmousedown = function() {
-  return !shouldMove;
-};
+function stopMoving() {
+
+  if (!qrInfo.shouldMove) {
+    return;
+  }
+
+  qrInfo.shouldMove = false
+
+  var body = document.getElementsByTagName('body')[0];
+
+  body.onmousedown = qrInfo.originalMouseDown;
+  body.onmouseup = qrInfo.originalMouseUp;
+
+}
 
 function startMoving(evt) {
 
-  shouldMove = true;
+  if (qrInfo.shouldMove) {
+    return;
+  }
+
+  var body = document.getElementsByTagName('body')[0];
+
+  qrInfo.originalMouseDown = body.onmousedown;
+
+  body.onmousedown = function() {
+    return false;
+  };
+
+  qrInfo.originalMouseUp = body.onmouseup;
+
+  body.onmouseup = function() {
+    stopMoving();
+  };
+
+  qrInfo.shouldMove = true;
 
   evt = evt || window.event;
 
   var posX = evt.clientX;
   var posY = evt.clientY;
-  var divTop = divid.style.top;
-  var divLeft = divid.style.right;
-  eWi = parseInt(divid.style.width);
-  eHe = parseInt(divid.style.height);
-  cWi = parseInt(document.getElementById('threadList').style.width);
-  cHe = parseInt(document.getElementById('threadList').style.height);
+  var divTop = qrInfo.divid.style.top;
+  var divLeft = qrInfo.divid.style.right;
 
   divTop = divTop.replace('px', '');
   divLeft = divLeft.replace('px', '');
 
-  diffX = (window.innerWidth - posX) - divLeft;
-  diffY = posY - divTop;
+  qrInfo.diffX = (window.innerWidth - posX) - divLeft;
+  qrInfo.diffY = posY - divTop;
 
 }
 
-document.onmousemove = function(evt) {
-  if (!shouldMove) {
+var move = function(evt) {
+
+  if (!qrInfo.shouldMove) {
     return;
   }
 
   evt = evt || window.event;
 
-  var posX = evt.clientX;
-  var posY = evt.clientY;
-  var aX = (window.innerWidth - posX) - diffX;
-  var aY = posY - diffY;
+  var newX = (window.innerWidth - evt.clientX) - qrInfo.diffX;
+  var newY = evt.clientY - qrInfo.diffY;
 
-  if (aX < 0) {
-    aX = 0;
-
+  if (newX < 0) {
+    newX = 0;
   }
 
-  if (aY < 0) {
-    aY = 0;
+  if (newY < 0) {
+    newY = 0;
   }
 
-  if (aX + eWi > cWi) {
-    aX = cWi - eWi;
+  var upperXLimit = document.body.clientWidth - qrInfo.divid.offsetWidth;
+
+  if (newX > upperXLimit) {
+    newX = upperXLimit;
   }
 
-  if (aY + eHe > cHe) {
-    aY = cHe - eHe;
+  var upperYLimit = window.innerHeight - qrInfo.divid.offsetHeight;
+
+  if (newY > upperYLimit) {
+    newY = upperYLimit;
   }
 
-  divid.style.right = aX + 'px';
-  divid.style.top = aY + 'px';
+  qrInfo.divid.style.right = newX + 'px';
+  qrInfo.divid.style.top = newY + 'px';
 
-}
+};
 
 function showQr(quote) {
 
   setQr();
+
+  var body = document.getElementsByTagName('body')[0];
+
+  body.addEventListener('mousemove', move);
 
   document.getElementById('qrbody').value += '>>' + quote + '\n';
 
@@ -104,6 +127,13 @@ function registerSync(source, destination, field, event) {
 
 }
 
+function removeQr() {
+  document.getElementById('quick-reply').remove();
+
+  var body = document.getElementsByTagName('body')[0];
+  body.removeEventListener('mousemove', move);
+}
+
 function setQr() {
 
   if (document.getElementById('quick-reply')) {
@@ -121,8 +151,8 @@ function setQr() {
   qrhtml += '<table class="post-table"><tbody> <tr><th colspan="2">';
   qrhtml += '<span class="handle" ';
   qrhtml += 'onmousedown=\'startMoving(event);\' ';
-  qrhtml += 'onmouseup=\'shouldMove = false\'><a class="close-btn"';
-  qrhtml += ' onclick="document.getElementById(\'quick-reply\').remove();"></a>';
+  qrhtml += 'onmouseup=\'stopMoving()\'><a class="close-btn"';
+  qrhtml += ' onclick=\'removeQr();\'></a>';
   qrhtml += 'Quick Reply</span></th> </tr>';
 
   if (QRshowname) {
@@ -204,7 +234,7 @@ function setQr() {
 
   document.body.appendChild(newDiv.children[0]);
 
-  divid = document.getElementById('quick-reply')
+  qrInfo.divid = document.getElementById('quick-reply');
 
   registerSync('fieldEmail', 'qremail', 'value', 'input');
   registerSync('fieldSubject', 'qrsubject', 'value', 'input');
