@@ -10,6 +10,7 @@ function stopMoving() {
   }
 
   qrInfo.shouldMove = false
+  lockedDrag = false
 
   var body = document.getElementsByTagName('body')[0];
 
@@ -20,9 +21,11 @@ function stopMoving() {
 
 function startMoving(evt) {
 
-  if (qrInfo.shouldMove) {
+  if (qrInfo.shouldMove || (typeof (lockedDrag) != 'undefined') && lockedDrag) {
     return;
   }
+
+  lockedDrag = true;
 
   var body = document.getElementsByTagName('body')[0];
 
@@ -42,16 +45,16 @@ function startMoving(evt) {
 
   evt = evt || window.event;
 
-  var posX = evt.clientX;
-  var posY = evt.clientY;
-  var divTop = qrInfo.divid.style.top;
-  var divLeft = qrInfo.divid.style.right;
+  var qrPanel = document.getElementById('quick-reply');
 
-  divTop = divTop.replace('px', '');
-  divLeft = divLeft.replace('px', '');
+  var divTop = qrPanel.style.top;
+  var divRight = qrPanel.style.right;
 
-  qrInfo.diffX = (window.innerWidth - posX) - divLeft;
-  qrInfo.diffY = posY - divTop;
+  divTop = +divTop.replace('px', '');
+  divRight = +divRight.replace('px', '');
+
+  qrInfo.diffX = (window.innerWidth - evt.clientX) - divRight;
+  qrInfo.diffY = evt.clientY - divTop;
 
 }
 
@@ -74,20 +77,22 @@ var move = function(evt) {
     newY = 0;
   }
 
-  var upperXLimit = document.body.clientWidth - qrInfo.divid.offsetWidth;
+  var qrPanel = document.getElementById('quick-reply');
+
+  var upperXLimit = document.body.clientWidth - qrPanel.offsetWidth;
 
   if (newX > upperXLimit) {
     newX = upperXLimit;
   }
 
-  var upperYLimit = window.innerHeight - qrInfo.divid.offsetHeight;
+  var upperYLimit = window.innerHeight - qrPanel.offsetHeight;
 
   if (newY > upperYLimit) {
     newY = upperYLimit;
   }
 
-  qrInfo.divid.style.right = newX + 'px';
-  qrInfo.divid.style.top = newY + 'px';
+  qrPanel.style.right = newX + 'px';
+  qrPanel.style.top = newY + 'px';
 
 };
 
@@ -150,8 +155,8 @@ function setQr() {
   qrhtml += '<div id="post-form-inner">';
   qrhtml += '<table class="post-table"><tbody> <tr><th colspan="2">';
   qrhtml += '<span class="handle" ';
-  qrhtml += 'onmousedown=\'startMoving(event);\' ';
-  qrhtml += 'onmouseup=\'stopMoving()\'><a class="close-btn"';
+  qrhtml += 'onmousedown=\'startMoving(event);\'>';
+  qrhtml += '<a class="close-btn"';
   qrhtml += ' onclick=\'removeQr();\'></a>';
   qrhtml += 'Quick Reply</span></th> </tr>';
 
@@ -233,8 +238,6 @@ function setQr() {
   newDiv.innerHTML = qrhtml;
 
   document.body.appendChild(newDiv.children[0]);
-
-  qrInfo.divid = document.getElementById('quick-reply');
 
   registerSync('fieldEmail', 'qremail', 'value', 'input');
   registerSync('fieldSubject', 'qrsubject', 'value', 'input');
