@@ -6,7 +6,8 @@ var selectedFiles = [];
 var selectedDiv;
 var selectedDivQr;
 
-if (!DISABLE_JS && typeof (Storage) !== "undefined") {
+if (!DISABLE_JS && typeof (Storage) !== "undefined"
+    && document.getElementById('fieldName')) {
 
   var savedPassword = localStorage.deletionPassword;
 

@@ -4,6 +4,15 @@ var originalButtonText;
 var identifierElement = document.getElementById('boardIdentifier');
 var boardUri = identifierElement ? identifierElement.value : null;
 
+if (!boardUri) {
+
+  var altIdentifierElement = document.getElementById('labelBoard');
+
+  boardUri = altIdentifierElement ? altIdentifierElement.innerHTML.replace(
+      /\//g, '') : null;
+
+}
+
 var hiddenCaptcha;
 var messageLimit;
 
