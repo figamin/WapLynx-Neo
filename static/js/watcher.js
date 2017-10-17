@@ -4,6 +4,97 @@ var isInThread = document.getElementById('threadIdentifier') ? true : false;
 var watcherAlertCounter = 0;
 var elementRelation = {};
 
+var watcherDragInfo = {}
+
+function stopMovingWatched() {
+
+  if (!watcherDragInfo.shouldMove) {
+    return;
+  }
+
+  watcherDragInfo.shouldMove = false
+  lockedDrag = false
+
+  var body = document.getElementsByTagName('body')[0];
+
+  body.onmousedown = watcherDragInfo.originalMouseDown;
+  body.onmouseup = watcherDragInfo.originalMouseUp;
+}
+
+function startMovingWatched(evt) {
+
+  if (watcherDragInfo.shouldMove || (typeof (lockedDrag) != 'undefined')
+      && lockedDrag) {
+    return;
+  }
+
+  lockedDrag = true;
+
+  var body = document.getElementsByTagName('body')[0];
+
+  watcherDragInfo.originalMouseDown = body.onmousedown;
+
+  body.onmousedown = function() {
+    return false;
+  };
+
+  watcherDragInfo.originalMouseUp = body.onmouseup;
+
+  body.onmouseup = function() {
+    stopMovingWatched();
+  };
+
+  watcherDragInfo.shouldMove = true;
+
+  evt = evt || window.event;
+
+  var watchedPanel = document.getElementById('watchedMenu');
+
+  var rect = watchedPanel.getBoundingClientRect();
+
+  watcherDragInfo.diffX = evt.clientX - rect.right;
+  watcherDragInfo.diffY = evt.clientY - rect.top;
+
+}
+
+var moveWatched = function(evt) {
+
+  if (!watcherDragInfo.shouldMove) {
+    return;
+  }
+
+  evt = evt || window.event;
+
+  var newX = (window.innerWidth - evt.clientX) + watcherDragInfo.diffX;
+  var newY = evt.clientY - watcherDragInfo.diffY;
+
+  if (newX < 0) {
+    newX = 0;
+  }
+
+  if (newY < 0) {
+    newY = 0;
+  }
+
+  var watchedPanel = document.getElementById('watchedMenu');
+
+  var upperXLimit = document.body.clientWidth - watchedPanel.offsetWidth;
+
+  if (newX > upperXLimit) {
+    newX = upperXLimit;
+  }
+
+  var upperYLimit = window.innerHeight - watchedPanel.offsetHeight;
+
+  if (newY > upperYLimit) {
+    newY = upperYLimit;
+  }
+
+  watchedPanel.style.right = newX + 'px';
+  watchedPanel.style.top = newY + 'px';
+
+};
+
 if (!DISABLE_JS) {
 
   var postingLink = document.getElementById('navPosting');
@@ -32,6 +123,10 @@ if (!DISABLE_JS) {
   watchedMenuLabel.innerHTML = 'Watched threads';
   watchedMenuLabel.setAttribute('class', 'watchedMenuLabel');
 
+  watchedMenuLabel.onmousedown = function(event) {
+    startMovingWatched(event);
+  };
+
   watchedMenu.appendChild(watchedMenuLabel);
 
   var showingWatched = false;
@@ -42,6 +137,9 @@ if (!DISABLE_JS) {
     if (!showingWatched) {
       return;
     }
+
+    var body = document.getElementsByTagName('body')[0];
+    body.removeEventListener('mousemove', moveWatched);
 
     showingWatched = false;
     watchedMenu.style.display = 'none';
@@ -54,7 +152,6 @@ if (!DISABLE_JS) {
 
   watchedMenu.id = 'watchedMenu';
   watchedMenu.style.display = 'none';
-  watchedMenu.style.position = 'absolute';
 
   document.body.appendChild(watchedMenu);
 
@@ -64,23 +161,15 @@ if (!DISABLE_JS) {
       return;
     }
 
+    var body = document.getElementsByTagName('body')[0];
+
+    body.addEventListener('mousemove', moveWatched);
+
     showingWatched = true;
-    var rect = watcherButton.getBoundingClientRect();
 
-    var previewOrigin = {
-      x : rect.right + 10 + window.scrollX,
-      y : rect.top + window.scrollY
-    };
-
-    watchedMenu.style.left = previewOrigin.x + 'px';
-    watchedMenu.style.top = previewOrigin.y + 'px';
-    watchedMenu.style.display = 'inline';
+    watchedMenu.style.display = 'block';
 
   }
-
-  document.addEventListener('scroll', function() {
-    closeWatcherMenuButton.onclick();
-  });
 
   var ops = document.getElementsByClassName('innerOP');
 

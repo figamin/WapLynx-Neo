@@ -47,14 +47,10 @@ function startMoving(evt) {
 
   var qrPanel = document.getElementById('quick-reply');
 
-  var divTop = qrPanel.style.top;
-  var divRight = qrPanel.style.right;
+  var rect = qrPanel.getBoundingClientRect();
 
-  divTop = +divTop.replace('px', '');
-  divRight = +divRight.replace('px', '');
-
-  qrInfo.diffX = (window.innerWidth - evt.clientX) - divRight;
-  qrInfo.diffY = evt.clientY - divTop;
+  qrInfo.diffX = evt.clientX - rect.right;
+  qrInfo.diffY = evt.clientY - rect.top;
 
 }
 
@@ -66,7 +62,7 @@ var move = function(evt) {
 
   evt = evt || window.event;
 
-  var newX = (window.innerWidth - evt.clientX) - qrInfo.diffX;
+  var newX = (window.innerWidth - evt.clientX) + qrInfo.diffX;
   var newY = evt.clientY - qrInfo.diffY;
 
   if (newX < 0) {

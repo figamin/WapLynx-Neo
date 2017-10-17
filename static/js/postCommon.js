@@ -30,7 +30,7 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined") {
 
   var bypassCheckBox = document.getElementById('alwaysUseBypassCheckBox');
 
-  if (JSON.parse(localStorage.ensureBypass)) {
+  if (localStorage.ensureBypass && JSON.parse(localStorage.ensureBypass)) {
     bypassCheckBox.checked = true;
   }
 

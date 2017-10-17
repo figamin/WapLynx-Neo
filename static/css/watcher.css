@@ -9,8 +9,8 @@
   content: '\e065';
 }
 
-#closeWatcherMenuButton::before, .close-btn::before, .watchedCellCloseButton::before
-  {
+#closeWatcherMenuButton::before, .close-btn::before,
+  .watchedCellCloseButton::before {
   font-family: 'Icons';
   content: '\e0db';
 }
@@ -26,7 +26,8 @@
 }
 
 .watchedMenuLabel {
-  font-size: 80%
+  font-size: 80%;
+  cursor: move;
 }
 
 .watchedNotification::before {
@@ -34,4 +35,11 @@
   content: '\e0D8';
   margin-left: 0.25em;
   color: #A00;
+}
+
+#watchedMenu {
+  position: fixed;
+  right: 100px;
+  top: 25px;
+  z-index: 100;
 }
