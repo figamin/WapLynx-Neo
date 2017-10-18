@@ -39,6 +39,12 @@ function updateHiddenFiles(file, hiding) {
     var element = mediaObject[i];
 
     element.button.innerHTML = hiding ? '(Show file)' : '(Hide file)';
+
+    if (element.element.style.display === 'none' && hiding) {
+      element.element.parentNode.getElementsByClassName('hideLink')[0]
+          .onclick();
+    }
+
     element.element.style.display = hiding ? 'none' : 'inline';
   }
 

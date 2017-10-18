@@ -86,6 +86,7 @@ function setPlayer(link, mime) {
   };
 
   var newThumb = document.createElement('img');
+  newThumb.setAttribute('class', 'imgLink');
   newThumb.src = link.childNodes[0].src;
   newThumb.onclick = function() {
     if (!video.childNodes.count) {
