@@ -1,5 +1,9 @@
 var boardIdentifier = document.getElementById('boardIdentifier').value;
 
+var selectedFiles = [];
+
+var maxLength = +document.getElementById('maxNameLengthLabel').innerHTML;
+
 if (!DISABLE_JS) {
 
   document.getElementById('addJsButton').style.display = 'inline';
@@ -14,7 +18,86 @@ if (!DISABLE_JS) {
 
   }
 
+  var dragAndDrop = document.getElementById('dragAndDropDiv');
+  dragAndDrop.className = '';
+
+  var dropZone = document.getElementById('dropzone');
+
+  var defaultFileChooser = document.getElementById('files');
+
+  defaultFileChooser.setAttribute('multiple', true);
+  defaultFileChooser.style.display = 'none';
+
+  defaultFileChooser.onchange = function() {
+
+    for (var i = 0; i < defaultFileChooser.files.length; i++) {
+      addSelectedFlag(defaultFileChooser.files[i]);
+    }
+
+    defaultFileChooser.type = "text";
+    defaultFileChooser.type = "file";
+  };
+
+  dropZone.onclick = function() {
+    defaultFileChooser.click();
+  };
+
+  document.getElementById('nameLabel').style.display = 'none';
+
 }
+
+function addSelectedFlag(file) {
+
+  if (file.type.indexOf('image/')) {
+    alert('You can only upload images for flags');
+    return;
+  }
+
+  var selectedDiv = document.getElementById('selectedDiv');
+
+  var cell = document.createElement('div');
+  cell.setAttribute('class', 'selectedCell');
+
+  var removeButton = document.createElement('div');
+  removeButton.setAttribute('class', 'removeButton');
+  removeButton.innerHTML = '✖';
+  cell.appendChild(removeButton);
+
+  var nameField = document.createElement('input');
+  nameField.setAttribute('class', 'nameField');
+  nameField.type = 'text';
+  nameField.value = file.name.split('.')[0];
+  cell.appendChild(nameField);
+
+  cell.appendChild(document.createElement('br'));
+
+  var dndThumb = document.createElement('img');
+  dndThumb.setAttribute('class', 'dragAndDropThumb');
+  cell.appendChild(dndThumb);
+
+  removeButton.onclick = function() {
+    var index = selectedFiles.indexOf(file);
+
+    selectedDiv.removeChild(cell);
+
+    selectedFiles.splice(selectedFiles.indexOf(file), 1);
+  };
+
+  selectedFiles.push(file);
+
+  var fileReader = new FileReader();
+
+  fileReader.onloadend = function() {
+
+    dndThumb.src = fileReader.result;
+
+    selectedDiv.appendChild(cell);
+
+  };
+
+  fileReader.readAsDataURL(file);
+
+};
 
 function processFlagCell(cell) {
 
@@ -46,11 +129,14 @@ function removeBanner(flagId) {
 
 }
 
-function addFlag() {
+function uploadFlags() {
 
-  var typedName = document.getElementById('fieldFlagName').value.trim();
+  if (!selectedFiles.length) {
+    location.reload(true);
+    return;
+  }
 
-  var maxLength = +document.getElementById('maxNameLengthLabel').innerHTML;
+  var typedName = document.getElementsByClassName('nameField')[0].value.trim();
 
   if (typedName.length > maxLength) {
     alert('Flag name too long, keep it under ' + maxLength + ' characters.');
@@ -60,19 +146,12 @@ function addFlag() {
     return;
   }
 
-  var file = document.getElementById('files').files[0];
-
-  if (!file) {
-    alert('You must select a file');
-    return;
-  }
-
   var reader = new FileReader();
 
   reader.onloadend = function() {
 
     var files = [ {
-      name : file.name,
+      name : selectedFiles[0].name,
       content : reader.result
     } ];
 
@@ -86,7 +165,9 @@ function addFlag() {
 
       if (status === 'ok') {
 
-        location.reload(true);
+        document.getElementsByClassName('removeButton')[0].onclick();
+
+        uploadFlags();
 
       } else {
         alert(status + ': ' + JSON.stringify(data));
@@ -97,6 +178,6 @@ function addFlag() {
 
   };
 
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(selectedFiles[0]);
 
 }

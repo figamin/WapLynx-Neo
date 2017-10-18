@@ -9,6 +9,10 @@
   href="/.static/css/global.css"
   type="text/css"
   rel="stylesheet" />
+<link
+  href="/.static/css/flags.css"
+  type="text/css"
+  rel="stylesheet" />
 </head>
 <body>
 
@@ -45,7 +49,21 @@
           type="hidden"
           name="boardUri"
           id="boardIdentifier">
-        <label>
+
+        <div
+          class="hidden"
+          id="dragAndDropDiv">
+          <div
+            class="dropzone"
+            id="dropzone">
+            Drag flags to upload or
+            <br>
+            click here to select them
+          </div>
+          <div id="selectedDiv"></div>
+        </div>
+
+        <label id="nameLabel">
           Flag Name:
           <input
             name="flagName"
@@ -62,9 +80,9 @@
           id="addFormButton">
         <input
           type="button"
-          onClick="addFlag()"
+          onClick="uploadFlags()"
           class="hidden"
-          value="Add flag"
+          value="Upload flags"
           id="addJsButton">
         <p class="small">
           Maximum size allowed: <span id="maxSizeLabel"></span>

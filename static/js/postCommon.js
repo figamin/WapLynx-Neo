@@ -74,6 +74,7 @@ function savedSelectedFlag(selectedFlag) {
   savedFlagData[boardUri] = selectedFlag;
 
   localStorage.setItem('savedFlags', JSON.stringify(savedFlagData));
+
 }
 
 function addDndCell(cell, removeButton) {
