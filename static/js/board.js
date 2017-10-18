@@ -24,10 +24,6 @@ if (!DISABLE_JS) {
 
     messageLimit = +document.getElementById('labelMessageLength').innerHTML;
 
-    if (document.getElementById('divUpload')) {
-      setDragAndDrop();
-    }
-
     var postButton = document.getElementById('jsButton');
     postButton.style.display = 'inline';
     postButton.disabled = false;
@@ -76,6 +72,8 @@ function sendThreadData(files, captchaId) {
     var combo = document.getElementById('flagCombobox');
 
     var selectedFlag = combo.options[combo.selectedIndex].value;
+
+    savedSelectedFlag(selectedFlag);
   }
 
   var forcedAnon = !document.getElementById('fieldName');

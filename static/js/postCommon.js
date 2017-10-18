@@ -7,7 +7,11 @@ var selectedDiv;
 var selectedDivQr;
 
 if (!DISABLE_JS && typeof (Storage) !== "undefined"
-    && document.getElementById('fieldName')) {
+    && document.getElementById('fieldPostingPassword')) {
+
+  if (document.getElementById('divUpload')) {
+    setDragAndDrop();
+  }
 
   var savedPassword = localStorage.deletionPassword;
 
@@ -21,10 +25,10 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
 
   }
 
-  var forcedAnon = !document.getElementById('fieldName');
+  var nameField = document.getElementById('fieldName');
 
-  if (!forcedAnon) {
-    document.getElementById('fieldName').value = localStorage.name || '';
+  if (nameField) {
+    nameField.value = localStorage.name || '';
   }
 
   document.getElementById('alwaysUseBypassDiv').display = 'inline';
@@ -36,9 +40,40 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
   }
 
   bypassCheckBox.addEventListener('change', function() {
-    localStorage.setItem("ensureBypass", bypassCheckBox.checked);
+    localStorage.setItem('ensureBypass', bypassCheckBox.checked);
   });
 
+  var flagCombo = document.getElementById('flagCombobox');
+
+  if (flagCombo && localStorage.savedFlags) {
+
+    var flagInfo = JSON.parse(localStorage.savedFlags);
+
+    if (flagInfo[boardUri]) {
+
+      for (var i = 0; i < flagCombo.options.length; i++) {
+
+        if (flagCombo.options[i].value === flagInfo[boardUri]) {
+          flagCombo.selectedIndex = i;
+          break;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+function savedSelectedFlag(selectedFlag) {
+
+  var savedFlagData = localStorage.savedFlags ? JSON
+      .parse(localStorage.savedFlags) : {};
+
+  savedFlagData[boardUri] = selectedFlag;
+
+  localStorage.setItem('savedFlags', JSON.stringify(savedFlagData));
 }
 
 function addDndCell(cell, removeButton) {

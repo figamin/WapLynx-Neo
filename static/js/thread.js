@@ -71,10 +71,6 @@ if (!DISABLE_JS) {
   boardUri = document.getElementById('boardIdentifier').value;
   var divPosts = document.getElementsByClassName('divPosts')[0];
 
-  if (document.getElementById('divUpload')) {
-    setDragAndDrop();
-  }
-
   document.getElementsByClassName('divRefresh')[0].style.display = 'block';
 
   messageLimit = +document.getElementById('labelMessageLength').innerHTML;
@@ -722,6 +718,9 @@ function sendReplyData(files, captchaId) {
     var combo = document.getElementById('flagCombobox');
 
     var selectedFlag = combo.options[combo.selectedIndex].value;
+
+    savedSelectedFlag(selectedFlag);
+
   }
 
   if (!forcedAnon) {
