@@ -28,6 +28,12 @@
   font-size: 20px;
 }
 
+#qrFlagCombobox option, #flagCombobox option {
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: auto 16px;
+}
+
 .removeButton:hover {
   color: #7D7D7D;
 }

@@ -64,6 +64,23 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
 
   }
 
+  if (flagCombo) {
+    setFlagPreviews(flagCombo);
+  }
+
+}
+
+function setFlagPreviews(combo) {
+
+  for (var i = 1; i < combo.options.length; i++) {
+
+    var option = combo.options[i];
+
+    option.style['background-image'] = 'url(/' + boardUri + '/flags/'
+        + option.value;
+
+  }
+
 }
 
 function savedSelectedFlag(selectedFlag) {
