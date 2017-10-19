@@ -42,6 +42,24 @@ if (!DISABLE_JS) {
     defaultFileChooser.click();
   };
 
+  dropZone.addEventListener('dragover', function handleDragOver(event) {
+
+    event.stopPropagation();
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+
+  }, false);
+
+  dropZone.addEventListener('drop', function handleFileSelect(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    for (var i = 0; i < evt.dataTransfer.files.length; i++) {
+      addSelectedFlag(evt.dataTransfer.files[i])
+    }
+
+  }, false);
+
   document.getElementById('nameLabel').style.display = 'none';
 
 }
