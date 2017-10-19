@@ -78,6 +78,7 @@
   padding: 2px;
   font-size: 10pt;
   box-sizing: border-box;
+  width: 85%;
 }
 
 #QRcaptchaDiv {

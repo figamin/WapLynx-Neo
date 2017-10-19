@@ -55,6 +55,9 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
 
         if (flagCombo.options[i].value === flagInfo[boardUri]) {
           flagCombo.selectedIndex = i;
+
+          showFlagPreview(flagCombo);
+
           break;
         }
 
@@ -70,7 +73,31 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
 
 }
 
+function showFlagPreview(combo) {
+
+  var index = combo.selectedIndex;
+
+  var src;
+
+  if (!index) {
+    src = '';
+  } else {
+    src = '/' + boardUri + '/flags/' + combo.options[index].value;
+  }
+
+  var previews = document.getElementsByClassName('flagPreview');
+
+  for (var i = 0; i < previews.length; i++) {
+    previews[i].src = src;
+  }
+
+}
+
 function setFlagPreviews(combo) {
+
+  combo.addEventListener('change', function() {
+    showFlagPreview(combo);
+  });
 
   for (var i = 1; i < combo.options.length; i++) {
 

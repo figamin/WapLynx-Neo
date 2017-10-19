@@ -1,6 +1,7 @@
 //I didn't write this originally.
 //I just tried to make it less shit.
 
+var qrFlagCombo;
 var qrInfo = {}
 
 function stopMoving() {
@@ -130,6 +131,8 @@ function registerSync(source, destination, field, event) {
 
 function removeQr() {
   document.getElementById('quick-reply').remove();
+
+  qrFlagCombo = null;
 
   var body = document.getElementsByTagName('body')[0];
   body.removeEventListener('mousemove', move);
@@ -266,6 +269,10 @@ function setQr() {
     document.getElementById('qrFlagsDiv').innerHTML = document
         .getElementById('flagsDiv').innerHTML.replace('flagCombobox',
         'qrFlagCombobox');
+
+    qrFlagCombo = document.getElementById('qrFlagCombobox');
+
+    setFlagPreviews(qrFlagCombo)
 
     registerSync('flagCombobox', 'qrFlagCombobox', 'value', 'change');
 

@@ -42,7 +42,19 @@
   margin: 1em;
 }
 
-#postBox div.wider input, #flagsDiv, #flagsDiv select {
+#flagCombobox {
+  display: inline-block;
+  width: 85%;
+  margin-bottom: 0.25em;
+}
+
+.flagPreview {
+  display: inline-block;
+  max-width: 10%;
+  height: 16px;
+}
+
+#postBox div.wider input, #flagsDiv {
   width: 100%;
   margin-bottom: 0.25em;
 }
