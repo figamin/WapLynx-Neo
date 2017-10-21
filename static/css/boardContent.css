@@ -54,7 +54,8 @@
   height: 16px;
 }
 
-#postBox div.wider input, #flagsDiv {
+#postBox div.wider input, #flagsDiv, #blockBypassDecorationPanel input[type='text']
+  {
   width: 100%;
   margin-bottom: 0.25em;
 }
@@ -78,7 +79,7 @@
   width: 25em;
 }
 
-#newPostFieldset, #quick-reply table {
+#newPostFieldset, #quick-reply table, #blockBypassDecorationPanel {
   border: 1px dashed #117743;
 }
 
@@ -136,4 +137,41 @@ input[type=checkbox].postingCheckbox:checked+label:before {
 #boardContentLinks {
   margin-top: 0.5em;
   font-size: 80%;
+}
+
+#blockBypassPanel {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  display: table;
+  text-align: center;
+  background: rgba(29, 31, 33, 0.66);
+  right: 0;
+  top: 0;
+}
+
+#blockBypassInnerPanel {
+  vertical-align: middle;
+  display: table-cell;
+}
+
+#blockBypassDecorationPanel {
+  background: #1D1F21;
+  padding: 10px;
+  display: inline-block;
+}
+
+#blockBypassLabel {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#blockBypassCaptchaControls {
+  display: block;
+  text-align: left;
+}
+
+#blockBypassCaptchaControls input, #blockBypassOkButton {
+  margin-right: 10px;
 }

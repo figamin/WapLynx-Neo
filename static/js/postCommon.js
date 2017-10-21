@@ -350,3 +350,101 @@ function getFilestToUpload(callback, currentIndex, files) {
   }
 
 }
+
+function displayBlockBypassPrompt(callback) {
+
+  var outerPanel = document.createElement('div');
+
+  outerPanel.id = 'blockBypassPanel';
+  document.body.appendChild(outerPanel);
+
+  var innerPanel = document.createElement('div');
+  innerPanel.id = 'blockBypassInnerPanel';
+  outerPanel.appendChild(innerPanel);
+
+  var decorationPanel = document.createElement('div');
+  decorationPanel.id = 'blockBypassDecorationPanel';
+  innerPanel.appendChild(decorationPanel);
+
+  var topLabel = document.createElement('span');
+  topLabel.id = 'blockBypassLabel';
+  topLabel.innerHTML = 'You need a block bypass to post';
+  decorationPanel.appendChild(topLabel);
+
+  var captchaImage = document.createElement('img');
+  captchaImage.src = '/captcha.js?d=' + new Date().toString();
+  captchaImage.setAttribute('class', 'captchaImage');
+  decorationPanel.appendChild(captchaImage);
+
+  var captchaControls = document.createElement('span');
+  captchaControls.id = 'blockBypassCaptchaControls';
+  decorationPanel.appendChild(captchaControls);
+
+  var reloadButton = document.createElement('input');
+  reloadButton.value = 'Reload';
+  reloadButton.addEventListener('click', function() {
+    reloadCaptcha()
+  });
+  reloadButton.type = 'button';
+  captchaControls.appendChild(reloadButton);
+
+  var reloadTimer = document.createElement('span');
+  reloadTimer.setAttribute('class', 'captchaTimer');
+  captchaControls.appendChild(reloadTimer);
+
+  var captchaField = document.createElement('input');
+  captchaField.type = 'text';
+  captchaField.setAttribute('placeHolder', 'answer');
+  captchaField.id = 'blockBypassPanelCaptcha';
+  decorationPanel.appendChild(captchaField);
+
+  var responseButtonsPanel = document.createElement('span');
+  decorationPanel.appendChild(responseButtonsPanel);
+
+  var okButton = document.createElement('input');
+  okButton.type = 'button';
+  okButton.id = 'blockBypassOkButton';
+  okButton.value = 'Ok';
+  okButton.onclick = function() {
+
+    var typedCaptcha = captchaField.value.trim();
+
+    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
+      alert('Captchas are exactly 6 (24 if no cookies) characters long.');
+      return;
+    } else if (/\W/.test(typedCaptcha)) {
+      alert('Invalid captcha.');
+      return;
+    }
+
+    apiRequest('renewBypass', {
+      captcha : typedCaptcha
+    }, function requestComplete(status, data) {
+
+      if (status === 'ok') {
+
+        document.cookie = 'bypass=' + data + '; path=/';
+
+        if (callback) {
+          callback();
+        }
+
+        outerPanel.remove();
+
+      } else {
+        alert(status + ': ' + JSON.stringify(data));
+      }
+    });
+
+  };
+
+  responseButtonsPanel.appendChild(okButton);
+
+  var cancelButton = document.createElement('input');
+  cancelButton.type = 'button';
+  cancelButton.value = 'Cancel';
+  cancelButton.onclick = function() {
+    outerPanel.remove();
+  };
+  responseButtonsPanel.appendChild(cancelButton);
+}

@@ -851,9 +851,9 @@ function postReply() {
         if (!data.valid
             && (data.mode == 2 || (data.mode == 1 && alwaysUseBypass))) {
 
-          if (window.confirm('You need a block bypass.')) {
-            window.open('/blockBypass.js');
-          }
+          displayBlockBypassPrompt(function() {
+            processReplyRequest();
+          });
 
         } else {
           processReplyRequest();
