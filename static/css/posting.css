@@ -1,6 +1,6 @@
 /*Used for places where posts are displayed*/
 .hideButton, .embedButton, #closeWatcherMenuButton, .watchButton,
-  .watchedCellCloseButton, .hideFileButton {
+  .watchedCellCloseButton, .hideFileButton, .extraMenuButton {
   margin-left: 0.5em;
   cursor: pointer;
   color: #FFB300;
@@ -33,18 +33,6 @@
 .hideButton::before {
   font-family: 'Icons';
   content: '\e017';
-}
-
-.hideMenu, #watchedMenu {
-  border: 1px dashed #117743;
-  background: #1d1f21;
-  padding: 0.25em;
-}
-
-.hideMenu label {
-  display: block;
-  font-size: 80%;
-  cursor: pointer;
 }
 
 .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
@@ -258,4 +246,9 @@
 .contentAction label, #divControls label, #transferControls label,
   #ipDelete label {
   font-size: 80%;
+}
+
+.extraMenuButton::before {
+  font-family: 'Icons';
+  content: '\e02f';
 }

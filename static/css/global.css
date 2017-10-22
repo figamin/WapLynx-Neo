@@ -352,3 +352,14 @@ footer {
 #settingsWrapper input.hidden {
   display: none;
 }
+
+.floatingMenu {
+  border: 1px dashed #117743;
+  background: #1d1f21;
+  padding: 0.25em;
+}
+
+.floatingMenu label {
+  font-size: 80%;
+  cursor: pointer;
+}

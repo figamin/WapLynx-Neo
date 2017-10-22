@@ -48,9 +48,7 @@ function startMovingWatched(evt) {
 
   evt = evt || window.event;
 
-  var watchedPanel = document.getElementById('watchedMenu');
-
-  var rect = watchedPanel.getBoundingClientRect();
+  var rect = watchedMenu.getBoundingClientRect();
 
   watcherDragInfo.diffX = evt.clientX - rect.right;
   watcherDragInfo.diffY = evt.clientY - rect.top;
@@ -119,9 +117,8 @@ if (!DISABLE_JS) {
 
   watchedMenu = document.createElement('div');
 
-  var watchedMenuLabel = document.createElement('span');
+  var watchedMenuLabel = document.createElement('label');
   watchedMenuLabel.innerHTML = 'Watched threads';
-  watchedMenuLabel.setAttribute('class', 'watchedMenuLabel');
 
   watchedMenuLabel.onmousedown = function(event) {
     startMovingWatched(event);
@@ -151,6 +148,7 @@ if (!DISABLE_JS) {
   watchedMenu.appendChild(document.createElement('hr'));
 
   watchedMenu.id = 'watchedMenu';
+  watchedMenu.setAttribute('class', 'floatingMenu');
   watchedMenu.style.display = 'none';
 
   document.body.appendChild(watchedMenu);
@@ -345,8 +343,8 @@ function addWatchedCell(board, thread, watchData) {
   var cell = document.createElement('div');
   cell.setAttribute('class', 'watchedCell');
 
-  var labelWrapper = document.createElement('span');
-  labelWrapper.setAttribute('class', 'watchedCellLabel watchedMenuLabel');
+  var labelWrapper = document.createElement('label');
+  labelWrapper.setAttribute('class', 'watchedCellLabel');
 
   var label = document.createElement('a');
   label.innerHTML = watchData.label || (board + '/' + thread);

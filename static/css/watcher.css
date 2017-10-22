@@ -25,11 +25,6 @@
   width: 90%;
 }
 
-.watchedMenuLabel {
-  font-size: 80%;
-  cursor: move;
-}
-
 .watchedNotification::before {
   font-family: 'Icons';
   content: '\e0D8';
