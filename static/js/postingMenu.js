@@ -1,5 +1,56 @@
 var shownPostingMenu;
 
+function showReport(board, thread, post, global) {
+
+  var outerPanel = getCaptchaModal(global ? 'Global report' : 'Report');
+
+  var reasonField = document.createElement('input');
+  reasonField.type = 'text';
+  reasonField.setAttribute('placeholder', 'reason');
+
+  var decorationPanel = outerPanel
+      .getElementsByClassName('modalDecorationPanel')[0];
+
+  var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
+
+  decorationPanel.insertBefore(reasonField, okButton.parentNode);
+
+  okButton.onclick = function() {
+
+    var typedCaptcha = outerPanel.getElementsByClassName('modalAnswer')[0].value
+        .trim();
+
+    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
+      alert('Captchas are exactly 6 (24 if no cookies) characters long.');
+      return;
+    } else if (/\W/.test(typedCaptcha)) {
+      alert('Invalid captcha.');
+      return;
+    }
+
+    apiRequest('reportContent', {
+      captcha : typedCaptcha,
+      reason : reasonField.value.trim(),
+      global : global,
+      postings : [ {
+        board : board,
+        thread : thread,
+        post : post
+      } ]
+    }, function requestComplete(status, data) {
+
+      if (status === 'ok') {
+        outerPanel.remove();
+      } else {
+        alert(status + ': ' + JSON.stringify(data));
+      }
+
+    });
+
+  };
+
+}
+
 function setExtraMenu(checkbox) {
 
   var name = checkbox.name;
@@ -42,12 +93,18 @@ function setExtraMenu(checkbox) {
 
   var reportButton = document.createElement('label');
   reportButton.innerHTML = 'Report';
+  reportButton.onclick = function() {
+    showReport(board, thread, post);
+  };
   extraMenu.appendChild(reportButton);
 
   extraMenu.appendChild(document.createElement('hr'));
 
   var globalReportButton = document.createElement('label');
   globalReportButton.innerHTML = 'Global Report';
+  globalReportButton.onclick = function() {
+    showReport(board, thread, post, true);
+  };
   extraMenu.appendChild(globalReportButton);
 
   extraMenu.appendChild(document.createElement('hr'));

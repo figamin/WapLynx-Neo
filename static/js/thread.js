@@ -638,7 +638,11 @@ function addPost(post) {
     processQuote(quote);
   }
 
-  setHideMenu(postCell.getElementsByClassName('deletionCheckBox')[0]);
+  var checkbox = postCell.getElementsByClassName('deletionCheckBox')[0];
+
+  setHideMenu(checkbox);
+
+  setExtraMenu(checkbox)
 
   processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
 

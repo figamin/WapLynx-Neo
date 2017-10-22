@@ -353,61 +353,14 @@ function getFilestToUpload(callback, currentIndex, files) {
 
 function displayBlockBypassPrompt(callback) {
 
-  var outerPanel = document.createElement('div');
+  var outerPanel = getCaptchaModal('You need a block bypass to post');
 
-  outerPanel.id = 'blockBypassPanel';
-  document.body.appendChild(outerPanel);
+  var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
-  var innerPanel = document.createElement('div');
-  innerPanel.id = 'blockBypassInnerPanel';
-  outerPanel.appendChild(innerPanel);
-
-  var decorationPanel = document.createElement('div');
-  decorationPanel.id = 'blockBypassDecorationPanel';
-  innerPanel.appendChild(decorationPanel);
-
-  var topLabel = document.createElement('span');
-  topLabel.id = 'blockBypassLabel';
-  topLabel.innerHTML = 'You need a block bypass to post';
-  decorationPanel.appendChild(topLabel);
-
-  var captchaImage = document.createElement('img');
-  captchaImage.src = '/captcha.js?d=' + new Date().toString();
-  captchaImage.setAttribute('class', 'captchaImage');
-  decorationPanel.appendChild(captchaImage);
-
-  var captchaControls = document.createElement('span');
-  captchaControls.id = 'blockBypassCaptchaControls';
-  decorationPanel.appendChild(captchaControls);
-
-  var reloadButton = document.createElement('input');
-  reloadButton.value = 'Reload';
-  reloadButton.addEventListener('click', function() {
-    reloadCaptcha()
-  });
-  reloadButton.type = 'button';
-  captchaControls.appendChild(reloadButton);
-
-  var reloadTimer = document.createElement('span');
-  reloadTimer.setAttribute('class', 'captchaTimer');
-  captchaControls.appendChild(reloadTimer);
-
-  var captchaField = document.createElement('input');
-  captchaField.type = 'text';
-  captchaField.setAttribute('placeHolder', 'answer');
-  captchaField.id = 'blockBypassPanelCaptcha';
-  decorationPanel.appendChild(captchaField);
-
-  var responseButtonsPanel = document.createElement('span');
-  decorationPanel.appendChild(responseButtonsPanel);
-
-  var okButton = document.createElement('input');
-  okButton.type = 'button';
-  okButton.id = 'blockBypassOkButton';
-  okButton.value = 'Ok';
   okButton.onclick = function() {
 
-    var typedCaptcha = captchaField.value.trim();
+    var typedCaptcha = outerPanel.getElementsByClassName('modalAnswer')[0].value
+        .trim();
 
     if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
       alert('Captchas are exactly 6 (24 if no cookies) characters long.');
@@ -438,13 +391,4 @@ function displayBlockBypassPrompt(callback) {
 
   };
 
-  responseButtonsPanel.appendChild(okButton);
-
-  var cancelButton = document.createElement('input');
-  cancelButton.type = 'button';
-  cancelButton.value = 'Cancel';
-  cancelButton.onclick = function() {
-    outerPanel.remove();
-  };
-  responseButtonsPanel.appendChild(cancelButton);
 }
