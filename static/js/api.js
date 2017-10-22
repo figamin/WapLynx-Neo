@@ -16,7 +16,7 @@ function getCookies() {
   return parsedCookies;
 }
 
-function handleConnectionResponse(xhr, delegate) {
+function handleConnectionResponse(xhr, callback) {
   var response;
 
   try {
@@ -64,34 +64,9 @@ function handleConnectionResponse(xhr, delegate) {
     alert('Parameter ' + response.data + ' was sent in blank.');
   } else if (response.status === 'bypassable') {
 
-    var popup = document.createElement('div');
-    popup.id = 'bypassPopUp';
-
-    var popupInner = document.createElement('div');
-    popupInner.id = 'bypassPopUpInner';
-
-    var popupText = document.createElement('span');
-    popupText.innerHTML = 'You are blocked, but you can use the block bypass to post. Do you want to get a block bypass?';
-    popupText.id = 'popupText';
-
-    var cancelButton = document.createElement('button');
-    cancelButton.innerHTML = 'No';
-    cancelButton.onclick = function() {
-      document.body.removeChild(popup);
-    };
-
-    var confirmButton = document.createElement('button');
-    confirmButton.innerHTML = 'Yes';
-    confirmButton.onclick = function() {
-      window.open('/blockBypass.js');
-      document.body.removeChild(popup);
-    };
-
-    popupInner.appendChild(popupText);
-    popupInner.appendChild(cancelButton);
-    popupInner.appendChild(confirmButton);
-    popup.appendChild(popupInner);
-    document.body.appendChild(popup);
+    displayBlockBypassPrompt(function() {
+      alert('You may now post');
+    });
 
   } else if (response.status === 'tooLarge') {
     alert('Request refused because it was too large');
@@ -140,7 +115,7 @@ function handleConnectionResponse(xhr, delegate) {
 
     }
   } else {
-    delegate(response.status, response.data);
+    callback(response.status, response.data);
   }
 
 }
@@ -148,10 +123,10 @@ function handleConnectionResponse(xhr, delegate) {
 // Makes a request to the back-end.
 // page: url of the api page
 // parameters: parameter block of the request
-// delegate: callback that will receive (data,status). If the delegate has a
-// function in stop property, it will be called when the connection stops
+// callback: callback that will receive (data,status). If the callback
+// has a function in stop property, it will be called when the connection stops
 // loading.
-function apiRequest(page, parameters, delegate) {
+function apiRequest(page, parameters, callback) {
   var xhr = new XMLHttpRequest();
 
   if ('withCredentials' in xhr) {
@@ -168,8 +143,8 @@ function apiRequest(page, parameters, delegate) {
 
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-  if (delegate.hasOwnProperty('progress')) {
-    xhr.upload.onprogress = delegate.progress;
+  if (callback.hasOwnProperty('progress')) {
+    xhr.upload.onprogress = callback.progress;
   }
 
   xhr.onreadystatechange = function connectionStateChanged() {
@@ -180,8 +155,8 @@ function apiRequest(page, parameters, delegate) {
 
     if (xhr.readyState == 4) {
 
-      if (delegate.hasOwnProperty('stop')) {
-        delegate.stop();
+      if (callback.hasOwnProperty('stop')) {
+        callback.stop();
       }
 
       if (xhr.status != 200) {
@@ -189,7 +164,7 @@ function apiRequest(page, parameters, delegate) {
         return;
       }
 
-      handleConnectionResponse(xhr, delegate);
+      handleConnectionResponse(xhr, callback);
     }
   };
 
