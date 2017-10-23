@@ -392,3 +392,18 @@ function displayBlockBypassPrompt(callback) {
   };
 
 }
+
+function storeUsedPostingPassword(boardUri, threadId, postId) {
+
+  var storedData = JSON.parse(localStorage.postingPasswords || '{}');
+
+  var key = boardUri + '/' + threadId
+
+  if (postId) {
+    key += '/' + postId;
+  }
+
+  storedData[key] = localStorage.deletionPassword;
+
+  localStorage.setItem('postingPasswords', JSON.stringify(storedData));
+}

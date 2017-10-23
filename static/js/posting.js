@@ -183,9 +183,9 @@ function deletePosts() {
       alert(data.removedThreads + ' threads and ' + data.removedPosts
           + ' posts were successfully deleted.');
 
-      if (!board && !data.removedThreads) {
+      if (!board && !data.removedThreads && data.removedPosts) {
         refreshPosts(true, true);
-      } else {
+      } else if (data.removedThreads || data.removedPosts) {
         window.location.pathname = '/' + toDelete[0].board + '/';
       }
 

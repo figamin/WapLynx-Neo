@@ -283,6 +283,9 @@ function saveThreadSettings() {
 var replyCallback = function(status, data) {
 
   if (status === 'ok') {
+
+    storeUsedPostingPassword(boardUri, threadId, data);
+
     document.getElementById('fieldMessage').value = '';
     document.getElementById('fieldSubject').value = '';
     clearQRAfterPosting();

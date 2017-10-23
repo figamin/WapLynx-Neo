@@ -51,6 +51,55 @@ function showReport(board, thread, post, global) {
 
 }
 
+function deleteSinglePost(boardUri, thread, post, forcedPassword) {
+
+  var key = boardUri + '/' + thread
+
+  if (post) {
+    key += '/' + post;
+  }
+
+  var storedData = JSON.parse(localStorage.postingPasswords || '{}');
+
+  var password = forcedPassword || storedData[key]
+      || localStorage.deletionPassword
+      || document.getElementById('deletionFieldPassword').value.trim();
+
+  apiRequest(
+      'deleteContent',
+      {
+        password : password,
+        postings : [ {
+          board : boardUri,
+          thread : thread,
+          post : post
+        } ]
+      },
+      function requestComplete(status, data) {
+
+        if (status === 'ok') {
+
+          if (!board && data.removedPosts) {
+            refreshPosts(true, true);
+          } else if (data.removedThreads || data.removedPosts) {
+            window.location.pathname = '/' + boardUri + '/';
+          } else {
+
+            var newPass = prompt('Could not delete. Would you like to try another password?');
+
+            if (newPass) {
+              deleteSinglePost(boardUri, thread, post, newPass);
+            }
+
+          }
+
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
+        }
+      });
+
+}
+
 function setExtraMenu(checkbox) {
 
   var name = checkbox.name;
@@ -112,6 +161,9 @@ function setExtraMenu(checkbox) {
   var deleteButton = document.createElement('label');
   deleteButton.innerHTML = 'Delete';
   extraMenu.appendChild(deleteButton);
+  deleteButton.onclick = function() {
+    deleteSinglePost(board, thread, post);
+  };
 
 }
 

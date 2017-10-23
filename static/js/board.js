@@ -44,6 +44,9 @@ if (!DISABLE_JS) {
 var postCallback = function requestComplete(status, data) {
 
   if (status === 'ok') {
+
+    storeUsedPostingPassword(boardUri, data);
+
     window.location.pathname = '/' + boardUri + '/res/' + data + '.html';
   } else {
     alert(status + ': ' + JSON.stringify(data));
