@@ -63,7 +63,8 @@ function deleteSinglePost(boardUri, thread, post, forcedPassword) {
 
   var password = forcedPassword || storedData[key]
       || localStorage.deletionPassword
-      || document.getElementById('deletionFieldPassword').value.trim();
+      || document.getElementById('deletionFieldPassword').value.trim()
+      || Math.random().toString(36).substring(2, 10);
 
   apiRequest(
       'deleteContent',

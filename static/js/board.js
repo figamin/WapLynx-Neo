@@ -114,6 +114,10 @@ function sendThreadData(files, captchaId) {
     return;
   }
 
+  if (!typedPassword) {
+    typedPassword = Math.random().toString(36).substring(2, 10);
+  }
+
   localStorage.setItem('deletionPassword', typedPassword);
 
   originalButtonText = postButton.innerHTML;
