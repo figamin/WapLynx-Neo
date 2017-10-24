@@ -54,9 +54,10 @@
   height: 16px;
 }
 
-#postBox div.wider input, #flagsDiv, .modalDecorationPanel input[type='text']
-  {
+#postBox div.wider input, #flagsDiv, .modalDecorationPanel input[type='text'],
+  .modalDecorationPanel select {
   width: 100%;
+  display: block;
   margin-bottom: 0.25em;
 }
 
