@@ -1,6 +1,8 @@
 var shownPostingMenu;
 var banLabels = [ 'Regular ban', 'Range ban (1/2 octects)',
     'Range ban (3/4 octects)' ];
+var deletionOptions = [ 'Do not delete', 'Delete post',
+    'Delete post and media', 'Delete by ip' ];
 
 function showReport(board, thread, post, global) {
 
@@ -53,7 +55,8 @@ function showReport(board, thread, post, global) {
 
 }
 
-function deleteSinglePost(boardUri, thread, post, forcedPassword) {
+function deleteSinglePost(boardUri, thread, post, fromIp, wipeMedia,
+    forcedPassword) {
 
   var key = boardUri + '/' + thread
 
@@ -69,9 +72,10 @@ function deleteSinglePost(boardUri, thread, post, forcedPassword) {
       || Math.random().toString(36).substring(2, 10);
 
   apiRequest(
-      'deleteContent',
+      fromIp ? 'deleteFromIpOnBoard' : 'deleteContent',
       {
         password : password,
+        deleteMedia : wipeMedia,
         postings : [ {
           board : boardUri,
           thread : thread,
@@ -82,16 +86,17 @@ function deleteSinglePost(boardUri, thread, post, forcedPassword) {
 
         if (status === 'ok') {
 
-          if (!board && data.removedPosts) {
+          if (!fromIp && !board && data.removedPosts) {
             refreshPosts(true, true);
-          } else if (data.removedThreads || data.removedPosts) {
+          } else if (fromIp || data.removedThreads || data.removedPosts) {
             window.location.pathname = '/' + boardUri + '/';
           } else {
 
             var newPass = prompt('Could not delete. Would you like to try another password?');
 
             if (newPass) {
-              deleteSinglePost(boardUri, thread, post, newPass);
+              deleteSinglePost(boardUri, thread, post, fromIp, wipeMedia,
+                  newPass);
             }
 
           }
@@ -133,11 +138,23 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
   for (var i = 0; i < banLabels.length; i++) {
 
     var option = document.createElement('option');
-    option.value = i;
     option.innerHTML = banLabels[i];
     typeCombo.appendChild(option);
 
   }
+
+  var deletionCombo = document.createElement('select');
+  decorationPanel.insertBefore(deletionCombo, okButton.parentNode);
+
+  for (var i = 0; i < deletionOptions.length; i++) {
+
+    var option = document.createElement('option');
+    option.innerHTML = deletionOptions[i];
+    deletionCombo.appendChild(option);
+
+  }
+
+  deletionCombo.selectedIndex = +localStorage.autoDeletionOption;
 
   var captchaField = outerPanel.getElementsByClassName('modalAnswer')[0];
   captchaField.setAttribute('placeholder', 'answer (only for board staff)');
@@ -145,6 +162,10 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
   okButton.onclick = function() {
 
     var typedMessage = messageField.value.trim();
+
+    var selectedDeletionOption = deletionCombo.selectedIndex;
+
+    localStorage.setItem('autoDeletionOption', selectedDeletionOption);
 
     apiRequest('banUsers', {
       reason : reasonField.value.trim(),
@@ -169,6 +190,12 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
         innerPart.appendChild(banMessageDiv);
 
         outerPanel.remove();
+
+        if (selectedDeletionOption) {
+          deleteSinglePost(boardUri, thread, post,
+              selectedDeletionOption === 3, selectedDeletionOption === 2);
+        }
+
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
@@ -251,7 +278,7 @@ function setExtraMenu(checkbox) {
   extraMenu.appendChild(document.createElement('hr'));
 
   var deleteButton = document.createElement('label');
-  deleteButton.innerHTML = 'Delete';
+  deleteButton.innerHTML = 'Delete Post';
   extraMenu.appendChild(deleteButton);
   deleteButton.onclick = function() {
     deleteSinglePost(board, thread, post);
@@ -261,7 +288,25 @@ function setExtraMenu(checkbox) {
     return;
   }
 
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var deleteMediaButton = document.createElement('label');
+  deleteMediaButton.innerHTML = 'Delete Post And Media';
+  extraMenu.appendChild(deleteMediaButton);
+  deleteMediaButton.onclick = function() {
+    deleteSinglePost(board, thread, post, false, true);
+  };
+
+  extraMenu.appendChild(document.createElement('hr'));
+
   var innerPart = checkbox.parentNode.parentNode;
+
+  var deleteByIpButton = document.createElement('label');
+  deleteByIpButton.innerHTML = 'Delete By Ip';
+  deleteByIpButton.onclick = function() {
+    deleteSinglePost(board, thread, post, true);
+  };
+  extraMenu.appendChild(deleteByIpButton);
 
   extraMenu.appendChild(document.createElement('hr'));
 
