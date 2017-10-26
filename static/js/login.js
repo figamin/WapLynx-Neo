@@ -57,7 +57,8 @@ function loginUser() {
   } else {
     apiRequest('login', {
       login : typedLogin,
-      password : typedPassword
+      password : typedPassword,
+      remember : document.getElementById('checkboxRemember').checked
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {

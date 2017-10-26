@@ -363,3 +363,7 @@ footer {
   font-size: 80%;
   cursor: pointer;
 }
+
+#divRemember input {
+  display: inline;
+}
