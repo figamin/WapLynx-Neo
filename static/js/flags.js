@@ -84,7 +84,7 @@ function addSelectedFlag(file) {
   var nameField = document.createElement('input');
   nameField.setAttribute('class', 'nameField');
   nameField.type = 'text';
-  nameField.value = file.name.split('.')[0];
+  nameField.value = file.name.substring(0, file.name.lastIndexOf('.'));
   cell.appendChild(nameField);
 
   cell.appendChild(document.createElement('br'));
