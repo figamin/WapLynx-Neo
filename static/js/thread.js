@@ -882,16 +882,16 @@ function startTimer(time) {
 
   currentRefresh = time;
   lastRefresh = time;
-  labelRefresh.innerHTML = currentRefresh;
+  refreshLabel.innerHTML = currentRefresh;
   refreshTimer = setInterval(function checkTimer() {
     currentRefresh--;
 
     if (!currentRefresh) {
       clearInterval(refreshTimer);
       refreshPosts();
-      labelRefresh.innerHTML = '';
+      refreshLabel.innerHTML = '';
     } else {
-      labelRefresh.innerHTML = currentRefresh;
+      refreshLabel.innerHTML = currentRefresh;
     }
 
   }, 1000);
@@ -902,7 +902,7 @@ function changeRefresh() {
   autoRefresh = document.getElementById('checkboxChangeRefresh').checked;
 
   if (!autoRefresh) {
-    labelRefresh.innerHTML = '';
+    refreshLabel.innerHTML = '';
     clearInterval(refreshTimer);
   } else {
     startTimer(5);
