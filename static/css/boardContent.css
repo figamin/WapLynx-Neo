@@ -55,7 +55,7 @@
 }
 
 #postBox div.wider input, #flagsDiv, .modalDecorationPanel input[type='text'],
-  .modalDecorationPanel select {
+  .modalDecorationPanel select, .modalDecorationPanel textarea {
   width: 100%;
   display: block;
   margin-bottom: 0.25em;

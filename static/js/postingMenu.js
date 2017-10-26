@@ -219,6 +219,181 @@ function spoilSinglePost(boardUri, thread, post) {
 
 }
 
+function transferThread(boardUri, thread) {
+
+  var destination = prompt('Transfer to which board?',
+      'Board uri without slashes');
+
+  if (!destination) {
+    return;
+  }
+
+  destination = destination.trim();
+
+  apiRequest('transferThread', {
+    boardUri : boardUri,
+    threadId : thread,
+    boardUriDestination : destination
+  }, function setLock(status, data) {
+
+    if (status === 'ok') {
+      window.location.pathname = '/' + destination + '/res/' + data + '.html';
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+
+}
+
+function editPost(board, thread, post) {
+
+  var url = '/edit.js?json=1&boardUri=' + board + '&threadId=' + thread;
+
+  if (post) {
+    url += '&postId=' + post;
+  }
+
+  var editData = localRequest(url, function gotData(error, data) {
+
+    if (error) {
+      alert(error);
+    } else {
+
+      data = JSON.parse(data);
+
+      var outerPanel = getCaptchaModal('Edit', true);
+
+      var decorationPanel = outerPanel
+          .getElementsByClassName('modalDecorationPanel')[0];
+
+      var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
+
+      var subjectField = document.createElement('input');
+      subjectField.type = 'text';
+      subjectField.value = data.subject || '';
+      subjectField.setAttribute('placeholder', 'subject');
+      decorationPanel.insertBefore(subjectField, okButton.parentNode);
+
+      var messageArea = document.createElement('textarea');
+      messageArea.setAttribute('placeholder', 'message');
+      messageArea.defaultValue = data.message || '';
+      decorationPanel.insertBefore(messageArea, okButton.parentNode);
+
+      okButton.onclick = function() {
+
+        var typedSubject = subjectField.value.trim();
+        var typedMessage = messageArea.value.trim();
+
+        if (typedSubject.length > 128) {
+          alert('Subject too long, keep it under 128 characters.');
+        } else if (!typedMessage.length) {
+          alert('A message is mandatory.');
+        } else {
+
+          var parameters = {
+            boardUri : board,
+            message : typedMessage,
+            subject : typedSubject
+          };
+
+          if (post) {
+            parameters.postId = post;
+          } else {
+            parameters.threadId = thread;
+          }
+
+          apiRequest('saveEdit', parameters, function requestComplete(status,
+              data) {
+
+            if (status === 'ok') {
+              location.reload(true);
+            } else {
+              alert(status + ': ' + JSON.stringify(data));
+            }
+          });
+
+        }
+
+      };
+
+    }
+
+  });
+
+}
+
+function setExtraMenuMod(checkbox, extraMenu, board, thread, post) {
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var deleteMediaButton = document.createElement('label');
+  deleteMediaButton.innerHTML = 'Delete Post And Media';
+  extraMenu.appendChild(deleteMediaButton);
+  deleteMediaButton.onclick = function() {
+    deleteSinglePost(board, thread, post, false, true);
+  };
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var innerPart = checkbox.parentNode.parentNode;
+
+  var deleteByIpButton = document.createElement('label');
+  deleteByIpButton.innerHTML = 'Delete By Ip';
+  deleteByIpButton.onclick = function() {
+    deleteSinglePost(board, thread, post, true);
+  };
+  extraMenu.appendChild(deleteByIpButton);
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var banButton = document.createElement('label');
+  banButton.innerHTML = 'Ban';
+  banButton.onclick = function() {
+    banSinglePost(innerPart, board, thread, post);
+  };
+  extraMenu.appendChild(banButton);
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var globalBanButton = document.createElement('label');
+  globalBanButton.innerHTML = 'Global Ban';
+  globalBanButton.onclick = function() {
+    banSinglePost(innerPart, board, thread, post, true);
+  };
+  extraMenu.appendChild(globalBanButton);
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var spoilButton = document.createElement('label');
+  spoilButton.innerHTML = 'Spoil Files';
+  spoilButton.onclick = function() {
+    spoilSinglePost(board, thread, post);
+  };
+  extraMenu.appendChild(spoilButton);
+
+  if (!post) {
+
+    extraMenu.appendChild(document.createElement('hr'));
+
+    var transferButton = document.createElement('label');
+    transferButton.innerHTML = 'Transfer Thread';
+    transferButton.onclick = function() {
+      transferThread(board, thread);
+    };
+    extraMenu.appendChild(transferButton);
+  }
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var editButton = document.createElement('label');
+  editButton.innerHTML = 'Edit';
+  editButton.onclick = function() {
+    editPost(board, thread, post);
+  };
+  extraMenu.appendChild(editButton);
+
+}
+
 function setExtraMenu(checkbox) {
 
   var name = checkbox.name;
@@ -284,56 +459,9 @@ function setExtraMenu(checkbox) {
     deleteSinglePost(board, thread, post);
   };
 
-  if (!getCookies().hash) {
-    return;
+  if (getCookies().hash) {
+    setExtraMenuMod(checkbox, extraMenu, board, thread, post);
   }
-
-  extraMenu.appendChild(document.createElement('hr'));
-
-  var deleteMediaButton = document.createElement('label');
-  deleteMediaButton.innerHTML = 'Delete Post And Media';
-  extraMenu.appendChild(deleteMediaButton);
-  deleteMediaButton.onclick = function() {
-    deleteSinglePost(board, thread, post, false, true);
-  };
-
-  extraMenu.appendChild(document.createElement('hr'));
-
-  var innerPart = checkbox.parentNode.parentNode;
-
-  var deleteByIpButton = document.createElement('label');
-  deleteByIpButton.innerHTML = 'Delete By Ip';
-  deleteByIpButton.onclick = function() {
-    deleteSinglePost(board, thread, post, true);
-  };
-  extraMenu.appendChild(deleteByIpButton);
-
-  extraMenu.appendChild(document.createElement('hr'));
-
-  var banButton = document.createElement('label');
-  banButton.innerHTML = 'Ban';
-  banButton.onclick = function() {
-    banSinglePost(innerPart, board, thread, post);
-  };
-  extraMenu.appendChild(banButton);
-
-  extraMenu.appendChild(document.createElement('hr'));
-
-  var globalBanButton = document.createElement('label');
-  globalBanButton.innerHTML = 'Global Ban';
-  globalBanButton.onclick = function() {
-    banSinglePost(innerPart, board, thread, post, true);
-  };
-  extraMenu.appendChild(globalBanButton);
-
-  extraMenu.appendChild(document.createElement('hr'));
-
-  var spoilButton = document.createElement('label');
-  spoilButton.innerHTML = 'Spoil Files';
-  spoilButton.onclick = function() {
-    spoilSinglePost(board, thread, post);
-  };
-  extraMenu.appendChild(spoilButton);
 
 }
 

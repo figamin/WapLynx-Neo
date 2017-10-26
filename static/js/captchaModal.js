@@ -1,4 +1,4 @@
-function getCaptchaModal(header) {
+function getCaptchaModal(header, noCaptcha) {
 
   var outerPanel = document.createElement('div');
   outerPanel.setAttribute('class', 'modalPanel');
@@ -17,32 +17,34 @@ function getCaptchaModal(header) {
   topLabel.innerHTML = header;
   decorationPanel.appendChild(topLabel);
 
-  var captchaImage = document.createElement('img');
-  captchaImage.src = '/captcha.js?d=' + new Date().toString();
-  captchaImage.setAttribute('class', 'captchaImage');
-  decorationPanel.appendChild(captchaImage);
+  if (!noCaptcha) {
+    var captchaImage = document.createElement('img');
+    captchaImage.src = '/captcha.js?d=' + new Date().toString();
+    captchaImage.setAttribute('class', 'captchaImage');
+    decorationPanel.appendChild(captchaImage);
 
-  var captchaControls = document.createElement('span');
-  captchaControls.setAttribute('class', 'modalCaptchaControls');
-  decorationPanel.appendChild(captchaControls);
+    var captchaControls = document.createElement('span');
+    captchaControls.setAttribute('class', 'modalCaptchaControls');
+    decorationPanel.appendChild(captchaControls);
 
-  var reloadButton = document.createElement('input');
-  reloadButton.value = 'Reload';
-  reloadButton.addEventListener('click', function() {
-    reloadCaptcha()
-  });
-  reloadButton.type = 'button';
-  captchaControls.appendChild(reloadButton);
+    var reloadButton = document.createElement('input');
+    reloadButton.value = 'Reload';
+    reloadButton.addEventListener('click', function() {
+      reloadCaptcha()
+    });
+    reloadButton.type = 'button';
+    captchaControls.appendChild(reloadButton);
 
-  var reloadTimer = document.createElement('span');
-  reloadTimer.setAttribute('class', 'captchaTimer');
-  captchaControls.appendChild(reloadTimer);
+    var reloadTimer = document.createElement('span');
+    reloadTimer.setAttribute('class', 'captchaTimer');
+    captchaControls.appendChild(reloadTimer);
 
-  var captchaField = document.createElement('input');
-  captchaField.type = 'text';
-  captchaField.setAttribute('placeHolder', 'answer');
-  captchaField.setAttribute('class', 'modalAnswer');
-  decorationPanel.appendChild(captchaField);
+    var captchaField = document.createElement('input');
+    captchaField.type = 'text';
+    captchaField.setAttribute('placeHolder', 'answer');
+    captchaField.setAttribute('class', 'modalAnswer');
+    decorationPanel.appendChild(captchaField);
+  }
 
   var responseButtonsPanel = document.createElement('span');
   decorationPanel.appendChild(responseButtonsPanel);
