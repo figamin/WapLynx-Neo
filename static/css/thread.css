@@ -5,6 +5,14 @@
   color: #A00;
 }
 
+#galleryLink:before {
+  font-family: Icons;
+  content: "\e02c";
+  color: #FFB300;
+  margin-left: 0.25em;
+  margin-right: 0.5em;
+}
+
 .pinIndicator:after {
   font-family: Icons;
   content: "\e0a8";
@@ -21,6 +29,11 @@
   font-family: Icons;
   content: "\e0db";
   color: #A00;
+}
+
+.galleryImage {
+  max-width: 100vw;
+  max-height: 100vh;
 }
 
 .contentAction label, .contentAction img {

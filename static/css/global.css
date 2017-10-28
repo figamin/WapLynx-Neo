@@ -212,6 +212,7 @@ nav span, nav a {
   font-family: Icons;
   content: "\e003";
   margin-right: 0.25em;
+  margin-left: 0.5em;
 }
 
 /* board list */
