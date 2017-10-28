@@ -2,6 +2,8 @@ var galleryFiles = [];
 var currentIndex = 0;
 var viewingGallery = false;
 var galleryImage;
+var previousImage;
+var nextImage;
 
 if (!DISABLE_JS) {
 
@@ -11,7 +13,7 @@ if (!DISABLE_JS) {
 
     var link = imageLinks[i];
 
-    if (link.dataset.filemime.indexOf('image/') > -1) {
+    if (link.dataset.filemime && link.dataset.filemime.indexOf('image/') > -1) {
       addGalleryFile(link.href);
     }
   }
@@ -48,6 +50,14 @@ if (!DISABLE_JS) {
     galleryImage = document.createElement('img');
     galleryImage.setAttribute('class', 'galleryImage');
     innerPanel.appendChild(galleryImage);
+
+    previousImage = document.createElement('img');
+    previousImage.style.display = 'none';
+    nextImage = document.createElement('img');
+    nextImage.style.display = 'none';
+
+    innerPanel.appendChild(nextImage);
+    innerPanel.appendChild(previousImage);
 
     displayImage(currentIndex);
 
@@ -126,6 +136,14 @@ function displayImage(index) {
   currentIndex = index;
 
   galleryImage.src = galleryFiles[index];
+
+  if (index > 0) {
+    previousImage.src = galleryFiles[index - 1];
+  }
+
+  if (index < galleryFiles.length - 1) {
+    nextImage.src = galleryFiles[index + 1];
+  }
 
 }
 
