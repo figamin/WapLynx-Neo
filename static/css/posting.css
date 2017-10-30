@@ -2,8 +2,6 @@
 .hideButton, .embedButton, #closeWatcherMenuButton, .watchButton,
   .watchedCellCloseButton, .hideFileButton, .extraMenuButton {
   margin-left: 0.5em;
-  cursor: pointer;
-  color: #FFB300;
 }
 
 .imgExpanded {
@@ -31,7 +29,6 @@
 }
 
 .hideButton::before {
-  font-family: 'Icons';
   content: '\e017';
 }
 
@@ -250,6 +247,5 @@
 }
 
 .extraMenuButton::before {
-  font-family: 'Icons';
   content: '\e02f';
 }

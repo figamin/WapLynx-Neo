@@ -15,7 +15,6 @@ function stopMoving() {
 
   var body = document.getElementsByTagName('body')[0];
 
-  body.onmousedown = qrInfo.originalMouseDown;
   body.onmouseup = qrInfo.originalMouseUp;
 
 }
@@ -26,15 +25,11 @@ function startMoving(evt) {
     return;
   }
 
+  evt.preventDefault();
+  
   lockedDrag = true;
 
   var body = document.getElementsByTagName('body')[0];
-
-  qrInfo.originalMouseDown = body.onmousedown;
-
-  body.onmousedown = function() {
-    return false;
-  };
 
   qrInfo.originalMouseUp = body.onmouseup;
 

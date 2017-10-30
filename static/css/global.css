@@ -30,7 +30,21 @@ hr {
   border-color: #117743;
 }
 
-a, .navClickable {
+.coloredIcon {
+  color: #FFB300;
+  cursor: pointer
+}
+
+.coloredIcon::before {
+  font-family: 'Icons';
+}
+
+#navLinkSpan .coloredIcon:before, #navOptionsSpan .coloredIcon:before,
+  #links .coloredIcon:before {
+  margin-right: 0.25em;
+}
+
+a {
   color: #FFB300;
   text-decoration: none;
 }
@@ -39,10 +53,6 @@ a:hover, .hideButton:hover, .unhideButton:hover, .embedButton:hover,
   .navClickable:hover, #closeWatcherMenuButton:hover, .watchButton:hover,
   .watchedCellCloseButton:hover, .hideFileButton:hover {
   text-shadow: 0px 0px 5px #117743;
-}
-
-.navClickable, .watchButton {
-  cursor: pointer
 }
 
 u {
@@ -161,58 +171,39 @@ nav span, nav a {
 }
 
 #navLinkHome:before {
-  font-family: Icons;
   content: "\e082";
-  margin-right: 0.25em;
 }
 
 #navBoardList:before {
-  font-family: Icons;
   content: "\e03a";
-  margin-right: 0.25em;
 }
 
 #linkOverboard:before, #navOverboard:before {
-  font-family: Icons;
   content: "\e007";
-  margin-right: 0.25em;
 }
 
 #navPosting:before {
-  font-family: Icons;
   content: "\e09a";
-  margin-right: 0.25em;
 }
 
 #navCatalog:before {
-  font-family: Icons;
   content: "\e072";
-  margin-right: 0.25em;
 }
 
 #linkRss:before {
-  font-family: Icons;
   content: "\e0b7";
-  margin-right: 0.25em;
 }
 
 #linkTop:before {
-  font-family: Icons;
   content: "\e012";
-  margin-right: 0.25em;
 }
 
 #linkBottom:before {
-  font-family: Icons;
   content: "\e00f";
-  margin-right: 0.25em;
 }
 
 #linkBack:before {
-  font-family: Icons;
   content: "\e003";
-  margin-right: 0.25em;
-  margin-left: 0.5em;
 }
 
 /* board list */

@@ -29,51 +29,35 @@
 }
 
 #linkLogs:before {
-  font-family: Icons;
   content: "\e069";
-  margin-right: 0.25em;
 }
 
 #linkGraphs:before {
-  font-family: Icons;
   content: "\e018";
-  margin-right: 0.25em;
 }
 
 #linkAccount:before {
-  font-family: Icons;
   content: "\e081";
-  margin-right: 0.25em;
 }
 
 #linkGlobalRules:before {
-  font-family: Icons;
   content: "\e0c9";
-  margin-right: 0.25em;
 }
 
 #linkAbout:before {
-  font-family: Icons;
   content: "\e06c";
-  margin-right: 0.25em;
 }
 
 #linkEngine:before {
-  font-family: Icons;
   content: "\e064";
-  margin-right: 0.25em;
 }
 
 #linkLinks:before {
-  font-family: Icons;
   content: "\e06a";
-  margin-right: 0.25em;
 }
 
 #linkContact:before {
-  font-family: Icons;
   content: "\e05c";
-  margin-right: 0.25em;
 }
 
 .topBoards {

@@ -20,15 +20,19 @@ if (!DISABLE_JS) {
 
   var backLink = document.getElementById('linkBack');
 
-  var galleryLink = document.createElement('span');
+  var galleryLink = document.createElement('a');
   galleryLink.title = 'Gallery mode.\nLeft/right arrow: previous/next\nUp/down arrow: skip 10 previous/next\nEsc: exit\nDelete: remove from gallery';
   galleryLink.id = 'galleryLink';
-  galleryLink.setAttribute('class', 'navClickable');
+  galleryLink.setAttribute('class', 'coloredIcon');
   backLink.parentNode.insertBefore(galleryLink, backLink);
+
+  backLink.parentNode.insertBefore(document.createTextNode(' '), backLink);
 
   var separator = document.createElement('span');
   separator.innerHTML = '/';
   backLink.parentNode.insertBefore(separator, backLink);
+
+  backLink.parentNode.insertBefore(document.createTextNode(' '), backLink);
 
   var outerPanel;
 

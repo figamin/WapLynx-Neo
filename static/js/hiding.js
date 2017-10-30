@@ -40,7 +40,7 @@ function setHideMenu(checkbox) {
   var post = parts[2];
 
   var hideButton = document.createElement('span');
-  hideButton.className = 'hideButton';
+  hideButton.className = 'hideButton coloredIcon';
   hideButton.title = "Hide";
 
   checkbox.parentNode.insertBefore(hideButton, checkbox.nextSibling);

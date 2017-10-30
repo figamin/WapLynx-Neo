@@ -1,17 +1,14 @@
 #watcherButton::before {
-  font-family: 'Icons';
   content: '\e065';
   margin-right: 0.25em;
 }
 
 .watchButton::before {
-  font-family: 'Icons';
   content: '\e065';
 }
 
 #closeWatcherMenuButton::before, .close-btn::before,
   .watchedCellCloseButton::before {
-  font-family: 'Icons';
   content: '\e0db';
 }
 
