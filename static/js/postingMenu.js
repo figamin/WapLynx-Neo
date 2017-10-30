@@ -3,6 +3,19 @@ var banLabels = [ 'Regular ban', 'Range ban (1/2 octects)',
     'Range ban (3/4 octects)' ];
 var deletionOptions = [ 'Do not delete', 'Delete post',
     'Delete post and media', 'Delete by ip' ];
+var threadSettingsList = [ {
+  label : 'Toggle Lock',
+  field : 'locked',
+  parameter : 'lock'
+}, {
+  label : 'Toggle Pin',
+  field : 'pinned',
+  parameter : 'pin'
+}, {
+  label : 'Toggle Cyclic',
+  field : 'cyclic',
+  parameter : 'cyclic'
+} ];
 
 function showReport(board, thread, post, global) {
 
@@ -322,6 +335,76 @@ function editPost(board, thread, post) {
 
 }
 
+function toggleThreadSetting(boardUri, thread, settingIndex) {
+
+  localRequest('/' + boardUri + '/res/' + thread + '.json', function gotData(
+      error, data) {
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    var data = JSON.parse(data);
+
+    var parameters = {
+      boardUri : boardUri,
+      threadId : thread
+    };
+
+    for (var i = 0; i < threadSettingsList.length; i++) {
+
+      var field = threadSettingsList[i];
+
+      parameters[field.parameter] = settingIndex === i ? !data[field.field]
+          : data[field.field];
+
+    }
+
+    apiRequest('changeThreadSettings', parameters, function requestComplete(
+        status, data) {
+
+      if (status === 'ok') {
+        location.reload(true);
+      } else {
+        alert(status + ': ' + JSON.stringify(data));
+      }
+    });
+
+  });
+
+}
+
+function addToggleSettingButton(extraMenu, board, thread, index) {
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var toggleButton = document.createElement('label');
+  toggleButton.innerHTML = threadSettingsList[index].label;
+  toggleButton.onclick = function() {
+    toggleThreadSetting(board, thread, index);
+  };
+  extraMenu.appendChild(toggleButton);
+
+}
+
+function setExtraMenuThread(extraMenu, board, thread) {
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var transferButton = document.createElement('label');
+  transferButton.innerHTML = 'Transfer Thread';
+  transferButton.onclick = function() {
+    transferThread(board, thread);
+  };
+  extraMenu.appendChild(transferButton);
+
+  for (var i = 0; i < threadSettingsList.length; i++) {
+    addToggleSettingButton(extraMenu, board, thread, i);
+  }
+
+}
+
 function setExtraMenuMod(checkbox, extraMenu, board, thread, post) {
 
   extraMenu.appendChild(document.createElement('hr'));
@@ -371,18 +454,6 @@ function setExtraMenuMod(checkbox, extraMenu, board, thread, post) {
   };
   extraMenu.appendChild(spoilButton);
 
-  if (!post) {
-
-    extraMenu.appendChild(document.createElement('hr'));
-
-    var transferButton = document.createElement('label');
-    transferButton.innerHTML = 'Transfer Thread';
-    transferButton.onclick = function() {
-      transferThread(board, thread);
-    };
-    extraMenu.appendChild(transferButton);
-  }
-
   extraMenu.appendChild(document.createElement('hr'));
 
   var editButton = document.createElement('label');
@@ -392,6 +463,9 @@ function setExtraMenuMod(checkbox, extraMenu, board, thread, post) {
   };
   extraMenu.appendChild(editButton);
 
+  if (!post) {
+    setExtraMenuThread(extraMenu, board, thread);
+  }
 }
 
 function setExtraMenu(checkbox) {
@@ -407,7 +481,7 @@ function setExtraMenu(checkbox) {
   var post = parts[2];
 
   var extraMenuButton = document.createElement('span');
-  extraMenuButton.setAttribute('class', 'extraMenuButton');
+  extraMenuButton.setAttribute('class', 'extraMenuButton coloredIcon');
   extraMenuButton.title = 'Post Menu';
   checkbox.parentNode.insertBefore(extraMenuButton, checkbox.nextSibling);
 
