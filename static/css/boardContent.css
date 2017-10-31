@@ -177,3 +177,14 @@ input[type=checkbox].postingCheckbox:checked+label:before {
 .modalCaptchaControls input, .modalOkButton {
   margin-right: 10px;
 }
+
+#favouriteButton:before {
+  font-family: Icons;
+  content: "\e0c2";
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+.checkedFavouriteButton:before {
+  color: #FFB300;
+}
