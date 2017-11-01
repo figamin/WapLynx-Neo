@@ -68,8 +68,8 @@ function showReport(board, thread, post, global) {
 
 }
 
-function deleteSinglePost(boardUri, thread, post, fromIp, wipeMedia,
-    forcedPassword) {
+function deleteSinglePost(boardUri, thread, post, fromIp, unlinkFiles,
+    wipeMedia, forcedPassword) {
 
   var key = boardUri + '/' + thread
 
@@ -88,6 +88,7 @@ function deleteSinglePost(boardUri, thread, post, fromIp, wipeMedia,
       fromIp ? 'deleteFromIpOnBoard' : 'deleteContent',
       {
         password : password,
+        deleteUploads : unlinkFiles,
         deleteMedia : wipeMedia,
         postings : [ {
           board : boardUri,
@@ -108,8 +109,8 @@ function deleteSinglePost(boardUri, thread, post, fromIp, wipeMedia,
             var newPass = prompt('Could not delete. Would you like to try another password?');
 
             if (newPass) {
-              deleteSinglePost(boardUri, thread, post, fromIp, wipeMedia,
-                  newPass);
+              deleteSinglePost(boardUri, thread, post, fromIp, unlinkFiles,
+                  wipeMedia, newPass);
             }
 
           }
@@ -192,27 +193,29 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
         thread : thread,
         post : post
       } ]
-    }, function requestComplete(status, data) {
+    },
+        function requestComplete(status, data) {
 
-      if (status === 'ok') {
+          if (status === 'ok') {
 
-        var banMessageDiv = document.createElement('div');
-        banMessageDiv.innerHTML = typedMessage
-            || '(USER WAS BANNED FOR THIS POST)';
-        banMessageDiv.setAttribute('class', 'divBanMessage');
-        innerPart.appendChild(banMessageDiv);
+            var banMessageDiv = document.createElement('div');
+            banMessageDiv.innerHTML = typedMessage
+                || '(USER WAS BANNED FOR THIS POST)';
+            banMessageDiv.setAttribute('class', 'divBanMessage');
+            innerPart.appendChild(banMessageDiv);
 
-        outerPanel.remove();
+            outerPanel.remove();
 
-        if (selectedDeletionOption) {
-          deleteSinglePost(boardUri, thread, post,
-              selectedDeletionOption === 3, selectedDeletionOption === 2);
-        }
+            if (selectedDeletionOption) {
+              deleteSinglePost(boardUri, thread, post,
+                  selectedDeletionOption === 3, false,
+                  selectedDeletionOption === 2);
+            }
 
-      } else {
-        alert(status + ': ' + JSON.stringify(data));
-      }
-    });
+          } else {
+            alert(status + ': ' + JSON.stringify(data));
+          }
+        });
 
   };
 
@@ -405,16 +408,28 @@ function setExtraMenuThread(extraMenu, board, thread) {
 
 }
 
-function setExtraMenuMod(checkbox, extraMenu, board, thread, post) {
+function setExtraMenuMod(checkbox, extraMenu, board, thread, post, hasFiles) {
 
-  extraMenu.appendChild(document.createElement('hr'));
+  if (hasFiles) {
+    extraMenu.appendChild(document.createElement('hr'));
 
-  var deleteMediaButton = document.createElement('label');
-  deleteMediaButton.innerHTML = 'Delete Post And Media';
-  extraMenu.appendChild(deleteMediaButton);
-  deleteMediaButton.onclick = function() {
-    deleteSinglePost(board, thread, post, false, true);
-  };
+    var deleteMediaButton = document.createElement('label');
+    deleteMediaButton.innerHTML = 'Delete Post And Media';
+    extraMenu.appendChild(deleteMediaButton);
+    deleteMediaButton.onclick = function() {
+      deleteSinglePost(board, thread, post, false, false, true);
+    };
+
+    extraMenu.appendChild(document.createElement('hr'));
+
+    var spoilButton = document.createElement('label');
+    spoilButton.innerHTML = 'Spoil Files';
+    spoilButton.onclick = function() {
+      spoilSinglePost(board, thread, post);
+    };
+    extraMenu.appendChild(spoilButton);
+
+  }
 
   extraMenu.appendChild(document.createElement('hr'));
 
@@ -447,15 +462,6 @@ function setExtraMenuMod(checkbox, extraMenu, board, thread, post) {
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var spoilButton = document.createElement('label');
-  spoilButton.innerHTML = 'Spoil Files';
-  spoilButton.onclick = function() {
-    spoilSinglePost(board, thread, post);
-  };
-  extraMenu.appendChild(spoilButton);
-
-  extraMenu.appendChild(document.createElement('hr'));
-
   var editButton = document.createElement('label');
   editButton.innerHTML = 'Edit';
   editButton.onclick = function() {
@@ -479,6 +485,9 @@ function setExtraMenu(checkbox) {
   var thread = parts[1];
 
   var post = parts[2];
+
+  var hasFiles = checkbox.parentNode.parentNode
+      .getElementsByClassName('panelUploads')[0].children.length > 0;
 
   var extraMenuButton = document.createElement('span');
   extraMenuButton.setAttribute('class', 'extraMenuButton coloredIcon');
@@ -533,8 +542,21 @@ function setExtraMenu(checkbox) {
     deleteSinglePost(board, thread, post);
   };
 
+  if (hasFiles) {
+
+    extraMenu.appendChild(document.createElement('hr'));
+
+    var unlinkButton = document.createElement('label');
+    unlinkButton.innerHTML = 'Unlink Files';
+    extraMenu.appendChild(unlinkButton);
+    unlinkButton.onclick = function() {
+      deleteSinglePost(board, thread, post, false, true);
+    };
+
+  }
+
   if (getCookies().hash) {
-    setExtraMenuMod(checkbox, extraMenu, board, thread, post);
+    setExtraMenuMod(checkbox, extraMenu, board, thread, post, hasFiles);
   }
 
 }
