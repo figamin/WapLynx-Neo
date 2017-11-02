@@ -150,7 +150,7 @@ function setQr() {
   qrhtml += '<table class="post-table"><tbody> <tr><th colspan="2">';
   qrhtml += '<span class="handle" ';
   qrhtml += 'onmousedown=\'startMoving(event);\'>';
-  qrhtml += '<a class="close-btn"';
+  qrhtml += '<a class="close-btn coloredIcon"';
   qrhtml += ' onclick=\'removeQr();\'></a>';
   qrhtml += 'Quick Reply</span></th> </tr>';
 

@@ -125,6 +125,6 @@
   margin: 0;
 }
 
-.handle, .close-btn {
+.handle {
   cursor: move;
 }

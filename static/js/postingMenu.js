@@ -103,7 +103,13 @@ function deleteSinglePost(boardUri, thread, post, fromIp, unlinkFiles,
           if (!fromIp && !board && data.removedPosts) {
             refreshPosts(true, true);
           } else if (fromIp || data.removedThreads || data.removedPosts) {
-            window.location.pathname = '/' + boardUri + '/';
+
+            if (board) {
+              location.reload(true);
+            } else {
+              window.location.pathname = '/' + boardUri + '/';
+            }
+
           } else {
 
             var newPass = prompt('Could not delete. Would you like to try another password?');
