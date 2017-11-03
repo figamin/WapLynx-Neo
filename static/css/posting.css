@@ -22,7 +22,7 @@
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.unhideButton {
+.unhideButton, .embedButton {
   cursor: pointer;
   color: #FFB300;
   font-size: 80%;
