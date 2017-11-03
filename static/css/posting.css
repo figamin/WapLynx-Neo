@@ -150,7 +150,7 @@
 }
 
 /*Change the dimensions if you wish for larger thumbs*/
-.uploadCell img:not (.imgExpanded ) {
+.uploadCell img:not(.imgExpanded) {
   max-width: 125px;
   max-height: 125px;
 }
