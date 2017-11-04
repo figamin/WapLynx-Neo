@@ -130,7 +130,7 @@ function setHideMenu(checkbox) {
 
     threadHideButton.onclick = function() {
       checkbox.parentNode.parentNode.parentNode.style.display = 'none';
-      unhideThreadButton.style.display = 'inline';
+      unhideThreadButton.style.display = 'block';
 
       registerHiding(board, thread);
     }

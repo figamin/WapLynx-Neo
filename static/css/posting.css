@@ -237,6 +237,10 @@
   text-decoration: none;
 }
 
+.unhideButton {
+  clear: left;
+}
+
 /*Actions form*/
 #threadList {
   margin: 1em;
