@@ -1,6 +1,5 @@
 /*Elements exclusive from the thread page*/
 .divRefresh {
-  display: block;
   padding: 0;
   height: 1.5em;
 }

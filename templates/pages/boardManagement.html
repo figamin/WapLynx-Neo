@@ -205,41 +205,42 @@
 
         <hr />
 
-        <h3>Custom JavaScript</h3>
+        <div id="customJsForm">
 
-        <p>Upload without any files to delete the custom JavaScript</p>
+          <h3>Custom JavaScript</h3>
 
-        <form
-          action="/setCustomJs.js"
-          method="post"
-          id="customJsForm"
-          enctype="multipart/form-data">
+          <p>Upload without any files to delete the custom JavaScript</p>
 
-          <input
-            type="hidden"
-            name="boardUri"
-            id="customJsIdentifier">
+          <form
+            action="/setCustomJs.js"
+            method="post"
+            enctype="multipart/form-data">
 
-          <input
-            type="file"
-            id="JsFiles"
-            name="files">
+            <input
+              type="hidden"
+              name="boardUri"
+              id="customJsIdentifier">
 
-          <input
-            id="jsFormButton"
-            type="submit"
-            value="Upload Js">
+            <input
+              type="file"
+              id="JsFiles"
+              name="files">
 
-          <input
-            type="button"
-            onclick="setJs()"
-            id="jsJsButton"
-            class="hidden"
-            value="Upload Js">
+            <input
+              id="jsFormButton"
+              type="submit"
+              value="Upload Js">
 
-        </form>
+            <input
+              type="button"
+              onclick="setJs()"
+              id="jsJsButton"
+              class="hidden"
+              value="Upload Js">
 
-        <hr />
+          </form>
+          <hr />
+        </div>
 
         <h3>Custom Spoiler</h3>
 
