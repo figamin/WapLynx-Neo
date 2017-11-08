@@ -21,7 +21,7 @@ if (!DISABLE_JS) {
   var backLink = document.getElementById('linkBack');
 
   var galleryLink = document.createElement('a');
-  galleryLink.title = 'Gallery mode.\nLeft/right arrow: previous/next\nUp/down arrow: skip 10 previous/next\nEsc: exit\nDelete: remove from gallery';
+  galleryLink.title = 'Gallery mode.\nLeft/right arrow: previous/next\nUp/down arrow: skip 10 previous/next\nHome/End: first/last\nEsc: exit\nDelete: remove from gallery';
   galleryLink.id = 'galleryLink';
   galleryLink.setAttribute('class', 'coloredIcon');
   backLink.parentNode.insertBefore(galleryLink, backLink);
@@ -82,6 +82,18 @@ if (!DISABLE_JS) {
       viewingGallery = false;
       event.preventDefault();
 
+      break;
+    }
+
+    case 'Home': {
+      displayImage(0);
+      event.preventDefault();
+      break;
+    }
+
+    case 'End': {
+      displayImage(galleryFiles.length - 1);
+      event.preventDefault();
       break;
     }
 
