@@ -31,7 +31,13 @@ function handleConnectionResponse(xhr, callback) {
   }
 
   if (response.auth && response.auth.authStatus === 'expired') {
-    document.cookie = 'hash=' + response.auth.newHash + ';path=/';
+
+    var expiration = new Date();
+    expiration.setUTCFullYear(expiration.getUTCFullYear() + 1);
+
+    var complement = '; path=/; expires=' + expiration.toUTCString();
+
+    document.cookie = 'hash=' + response.auth.newHash + complement;
 
   }
 

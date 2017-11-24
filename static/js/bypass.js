@@ -25,7 +25,11 @@ function blockBypass() {
 
     if (status === 'ok') {
 
-      document.cookie = 'bypass=' + data + '; path=/';
+      var expiration = new Date();
+      expiration.setUTCFullYear(expiration.getUTCFullYear() + 1);
+
+      document.cookie = 'bypass=' + data + '; path=/; expires='
+          + expiration.toUTCString();
 
       location.reload(true);
 
