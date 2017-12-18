@@ -1,0 +1,10 @@
+#settingsMenu {
+  position: fixed;
+  right: 100px;
+  top: 25px;
+  z-index: 100;
+}
+
+#closeSettingsMenuButton::before {
+  content: '\e0db';
+}

@@ -69,22 +69,20 @@ var moveWatched = function(evt) {
     newY = 0;
   }
 
-  var watchedPanel = document.getElementById('watchedMenu');
-
-  var upperXLimit = document.body.clientWidth - watchedPanel.offsetWidth;
+  var upperXLimit = document.body.clientWidth - watchedMenu.offsetWidth;
 
   if (newX > upperXLimit) {
     newX = upperXLimit;
   }
 
-  var upperYLimit = window.innerHeight - watchedPanel.offsetHeight;
+  var upperYLimit = window.innerHeight - watchedMenu.offsetHeight;
 
   if (newY > upperYLimit) {
     newY = upperYLimit;
   }
 
-  watchedPanel.style.right = newX + 'px';
-  watchedPanel.style.top = newY + 'px';
+  watchedMenu.style.right = newX + 'px';
+  watchedMenu.style.top = newY + 'px';
 
 };
 

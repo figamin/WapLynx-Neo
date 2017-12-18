@@ -182,6 +182,10 @@ nav span, nav a {
   content: "\e007";
 }
 
+#settingsButton:before {
+  content: "\e041";
+}
+
 #navPosting:before {
   content: "\e09a";
 }

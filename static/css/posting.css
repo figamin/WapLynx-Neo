@@ -1,6 +1,7 @@
 /*Used for places where posts are displayed*/
 .hideButton, .embedButton, #closeWatcherMenuButton, .watchButton,
-  .watchedCellCloseButton, .hideFileButton, .extraMenuButton {
+  .watchedCellCloseButton, .hideFileButton, .extraMenuButton,
+  #closeSettingsMenuButton {
   margin-left: 0.5em;
 }
 
