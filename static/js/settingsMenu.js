@@ -1,3 +1,43 @@
+var currentSettingsPanel;
+var currentSettingsTab;
+var menuContentPanel;
+var tabsDiv;
+
+function selectSettingsPanel(tab, panel) {
+
+  if (tab === currentSettingsTab) {
+    return;
+  }
+
+  if (currentSettingsTab) {
+    currentSettingsTab.id = '';
+    currentSettingsPanel.remove();
+  }
+
+  menuContentPanel.appendChild(panel);
+  tab.id = 'selectedTab';
+
+  currentSettingsPanel = panel;
+  currentSettingsTab = tab;
+
+}
+
+function registerTab(text, content, select) {
+
+  var newTab = document.createElement('span');
+  newTab.innerHTML = text;
+  newTab.setAttribute('class', 'settingsTab');
+  newTab.onclick = function() {
+    selectSettingsPanel(newTab, content);
+  };
+  tabsDiv.appendChild(newTab);
+
+  if (select) {
+    newTab.onclick();
+  }
+
+}
+
 if (!DISABLE_JS) {
 
   var postingLink = document.getElementById('navPosting');
@@ -64,4 +104,17 @@ if (!DISABLE_JS) {
   }
 
   setDraggable(settingsMenu, settingsMenuLabel);
+
+  tabsDiv = document.createElement('div');
+  settingsMenu.appendChild(tabsDiv);
+
+  menuContentPanel = document.createElement('div');
+  settingsMenu.appendChild(menuContentPanel);
+
+  var settingsPanel = document.createElement('div');
+  settingsPanel.innerHTML = 'Filters and shit lmao';
+  // TODO
+
+  registerTab('Filters', settingsPanel, true);
+
 }
