@@ -2,6 +2,9 @@ var currentSettingsPanel;
 var currentSettingsTab;
 var menuContentPanel;
 var tabsDiv;
+var existingFiltersDiv;
+
+var filterTypes = [ 'Name', 'Tripcode', 'Subject', 'Message' ];
 
 function selectSettingsPanel(tab, panel) {
 
@@ -72,6 +75,55 @@ function placeNavBarButton(settingsMenu) {
 
 }
 
+function addFilterDisplay(filter) {
+
+  var filterCell = document.createElement('div');
+
+  var cellWrapper = document.createElement('div');
+  existingFiltersDiv.appendChild(cellWrapper);
+
+  var filterTypeLabel = document.createElement('span');
+  filterTypeLabel.innerHTML = filterTypes[filter.type];
+  filterTypeLabel.className = 'existingFilterTypeLabel';
+  filterCell.appendChild(filterTypeLabel);
+
+  var filterContentLabel = document.createElement('span');
+  var contentToDisplay = filter.filter;
+  if (filter.regex) {
+    contentToDisplay = '/' + contentToDisplay + '/';
+  }
+  filterContentLabel.innerHTML = contentToDisplay;
+  filterContentLabel.className = 'existingFilterContentLabel';
+  filterCell.appendChild(filterContentLabel);
+
+  var button = document.createElement('span');
+  button.className = 'filterDeleteButton glowOnHover coloredIcon';
+  filterCell.appendChild(button);
+
+  button.onclick = function() {
+
+    for (var i = 0; i < existingFiltersDiv.children.length; i++) {
+      if (existingFiltersDiv.children[i] === cellWrapper) {
+
+        var savedFilters = JSON.parse(localStorage.filterData || '[]');
+
+        savedFilters.splice(i, 1);
+
+        localStorage.filterData = JSON.stringify(savedFilters);
+
+        cellWrapper.remove();
+
+        return;
+      }
+    }
+
+  };
+
+  cellWrapper.appendChild(document.createElement('hr'));
+  cellWrapper.appendChild(filterCell);
+
+}
+
 function getFiltersContent() {
 
   var filtersPanel = document.createElement('div');
@@ -82,8 +134,6 @@ function getFiltersContent() {
   filtersPanel.appendChild(newFilterPanel);
 
   var newFilterTypeCombo = document.createElement('select');
-
-  var filterTypes = [ 'Name', 'Tripcode', 'Subject', 'Message' ];
 
   for (var i = 0; i < filterTypes.length; i++) {
     var option = document.createElement('option');
@@ -122,6 +172,8 @@ function getFiltersContent() {
       type : newFilterTypeCombo.selectedIndex
     };
 
+    addFilterDisplay(newFilterData);
+
     var savedFilters = JSON.parse(localStorage.filterData || '[]');
 
     savedFilters.push(newFilterData);
@@ -130,6 +182,28 @@ function getFiltersContent() {
 
   };
   newFilterPanel.appendChild(newFilterButton);
+
+  var existingFiltersLabelsPanel = document.createElement('div');
+  filtersPanel.appendChild(existingFiltersLabelsPanel);
+
+  var labelType = document.createElement('label');
+  labelType.innerHTML = 'Type';
+  labelType.id = 'labelExistingFilfterType';
+  existingFiltersLabelsPanel.appendChild(labelType);
+
+  var labelContent = document.createElement('label');
+  labelContent.innerHTML = 'Content';
+  labelContent.id = 'labelExistingFilfterContent';
+  existingFiltersLabelsPanel.appendChild(labelContent);
+
+  existingFiltersDiv = document.createElement('div');
+  filtersPanel.appendChild(existingFiltersDiv);
+
+  var currentFilters = JSON.parse(localStorage.filterData || '[]');
+
+  for (var i = 0; i < currentFilters.length; i++) {
+    addFilterDisplay(currentFilters[i]);
+  }
 
   return filtersPanel;
 
@@ -155,7 +229,7 @@ if (!DISABLE_JS) {
 
   var closeSettingsMenuButton = document.createElement('span');
   closeSettingsMenuButton.id = 'closeSettingsMenuButton';
-  closeSettingsMenuButton.className = 'coloredIcon';
+  closeSettingsMenuButton.className = 'coloredIcon glowOnHover';
   closeSettingsMenuButton.onclick = function() {
 
     if (!showingSettings) {

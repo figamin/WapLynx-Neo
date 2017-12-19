@@ -61,7 +61,7 @@ function processFileForHiding(file) {
 
   var hidingButton = document.createElement('span');
   hidingButton.innerHTML = '(Hide file)';
-  hidingButton.className = 'hideFileButton';
+  hidingButton.className = 'hideFileButton glowOnHover';
 
   var fileName = nameLink.href.split('/');
   fileName = fileName[fileName.length - 1];

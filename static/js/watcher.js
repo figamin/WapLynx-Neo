@@ -41,7 +41,7 @@ if (!DISABLE_JS) {
 
   var closeWatcherMenuButton = document.createElement('span');
   closeWatcherMenuButton.id = 'closeWatcherMenuButton';
-  closeWatcherMenuButton.className = 'coloredIcon';
+  closeWatcherMenuButton.className = 'coloredIcon glowOnHover';
   closeWatcherMenuButton.onclick = function() {
 
     if (!showingWatched) {
@@ -278,7 +278,7 @@ function addWatchedCell(board, thread, watchData) {
   cell.appendChild(labelWrapper);
 
   var button = document.createElement('span');
-  button.className = 'watchedCellCloseButton coloredIcon';
+  button.className = 'watchedCellCloseButton glowOnHover coloredIcon';
   cell.appendChild(button);
 
   button.onclick = function() {
@@ -315,7 +315,7 @@ function processOP(op) {
   var thread = nameParts[1];
 
   var watchButton = document.createElement('span');
-  watchButton.className = 'watchButton coloredIcon';
+  watchButton.className = 'watchButton glowOnHover coloredIcon';
   watchButton.title = "Watch Thread";
 
   checkBox.parentNode.insertBefore(watchButton,

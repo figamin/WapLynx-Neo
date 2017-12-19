@@ -45,7 +45,7 @@ function processLinkForEmbed(link) {
   var embedButton = document.createElement('span');
 
   embedButton.innerHTML = '[Embed]';
-  embedButton.className = 'embedButton';
+  embedButton.className = 'embedButton glowOnHover';
 
   embedButton.onclick = function() {
 

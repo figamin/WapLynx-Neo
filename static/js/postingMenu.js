@@ -496,12 +496,12 @@ function setExtraMenu(checkbox) {
       .getElementsByClassName('panelUploads')[0].children.length > 0;
 
   var extraMenuButton = document.createElement('span');
-  extraMenuButton.className = 'extraMenuButton coloredIcon';
+  extraMenuButton.className = 'extraMenuButton glowOnHover coloredIcon';
   extraMenuButton.title = 'Post Menu';
   checkbox.parentNode.insertBefore(extraMenuButton, checkbox.nextSibling);
 
   var extraMenu = document.createElement('div');
-  extraMenu.className = 'floatingMenu';
+  extraMenu.className = 'floatingMenu extraMenu';
   extraMenu.style.display = 'none';
   extraMenu.style.position = 'absolute';
 

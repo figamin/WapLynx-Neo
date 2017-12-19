@@ -40,13 +40,13 @@ function setHideMenu(checkbox) {
   var post = parts[2];
 
   var hideButton = document.createElement('span');
-  hideButton.className = 'hideButton coloredIcon';
+  hideButton.className = 'hideButton glowOnHover coloredIcon';
   hideButton.title = "Hide";
 
   checkbox.parentNode.insertBefore(hideButton, checkbox.nextSibling);
 
   var hideMenu = document.createElement('div');
-  hideMenu.className = 'floatingMenu';
+  hideMenu.className = 'floatingMenu hideMenu';
   hideMenu.style.display = 'none';
   hideMenu.style.position = 'absolute';
 
@@ -95,7 +95,7 @@ function setHideMenu(checkbox) {
       + (post || thread) + ']';
 
   unhidePostButton.innerHTML = unhideHTML;
-  unhidePostButton.className = 'unhideButton';
+  unhidePostButton.className = 'unhideButton glowOnHover';
   unhidePostButton.style.display = 'none';
   checkbox.parentNode.parentNode.parentNode.insertBefore(unhidePostButton,
       checkbox.parentNode.parentNode);
@@ -123,7 +123,7 @@ function setHideMenu(checkbox) {
 
     unhideThreadButton.innerHTML = '[Unhide thread ' + board + '/' + thread
         + ']';
-    unhideThreadButton.className = 'unhideButton';
+    unhideThreadButton.className = 'unhideButton glowOnHover';
     unhideThreadButton.style.display = 'none';
     checkbox.parentNode.parentNode.parentNode.parentNode.insertBefore(
         unhideThreadButton, checkbox.parentNode.parentNode.parentNode);

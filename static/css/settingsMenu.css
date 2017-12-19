@@ -9,7 +9,7 @@
   float: right;
 }
 
-#closeSettingsMenuButton::before {
+#closeSettingsMenuButton::before, .filterDeleteButton::before {
   content: '\e0db';
 }
 
@@ -32,6 +32,17 @@
   margin: 0.5em
 }
 
-.settingsLabel {
+.settingsLabel, #labelExistingFilfterType, #labelExistingFilfterContent,
+  .existingFilterTypeLabel, .existingFilterContentLabel {
   font-size: 80%;
+}
+
+#labelExistingFilfterType, .existingFilterTypeLabel {
+  display: inline-block;
+  width: 20%;
+}
+
+#labelExistingFilfterContent, .existingFilterContentLabel {
+  width: 75%;
+  display: inline-block;
 }

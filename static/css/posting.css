@@ -29,6 +29,11 @@
   font-size: 80%;
 }
 
+.hideMenu label, .extraMenu label {
+  font-size: 80%;
+  cursor: pointer;
+}
+
 .hideButton::before {
   content: '\e017';
 }
