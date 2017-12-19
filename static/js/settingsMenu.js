@@ -38,6 +38,68 @@ function registerTab(text, content, select) {
 
 }
 
+function getFiltersContent() {
+
+  var filtersPanel = document.createElement('div');
+
+  var newFilterPanel = document.createElement('span');
+  newFilterPanel.id = 'newFilterPanel';
+
+  filtersPanel.appendChild(newFilterPanel);
+
+  var newFilterTypeCombo = document.createElement('select');
+
+  var filterTypes = [ 'Name', 'Tripcode', 'Subject', 'Message' ];
+
+  for (var i = 0; i < filterTypes.length; i++) {
+    var option = document.createElement('option');
+    option.innerHTML = filterTypes[i];
+    newFilterTypeCombo.appendChild(option);
+  }
+  newFilterPanel.appendChild(newFilterTypeCombo);
+
+  var newFilterField = document.createElement('input');
+  newFilterField.type = 'text';
+  newFilterField.placeholder = 'filter';
+  newFilterPanel.appendChild(newFilterField);
+
+  var regexLabel = document.createElement('label');
+  regexLabel.innerHTML = 'Regex';
+  newFilterPanel.appendChild(regexLabel);
+
+  var newFilterRegex = document.createElement('input');
+  newFilterRegex.type = 'checkbox';
+  newFilterPanel.appendChild(newFilterRegex);
+
+  var newFilterButton = document.createElement('button');
+  newFilterButton.innerHTML = 'Add filter';
+  newFilterButton.onclick = function() {
+
+    var filterContent = newFilterField.value.trim();
+
+    if (!filterContent) {
+      return;
+    }
+
+    var newFilterData = {
+      filter : filterContent,
+      regex : newFilterRegex.checked,
+      type : newFilterTypeCombo.selectedIndex
+    };
+
+    var savedFilters = JSON.parse(localStorage.filterData || '[]');
+
+    savedFilters.push(newFilterData);
+
+    localStorage.setItem('filterData', JSON.stringify(savedFilters));
+
+  };
+  newFilterPanel.appendChild(newFilterButton);
+
+  return filtersPanel;
+
+}
+
 if (!DISABLE_JS) {
 
   var postingLink = document.getElementById('navPosting');
@@ -111,10 +173,6 @@ if (!DISABLE_JS) {
   menuContentPanel = document.createElement('div');
   settingsMenu.appendChild(menuContentPanel);
 
-  var settingsPanel = document.createElement('div');
-  settingsPanel.innerHTML = 'Filters and shit lmao';
-  // TODO
-
-  registerTab('Filters', settingsPanel, true);
+  registerTab('Filters', getFiltersContent(), true);
 
 }
