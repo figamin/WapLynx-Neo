@@ -51,7 +51,8 @@ a {
 
 a:hover, .hideButton:hover, .unhideButton:hover, .embedButton:hover,
   .navClickable:hover, #closeWatcherMenuButton:hover, .watchButton:hover,
-  .watchedCellCloseButton:hover, .hideFileButton:hover {
+  .watchedCellCloseButton:hover, .hideFileButton:hover,
+  #closeSettingsMenuButton:hover {
   text-shadow: 0px 0px 5px #117743;
 }
 
@@ -355,8 +356,11 @@ footer {
   padding: 0.25em;
 }
 
-.floatingMenu label {
+.floatingMenu .headerLabel {
   font-size: 80%;
+}
+
+.floatingMenu .header, .floatingMenu .headerLabel {
   cursor: pointer;
 }
 

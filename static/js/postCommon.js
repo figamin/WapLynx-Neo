@@ -136,7 +136,7 @@ function addDndCell(cell, removeButton) {
 function addSelectedFile(file) {
 
   var cell = document.createElement('div');
-  cell.setAttribute('class', 'selectedCell');
+  cell.className = 'selectedCell';
 
   cell.innerHTML = selectedCell;
 
@@ -173,7 +173,7 @@ function addSelectedFile(file) {
 
       var dndThumb = document.createElement('img');
       dndThumb.src = fileReader.result;
-      dndThumb.setAttribute('class', 'dragAndDropThumb');
+      dndThumb.className = 'dragAndDropThumb';
       cell.appendChild(dndThumb);
 
       addDndCell(cell, removeButton);

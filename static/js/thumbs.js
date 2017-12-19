@@ -48,7 +48,7 @@ function expandImage(mouseEvent, link, mime) {
 
     expanded = document.createElement('img');
     expanded.setAttribute('src', expandedSrc);
-    expanded.setAttribute('class', 'imgExpanded');
+    expanded.className = 'imgExpanded';
 
     thumb.style.display = 'none';
     link.appendChild(expanded);
@@ -77,7 +77,7 @@ function setPlayer(link, mime) {
   hideLink.innerHTML = '[ - ]';
   hideLink.style.cursor = 'pointer';
   hideLink.style.display = 'none';
-  hideLink.setAttribute('class', 'hideLink');
+  hideLink.className = 'hideLink';
   hideLink.onclick = function() {
     newThumb.style.display = 'inline';
     video.style.display = 'none';
@@ -86,7 +86,7 @@ function setPlayer(link, mime) {
   };
 
   var newThumb = document.createElement('img');
-  newThumb.setAttribute('class', 'imgLink');
+  newThumb.className = 'imgLink';
   newThumb.src = link.childNodes[0].src;
   newThumb.onclick = function() {
     if (!video.childNodes.count) {

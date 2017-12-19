@@ -128,7 +128,7 @@ function setFullBorder(tooltip) {
 function processQuote(quote, backLink) {
 
   var tooltip = document.createElement('div');
-  tooltip.setAttribute('class', 'quoteTooltip');
+  tooltip.className = 'quoteTooltip';
   tooltip.style.display = 'none';
   tooltip.style.position = 'absolute';
 

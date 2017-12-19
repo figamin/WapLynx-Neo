@@ -207,7 +207,7 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
             var banMessageDiv = document.createElement('div');
             banMessageDiv.innerHTML = typedMessage
                 || '(USER WAS BANNED FOR THIS POST)';
-            banMessageDiv.setAttribute('class', 'divBanMessage');
+            banMessageDiv.className = 'divBanMessage';
             innerPart.appendChild(banMessageDiv);
 
             outerPanel.remove();
@@ -496,7 +496,7 @@ function setExtraMenu(checkbox) {
       .getElementsByClassName('panelUploads')[0].children.length > 0;
 
   var extraMenuButton = document.createElement('span');
-  extraMenuButton.setAttribute('class', 'extraMenuButton coloredIcon');
+  extraMenuButton.className = 'extraMenuButton coloredIcon';
   extraMenuButton.title = 'Post Menu';
   checkbox.parentNode.insertBefore(extraMenuButton, checkbox.nextSibling);
 

@@ -43,7 +43,7 @@ function setDraggable(element, dragElement) {
 
     var rect = element.getBoundingClientRect();
 
-    dragglableInfo.diffX = evt.clientX - rect.right;
+    dragglableInfo.diffX = evt.clientX - rect.left;
     dragglableInfo.diffY = evt.clientY - rect.top;
 
   };
@@ -56,7 +56,7 @@ function setDraggable(element, dragElement) {
 
     evt = evt || window.event;
 
-    var newX = (window.innerWidth - evt.clientX) + dragglableInfo.diffX;
+    var newX = evt.clientX - dragglableInfo.diffX;
     var newY = evt.clientY - dragglableInfo.diffY;
 
     if (newX < 0) {
@@ -79,7 +79,7 @@ function setDraggable(element, dragElement) {
       newY = upperYLimit;
     }
 
-    element.style.right = newX + 'px';
+    element.style.left = newX + 'px';
     element.style.top = newY + 'px';
 
   };

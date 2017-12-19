@@ -23,7 +23,7 @@ if (!DISABLE_JS) {
   var galleryLink = document.createElement('a');
   galleryLink.title = 'Gallery mode.\nLeft/right arrow: previous/next\nUp/down arrow: skip 10 previous/next\nHome/End: first/last\nEsc: exit\nDelete: remove from gallery';
   galleryLink.id = 'galleryLink';
-  galleryLink.setAttribute('class', 'coloredIcon');
+  galleryLink.className = 'coloredIcon';
   backLink.parentNode.insertBefore(galleryLink, backLink);
 
   backLink.parentNode.insertBefore(document.createTextNode(' '), backLink);
@@ -44,15 +44,15 @@ if (!DISABLE_JS) {
     }
 
     outerPanel = document.createElement('div');
-    outerPanel.setAttribute('class', 'modalPanel');
+    outerPanel.className = 'modalPanel';
     document.body.appendChild(outerPanel);
 
     var innerPanel = document.createElement('div');
-    innerPanel.setAttribute('class', 'modalInnerPanel');
+    innerPanel.className = 'modalInnerPanel';
     outerPanel.appendChild(innerPanel);
 
     galleryImage = document.createElement('img');
-    galleryImage.setAttribute('class', 'galleryImage');
+    galleryImage.className = 'galleryImage';
     innerPanel.appendChild(galleryImage);
 
     previousImage = document.createElement('img');

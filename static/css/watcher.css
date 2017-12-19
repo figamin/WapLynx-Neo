@@ -31,7 +31,12 @@
 
 #watchedMenu {
   position: fixed;
-  right: 100px;
+  left: 100px;
   top: 25px;
   z-index: 100;
+}
+
+#watchedMenu label {
+  font-size: 80%;
+  cursor: pointer;
 }

@@ -26,7 +26,7 @@ function registerTab(text, content, select) {
 
   var newTab = document.createElement('span');
   newTab.innerHTML = text;
-  newTab.setAttribute('class', 'settingsTab');
+  newTab.className = 'settingsTab';
   newTab.onclick = function() {
     selectSettingsPanel(newTab, content);
   };
@@ -34,6 +34,40 @@ function registerTab(text, content, select) {
 
   if (select) {
     newTab.onclick();
+  }
+
+}
+
+function placeNavBarButton(settingsMenu) {
+
+  var postingLink = document.getElementById('navPosting');
+  var referenceNode = postingLink.nextSibling;
+
+  postingLink.parentNode.insertBefore(document.createTextNode(' '),
+      referenceNode);
+
+  var divider = document.createElement('span');
+  divider.innerHTML = '/';
+  postingLink.parentNode.insertBefore(divider, referenceNode);
+
+  postingLink.parentNode.insertBefore(document.createTextNode(' '),
+      referenceNode);
+
+  var settingsButton = document.createElement('a');
+  settingsButton.innerHTML = 'settings';
+  settingsButton.id = 'settingsButton';
+  settingsButton.className = 'coloredIcon';
+  postingLink.parentNode.insertBefore(settingsButton, referenceNode);
+
+  settingsButton.onclick = function() {
+
+    if (showingSettings) {
+      return;
+    }
+
+    showingSettings = true;
+    settingsMenu.style.display = 'block';
+
   }
 
 }
@@ -65,6 +99,7 @@ function getFiltersContent() {
 
   var regexLabel = document.createElement('label');
   regexLabel.innerHTML = 'Regex';
+  regexLabel.className = 'settingsLabel';
   newFilterPanel.appendChild(regexLabel);
 
   var newFilterRegex = document.createElement('input');
@@ -102,37 +137,25 @@ function getFiltersContent() {
 
 if (!DISABLE_JS) {
 
-  var postingLink = document.getElementById('navPosting');
-  var referenceNode = postingLink.nextSibling;
-
-  postingLink.parentNode.insertBefore(document.createTextNode(' '),
-      referenceNode);
-
-  var divider = document.createElement('span');
-  divider.innerHTML = '/';
-  postingLink.parentNode.insertBefore(divider, referenceNode);
-
-  postingLink.parentNode.insertBefore(document.createTextNode(' '),
-      referenceNode);
-
-  var settingsButton = document.createElement('a');
-  settingsButton.innerHTML = 'settings';
-  settingsButton.id = 'settingsButton';
-  settingsButton.setAttribute('class', 'coloredIcon');
-  postingLink.parentNode.insertBefore(settingsButton, referenceNode);
-
   var settingsMenu = document.createElement('div');
+
+  placeNavBarButton(settingsMenu);
+
+  var settingsMenuHeader = document.createElement('div');
+  settingsMenuHeader.className = 'header';
+  settingsMenu.appendChild(settingsMenuHeader);
 
   var settingsMenuLabel = document.createElement('label');
   settingsMenuLabel.innerHTML = 'Settings';
+  settingsMenuLabel.className = 'headerLabel';
 
-  settingsMenu.appendChild(settingsMenuLabel);
+  settingsMenuHeader.appendChild(settingsMenuLabel);
 
   var showingSettings = false;
 
   var closeSettingsMenuButton = document.createElement('span');
   closeSettingsMenuButton.id = 'closeSettingsMenuButton';
-  closeSettingsMenuButton.setAttribute('class', 'coloredIcon');
+  closeSettingsMenuButton.className = 'coloredIcon';
   closeSettingsMenuButton.onclick = function() {
 
     if (!showingSettings) {
@@ -144,28 +167,17 @@ if (!DISABLE_JS) {
 
   };
 
-  settingsMenu.appendChild(closeSettingsMenuButton);
+  settingsMenuHeader.appendChild(closeSettingsMenuButton);
 
   settingsMenu.appendChild(document.createElement('hr'));
 
   settingsMenu.id = 'settingsMenu';
-  settingsMenu.setAttribute('class', 'floatingMenu');
+  settingsMenu.className = 'floatingMenu';
   settingsMenu.style.display = 'none';
 
   document.body.appendChild(settingsMenu);
 
-  settingsButton.onclick = function() {
-
-    if (showingSettings) {
-      return;
-    }
-
-    showingSettings = true;
-    settingsMenu.style.display = 'block';
-
-  }
-
-  setDraggable(settingsMenu, settingsMenuLabel);
+  setDraggable(settingsMenu, settingsMenuHeader);
 
   tabsDiv = document.createElement('div');
   settingsMenu.appendChild(tabsDiv);

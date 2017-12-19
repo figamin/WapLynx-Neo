@@ -239,7 +239,7 @@ function setCell(thread) {
   var cell = document.createElement('div');
 
   cell.innerHTML = catalogCellTemplate;
-  cell.setAttribute('class', 'catalogCell');
+  cell.className = 'catalogCell';
 
   setCellThumb(cell.getElementsByClassName('linkThumb')[0], thread);
 

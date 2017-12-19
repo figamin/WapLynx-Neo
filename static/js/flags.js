@@ -74,15 +74,15 @@ function addSelectedFlag(file) {
   var selectedDiv = document.getElementById('selectedDiv');
 
   var cell = document.createElement('div');
-  cell.setAttribute('class', 'selectedCell');
+  cell.className = 'selectedCell';
 
   var removeButton = document.createElement('div');
-  removeButton.setAttribute('class', 'removeButton');
+  removeButton.className = 'removeButton';
   removeButton.innerHTML = '✖';
   cell.appendChild(removeButton);
 
   var nameField = document.createElement('input');
-  nameField.setAttribute('class', 'nameField');
+  nameField.className = 'nameField';
   nameField.type = 'text';
   nameField.value = file.name.substring(0, file.name.lastIndexOf('.'));
   cell.appendChild(nameField);
@@ -90,7 +90,7 @@ function addSelectedFlag(file) {
   cell.appendChild(document.createElement('br'));
 
   var dndThumb = document.createElement('img');
-  dndThumb.setAttribute('class', 'dragAndDropThumb');
+  dndThumb.className = 'dragAndDropThumb';
   cell.appendChild(dndThumb);
 
   removeButton.onclick = function() {

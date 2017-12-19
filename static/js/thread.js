@@ -228,7 +228,7 @@ function markPost(id) {
   }
 
   if (markedPosting && markedPosting.className === 'markedPost') {
-    markedPosting.setAttribute('class', 'innerPost');
+    markedPosting.className = 'innerPost';
   }
 
   var container = document.getElementById(id);
@@ -240,7 +240,7 @@ function markPost(id) {
   markedPosting = container.getElementsByClassName('innerPost')[0];
 
   if (markedPosting) {
-    markedPosting.setAttribute('class', 'markedPost');
+    markedPosting.className = 'markedPost';
   }
 }
 
@@ -412,7 +412,7 @@ function setUploadLinks(cell, file) {
 function getUploadCellBase() {
   var cell = document.createElement('div');
   cell.innerHTML = uploadCell;
-  cell.setAttribute('class', 'uploadCell');
+  cell.className = 'uploadCell';
 
   return cell;
 }
@@ -590,7 +590,7 @@ function addPost(post) {
   postCell.innerHTML = postCellTemplate;
 
   postCell.id = post.postId;
-  postCell.setAttribute('class', 'postCell');
+  postCell.className = 'postCell';
 
   if (post.files && post.files.length > 1) {
     postCell.className += ' multipleUploads';

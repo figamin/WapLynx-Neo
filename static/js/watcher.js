@@ -22,7 +22,7 @@ if (!DISABLE_JS) {
   var watcherButton = document.createElement('a');
   watcherButton.innerHTML = 'watched threads';
   watcherButton.id = 'watcherButton';
-  watcherButton.setAttribute('class', 'coloredIcon');
+  watcherButton.className = 'coloredIcon';
 
   var watcherCounter = document.createElement('span');
 
@@ -41,7 +41,7 @@ if (!DISABLE_JS) {
 
   var closeWatcherMenuButton = document.createElement('span');
   closeWatcherMenuButton.id = 'closeWatcherMenuButton';
-  closeWatcherMenuButton.setAttribute('class', 'coloredIcon');
+  closeWatcherMenuButton.className = 'coloredIcon';
   closeWatcherMenuButton.onclick = function() {
 
     if (!showingWatched) {
@@ -58,7 +58,7 @@ if (!DISABLE_JS) {
   watchedMenu.appendChild(document.createElement('hr'));
 
   watchedMenu.id = 'watchedMenu';
-  watchedMenu.setAttribute('class', 'floatingMenu');
+  watchedMenu.className = 'floatingMenu';
   watchedMenu.style.display = 'none';
 
   document.body.appendChild(watchedMenu);
@@ -248,10 +248,10 @@ function addWatchedCell(board, thread, watchData) {
   var cellWrapper = document.createElement('div');
 
   var cell = document.createElement('div');
-  cell.setAttribute('class', 'watchedCell');
+  cell.className = 'watchedCell';
 
   var labelWrapper = document.createElement('label');
-  labelWrapper.setAttribute('class', 'watchedCellLabel');
+  labelWrapper.className = 'watchedCellLabel';
 
   var label = document.createElement('a');
   label.innerHTML = watchData.label || (board + '/' + thread);
@@ -259,7 +259,7 @@ function addWatchedCell(board, thread, watchData) {
   labelWrapper.appendChild(label);
 
   var notification = document.createElement('span');
-  notification.setAttribute('class', 'watchedNotification');
+  notification.className = 'watchedNotification';
 
   if (!elementRelation[board]) {
     elementRelation[board] = {};
@@ -278,7 +278,7 @@ function addWatchedCell(board, thread, watchData) {
   cell.appendChild(labelWrapper);
 
   var button = document.createElement('span');
-  button.setAttribute('class', 'watchedCellCloseButton coloredIcon');
+  button.className = 'watchedCellCloseButton coloredIcon';
   cell.appendChild(button);
 
   button.onclick = function() {
@@ -315,7 +315,7 @@ function processOP(op) {
   var thread = nameParts[1];
 
   var watchButton = document.createElement('span');
-  watchButton.setAttribute('class', 'watchButton coloredIcon');
+  watchButton.className = 'watchButton coloredIcon';
   watchButton.title = "Watch Thread";
 
   checkBox.parentNode.insertBefore(watchButton,

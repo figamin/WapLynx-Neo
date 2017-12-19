@@ -1,30 +1,30 @@
 function getCaptchaModal(header, noCaptcha) {
 
   var outerPanel = document.createElement('div');
-  outerPanel.setAttribute('class', 'modalPanel');
+  outerPanel.className = 'modalPanel';
   document.body.appendChild(outerPanel);
 
   var innerPanel = document.createElement('div');
-  innerPanel.setAttribute('class', 'modalInnerPanel');
+  innerPanel.className = 'modalInnerPanel';
   outerPanel.appendChild(innerPanel);
 
   var decorationPanel = document.createElement('div');
-  decorationPanel.setAttribute('class', 'modalDecorationPanel');
+  decorationPanel.className = 'modalDecorationPanel';
   innerPanel.appendChild(decorationPanel);
 
   var topLabel = document.createElement('span');
-  topLabel.setAttribute('class', 'modalHeader');
+  topLabel.className = 'modalHeader';
   topLabel.innerHTML = header;
   decorationPanel.appendChild(topLabel);
 
   if (!noCaptcha) {
     var captchaImage = document.createElement('img');
     captchaImage.src = '/captcha.js?d=' + new Date().toString();
-    captchaImage.setAttribute('class', 'captchaImage');
+    captchaImage.className = 'captchaImage';
     decorationPanel.appendChild(captchaImage);
 
     var captchaControls = document.createElement('span');
-    captchaControls.setAttribute('class', 'modalCaptchaControls');
+    captchaControls.className = 'modalCaptchaControls';
     decorationPanel.appendChild(captchaControls);
 
     var reloadButton = document.createElement('input');
@@ -36,13 +36,13 @@ function getCaptchaModal(header, noCaptcha) {
     captchaControls.appendChild(reloadButton);
 
     var reloadTimer = document.createElement('span');
-    reloadTimer.setAttribute('class', 'captchaTimer');
+    reloadTimer.className = 'captchaTimer';
     captchaControls.appendChild(reloadTimer);
 
     var captchaField = document.createElement('input');
     captchaField.type = 'text';
     captchaField.setAttribute('placeHolder', 'answer');
-    captchaField.setAttribute('class', 'modalAnswer');
+    captchaField.className = 'modalAnswer';
     decorationPanel.appendChild(captchaField);
   }
 
@@ -51,7 +51,7 @@ function getCaptchaModal(header, noCaptcha) {
 
   var okButton = document.createElement('input');
   okButton.type = 'button';
-  okButton.setAttribute('class', 'modalOkButton');
+  okButton.className = 'modalOkButton';
   okButton.value = 'Ok';
   responseButtonsPanel.appendChild(okButton);
 

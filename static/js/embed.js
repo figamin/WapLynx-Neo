@@ -45,7 +45,7 @@ function processLinkForEmbed(link) {
   var embedButton = document.createElement('span');
 
   embedButton.innerHTML = '[Embed]';
-  embedButton.setAttribute('class', 'embedButton');
+  embedButton.className = 'embedButton';
 
   embedButton.onclick = function() {
 

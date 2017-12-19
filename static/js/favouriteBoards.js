@@ -59,7 +59,7 @@ if (!DISABLE_JS) {
     boardLabel.parentNode.appendChild(favouriteButton);
 
     if (favouriteBoards.indexOf(boardUri) > -1) {
-      favouriteButton.setAttribute('class', 'checkedFavouriteButton');
+      favouriteButton.className = 'checkedFavouriteButton';
     }
 
     favouriteButton.onclick = function() {
@@ -73,7 +73,7 @@ if (!DISABLE_JS) {
       } else {
         favouriteBoards.push(boardUri);
         favouriteBoards.sort();
-        favouriteButton.setAttribute('class', 'checkedFavouriteButton');
+        favouriteButton.className = 'checkedFavouriteButton';
       }
 
       localStorage.setItem('favouriteBoards', JSON.stringify(favouriteBoards));
