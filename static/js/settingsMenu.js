@@ -4,7 +4,25 @@ var menuContentPanel;
 var tabsDiv;
 var existingFiltersDiv;
 
-var filterTypes = [ 'Name', 'Tripcode', 'Subject', 'Message' ];
+var loadedFilters = JSON.parse(localStorage.filterData || '[]');
+
+var filterTypes = [ {
+  label : 'Name'
+}, {
+  label : 'Tripcode'
+}, {
+  label : 'Subject'
+}, {
+  label : 'Message'
+}
+
+];
+
+function checkFilters() {
+
+  
+
+}
 
 function selectSettingsPanel(tab, panel) {
 
@@ -83,7 +101,7 @@ function addFilterDisplay(filter) {
   existingFiltersDiv.appendChild(cellWrapper);
 
   var filterTypeLabel = document.createElement('span');
-  filterTypeLabel.innerHTML = filterTypes[filter.type];
+  filterTypeLabel.innerHTML = filterTypes[filter.type].label;
   filterTypeLabel.className = 'existingFilterTypeLabel';
   filterCell.appendChild(filterTypeLabel);
 
@@ -102,20 +120,11 @@ function addFilterDisplay(filter) {
 
   button.onclick = function() {
 
-    for (var i = 0; i < existingFiltersDiv.children.length; i++) {
-      if (existingFiltersDiv.children[i] === cellWrapper) {
+    loadedFilters.splice(loadedFilters.indexOf(filter), 1);
 
-        var savedFilters = JSON.parse(localStorage.filterData || '[]');
+    localStorage.filterData = JSON.stringify(loadedFilters);
 
-        savedFilters.splice(i, 1);
-
-        localStorage.filterData = JSON.stringify(savedFilters);
-
-        cellWrapper.remove();
-
-        return;
-      }
-    }
+    cellWrapper.remove();
 
   };
 
@@ -137,7 +146,7 @@ function getFiltersContent() {
 
   for (var i = 0; i < filterTypes.length; i++) {
     var option = document.createElement('option');
-    option.innerHTML = filterTypes[i];
+    option.innerHTML = filterTypes[i].label;
     newFilterTypeCombo.appendChild(option);
   }
   newFilterPanel.appendChild(newFilterTypeCombo);
@@ -174,11 +183,9 @@ function getFiltersContent() {
 
     addFilterDisplay(newFilterData);
 
-    var savedFilters = JSON.parse(localStorage.filterData || '[]');
+    loadedFilters.push(newFilterData);
 
-    savedFilters.push(newFilterData);
-
-    localStorage.setItem('filterData', JSON.stringify(savedFilters));
+    localStorage.setItem('filterData', JSON.stringify(loadedFilters));
 
   };
   newFilterPanel.appendChild(newFilterButton);
@@ -197,12 +204,11 @@ function getFiltersContent() {
   existingFiltersLabelsPanel.appendChild(labelContent);
 
   existingFiltersDiv = document.createElement('div');
+  existingFiltersDiv.id = 'existingFiltersPanel';
   filtersPanel.appendChild(existingFiltersDiv);
 
-  var currentFilters = JSON.parse(localStorage.filterData || '[]');
-
-  for (var i = 0; i < currentFilters.length; i++) {
-    addFilterDisplay(currentFilters[i]);
+  for (var i = 0; i < loadedFilters.length; i++) {
+    addFilterDisplay(loadedFilters[i]);
   }
 
   return filtersPanel;

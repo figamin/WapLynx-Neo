@@ -46,3 +46,9 @@
   width: 75%;
   display: inline-block;
 }
+
+#existingFiltersPanel {
+  overflow: hidden;
+  overflow-y: auto;
+  height: 20em;
+}
