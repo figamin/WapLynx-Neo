@@ -6,23 +6,7 @@ var existingFiltersDiv;
 
 var loadedFilters = JSON.parse(localStorage.filterData || '[]');
 
-var filterTypes = [ {
-  label : 'Name'
-}, {
-  label : 'Tripcode'
-}, {
-  label : 'Subject'
-}, {
-  label : 'Message'
-}
-
-];
-
-function checkFilters() {
-
-  
-
-}
+var filterTypes = [ 'Name', 'Tripcode', 'Subject', 'Message' ];
 
 function selectSettingsPanel(tab, panel) {
 
@@ -101,7 +85,7 @@ function addFilterDisplay(filter) {
   existingFiltersDiv.appendChild(cellWrapper);
 
   var filterTypeLabel = document.createElement('span');
-  filterTypeLabel.innerHTML = filterTypes[filter.type].label;
+  filterTypeLabel.innerHTML = filterTypes[filter.type];
   filterTypeLabel.className = 'existingFilterTypeLabel';
   filterCell.appendChild(filterTypeLabel);
 
@@ -123,6 +107,8 @@ function addFilterDisplay(filter) {
     loadedFilters.splice(loadedFilters.indexOf(filter), 1);
 
     localStorage.filterData = JSON.stringify(loadedFilters);
+
+    checkFilters();
 
     cellWrapper.remove();
 
@@ -146,7 +132,7 @@ function getFiltersContent() {
 
   for (var i = 0; i < filterTypes.length; i++) {
     var option = document.createElement('option');
-    option.innerHTML = filterTypes[i].label;
+    option.innerHTML = filterTypes[i];
     newFilterTypeCombo.appendChild(option);
   }
   newFilterPanel.appendChild(newFilterTypeCombo);
@@ -186,6 +172,8 @@ function getFiltersContent() {
     loadedFilters.push(newFilterData);
 
     localStorage.setItem('filterData', JSON.stringify(loadedFilters));
+
+    checkFilters();
 
   };
   newFilterPanel.appendChild(newFilterButton);
