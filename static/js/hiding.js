@@ -243,6 +243,8 @@ function setHideMenu(checkbox) {
 
   }
 
+  checkFilterHiding(checkbox);
+
   var storedHidingData = localStorage.hidingData;
 
   if (!storedHidingData) {
@@ -282,7 +284,6 @@ if (!DISABLE_JS) {
 
   for (var i = 0; i < checkboxes.length; i++) {
     setHideMenu(checkboxes[i]);
-    checkFilterHiding(checkboxes[i]);
   }
 
 }
