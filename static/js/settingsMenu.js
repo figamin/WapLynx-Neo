@@ -119,6 +119,23 @@ function addFilterDisplay(filter) {
 
 }
 
+function createFilter(content, regex, type) {
+
+  var newFilterData = {
+    filter : content,
+    regex : regex,
+    type : type
+  };
+
+  addFilterDisplay(newFilterData);
+
+  loadedFilters.push(newFilterData);
+
+  localStorage.setItem('filterData', JSON.stringify(loadedFilters));
+
+  checkFilters();
+}
+
 function getFiltersContent() {
 
   var filtersPanel = document.createElement('div');
@@ -161,19 +178,8 @@ function getFiltersContent() {
       return;
     }
 
-    var newFilterData = {
-      filter : filterContent,
-      regex : newFilterRegex.checked,
-      type : newFilterTypeCombo.selectedIndex
-    };
-
-    addFilterDisplay(newFilterData);
-
-    loadedFilters.push(newFilterData);
-
-    localStorage.setItem('filterData', JSON.stringify(loadedFilters));
-
-    checkFilters();
+    createFilter(filterContent, newFilterRegex.checked,
+        newFilterTypeCombo.selectedIndex);
 
   };
   newFilterPanel.appendChild(newFilterButton);
