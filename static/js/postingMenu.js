@@ -520,36 +520,6 @@ function setExtraMenu(checkbox) {
     shownPostingMenu = extraMenu;
   };
 
-  var name = checkbox.parentNode.getElementsByClassName('linkName')[0].innerHTML;
-
-  var trip;
-
-  if (name.indexOf('#') >= 0) {
-    trip = name.substring(name.lastIndexOf('#') + 1);
-    name = name.substring(0, name.indexOf('#'));
-  }
-
-  var filterNameButton = document.createElement('label');
-  filterNameButton.innerHTML = 'Filter name';
-  filterNameButton.onclick = function() {
-    createFilter(name, false, 0);
-  };
-  extraMenu.appendChild(filterNameButton);
-
-  extraMenu.appendChild(document.createElement('hr'));
-
-  if (trip) {
-
-    var filterTripButton = document.createElement('label');
-    filterTripButton.innerHTML = 'Filter tripcode';
-    filterTripButton.onclick = function() {
-      createFilter(trip, false, 1);
-    };
-    extraMenu.appendChild(filterTripButton);
-
-    extraMenu.appendChild(document.createElement('hr'));
-  }
-
   var reportButton = document.createElement('label');
   reportButton.innerHTML = 'Report';
   reportButton.onclick = function() {

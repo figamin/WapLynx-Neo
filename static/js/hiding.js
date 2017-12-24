@@ -171,6 +171,38 @@ function setHideMenu(checkbox) {
 
   }
 
+  hideMenu.appendChild(document.createElement('hr'));
+
+  var name = checkbox.parentNode.getElementsByClassName('linkName')[0].innerHTML;
+
+  var trip;
+
+  if (name.indexOf('#') >= 0) {
+    trip = name.substring(name.lastIndexOf('#') + 1);
+    name = name.substring(0, name.indexOf('#'));
+  }
+
+  var filterNameButton = document.createElement('label');
+  filterNameButton.innerHTML = 'Filter name';
+  filterNameButton.onclick = function() {
+    createFilter(name, false, 0);
+  };
+  hideMenu.appendChild(filterNameButton);
+
+  hideMenu.appendChild(document.createElement('hr'));
+
+  if (trip) {
+
+    var filterTripButton = document.createElement('label');
+    filterTripButton.innerHTML = 'Filter tripcode';
+    filterTripButton.onclick = function() {
+      createFilter(trip, false, 1);
+    };
+    hideMenu.appendChild(filterTripButton);
+
+    hideMenu.appendChild(document.createElement('hr'));
+  }
+
   document.body.appendChild(hideMenu);
 
   hideButton.onclick = function() {
