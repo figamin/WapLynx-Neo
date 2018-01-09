@@ -9,6 +9,11 @@
   float: right;
 }
 
+#cssInput {
+  width: 24em;
+  height: 12em;
+}
+
 #closeSettingsMenuButton::before, .filterDeleteButton::before {
   content: '\e0db';
 }

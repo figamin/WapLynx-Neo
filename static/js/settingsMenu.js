@@ -209,6 +209,45 @@ function getFiltersContent() {
 
 }
 
+function getCSSContent() {
+
+  var savedCSS = localStorage.customCSS;
+
+  if (savedCSS) {
+
+    var head = document.getElementsByTagName('head')[0];
+
+    var newCSS = document.createElement('style');
+    newCSS.innerHTML = savedCSS;
+
+    head.appendChild(newCSS);
+
+  }
+
+  var cssPanel = document.createElement('div');
+
+  var cssArea = document.createElement('textarea');
+  cssPanel.appendChild(cssArea);
+  if (savedCSS) {
+    cssArea.value = savedCSS;
+  }
+  cssArea.id = 'cssInput';
+
+  var bottomDiv = document.createElement('div');
+  cssPanel.appendChild(bottomDiv);
+
+  var saveButton = document.createElement('button');
+  saveButton.innerHTML = 'Save';
+  bottomDiv.appendChild(saveButton);
+
+  saveButton.onclick = function() {
+    localStorage.customCSS = cssArea.value.trim();
+  };
+
+  return cssPanel;
+
+}
+
 if (!DISABLE_JS) {
 
   var settingsMenu = document.createElement('div');
@@ -260,5 +299,7 @@ if (!DISABLE_JS) {
   settingsMenu.appendChild(menuContentPanel);
 
   registerTab('Filters', getFiltersContent(), true);
+
+  registerTab('CSS', getCSSContent());
 
 }
