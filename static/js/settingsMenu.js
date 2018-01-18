@@ -213,15 +213,14 @@ function getCSSContent() {
 
   var savedCSS = localStorage.customCSS;
 
+  var head = document.getElementsByTagName('head')[0];
+
+  var newCSS = document.createElement('style');
+
+  head.appendChild(newCSS);
+
   if (savedCSS) {
-
-    var head = document.getElementsByTagName('head')[0];
-
-    var newCSS = document.createElement('style');
     newCSS.innerHTML = savedCSS;
-
-    head.appendChild(newCSS);
-
   }
 
   var cssPanel = document.createElement('div');
@@ -241,10 +240,48 @@ function getCSSContent() {
   bottomDiv.appendChild(saveButton);
 
   saveButton.onclick = function() {
-    localStorage.customCSS = cssArea.value.trim();
+    newCSS.innerHTML = cssArea.value.trim();
+    localStorage.customCSS = newCSS.innerHTML;
   };
 
   return cssPanel;
+
+}
+
+function getJSContent() {
+
+  var savedJS = localStorage.customJS;
+
+  if (savedJS) {
+    var head = document.getElementsByTagName('head')[0];
+
+    var newJS = document.createElement('script');
+
+    head.appendChild(newJS);
+    newJS.innerHTML = savedJS;
+  }
+
+  var jsPanel = document.createElement('div');
+
+  var jsArea = document.createElement('textarea');
+  jsPanel.appendChild(jsArea);
+  if (savedJS) {
+    jsArea.value = savedJS;
+  }
+  jsArea.id = 'jsInput';
+
+  var bottomDiv = document.createElement('div');
+  jsPanel.appendChild(bottomDiv);
+
+  var saveButton = document.createElement('button');
+  saveButton.innerHTML = 'Save';
+  bottomDiv.appendChild(saveButton);
+
+  saveButton.onclick = function() {
+    localStorage.customJS = jsArea.value.trim();
+  };
+
+  return jsPanel;
 
 }
 
@@ -301,5 +338,6 @@ if (!DISABLE_JS) {
   registerTab('Filters', getFiltersContent(), true);
 
   registerTab('CSS', getCSSContent());
+  registerTab('JS', getJSContent());
 
 }

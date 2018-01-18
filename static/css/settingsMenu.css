@@ -9,7 +9,7 @@
   float: right;
 }
 
-#cssInput {
+#cssInput, #jsInput {
   width: 24em;
   height: 12em;
 }
