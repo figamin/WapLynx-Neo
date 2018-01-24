@@ -8,7 +8,6 @@ var themes = [ {
   id : 'jungle'
 } ];
 
-var customCss;
 var addedTheme;
 
 function updateCss() {
@@ -23,25 +22,13 @@ function updateCss() {
 
     if (theme.id === localStorage.selectedTheme) {
       addedTheme = theme.element;
-      document.head.insertBefore(theme.element, customCss);
+      document.head.appendChild(theme.element);
     }
   }
 
 }
 
 if (!DISABLE_JS) {
-
-  for (var i = 0; i < document.head.children.length; i++) {
-    var element = document.head.children[i];
-
-    if (element.rel === 'stylesheet'
-        && element.href.indexOf('/custom.css') > -1) {
-
-      customCss = element;
-      break;
-    }
-
-  }
 
   for (var i = 0; i < themes.length; i++) {
     themes[i].element = document.createElement('link');
