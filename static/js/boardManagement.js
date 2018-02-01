@@ -306,6 +306,7 @@ function saveSettings() {
         maxFileSizeMB : typedFileSize,
         acceptedMimes : typedTypedMimes,
         maxFiles : typedFileLimit,
+        maxBumpAge : typedMaxBumpAge
       }, function requestComplete(status, data) {
 
         if (status === 'ok') {
