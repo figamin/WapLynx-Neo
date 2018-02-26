@@ -143,6 +143,7 @@ header {
 }
 
 nav {
+  height: 18px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -152,6 +153,7 @@ nav {
   font-size: 70%;
   text-align: center;
   z-index: 1;
+  position: fixed;
 }
 
 nav span, nav a {

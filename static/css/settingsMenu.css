@@ -14,7 +14,8 @@
   height: 12em;
 }
 
-#closeSettingsMenuButton::before, .filterDeleteButton::before {
+#closeSettingsMenuButton::before, .filterDeleteButton::before,
+  #closeSideCatalogButton::before {
   content: '\e0db';
 }
 

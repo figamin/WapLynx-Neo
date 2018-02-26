@@ -1,0 +1,26 @@
+#mainPanel, #sideCatalog {
+  overflow-y: auto;
+  height: calc(100vh - 22px);
+  margin-top: 22px;
+}
+
+#sideCatalog {
+  float: right;
+  padding: 0 10px 0 10px;
+  min-width: 150px;
+  margin-top: 0;
+}
+
+header {
+  margin-top: 36px;
+}
+
+#closeSideCatalogButton {
+  display: table-cell;
+  text-align: right;
+}
+
+#sideCatalogHeader {
+  display: table;
+  width: 100%;
+}
