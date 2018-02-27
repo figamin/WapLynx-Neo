@@ -4,11 +4,19 @@
   margin-top: 22px;
 }
 
+#navSideCatalog:before {
+  content: "\e088";
+}
+
 #sideCatalog {
   float: right;
   padding: 0 10px 0 10px;
-  min-width: 150px;
+  min-width: 300px;
   margin-top: 0;
+}
+
+#sideCatalogBody hr {
+  clear: both;
 }
 
 header {
@@ -23,4 +31,25 @@ header {
 #sideCatalogHeader {
   display: table;
   width: 100%;
+}
+
+#sideCatalogBody a {
+  display: block;
+  cursor: pointer;
+}
+
+#sideCatalogBody img {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  max-width: 125px;
+  max-height: 125px;
+}
+
+.sideCatalogCellText {
+  vertical-align: top;
+}
+
+.sideCatalogCellText span {
+  display: block;
 }

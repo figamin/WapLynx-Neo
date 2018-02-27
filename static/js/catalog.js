@@ -206,10 +206,6 @@ function checkForFileHiding(child) {
   }
 }
 
-function removeElement(element) {
-  element.parentNode.removeChild(element);
-}
-
 function setCellThumb(thumbLink, thread) {
   thumbLink.href = '/' + boardUri + '/res/' + thread.threadId + '.html';
 
@@ -228,7 +224,7 @@ function setCatalogCellIndicators(thread, cell) {
 
   for ( var key in indicatorsRelation) {
     if (!thread[key]) {
-      removeElement(cell.getElementsByClassName(indicatorsRelation[key])[0]);
+      cell.getElementsByClassName(indicatorsRelation[key])[0].remove();
     }
   }
 

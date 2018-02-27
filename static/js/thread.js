@@ -4,8 +4,7 @@ var board = false;
 var replyButton;
 var fullRefresh = false;
 var refreshButton;
-var lastReplyId = 0;
-var lastRefreshWaiting = 0;
+var lastReplyId;
 var refreshLabel;
 var autoRefresh;
 var refreshTimer;
@@ -18,11 +17,12 @@ var markedPosting;
 var limitRefreshWait = 10 * 60;
 var originalButtonText;
 var messageLimit;
-var unreadPosts = 0;
-var originalTitle = document.title;
+var unreadPosts;
+var originalTitle;
 var lastPost;
-var highLightedIds = [];
-var idsRelation = {};
+var highLightedIds;
+var idsRelation;
+var refreshURL;
 
 var reverseHTMLReplaceTable = {
   '&lt;' : '<',
@@ -32,7 +32,7 @@ var reverseHTMLReplaceTable = {
 var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
     + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
     + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
-    + '</span> <span class="labelCreated"></span> <span class="spanId"> Id: <span '
+    + '</span> <span class="labelCreated"></span> <span class="spanId"> Id:<span '
     + 'class="labelId"></span></span> <a class="linkPreview">[Preview]</a> <a '
     + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
     + '</span></div>'
@@ -55,6 +55,20 @@ var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
 
 var guiEditInfo = 'Edited last time by {$login} on {$date}.';
 
+function initThread() {
+
+  lastReplyId = 0;
+  originalTitle = document.title;
+  highLightedIds = [];
+  idsRelation = {};
+  unreadPosts = 0;
+  threadId = +document.getElementsByClassName('opCell')[0].id;
+  refreshURL = document.getElementById('divMod') ? '/mod.js?boardUri='
+      + boardUri + '&threadId=' + threadId + '&json=1' : '/' + boardUri
+      + '/res/' + threadId + '.json';
+
+}
+
 if (!DISABLE_JS) {
 
   document.onscroll = function() {
@@ -76,18 +90,14 @@ if (!DISABLE_JS) {
   boardUri = document.getElementById('boardIdentifier').value;
   var divPosts = document.getElementsByClassName('divPosts')[0];
 
+  initThread();
+
   document.getElementsByClassName('divRefresh')[0].style.display = 'block';
 
   messageLimit = +document.getElementById('labelMessageLength').innerHTML;
   refreshLabel = document.getElementById('labelRefresh');
 
   refreshButton = document.getElementById('refreshButton');
-
-  threadId = document.getElementsByClassName('opCell')[0].id;
-
-  var refreshURL = document.getElementById('divMod') ? '/mod.js?boardUri='
-      + boardUri + '&threadId=' + threadId + '&json=1' : '/' + boardUri
-      + '/res/' + threadId + '.json';
 
   if (document.getElementById('controlThreadIdentifier')) {
     document.getElementById('settingsJsButon').style.display = 'inline';
@@ -364,10 +374,6 @@ function formatFileSize(size) {
 
 }
 
-function removeElement(element) {
-  element.parentNode.removeChild(element);
-}
-
 function setLastEditedLabel(post, cell) {
 
   var editedLabel = cell.getElementsByClassName('labelLastEdit')[0];
@@ -380,7 +386,7 @@ function setLastEditedLabel(post, cell) {
         .replace('{$login}', post.lastEditLogin);
 
   } else {
-    removeElement(editedLabel);
+    editedLabel.remove();
   }
 
 }
@@ -438,13 +444,13 @@ function setUploadCell(node, files) {
     if (file.width) {
       dimensionLabel.innerHTML = file.width + 'x' + file.height;
     } else {
-      removeElement(dimensionLabel);
+      dimensionLabel.remove();
     }
 
     if (file.md5) {
       cell.getElementsByClassName('labelHash')[0].innerHTML = file.md5;
     } else {
-      removeElement(cell.getElementsByClassName('divHash')[0]);
+      cell.getElementsByClassName('divHash')[0].remove();
     }
 
     node.appendChild(cell);
@@ -457,7 +463,7 @@ function setPostHideableElements(postCell, post) {
   if (post.subject) {
     subjectLabel.innerHTML = post.subject;
   } else {
-    removeElement(subjectLabel);
+    subjectLabel.remove();
   }
 
   if (post.id) {
@@ -469,7 +475,7 @@ function setPostHideableElements(postCell, post) {
 
   } else {
     var spanId = postCell.getElementsByClassName('spanId')[0];
-    spanId.parentNode.removeChild(spanId);
+    spanId.remove();
   }
 
   var banMessageLabel = postCell.getElementsByClassName('divBanMessage')[0];
@@ -494,17 +500,17 @@ function setPostHideableElements(postCell, post) {
       imgFlag.className += ' flag' + post.flagCode;
     }
   } else {
-    removeElement(imgFlag);
+    imgFlag.remove();
   }
 
   if (!post.ip) {
-    removeElement(postCell.getElementsByClassName('panelIp')[0]);
+    postCell.getElementsByClassName('panelIp')[0].remove();
   } else {
 
     postCell.getElementsByClassName('labelIp')[0].innerHTML = post.ip;
 
     if (!post.broadRange) {
-      removeElement(postCell.getElementsByClassName('panelRange')[0]);
+      postCell.getElementsByClassName('panelRange')[0].remove();
     } else {
 
       postCell.getElementsByClassName('labelBroadRange')[0].innerHTML = post.broadRange;
@@ -518,14 +524,20 @@ function setPostHideableElements(postCell, post) {
 
 function setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
     deletionCheckbox) {
-  var linkStart = '/' + boardUri + '/res/' + threadId + '.html#';
-  link.href = linkStart + post.postId;
-  linkQuote.href = linkStart + 'q' + post.postId;
+  var linkStart = '/' + boardUri + '/res/' + threadId + '.html';
+
+  linkQuote.href = linkStart;
+
+  if (post.postId) {
+    link.href = '#' + linkStart + post.postId;
+    linkQuote += 'q' + post.postId;
+  }
 
   var checkboxName = boardUri + '-' + threadId + '-' + post.postId;
   deletionCheckbox.setAttribute('name', checkboxName);
 
-  var linkPreview = '/' + boardUri + '/preview/' + post.postId + '.html';
+  var linkPreview = '/' + boardUri + '/preview/' + (post.postId || threadId)
+      + '.html';
 
   postCell.getElementsByClassName('linkPreview')[0].href = linkPreview;
 }
@@ -547,7 +559,7 @@ function setPostComplexElements(postCell, post, boardUri, threadId) {
   var link = postCell.getElementsByClassName('linkSelf')[0];
 
   var linkQuote = postCell.getElementsByClassName('linkQuote')[0];
-  linkQuote.innerHTML = post.postId;
+  linkQuote.innerHTML = post.postId || threadId;
 
   var deletionCheckbox = postCell.getElementsByClassName('deletionCheckBox')[0];
 

@@ -117,7 +117,8 @@
 }
 
 #divLatestImages img {
-  max-width: 100%;
+  max-width: 125px;
+  max-height: 125px;
   padding: 5px;
   background: #282A2E;
   border-radius: 5px;
