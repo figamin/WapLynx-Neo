@@ -57,6 +57,7 @@ var guiEditInfo = 'Edited last time by {$login} on {$date}.';
 
 function initThread() {
 
+  lastPost = null;
   lastReplyId = 0;
   originalTitle = document.title;
   highLightedIds = [];
@@ -533,7 +534,8 @@ function setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
     linkQuote += 'q' + post.postId;
   }
 
-  var checkboxName = boardUri + '-' + threadId + '-' + post.postId;
+  var checkboxName = boardUri + '-' + threadId
+      + (post.postId ? '' : '-' + post.postId);
   deletionCheckbox.setAttribute('name', checkboxName);
 
   var linkPreview = '/' + boardUri + '/preview/' + (post.postId || threadId)
@@ -590,25 +592,6 @@ function setPostInnerElements(boardUri, threadId, post, postCell) {
   setPostHideableElements(postCell, post);
 
   setPostComplexElements(postCell, post, boardUri, threadId);
-}
-
-function addPost(post) {
-
-  if (!fullRefresh) {
-    unreadPosts++;
-  }
-
-  var postCell = document.createElement('div');
-  postCell.innerHTML = postCellTemplate;
-
-  postCell.id = post.postId;
-  postCell.className = 'postCell';
-
-  if (post.files && post.files.length > 1) {
-    postCell.className += ' multipleUploads';
-  }
-
-  setPostInnerElements(boardUri, threadId, post, postCell);
 
   var messageLinks = postCell.getElementsByClassName('divMessage')[0]
       .getElementsByTagName('a');
@@ -641,10 +624,6 @@ function addPost(post) {
     updateHiddenFiles(hiddenMedia[i], true);
   }
 
-  lastPost = postCell;
-
-  divPosts.appendChild(postCell);
-
   postCell.setAttribute('data-boarduri', boardUri);
 
   addToKnownPostsForBackLinks(postCell);
@@ -652,18 +631,38 @@ function addPost(post) {
   var quotes = postCell.getElementsByClassName('quoteLink');
 
   for (i = 0; i < quotes.length; i++) {
-    var quote = quotes[i];
-
-    processQuote(quote);
+    processQuote(quotes[i]);
   }
 
   var checkbox = postCell.getElementsByClassName('deletionCheckBox')[0];
 
   setHideMenu(checkbox);
-
   setExtraMenu(checkbox)
 
   processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
+}
+
+function addPost(post) {
+
+  if (!fullRefresh) {
+    unreadPosts++;
+  }
+
+  var postCell = document.createElement('div');
+  postCell.innerHTML = postCellTemplate;
+
+  postCell.id = post.postId;
+  postCell.className = 'postCell';
+
+  if (post.files && post.files.length > 1) {
+    postCell.className += ' multipleUploads';
+  }
+
+  divPosts.appendChild(postCell);
+
+  setPostInnerElements(boardUri, threadId, post, postCell);
+
+  lastPost = postCell;
 
 }
 

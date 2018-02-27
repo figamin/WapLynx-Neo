@@ -91,6 +91,8 @@ function loadThread(thread) {
 
         var opCell = document.getElementsByClassName('opCell')[0];
 
+        document.getElementsByClassName('divPosts')[0].innerHTML = '';
+
         data = JSON.parse(data);
 
         opCell.id = thread.threadId;
@@ -190,13 +192,9 @@ function loadThread(thread) {
 
         document.getElementsByClassName('opUploadPanel')[0].innerHTML = '';
 
-        setPostInnerElements(boardUri, threadId, data, opCell);
-
         document.getElementsByClassName('opHead')[0]
             .getElementsByClassName('deletionCheckBox')[0].value = boardUri
             + '-' + thread.threadId;
-
-        document.getElementsByClassName('divPosts')[0].innerHTML = '';
 
         removeAllFromClass('extraMenuButton');
         removeAllFromClass('hideMenu');
@@ -211,9 +209,9 @@ function loadThread(thread) {
 
         initThread();
 
-        setHideMenu(document.getElementsByClassName('deletionCheckBox')[0]);
+        setPostInnerElements(boardUri, threadId, data, opCell);
+
         processOP(document.getElementsByClassName('innerOP')[0]);
-        setExtraMenu(document.getElementsByClassName('deletionCheckBox')[0]);
 
         if (data.posts && data.posts.length) {
 
