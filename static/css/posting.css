@@ -64,7 +64,7 @@
 }
 
 .markedPost {
-  background: rgba(59, 22, 43, 0.4) !important;
+  background: rgba(59, 22, 43, 0.4);
 }
 
 .linkName {

@@ -103,12 +103,12 @@ function loadThread(cell, thread) {
         }
 
         if (selectedThreadCell) {
-          selectedThreadCell.className = '';
+          selectedThreadCell.className = 'sideCatalogCell';
         }
 
         selectedThreadCell = cell;
 
-        selectedThreadCell.className = 'markedPost';
+        selectedThreadCell.className = 'sideCatalogMarkedCell';
 
         knownPosts = {};
         window.history.pushState('', '',
@@ -324,8 +324,10 @@ function addSideCatalogThread(thread) {
   var cell = document.createElement('a');
 
   if (threadId === thread.threadId) {
-    cell.className = 'markedPost';
+    cell.className = 'sideCatalogMarkedCell';
     selectedThreadCell = cell;
+  } else {
+    cell.className = 'sideCatalogCell';
   }
 
   cell.onclick = function() {

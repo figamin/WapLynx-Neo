@@ -33,13 +33,17 @@ header {
   width: 100%;
 }
 
-#sideCatalogBody a {
+.sideCatalogCell, .sideCatalogMarkedCell {
   display: block;
   cursor: pointer;
   background: #282A2E;
   border: 1px solid #117743;
   border-radius: 5px;
   padding: 0.5em;
+}
+
+.sideCatalogMarkedCell {
+  background: rgba(59, 22, 43, 0.4);
 }
 
 #sideCatalogBody img {
