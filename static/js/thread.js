@@ -37,7 +37,7 @@ var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
     + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
     + '</span></div>'
     + '<div>'
-    + '<span class="panelIp"> <span class="panelRange"> Broad'
+    + '<span class="panelIp"> <span class="panelRange">Broad'
     + 'range(1/2 octets): <span class="labelBroadRange"> </span> <br>'
     + 'Narrow range(3/4 octets): <span class="labelNarrowRange"> </span> <br>'
     + '</span> Ip: <span class="labelIp"></span></span>'
@@ -143,7 +143,7 @@ if (!DISABLE_JS) {
   if (hash.indexOf('q') === 0 && hash.length > 1) {
     document.getElementById('fieldMessage').value = '>>' + hash.substring(1)
         + '\n';
-  } else if (hash.length > 1) {
+  } else if (hash.length > 0) {
     markPost(hash);
   }
 

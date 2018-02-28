@@ -64,7 +64,7 @@
 }
 
 .markedPost {
-  background: rgba(59, 22, 43, 0.4);
+  background: rgba(59, 22, 43, 0.4) !important;
 }
 
 .linkName {
@@ -176,10 +176,6 @@
 
 .opCell {
   clear: left;
-}
-
-.panelIp, .panelProxyIp {
-  margin: 0.25em 1em 0.25em 0.5em;
 }
 
 .panelBacklinks a {

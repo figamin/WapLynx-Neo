@@ -5,6 +5,7 @@ if (!DISABLE_JS) {
     '>' : '&gt;'
   };
 
+  var selectedThreadCell;
   var refreshingSideCatalog = false;
   var loadingThread = false;
   var sideCatalogBody = document.getElementById('sideCatalogBody');
@@ -58,7 +59,34 @@ function removeAllFromClass(className) {
 
 }
 
-function loadThread(thread) {
+function removeIndicator(className) {
+
+  var elements = document.getElementsByClassName(className);
+
+  if (!elements.length) {
+    return;
+  }
+
+  elements[0].nextSibling.remove();
+  elements[0].remove();
+
+}
+
+function addIndicator(className, title) {
+
+  var spanId = document.getElementsByClassName('spanId')[0];
+
+  var indicator = document.createElement('span');
+  indicator.className = className;
+  indicator.title = title;
+
+  spanId.parentNode.insertBefore(indicator, spanId.nextSibling);
+  spanId.parentNode.insertBefore(document.createTextNode(' '),
+      spanId.nextSibling);
+
+}
+
+function loadThread(cell, thread) {
 
   loadingThread = true;
 
@@ -71,19 +99,33 @@ function loadThread(thread) {
         loadingThread = false;
 
         if (error) {
-          console.log(error);
           return;
         }
 
+        if (selectedThreadCell) {
+          selectedThreadCell.className = '';
+        }
+
+        selectedThreadCell = cell;
+
+        selectedThreadCell.className = 'markedPost';
+
         knownPosts = {};
-        window.history.pushState('', '', '/' + boardUri + '/res/'
-            + thread.threadId + '.html');
+        window.history.pushState('', '',
+            document.getElementById('divMod') ? '/mod.js?boardUri=' + boardUri
+                + '&threadId=' + thread.threadId : '/' + boardUri + '/res/'
+                + thread.threadId + '.html');
 
         document.getElementById('threadIdentifier').value = thread.threadId;
 
         if (document.getElementById('divMod')) {
           document.getElementById('controlThreadIdentifier').value = thread.threadId;
           document.getElementById('transferThreadIdentifier').value = thread.threadId;
+
+          document.getElementById('checkboxLock').checked = thread.locked;
+          document.getElementById('checkboxPin').checked = thread.pinned;
+          document.getElementById('checkboxCyclic').checked = thread.cyclic;
+
         }
 
         document.title = '/' + boardUri + '/ - '
@@ -132,7 +174,31 @@ function loadThread(thread) {
 
           var newIpPanel = document.createElement('span');
           newIpPanel.className = 'panelIp';
-          newIpPanel.appendChild(document.createTextNode(' '));
+
+          var rangePanel = document.createElement('span');
+          rangePanel.className = 'panelRange';
+          rangePanel.innerHTML = 'Broad range(1/2 octets): '
+
+          var broadRangeLabel = document.createElement('span');
+          broadRangeLabel.className = 'labelBroadRange';
+
+          rangePanel.appendChild(broadRangeLabel);
+
+          rangePanel.appendChild(document.createElement('br'));
+
+          rangePanel.appendChild(document
+              .createTextNode('Narrow range(3/4 octets):'));
+
+          var narrowRangeLabel = document.createElement('span');
+          narrowRangeLabel.className = 'labelNarrowRange';
+
+          rangePanel.appendChild(narrowRangeLabel);
+
+          rangePanel.appendChild(document.createElement('br'));
+
+          newIpPanel.appendChild(rangePanel);
+
+          newIpPanel.appendChild(document.createTextNode('Ip:'));
 
           var newIpLabel = document.createElement('span');
           newIpLabel.className = 'labelIp';
@@ -182,6 +248,12 @@ function loadThread(thread) {
           var newSpanId = document.createElement('span');
           newSpanId.className = 'spanId';
 
+          newSpanId.innerHTML = 'Id:';
+
+          var newLabelId = document.createElement('span');
+          newLabelId.className = 'labelId';
+          newSpanId.appendChild(newLabelId);
+
           var labelCreated = document.getElementsByClassName('labelCreated')[0];
           labelCreated.parentNode.insertBefore(newSpanId,
               labelCreated.nextSibling);
@@ -202,6 +274,26 @@ function loadThread(thread) {
         removeAllFromClass('extraMenu');
         removeAllFromClass('hideButton');
         removeAllFromClass('watchButton');
+
+        removeIndicator('lockIndicator');
+        removeIndicator('pinIndicator');
+        removeIndicator('cyclicIndicator');
+
+        addIndicator('cyclicIndicator', 'Cyclical Thread');
+        addIndicator('pinIndicator', 'Sticky');
+        addIndicator('lockIndicator', 'Locked');
+
+        if (!thread.locked) {
+          removeIndicator('lockIndicator');
+        }
+
+        if (!thread.pinned) {
+          removeIndicator('pinIndicator');
+        }
+
+        if (!thread.cyclic) {
+          removeIndicator('cyclicIndicator');
+        }
 
         document.getElementsByClassName('panelBacklinks')[0].innerHTML = '';
 
@@ -231,13 +323,18 @@ function addSideCatalogThread(thread) {
 
   var cell = document.createElement('a');
 
+  if (threadId === thread.threadId) {
+    cell.className = 'markedPost';
+    selectedThreadCell = cell;
+  }
+
   cell.onclick = function() {
 
     if (loadingThread || thread.threadId === threadId) {
       return;
     }
 
-    loadThread(thread);
+    loadThread(cell, thread);
 
   };
 

@@ -36,6 +36,10 @@ header {
 #sideCatalogBody a {
   display: block;
   cursor: pointer;
+  background: #282A2E;
+  border: 1px solid #117743;
+  border-radius: 5px;
+  padding: 0.5em;
 }
 
 #sideCatalogBody img {

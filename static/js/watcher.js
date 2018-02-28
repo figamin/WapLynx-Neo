@@ -319,7 +319,7 @@ function processOP(op) {
   watchButton.title = "Watch Thread";
 
   checkBox.parentNode.insertBefore(watchButton,
-      checkBox.nextSibling.nextSibling);
+      checkBox.nextSibling.nextSibling.nextSibling);
 
   watchButton.onclick = function() {
 
