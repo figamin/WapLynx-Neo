@@ -525,14 +525,16 @@ function setPostHideableElements(postCell, post) {
 
 function setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
     deletionCheckbox) {
-  var linkStart = '/' + boardUri + '/res/' + threadId + '.html';
+
+  var postingId = post.postId || threadId;
+
+  var linkStart = '/' + boardUri + '/res/' + threadId + '.html#';
 
   linkQuote.href = linkStart;
+  link.href = linkStart;
 
-  if (post.postId) {
-    link.href = '#' + linkStart + post.postId;
-    linkQuote += 'q' + post.postId;
-  }
+  link.href += postingId;
+  linkQuote.href += 'q' + postingId;
 
   var checkboxName = boardUri + '-' + threadId + '-' + post.postId;
 
