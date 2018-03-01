@@ -11,7 +11,7 @@
 #sideCatalog {
   float: right;
   padding: 0 10px 0 10px;
-  min-width: 300px;
+  max-width: 30%;
   margin-top: 0;
 }
 
@@ -34,12 +34,13 @@ header {
 }
 
 .sideCatalogCell, .sideCatalogMarkedCell {
-  display: block;
+  display: inline-block;
   cursor: pointer;
   background: #282A2E;
   border: 1px solid #117743;
   border-radius: 5px;
   padding: 0.5em;
+  font-size: 80%;
 }
 
 .sideCatalogMarkedCell {
@@ -49,7 +50,6 @@ header {
 #sideCatalogBody img {
   float: left;
   margin-right: 10px;
-  margin-bottom: 10px;
   max-width: 125px;
   max-height: 125px;
 }
