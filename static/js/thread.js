@@ -534,8 +534,8 @@ function setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
     linkQuote += 'q' + post.postId;
   }
 
-  var checkboxName = boardUri + '-' + threadId
-      + (post.postId ? '' : '-' + post.postId);
+  var checkboxName = boardUri + '-' + threadId + '-' + post.postId;
+
   deletionCheckbox.setAttribute('name', checkboxName);
 
   var linkPreview = '/' + boardUri + '/preview/' + (post.postId || threadId)
