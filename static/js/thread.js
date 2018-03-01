@@ -72,7 +72,7 @@ function initThread() {
 
 if (!DISABLE_JS) {
 
-  document.onscroll = function() {
+  document.getElementById('mainPanel').onscroll = function() {
 
     if (!unreadPosts) {
       return;
