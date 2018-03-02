@@ -108,29 +108,10 @@ function addBackLink(quoteUrl, quote) {
 
 }
 
-function setFullBorder(tooltip) {
-
-  var innerPost = tooltip.getElementsByClassName('innerPost')[0];
-
-  var parent = innerPost.parentNode;
-
-  var temp = document.createElement('div');
-  temp.appendChild(innerPost);
-
-  tooltip.innerHTML = '';
-  tooltip.appendChild(innerPost);
-
-  innerPost.style['border-style'] = 'solid';
-  innerPost.style['border-width'] = '1px';
-  innerPost.style['border-color'] = '#117743';
-}
-
 function processQuote(quote, backLink) {
 
   var tooltip = document.createElement('div');
   tooltip.className = 'quoteTooltip';
-  tooltip.style.display = 'none';
-  tooltip.style.position = 'absolute';
 
   document.body.appendChild(tooltip);
 
@@ -142,9 +123,6 @@ function processQuote(quote, backLink) {
 
   if (loadedPreviews.indexOf(quoteUrl) > -1) {
     tooltip.innerHTML = loadedContent[quoteUrl];
-
-    setFullBorder(tooltip);
-
   } else {
     var referenceList = quoteReference[quoteUrl] || [];
 

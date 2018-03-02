@@ -133,6 +133,8 @@ function loadThread(cell, thread) {
 
         var opCell = document.getElementsByClassName('opCell')[0];
 
+        opCell.scrollIntoView();
+
         document.getElementsByClassName('divPosts')[0].innerHTML = '';
 
         data = JSON.parse(data);

@@ -92,585 +92,581 @@
 
   <div id="mainPanel">
 
-    <div>
+    <header class="boardHeader">
+      <img id="bannerImage" />
+      <div>
+        <p id="labelName"></p>
+      </div>
+      <p id="labelDescription"></p>
+    </header>
 
-      <header class="boardHeader">
-        <img id="bannerImage" />
-        <div>
-          <p id="labelName"></p>
-        </div>
-        <p id="labelDescription"></p>
-      </header>
+    <div id="postingForm">
 
-      <div id="postingForm">
+      <fieldset id="newPostFieldset">
+        <legend>Mode: Reply</legend>
 
-        <fieldset id="newPostFieldset">
-          <legend>Mode: Reply</legend>
+        <form
+          class="form-post"
+          action="/replyThread.js"
+          enctype="multipart/form-data"
+          method="post">
 
-          <form
-            class="form-post"
-            action="/replyThread.js"
-            enctype="multipart/form-data"
-            method="post">
+          <div id="postBox">
 
-            <div id="postBox">
+            <div
+              id="divName"
+              class="wider">
+              <input
+                type="text"
+                id="fieldName"
+                name="name"
+                placeholder="Name">
+            </div>
 
+            <div class="wider">
+              <input
+                type="text"
+                id="fieldEmail"
+                name="email"
+                placeholder="E-mail">
+            </div>
+
+            <div class="wider">
+              <input
+                type="text"
+                id="fieldSubject"
+                name="subject"
+                placeholder="Subject">
+            </div>
+
+            <div>
+              <textarea
+                id="fieldMessage"
+                name="message"
+                placeholder="Message"></textarea>
+            </div>
+
+            <div class="wider">
+
+              <input
+                type="text"
+                name="password"
+                id="fieldPostingPassword"
+                placeholder="Password">
+            </div>
+
+            <div
+              id="noFlagDiv"
+              class="centered">
+              <input
+                type="checkbox"
+                class="postingCheckbox"
+                id="checkboxNoFlag"
+                name="noFlag">
+              <label for="checkboxNoFlag">Don't show location</label>
+            </div>
+
+            <div
+              id="alwaysUseBypassDiv"
+              class="centered hidden">
+              <input
+                type="checkbox"
+                class="postingCheckbox"
+                id="alwaysUseBypassCheckBox">
+              <label for="alwaysUseBypassCheckBox">Make sure I have a
+                block bypass</label>
+            </div>
+
+            <div id="flagsDiv">
+              <select
+                name="flag"
+                id="flagCombobox">
+              </select>
+              <img class="flagPreview">
+
+            </div>
+
+            <div id="divUpload">
               <div
-                id="divName"
-                class="wider">
-                <input
-                  type="text"
-                  id="fieldName"
-                  name="name"
-                  placeholder="Name">
-              </div>
-
-              <div class="wider">
-                <input
-                  type="text"
-                  id="fieldEmail"
-                  name="email"
-                  placeholder="E-mail">
-              </div>
-
-              <div class="wider">
-                <input
-                  type="text"
-                  id="fieldSubject"
-                  name="subject"
-                  placeholder="Subject">
+                class="hidden"
+                id="dragAndDropDiv">
+                <div
+                  class="dropzone"
+                  id="dropzone">
+                  Drag files to upload or
+                  <br>
+                  click here to select them
+                </div>
+                <div id="selectedDiv"></div>
               </div>
 
               <div>
-                <textarea
-                  id="fieldMessage"
-                  name="message"
-                  placeholder="Message"></textarea>
-              </div>
-
-              <div class="wider">
-
                 <input
-                  type="text"
-                  name="password"
-                  id="fieldPostingPassword"
-                  placeholder="Password">
+                  type="file"
+                  name="files"
+                  id="files"
+                  multiple
+                  class="fileBrowser">
               </div>
 
-              <div
-                id="noFlagDiv"
-                class="centered">
+              <div>
                 <input
                   type="checkbox"
+                  name="spoiler"
                   class="postingCheckbox"
-                  id="checkboxNoFlag"
-                  name="noFlag">
-                <label for="checkboxNoFlag">Don't show location</label>
+                  id="checkboxSpoiler">
+
+                <label for="checkboxSpoiler">Spoiler</label>
               </div>
 
-              <div
-                id="alwaysUseBypassDiv"
-                class="centered hidden">
-                <input
-                  type="checkbox"
-                  class="postingCheckbox"
-                  id="alwaysUseBypassCheckBox">
-                <label for="alwaysUseBypassCheckBox">Make sure I have a
-                  block bypass</label>
-              </div>
-
-              <div id="flagsDiv">
-                <select
-                  name="flag"
-                  id="flagCombobox">
-                </select>
-                <img class="flagPreview">
-
-              </div>
-
-              <div id="divUpload">
-                <div
-                  class="hidden"
-                  id="dragAndDropDiv">
-                  <div
-                    class="dropzone"
-                    id="dropzone">
-                    Drag files to upload or
-                    <br>
-                    click here to select them
-                  </div>
-                  <div id="selectedDiv"></div>
-                </div>
-
-                <div>
-                  <input
-                    type="file"
-                    name="files"
-                    id="files"
-                    multiple
-                    class="fileBrowser">
-                </div>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    name="spoiler"
-                    class="postingCheckbox"
-                    id="checkboxSpoiler">
-
-                  <label for="checkboxSpoiler">Spoiler</label>
-                </div>
-
-                <p class="small">
-                  Max file size: <span id="labelMaxFileSize"></span>
-                </p>
-                <p class="small">
-                  Max files: <span id="labelMaxFiles"></span>
-                </p>
-              </div>
-
+              <p class="small">
+                Max file size: <span id="labelMaxFileSize"></span>
+              </p>
+              <p class="small">
+                Max files: <span id="labelMaxFiles"></span>
+              </p>
             </div>
-
-            <div id="captchaDiv">
-
-              <img
-                class="captchaImage"
-                src="/captcha.js"
-                id="captchaImage" />
-
-              <div class="subCaptchaDiv">
-                <input
-                  type="button"
-                  onClick="reloadCaptcha()"
-                  value="Reload"
-                  id="reloadCaptchaButton"
-                  class="hidden">
-                <span class="captchaTimer"></span>
-                <br>
-
-                <input
-                  name="captcha"
-                  type="text"
-                  class="captchaField"
-                  id="fieldCaptcha"
-                  placeholder="answer">
-
-                <a
-                  href="/noCookieCaptcha.js"
-                  class="small">no cookies?</a>
-
-              </div>
-
-            </div>
-
-            <button
-              type="submit"
-              id="formButton">Reply</button>
-
-            <button
-              type="button"
-              onClick="postReply()"
-              id="jsButton"
-              class="hidden">Reply</button>
-
-            <input
-              type="hidden"
-              name="boardUri"
-              id="boardIdentifier">
-
-            <input
-              type="hidden"
-              name="threadId"
-              id="threadIdentifier">
-
-            <p class="small">
-              Remember to follow the
-              <a
-                href="../rules.html"
-                class="rules">rules</a>
-            </p>
-            <p class="small">
-              Max message length: <span id="labelMessageLength"></span>
-            </p>
-
-          </form>
-
-        </fieldset>
-
-      </div>
-
-      <div id="divControls">
-
-        <form
-          action="/changeThreadSettings.js"
-          method="post"
-          enctype="multipart/form-data">
-
-          <fieldset id="settingsFieldset">
-            <legend>Thread Settings</legend>
-
-            <label>
-              <input
-                name="lock"
-                id="checkboxLock"
-                type="checkbox">
-              Lock
-            </label>
-            <label>
-              <input
-                name="pin"
-                id="checkboxPin"
-                type="checkbox">
-              Pin
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="cyclic"
-                id="checkboxCyclic">
-              Cyclic
-            </label>
-
-            <input
-              type="hidden"
-              name="boardUri"
-              id="controlBoardIdentifier">
-            <input
-              type="hidden"
-              name="threadId"
-              id="controlThreadIdentifier">
-            <input
-              type="submit"
-              id="settingsFormButon"
-              value="Save">
-
-            <input
-              type="button"
-              id="settingsJsButon"
-              onClick="saveThreadSettings()"
-              class="hidden"
-              value="Save">
-          </fieldset>
-        </form>
-
-      </div>
-
-      <div id="transferControls">
-
-        <form
-          action="/transferThread.js"
-          enctype="multipart/form-data"
-          method="post"
-          id="formTransfer"
-          class="formTransfer">
-
-          <fieldset id="settingsFieldset">
-            <legend>Transfer Thread</legend>
-
-            <input
-              type="hidden"
-              name="boardUri"
-              id="transferBoardIdentifier">
-
-            <input
-              type="hidden"
-              name="threadId"
-              id="transferThreadIdentifier">
-
-            <label>
-              Destination board:
-              <input
-                type="text"
-                id="fieldDestinationBoard"
-                name="boardUriDestination">
-            </label>
-            <input
-              type="submit"
-              id="transferFormButton"
-              value="Transfer thread">
-
-            <input
-              type="button"
-              class="hidden"
-              onclick="transfer()"
-              id="transferJsButton"
-              value="Transfer thread">
-          </fieldset>
-        </form>
-
-      </div>
-
-      <div id="ipDelete">
-
-        <form
-          id="ipDeletionForm"
-          method="post"
-          action="/deleteFromIp.js"
-          enctype="multipart/form-data">
-
-          <fieldset id="settingsFieldset">
-            <legend>Delete from IP</legend>
-
-            <label>
-              Non-hashed ip:
-              <input
-                type="text"
-                name="ip"
-                id="ipField">
-            </label>
-            <label>
-              Delete only from these boards(Ex:"b v", leaving blank will delete
-              from all boards)
-              <input
-                type="text"
-                name="boards"
-                id="fieldBoards">
-            </label>
-            <input
-              type="button"
-              value="Delete"
-              onclick="deleteFromIp()"
-              id="deleteFromIpJsButton"
-              class="hidden">
-
-            <input
-              value="Delete"
-              type="submit"
-              id="deleteFromIpFormButton">
-          </fieldset>
-        </form>
-
-      </div>
-
-      <div id="panelMessage">
-        <hr>
-        <div id="divMessage"></div>
-      </div>
-
-      <div id="threadList">
-
-        <form
-          method="post"
-          action="/contentActions.js"
-          enctype="multipart/form-data">
-
-          <div id="divThreads"></div>
-
-          <hr class="clearer" />
-
-          <div class="divRefresh hidden">
-
-            <input
-              type="button"
-              id="refreshButton"
-              onclick="refreshPosts(true)"
-              value="Refresh">
-
-            <label>
-              <input
-                id="checkboxChangeRefresh"
-                type="checkbox"
-                checked
-                onchange="changeRefresh()">
-              Auto <span id="labelRefresh"></span>
-            </label>
 
           </div>
 
-          <div id=boardContentLinks>
-            <span>[</span>
-            <a id="linkManagement">Manage Board</a>
-            <span>/</span>
-            <a id="linkMod">Moderate Thread</a>
-            <span>]</span>
-          </div>
+          <div id="captchaDiv">
 
-          <fieldset class="reportFieldset">
-            <legend>Delete</legend>
+            <img
+              class="captchaImage"
+              src="/captcha.js"
+              id="captchaImage" />
 
-            <div class="contentAction">
-              <label>
-                Password
-                <input
-                  type="text"
-                  id="deletionFieldPassword"
-                  name="password">
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  id="checkboxOnlyFiles"
-                  name="deleteUploads">
-                Delete only files (Removes the file reference to the posts)
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  id="checkboxMediaDeletion"
-                  name="deleteMedia">
-                Delete media (Removes the saved files from the server)
-              </label>
-              <input
-                type="submit"
-                id="deleteFormButton"
-                value="Delete"
-                name="action">
-
+            <div class="subCaptchaDiv">
               <input
                 type="button"
-                class="hidden"
-                id="deleteJsButton"
-                onClick="deletePosts()"
-                value="Delete">
-            </div>
-          </fieldset>
-
-          <fieldset class="reportFieldset">
-            <legend>Report/Ban</legend>
-
-            <div class="contentAction">
-
-              <label>
-                Reason (used on reports and bans)
-                <input
-                  type="text"
-                  id="reportFieldReason"
-                  name="reason">
-              </label>
-
-              <label>
-                <input
-                  type="checkbox"
-                  id="checkboxGlobal"
-                  name="global">
-                Global (used on reports and bans)
-              </label>
-              <p>Captcha (required for reports and bans by board staff)</p>
-              <img
-                class="captchaImage"
-                id="captchaImageReport"
-                src="/captcha.js">
-
-              <input
-                type="button"
-                class="hidden"
-                id="reloadCaptchaButtonReport"
-                onclick="reloadCaptcha()"
-                value="Reload">
+                onClick="reloadCaptcha()"
+                value="Reload"
+                id="reloadCaptchaButton"
+                class="hidden">
               <span class="captchaTimer"></span>
               <br>
 
               <input
                 name="captcha"
                 type="text"
-                id="fieldCaptchaReport"
                 class="captchaField"
+                id="fieldCaptcha"
                 placeholder="answer">
 
               <a
-                class="small"
-                href="/noCookieCaptcha.js">no cookies?</a>
+                href="/noCookieCaptcha.js"
+                class="small">no cookies?</a>
 
-              <br>
+            </div>
+
+          </div>
+
+          <button
+            type="submit"
+            id="formButton">Reply</button>
+
+          <button
+            type="button"
+            onClick="postReply()"
+            id="jsButton"
+            class="hidden">Reply</button>
+
+          <input
+            type="hidden"
+            name="boardUri"
+            id="boardIdentifier">
+
+          <input
+            type="hidden"
+            name="threadId"
+            id="threadIdentifier">
+
+          <p class="small">
+            Remember to follow the
+            <a
+              href="../rules.html"
+              class="rules">rules</a>
+          </p>
+          <p class="small">
+            Max message length: <span id="labelMessageLength"></span>
+          </p>
+
+        </form>
+
+      </fieldset>
+
+    </div>
+
+    <div id="divControls">
+
+      <form
+        action="/changeThreadSettings.js"
+        method="post"
+        enctype="multipart/form-data">
+
+        <fieldset id="settingsFieldset">
+          <legend>Thread Settings</legend>
+
+          <label>
+            <input
+              name="lock"
+              id="checkboxLock"
+              type="checkbox">
+            Lock
+          </label>
+          <label>
+            <input
+              name="pin"
+              id="checkboxPin"
+              type="checkbox">
+            Pin
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="cyclic"
+              id="checkboxCyclic">
+            Cyclic
+          </label>
+
+          <input
+            type="hidden"
+            name="boardUri"
+            id="controlBoardIdentifier">
+          <input
+            type="hidden"
+            name="threadId"
+            id="controlThreadIdentifier">
+          <input
+            type="submit"
+            id="settingsFormButon"
+            value="Save">
+
+          <input
+            type="button"
+            id="settingsJsButon"
+            onClick="saveThreadSettings()"
+            class="hidden"
+            value="Save">
+        </fieldset>
+      </form>
+
+    </div>
+
+    <div id="transferControls">
+
+      <form
+        action="/transferThread.js"
+        enctype="multipart/form-data"
+        method="post"
+        id="formTransfer"
+        class="formTransfer">
+
+        <fieldset id="settingsFieldset">
+          <legend>Transfer Thread</legend>
+
+          <input
+            type="hidden"
+            name="boardUri"
+            id="transferBoardIdentifier">
+
+          <input
+            type="hidden"
+            name="threadId"
+            id="transferThreadIdentifier">
+
+          <label>
+            Destination board:
+            <input
+              type="text"
+              id="fieldDestinationBoard"
+              name="boardUriDestination">
+          </label>
+          <input
+            type="submit"
+            id="transferFormButton"
+            value="Transfer thread">
+
+          <input
+            type="button"
+            class="hidden"
+            onclick="transfer()"
+            id="transferJsButton"
+            value="Transfer thread">
+        </fieldset>
+      </form>
+
+    </div>
+
+    <div id="ipDelete">
+
+      <form
+        id="ipDeletionForm"
+        method="post"
+        action="/deleteFromIp.js"
+        enctype="multipart/form-data">
+
+        <fieldset id="settingsFieldset">
+          <legend>Delete from IP</legend>
+
+          <label>
+            Non-hashed ip:
+            <input
+              type="text"
+              name="ip"
+              id="ipField">
+          </label>
+          <label>
+            Delete only from these boards(Ex:"b v", leaving blank will delete
+            from all boards)
+            <input
+              type="text"
+              name="boards"
+              id="fieldBoards">
+          </label>
+          <input
+            type="button"
+            value="Delete"
+            onclick="deleteFromIp()"
+            id="deleteFromIpJsButton"
+            class="hidden">
+
+          <input
+            value="Delete"
+            type="submit"
+            id="deleteFromIpFormButton">
+        </fieldset>
+      </form>
+
+    </div>
+
+    <div id="panelMessage">
+      <hr>
+      <div id="divMessage"></div>
+    </div>
+
+    <div id="threadList">
+
+      <form
+        method="post"
+        action="/contentActions.js"
+        enctype="multipart/form-data">
+
+        <div id="divThreads"></div>
+
+        <hr class="clearer" />
+
+        <div class="divRefresh hidden">
+
+          <input
+            type="button"
+            id="refreshButton"
+            onclick="refreshPosts(true)"
+            value="Refresh">
+
+          <label>
+            <input
+              id="checkboxChangeRefresh"
+              type="checkbox"
+              checked
+              onchange="changeRefresh()">
+            Auto <span id="labelRefresh"></span>
+          </label>
+
+        </div>
+
+        <div id=boardContentLinks>
+          <span>[</span>
+          <a id="linkManagement">Manage Board</a>
+          <span>/</span>
+          <a id="linkMod">Moderate Thread</a>
+          <span>]</span>
+        </div>
+
+        <fieldset class="reportFieldset">
+          <legend>Delete</legend>
+
+          <div class="contentAction">
+            <label>
+              Password
+              <input
+                type="text"
+                id="deletionFieldPassword"
+                name="password">
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                id="checkboxOnlyFiles"
+                name="deleteUploads">
+              Delete only files (Removes the file reference to the posts)
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                id="checkboxMediaDeletion"
+                name="deleteMedia">
+              Delete media (Removes the saved files from the server)
+            </label>
+            <input
+              type="submit"
+              id="deleteFormButton"
+              value="Delete"
+              name="action">
+
+            <input
+              type="button"
+              class="hidden"
+              id="deleteJsButton"
+              onClick="deletePosts()"
+              value="Delete">
+          </div>
+        </fieldset>
+
+        <fieldset class="reportFieldset">
+          <legend>Report/Ban</legend>
+
+          <div class="contentAction">
+
+            <label>
+              Reason (used on reports and bans)
+              <input
+                type="text"
+                id="reportFieldReason"
+                name="reason">
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                id="checkboxGlobal"
+                name="global">
+              Global (used on reports and bans)
+            </label>
+            <p>Captcha (required for reports and bans by board staff)</p>
+            <img
+              class="captchaImage"
+              id="captchaImageReport"
+              src="/captcha.js">
+
+            <input
+              type="button"
+              class="hidden"
+              id="reloadCaptchaButtonReport"
+              onclick="reloadCaptcha()"
+              value="Reload">
+            <span class="captchaTimer"></span>
+            <br>
+
+            <input
+              name="captcha"
+              type="text"
+              id="fieldCaptchaReport"
+              class="captchaField"
+              placeholder="answer">
+
+            <a
+              class="small"
+              href="/noCookieCaptcha.js">no cookies?</a>
+
+            <br>
+
+            <input
+              type="submit"
+              id="reportFormButton"
+              value="Report"
+              name="action">
+
+            <input
+              type="button"
+              class="hidden"
+              id="reportJsButton"
+              onClick="reportPosts()"
+              value="Report">
+
+            <div id="divMod">
+              <hr>
+              <p>Moderation actions</p>
+              <label>
+                Ban duration (Defaults to 5 years):
+                <input
+                  type="text"
+                  id="fieldDuration"
+                  name="duration">
+                <a href="/.static/moderation.html#banSection">Duration
+                  format</a>
+              </label>
+              <label>
+                Ban Message
+                <input
+                  type="text"
+                  id="fieldbanMessage"
+                  name="banMessage">
+              </label>
+
+              <label>
+                Ban type:
+                <select
+                  name="banType"
+                  id="comboBoxBanTypes">
+                  <option value="0">Regular ban</option>
+                  <option value="1">Range ban (1/2 octects)</option>
+                  <option value="2">Range ban (3/4 octects)</option>
+                </select>
+              </label>
+
+              <button
+                type="submit"
+                id="inputIpDelete"
+                value="ip-deletion"
+                name="action">Delete by ip on this board</button>
+
+              <input
+                type="button"
+                class="hidden"
+                id="ipDeletionJsButton"
+                onClick="deleteFromIpOnBoard()"
+                value="Delete by ip on this board">
+
 
               <input
                 type="submit"
-                id="reportFormButton"
-                value="Report"
+                id="inputBan"
+                value="Ban"
                 name="action">
 
               <input
                 type="button"
                 class="hidden"
-                id="reportJsButton"
-                onClick="reportPosts()"
-                value="Report">
+                id="banJsButton"
+                onClick="banPosts()"
+                value="Ban">
 
-              <div id="divMod">
-                <hr>
-                <p>Moderation actions</p>
-                <label>
-                  Ban duration (Defaults to 5 years):
-                  <input
-                    type="text"
-                    id="fieldDuration"
-                    name="duration">
-                  <a href="/.static/moderation.html#banSection">Duration
-                    format</a>
-                </label>
-                <label>
-                  Ban Message
-                  <input
-                    type="text"
-                    id="fieldbanMessage"
-                    name="banMessage">
-                </label>
+              <button
+                type="submit"
+                id="inputSpoil"
+                value="spoil"
+                name="action">Spoil Files</button>
 
-                <label>
-                  Ban type:
-                  <select
-                    name="banType"
-                    id="comboBoxBanTypes">
-                    <option value="0">Regular ban</option>
-                    <option value="1">Range ban (1/2 octects)</option>
-                    <option value="2">Range ban (3/4 octects)</option>
-                  </select>
-                </label>
-
-                <button
-                  type="submit"
-                  id="inputIpDelete"
-                  value="ip-deletion"
-                  name="action">Delete by ip on this board</button>
-
-                <input
-                  type="button"
-                  class="hidden"
-                  id="ipDeletionJsButton"
-                  onClick="deleteFromIpOnBoard()"
-                  value="Delete by ip on this board">
-
-
-                <input
-                  type="submit"
-                  id="inputBan"
-                  value="Ban"
-                  name="action">
-
-                <input
-                  type="button"
-                  class="hidden"
-                  id="banJsButton"
-                  onClick="banPosts()"
-                  value="Ban">
-
-                <button
-                  type="submit"
-                  id="inputSpoil"
-                  value="spoil"
-                  name="action">Spoil Files</button>
-
-                <input
-                  type="button"
-                  class="hidden"
-                  id="spoilJsButton"
-                  onClick="spoilFiles()"
-                  value="Spoil files">
-
-              </div>
+              <input
+                type="button"
+                class="hidden"
+                id="spoilJsButton"
+                onClick="spoilFiles()"
+                value="Spoil files">
 
             </div>
 
+          </div>
 
-          </fieldset>
 
-        </form>
+        </fieldset>
 
-      </div>
+      </form>
 
-      <footer id="footer"></footer>
     </div>
 
+    <footer id="footer"></footer>
   </div>
 
 </body>

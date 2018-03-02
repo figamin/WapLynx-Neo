@@ -8,11 +8,19 @@ function removeQr() {
   qrPanel.style.display = 'none';
 }
 
-function showQr(quote) {
-
-  setQr();
+function showQr(link, quote) {
 
   qrPanel.style.display = 'block';
+
+  var rect = link.getBoundingClientRect();
+
+  var previewOrigin = {
+    x : rect.right + 10 + window.scrollX,
+    y : rect.top + window.scrollY
+  };
+
+  qrPanel.style.left = previewOrigin.x + 'px';
+  qrPanel.style.top = (previewOrigin.y - 60) + 'px';
 
   document.getElementById('qrbody').value += '>>' + quote + '\n';
 
@@ -43,10 +51,6 @@ function registerSync(source, destination, field, event) {
 }
 
 function setQr() {
-
-  if (qrPanel) {
-    return;
-  }
 
   var flags = document.getElementById('flagsDiv') ? true : false;
 
@@ -224,4 +228,8 @@ function setQRReplyEnabled(enabled) {
   if (qrReplyButton) {
     qrReplyButton.disabled = !enabled;
   }
+}
+
+if (!DISABLE_JS) {
+  setQr();
 }

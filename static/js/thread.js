@@ -258,11 +258,11 @@ function markPost(id) {
 function processPostingQuote(link) {
 
   link.onclick = function() {
-    var toQuote = link.href.match(/#q(\d+)/);
+    var toQuote = link.href.match(/#q(\d+)/)[1];
 
-    showQr(toQuote[1]);
+    showQr(link, toQuote);
 
-    document.getElementById('fieldMessage').value += '>>' + toQuote[1] + '\n';
+    document.getElementById('fieldMessage').value += '>>' + toQuote + '\n';
 
   };
 
