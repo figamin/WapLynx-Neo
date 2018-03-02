@@ -108,6 +108,20 @@ function addBackLink(quoteUrl, quote) {
 
 }
 
+function setFullBorder(tooltip) {
+
+  var innerPost = tooltip.getElementsByClassName('innerPost')[0];
+
+  var parent = innerPost.parentNode;
+
+  var temp = document.createElement('div');
+  temp.appendChild(innerPost);
+
+  tooltip.innerHTML = '';
+  tooltip.appendChild(innerPost);
+
+}
+
 function processQuote(quote, backLink) {
 
   var tooltip = document.createElement('div');
@@ -123,6 +137,9 @@ function processQuote(quote, backLink) {
 
   if (loadedPreviews.indexOf(quoteUrl) > -1) {
     tooltip.innerHTML = loadedContent[quoteUrl];
+
+    setFullBorder(tooltip);
+
   } else {
     var referenceList = quoteReference[quoteUrl] || [];
 

@@ -25,7 +25,7 @@
 
 .quoteTooltip {
   position: absolute;
-  display:
+  display: none
 }
 
 .unhideButton, .embedButton {
