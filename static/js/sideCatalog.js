@@ -303,6 +303,9 @@ function loadThread(cell, thread) {
 
         initThread();
 
+        galleryFiles = [];
+        currentIndex = 0;
+
         setPostInnerElements(boardUri, threadId, data, opCell);
 
         processOP(document.getElementsByClassName('innerOP')[0]);
