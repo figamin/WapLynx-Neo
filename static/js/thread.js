@@ -12,6 +12,7 @@ var lastRefresh;
 var currentRefresh;
 var manualRefresh;
 var foundPosts;
+var refreshingThread;
 var hiddenCaptcha = !document.getElementById('captchaDiv');
 var markedPosting;
 var limitRefreshWait = 10 * 60;
@@ -302,9 +303,8 @@ var replyCallback = function(status, data) {
     clearQRAfterPosting();
     clearSelectedFiles();
 
-    setTimeout(function() {
-      refreshPosts();
-    }, 2000);
+    refreshPosts(true);
+
   } else {
     alert(status + ': ' + JSON.stringify(data));
   }
@@ -723,18 +723,32 @@ var refreshCallback = function(error, data) {
 
 refreshCallback.stop = function() {
   refreshButton.disabled = false;
+
+  refreshingThread = false;
+
+  if (waitingForRefreshData) {
+    loadThread(waitingForRefreshData.cell, waitingForRefreshData.thread);
+    waitingForRefreshData = false;
+  }
+
 };
 
 function refreshPosts(manual, full) {
 
+  if (manual && loadingThread) {
+    return;
+  }
+
   manualRefresh = manual;
   fullRefresh = full;
 
-  if (autoRefresh) {
+  if (autoRefresh && manual) {
     clearInterval(refreshTimer);
   }
 
   refreshButton.disabled = true;
+
+  refreshingThread = true;
 
   localRequest(refreshURL, refreshCallback);
 
@@ -901,6 +915,11 @@ function startTimer(time) {
   lastRefresh = time;
   refreshLabel.innerHTML = currentRefresh;
   refreshTimer = setInterval(function checkTimer() {
+
+    if (loadingThread) {
+      return;
+    }
+
     currentRefresh--;
 
     if (!currentRefresh) {

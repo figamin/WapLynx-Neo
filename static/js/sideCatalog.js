@@ -5,6 +5,7 @@ if (!DISABLE_JS) {
     '>' : '&gt;'
   };
 
+  var waitingForRefreshData;
   var selectedThreadCell;
   var refreshingSideCatalog = false;
   var loadingThread = false;
@@ -97,6 +98,10 @@ function loadThread(cell, thread) {
       function(error, data) {
 
         loadingThread = false;
+
+        if (autoRefresh) {
+          currentRefresh = 5;
+        }
 
         if (error) {
           return;
@@ -337,7 +342,14 @@ function addSideCatalogThread(thread) {
 
   cell.onclick = function() {
 
-    if (loadingThread || thread.threadId === threadId) {
+    if (loadingThread || thread.threadId === threadId || waitingForRefreshData) {
+      return;
+    } else if (refreshingThread) {
+      waitingForRefreshData = {
+        cell : cell,
+        thread : thread
+      };
+
       return;
     }
 

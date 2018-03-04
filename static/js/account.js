@@ -125,11 +125,7 @@ function createBoard() {
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
-
-        alert('Board created.');
-
         window.location.pathname = '/' + typedUri + '/';
-
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
