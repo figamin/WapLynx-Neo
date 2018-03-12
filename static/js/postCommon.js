@@ -127,6 +127,21 @@ function addDndCell(cell, removeButton) {
     var clonedCell = cell.cloneNode(true);
     clonedCell.getElementsByClassName('removeButton')[0].onclick = removeButton.onclick;
     selectedDivQr.appendChild(clonedCell);
+
+    var sourceSpoiler = cell.getElementsByClassName('spoilerCheckBox')[0];
+    var destinationSpoiler = clonedCell
+        .getElementsByClassName('spoilerCheckBox')[0];
+
+    sourceSpoiler.addEventListener('change', function() {
+      if (destinationSpoiler) {
+        destinationSpoiler.checked = sourceSpoiler.checked;
+      }
+    });
+
+    destinationSpoiler.addEventListener('change', function() {
+      sourceSpoiler.checked = destinationSpoiler.checked;
+    });
+
   }
 
   selectedDiv.appendChild(cell);
