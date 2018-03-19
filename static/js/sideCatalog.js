@@ -1,5 +1,13 @@
 if (!DISABLE_JS) {
 
+  var storedHidingData = localStorage.hidingData;
+
+  if (storedHidingData) {
+    storedHidingData = JSON.parse(storedHidingData);
+  } else {
+    storedHidingData = {};
+  }
+
   htmlReplaceTable = {
     '<' : '&lt;',
     '>' : '&gt;'
@@ -333,13 +341,6 @@ function addSideCatalogThread(thread) {
 
   var cell = document.createElement('a');
 
-  if (threadId === thread.threadId) {
-    cell.className = 'sideCatalogMarkedCell';
-    selectedThreadCell = cell;
-  } else {
-    cell.className = 'sideCatalogCell';
-  }
-
   cell.onclick = function() {
 
     if (loadingThread || thread.threadId === threadId || waitingForRefreshData) {
@@ -386,6 +387,33 @@ function addSideCatalogThread(thread) {
 
   sideCatalogBody.appendChild(cell);
 
+  if (threadId === thread.threadId) {
+    cell.className = 'sideCatalogMarkedCell';
+    cell.scrollIntoView();
+    selectedThreadCell = cell;
+  } else {
+    cell.className = 'sideCatalogCell';
+  }
+
+}
+
+function processCatalogData(data) {
+
+  sideCatalogBody.innerHTML = '';
+
+  var boardData = storedHidingData[boardUri];
+
+  for (var i = 0; i < data.length; i++) {
+
+    var thread = data[i];
+
+    if ((boardData && boardData.threads.indexOf(thread.threadId.toString()) > -1)) {
+      continue;
+    }
+
+    addSideCatalogThread(thread);
+  }
+
 }
 
 function refreshSideCatalog() {
@@ -404,18 +432,7 @@ function refreshSideCatalog() {
       return;
     }
 
-    data = JSON.parse(data);
-
-    sideCatalogBody.innerHTML = '';
-
-    for (var i = 0; i < data.length; i++) {
-
-      if (i) {
-        sideCatalogBody.appendChild(document.createElement('hr'));
-      }
-
-      addSideCatalogThread(data[i]);
-    }
+    processCatalogData(JSON.parse(data));
 
   });
 
