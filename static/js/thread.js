@@ -536,7 +536,11 @@ function setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
   link.href += postingId;
   linkQuote.href += 'q' + postingId;
 
-  var checkboxName = boardUri + '-' + threadId + '-' + post.postId;
+  var checkboxName = boardUri + '-' + threadId;
+
+  if (post.postId) {
+    checkboxName += '-' + post.postId;
+  }
 
   deletionCheckbox.setAttribute('name', checkboxName);
 
