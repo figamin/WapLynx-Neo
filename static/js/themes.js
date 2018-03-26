@@ -9,11 +9,17 @@ var themes = [ {
 } ];
 
 var addedTheme;
+var customCss;
 
 function updateCss() {
 
   if (addedTheme) {
-    addedTheme.parentNode.removeChild(addedTheme);
+
+    if (customCss && !customCss.parentNode) {
+      document.head.appendChild(customCss);
+    }
+
+    addedTheme.remove();
     addedTheme = null;
   }
 
@@ -22,6 +28,11 @@ function updateCss() {
 
     if (theme.id === localStorage.selectedTheme) {
       addedTheme = theme.element;
+
+      if (customCss && customCss.parentNode) {
+        customCss.remove();
+      }
+
       document.head.appendChild(theme.element);
     }
   }
@@ -35,6 +46,23 @@ if (!DISABLE_JS) {
     themes[i].element.type = 'text/css';
     themes[i].element.rel = 'stylesheet';
     themes[i].element.href = '/.static/css/' + themes[i].file;
+  }
+
+  if (typeof (boardUri) !== 'undefined') {
+
+    var linkedCss = document.getElementsByTagName('link');
+
+    for (var i = 0; i < linkedCss.length; i++) {
+
+      var ending = '/' + boardUri + '/custom.css';
+
+      if (linkedCss[i].href.indexOf(ending) === linkedCss[i].href.length
+          - ending.length) {
+        customCss = linkedCss[i];
+        break;
+      }
+    }
+
   }
 
   updateCss();

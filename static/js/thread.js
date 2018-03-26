@@ -417,7 +417,7 @@ function setUploadLinks(cell, file) {
 }
 
 function getUploadCellBase() {
-  var cell = document.createElement('div');
+  var cell = document.createElement('figure');
   cell.innerHTML = uploadCell;
   cell.className = 'uploadCell';
 
