@@ -41,7 +41,7 @@
 
       <legend>Account</legend>
       <h3>
-        Logged in as: <span id="labelLogin"></span>
+        Logged in as: <span id="labelLogin"></span>, <span id="labelGlobalRole"></span>
       </h3>
 
       <form action="/logout.js">
@@ -64,6 +64,26 @@
       <br />
       <a href="/.static/moderation.html">Moderation Manual</a>
       <hr />
+
+      <form
+        action="/requestEmailConfirmation.js"
+        method="post"
+        enctype="multipart/form-data"
+        id="confirmationForm">
+        Your e-mail haven't been confirmed yet.
+        <br>
+        You won't be able to reset your password or receive report notifications
+        until doing so.
+        <button
+          type="submit"
+          id="requestConfirmationFormButton">Request confirmation
+          e-mail</button>
+        <button
+          type="button"
+          style="display: none;"
+          onclick="requestConfirmation()"
+          id="requestConfirmationJsButton">Request confirmation e-mail</button>
+      </form>
 
       <h3>Settings</h3>
 
@@ -89,13 +109,10 @@
         <label>
           <input
             type="checkbox"
-            name="lockEnabled"
-            id="checkboxLock">
-          Lock account for 24 hours after too many failed login attempts
+            name="reportNotify"
+            id="checkboxReportNotify">
+          Receive e-mail report notifications
         </label>
-
-        <p>If you entered an email you will receive a link to unlock it
-          immediately</p>
 
         <input
           type="submit"

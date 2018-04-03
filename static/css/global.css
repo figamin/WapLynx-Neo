@@ -15,6 +15,10 @@
   image-orientation: from-image;
 }
 
+.linkList a {
+  display: block;
+}
+
 #themeSelector {
   font-size: 100%;
 }

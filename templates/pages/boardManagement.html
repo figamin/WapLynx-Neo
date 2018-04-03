@@ -397,6 +397,13 @@
             class="wide">
         </label>
         <label>
+          Thread limit<sup>2</sup>:
+          <input
+            id="maxThreadsField"
+            type="text"
+            name="maxThreadCount">
+        </label>
+        <label>
           Hourly thread limit (locks thread creation temporarily if exceeded):
           <input
             id="hourlyThreadLimitField"
@@ -417,7 +424,9 @@
           name="tags"
           class="wide">
 
-        <label for="boardMessageField">Board Message:</label>
+        <label for="boardMessageField">
+          Board Message(Maximum length: <span id="messageLengthLabel"></span>):
+        </label>
         <textarea
           name="boardMessage"
           id="boardMessageField"

@@ -277,6 +277,17 @@ function loadThread(cell, thread) {
 
         }
 
+        if (!opCell.getElementsByClassName('opUploadPanel').length) {
+
+          var newOpUploadPanel = document.createElement('div');
+          newOpUploadPanel.className = 'panelUploads opUploadPanel';
+
+          var innerOP = opCell.getElementsByClassName('innerOP')[0];
+
+          innerOP.insertBefore(newOpUploadPanel, innerOP.children[0]);
+
+        }
+
         document.getElementsByClassName('opUploadPanel')[0].innerHTML = '';
 
         document.getElementsByClassName('opHead')[0]
@@ -328,7 +339,7 @@ function loadThread(cell, thread) {
           lastReplyId = data.posts[data.posts.length - 1].postId;
 
           for (var i = 0; i < data.posts.length; i++) {
-            addPost(data.posts[i]);
+            divPosts.appendChild(addPost(data.posts[i], boardUri, threadId));
           }
 
         }

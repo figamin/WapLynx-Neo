@@ -81,11 +81,25 @@
             id="fieldCSP">
         </label>
         <label>
+          Static files expiration (minutes):
+          <input
+            type="text"
+            name="staticExpiration"
+            id="fieldStaticExpiration">
+        </label>
+        <label>
           Maximum size for requests (MB):
           <input
             type="text"
             name="maxRequestSizeMB"
             id="fieldMaxRequestSize">
+        </label>
+        <label>
+          Cluster Port<sup>2</sup>:
+          <input
+            type="text"
+            name="clusterPort"
+            id="fieldClusterPort">
         </label>
         <label>
           <input
@@ -373,6 +387,20 @@
             id="fieldMaxFlagSize">
         </label>
         <label>
+          Maximum board message size:
+          <input
+            type="text"
+            name="boardMessageLength"
+            id="fieldBoardMessageLength">
+        </label>
+        <label>
+          Maximum number of board hash bans:
+          <input
+            type="text"
+            name="maxBoardHashBans"
+            id="fieldMaxBoardHashBans">
+        </label>
+        <label>
           Maximum number of rules in boards:
           <input
             type="text"
@@ -406,6 +434,13 @@
             type="text"
             name="maxBannerSizeKB"
             id="fieldMaxBannerSize">
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="omitUnindexedContent"
+            id="checkboxOmitUnindexedContent">
+          Omit content from unindexed boards from front-page or overboards
         </label>
         <hr>
 
@@ -482,14 +517,6 @@
             id="fieldRssDomain">
         </label>
         <label>
-          Maximum amount of concurrent rebuild messages(Increase if your site's
-          pages are taking too long to update):
-          <input
-            type="text"
-            name="concurrentRebuildMessages"
-            id="fieldConcurrentRebuildMessages">
-        </label>
-        <label>
           Overboard uri:
           <input
             type="text"
@@ -509,6 +536,13 @@
         <label>
           <input
             type="checkbox"
+            id="checkboxVerbose"
+            name="verbose">
+          Full verbose mode
+        </label>
+        <label>
+          <input
+            type="checkbox"
             id="checkboxVerboseApis"
             name="verboseApis">
           Verbose APIs mode
@@ -516,16 +550,9 @@
         <label>
           <input
             type="checkbox"
-            id="checkboxPreemptiveCaching"
-            name="preemptiveCaching">
-          Use preemptive caching
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            id="checkboxVerboseStatic"
-            name="verboseStatic">
-          Verbose static serving mode
+            id="checkboxVerboseCache"
+            name="verboseCache">
+          Verbose cache mode
         </label>
         <label>
           <input
@@ -554,13 +581,6 @@
             id="checkboxVerboseGenerator"
             name="verboseGenerator">
           Verbose generator mode
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            id="checkboxVerbose"
-            name="verbose">
-          Full verbose mode
         </label>
         <label>
           <input

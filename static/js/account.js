@@ -1,11 +1,17 @@
 var settingsRelation = {
-  checkboxAlwaysSign : 'alwaysSignRole'
+  checkboxAlwaysSign : 'alwaysSignRole',
+  checkboxReportNotify : 'reportNotify'
 };
 
 if (!DISABLE_JS) {
   document.getElementById('logoutJsButton').style.display = 'inline';
   document.getElementById('saveJsButton').style.display = 'inline';
   document.getElementById('passwordJsButton').style.display = 'inline';
+
+  if (document.getElementById('requestConfirmationJsButton')) {
+    document.getElementById('requestConfirmationJsButton').style.display = 'inline';
+    document.getElementById('requestConfirmationFormButton').style.display = 'none';
+  }
 
   document.getElementById('passwordFormButton').style.display = 'none';
   document.getElementById('saveFormButton').style.display = 'none';
@@ -16,6 +22,20 @@ if (!DISABLE_JS) {
     document.getElementById('newBoardFormButton').style.display = 'none';
     document.getElementById('newBoardJsButton').style.display = 'inline';
   }
+
+}
+
+function requestConfirmation() {
+
+  apiRequest('requestEmailConfirmation', {}, function requestComplete(status,
+      data) {
+
+    if (status === 'ok') {
+      alert('Confirmation requested.');
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 }
 

@@ -39,31 +39,22 @@
 
     <fieldset id="settingsFieldset">
 
-      <legend>Graphs</legend>
+      <legend>Media details</legend>
 
-      <form
-        method="get"
-        action="graphs.js">
+      <p>
+        Identifier: <span id="labelIdentifier"></span>
+      </p>
 
-        <label>
-          Year:
-          <input
-            type="text"
-            name="year"
-            placeholder="YYYY">
-        </label>
+      <p>
+        Size: <span id="labelSize"></span>
+      </p>
 
-        <input
-          type="submit"
-          value="Search">
+      <p>
+        First uploaded at: <span id="labelUploadDate"></span>
+      </p>
 
-      </form>
-
-      <hr />
-
-      <div
-        id="divDates"
-        class="linkList"></div>
+      <h3>References</h3>
+      <div id="panelReferences"></div>
 
     </fieldset>
 

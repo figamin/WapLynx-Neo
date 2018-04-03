@@ -252,7 +252,7 @@ function setCell(thread) {
 
   setCatalogCellIndicators(thread, cell);
 
-  cell.getElementsByClassName('divMessage')[0].innerHTML = thread.message;
+  cell.getElementsByClassName('divMessage')[0].innerHTML = thread.markdown;
 
   return cell;
 

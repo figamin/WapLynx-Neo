@@ -63,14 +63,6 @@ function loginUser() {
 
       if (status === 'ok') {
 
-        var expiration = new Date();
-        expiration.setUTCFullYear(expiration.getUTCFullYear() + 1);
-
-        var complement = '; path=/; expires=' + expiration.toUTCString();
-
-        document.cookie = 'login=' + typedLogin + complement;
-        document.cookie = 'hash=' + data + complement;
-
         window.location.pathname = '/account.js';
 
       } else {
@@ -111,14 +103,6 @@ function registerAccount() {
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
-
-        var expiration = new Date();
-        expiration.setUTCFullYear(expiration.getUTCFullYear() + 1);
-
-        var complement = '; path=/; expires=' + expiration.toUTCString();
-
-        document.cookie = 'login=' + typedLogin + complement;
-        document.cookie = 'hash=' + data + complement;
 
         window.location.pathname = '/account.js';
 

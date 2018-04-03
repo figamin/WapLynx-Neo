@@ -1,3 +1,34 @@
+var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
+    + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
+    + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
+    + '</span> <span class="labelCreated"></span> <span class="spanId"> Id:<span '
+    + 'class="labelId"></span></span> <a '
+    + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
+    + '</span></div>'
+    + '<div>'
+    + '<span class="panelIp"> <span class="panelRange">Broad'
+    + 'range(1/2 octets): <span class="labelBroadRange"> </span> <br>'
+    + 'Narrow range(3/4 octets): <span class="labelNarrowRange"> </span> <br>'
+    + '</span> Ip: <span class="labelIp"></span></span>'
+    + '</div>'
+    + '<div class="panelUploads"></div><div class="divMessage"></div>'
+    + '<div class="divBanMessage"></div><div class="labelLastEdit"></div></div>';
+
+var uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
+    + 'Open file</a> (<span class="sizeLabel"></span> <span class="dimensionLabel">'
+    + '</span> <a class="originalNameLink"></a>)</div>'
+    + '<div class="divHash"><span>MD5: <span class="labelHash"></span></span></div>'
+    + '<a class="imgLink" ' + 'target="blank"></a>';
+
+var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
+
+var guiEditInfo = 'Edited last time by {$login} on {$date}.';
+
+var reverseHTMLReplaceTable = {
+  '&lt;' : '<',
+  '&gt;' : '>'
+};
+
 if (!DISABLE_JS) {
 
   if (document.getElementById('deleteJsButton')) {
@@ -216,5 +247,350 @@ function deleteFromIpOnBoard() {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
+
+}
+
+function padDateField(value) {
+  if (value < 10) {
+    value = '0' + value;
+  }
+
+  return value;
+}
+
+function formatDateToDisplay(d) {
+  var day = padDateField(d.getUTCDate());
+
+  var weekDays = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
+
+  var month = padDateField(d.getUTCMonth() + 1);
+
+  var year = d.getUTCFullYear();
+
+  var weekDay = weekDays[d.getUTCDay()];
+
+  var hour = padDateField(d.getUTCHours());
+
+  var minute = padDateField(d.getUTCMinutes());
+
+  var second = padDateField(d.getUTCSeconds());
+
+  var toReturn = month + '/' + day + '/' + year;
+
+  return toReturn + ' (' + weekDay + ') ' + hour + ':' + minute + ':' + second;
+}
+
+function formatFileSize(size) {
+
+  var orderIndex = 0;
+
+  while (orderIndex < sizeOrders.length - 1 && size > 1024) {
+
+    orderIndex++;
+    size /= 1024;
+
+  }
+
+  return size.toFixed(2) + ' ' + sizeOrders[orderIndex];
+
+}
+
+function setLastEditedLabel(post, cell) {
+
+  var editedLabel = cell.getElementsByClassName('labelLastEdit')[0];
+
+  if (post.lastEditTime) {
+
+    var formatedDate = formatDateToDisplay(new Date(post.lastEditTime));
+
+    editedLabel.innerHTML = guiEditInfo.replace('{$date}', formatedDate)
+        .replace('{$login}', post.lastEditLogin);
+
+  } else {
+    editedLabel.remove();
+  }
+
+}
+
+function setUploadLinks(cell, file) {
+  var thumbLink = cell.getElementsByClassName('imgLink')[0];
+  thumbLink.href = file.path;
+
+  thumbLink.setAttribute('data-filemime', file.mime);
+
+  if (file.mime.indexOf('image/') > -1) {
+    addGalleryFile(file.path);
+  }
+
+  var img = document.createElement('img');
+  img.src = file.thumb;
+
+  thumbLink.appendChild(img);
+
+  var nameLink = cell.getElementsByClassName('nameLink')[0];
+  nameLink.href = file.path;
+
+  var originalLink = cell.getElementsByClassName('originalNameLink')[0];
+  originalLink.innerHTML = file.originalName;
+  originalLink.href = file.path;
+  originalLink.setAttribute('download', file.originalName);
+}
+
+function getUploadCellBase() {
+  var cell = document.createElement('figure');
+  cell.innerHTML = uploadCell;
+  cell.className = 'uploadCell';
+
+  return cell;
+}
+
+function setUploadCell(node, files) {
+
+  if (!files) {
+    return;
+  }
+
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+
+    var cell = getUploadCellBase();
+
+    setUploadLinks(cell, file);
+
+    var sizeString = formatFileSize(file.size);
+    cell.getElementsByClassName('sizeLabel')[0].innerHTML = sizeString;
+
+    var dimensionLabel = cell.getElementsByClassName('dimensionLabel')[0];
+
+    if (file.width) {
+      dimensionLabel.innerHTML = file.width + 'x' + file.height;
+    } else {
+      dimensionLabel.remove();
+    }
+
+    if (file.md5) {
+      cell.getElementsByClassName('labelHash')[0].innerHTML = file.md5;
+    } else {
+      cell.getElementsByClassName('divHash')[0].remove();
+    }
+
+    node.appendChild(cell);
+  }
+
+}
+
+function setPostHideableElements(postCell, post) {
+  var subjectLabel = postCell.getElementsByClassName('labelSubject')[0];
+  if (post.subject) {
+    subjectLabel.innerHTML = post.subject;
+  } else {
+    subjectLabel.remove();
+  }
+
+  if (post.id) {
+    var labelId = postCell.getElementsByClassName('labelId')[0];
+    labelId.setAttribute('style', 'background-color: #' + post.id);
+    labelId.innerHTML = post.id;
+
+    processIdLabel(labelId);
+
+  } else {
+    var spanId = postCell.getElementsByClassName('spanId')[0];
+    spanId.remove();
+  }
+
+  var banMessageLabel = postCell.getElementsByClassName('divBanMessage')[0];
+
+  if (!post.banMessage) {
+    banMessageLabel.parentNode.removeChild(banMessageLabel);
+  } else {
+    banMessageLabel.innerHTML = post.banMessage;
+  }
+
+  setLastEditedLabel(post, postCell);
+
+  var imgFlag = postCell.getElementsByClassName('imgFlag')[0];
+
+  if (post.flag) {
+    imgFlag.src = post.flag;
+    imgFlag.title = post.flagName.replace(/&(l|g)t;/g, function replace(match) {
+      return reverseHTMLReplaceTable[match];
+    });
+
+    if (post.flagCode) {
+      imgFlag.className += ' flag' + post.flagCode;
+    }
+  } else {
+    imgFlag.remove();
+  }
+
+  if (!post.ip) {
+    postCell.getElementsByClassName('panelIp')[0].remove();
+  } else {
+
+    postCell.getElementsByClassName('labelIp')[0].innerHTML = post.ip;
+
+    if (!post.broadRange) {
+      postCell.getElementsByClassName('panelRange')[0].remove();
+    } else {
+
+      postCell.getElementsByClassName('labelBroadRange')[0].innerHTML = post.broadRange;
+      postCell.getElementsByClassName('labelNarrowRange')[0].innerHTML = post.narrowRange;
+
+    }
+
+  }
+
+}
+
+function setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
+    deletionCheckbox) {
+
+  var postingId = post.postId || threadId;
+
+  var linkStart = '/' + boardUri + '/res/' + threadId + '.html#';
+
+  linkQuote.href = linkStart;
+  link.href = linkStart;
+
+  link.href += postingId;
+  linkQuote.href += 'q' + postingId;
+
+  var checkboxName = boardUri + '-' + threadId;
+
+  if (post.postId) {
+    checkboxName += '-' + post.postId;
+  }
+
+  deletionCheckbox.setAttribute('name', checkboxName);
+
+}
+
+function setRoleSignature(postingCell, posting) {
+  var labelRole = postingCell.getElementsByClassName('labelRole')[0];
+
+  if (posting.signedRole) {
+    labelRole.innerHTML = posting.signedRole;
+  } else {
+    labelRole.parentNode.removeChild(labelRole);
+  }
+}
+
+function setPostComplexElements(postCell, post, boardUri, threadId) {
+
+  setRoleSignature(postCell, post);
+
+  var link = postCell.getElementsByClassName('linkSelf')[0];
+
+  var linkQuote = postCell.getElementsByClassName('linkQuote')[0];
+  linkQuote.innerHTML = post.postId || threadId;
+
+  var deletionCheckbox = postCell.getElementsByClassName('deletionCheckBox')[0];
+
+  setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
+      deletionCheckbox);
+
+  var panelUploads = postCell.getElementsByClassName('panelUploads')[0];
+
+  if (!post.files || !post.files.length) {
+    panelUploads.remove();
+  } else {
+    setUploadCell(panelUploads, post.files);
+  }
+
+}
+
+function setPostInnerElements(boardUri, threadId, post, postCell, noExtras) {
+
+  var linkName = postCell.getElementsByClassName('linkName')[0];
+
+  linkName.innerHTML = post.name;
+
+  if (post.email) {
+    linkName.href = 'mailto:' + post.email;
+  } else {
+    linkName.className += ' noEmailName';
+  }
+
+  var labelCreated = postCell.getElementsByClassName('labelCreated')[0];
+
+  labelCreated.innerHTML = formatDateToDisplay(new Date(post.creation));
+
+  postCell.getElementsByClassName('divMessage')[0].innerHTML = post.markdown;
+
+  setPostHideableElements(postCell, post);
+
+  setPostComplexElements(postCell, post, boardUri, threadId);
+
+  var messageLinks = postCell.getElementsByClassName('divMessage')[0]
+      .getElementsByTagName('a');
+
+  for (var i = 0; i < messageLinks.length; i++) {
+    processLinkForEmbed(messageLinks[i]);
+  }
+
+  var links = postCell.getElementsByClassName('imgLink');
+
+  var temporaryImageLinks = [];
+
+  for (i = 0; i < links.length; i++) {
+    temporaryImageLinks.push(links[i]);
+  }
+
+  for (i = 0; i < temporaryImageLinks.length; i++) {
+    processImageLink(temporaryImageLinks[i]);
+  }
+
+  var shownFiles = postCell.getElementsByClassName('uploadCell');
+
+  for (var i = 0; i < shownFiles.length; i++) {
+    processFileForHiding(shownFiles[i]);
+  }
+
+  var hiddenMedia = getHiddenMedia();
+
+  for (i = 0; i < hiddenMedia.length; i++) {
+    updateHiddenFiles(hiddenMedia[i], true);
+  }
+
+  postCell.setAttribute('data-boarduri', boardUri);
+
+  if (noExtras) {
+    return;
+  }
+
+  addToKnownPostsForBackLinks(postCell);
+
+  var quotes = postCell.getElementsByClassName('quoteLink');
+
+  for (i = 0; i < quotes.length; i++) {
+    processQuote(quotes[i]);
+  }
+
+  var checkbox = postCell.getElementsByClassName('deletionCheckBox')[0];
+
+  setHideMenu(checkbox);
+  setExtraMenu(checkbox)
+
+  processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
+}
+
+function addPost(post, boardUri, threadId, noExtra) {
+
+  var postCell = document.createElement('div');
+  postCell.innerHTML = postCellTemplate;
+
+  postCell.id = post.postId;
+  postCell.setAttribute('class', 'postCell');
+
+  if (post.files && post.files.length > 1) {
+    postCell.className += ' multipleUploads';
+  }
+
+  postCell.setAttribute('data-boarduri', boardUri);
+
+  setPostInnerElements(boardUri, threadId, post, postCell, noExtra);
+
+  return postCell;
 
 }

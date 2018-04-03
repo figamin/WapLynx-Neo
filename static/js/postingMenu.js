@@ -546,7 +546,9 @@ function setExtraMenu(checkbox) {
   };
 
   var hasFiles = checkbox.parentNode.parentNode
-      .getElementsByClassName('panelUploads')[0].children.length > 0;
+      .getElementsByClassName('panelUploads')[0];
+
+  hasFiles = hasFiles && hasFiles.children.length > 0;
 
   if (hasFiles) {
 
