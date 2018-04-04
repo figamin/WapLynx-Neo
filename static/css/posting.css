@@ -163,8 +163,8 @@
 /*Change the dimensions if you wish for larger thumbs*/
 .uploadCell img:not(.imgExpanded) {
   max-width: 125px;
-  max-height: 125px;
-  min-height: 125px;
+  height: 125px;
+  object-fit: contain;
 }
 
 .multipleUploads .opUploadPanel, .multipleUploads .panelUploads {
