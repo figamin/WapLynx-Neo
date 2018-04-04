@@ -5,10 +5,6 @@ if (!DISABLE_JS) {
 
   var siteSettingsRelation = {
 
-    fieldConcurrentRebuildMessages : {
-      setting : 'concurrentRebuildMessages',
-      type : 'string'
-    },
     fieldSlaves : {
       setting : 'slaves',
       type : 'array'
@@ -17,6 +13,10 @@ if (!DISABLE_JS) {
       type : 'boolean',
       setting : 'useGlobalBanners',
     },
+    checkboxVerboseCache : {
+      type : 'boolean',
+      setting : 'verboseCache',
+    },
     checkboxVerboseGenerator : {
       type : 'boolean',
       setting : 'verboseGenerator',
@@ -24,6 +24,14 @@ if (!DISABLE_JS) {
     checkboxVerboseQueue : {
       type : 'boolean',
       setting : 'verboseQueue',
+    },
+    checkboxOmitUnindexedContent : {
+      type : 'boolean',
+      setting : 'omitUnindexedContent',
+    },
+    fieldMaxBoardHashBans : {
+      type : 'boolean',
+      setting : 'maxBoardHashBans',
     },
     checkboxVerboseGridfs : {
       type : 'boolean',
@@ -36,10 +44,6 @@ if (!DISABLE_JS) {
     checkboxVerboseMisc : {
       type : 'boolean',
       setting : 'verboseMisc',
-    },
-    checkboxVerboseStatic : {
-      type : 'boolean',
-      setting : 'verboseStatic',
     },
     checkboxVerboseApis : {
       type : 'boolean',
@@ -65,13 +69,13 @@ if (!DISABLE_JS) {
       type : 'string',
       setting : 'ipExpirationDays'
     },
+    fieldClusterPort : {
+      type : 'string',
+      setting : 'clusterPort'
+    },
     fieldIncrementalSpamIpsSource : {
       type : 'string',
       setting : 'incSpamIpsSource'
-    },
-    checkboxPreemptiveCaching : {
-      type : 'boolean',
-      setting : 'preemptiveCaching',
     },
     fieldMaster : {
       setting : 'master',
@@ -83,6 +87,10 @@ if (!DISABLE_JS) {
     },
     fieldTorPort : {
       setting : 'torPort',
+      type : 'string'
+    },
+    fieldBoardMessageLength : {
+      setting : 'boardMessageLength',
       type : 'string'
     },
     fieldSpamIpsSource : {
@@ -211,6 +219,10 @@ if (!DISABLE_JS) {
     },
     fieldFlagNameLength : {
       setting : 'flagNameLength',
+      type : 'string'
+    },
+    fieldStaticExpiration : {
+      setting : 'staticExpiration',
       type : 'string'
     },
     fieldBoardsPerPage : {
