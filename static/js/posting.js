@@ -312,13 +312,13 @@ function setLastEditedLabel(post, cell) {
 
 }
 
-function setUploadLinks(cell, file) {
+function setUploadLinks(cell, file, noExtras) {
   var thumbLink = cell.getElementsByClassName('imgLink')[0];
   thumbLink.href = file.path;
 
   thumbLink.setAttribute('data-filemime', file.mime);
 
-  if (file.mime.indexOf('image/') > -1) {
+  if (file.mime.indexOf('image/') > -1 && !noExtras) {
     addGalleryFile(file.path);
   }
 
@@ -344,7 +344,7 @@ function getUploadCellBase() {
   return cell;
 }
 
-function setUploadCell(node, files) {
+function setUploadCell(node, files, noExtras) {
 
   if (!files) {
     return;
@@ -355,7 +355,7 @@ function setUploadCell(node, files) {
 
     var cell = getUploadCellBase();
 
-    setUploadLinks(cell, file);
+    setUploadLinks(cell, file, noExtras);
 
     var sizeString = formatFileSize(file.size);
     cell.getElementsByClassName('sizeLabel')[0].innerHTML = sizeString;
@@ -476,7 +476,7 @@ function setRoleSignature(postingCell, posting) {
   }
 }
 
-function setPostComplexElements(postCell, post, boardUri, threadId) {
+function setPostComplexElements(postCell, post, boardUri, threadId, noExtras) {
 
   setRoleSignature(postCell, post);
 
@@ -495,7 +495,7 @@ function setPostComplexElements(postCell, post, boardUri, threadId) {
   if (!post.files || !post.files.length) {
     panelUploads.remove();
   } else {
-    setUploadCell(panelUploads, post.files);
+    setUploadCell(panelUploads, post.files, noExtras);
   }
 
 }
@@ -520,7 +520,7 @@ function setPostInnerElements(boardUri, threadId, post, postCell, noExtras) {
 
   setPostHideableElements(postCell, post);
 
-  setPostComplexElements(postCell, post, boardUri, threadId);
+  setPostComplexElements(postCell, post, boardUri, threadId, noExtras);
 
   var messageLinks = postCell.getElementsByClassName('divMessage')[0]
       .getElementsByTagName('a');
