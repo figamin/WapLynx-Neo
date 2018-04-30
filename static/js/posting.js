@@ -379,7 +379,7 @@ function setUploadCell(node, files, noExtras) {
 
 }
 
-function setPostHideableElements(postCell, post) {
+function setPostHideableElements(postCell, post, noExtras) {
   var subjectLabel = postCell.getElementsByClassName('labelSubject')[0];
   if (post.subject) {
     subjectLabel.innerHTML = post.subject;
@@ -392,7 +392,9 @@ function setPostHideableElements(postCell, post) {
     labelId.setAttribute('style', 'background-color: #' + post.id);
     labelId.innerHTML = post.id;
 
-    processIdLabel(labelId);
+    if (!noExtras) {
+      processIdLabel(labelId);
+    }
 
   } else {
     var spanId = postCell.getElementsByClassName('spanId')[0];
@@ -518,7 +520,7 @@ function setPostInnerElements(boardUri, threadId, post, postCell, noExtras) {
 
   postCell.getElementsByClassName('divMessage')[0].innerHTML = post.markdown;
 
-  setPostHideableElements(postCell, post);
+  setPostHideableElements(postCell, post, noExtras);
 
   setPostComplexElements(postCell, post, boardUri, threadId, noExtras);
 
