@@ -180,6 +180,18 @@
   margin-bottom: 0.5em;
 }
 
+.originalNameLink {
+  display:inline-block;
+  vertical-align:top;
+  max-width: 155px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.originalNameLink:hover {
+  max-width: 100%;
+}
+
 .opCell {
   clear: left;
 }
