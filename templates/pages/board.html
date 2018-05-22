@@ -97,14 +97,6 @@
             </tr>
 
             <tr>
-              <th>E-mail</th>
-              <td><input
-                  type="text"
-                  id="fieldEmail"
-                  name="email"></td>
-            </tr>
-
-            <tr>
               <th>Subject</th>
               <td><input
                   type="text"
@@ -132,43 +124,6 @@
                 <p class="small">
                   Max message length: <span id="labelMessageLength"></span>
                 </p></td>
-            </tr>
-
-            <tr>
-              <th>Password</th>
-              <td><input
-                  id="fieldPostingPassword"
-                  name="password"
-                  type="password">
-                <p class="small">(used to delete files and postings)</p></td>
-            </tr>
-
-            <tr id="flagsDiv">
-              <th>Flag</th>
-              <td><select
-                  name="flag"
-                  id="flagCombobox">
-                </select> <img class="flagPreview"></td>
-            </tr>
-
-            <tr id="noFlagDiv">
-              <th>No location</th>
-              <td><input
-                  type="checkbox"
-                  class="postingCheckbox"
-                  id="checkboxNoFlag"
-                  name="noFlag"> <label for="checkboxNoFlag"></label></td>
-            </tr>
-
-            <tr
-              id="alwaysUseBypassDiv"
-              class="hidden">
-              <th>Bypass check</th>
-              <td><input
-                  type="checkbox"
-                  class="postingCheckbox"
-                  id="alwaysUseBypassCheckBox"> <label
-                  for="alwaysUseBypassCheckBox"></label></td>
             </tr>
 
             <tr id="divUpload">
@@ -240,6 +195,60 @@
                     class="small">no cookies?</a>
 
                 </div></td>
+            </tr>
+
+            <tr
+              class="hidden small"
+              id="formMore">
+              <td>More</td>
+            </tr>
+
+          </tbody>
+          <tbody id="extra">
+
+            <tr>
+              <th>E-mail</th>
+              <td><input
+                  type="text"
+                  id="fieldEmail"
+                  name="email"></td>
+            </tr>
+
+            <tr>
+              <th>Password</th>
+              <td><input
+                  id="fieldPostingPassword"
+                  name="password"
+                  type="password">
+                <p class="small">(used to delete files and postings)</p></td>
+            </tr>
+
+            <tr id="flagsDiv">
+              <th>Flag</th>
+              <td><select
+                  name="flag"
+                  id="flagCombobox">
+                </select> <img class="flagPreview"></td>
+            </tr>
+
+            <tr id="noFlagDiv">
+              <th>No location</th>
+              <td><input
+                  type="checkbox"
+                  class="postingCheckbox"
+                  id="checkboxNoFlag"
+                  name="noFlag"> <label for="checkboxNoFlag"></label></td>
+            </tr>
+
+            <tr
+              id="alwaysUseBypassDiv"
+              class="hidden">
+              <th>Bypass check</th>
+              <td><input
+                  type="checkbox"
+                  class="postingCheckbox"
+                  id="alwaysUseBypassCheckBox"> <label
+                  for="alwaysUseBypassCheckBox"></label></td>
             </tr>
 
           </tbody>

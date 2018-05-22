@@ -71,6 +71,36 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
     setFlagPreviews(flagCombo);
   }
 
+  var formMore = document.getElementById('formMore');
+
+  formMore.style.display = 'table-row';
+
+  var toggled = false;
+
+  var extra = document.getElementById('extra');
+
+  extra.className = 'hidden';
+
+  formMore.children[0].onclick = function() {
+
+    if (toggled) {
+      formMore.children[0].innerHTML = 'More';
+      extra.className = 'hidden';
+    } else {
+      formMore.children[0].innerHTML = 'Less';
+      extra.className = '';
+    }
+
+    toggled = !toggled;
+
+    localStorage.setItem('showExtra', toggled);
+
+  };
+
+  if (localStorage.showExtra && JSON.parse(localStorage.showExtra)) {
+    formMore.children[0].onclick();
+  }
+
 }
 
 function showFlagPreview(combo) {
@@ -98,15 +128,6 @@ function setFlagPreviews(combo) {
   combo.addEventListener('change', function() {
     showFlagPreview(combo);
   });
-
-  for (var i = 1; i < combo.options.length; i++) {
-
-    var option = combo.options[i];
-
-    option.style['background-image'] = 'url(/' + boardUri + '/flags/'
-        + option.value;
-
-  }
 
 }
 

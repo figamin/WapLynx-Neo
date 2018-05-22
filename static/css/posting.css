@@ -28,6 +28,10 @@
   display: none
 }
 
+#formMore {
+  cursor: pointer;
+}
+
 .unhideButton, .embedButton {
   cursor: pointer;
   color: #FFB300;
@@ -181,8 +185,8 @@
 }
 
 .originalNameLink {
-  display:inline-block;
-  vertical-align:top;
+  display: inline-block;
+  vertical-align: top;
   max-width: 155px;
   overflow: hidden;
   text-overflow: ellipsis;
