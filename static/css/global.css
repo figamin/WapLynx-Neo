@@ -311,7 +311,7 @@ span.spoiler {
   font-size: 80%;
 }
 
-input.wide, textarea.wide {
+.wide, #postingForm input[type='text'], #flagCombobox {
   width: 100%;
 }
 

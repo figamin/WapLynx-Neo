@@ -31,7 +31,7 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
     nameField.value = localStorage.name || '';
   }
 
-  document.getElementById('alwaysUseBypassDiv').style.display = 'block';
+  document.getElementById('alwaysUseBypassDiv').style.display = 'table-row';
 
   var bypassCheckBox = document.getElementById('alwaysUseBypassCheckBox');
 
