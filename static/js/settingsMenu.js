@@ -248,6 +248,37 @@ function getCSSContent() {
 
 }
 
+function getOtherContent() {
+
+  var otherPanel = document.createElement('div');
+
+  var relativeDiv = document.createElement('div');
+  otherPanel.appendChild(relativeDiv);
+
+  var relativeLabel = document.createElement('label');
+  relativeLabel.className = 'small';
+  relativeLabel.innerHTML = 'Relative Times';
+  relativeDiv.appendChild(relativeLabel);
+
+  var relativeCheckBox = document.createElement('input');
+  relativeCheckBox.type = 'checkbox';
+  relativeDiv.appendChild(relativeCheckBox);
+
+  relativeCheckBox.checked = localStorage.relativeTime
+      && JSON.parse(localStorage.relativeTime);
+
+  var saveButton = document.createElement('button');
+  otherPanel.appendChild(saveButton);
+  saveButton.innerHTML = 'Save';
+
+  saveButton.onclick = function() {
+    localStorage.setItem('relativeTime', relativeCheckBox.checked);
+  }
+
+  return otherPanel;
+
+}
+
 function getJSContent() {
 
   var savedJS = localStorage.customJS;
@@ -336,8 +367,8 @@ if (!DISABLE_JS) {
   settingsMenu.appendChild(menuContentPanel);
 
   registerTab('Filters', getFiltersContent(), true);
-
   registerTab('CSS', getCSSContent());
   registerTab('JS', getJSContent());
+  registerTab('Other', getOtherContent());
 
 }

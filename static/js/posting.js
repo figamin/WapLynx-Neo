@@ -50,7 +50,71 @@ if (!DISABLE_JS) {
 
   }
 
+  if (localStorage.relativeTime && JSON.parse(localStorage.relativeTime)) {
+
+    updateAllRelativeTimes();
+    setInterval(updateAllRelativeTimes, 1000 * 60 * 5);
+
+  }
+
 }
+
+function updateAllRelativeTimes() {
+
+  var times = document.getElementsByClassName('labelCreated');
+
+  for (var i = 0; i < times.length; i++) {
+    addRelativeTime(times[i]);
+  }
+
+}
+
+function addRelativeTime(time) {
+
+  var timeObject = new Date(time.innerHTML + ' UTC');
+
+  if (time.nextSibling.nextSibling.className !== 'relativeTime') {
+
+    var newRelativeLabel = document.createElement('span');
+
+    newRelativeLabel.className = 'relativeTime';
+
+    time.parentNode.insertBefore(newRelativeLabel, time.nextSibling);
+    time.parentNode
+        .insertBefore(document.createTextNode(' '), time.nextSibling);
+
+  }
+
+  var now = new Date();
+
+  var content;
+
+  var delta = now - timeObject;
+
+  var second = 1000;
+  var minute = second * 60;
+  var hour = minute * 60;
+  var day = hour * 24;
+  var month = day * 30.5;
+  var year = day * 365.25;
+
+  if (delta > 2 * year) {
+    content = Math.ceil(delta / year) + ' years ago';
+  } else if (delta > 2 * month) {
+    content = Math.ceil(delta / month) + ' months ago';
+  } else if (delta > 2 * day) {
+    content = Math.ceil(delta / day) + ' days ago';
+  } else if (delta > 2 * hour) {
+    content = Math.ceil(delta / hour) + ' hours ago';
+  } else if (delta > 2 * minute) {
+    content = Math.ceil(delta / minute) + ' minutes ago';
+  } else {
+    content = 'Just now'
+  }
+
+  time.nextSibling.nextSibling.innerHTML = '(' + content + ')';
+
+};
 
 function spoilFiles() {
 
@@ -517,6 +581,10 @@ function setPostInnerElements(boardUri, threadId, post, postCell, noExtras) {
   var labelCreated = postCell.getElementsByClassName('labelCreated')[0];
 
   labelCreated.innerHTML = formatDateToDisplay(new Date(post.creation));
+
+  if (localStorage.relativeTime && JSON.parse(localStorage.relativeTime)) {
+    addRelativeTime(labelCreated);
+  }
 
   postCell.getElementsByClassName('divMessage')[0].innerHTML = post.markdown;
 
