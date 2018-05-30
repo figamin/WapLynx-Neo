@@ -108,15 +108,6 @@ if (!DISABLE_JS) {
 
   changeRefresh();
 
-  var hash = window.location.hash.substring(1);
-
-  if (hash.indexOf('q') === 0 && hash.length > 1) {
-    document.getElementById('fieldMessage').value = '>>' + hash.substring(1)
-        + '\n';
-  } else if (hash.length > 0) {
-    markPost(hash);
-  }
-
   var postingQuotes = document.getElementsByClassName('linkQuote');
 
   for (var i = 0; i < postingQuotes.length; i++) {

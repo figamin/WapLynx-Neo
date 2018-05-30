@@ -30,6 +30,7 @@ function expandImage(mouseEvent, link, mime) {
   if (thumb.style.display === 'none') {
     link.getElementsByClassName('imgExpanded')[0].style.display = 'none';
     thumb.style.display = '';
+    thumb.scrollIntoView();
     return false;
   }
 

@@ -19,8 +19,8 @@ function showQr(link, quote) {
     y : rect.top + window.scrollY
   };
 
-  qrPanel.style.left = previewOrigin.x + 'px';
-  qrPanel.style.top = (previewOrigin.y - 60) + 'px';
+  qrPanel.style.left = (previewOrigin.x + 35) + 'px';
+  qrPanel.style.top = (previewOrigin.y - 5) + 'px';
 
   document.getElementById('qrbody').value += '>>' + quote + '\n';
 
@@ -232,4 +232,25 @@ function setQRReplyEnabled(enabled) {
 
 if (!DISABLE_JS) {
   setQr();
+
+  var hash = window.location.hash.substring(1);
+
+  if (hash.indexOf('q') === 0 && hash.length > 1) {
+
+    hash = hash.substring(1);
+
+    var post = document.getElementById(hash);
+
+    if (post) {
+
+      post.scrollIntoView();
+      showQr(post.getElementsByClassName('linkQuote')[0], hash);
+
+      markPost(hash);
+    }
+
+  } else if (hash.length > 0) {
+    markPost(hash);
+  }
+
 }
