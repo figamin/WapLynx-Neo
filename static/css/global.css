@@ -11,6 +11,10 @@
   text-decoration: none;
 }
 
+#panelReferences a {
+  display: block;
+}
+
 .imgLink img, .latestImageCell img, .mediaCell img, .catalogCell img {
   image-orientation: from-image;
 }
