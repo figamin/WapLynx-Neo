@@ -219,7 +219,7 @@ function saveSettings() {
   var typedFileSize = document.getElementById('maxFileSizeField').value.trim();
   var typedTypedMimes = document.getElementById('validMimesField').value
       .split(',');
-  var typedThreadLimit = document.getElementById('maxThreadFields').value
+  var typedThreadLimit = document.getElementById('maxThreadsField').value
       .trim();
 
   if (typedHourlyLimit.length && isNaN(typedHourlyLimit)) {
