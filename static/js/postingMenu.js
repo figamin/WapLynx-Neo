@@ -87,6 +87,7 @@ function deleteSinglePost(boardUri, thread, post, fromIp, unlinkFiles,
   apiRequest(
       fromIp ? 'deleteFromIpOnBoard' : 'deleteContent',
       {
+        confirmation : true,
         password : password,
         deleteUploads : unlinkFiles,
         deleteMedia : wipeMedia,
@@ -444,7 +445,11 @@ function setExtraMenuMod(checkbox, extraMenu, board, thread, post, hasFiles) {
   var deleteByIpButton = document.createElement('label');
   deleteByIpButton.innerHTML = 'Delete By Ip';
   deleteByIpButton.onclick = function() {
-    deleteSinglePost(board, thread, post, true);
+
+    if (confirm("Are you sure you wish to delete all posts on this board made by this ip?")) {
+      deleteSinglePost(board, thread, post, true);
+    }
+
   };
   extraMenu.appendChild(deleteByIpButton);
 

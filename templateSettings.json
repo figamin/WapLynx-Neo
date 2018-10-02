@@ -76,5 +76,6 @@
   "socketManagementPage": "pages/socket.html",
   "mediaDetailsPage": "pages/mediaDetailsPage.html",
   "confirmationEmail": "emails/confirmationEmail.html",
-  "reportNotificationEmail": "emails/reportNotifyEmail.html"
+  "reportNotificationEmail": "emails/reportNotifyEmail.html",
+  "latestPostingsPage": "pages/latestPostings.html"
 }

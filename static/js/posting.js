@@ -297,8 +297,12 @@ function deleteFromIpOnBoard() {
 
   var redirect = '/' + selected[0].board + '/';
 
+  var confirmationBox = document
+      .getElementById('ipDeletionConfirmationCheckbox');
+
   apiRequest('deleteFromIpOnBoard', {
-    postings : selected
+    postings : selected,
+    confirmation : confirmationBox.checked
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {

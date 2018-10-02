@@ -2,8 +2,6 @@ var boardUri;
 
 if (!DISABLE_JS) {
 
-  document.getElementById('reloadCaptchaButton').style.display = 'inline';
-
   var boardIdentifier = document.getElementById('boardIdentifier');
 
   if (boardIdentifier) {
@@ -50,20 +48,9 @@ function liftBan(ban) {
 
 function placeRangeBan() {
 
-  var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
-
-  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
-    return;
-  } else if (/\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
-    return;
-  }
-
   var typedRange = document.getElementById('rangeField').value.trim();
 
   var parameters = {
-    captcha : typedCaptcha,
     range : typedRange
   };
 

@@ -2,8 +2,6 @@ var boardUri;
 
 if (!DISABLE_JS) {
 
-  document.getElementById('reloadCaptchaButton').style.display = 'inline';
-
   var boardIdentifier = document.getElementById('boardIdentifier');
 
   if (boardIdentifier) {

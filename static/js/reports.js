@@ -23,6 +23,8 @@ function closeReports() {
 
   apiRequest('closeReports', {
     reports : ids,
+    duration : document.getElementById('fieldBanDuration').value,
+    banReporter : document.getElementById('banReporterCheckbox').checked,
     deleteContent : document.getElementById('deleteContentCheckbox').checked
   }, function requestComplete(status, data) {
 

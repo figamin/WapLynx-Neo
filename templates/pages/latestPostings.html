@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0">
 <link
-  href="/.static/css/global.css"
+  rel="stylesheet"
   type="text/css"
-  rel="stylesheet" />
+  href="/.static/css/global.css">
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/.static/css/posting.css">
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/.static/css/markdown.css">
 </head>
+
 <body>
 
   <nav>
@@ -36,46 +45,41 @@
   </header>
 
   <div id="settingsWrapper">
-
     <fieldset id="settingsFieldset">
 
-      <legend>Range Ban</legend>
+      <legend>Search</legend>
+      <a id="linkPrevious">Previous day</a>
+      <a id="linkNext">Next day</a>
 
       <form
-        action="/placeRangeBan.js"
-        method="post"
-        enctype="multipart/form-data">
-        <label>
-          Range to be banned:
-          <input
-            type="text"
-            name="range"
-            id="rangeField">
-        </label>
+        action="/latestPostings.js"
+        method="get">
+        Date:
         <input
-          id="boardIdentifier"
-          type="hidden"
-          name="boardUri">
-
+          type="text"
+          name="date"
+          id="fieldDate">
+        <br>
+        Boards(separate with comma, if empty, all boards will be checked):
         <input
-          type="submit"
-          id="createFormButton"
-          value="Place Range Ban">
-        <input
-          type="button"
-          id="createJsButton"
-          onClick="placeRangeBan()"
-          class="hidden"
-          value="Place Range Ban">
+          id="fieldBoards"
+          type="text"
+          name="boards">
+        <br>
+        <button type="submit">Search</button>
       </form>
-      <div id="rangeBansDiv"></div>
+
+      <hr>
+      <h3>Postings</h3>
+      <div id="divPostings"></div>
+
     </fieldset>
   </div>
+
 </body>
 
 <script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
-<script src="/.static/js/rangeBans.js"></script>
 <script src="/.static/js/themes.js"></script>
 <script src="/.static/js/favouriteBoards.js"></script>
 

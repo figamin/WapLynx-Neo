@@ -13,6 +13,10 @@ if (!DISABLE_JS) {
       type : 'boolean',
       setting : 'useGlobalBanners',
     },
+    checkboxDisableLatestPostings : {
+      type : 'boolean',
+      setting : 'disableLatestPostings',
+    },
     checkboxVerboseCache : {
       type : 'boolean',
       setting : 'verboseCache',
@@ -30,8 +34,12 @@ if (!DISABLE_JS) {
       setting : 'omitUnindexedContent',
     },
     fieldMaxBoardHashBans : {
-      type : 'boolean',
+      type : 'string',
       setting : 'maxBoardHashBans',
+    },
+    fieldMaxBoardRangeBans : {
+      type : 'string',
+      setting : 'maxBoardRangeBans',
     },
     checkboxVerboseGridfs : {
       type : 'boolean',
