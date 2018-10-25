@@ -49,13 +49,6 @@
   height: 16px;
 }
 
-.modalDecorationPanel input[type='text'], .modalDecorationPanel select,
-  .modalDecorationPanel textarea {
-  width: 100%;
-  display: block;
-  margin-bottom: 0.25em;
-}
-
 #divUpload, .centered {
   text-align: center;
 }
@@ -95,11 +88,11 @@
   font-size: 80%;
 }
 
-#postingForm td {
+#postingForm td, .modalTableBody td {
   text-align: left;
 }
 
-#postingForm th {
+#postingForm th, .modalTableBody th {
   font-weight: bold;
   text-align: left;
   width: 100px;

@@ -315,7 +315,8 @@ span.spoiler {
   font-size: 80%;
 }
 
-.wide, #postingForm input[type='text'], #flagCombobox {
+.wide, #postingForm input[type='text'], .modalTableBody input[type='text'],
+  .modalTableBody select, #flagCombobox {
   width: 100%;
 }
 

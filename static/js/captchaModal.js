@@ -1,3 +1,23 @@
+function addModalRow(label, element) {
+
+  var tableBody = document.getElementsByClassName('modalTableBody')[0];
+
+  var tableRow = document.createElement('tr');
+  tableBody.appendChild(tableRow);
+
+  var labelElement = document.createElement('th');
+  labelElement.innerHTML = label;
+
+  tableRow.appendChild(labelElement);
+
+  var fieldHolder = document.createElement('td');
+
+  fieldHolder.appendChild(element);
+
+  tableRow.appendChild(fieldHolder);
+
+}
+
 function getCaptchaModal(header, noCaptcha) {
 
   var outerPanel = document.createElement('div');
@@ -39,11 +59,22 @@ function getCaptchaModal(header, noCaptcha) {
     reloadTimer.className = 'captchaTimer';
     captchaControls.appendChild(reloadTimer);
 
+  }
+
+  var captchaTable = document.createElement('table');
+  var tableBody = document.createElement('tbody');
+  tableBody.className = 'modalTableBody';
+  captchaTable.appendChild(tableBody);
+  decorationPanel.appendChild(captchaTable);
+
+  if (!noCaptcha) {
+
     var captchaField = document.createElement('input');
     captchaField.type = 'text';
-    captchaField.setAttribute('placeHolder', 'answer');
     captchaField.className = 'modalAnswer';
-    decorationPanel.appendChild(captchaField);
+
+    addModalRow('Answer', captchaField);
+
   }
 
   var responseButtonsPanel = document.createElement('span');

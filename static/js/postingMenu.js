@@ -23,14 +23,10 @@ function showReport(board, thread, post, global) {
 
   var reasonField = document.createElement('input');
   reasonField.type = 'text';
-  reasonField.setAttribute('placeholder', 'reason');
 
-  var decorationPanel = outerPanel
-      .getElementsByClassName('modalDecorationPanel')[0];
+  addModalRow('Reason', reasonField);
 
   var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
-
-  decorationPanel.insertBefore(reasonField, okButton.parentNode);
 
   okButton.onclick = function() {
 
@@ -140,21 +136,18 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
 
   var reasonField = document.createElement('input');
   reasonField.type = 'text';
-  reasonField.setAttribute('placeholder', 'reason');
-  decorationPanel.insertBefore(reasonField, okButton.parentNode);
+  addModalRow('Reason', reasonField);
 
   var durationField = document.createElement('input');
   durationField.type = 'text';
-  durationField.setAttribute('placeholder', 'duration');
-  decorationPanel.insertBefore(durationField, okButton.parentNode);
+  addModalRow('Duration', durationField);
 
   var messageField = document.createElement('input');
   messageField.type = 'text';
-  messageField.setAttribute('placeholder', 'message');
-  decorationPanel.insertBefore(messageField, okButton.parentNode);
+  addModalRow('Message', messageField);
 
   var typeCombo = document.createElement('select');
-  decorationPanel.insertBefore(typeCombo, okButton.parentNode);
+  addModalRow('Type', typeCombo);
 
   for (var i = 0; i < banLabels.length; i++) {
 
@@ -165,7 +158,8 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
   }
 
   var deletionCombo = document.createElement('select');
-  decorationPanel.insertBefore(deletionCombo, okButton.parentNode);
+
+  addModalRow('Deletion action', deletionCombo);
 
   for (var i = 0; i < deletionOptions.length; i++) {
 
@@ -178,7 +172,7 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
   deletionCombo.selectedIndex = +localStorage.autoDeletionOption;
 
   var captchaField = outerPanel.getElementsByClassName('modalAnswer')[0];
-  captchaField.setAttribute('placeholder', 'answer (only for board staff)');
+  captchaField.setAttribute('placeholder', 'only for board staff)');
 
   okButton.onclick = function() {
 
@@ -286,21 +280,17 @@ function editPost(board, thread, post) {
 
       var outerPanel = getCaptchaModal('Edit', true);
 
-      var decorationPanel = outerPanel
-          .getElementsByClassName('modalDecorationPanel')[0];
-
       var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
       var subjectField = document.createElement('input');
       subjectField.type = 'text';
       subjectField.value = data.subject || '';
-      subjectField.setAttribute('placeholder', 'subject');
-      decorationPanel.insertBefore(subjectField, okButton.parentNode);
+      addModalRow('Subject', subjectField);
 
       var messageArea = document.createElement('textarea');
       messageArea.setAttribute('placeholder', 'message');
       messageArea.defaultValue = data.message || '';
-      decorationPanel.insertBefore(messageArea, okButton.parentNode);
+      addModalRow('Message', messageArea);
 
       okButton.onclick = function() {
 
