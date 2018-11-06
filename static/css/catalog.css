@@ -17,10 +17,7 @@
   height: 14em;
   overflow: hidden;
   overflow-y: auto;
-  background: #282A2E;
   margin: 0.1em;
-  border: 1px solid #117743;
-  border-radius: 5px;
 }
 
 .catalogLabel {

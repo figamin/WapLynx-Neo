@@ -61,19 +61,12 @@
 }
 
 .innerPost, .markedPost {
-  background: #282A2E;
   display: inline-block;
   overflow: hidden;
   padding-right: 0.5em;
   padding-left: 0.25em;
   padding-top: 0.25em;
   max-width: 100%;
-  border: 1px solid #117743;
-  border-radius: 5px;
-}
-
-.markedPost {
-  background: rgba(59, 22, 43, 0.4);
 }
 
 .linkName {

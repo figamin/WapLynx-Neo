@@ -68,16 +68,10 @@
 
 .topBoards a {
   padding: 0.25em 0.5em;
-  background: #282A2E;
   text-decoration: none;
   margin: 0.5em 0.25em;
-  border-radius: 5px;
   display: inline-block;
   font-size: 90%;
-}
-
-.topBoards br {
-  display: none;
 }
 
 #divLatestPosts {
@@ -90,13 +84,10 @@
   display: inline-block;
   overflow: hidden;
   padding: 0.5em;
-  background: #282A2E;
   margin: 0.5em;
   max-width: 15%;
   max-height: 8em;
   font-size: 75%;
-  border: 1px solid #117743;
-  border-radius: 5px;
   vertical-align: middle;
 }
 
@@ -120,6 +111,4 @@
   max-width: 125px;
   max-height: 125px;
   padding: 5px;
-  background: #282A2E;
-  border-radius: 5px;
 }

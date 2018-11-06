@@ -36,17 +36,10 @@ header {
 .sideCatalogCell, .sideCatalogMarkedCell {
   display: block;
   cursor: pointer;
-  background: #282A2E;
-  border: 1px solid #117743;
-  border-radius: 5px;
   padding: 0.5em;
   font-size: 75%;
   overflow: hidden;
   margin-bottom: 10px;
-}
-
-.sideCatalogMarkedCell {
-  background: rgba(59, 22, 43, 0.4);
 }
 
 #sideCatalogBody img {

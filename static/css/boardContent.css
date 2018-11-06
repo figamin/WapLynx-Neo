@@ -59,10 +59,6 @@
   width: 25em;
 }
 
-#newPostFieldset, #quick-reply table, .modalDecorationPanel {
-  border: 1px dashed #117743;
-}
-
 #postingForm {
   text-align: center;
   margin: 1em auto;
