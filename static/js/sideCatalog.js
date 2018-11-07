@@ -300,6 +300,7 @@ function loadThread(cell, thread) {
         removeAllFromClass('extraMenu');
         removeAllFromClass('hideButton');
         removeAllFromClass('watchButton');
+        removeAllFromClass('relativeTime');
 
         removeIndicator('lockIndicator');
         removeIndicator('pinIndicator');
