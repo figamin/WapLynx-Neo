@@ -77,5 +77,6 @@
   "mediaDetailsPage": "pages/mediaDetailsPage.html",
   "confirmationEmail": "emails/confirmationEmail.html",
   "reportNotificationEmail": "emails/reportNotifyEmail.html",
-  "latestPostingsPage": "pages/latestPostings.html"
+  "latestPostingsPage": "pages/latestPostings.html",
+  "header": "cells/header.html"
 }
