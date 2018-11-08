@@ -24,11 +24,13 @@ function startTimer() {
 
   setTimeout(function refresh() {
 
-    latestCheck = new Date();
+    var currentCheck = new Date();
 
     localRequest('/latestPostings.js?json=1&date=' + latestCheck.toUTCString()
         + '&boards=' + document.getElementById('fieldBoards').value,
         function gotData(error, data) {
+
+          latestCheck = currentCheck;
 
           startTimer();
 
