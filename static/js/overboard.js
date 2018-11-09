@@ -1,1 +1,1 @@
-var board = true;
+api.isBoard = true;

@@ -1,10 +1,17 @@
-if (!DISABLE_JS) {
+var accounts = {};
+
+accounts.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
   document.getElementById('addAccountJsButton').style.display = 'inline';
-
   document.getElementById('addAccountFormButton').style.display = 'none';
-}
 
-function addAccount() {
+};
+
+accounts.addAccount = function() {
 
   var typedLogin = document.getElementById('fieldLogin').value;
   var typedPassword = document.getElementById('fieldPassword').value;
@@ -18,7 +25,7 @@ function addAccount() {
     alert('Invalid login.');
   } else {
 
-    apiRequest('addAccount', {
+    api.apiRequest('addAccount', {
       login : typedLogin,
       password : typedPassword,
       email : typedEmail
@@ -33,4 +40,6 @@ function addAccount() {
 
   }
 
-}
+};
+
+accounts.init();

@@ -1,35 +1,41 @@
-var postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
-    + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
-    + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
-    + '</span> <span class="labelCreated"></span> <span class="spanId"> Id:<span '
-    + 'class="labelId"></span></span> <a '
-    + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
-    + '</span></div>'
-    + '<div>'
-    + '<span class="panelIp"> <span class="panelRange">Broad'
-    + 'range(1/2 octets): <span class="labelBroadRange"> </span> <br>'
-    + 'Narrow range(3/4 octets): <span class="labelNarrowRange"> </span> <br>'
-    + '</span> Ip: <span class="labelIp"></span></span>'
-    + '</div>'
-    + '<div class="panelUploads"></div><div class="divMessage"></div>'
-    + '<div class="divBanMessage"></div><div class="labelLastEdit"></div></div>';
+var posting = {};
 
-var uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
-    + 'Open file</a> (<span class="sizeLabel"></span> <span class="dimensionLabel">'
-    + '</span> <a class="originalNameLink"></a>)</div>'
-    + '<div class="divHash"><span>MD5: <span class="labelHash"></span></span></div>'
-    + '<a class="imgLink" ' + 'target="blank"></a>';
+posting.init = function() {
 
-var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
-var guiEditInfo = 'Edited last time by {$login} on {$date}.';
+  posting.postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
+      + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
+      + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
+      + '</span> <span class="labelCreated"></span> <span class="spanId"> Id:<span '
+      + 'class="labelId"></span></span> <a '
+      + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
+      + '</span></div>'
+      + '<div>'
+      + '<span class="panelIp"> <span class="panelRange">Broad'
+      + 'range(1/2 octets): <span class="labelBroadRange"> </span> <br>'
+      + 'Narrow range(3/4 octets): <span class="labelNarrowRange"> </span> <br>'
+      + '</span> Ip: <span class="labelIp"></span></span>'
+      + '</div>'
+      + '<div class="panelUploads"></div><div class="divMessage"></div>'
+      + '<div class="divBanMessage"></div><div class="labelLastEdit"></div></div>';
 
-var reverseHTMLReplaceTable = {
-  '&lt;' : '<',
-  '&gt;' : '>'
-};
+  posting.uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
+      + 'Open file</a> (<span class="sizeLabel"></span> <span class="dimensionLabel">'
+      + '</span> <a class="originalNameLink"></a>)</div>'
+      + '<div class="divHash"><span>MD5: <span class="labelHash"></span></span></div>'
+      + '<a class="imgLink" ' + 'target="blank"></a>';
 
-if (!DISABLE_JS) {
+  posting.sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
+
+  posting.guiEditInfo = 'Edited last time by {$login} on {$date}.';
+
+  posting.reverseHTMLReplaceTable = {
+    '&lt;' : '<',
+    '&gt;' : '>'
+  };
 
   if (document.getElementById('deleteJsButton')) {
     document.getElementById('deleteJsButton').style.display = 'inline';
@@ -52,24 +58,24 @@ if (!DISABLE_JS) {
 
   if (localStorage.relativeTime && JSON.parse(localStorage.relativeTime)) {
 
-    updateAllRelativeTimes();
-    setInterval(updateAllRelativeTimes, 1000 * 60 * 5);
+    posting.updateAllRelativeTimes();
+    setInterval(posting.updateAllRelativeTimes, 1000 * 60 * 5);
 
   }
 
-}
+};
 
-function updateAllRelativeTimes() {
+posting.updateAllRelativeTimes = function() {
 
   var times = document.getElementsByClassName('labelCreated');
 
   for (var i = 0; i < times.length; i++) {
-    addRelativeTime(times[i]);
+    posting.addRelativeTime(times[i]);
   }
 
-}
+};
 
-function addRelativeTime(time) {
+posting.addRelativeTime = function(time) {
 
   var timeObject = new Date(time.innerHTML + ' UTC');
 
@@ -116,10 +122,10 @@ function addRelativeTime(time) {
 
 };
 
-function spoilFiles() {
+posting.spoilFiles = function() {
 
-  apiRequest('spoilFiles', {
-    postings : getSelectedContent()
+  api.apiRequest('spoilFiles', {
+    postings : posting.getSelectedContent()
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
@@ -131,66 +137,9 @@ function spoilFiles() {
     }
   });
 
-}
+};
 
-function applyBans(captcha) {
-  var typedReason = document.getElementById('reportFieldReason').value.trim();
-  var typedDuration = document.getElementById('fieldDuration').value.trim();
-  var typedMessage = document.getElementById('fieldbanMessage').value.trim();
-  var banType = document.getElementById('comboBoxBanTypes').selectedIndex;
-
-  var toBan = getSelectedContent();
-
-  apiRequest('banUsers', {
-    reason : typedReason,
-    captcha : captcha,
-    banType : banType,
-    duration : typedDuration,
-    banMessage : typedMessage,
-    global : document.getElementById('checkboxGlobal').checked,
-    postings : toBan
-  }, function requestComplete(status, data) {
-
-    if (status === 'ok') {
-
-      alert('Bans applied');
-
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
-}
-
-function banPosts() {
-
-  if (!document.getElementsByClassName('panelRange').length) {
-    applyBans();
-    return;
-  }
-
-  var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
-
-  if (typedCaptcha && /\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
-    return;
-  }
-
-  if (typedCaptcha.length == 24 || !typedCaptcha) {
-    applyBans(typedCaptcha);
-  } else {
-    var parsedCookies = getCookies();
-
-    apiRequest('solveCaptcha', {
-      captchaId : parsedCookies.captchaid,
-      answer : typedCaptcha
-    }, function solvedCaptcha(status, data) {
-      applyBans(parsedCookies.captchaid);
-    });
-  }
-
-}
-
-function getSelectedContent() {
+posting.getSelectedContent = function() {
   var selectedContent = [];
 
   var checkBoxes = document.getElementsByClassName('deletionCheckBox');
@@ -218,25 +167,14 @@ function getSelectedContent() {
 
   return selectedContent;
 
-}
+};
 
-var reportCallback = function(status, data) {
-
-  if (status === 'ok') {
-
-    alert('Content reported');
-
-  } else {
-    alert(status + ': ' + JSON.stringify(data));
-  }
-}
-
-function reportPosts() {
+posting.reportPosts = function() {
 
   var typedReason = document.getElementById('reportFieldReason').value.trim();
   var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
 
-  var toReport = getSelectedContent();
+  var toReport = posting.getSelectedContent();
 
   if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
     alert('Captchas are exactly 6 (24 if no cookies) characters long.');
@@ -246,27 +184,38 @@ function reportPosts() {
     return;
   }
 
-  apiRequest('reportContent', {
+  api.apiRequest('reportContent', {
     reason : typedReason,
     captcha : typedCaptcha,
     global : document.getElementById('checkboxGlobal').checked,
     postings : toReport
-  }, reportCallback);
-}
+  }, function reported(status, data) {
 
-function deletePosts() {
+    if (status === 'ok') {
+
+      alert('Content reported');
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+
+  });
+
+};
+
+posting.deletePosts = function() {
 
   var typedPassword = document.getElementById('deletionFieldPassword').value
       .trim();
 
-  var toDelete = getSelectedContent();
+  var toDelete = posting.getSelectedContent();
 
   if (!toDelete.length) {
     alert('Nothing selected');
     return;
   }
 
-  apiRequest('deleteContent', {
+  api.apiRequest('deleteContent', {
     password : typedPassword,
     deleteMedia : document.getElementById('checkboxMediaDeletion').checked,
     deleteUploads : document.getElementById('checkboxOnlyFiles').checked,
@@ -278,7 +227,7 @@ function deletePosts() {
       alert(data.removedThreads + ' threads and ' + data.removedPosts
           + ' posts were successfully deleted.');
 
-      if (!board && !data.removedThreads && data.removedPosts) {
+      if (!api.isBoard && !data.removedThreads && data.removedPosts) {
         refreshPosts(true, true);
       } else if (data.removedThreads || data.removedPosts) {
         window.location.pathname = '/' + toDelete[0].board + '/';
@@ -289,18 +238,18 @@ function deletePosts() {
     }
   });
 
-}
+};
 
-function deleteFromIpOnBoard() {
+posting.deleteFromIpOnBoard = function() {
 
-  var selected = getSelectedContent();
+  var selected = posting.getSelectedContent();
 
   var redirect = '/' + selected[0].board + '/';
 
   var confirmationBox = document
       .getElementById('ipDeletionConfirmationCheckbox');
 
-  apiRequest('deleteFromIpOnBoard', {
+  api.apiRequest('deleteFromIpOnBoard', {
     postings : selected,
     confirmation : confirmationBox.checked
   }, function requestComplete(status, data) {
@@ -316,78 +265,84 @@ function deleteFromIpOnBoard() {
     }
   });
 
-}
+};
 
-function padDateField(value) {
+posting.padDateField = function(value) {
+
   if (value < 10) {
     value = '0' + value;
   }
 
   return value;
-}
 
-function formatDateToDisplay(d) {
-  var day = padDateField(d.getUTCDate());
+};
+
+posting.formatDateToDisplay = function(d) {
+
+  var day = posting.padDateField(d.getUTCDate());
 
   var weekDays = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
 
-  var month = padDateField(d.getUTCMonth() + 1);
+  var month = posting.padDateField(d.getUTCMonth() + 1);
 
   var year = d.getUTCFullYear();
 
   var weekDay = weekDays[d.getUTCDay()];
 
-  var hour = padDateField(d.getUTCHours());
+  var hour = posting.padDateField(d.getUTCHours());
 
-  var minute = padDateField(d.getUTCMinutes());
+  var minute = posting.padDateField(d.getUTCMinutes());
 
-  var second = padDateField(d.getUTCSeconds());
+  var second = posting.padDateField(d.getUTCSeconds());
 
   var toReturn = month + '/' + day + '/' + year;
 
   return toReturn + ' (' + weekDay + ') ' + hour + ':' + minute + ':' + second;
-}
 
-function formatFileSize(size) {
+};
+
+posting.formatFileSize = function(size) {
 
   var orderIndex = 0;
 
-  while (orderIndex < sizeOrders.length - 1 && size > 1024) {
+  while (orderIndex < posting.sizeOrders.length - 1 && size > 1024) {
 
     orderIndex++;
     size /= 1024;
 
   }
 
-  return size.toFixed(2) + ' ' + sizeOrders[orderIndex];
+  return size.toFixed(2) + ' ' + posting.sizeOrders[orderIndex];
 
-}
+};
 
-function setLastEditedLabel(post, cell) {
+posting.setLastEditedLabel = function(post, cell) {
 
   var editedLabel = cell.getElementsByClassName('labelLastEdit')[0];
 
   if (post.lastEditTime) {
 
-    var formatedDate = formatDateToDisplay(new Date(post.lastEditTime));
+    var formatedDate = posting.formatDateToDisplay(new Date(post.lastEditTime));
 
-    editedLabel.innerHTML = guiEditInfo.replace('{$date}', formatedDate)
-        .replace('{$login}', post.lastEditLogin);
+    editedLabel.innerHTML = posting.guiEditInfo
+        .replace('{$date}', formatedDate).replace('{$login}',
+            post.lastEditLogin);
 
   } else {
     editedLabel.remove();
   }
 
-}
+};
 
-function setUploadLinks(cell, file, noExtras) {
+posting.setUploadLinks = function(cell, file, noExtras) {
+
   var thumbLink = cell.getElementsByClassName('imgLink')[0];
   thumbLink.href = file.path;
 
   thumbLink.setAttribute('data-filemime', file.mime);
 
   if (file.mime.indexOf('image/') > -1 && !noExtras) {
-    addGalleryFile(file.path);
+    gallery.addGalleryFile(file.path);
   }
 
   var img = document.createElement('img');
@@ -402,17 +357,20 @@ function setUploadLinks(cell, file, noExtras) {
   originalLink.innerHTML = file.originalName;
   originalLink.href = file.path;
   originalLink.setAttribute('download', file.originalName);
-}
 
-function getUploadCellBase() {
+};
+
+posting.getUploadCellBase = function() {
+
   var cell = document.createElement('figure');
-  cell.innerHTML = uploadCell;
+  cell.innerHTML = posting.uploadCell;
   cell.className = 'uploadCell';
 
   return cell;
+
 }
 
-function setUploadCell(node, files, noExtras) {
+posting.setUploadCell = function(node, files, noExtras) {
 
   if (!files) {
     return;
@@ -421,11 +379,11 @@ function setUploadCell(node, files, noExtras) {
   for (var i = 0; i < files.length; i++) {
     var file = files[i];
 
-    var cell = getUploadCellBase();
+    var cell = posting.getUploadCellBase();
 
-    setUploadLinks(cell, file, noExtras);
+    posting.setUploadLinks(cell, file, noExtras);
 
-    var sizeString = formatFileSize(file.size);
+    var sizeString = posting.formatFileSize(file.size);
     cell.getElementsByClassName('sizeLabel')[0].innerHTML = sizeString;
 
     var dimensionLabel = cell.getElementsByClassName('dimensionLabel')[0];
@@ -445,10 +403,12 @@ function setUploadCell(node, files, noExtras) {
     node.appendChild(cell);
   }
 
-}
+};
 
-function setPostHideableElements(postCell, post, noExtras) {
+posting.setPostHideableElements = function(postCell, post, noExtras) {
+
   var subjectLabel = postCell.getElementsByClassName('labelSubject')[0];
+
   if (post.subject) {
     subjectLabel.innerHTML = post.subject;
   } else {
@@ -477,14 +437,14 @@ function setPostHideableElements(postCell, post, noExtras) {
     banMessageLabel.innerHTML = post.banMessage;
   }
 
-  setLastEditedLabel(post, postCell);
+  posting.setLastEditedLabel(post, postCell);
 
   var imgFlag = postCell.getElementsByClassName('imgFlag')[0];
 
   if (post.flag) {
     imgFlag.src = post.flag;
     imgFlag.title = post.flagName.replace(/&(l|g)t;/g, function replace(match) {
-      return reverseHTMLReplaceTable[match];
+      return posting.reverseHTMLReplaceTable[match];
     });
 
     if (post.flagCode) {
@@ -511,10 +471,10 @@ function setPostHideableElements(postCell, post, noExtras) {
 
   }
 
-}
+};
 
-function setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
-    deletionCheckbox) {
+posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
+    linkQuote, deletionCheckbox) {
 
   var postingId = post.postId || threadId;
 
@@ -534,9 +494,10 @@ function setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
 
   deletionCheckbox.setAttribute('name', checkboxName);
 
-}
+};
 
-function setRoleSignature(postingCell, posting) {
+posting.setRoleSignature = function(postingCell, posting) {
+
   var labelRole = postingCell.getElementsByClassName('labelRole')[0];
 
   if (posting.signedRole) {
@@ -544,11 +505,13 @@ function setRoleSignature(postingCell, posting) {
   } else {
     labelRole.parentNode.removeChild(labelRole);
   }
-}
 
-function setPostComplexElements(postCell, post, boardUri, threadId, noExtras) {
+};
 
-  setRoleSignature(postCell, post);
+posting.setPostComplexElements = function(postCell, post, boardUri, threadId,
+    noExtras) {
+
+  posting.setRoleSignature(postCell, post);
 
   var link = postCell.getElementsByClassName('linkSelf')[0];
 
@@ -557,7 +520,7 @@ function setPostComplexElements(postCell, post, boardUri, threadId, noExtras) {
 
   var deletionCheckbox = postCell.getElementsByClassName('deletionCheckBox')[0];
 
-  setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
+  posting.setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
       deletionCheckbox);
 
   var panelUploads = postCell.getElementsByClassName('panelUploads')[0];
@@ -565,12 +528,13 @@ function setPostComplexElements(postCell, post, boardUri, threadId, noExtras) {
   if (!post.files || !post.files.length) {
     panelUploads.remove();
   } else {
-    setUploadCell(panelUploads, post.files, noExtras);
+    posting.setUploadCell(panelUploads, post.files, noExtras);
   }
 
-}
+};
 
-function setPostInnerElements(boardUri, threadId, post, postCell, noExtras) {
+posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
+    noExtras) {
 
   var linkName = postCell.getElementsByClassName('linkName')[0];
 
@@ -584,23 +548,23 @@ function setPostInnerElements(boardUri, threadId, post, postCell, noExtras) {
 
   var labelCreated = postCell.getElementsByClassName('labelCreated')[0];
 
-  labelCreated.innerHTML = formatDateToDisplay(new Date(post.creation));
+  labelCreated.innerHTML = posting.formatDateToDisplay(new Date(post.creation));
 
   if (localStorage.relativeTime && JSON.parse(localStorage.relativeTime)) {
-    addRelativeTime(labelCreated);
+    posting.addRelativeTime(labelCreated);
   }
 
   postCell.getElementsByClassName('divMessage')[0].innerHTML = post.markdown;
 
-  setPostHideableElements(postCell, post, noExtras);
+  posting.setPostHideableElements(postCell, post, noExtras);
 
-  setPostComplexElements(postCell, post, boardUri, threadId, noExtras);
+  posting.setPostComplexElements(postCell, post, boardUri, threadId, noExtras);
 
   var messageLinks = postCell.getElementsByClassName('divMessage')[0]
       .getElementsByTagName('a');
 
   for (var i = 0; i < messageLinks.length; i++) {
-    processLinkForEmbed(messageLinks[i]);
+    embed.processLinkForEmbed(messageLinks[i]);
   }
 
   var links = postCell.getElementsByClassName('imgLink');
@@ -612,19 +576,19 @@ function setPostInnerElements(boardUri, threadId, post, postCell, noExtras) {
   }
 
   for (i = 0; i < temporaryImageLinks.length; i++) {
-    processImageLink(temporaryImageLinks[i]);
+    thumbs.processImageLink(temporaryImageLinks[i]);
   }
 
   var shownFiles = postCell.getElementsByClassName('uploadCell');
 
   for (var i = 0; i < shownFiles.length; i++) {
-    processFileForHiding(shownFiles[i]);
+    mediaHiding.processFileForHiding(shownFiles[i]);
   }
 
-  var hiddenMedia = getHiddenMedia();
+  var hiddenMedia = mediaHiding.getHiddenMedia();
 
   for (i = 0; i < hiddenMedia.length; i++) {
-    updateHiddenFiles(hiddenMedia[i], true);
+    mediaHiding.updateHiddenFiles(hiddenMedia[i], true);
   }
 
   postCell.setAttribute('data-boarduri', boardUri);
@@ -633,26 +597,27 @@ function setPostInnerElements(boardUri, threadId, post, postCell, noExtras) {
     return;
   }
 
-  addToKnownPostsForBackLinks(postCell);
+  tooltips.addToKnownPostsForBackLinks(postCell);
 
   var quotes = postCell.getElementsByClassName('quoteLink');
 
   for (i = 0; i < quotes.length; i++) {
-    processQuote(quotes[i]);
+    tooltips.processQuote(quotes[i]);
   }
 
   var checkbox = postCell.getElementsByClassName('deletionCheckBox')[0];
 
-  setHideMenu(checkbox);
-  setExtraMenu(checkbox)
+  hiding.setHideMenu(checkbox);
+  postingMenu.setExtraMenu(checkbox)
 
   processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
-}
 
-function addPost(post, boardUri, threadId, noExtra) {
+};
+
+posting.addPost = function(post, boardUri, threadId, noExtra) {
 
   var postCell = document.createElement('div');
-  postCell.innerHTML = postCellTemplate;
+  postCell.innerHTML = posting.postCellTemplate;
 
   postCell.id = post.postId;
   postCell.setAttribute('class', 'postCell');
@@ -663,8 +628,10 @@ function addPost(post, boardUri, threadId, noExtra) {
 
   postCell.setAttribute('data-boarduri', boardUri);
 
-  setPostInnerElements(boardUri, threadId, post, postCell, noExtra);
+  posting.setPostInnerElements(boardUri, threadId, post, postCell, noExtra);
 
   return postCell;
 
-}
+};
+
+posting.init();

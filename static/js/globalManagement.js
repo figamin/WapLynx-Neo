@@ -1,4 +1,10 @@
-if (!DISABLE_JS) {
+var globalManagement = {};
+
+globalManagement.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   if (document.getElementById('addStaffForm')) {
     document.getElementById('addJsButton').style.display = 'inline';
@@ -15,12 +21,12 @@ if (!DISABLE_JS) {
   var staffCells = document.getElementsByClassName('staffCell');
 
   for (var i = 0; i < staffCells.length; i++) {
-    processCell(staffCells[i]);
+    globalManagement.processCell(staffCells[i]);
   }
 
-}
+};
 
-function processCell(cell) {
+globalManagement.processCell = function(cell) {
 
   var button = cell.getElementsByClassName('saveJsButton')[0];
   button.style.display = 'inline';
@@ -31,28 +37,30 @@ function processCell(cell) {
   var user = cell.getElementsByClassName('userIdentifier')[0].value;
 
   button.onclick = function() {
-    saveUser(user, comboBox);
+    globalManagement.saveUser(user, comboBox);
   };
-}
 
-function saveUser(user, comboBox) {
+};
 
-  setUser(user, comboBox.options[comboBox.selectedIndex].value);
+globalManagement.saveUser = function(user, comboBox) {
 
-}
+  globalManagement
+      .setUser(user, comboBox.options[comboBox.selectedIndex].value);
 
-function addUser() {
+};
+
+globalManagement.addUser = function() {
 
   var combo = document.getElementById('newStaffCombo');
 
-  setUser(document.getElementById('fieldLogin').value.trim(),
+  globalManagement.setUser(document.getElementById('fieldLogin').value.trim(),
       combo.options[combo.selectedIndex].value);
 
-}
+};
 
-function setUser(login, role) {
+globalManagement.setUser = function(login, role) {
 
-  apiRequest('setGlobalRole', {
+  api.apiRequest('setGlobalRole', {
     login : login,
     role : +role
   }, function requestComplete(status, data) {
@@ -66,9 +74,9 @@ function setUser(login, role) {
     }
   });
 
-}
+};
 
-function massBan() {
+globalManagement.massBan = function() {
 
   var ipField = document.getElementById('fieldIps');
   var reasonField = document.getElementById('fieldReason');
@@ -98,7 +106,7 @@ function massBan() {
   var typedReason = reasonField.value;
   var typedDuration = durationField.value;
 
-  apiRequest('massBan.js', {
+  api.apiRequest('massBan.js', {
     ips : finalIpArray,
     reason : typedReason,
     duration : typedDuration
@@ -116,4 +124,6 @@ function massBan() {
     }
   });
 
-}
+};
+
+globalManagement.init();

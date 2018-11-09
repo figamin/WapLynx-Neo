@@ -1,4 +1,10 @@
-if (!DISABLE_JS) {
+var languages = {};
+
+languages.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   document.getElementById('addJsButton').style.display = 'inline';
 
@@ -7,12 +13,12 @@ if (!DISABLE_JS) {
   var cells = document.getElementsByClassName('languageCell');
 
   for (var i = 0; i < cells.length; i++) {
-    setLanguageCell(cells[i]);
+    languages.setLanguageCell(cells[i]);
   }
 
-}
+};
 
-function setLanguageCell(cell) {
+languages.setLanguageCell = function(cell) {
 
   var jsButton = cell.getElementsByClassName('deleteJsButton')[0];
   jsButton.style.display = 'inline';
@@ -20,7 +26,7 @@ function setLanguageCell(cell) {
 
   jsButton.onclick = function() {
 
-    apiRequest('deleteLanguage', {
+    api.apiRequest('deleteLanguage', {
       languageId : cell.getElementsByClassName('languageIdentifier')[0].value
     }, function requestComplete(status, data) {
 
@@ -35,9 +41,9 @@ function setLanguageCell(cell) {
 
   };
 
-}
+};
 
-function addLanguage() {
+languages.addLanguage = function() {
 
   var typedHeaderValues = document.getElementById('fieldHeaderValues').value
       .trim();
@@ -57,7 +63,7 @@ function addLanguage() {
     headerValues : parsedHeaderValues
   };
 
-  apiRequest('addLanguage', {
+  api.apiRequest('addLanguage', {
     frontEnd : typedFrontEnd,
     languagePack : typedLanguagePack,
     headerValues : parsedHeaderValues
@@ -72,4 +78,6 @@ function addLanguage() {
     }
   });
 
-}
+};
+
+languages.init();

@@ -176,7 +176,7 @@
                 <div class="subCaptchaDiv">
                   <input
                     type="button"
-                    onClick="reloadCaptcha()"
+                    onClick="captchaUtils.reloadCaptcha()"
                     value="Reload"
                     id="reloadCaptchaButton"
                     class="hidden">
@@ -259,7 +259,7 @@
 
         <button
           type="button"
-          onClick="postThread()"
+          onClick="board.postThread()"
           id="jsButton"
           class="hidden">Post</button>
       </form>
@@ -335,7 +335,7 @@
             type="button"
             class="hidden"
             id="deleteJsButton"
-            onClick="deletePosts()"
+            onClick="posting.deletePosts()"
             value="Delete">
         </div>
       </fieldset>
@@ -368,7 +368,7 @@
             type="button"
             class="hidden"
             id="reloadCaptchaButtonReport"
-            onclick="reloadCaptcha()"
+            onclick="captchaUtils.reloadCaptcha()"
             value="Reload">
           <span class="captchaTimer"></span>
           <br>
@@ -396,7 +396,7 @@
             type="button"
             class="hidden"
             id="reportJsButton"
-            onClick="reportPosts()"
+            onClick="posting.reportPosts()"
             value="Report">
 
 
@@ -421,7 +421,7 @@
 <script src="/.static/js/thumbs.js"></script>
 <script src="/.static/js/tooltips.js"></script>
 <script src="/.static/js/posting.js"></script>
-<script src="/.static/js/captcha.js"></script>
+<script src="/.static/js/captchaUtils.js"></script>
 <script src="/.static/js/themes.js"></script>
 <script src="/.static/js/draggable.js"></script>
 <script src="/.static/js/settingsMenu.js"></script>

@@ -149,7 +149,7 @@
                 <div class="subCaptchaDiv">
                   <input
                     type="button"
-                    onClick="reloadCaptcha()"
+                    onClick="captchaUtils.reloadCaptcha()"
                     value="Reload"
                     id="reloadCaptchaButton"
                     class="hidden">
@@ -233,7 +233,7 @@
 
         <button
           type="button"
-          onClick="postThread()"
+          onClick="board.postThread()"
           id="jsButton"
           class="hidden">Post</button>
 
@@ -257,11 +257,11 @@
     <button
       id="catalogRefreshButton"
       class="catalogLabel"
-      onclick="refreshCatalog(true)">Refresh</button>
+      onclick="catalog.refreshCatalog(true)">Refresh</button>
     <input
       type="checkbox"
       id="autoCatalogRefreshCheckBox"
-      onchange="changeCatalogRefresh()">
+      onchange="catalog.changeCatalogRefresh()">
     <span
       class="catalogLabel"
       id="catalogRefreshLabel">Auto</span>)
@@ -280,7 +280,7 @@
 <script src="/.static/js/board.js"></script>
 <script src="/.static/js/postCommon.js"></script>
 <script src="/.static/js/captchaModal.js"></script>
-<script src="/.static/js/captcha.js"></script>
+<script src="/.static/js/captchaUtils.js"></script>
 <script src="/.static/js/catalog.js"></script>
 <script src="/.static/js/themes.js"></script>
 <script src="/.static/js/draggable.js"></script>

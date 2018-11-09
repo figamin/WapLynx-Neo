@@ -1,9 +1,14 @@
-var boardIdentifier;
+var bannerManagement = {};
 
-if (!DISABLE_JS) {
+bannerManagement.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   if (document.getElementById('boardIdentifier')) {
-    boardIdentifier = document.getElementById('boardIdentifier').value;
+    api.boardUri = document
+        .getElementById('boardIdentifier').value;
   }
 
   document.getElementById('addJsButton').style.display = 'inline';
@@ -13,25 +18,26 @@ if (!DISABLE_JS) {
   var bannersDiv = document.getElementById('bannersDiv');
 
   for (var j = 0; j < bannersDiv.childNodes.length; j++) {
-    processBannerCell(bannersDiv.childNodes[j]);
+    bannerManagement.processBannerCell(bannersDiv.childNodes[j]);
   }
 
-}
+};
 
-function processBannerCell(cell) {
+bannerManagement.processBannerCell = function(cell) {
 
   var button = cell.getElementsByClassName('deleteJsButton')[0];
   button.style.display = 'inline';
 
   button.onclick = function() {
-    removeBanner(cell.getElementsByClassName('bannerIdentifier')[0].value);
+    bannerManagement.removeBanner(cell
+        .getElementsByClassName('bannerIdentifier')[0].value);
   };
 
   cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
 
-}
+};
 
-function addBanner() {
+bannerManagement.addBanner = function() {
 
   var file = document.getElementById('files').files[0];
 
@@ -50,10 +56,9 @@ function addBanner() {
     } ];
 
     // style exception, too simple
-
-    apiRequest('createBanner', {
+    api.apiRequest('createBanner', {
       files : files,
-      boardUri : boardIdentifier,
+      boardUri : api.boardUri,
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
@@ -64,17 +69,16 @@ function addBanner() {
         alert(status + ': ' + JSON.stringify(data));
       }
     });
-
     // style exception, too simple
 
   };
 
   reader.readAsDataURL(file);
 
-}
+};
 
-function removeBanner(bannerId) {
-  apiRequest('deleteBanner', {
+bannerManagement.removeBanner = function(bannerId) {
+  api.apiRequest('deleteBanner', {
     bannerId : bannerId,
   }, function requestComplete(status, data) {
 
@@ -86,4 +90,6 @@ function removeBanner(bannerId) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
-}
+};
+
+bannerManagement.init();

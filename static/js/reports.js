@@ -1,4 +1,6 @@
-function closeReports() {
+var reports = {};
+
+reports.closeReports = function() {
 
   var reportDiv = document.getElementById('reportDiv');
 
@@ -21,7 +23,7 @@ function closeReports() {
     return;
   }
 
-  apiRequest('closeReports', {
+  api.apiRequest('closeReports', {
     reports : ids,
     duration : document.getElementById('fieldBanDuration').value,
     banReporter : document.getElementById('banReporterCheckbox').checked,
@@ -39,4 +41,4 @@ function closeReports() {
     }
   });
 
-}
+};

@@ -1,10 +1,17 @@
-if (!DISABLE_JS) {
+var accountManagement = {};
+
+accountManagement.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
   document.getElementById('deleteAccountJsButton').style.display = 'inline';
-
   document.getElementById('deleteAccountFormButton').style.display = 'none';
-}
 
-function deleteAccount() {
+};
+
+accountManagement.deleteAccount = function() {
 
   var confirmed = document.getElementById('confirmationCheckbox').checked;
 
@@ -12,7 +19,7 @@ function deleteAccount() {
     alert('You must confirm that you wish to delete this account.');
   } else {
 
-    apiRequest('deleteAccount', {
+    api.apiRequest('deleteAccount', {
       confirmation : confirmed,
       account : document.getElementById('userIdentifier').value
     }, function requestComplete(status, data) {
@@ -26,4 +33,6 @@ function deleteAccount() {
 
   }
 
-}
+};
+
+accountManagement.init();

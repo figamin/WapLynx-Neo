@@ -73,14 +73,14 @@
 
   <div
     class="hidden"
-    id="sideCatalog">
+    id="sideCatalogDiv">
 
     <div id="sideCatalogHeader">
 
       <button
         id="sideCatalogRefreshButton"
         class="catalogLabel"
-        onclick="refreshSideCatalog()">Refresh</button>
+        onclick="sideCatalog.refreshSideCatalog()">Refresh</button>
       <span
         id="closeSideCatalogButton"
         class="coloredIcon glowOnHover"></span>
@@ -204,7 +204,7 @@
                   <div class="subCaptchaDiv">
                     <input
                       type="button"
-                      onClick="reloadCaptcha()"
+                      onClick="captchaUtils.reloadCaptcha()"
                       value="Reload"
                       id="reloadCaptchaButton"
                       class="hidden">
@@ -428,7 +428,7 @@
           <input
             type="button"
             value="Delete"
-            onclick="deleteFromIp()"
+            onclick="thread.deleteFromIp()"
             id="deleteFromIpJsButton"
             class="hidden">
 
@@ -470,7 +470,7 @@
               id="checkboxChangeRefresh"
               type="checkbox"
               checked
-              onchange="changeRefresh()">
+              onchange="thread.changeRefresh()">
             Auto <span id="labelRefresh"></span>
           </label>
 
@@ -519,7 +519,7 @@
               type="button"
               class="hidden"
               id="deleteJsButton"
-              onClick="deletePosts()"
+              onClick="posting.deletePosts()"
               value="Delete">
           </div>
         </fieldset>
@@ -554,7 +554,7 @@
               type="button"
               class="hidden"
               id="reloadCaptchaButtonReport"
-              onclick="reloadCaptcha()"
+              onclick="captchaUtils.reloadCaptcha()"
               value="Reload">
             <span class="captchaTimer"></span>
             <br>
@@ -582,7 +582,7 @@
               type="button"
               class="hidden"
               id="reportJsButton"
-              onClick="reportPosts()"
+              onClick="posting.reportPosts()"
               value="Report">
 
             <div id="divMod">
@@ -635,7 +635,7 @@
                 type="button"
                 class="hidden"
                 id="ipDeletionJsButton"
-                onClick="deleteFromIpOnBoard()"
+                onClick="posting.deleteFromIpOnBoard()"
                 value="Delete by ip on this board">
 
 
@@ -649,7 +649,7 @@
                 type="button"
                 class="hidden"
                 id="banJsButton"
-                onClick="banPosts()"
+                onClick="thread.banPosts()"
                 value="Ban">
 
               <button
@@ -662,7 +662,7 @@
                 type="button"
                 class="hidden"
                 id="spoilJsButton"
-                onClick="spoilFiles()"
+                onClick="posting.spoilFiles()"
                 value="Spoil files">
 
             </div>
@@ -690,7 +690,7 @@
 <script src="/.static/js/thumbs.js"></script>
 <script src="/.static/js/tooltips.js"></script>
 <script src="/.static/js/posting.js"></script>
-<script src="/.static/js/captcha.js"></script>
+<script src="/.static/js/captchaUtils.js"></script>
 <script src="/.static/js/draggable.js"></script>
 <script src="/.static/js/qr.js"></script>
 <script src="/.static/js/themes.js"></script>

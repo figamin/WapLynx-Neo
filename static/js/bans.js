@@ -1,4 +1,10 @@
-if (!DISABLE_JS) {
+var bans = {};
+
+bans.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   var bansDiv = document.getElementById('bansDiv')
       || document.getElementById('appealedBansPanel');
@@ -6,12 +12,13 @@ if (!DISABLE_JS) {
   if (bansDiv) {
 
     for (var j = 0; j < bansDiv.childNodes.length; j++) {
-      processBanCell(bansDiv.childNodes[j]);
+      bans.processBanCell(bansDiv.childNodes[j]);
     }
   }
-}
 
-function processBanCell(cell) {
+};
+
+bans.processBanCell = function(cell) {
 
   if (cell.className !== 'banCell') {
     return;
@@ -21,7 +28,7 @@ function processBanCell(cell) {
   button.style.display = 'inline';
 
   button.onclick = function() {
-    liftBan(cell.getElementsByClassName('liftIdentifier')[0].value);
+    bans.liftBan(cell.getElementsByClassName('liftIdentifier')[0].value);
   };
 
   cell.getElementsByClassName('liftFormButton')[0].style.display = 'none';
@@ -32,32 +39,18 @@ function processBanCell(cell) {
     denyButton.style.display = 'inline'
 
     denyButton.onclick = function() {
-      denyAppeal(cell.getElementsByClassName('denyIdentifier')[0].value);
+      bans.denyAppeal(cell.getElementsByClassName('denyIdentifier')[0].value);
     };
 
     cell.getElementsByClassName('denyFormButton')[0].style.display = 'none';
 
   }
 
-}
+};
 
-function denyAppeal(ban) {
-  apiRequest('denyAppeal', {
-    banId : ban
-  }, function requestComplete(status, data) {
+bans.denyAppeal = function(ban) {
 
-    if (status === 'ok') {
-
-      location.reload(true);
-
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
-}
-
-function liftBan(ban) {
-  apiRequest('liftBan', {
+  api.apiRequest('denyAppeal', {
     banId : ban
   }, function requestComplete(status, data) {
 
@@ -70,4 +63,23 @@ function liftBan(ban) {
     }
   });
 
-}
+};
+
+bans.liftBan = function(ban) {
+
+  api.apiRequest('liftBan', {
+    banId : ban
+  }, function requestComplete(status, data) {
+
+    if (status === 'ok') {
+
+      location.reload(true);
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+
+};
+
+bans.init();

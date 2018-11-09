@@ -1,6 +1,12 @@
-var boardIdentifier = document.getElementById('boardIdentifier').value;
+var filterManagement = {};
 
-if (!DISABLE_JS) {
+filterManagement.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  api.boardUri = document.getElementById('boardIdentifier').value;
 
   document.getElementById('addJsButton').style.display = 'inline';
 
@@ -9,27 +15,28 @@ if (!DISABLE_JS) {
   var filtersDiv = document.getElementById('divFilters');
 
   for (var j = 0; j < filtersDiv.childNodes.length; j++) {
-    processFilterCell(filtersDiv.childNodes[j]);
+    filterManagement.processFilterCell(filtersDiv.childNodes[j]);
   }
 
-}
+};
 
-function processFilterCell(cell) {
+filterManagement.processFilterCell = function(cell) {
 
   var button = cell.getElementsByClassName('deleteJsButton')[0];
   button.style.display = 'inline';
 
   button.onclick = function() {
-    removeFilter(cell.getElementsByClassName('filterIdentifier')[0].value);
+    filterManagement.removeFilter(cell
+        .getElementsByClassName('filterIdentifier')[0].value);
   };
 
   cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
-}
+};
 
-function removeFilter(filter) {
+filterManagement.removeFilter = function(filter) {
 
-  apiRequest('deleteFilter', {
-    boardUri : boardIdentifier,
+  api.apiRequest('deleteFilter', {
+    boardUri : api.boardUri,
     filterIdentifier : filter
   }, function requestComplete(status, data) {
 
@@ -42,9 +49,10 @@ function removeFilter(filter) {
     }
   });
 
-}
+};
 
-function addFilter() {
+filterManagement.addFilter = function() {
+
   var typedOriginal = document.getElementById('fieldOriginalTerm').value.trim();
   var typedReplacement = document.getElementById('fieldReplacementTerm').value
       .trim();
@@ -58,8 +66,8 @@ function addFilter() {
     return;
   }
 
-  apiRequest('createFilter', {
-    boardUri : boardIdentifier,
+  api.apiRequest('createFilter', {
+    boardUri : api.boardUri,
     originalTerm : typedOriginal,
     caseInsensitive : caseInsensitive,
     replacementTerm : typedReplacement
@@ -75,3 +83,5 @@ function addFilter() {
   });
 
 }
+
+filterManagement.init();

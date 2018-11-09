@@ -38,7 +38,7 @@
   font-size: 80%;
 }
 
-.hideMenu label, .extraMenu label {
+.hideMenu div, .extraMenu div {
   font-size: 80%;
   cursor: pointer;
 }
@@ -182,6 +182,7 @@
   vertical-align: top;
   max-width: 155px;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 

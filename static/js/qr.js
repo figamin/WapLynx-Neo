@@ -1,14 +1,40 @@
-//I didn't write this originally.
-//I just tried to make it less shit.
+var qr = {};
 
-var qrFlagCombo;
-var qrPanel;
+qr.init = function() {
 
-function removeQr() {
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  qr.setQr();
+
+  var hash = window.location.hash.substring(1);
+
+  if (hash.indexOf('q') === 0 && hash.length > 1) {
+
+    hash = hash.substring(1);
+
+    var post = document.getElementById(hash);
+
+    if (post) {
+
+      post.scrollIntoView();
+      qr.showQr(post.getElementsByClassName('linkQuote')[0], hash);
+
+      markPost(hash);
+    }
+
+  } else if (hash.length > 0) {
+    markPost(hash);
+  }
+
+};
+
+qr.removeQr = function() {
   qrPanel.style.display = 'none';
-}
+};
 
-function showQr(link, quote) {
+qr.showQr = function(link, quote) {
 
   qrPanel.style.display = 'block';
 
@@ -29,9 +55,9 @@ function showQr(link, quote) {
     document.getElementById('qrbody').value += '>' + selectedText + '\n';
     document.getElementById('fieldMessage').value += '>' + selectedText + '\n';
   }
-}
+};
 
-function registerSync(source, destination, field, event) {
+qr.registerSync = function(source, destination, field, event) {
 
   var sourceElement = document.getElementById(source);
   var destinationElement = document.getElementById(destination);
@@ -48,9 +74,9 @@ function registerSync(source, destination, field, event) {
     sourceElement[field] = destinationElement[field];
   });
 
-}
+};
 
-function setQr() {
+qr.setQr = function() {
 
   var flags = document.getElementById('flagsDiv') ? true : false;
 
@@ -63,7 +89,7 @@ function setQr() {
   qrhtml += '<table class="post-table"><tbody> <tr><th colspan="2">';
   qrhtml += '<span class="handle">';
   qrhtml += '<a class="close-btn coloredIcon"';
-  qrhtml += ' onclick=\'removeQr();\'></a>';
+  qrhtml += ' onclick=\'qr.removeQr();\'></a>';
   qrhtml += 'Quick Reply</span></th> </tr>';
 
   if (QRshowname) {
@@ -86,7 +112,7 @@ function setQr() {
   qrhtml += '</textarea></td></tr> ';
 
   qrhtml += '<tr><td colspan="2">';
-  qrhtml += '<input id="qrpassword" type="text" placeholder="Password"></td></tr>';
+  qrhtml += '<input id="qrpassword" type="password" placeholder="Password"></td></tr>';
 
   var noFlagDiv = document.getElementById('noFlagDiv');
 
@@ -117,7 +143,7 @@ function setQr() {
 
   }
 
-  if (!hiddenCaptcha) {
+  if (!api.hiddenCaptcha) {
 
     var parts = document.getElementById('captchaImage').src.split('/');
 
@@ -126,7 +152,7 @@ function setQr() {
     qrhtml += '<tr><td colspan="2"><img src="' + lastPart;
     qrhtml += '" class="captchaImage"/></td></tr>';
 
-    qrhtml += '<tr><td colspan="2"><input type="button" onClick="reloadCaptcha()"';
+    qrhtml += '<tr><td colspan="2"><input type="button" onClick="captchaUtils.reloadCaptcha()"';
     qrhtml += ' value="Reload"> <span class="captchaTimer"></span></td></tr>';
 
     qrhtml += '<tr><td><input type="text" class="captchaField" ';
@@ -144,24 +170,26 @@ function setQr() {
   qrPanel.innerHTML = qrhtml;
   qrPanel = qrPanel.children[0];
 
-  setDraggable(qrPanel, qrPanel.getElementsByClassName('handle')[0]);
+  draggable.setDraggable(qrPanel, qrPanel.getElementsByClassName('handle')[0]);
 
   document.body.appendChild(qrPanel);
 
-  registerSync('fieldEmail', 'qremail', 'value', 'input');
-  registerSync('fieldSubject', 'qrsubject', 'value', 'input');
-  registerSync('fieldMessage', 'qrbody', 'value', 'input');
-  registerSync('fieldPostingPassword', 'qrpassword', 'value', 'input');
-  registerSync('alwaysUseBypassCheckBox', 'qralwaysUseBypassCheckBox',
+  qr.registerSync('fieldEmail', 'qremail', 'value', 'input');
+  qr.registerSync('fieldSubject', 'qrsubject', 'value', 'input');
+  qr.registerSync('fieldMessage', 'qrbody', 'value', 'input');
+  qr.registerSync('fieldPostingPassword', 'qrpassword', 'value', 'input');
+  qr.registerSync('alwaysUseBypassCheckBox', 'qralwaysUseBypassCheckBox',
       'checked', 'change');
 
   if (noFlagDiv) {
-    registerSync('checkboxNoFlag', 'qrcheckboxNoFlag', 'checked', 'change');
+    qr.registerSync('checkboxNoFlag', 'qrcheckboxNoFlag', 'checked', 'change');
   }
 
   if (!textBoard) {
-    registerSync('checkboxSpoiler', 'qrcheckboxSpoiler', 'checked', 'change');
-    setDragAndDrop(true);
+    qr
+        .registerSync('checkboxSpoiler', 'qrcheckboxSpoiler', 'checked',
+            'change');
+    postCommon.setDragAndDrop(true);
 
     for (var i = 0; i < selectedDiv.childNodes.length; i++) {
       var originalCell = selectedDiv.childNodes[i];
@@ -182,23 +210,23 @@ function setQr() {
 
     qrFlagCombo = document.getElementById('qrFlagCombobox');
 
-    setFlagPreviews(qrFlagCombo)
+    postCommon.setFlagPreviews(qrFlagCombo)
 
-    registerSync('flagCombobox', 'qrFlagCombobox', 'value', 'change');
+    qr.registerSync('flagCombobox', 'qrFlagCombobox', 'value', 'change');
 
   }
 
   if (QRshowname) {
-    registerSync('fieldName', 'qrname', 'value', 'input');
+    qr.registerSync('fieldName', 'qrname', 'value', 'input');
   }
 
-  if (!hiddenCaptcha) {
-    registerSync('fieldCaptcha', 'QRfieldCaptcha', 'value', 'input');
+  if (!api.hiddenCaptcha) {
+    qr.registerSync('fieldCaptcha', 'QRfieldCaptcha', 'value', 'input');
   }
 
-}
+};
 
-function setQRReplyText(text) {
+qr.setQRReplyText = function(text) {
 
   var qrReplyButton = document.getElementById('qrbutton');
 
@@ -206,9 +234,9 @@ function setQRReplyText(text) {
     qrReplyButton.innerHTML = text;
   }
 
-}
+};
 
-function clearQRAfterPosting() {
+qr.clearQRAfterPosting = function() {
 
   var qrMessageField = document.getElementById('qrbody');
 
@@ -219,38 +247,16 @@ function clearQRAfterPosting() {
   document.getElementById('qrsubject').value = '';
   qrMessageField.value = '';
 
-}
+};
 
-function setQRReplyEnabled(enabled) {
+qr.setQRReplyEnabled = function(enabled) {
 
   var qrReplyButton = document.getElementById('qrbutton');
 
   if (qrReplyButton) {
     qrReplyButton.disabled = !enabled;
   }
-}
 
-if (!DISABLE_JS) {
-  setQr();
+};
 
-  var hash = window.location.hash.substring(1);
-
-  if (hash.indexOf('q') === 0 && hash.length > 1) {
-
-    hash = hash.substring(1);
-
-    var post = document.getElementById(hash);
-
-    if (post) {
-
-      post.scrollIntoView();
-      showQr(post.getElementsByClassName('linkQuote')[0], hash);
-
-      markPost(hash);
-    }
-
-  } else if (hash.length > 0) {
-    markPost(hash);
-  }
-
-}
+qr.init();

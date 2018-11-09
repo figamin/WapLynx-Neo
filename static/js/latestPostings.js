@@ -1,69 +1,77 @@
-var latestCheck;
-var postsDiv;
-var unread = 0;
-var originalTitle = document.title;
+var latestPostings = {};
 
-if (!DISABLE_JS) {
+latestPostings.init = function() {
 
-  postsDiv = document.getElementById('divPostings');
-  latestCheck = new Date();
-  startTimer();
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  latestPostings.unread = 0;
+  latestPostings.originalTitle = document.title;
+
+  latestPostings.postsDiv = document.getElementById('divPostings');
+  latestPostings.latestCheck = new Date();
+  latestPostings.startTimer();
 
   document.addEventListener('visibilitychange', function changed() {
 
-    if (unread && !document.hidden) {
-      unread = 0;
-      document.title = originalTitle;
+    if (latestPostings.unread && !document.hidden) {
+      latestPostings.unread = 0;
+      document.title = latestPostings.originalTitle;
     }
 
   }, false);
 
-}
+};
 
-function startTimer() {
+latestPostings.startTimer = function() {
 
   setTimeout(function refresh() {
 
     var currentCheck = new Date();
 
-    localRequest('/latestPostings.js?json=1&date=' + latestCheck.toUTCString()
-        + '&boards=' + document.getElementById('fieldBoards').value,
-        function gotData(error, data) {
+    api.localRequest('/latestPostings.js?json=1&date='
+        + latestPostings.latestCheck.toUTCString() + '&boards='
+        + document.getElementById('fieldBoards').value, function gotData(error,
+        data) {
 
-          latestCheck = currentCheck;
+      latestPostings.latestCheck = currentCheck;
+      latestPostings.startTimer();
 
-          startTimer();
+      if (!data) {
+        return;
+      }
 
-          if (!data) {
-            return;
-          }
+      data = JSON.parse(data);
 
-          data = JSON.parse(data);
+      if (document.hidden) {
+        latestPostings.unread += data.length;
 
-          if (document.hidden) {
-            unread += data.length;
+        if (!latestPostings.unread) {
+          return;
+        }
 
-            if (!unread) {
-              return;
-            }
+        document.title = latestPostings.originalTitle + '('
+            + latestPostings.unread + ')';
+      }
 
-            document.title = originalTitle + '(' + unread + ')';
-          }
+      for (var i = 0; i < data.length; i++) {
 
-          for (var i = 0; i < data.length; i++) {
+        var post = data[i];
 
-            var post = data[i];
+        var cell = posting.addPost(post, post.boardUri, post.threadId, true);
 
-            var cell = addPost(post, post.boardUri, post.threadId, true);
+        cell.getElementsByClassName('deletionCheckBox')[0].remove();
 
-            cell.getElementsByClassName('deletionCheckBox')[0].remove();
+        latestPostings.postsDiv.insertBefore(cell,
+            latestPostings.postsDiv.childNodes[0]);
 
-            postsDiv.insertBefore(cell, postsDiv.childNodes[0]);
+      }
 
-          }
-
-        });
+    });
 
   }, 1000 * 60);
 
-}
+};
+
+latestPostings.init();

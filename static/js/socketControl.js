@@ -1,11 +1,19 @@
-if (!DISABLE_JS) {
+var socketControl = {};
+
+socketControl.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
   document.getElementById('restartFormButton').style.display = 'none';
   document.getElementById('restartJsButton').style.display = 'inline';
-}
 
-function restartSocket() {
+};
 
-  apiRequest('restartSocket', {}, function restarted(status, data) {
+socketControl.restartSocket = function() {
+
+  api.apiRequest('restartSocket', {}, function restarted(status, data) {
 
     if (status === 'ok') {
       window.location = '/socketControl.js';
@@ -15,4 +23,6 @@ function restartSocket() {
 
   });
 
-}
+};
+
+socketControl.init();

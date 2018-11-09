@@ -1,4 +1,12 @@
-if (!DISABLE_JS) {
+var loginObj = {};
+// I wish I could go back in time and kill whoever implemented the exposed
+// element bullshit on IE before he was born
+
+loginObj.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   if (document.getElementById('divCreation')) {
     document.getElementById('registerJsButton').style.display = 'inline';
@@ -13,9 +21,9 @@ if (!DISABLE_JS) {
   document.getElementById('recoverFormButton').style.display = 'none';
   document.getElementById('loginFormButton').style.display = 'none';
 
-}
+};
 
-function recoverAccount() {
+loginObj.recoverAccount = function() {
 
   var typedLogin = document.getElementById('recoverFieldLogin').value.trim();
   var typedCaptcha = document.getElementById('fieldCaptchaRecover').value
@@ -29,7 +37,7 @@ function recoverAccount() {
 
   } else if (typedLogin.length) {
 
-    apiRequest('requestAccountRecovery', {
+    api.apiRequest('requestAccountRecovery', {
       login : typedLogin,
       captcha : typedCaptcha
     }, function requestComplete(status, data) {
@@ -45,9 +53,9 @@ function recoverAccount() {
 
   }
 
-}
+};
 
-function loginUser() {
+loginObj.loginUser = function() {
 
   var typedLogin = document.getElementById('loginFieldLogin').value.trim();
   var typedPassword = document.getElementById('loginFieldPassword').value;
@@ -55,7 +63,7 @@ function loginUser() {
   if (!typedLogin.length || !typedPassword.length) {
     alert('Both login and password are mandatory.');
   } else {
-    apiRequest('login', {
+    api.apiRequest('login', {
       login : typedLogin,
       password : typedPassword,
       remember : document.getElementById('checkboxRemember').checked
@@ -76,9 +84,10 @@ function loginUser() {
       }
     });
   }
-}
 
-function registerAccount() {
+};
+
+loginObj.registerAccount = function() {
 
   var typedLogin = document.getElementById('registerFieldLogin').value.trim();
   var typedEmail = document.getElementById('registerFieldEmail').value.trim();
@@ -101,7 +110,7 @@ function registerAccount() {
     alert('Invalid login.');
   } else {
 
-    apiRequest('registerAccount', {
+    api.apiRequest('registerAccount', {
       login : typedLogin,
       captcha : typedCaptcha,
       password : typedPassword,
@@ -125,4 +134,6 @@ function registerAccount() {
 
   }
 
-}
+};
+
+loginObj.init();

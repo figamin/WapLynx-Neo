@@ -1,16 +1,21 @@
-var selectedCell = '<div class="removeButton">✖</div>'
-    + '<span class="nameLabel"></span><div class="spoilerPanel">'
-    + '<input type="checkbox" class="spoilerCheckBox">Spoiler</div>';
+var postCommon = {};
 
-var selectedFiles = [];
-var selectedDiv;
-var selectedDivQr;
+postCommon.init = function() {
 
-if (!DISABLE_JS && typeof (Storage) !== "undefined"
-    && document.getElementById('fieldPostingPassword')) {
+  if ((typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS)
+      || typeof (Storage) === "undefined"
+      || !document.getElementById('fieldPostingPassword')) {
+    return;
+  }
+
+  postCommon.selectedCell = '<div class="removeButton">✖</div>'
+      + '<span class="nameLabel"></span><div class="spoilerPanel">'
+      + '<input type="checkbox" class="spoilerCheckBox">Spoiler</div>';
+
+  postCommon.selectedFiles = [];
 
   if (document.getElementById('divUpload')) {
-    setDragAndDrop();
+    postCommon.setDragAndDrop();
   }
 
   var savedPassword = localStorage.deletionPassword;
@@ -49,14 +54,14 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
 
     var flagInfo = JSON.parse(localStorage.savedFlags);
 
-    if (flagInfo[boardUri]) {
+    if (flagInfo[api.boardUri]) {
 
       for (var i = 0; i < flagCombo.options.length; i++) {
 
-        if (flagCombo.options[i].value === flagInfo[boardUri]) {
+        if (flagCombo.options[i].value === flagInfo[api.boardUri]) {
           flagCombo.selectedIndex = i;
 
-          showFlagPreview(flagCombo);
+          postCommon.showFlagPreview(flagCombo);
 
           break;
         }
@@ -68,7 +73,7 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
   }
 
   if (flagCombo) {
-    setFlagPreviews(flagCombo);
+    postCommon.setFlagPreviews(flagCombo);
   }
 
   var formMore = document.getElementById('formMore');
@@ -101,9 +106,9 @@ if (!DISABLE_JS && typeof (Storage) !== "undefined"
     formMore.children[0].onclick();
   }
 
-}
+};
 
-function showFlagPreview(combo) {
+postCommon.showFlagPreview = function(combo) {
 
   var index = combo.selectedIndex;
 
@@ -112,7 +117,7 @@ function showFlagPreview(combo) {
   if (!index) {
     src = '';
   } else {
-    src = '/' + boardUri + '/flags/' + combo.options[index].value;
+    src = '/' + api.boardUri + '/flags/' + combo.options[index].value;
   }
 
   var previews = document.getElementsByClassName('flagPreview');
@@ -121,33 +126,33 @@ function showFlagPreview(combo) {
     previews[i].src = src;
   }
 
-}
+};
 
-function setFlagPreviews(combo) {
+postCommon.setFlagPreviews = function(combo) {
 
   combo.addEventListener('change', function() {
-    showFlagPreview(combo);
+    postCommon.showFlagPreview(combo);
   });
 
-}
+};
 
-function savedSelectedFlag(selectedFlag) {
+postCommon.savedSelectedFlag = function(selectedFlag) {
 
   var savedFlagData = localStorage.savedFlags ? JSON
       .parse(localStorage.savedFlags) : {};
 
-  savedFlagData[boardUri] = selectedFlag;
+  savedFlagData[api.boardUri] = selectedFlag;
 
   localStorage.setItem('savedFlags', JSON.stringify(savedFlagData));
 
-}
+};
 
-function addDndCell(cell, removeButton) {
+postCommon.addDndCell = function(cell, removeButton) {
 
-  if (selectedDivQr) {
+  if (postCommon.selectedDivQr) {
     var clonedCell = cell.cloneNode(true);
     clonedCell.getElementsByClassName('removeButton')[0].onclick = removeButton.onclick;
-    selectedDivQr.appendChild(clonedCell);
+    postCommon.selectedDivQr.appendChild(clonedCell);
 
     var sourceSpoiler = cell.getElementsByClassName('spoilerCheckBox')[0];
     var destinationSpoiler = clonedCell
@@ -165,16 +170,16 @@ function addDndCell(cell, removeButton) {
 
   }
 
-  selectedDiv.appendChild(cell);
+  postCommon.selectedDiv.appendChild(cell);
 
-}
+};
 
-function addSelectedFile(file) {
+postCommon.addSelectedFile = function(file) {
 
   var cell = document.createElement('div');
   cell.className = 'selectedCell';
 
-  cell.innerHTML = selectedCell;
+  cell.innerHTML = postCommon.selectedCell;
 
   var nameLabel = cell.getElementsByClassName('nameLabel')[0];
   nameLabel.innerHTML = file.name;
@@ -182,24 +187,25 @@ function addSelectedFile(file) {
   var removeButton = cell.getElementsByClassName('removeButton')[0];
 
   removeButton.onclick = function() {
-    var index = selectedFiles.indexOf(file);
+    var index = postCommon.selectedFiles.indexOf(file);
 
-    if (selectedDivQr) {
+    if (postCommon.selectedDivQr) {
 
-      for (var i = 0; i < selectedDiv.childNodes.length; i++) {
-        if (selectedDiv.childNodes[i] === cell) {
-          selectedDivQr.removeChild(selectedDivQr.childNodes[i]);
+      for (var i = 0; i < postCommon.selectedDiv.childNodes.length; i++) {
+        if (postCommon.selectedDiv.childNodes[i] === cell) {
+          postCommon.selectedDivQr
+              .removeChild(postCommon.selectedDivQr.childNodes[i]);
         }
       }
 
     }
 
-    selectedDiv.removeChild(cell);
+    postCommon.selectedDiv.removeChild(cell);
 
-    selectedFiles.splice(selectedFiles.indexOf(file), 1);
+    postCommon.selectedFiles.splice(postCommon.selectedFiles.indexOf(file), 1);
   };
 
-  selectedFiles.push(file);
+  postCommon.selectedFiles.push(file);
 
   if (!file.type.indexOf('image/')) {
 
@@ -212,38 +218,39 @@ function addSelectedFile(file) {
       dndThumb.className = 'dragAndDropThumb';
       cell.appendChild(dndThumb);
 
-      addDndCell(cell, removeButton);
+      postCommon.addDndCell(cell, removeButton);
 
     };
 
     fileReader.readAsDataURL(file);
 
   } else {
-    addDndCell(cell, removeButton);
+    postCommon.addDndCell(cell, removeButton);
   }
 
-}
+};
 
-function clearSelectedFiles() {
+postCommon.clearSelectedFiles = function() {
 
   if (!document.getElementById('divUpload')) {
     return;
   }
 
-  selectedFiles = [];
+  postCommon.selectedFiles = [];
 
-  while (selectedDiv.firstChild) {
-    selectedDiv.removeChild(selectedDiv.firstChild);
+  while (postCommon.selectedDiv.firstChild) {
+    postCommon.selectedDiv.removeChild(postCommon.selectedDiv.firstChild);
   }
 
-  if (selectedDivQr) {
-    while (selectedDivQr.firstChild) {
-      selectedDivQr.removeChild(selectedDivQr.firstChild);
+  if (postCommon.selectedDivQr) {
+    while (postCommon.selectedDivQr.firstChild) {
+      postCommon.selectedDivQr.removeChild(postCommon.selectedDivQr.firstChild);
     }
   }
-}
 
-function setDragAndDrop(qr) {
+};
+
+postCommon.setDragAndDrop = function(qr) {
 
   var fileInput = document.getElementById('files')
 
@@ -254,7 +261,7 @@ function setDragAndDrop(qr) {
     fileInput.onchange = function() {
 
       for (var i = 0; i < fileInput.files.length; i++) {
-        addSelectedFile(fileInput.files[i]);
+        postCommon.addSelectedFile(fileInput.files[i]);
       }
 
       fileInput.type = "text";
@@ -268,9 +275,9 @@ function setDragAndDrop(qr) {
   };
 
   if (!qr) {
-    selectedDiv = document.getElementById('selectedDiv');
+    postCommon.selectedDiv = document.getElementById('selectedDiv');
   } else {
-    selectedDivQr = document.getElementById('selectedDivQr');
+    postCommon.selectedDivQr = document.getElementById('selectedDivQr');
   }
 
   drop.addEventListener('dragover', function handleDragOver(event) {
@@ -286,14 +293,14 @@ function setDragAndDrop(qr) {
     evt.preventDefault();
 
     for (var i = 0; i < evt.dataTransfer.files.length; i++) {
-      addSelectedFile(evt.dataTransfer.files[i])
+      postCommon.addSelectedFile(evt.dataTransfer.files[i])
     }
 
   }, false);
 
-}
+};
 
-function checkExistance(file, callback) {
+postCommon.checkExistance = function(file, callback) {
 
   var reader = new FileReader();
 
@@ -304,7 +311,7 @@ function checkExistance(file, callback) {
 
     var identifier = md5 + '-' + mime.replace('/', '');
 
-    localRequest('/checkFileIdentifier.js?identifier=' + identifier,
+    api.localRequest('/checkFileIdentifier.js?identifier=' + identifier,
         function requested(error, response) {
 
           if (error) {
@@ -328,9 +335,9 @@ function checkExistance(file, callback) {
 
   reader.readAsArrayBuffer(file);
 
-}
+};
 
-function getFilestToUpload(callback, currentIndex, files) {
+postCommon.getFilestToUpload = function(callback, currentIndex, files) {
 
   currentIndex = currentIndex || 0;
   files = files || [];
@@ -340,24 +347,25 @@ function getFilestToUpload(callback, currentIndex, files) {
     return;
   }
 
-  if (currentIndex < selectedFiles.length) {
+  if (currentIndex < postCommon.selectedFiles.length) {
 
-    var spoiled = selectedDiv.getElementsByClassName('spoilerCheckBox')[currentIndex].checked;
+    var spoiled = postCommon.selectedDiv
+        .getElementsByClassName('spoilerCheckBox')[currentIndex].checked;
 
-    var file = selectedFiles[currentIndex];
+    var file = postCommon.selectedFiles[currentIndex];
 
-    checkExistance(file, function checked(md5, mime) {
+    postCommon.checkExistance(file, function checked(md5, mime) {
 
       if (md5) {
 
         files.push({
-          name : selectedFiles[currentIndex].name,
+          name : postCommon.selectedFiles[currentIndex].name,
           spoiler : spoiled,
           md5 : md5,
           mime : mime
         });
 
-        getFilestToUpload(callback, ++currentIndex, files)
+        postCommon.getFilestToUpload(callback, ++currentIndex, files)
 
       } else {
 
@@ -366,16 +374,16 @@ function getFilestToUpload(callback, currentIndex, files) {
         reader.onloadend = function() {
 
           files.push({
-            name : selectedFiles[currentIndex].name,
+            name : postCommon.selectedFiles[currentIndex].name,
             content : reader.result,
             spoiler : spoiled
           });
 
-          getFilestToUpload(callback, ++currentIndex, files)
+          postCommon.getFilestToUpload(callback, ++currentIndex, files)
 
         };
 
-        reader.readAsDataURL(selectedFiles[currentIndex]);
+        reader.readAsDataURL(postCommon.selectedFiles[currentIndex]);
 
       }
 
@@ -385,11 +393,12 @@ function getFilestToUpload(callback, currentIndex, files) {
     callback(files);
   }
 
-}
+};
 
-function displayBlockBypassPrompt(callback) {
+postCommon.displayBlockBypassPrompt = function(callback) {
 
-  var outerPanel = getCaptchaModal('You need a block bypass to post');
+  var outerPanel = captchaModal
+      .getCaptchaModal('You need a block bypass to post');
 
   var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
@@ -406,7 +415,7 @@ function displayBlockBypassPrompt(callback) {
       return;
     }
 
-    apiRequest('renewBypass', {
+    api.apiRequest('renewBypass', {
       captcha : typedCaptcha
     }, function requestComplete(status, data) {
 
@@ -428,9 +437,9 @@ function displayBlockBypassPrompt(callback) {
 
   };
 
-}
+};
 
-function storeUsedPostingPassword(boardUri, threadId, postId) {
+postCommon.storeUsedPostingPassword = function(boardUri, threadId, postId) {
 
   var storedData = JSON.parse(localStorage.postingPasswords || '{}');
 
@@ -443,4 +452,7 @@ function storeUsedPostingPassword(boardUri, threadId, postId) {
   storedData[key] = localStorage.deletionPassword;
 
   localStorage.setItem('postingPasswords', JSON.stringify(storedData));
-}
+
+};
+
+postCommon.init();

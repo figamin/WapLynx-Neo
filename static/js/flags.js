@@ -1,10 +1,15 @@
-var boardIdentifier = document.getElementById('boardIdentifier').value;
+var flags = {};
 
-var selectedFiles = [];
+flags.init = function() {
 
-var maxLength = +document.getElementById('maxNameLengthLabel').innerHTML;
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
-if (!DISABLE_JS) {
+  flags.maxLength = +document.getElementById('maxNameLengthLabel').innerHTML;
+  flags.selectedFiles = [];
+
+  api.boardUri = document.getElementById('boardIdentifier').value;
 
   document.getElementById('addJsButton').style.display = 'inline';
 
@@ -13,9 +18,7 @@ if (!DISABLE_JS) {
   var flagCells = document.getElementsByClassName('flagCell');
 
   for (var i = 0; i < flagCells.length; i++) {
-
-    processFlagCell(flagCells[i]);
-
+    flags.processFlagCell(flagCells[i]);
   }
 
   var dragAndDrop = document.getElementById('dragAndDropDiv');
@@ -31,7 +34,7 @@ if (!DISABLE_JS) {
   defaultFileChooser.onchange = function() {
 
     for (var i = 0; i < defaultFileChooser.files.length; i++) {
-      addSelectedFlag(defaultFileChooser.files[i]);
+      flags.addSelectedFlag(defaultFileChooser.files[i]);
     }
 
     defaultFileChooser.type = "text";
@@ -55,16 +58,16 @@ if (!DISABLE_JS) {
     evt.preventDefault();
 
     for (var i = 0; i < evt.dataTransfer.files.length; i++) {
-      addSelectedFlag(evt.dataTransfer.files[i])
+      flags.addSelectedFlag(evt.dataTransfer.files[i])
     }
 
   }, false);
 
   document.getElementById('nameLabel').style.display = 'none';
 
-}
+};
 
-function addSelectedFlag(file) {
+flags.addSelectedFlag = function(file) {
 
   if (file.type.indexOf('image/')) {
     alert('You can only upload images for flags');
@@ -94,14 +97,14 @@ function addSelectedFlag(file) {
   cell.appendChild(dndThumb);
 
   removeButton.onclick = function() {
-    var index = selectedFiles.indexOf(file);
+    var index = flags.selectedFiles.indexOf(file);
 
     selectedDiv.removeChild(cell);
 
-    selectedFiles.splice(selectedFiles.indexOf(file), 1);
+    flags.selectedFiles.splice(flags.selectedFiles.indexOf(file), 1);
   };
 
-  selectedFiles.push(file);
+  flags.selectedFiles.push(file);
 
   var fileReader = new FileReader();
 
@@ -117,22 +120,22 @@ function addSelectedFlag(file) {
 
 };
 
-function processFlagCell(cell) {
+flags.processFlagCell = function(cell) {
 
   var button = cell.getElementsByClassName('deleteJsButton')[0];
   button.style.display = 'inline';
 
   button.onclick = function() {
-    removeBanner(cell.getElementsByClassName('idIdentifier')[0].value);
+    flags.removeFlag(cell.getElementsByClassName('idIdentifier')[0].value);
   };
 
   cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
 
-}
+};
 
-function removeBanner(flagId) {
+flags.removeFlag = function(flagId) {
 
-  apiRequest('deleteFlag', {
+  api.apiRequest('deleteFlag', {
     flagId : flagId,
   }, function requestComplete(status, data) {
 
@@ -145,19 +148,20 @@ function removeBanner(flagId) {
     }
   });
 
-}
+};
 
-function uploadFlags() {
+flags.uploadFlags = function() {
 
-  if (!selectedFiles.length) {
+  if (!flags.selectedFiles.length) {
     location.reload(true);
     return;
   }
 
   var typedName = document.getElementsByClassName('nameField')[0].value.trim();
 
-  if (typedName.length > maxLength) {
-    alert('Flag name too long, keep it under ' + maxLength + ' characters.');
+  if (typedName.length > flags.maxLength) {
+    alert('Flag name too long, keep it under ' + flags.maxLength
+        + ' characters.');
     return;
   } else if (!typedName.length) {
     alert('A name is mandatory for the flag.');
@@ -169,33 +173,33 @@ function uploadFlags() {
   reader.onloadend = function() {
 
     var files = [ {
-      name : selectedFiles[0].name,
+      name : flags.selectedFiles[0].name,
       content : reader.result
     } ];
 
     // style exception, too simple
-
-    apiRequest('createFlag', {
+    api.apiRequest('createFlag', {
       files : files,
       flagName : typedName,
-      boardUri : boardIdentifier,
+      boardUri : api.boardUri,
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
 
         document.getElementsByClassName('removeButton')[0].onclick();
 
-        uploadFlags();
+        flags.uploadFlags();
 
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
     });
-
     // style exception, too simple
 
   };
 
-  reader.readAsDataURL(selectedFiles[0]);
+  reader.readAsDataURL(flags.selectedFiles[0]);
 
-}
+};
+
+flags.init();

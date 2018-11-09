@@ -1,27 +1,25 @@
-if (!DISABLE_JS) {
+var catalog = {};
 
-  var autoRefresh;
-  var searchDelay = 1000;
-  var refreshTimer;
-  var limitRefreshWait = 10 * 60;
-  var loadingData = false;
-  var catalogThreads;
-  var lastRefresh;
-  var currentRefresh;
-  var refreshingButton = document.getElementById('catalogRefreshButton');
-  var catalogDiv = document.getElementById('divThreads');
+catalog.init = function() {
 
-  var indicatorsRelation = {
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  catalog.catalogDiv = document.getElementById('divThreads');
+
+  catalog.indicatorsRelation = {
     pinned : 'pinIndicator',
     locked : 'lockIndicator',
     cyclic : 'cyclicIndicator',
     autoSage : 'bumpLockIndicator'
   };
 
-  var refreshCheckBox = document.getElementById('autoCatalogRefreshCheckBox');
-  var refreshLabel = document.getElementById('catalogRefreshLabel');
-  var originalAutoRefreshText = refreshLabel.innerHTML;
-  var searchField = document.getElementById('catalogSearchField');
+  catalog.refreshCheckBox = document
+      .getElementById('autoCatalogRefreshCheckBox');
+  catalog.refreshLabel = document.getElementById('catalogRefreshLabel');
+  catalog.originalAutoRefreshText = catalog.refreshLabel.innerHTML;
+  catalog.searchField = document.getElementById('catalogSearchField');
 
   var catalogCellTemplate = '<a class="linkThumb"></a>';
   catalogCellTemplate += '<p class="threadStats">R: ';
@@ -35,7 +33,7 @@ if (!DISABLE_JS) {
   catalogCellTemplate += '</p><p><span class="labelSubject"></span></p>';
   catalogCellTemplate += '<div class="divMessage"></div>';
 
-  var searchTimer;
+  catalog.catalogCellTemplate = catalogCellTemplate;
 
   var storedHidingData = localStorage.hidingData;
 
@@ -45,46 +43,51 @@ if (!DISABLE_JS) {
     storedHidingData = {};
   }
 
-  initCatalog();
-}
+  catalog.storedHidingData = storedHidingData;
 
-function startTimer(time) {
+  catalog.initCatalog();
 
-  if (time > limitRefreshWait) {
-    time = limitRefreshWait;
+};
+
+catalog.startTimer = function(time) {
+
+  if (time > 600) {
+    time = 600;
   }
 
-  currentRefresh = time;
-  lastRefresh = time;
-  refreshLabel.innerHTML = originalAutoRefreshText + ' ' + currentRefresh;
-  refreshTimer = setInterval(function checkTimer() {
-    currentRefresh--;
+  catalog.currentRefresh = time;
+  catalog.lastRefresh = time;
+  catalog.refreshLabel.innerHTML = catalog.originalAutoRefreshText + ' '
+      + catalog.currentRefresh;
+  catalog.refreshTimer = setInterval(function checkTimer() {
+    catalog.currentRefresh--;
 
-    if (!currentRefresh) {
-      clearInterval(refreshTimer);
-      refreshCatalog();
-      refreshLabel.innerHTML = originalAutoRefreshText;
+    if (!catalog.currentRefresh) {
+      clearInterval(catalog.refreshTimer);
+      catalog.refreshCatalog();
+      catalog.refreshLabel.innerHTML = catalog.originalAutoRefreshText;
     } else {
-      refreshLabel.innerHTML = originalAutoRefreshText + ' ' + currentRefresh;
+      catalog.refreshLabel.innerHTML = catalog.originalAutoRefreshText + ' '
+          + catalog.currentRefresh;
     }
 
   }, 1000);
-}
+};
 
-function changeCatalogRefresh() {
+catalog.changeCatalogRefresh = function() {
 
-  autoRefresh = refreshCheckBox.checked;
+  catalog.autoRefresh = catalog.refreshCheckBox.checked;
 
-  if (!autoRefresh) {
-    refreshLabel.innerHTML = originalAutoRefreshText;
-    clearInterval(refreshTimer);
+  if (!catalog.autoRefresh) {
+    catalog.refreshLabel.innerHTML = catalog.originalAutoRefreshText;
+    clearInterval(catalog.refreshTimer);
   } else {
-    startTimer(5);
+    catalog.startTimer(5);
   }
 
-}
+};
 
-function getHiddenMedia() {
+catalog.getHiddenMedia = function() {
 
   var hiddenMedia = localStorage.hiddenMedia;
 
@@ -96,52 +99,52 @@ function getHiddenMedia() {
 
   return hiddenMedia;
 
-}
+};
 
-function refreshCatalog(manual) {
+catalog.refreshCatalog = function(manual) {
 
-  if (autoRefresh) {
-    clearInterval(refreshTimer);
+  if (catalog.autoRefresh) {
+    clearInterval(catalog.refreshTimer);
   }
 
-  var currentData = JSON.stringify(catalogThreads);
+  var currentData = JSON.stringify(catalog.catalogThreads);
 
-  getCatalogData(function refreshed(error) {
+  catalog.getCatalogData(function refreshed(error) {
 
     if (error) {
       return;
     }
 
-    var changed = currentData != JSON.stringify(catalogThreads);
+    var changed = currentData != JSON.stringify(catalog.catalogThreads);
 
-    if (autoRefresh) {
-      startTimer(manual || changed ? 5 : lastRefresh * 2);
+    if (catalog.autoRefresh) {
+      catalog.startTimer(manual || changed ? 5 : catalog.lastRefresh * 2);
     }
 
-    search();
+    catalog.search();
 
   });
 
-}
+};
 
-function initCatalog() {
+catalog.initCatalog = function() {
 
-  changeCatalogRefresh();
+  catalog.changeCatalogRefresh();
 
-  var boardUri = window.location.toString().match(/\/(\w+)\/catalog.html/)[1];
+  api.boardUri = window.location.toString().match(/\/(\w+)\/catalog.html/)[1];
 
   document.getElementById('divTools').style.display = 'inline-block';
 
-  searchField.addEventListener('input', function() {
+  catalog.searchField.addEventListener('input', function() {
 
-    if (searchTimer) {
-      clearTimeout(searchTimer);
+    if (catalog.searchTimer) {
+      clearTimeout(catalog.searchTimer);
     }
 
-    searchTimer = setTimeout(function() {
-      searchTime = null;
-      search();
-    }, searchDelay);
+    catalog.searchTimer = setTimeout(function() {
+      delete catalog.searchTime;
+      catalog.search();
+    }, 1000);
 
   });
 
@@ -172,27 +175,27 @@ function initCatalog() {
     var board = matches[1];
     var thread = matches[2];
 
-    var boardData = storedHidingData[board];
+    var boardData = catalog.storedHidingData[board];
 
     if (boardData && boardData.threads.indexOf(thread) > -1) {
       var cell = link.parentNode;
 
       cell.parentNode.removeChild(cell);
     } else if (child.tagName === 'IMG') {
-      checkForFileHiding(child);
+      catalog.checkForFileHiding(child);
     }
 
   }
 
-  getCatalogData();
+  catalog.getCatalogData();
 
-}
+};
 
-function checkForFileHiding(child) {
+catalog.checkForFileHiding = function(child) {
 
   var srcParts = child.src.split('/');
 
-  var hiddenMedia = getHiddenMedia();
+  var hiddenMedia = catalog.getHiddenMedia();
 
   var finalPart = srcParts[srcParts.length - 1].substr(2);
 
@@ -204,40 +207,40 @@ function checkForFileHiding(child) {
     }
 
   }
-}
+};
 
-function setCellThumb(thumbLink, thread) {
-  thumbLink.href = '/' + boardUri + '/res/' + thread.threadId + '.html';
+catalog.setCellThumb = function(thumbLink, thread) {
+  thumbLink.href = '/' + api.boardUri + '/res/' + thread.threadId + '.html';
 
   if (thread.thumb) {
     var thumbImage = document.createElement('img');
 
     thumbImage.src = thread.thumb;
     thumbLink.appendChild(thumbImage);
-    checkForFileHiding(thumbImage);
+    catalog.checkForFileHiding(thumbImage);
   } else {
     thumbLink.innerHTML = 'Open';
   }
-}
+};
 
-function setCatalogCellIndicators(thread, cell) {
+catalog.setCatalogCellIndicators = function(thread, cell) {
 
-  for ( var key in indicatorsRelation) {
+  for ( var key in catalog.indicatorsRelation) {
     if (!thread[key]) {
-      cell.getElementsByClassName(indicatorsRelation[key])[0].remove();
+      cell.getElementsByClassName(catalog.indicatorsRelation[key])[0].remove();
     }
   }
 
-}
+};
 
-function setCell(thread) {
+catalog.setCell = function(thread) {
 
   var cell = document.createElement('div');
 
-  cell.innerHTML = catalogCellTemplate;
+  cell.innerHTML = catalog.catalogCellTemplate;
   cell.className = 'catalogCell';
 
-  setCellThumb(cell.getElementsByClassName('linkThumb')[0], thread);
+  catalog.setCellThumb(cell.getElementsByClassName('linkThumb')[0], thread);
 
   var labelReplies = cell.getElementsByClassName('labelReplies')[0];
   labelReplies.innerHTML = thread.postCount || 0;
@@ -250,31 +253,31 @@ function setCell(thread) {
     cell.getElementsByClassName('labelSubject')[0].innerHTML = thread.subject;
   }
 
-  setCatalogCellIndicators(thread, cell);
+  catalog.setCatalogCellIndicators(thread, cell);
 
   cell.getElementsByClassName('divMessage')[0].innerHTML = thread.markdown;
 
   return cell;
 
-}
+};
 
-function search() {
+catalog.search = function() {
 
-  if (!catalogThreads) {
+  if (!catalog.catalogThreads) {
     return;
   }
 
-  var term = searchField.value.toLowerCase();
+  var term = catalog.searchField.value.toLowerCase();
 
-  while (catalogDiv.firstChild) {
-    catalogDiv.removeChild(catalogDiv.firstChild);
+  while (catalog.catalogDiv.firstChild) {
+    catalog.catalogDiv.removeChild(catalog.catalogDiv.firstChild);
   }
 
-  var boardData = storedHidingData[boardUri];
+  var boardData = catalog.storedHidingData[api.boardUri];
 
-  for (var i = 0; i < catalogThreads.length; i++) {
+  for (var i = 0; i < catalog.catalogThreads.length; i++) {
 
-    var thread = catalogThreads[i];
+    var thread = catalog.catalogThreads[i];
 
     if ((boardData && boardData.threads.indexOf(thread.threadId.toString()) > -1)
         || (term.length && thread.message.toLowerCase().indexOf(term) < 0 && (thread.subject || '')
@@ -282,24 +285,24 @@ function search() {
       continue;
     }
 
-    catalogDiv.appendChild(setCell(thread));
+    catalog.catalogDiv.appendChild(catalog.setCell(thread));
 
   }
 
-}
+};
 
-function getCatalogData(callback) {
+catalog.getCatalogData = function(callback) {
 
-  if (loadingData) {
+  if (catalog.loadingData) {
     return;
   }
 
-  loadingData = true;
+  catalog.loadingData = true;
 
-  localRequest('/' + boardUri + '/catalog.json', function gotBoardData(error,
-      data) {
+  api.localRequest('/' + api.boardUri + '/catalog.json', function gotBoardData(
+      error, data) {
 
-    loadingData = false;
+    catalog.loadingData = false;
 
     if (error) {
       if (callback) {
@@ -310,11 +313,13 @@ function getCatalogData(callback) {
       return;
     }
 
-    catalogThreads = JSON.parse(data);
+    catalog.catalogThreads = JSON.parse(data);
     if (callback) {
       callback();
     }
 
   });
 
-}
+};
+
+catalog.init();

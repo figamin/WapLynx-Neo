@@ -1,71 +1,46 @@
-var themes = [ {
-  file : 'clear.css',
-  label : 'Clear',
-  id : 'clear'
-}, {
-  file : 'jungle.css',
-  label : 'Jungle',
-  id : 'jungle'
-} ];
+var themes = {};
 
-var addedTheme;
-var customCss;
+themes.init = function() {
 
-function updateCss() {
-
-  if (addedTheme) {
-
-    if (customCss && !customCss.parentNode) {
-      document.head.appendChild(customCss);
-    }
-
-    addedTheme.remove();
-    addedTheme = null;
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
   }
 
-  for (var i = 0; i < themes.length; i++) {
-    var theme = themes[i];
+  themes.themes = [ {
+    file : 'clear.css',
+    label : 'Clear',
+    id : 'clear'
+  }, {
+    file : 'jungle.css',
+    label : 'Jungle',
+    id : 'jungle'
+  } ];
 
-    if (theme.id === localStorage.selectedTheme) {
-      addedTheme = theme.element;
-
-      if (customCss && customCss.parentNode) {
-        customCss.remove();
-      }
-
-      document.head.appendChild(theme.element);
-    }
+  for (var i = 0; i < themes.themes.length; i++) {
+    themes.themes[i].element = document.createElement('link');
+    themes.themes[i].element.type = 'text/css';
+    themes.themes[i].element.rel = 'stylesheet';
+    themes.themes[i].element.href = '/.static/css/' + themes.themes[i].file;
   }
 
-}
-
-if (!DISABLE_JS) {
-
-  for (var i = 0; i < themes.length; i++) {
-    themes[i].element = document.createElement('link');
-    themes[i].element.type = 'text/css';
-    themes[i].element.rel = 'stylesheet';
-    themes[i].element.href = '/.static/css/' + themes[i].file;
-  }
-
-  if (typeof (boardUri) !== 'undefined') {
+  if (api.boardUri) {
 
     var linkedCss = document.getElementsByTagName('link');
 
     for (var i = 0; i < linkedCss.length; i++) {
 
-      var ending = '/' + boardUri + '/custom.css';
+      var ending = '/' + api.boardUri + '/custom.css';
 
       if (linkedCss[i].href.indexOf(ending) === linkedCss[i].href.length
           - ending.length) {
-        customCss = linkedCss[i];
+        themes.customCss = linkedCss[i];
         break;
       }
     }
 
   }
 
-  updateCss();
+  themes.updateCss();
 
   var postingLink = document.getElementById('navPosting');
 
@@ -90,9 +65,9 @@ if (!DISABLE_JS) {
     vanillaOption.innerHTML = 'Default';
     themeSelector.appendChild(vanillaOption);
 
-    for (i = 0; i < themes.length; i++) {
+    for (i = 0; i < themes.themes.length; i++) {
 
-      var theme = themes[i];
+      var theme = themes.themes[i];
 
       var themeOption = document.createElement('option');
       themeOption.innerHTML = theme.label;
@@ -113,13 +88,13 @@ if (!DISABLE_JS) {
 
           delete localStorage.selectedTheme;
 
-          updateCss();
+          themes.updateCss();
         }
 
         return;
       }
 
-      var selectedTheme = themes[themeSelector.selectedIndex - 1];
+      var selectedTheme = themes.themes[themeSelector.selectedIndex - 1];
 
       if (selectedTheme.id === localStorage.selectedTheme) {
         return;
@@ -127,7 +102,7 @@ if (!DISABLE_JS) {
 
       localStorage.selectedTheme = selectedTheme.id;
 
-      updateCss();
+      themes.updateCss();
 
     };
 
@@ -135,4 +110,34 @@ if (!DISABLE_JS) {
 
   }
 
-}
+};
+
+themes.updateCss = function() {
+
+  if (themes.addedTheme) {
+
+    if (themes.customCss && !themes.customCss.parentNode) {
+      document.head.appendChild(themes.customCss);
+    }
+
+    themes.addedTheme.remove();
+    themes.addedTheme = null;
+  }
+
+  for (var i = 0; i < themes.themes.length; i++) {
+    var theme = themes.themes[i];
+
+    if (theme.id === localStorage.selectedTheme) {
+      themes.addedTheme = theme.element;
+
+      if (themes.customCss && themes.customCss.parentNode) {
+        themes.customCss.remove();
+      }
+
+      document.head.appendChild(theme.element);
+    }
+  }
+
+};
+
+themes.init();

@@ -60,7 +60,7 @@
         <input
           type="button"
           id="loginJsButton"
-          onclick="loginUser()"
+          onclick="loginObj.loginUser()"
           value="login"
           class="hidden">
 
@@ -104,7 +104,7 @@
             <input
               type="button"
               id="reloadCaptchaButton"
-              onclick="reloadCaptcha()"
+              onclick="captchaUtils.reloadCaptcha()"
               value="reload">
             <span class="captchaTimer"></span>
 
@@ -130,7 +130,7 @@
           <input
             type="button"
             id="registerJsButton"
-            onclick="registerAccount()"
+            onclick="loginObj.registerAccount()"
             value="register"
             class="hidden">
 
@@ -163,7 +163,7 @@
             <input
               type="button"
               id="reloadCaptchaButtonRecover"
-              onclick="reloadCaptcha()"
+              onclick="captchaUtils.reloadCaptcha()"
               value="reload">
             <span class="captchaTimer"></span>
 
@@ -189,7 +189,7 @@
           <input
             type="button"
             id="recoverJsButton"
-            onclick="recoverAccount()"
+            onclick="loginObj.recoverAccount()"
             value="request recovery"
             class="hidden">
         </form>
@@ -205,7 +205,7 @@
 <script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
 <script src="/.static/js/login.js"></script>
-<script src="/.static/js/captcha.js"></script>
+<script src="/.static/js/captchaUtils.js"></script>
 <script src="/.static/js/themes.js"></script>
 <script src="/.static/js/favouriteBoards.js"></script>
 

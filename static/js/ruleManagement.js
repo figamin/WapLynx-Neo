@@ -1,21 +1,26 @@
-var boardIdentifier;
+var ruleManagement = {};
 
-if (!DISABLE_JS) {
+ruleManagement.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
   document.getElementById('addJsButton').style.display = 'inline';
 
   document.getElementById('addFormButton').style.display = 'none';
 
-  boardIdentifier = document.getElementById('boardIdentifier').value;
+  api.boardUri = document.getElementById('boardIdentifier').value;
 
   var rules = document.getElementsByClassName('ruleManagementCell');
 
   for (var i = 0; i < rules.length; i++) {
-    processRuleCell(rules[i]);
+    ruleManagement.processRuleCell(rules[i]);
   }
 
-}
+};
 
-function processRuleCell(cell) {
+ruleManagement.processRuleCell = function(cell) {
 
   var button = cell.getElementsByClassName('deleteJsButton')[0];
 
@@ -27,8 +32,8 @@ function processRuleCell(cell) {
 
     var index = cell.getElementsByClassName('indexIdentifier')[0].value;
 
-    apiRequest('deleteRule', {
-      boardUri : boardIdentifier,
+    api.apiRequest('deleteRule', {
+      boardUri : api.boardUri,
       ruleIndex : index,
     }, function requestComplete(status, data) {
       if (status === 'ok') {
@@ -42,9 +47,9 @@ function processRuleCell(cell) {
 
   }
 
-}
+};
 
-function addRule() {
+ruleManagement.addRule = function() {
 
   var typedRule = document.getElementById('fieldRule').value.trim();
 
@@ -55,8 +60,8 @@ function addRule() {
     alert('Rule too long, keep in under 512 characters.');
   } else {
 
-    apiRequest('createRule', {
-      boardUri : boardIdentifier,
+    api.apiRequest('createRule', {
+      boardUri : api.boardUri,
       rule : typedRule,
     }, function requestComplete(status, data) {
       if (status === 'ok') {
@@ -70,4 +75,6 @@ function addRule() {
 
   }
 
-}
+};
+
+ruleManagement.init();

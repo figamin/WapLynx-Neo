@@ -1,13 +1,18 @@
-if (!DISABLE_JS) {
+var bypass = {};
+
+bypass.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   document.getElementById('reloadCaptchaButton').style.display = 'inline';
   document.getElementById('bypassJsButton').style.display = 'inline';
-
   document.getElementById('bypassFormButton').style.display = 'none';
 
-}
+};
 
-function blockBypass() {
+bypass.blockBypass = function() {
 
   var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
 
@@ -19,7 +24,7 @@ function blockBypass() {
     return;
   }
 
-  apiRequest('renewBypass', {
+  api.apiRequest('renewBypass', {
     captcha : typedCaptcha
   }, function requestComplete(status, data) {
 
@@ -35,4 +40,6 @@ function blockBypass() {
     }
   });
 
-}
+};
+
+bypass.init();

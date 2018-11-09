@@ -1,34 +1,28 @@
-if (!DISABLE_JS) {
+var sideCatalog = {};
 
-  var storedHidingData = localStorage.hidingData;
+sideCatalog.init = function() {
 
-  if (storedHidingData) {
-    storedHidingData = JSON.parse(storedHidingData);
-  } else {
-    storedHidingData = {};
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
   }
 
-  htmlReplaceTable = {
+  sideCatalog.htmlReplaceTable = {
     '<' : '&lt;',
     '>' : '&gt;'
   };
 
-  var waitingForRefreshData;
-  var selectedThreadCell;
-  var refreshingSideCatalog = false;
-  var loadingThread = false;
-  var sideCatalogBody = document.getElementById('sideCatalogBody');
+  sideCatalog.sideCatalogBody = document.getElementById('sideCatalogBody');
 
-  var sideCatalog = document.getElementById('sideCatalog');
+  sideCatalog.sideCatalogDiv = document.getElementById('sideCatalogDiv');
 
   if (!localStorage.hideSideCatalog) {
-    sideCatalog.style.display = 'block';
+    sideCatalog.sideCatalogDiv.style.display = 'block';
   }
 
-  refreshSideCatalog();
+  sideCatalog.refreshSideCatalog();
 
   document.getElementById('closeSideCatalogButton').onclick = function() {
-    sideCatalog.style.display = 'none';
+    sideCatalog.sideCatalogDiv.style.display = 'none';
     localStorage.setItem('hideSideCatalog', true);
   }
 
@@ -56,9 +50,9 @@ if (!DISABLE_JS) {
   catalogButton.parentNode.insertBefore(document.createTextNode(' '),
       catalogButton.nextSibling);
 
-}
+};
 
-function removeAllFromClass(className) {
+sideCatalog.removeAllFromClass = function(className) {
 
   var elements = document.getElementsByClassName(className);
 
@@ -66,9 +60,9 @@ function removeAllFromClass(className) {
     elements[0].remove();
   }
 
-}
+};
 
-function removeIndicator(className) {
+sideCatalog.removeIndicator = function(className) {
 
   var elements = document.getElementsByClassName(className);
 
@@ -79,9 +73,9 @@ function removeIndicator(className) {
   elements[0].nextSibling.remove();
   elements[0].remove();
 
-}
+};
 
-function addIndicator(className, title) {
+sideCatalog.addIndicator = function(className, title) {
 
   var spanId = document.getElementsByClassName('spanId')[0];
 
@@ -93,56 +87,56 @@ function addIndicator(className, title) {
   spanId.parentNode.insertBefore(document.createTextNode(' '),
       spanId.nextSibling);
 
-}
+};
 
-function loadThread(cell, thread) {
+sideCatalog.loadThread = function(cell, threadData) {
 
-  loadingThread = true;
+  sideCatalog.loadingThread = true;
 
-  localRequest(
-      document.getElementById('divMod') ? '/mod.js?boardUri=' + boardUri
-          + '&threadId=' + thread.threadId + '&json=1' : '/' + boardUri
-          + '/res/' + thread.threadId + '.json',
+  api.localRequest(
+      document.getElementById('divMod') ? '/mod.js?boardUri=' + api.boardUri
+          + '&threadId=' + threadData.threadId + '&json=1' : '/' + api.boardUri
+          + '/res/' + threadData.threadId + '.json',
       function(error, data) {
 
-        loadingThread = false;
+        sideCatalog.loadingThread = false;
 
-        if (autoRefresh) {
-          currentRefresh = 5;
+        if (thread.autoRefresh) {
+          thread.currentRefresh = 5;
         }
 
         if (error) {
           return;
         }
 
-        if (selectedThreadCell) {
-          selectedThreadCell.className = 'sideCatalogCell';
+        if (sideCatalog.selectedThreadCell) {
+          sideCatalog.selectedThreadCell.className = 'sideCatalogCell';
         }
 
-        selectedThreadCell = cell;
+        sideCatalog.selectedThreadCell = cell;
 
-        selectedThreadCell.className = 'sideCatalogMarkedCell';
+        sideCatalog.selectedThreadCell.className = 'sideCatalogMarkedCell';
 
-        knownPosts = {};
+        tooltips.knownPosts = {};
         window.history.pushState('', '',
-            document.getElementById('divMod') ? '/mod.js?boardUri=' + boardUri
-                + '&threadId=' + thread.threadId : '/' + boardUri + '/res/'
-                + thread.threadId + '.html');
+            document.getElementById('divMod') ? '/mod.js?boardUri='
+                + api.boardUri + '&threadId=' + threadData.threadId : '/'
+                + api.boardUri + '/res/' + threadData.threadId + '.html');
 
-        document.getElementById('threadIdentifier').value = thread.threadId;
+        document.getElementById('threadIdentifier').value = threadData.threadId;
 
         if (document.getElementById('divMod')) {
-          document.getElementById('controlThreadIdentifier').value = thread.threadId;
-          document.getElementById('transferThreadIdentifier').value = thread.threadId;
+          document.getElementById('controlThreadIdentifier').value = threadData.threadId;
+          document.getElementById('transferThreadIdentifier').value = threadData.threadId;
 
-          document.getElementById('checkboxLock').checked = thread.locked;
-          document.getElementById('checkboxPin').checked = thread.pinned;
-          document.getElementById('checkboxCyclic').checked = thread.cyclic;
+          document.getElementById('checkboxLock').checked = threadData.locked;
+          document.getElementById('checkboxPin').checked = threadData.pinned;
+          document.getElementById('checkboxCyclic').checked = threadData.cyclic;
 
         }
 
-        document.title = '/' + boardUri + '/ - '
-            + (thread.subject || thread.message);
+        document.title = '/' + api.boardUri + '/ - '
+            + (threadData.subject || threadData.message);
 
         var opCell = document.getElementsByClassName('opCell')[0];
 
@@ -152,7 +146,7 @@ function loadThread(cell, thread) {
 
         data = JSON.parse(data);
 
-        opCell.id = thread.threadId;
+        opCell.id = threadData.threadId;
         opCell.className = 'opCell';
         if (data.files && data.files.length > 1) {
           opCell.className += ' multipleUploads';
@@ -291,74 +285,79 @@ function loadThread(cell, thread) {
         document.getElementsByClassName('opUploadPanel')[0].innerHTML = '';
 
         document.getElementsByClassName('opHead')[0]
-            .getElementsByClassName('deletionCheckBox')[0].value = boardUri
-            + '-' + thread.threadId;
+            .getElementsByClassName('deletionCheckBox')[0].value = api.boardUri
+            + '-' + threadData.threadId;
 
-        removeAllFromClass('extraMenuButton');
-        removeAllFromClass('hideMenu');
-        removeAllFromClass('quoteTooltip');
-        removeAllFromClass('extraMenu');
-        removeAllFromClass('hideButton');
-        removeAllFromClass('watchButton');
-        removeAllFromClass('relativeTime');
+        innerOP.parentNode.style.display = 'block';
 
-        removeIndicator('lockIndicator');
-        removeIndicator('pinIndicator');
-        removeIndicator('cyclicIndicator');
+        sideCatalog.removeAllFromClass('extraMenuButton');
+        sideCatalog.removeAllFromClass('hideMenu');
+        sideCatalog.removeAllFromClass('quoteTooltip');
+        sideCatalog.removeAllFromClass('extraMenu');
+        sideCatalog.removeAllFromClass('hideButton');
+        sideCatalog.removeAllFromClass('watchButton');
+        sideCatalog.removeAllFromClass('relativeTime');
+        sideCatalog.removeAllFromClass('unhideButton');
 
-        addIndicator('cyclicIndicator', 'Cyclical Thread');
-        addIndicator('pinIndicator', 'Sticky');
-        addIndicator('lockIndicator', 'Locked');
+        sideCatalog.removeIndicator('lockIndicator');
+        sideCatalog.removeIndicator('pinIndicator');
+        sideCatalog.removeIndicator('cyclicIndicator');
 
-        if (!thread.locked) {
-          removeIndicator('lockIndicator');
+        sideCatalog.addIndicator('cyclicIndicator', 'Cyclical Thread');
+        sideCatalog.addIndicator('pinIndicator', 'Sticky');
+        sideCatalog.addIndicator('lockIndicator', 'Locked');
+
+        if (!threadData.locked) {
+          sideCatalog.removeIndicator('lockIndicator');
         }
 
-        if (!thread.pinned) {
-          removeIndicator('pinIndicator');
+        if (!threadData.pinned) {
+          sideCatalog.removeIndicator('pinIndicator');
         }
 
-        if (!thread.cyclic) {
-          removeIndicator('cyclicIndicator');
+        if (!threadData.cyclic) {
+          sideCatalog.removeIndicator('cyclicIndicator');
         }
 
         document.getElementsByClassName('panelBacklinks')[0].innerHTML = '';
 
-        fullRefresh = true;
+        thread.fullRefresh = true;
 
-        initThread();
+        thread.initThread();
 
-        galleryFiles = [];
-        currentIndex = 0;
+        gallery.galleryFiles = [];
+        gallery.currentIndex = 0;
 
-        setPostInnerElements(boardUri, threadId, data, opCell);
+        posting.setPostInnerElements(api.boardUri, api.threadId, data, opCell);
 
-        processOP(document.getElementsByClassName('innerOP')[0]);
+        watcher.processOP(document.getElementsByClassName('innerOP')[0]);
 
         if (data.posts && data.posts.length) {
 
-          lastReplyId = data.posts[data.posts.length - 1].postId;
+          thread.lastReplyId = data.posts[data.posts.length - 1].postId;
 
           for (var i = 0; i < data.posts.length; i++) {
-            divPosts.appendChild(addPost(data.posts[i], boardUri, threadId));
+            thread.divPosts.appendChild(posting.addPost(data.posts[i],
+                api.boardUri, api.threadId));
           }
 
         }
 
       });
 
-}
+};
 
-function addSideCatalogThread(thread) {
+sideCatalog.addSideCatalogThread = function(thread) {
 
   var cell = document.createElement('a');
 
   cell.onclick = function() {
 
-    if (loadingThread || thread.threadId === threadId || waitingForRefreshData) {
+    if (sideCatalog.loadingThread || thread.threadId === api.threadId
+        || sideCatalog.waitingForRefreshData) {
       return;
-    } else if (refreshingThread) {
-      waitingForRefreshData = {
+    } else if (thread.refreshingThread) {
+      sideCatalog.waitingForRefreshData = {
         cell : cell,
         thread : thread
       };
@@ -366,7 +365,7 @@ function addSideCatalogThread(thread) {
       return;
     }
 
-    loadThread(cell, thread);
+    sideCatalog.loadThread(cell, thread);
 
   };
 
@@ -391,29 +390,29 @@ function addSideCatalogThread(thread) {
 
   upperText.innerHTML = (thread.subject || (thread.message.replace(/[<>]/g,
       function(match) {
-        return htmlReplaceTable[match];
+        return sideCatalog.htmlReplaceTable[match];
       }).substring(0, 128) || thread.threadId));
 
   lowerText.innerHTML = 'R: ' + (thread.postCount || 0) + ' / F: '
       + (thread.fileCount || 0);
 
-  sideCatalogBody.appendChild(cell);
+  sideCatalog.sideCatalogBody.appendChild(cell);
 
-  if (threadId === thread.threadId) {
+  if (api.threadId === thread.threadId) {
     cell.className = 'sideCatalogMarkedCell';
     cell.scrollIntoView();
-    selectedThreadCell = cell;
+    sideCatalog.selectedThreadCell = cell;
   } else {
     cell.className = 'sideCatalogCell';
   }
 
-}
+};
 
-function processCatalogData(data) {
+sideCatalog.processCatalogData = function(data) {
 
-  sideCatalogBody.innerHTML = '';
+  sideCatalog.sideCatalogBody.innerHTML = '';
 
-  var boardData = storedHidingData[boardUri];
+  var boardData = hiding.storedHidingData[api.boardUri];
 
   for (var i = 0; i < data.length; i++) {
 
@@ -423,29 +422,31 @@ function processCatalogData(data) {
       continue;
     }
 
-    addSideCatalogThread(thread);
+    sideCatalog.addSideCatalogThread(thread);
   }
 
-}
+};
 
-function refreshSideCatalog() {
+sideCatalog.refreshSideCatalog = function() {
 
-  if (refreshingSideCatalog) {
+  if (sideCatalog.refreshingSideCatalog) {
     return;
   }
 
-  refreshingSideCatalog = true;
+  sideCatalog.refreshingSideCatalog = true;
 
-  localRequest('/' + boardUri + '/catalog.json', function(error, data) {
+  api.localRequest('/' + api.boardUri + '/catalog.json', function(error, data) {
 
-    refreshingSideCatalog = false;
+    sideCatalog.refreshingSideCatalog = false;
 
     if (error) {
       return;
     }
 
-    processCatalogData(JSON.parse(data));
+    sideCatalog.processCatalogData(JSON.parse(data));
 
   });
 
-}
+};
+
+sideCatalog.init();

@@ -59,7 +59,7 @@
 
         <input
           type="button"
-          onClick="addUser()"
+          onClick="globalManagement.addUser()"
           class="hidden"
           id="addJsButton"
           value="Add user">
@@ -159,7 +159,7 @@
           id="closeReportsJsButton"
           type="button"
           class="hidden"
-          onclick="closeReports()">Close selected reports</button>
+          onclick="reports.closeReports()">Close selected reports</button>
       </form>
 
       <hr />
@@ -201,7 +201,7 @@
               type="submit"
               id="massBanFormButton">Ban</button>
             <button
-              onclick="massBan()"
+              onclick="globalManagement.massBan()"
               type="button"
               style="display: none;"
               id="massBanJsButton">Ban</button>

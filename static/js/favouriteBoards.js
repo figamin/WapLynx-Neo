@@ -1,6 +1,59 @@
-function setFavouriteBoards() {
+var favouriteBoards = {};
 
-  var favouriteBoards = JSON.parse(localStorage.favouriteBoards || '[]');
+favouriteBoards.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  favouriteBoards.setFavouriteBoards();
+
+  var boardLabel = document.getElementById('labelName')
+      || document.getElementById('labelBoard');
+
+  if (boardLabel) {
+
+    var savedFavouriteBoards = JSON.parse(localStorage.savedFavouriteBoards
+        || '[]');
+
+    var favouriteButton = document.createElement('span');
+    favouriteButton.id = 'favouriteButton';
+    boardLabel.parentNode.appendChild(favouriteButton);
+
+    if (savedFavouriteBoards.indexOf(api.boardUri) > -1) {
+      favouriteButton.className = 'checkedFavouriteButton';
+    }
+
+    favouriteButton.onclick = function() {
+      savedFavouriteBoards = JSON.parse(localStorage.savedFavouriteBoards
+          || '[]');
+
+      var index = savedFavouriteBoards.indexOf(api.boardUri);
+
+      if (index > -1) {
+        savedFavouriteBoards.splice(index, 1);
+        favouriteButton.removeAttribute('class');
+      } else {
+        savedFavouriteBoards.push(api.boardUri);
+        savedFavouriteBoards.sort();
+        favouriteButton.className = 'checkedFavouriteButton';
+      }
+
+      localStorage.setItem('savedFavouriteBoards', JSON
+          .stringify(savedFavouriteBoards));
+
+      favouriteBoards.setFavouriteBoards();
+
+    };
+
+  }
+
+};
+
+favouriteBoards.setFavouriteBoards = function() {
+
+  var savedFavouriteBoards = JSON.parse(localStorage.savedFavouriteBoards
+      || '[]');
 
   var boardsSpan = document.getElementById('navBoardsSpan');
 
@@ -8,7 +61,7 @@ function setFavouriteBoards() {
     boardsSpan.removeChild(boardsSpan.lastChild);
   }
 
-  if (favouriteBoards.length) {
+  if (savedFavouriteBoards.length) {
 
     var firstBracket = document.createElement('span');
     firstBracket.innerHTML = '[';
@@ -16,16 +69,16 @@ function setFavouriteBoards() {
 
     boardsSpan.appendChild(document.createTextNode(' '));
 
-    for (var i = 0; i < favouriteBoards.length; i++) {
+    for (var i = 0; i < savedFavouriteBoards.length; i++) {
 
       var link = document.createElement('a');
-      link.href = '/' + favouriteBoards[i];
-      link.innerHTML = favouriteBoards[i];
+      link.href = '/' + savedFavouriteBoards[i];
+      link.innerHTML = savedFavouriteBoards[i];
       boardsSpan.appendChild(link);
 
       boardsSpan.appendChild(document.createTextNode(' '));
 
-      if (i < favouriteBoards.length - 1) {
+      if (i < savedFavouriteBoards.length - 1) {
 
         var divider = document.createElement('span');
         divider.innerHTML = '/';
@@ -36,52 +89,11 @@ function setFavouriteBoards() {
 
     }
 
-    var seconrdBracket = document.createElement('span');
-    seconrdBracket.innerHTML = ']';
-    boardsSpan.appendChild(seconrdBracket);
+    var secondBracket = document.createElement('span');
+    secondBracket.innerHTML = ']';
+    boardsSpan.appendChild(secondBracket);
   }
 
-}
+};
 
-if (!DISABLE_JS) {
-
-  setFavouriteBoards();
-
-  var boardLabel = document.getElementById('labelName')
-      || document.getElementById('labelBoard');
-
-  if (boardLabel) {
-
-    var favouriteBoards = JSON.parse(localStorage.favouriteBoards || '[]');
-
-    var favouriteButton = document.createElement('span');
-    favouriteButton.id = 'favouriteButton';
-    boardLabel.parentNode.appendChild(favouriteButton);
-
-    if (favouriteBoards.indexOf(boardUri) > -1) {
-      favouriteButton.className = 'checkedFavouriteButton';
-    }
-
-    favouriteButton.onclick = function() {
-      favouriteBoards = JSON.parse(localStorage.favouriteBoards || '[]');
-
-      var index = favouriteBoards.indexOf(boardUri);
-
-      if (index > -1) {
-        favouriteBoards.splice(index, 1);
-        favouriteButton.removeAttribute('class');
-      } else {
-        favouriteBoards.push(boardUri);
-        favouriteBoards.sort();
-        favouriteButton.className = 'checkedFavouriteButton';
-      }
-
-      localStorage.setItem('favouriteBoards', JSON.stringify(favouriteBoards));
-
-      setFavouriteBoards();
-
-    };
-
-  }
-
-}
+favouriteBoards.init();

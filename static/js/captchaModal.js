@@ -1,4 +1,6 @@
-function addModalRow(label, element) {
+var captchaModal = {};
+
+captchaModal.addModalRow = function(label, element) {
 
   var tableBody = document.getElementsByClassName('modalTableBody')[0];
 
@@ -16,9 +18,9 @@ function addModalRow(label, element) {
 
   tableRow.appendChild(fieldHolder);
 
-}
+};
 
-function getCaptchaModal(header, noCaptcha) {
+captchaModal.getCaptchaModal = function(header, noCaptcha) {
 
   var outerPanel = document.createElement('div');
   outerPanel.className = 'modalPanel';
@@ -50,7 +52,7 @@ function getCaptchaModal(header, noCaptcha) {
     var reloadButton = document.createElement('input');
     reloadButton.value = 'Reload';
     reloadButton.addEventListener('click', function() {
-      reloadCaptcha()
+      captchaUtils.reloadCaptcha()
     });
     reloadButton.type = 'button';
     captchaControls.appendChild(reloadButton);
@@ -73,7 +75,7 @@ function getCaptchaModal(header, noCaptcha) {
     captchaField.type = 'text';
     captchaField.className = 'modalAnswer';
 
-    addModalRow('Answer', captchaField);
+    captchaModal.addModalRow('Answer', captchaField);
 
   }
 
@@ -96,4 +98,4 @@ function getCaptchaModal(header, noCaptcha) {
 
   return outerPanel;
 
-}
+};

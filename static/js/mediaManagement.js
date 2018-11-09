@@ -1,11 +1,17 @@
-if (!DISABLE_JS) {
+var mediaManagement = {};
+
+mediaManagement.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   document.getElementById('deleteJsButton').style.display = 'inline';
   document.getElementById('deleteFormButton').style.display = 'none';
 
-}
+};
 
-function deleteMedia() {
+mediaManagement.deleteMedia = function() {
 
   var checkBoxes = document.getElementsByClassName('identifierCheckbox');
 
@@ -17,7 +23,7 @@ function deleteMedia() {
     }
   }
 
-  apiRequest('deleteMedia', {
+  api.apiRequest('deleteMedia', {
     identifiers : identifiers
   }, function deletedMedia(status, data) {
 
@@ -31,4 +37,6 @@ function deleteMedia() {
 
   });
 
-}
+};
+
+mediaManagement.init();

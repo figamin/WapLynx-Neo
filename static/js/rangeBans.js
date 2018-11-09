@@ -1,11 +1,15 @@
-var boardUri;
+var rangeBans = {};
 
-if (!DISABLE_JS) {
+rangeBans.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   var boardIdentifier = document.getElementById('boardIdentifier');
 
   if (boardIdentifier) {
-    boardUri = boardIdentifier.value;
+    api.boardUri = boardIdentifier.value;
   }
 
   document.getElementById('createFormButton').style.display = 'none';
@@ -14,25 +18,27 @@ if (!DISABLE_JS) {
   var rangeBanCells = document.getElementsByClassName('rangeBanCell');
 
   for (var j = 0; j < rangeBanCells.length; j++) {
-    processRangeBanCell(rangeBanCells[j]);
+    rangeBans.processRangeBanCell(rangeBanCells[j]);
   }
-}
 
-function processRangeBanCell(cell) {
+};
+
+rangeBans.processRangeBanCell = function(cell) {
 
   var button = cell.getElementsByClassName('liftJsButton')[0];
   button.style.display = 'inline';
 
   button.onclick = function() {
-    liftBan(cell.getElementsByClassName('idIdentifier')[0].value);
+    rangeBans.liftBan(cell.getElementsByClassName('idIdentifier')[0].value);
   };
 
   cell.getElementsByClassName('liftFormButton')[0].style.display = 'none';
 
-}
+};
 
-function liftBan(ban) {
-  apiRequest('liftBan', {
+rangeBans.liftBan = function(ban) {
+
+  api.apiRequest('liftBan', {
     banId : ban
   }, function requestComplete(status, data) {
 
@@ -44,21 +50,19 @@ function liftBan(ban) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
-}
 
-function placeRangeBan() {
+};
+
+rangeBans.placeRangeBan = function() {
 
   var typedRange = document.getElementById('rangeField').value.trim();
 
   var parameters = {
-    range : typedRange
+    range : typedRange,
+    boardUri : api.boardUri
   };
 
-  if (boardUri) {
-    parameters.boardUri = boardUri;
-  }
-
-  apiRequest('placeRangeBan', parameters,
+  api.apiRequest('placeRangeBan', parameters,
       function requestComplete(status, data) {
 
         if (status === 'ok') {
@@ -70,4 +74,6 @@ function placeRangeBan() {
         }
       });
 
-}
+};
+
+rangeBans.init();

@@ -1,30 +1,55 @@
-var shownPostingMenu;
-var banLabels = [ 'Regular ban', 'Range ban (1/2 octects)',
-    'Range ban (3/4 octects)' ];
-var deletionOptions = [ 'Do not delete', 'Delete post',
-    'Delete post and media', 'Delete by ip' ];
-var threadSettingsList = [ {
-  label : 'Toggle Lock',
-  field : 'locked',
-  parameter : 'lock'
-}, {
-  label : 'Toggle Pin',
-  field : 'pinned',
-  parameter : 'pin'
-}, {
-  label : 'Toggle Cyclic',
-  field : 'cyclic',
-  parameter : 'cyclic'
-} ];
+var postingMenu = {};
 
-function showReport(board, thread, post, global) {
+postingMenu.init = function() {
 
-  var outerPanel = getCaptchaModal(global ? 'Global report' : 'Report');
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  postingMenu.banLabels = [ 'Regular ban', 'Range ban (1/2 octects)',
+      'Range ban (3/4 octects)' ];
+  postingMenu.deletionOptions = [ 'Do not delete', 'Delete post',
+      'Delete post and media', 'Delete by ip' ];
+  postingMenu.threadSettingsList = [ {
+    label : 'Toggle Lock',
+    field : 'locked',
+    parameter : 'lock'
+  }, {
+    label : 'Toggle Pin',
+    field : 'pinned',
+    parameter : 'pin'
+  }, {
+    label : 'Toggle Cyclic',
+    field : 'cyclic',
+    parameter : 'cyclic'
+  } ];
+
+  document.body.addEventListener('click', function clicked() {
+
+    if (postingMenu.shownPostingMenu) {
+      postingMenu.shownPostingMenu.style.display = 'none';
+      delete postingMenu.shownPostingMenu;
+    }
+
+  }, true);
+
+  var checkboxes = document.getElementsByClassName('deletionCheckBox');
+
+  for (var i = 0; i < checkboxes.length; i++) {
+    postingMenu.setExtraMenu(checkboxes[i]);
+  }
+
+};
+
+postingMenu.showReport = function(board, thread, post, global) {
+
+  var outerPanel = captchaModal.getCaptchaModal(global ? 'Global report'
+      : 'Report');
 
   var reasonField = document.createElement('input');
   reasonField.type = 'text';
 
-  addModalRow('Reason', reasonField);
+  captchaModal.addModalRow('Reason', reasonField);
 
   var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
@@ -41,7 +66,7 @@ function showReport(board, thread, post, global) {
       return;
     }
 
-    apiRequest('reportContent', {
+    api.apiRequest('reportContent', {
       captcha : typedCaptcha,
       reason : reasonField.value.trim(),
       global : global,
@@ -62,10 +87,14 @@ function showReport(board, thread, post, global) {
 
   };
 
-}
+};
 
-function deleteSinglePost(boardUri, thread, post, fromIp, unlinkFiles,
-    wipeMedia, forcedPassword) {
+postingMenu.deleteSinglePost = function(boardUri, thread, post, fromIp,
+    unlinkFiles, wipeMedia, forcedPassword) {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   var key = boardUri + '/' + thread
 
@@ -80,54 +109,55 @@ function deleteSinglePost(boardUri, thread, post, fromIp, unlinkFiles,
       || document.getElementById('deletionFieldPassword').value.trim()
       || Math.random().toString(36).substring(2, 10);
 
-  apiRequest(
-      fromIp ? 'deleteFromIpOnBoard' : 'deleteContent',
-      {
-        confirmation : true,
-        password : password,
-        deleteUploads : unlinkFiles,
-        deleteMedia : wipeMedia,
-        postings : [ {
-          board : boardUri,
-          thread : thread,
-          post : post
-        } ]
-      },
-      function requestComplete(status, data) {
+  api
+      .apiRequest(
+          fromIp ? 'deleteFromIpOnBoard' : 'deleteContent',
+          {
+            confirmation : true,
+            password : password,
+            deleteUploads : unlinkFiles,
+            deleteMedia : wipeMedia,
+            postings : [ {
+              board : boardUri,
+              thread : thread,
+              post : post
+            } ]
+          },
+          function requestComplete(status, data) {
 
-        if (status === 'ok') {
+            if (status === 'ok') {
 
-          if (!fromIp && !board && data.removedPosts) {
-            refreshPosts(true, true);
-          } else if (fromIp || data.removedThreads || data.removedPosts) {
+              if (!fromIp && !api.isBoard && data.removedPosts) {
+                refreshPosts(true, true);
+              } else if (fromIp || data.removedThreads || data.removedPosts) {
 
-            if (board) {
-              location.reload(true);
+                if (api.isBoard) {
+                  location.reload(true);
+                } else {
+                  window.location.pathname = '/' + boardUri + '/';
+                }
+
+              } else {
+
+                var newPass = prompt('Could not delete. Would you like to try another password?');
+
+                if (newPass) {
+                  postingMenu.deleteSinglePost(boardUri, thread, post, fromIp,
+                      unlinkFiles, wipeMedia, newPass);
+                }
+
+              }
+
             } else {
-              window.location.pathname = '/' + boardUri + '/';
+              alert(status + ': ' + JSON.stringify(data));
             }
+          });
 
-          } else {
+};
 
-            var newPass = prompt('Could not delete. Would you like to try another password?');
+postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) {
 
-            if (newPass) {
-              deleteSinglePost(boardUri, thread, post, fromIp, unlinkFiles,
-                  wipeMedia, newPass);
-            }
-
-          }
-
-        } else {
-          alert(status + ': ' + JSON.stringify(data));
-        }
-      });
-
-}
-
-function banSinglePost(innerPart, boardUri, thread, post, global) {
-
-  var outerPanel = getCaptchaModal(global ? 'Global ban' : 'Ban');
+  var outerPanel = captchaModal.getCaptchaModal(global ? 'Global ban' : 'Ban');
 
   var decorationPanel = outerPanel
       .getElementsByClassName('modalDecorationPanel')[0];
@@ -136,35 +166,35 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
 
   var reasonField = document.createElement('input');
   reasonField.type = 'text';
-  addModalRow('Reason', reasonField);
+  captchaModal.addModalRow('Reason', reasonField);
 
   var durationField = document.createElement('input');
   durationField.type = 'text';
-  addModalRow('Duration', durationField);
+  captchaModal.addModalRow('Duration', durationField);
 
   var messageField = document.createElement('input');
   messageField.type = 'text';
-  addModalRow('Message', messageField);
+  captchaModal.addModalRow('Message', messageField);
 
   var typeCombo = document.createElement('select');
-  addModalRow('Type', typeCombo);
+  captchaModal.addModalRow('Type', typeCombo);
 
-  for (var i = 0; i < banLabels.length; i++) {
+  for (var i = 0; i < postingMenu.banLabels.length; i++) {
 
     var option = document.createElement('option');
-    option.innerHTML = banLabels[i];
+    option.innerHTML = postingMenu.banLabels[i];
     typeCombo.appendChild(option);
 
   }
 
   var deletionCombo = document.createElement('select');
 
-  addModalRow('Deletion action', deletionCombo);
+  captchaModal.addModalRow('Deletion action', deletionCombo);
 
-  for (var i = 0; i < deletionOptions.length; i++) {
+  for (var i = 0; i < postingMenu.deletionOptions.length; i++) {
 
     var option = document.createElement('option');
-    option.innerHTML = deletionOptions[i];
+    option.innerHTML = postingMenu.deletionOptions[i];
     deletionCombo.appendChild(option);
 
   }
@@ -182,7 +212,7 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
 
     localStorage.setItem('autoDeletionOption', selectedDeletionOption);
 
-    apiRequest('banUsers', {
+    api.apiRequest('banUsers', {
       reason : reasonField.value.trim(),
       captcha : captchaField.value.trim(),
       banType : typeCombo.selectedIndex,
@@ -194,37 +224,37 @@ function banSinglePost(innerPart, boardUri, thread, post, global) {
         thread : thread,
         post : post
       } ]
-    },
-        function requestComplete(status, data) {
+    }, function requestComplete(status, data) {
 
-          if (status === 'ok') {
+      if (status === 'ok') {
 
-            var banMessageDiv = document.createElement('div');
-            banMessageDiv.innerHTML = typedMessage
-                || '(USER WAS BANNED FOR THIS POST)';
-            banMessageDiv.className = 'divBanMessage';
-            innerPart.appendChild(banMessageDiv);
+        var banMessageDiv = document.createElement('div');
+        banMessageDiv.innerHTML = typedMessage
+            || '(USER WAS BANNED FOR THIS POST)';
+        banMessageDiv.className = 'divBanMessage';
+        innerPart.appendChild(banMessageDiv);
 
-            outerPanel.remove();
+        outerPanel.remove();
 
-            if (selectedDeletionOption) {
-              deleteSinglePost(boardUri, thread, post,
+        if (selectedDeletionOption) {
+          postingMenu
+              .deleteSinglePost(boardUri, thread, post,
                   selectedDeletionOption === 3, false,
                   selectedDeletionOption === 2);
-            }
+        }
 
-          } else {
-            alert(status + ': ' + JSON.stringify(data));
-          }
-        });
+      } else {
+        alert(status + ': ' + JSON.stringify(data));
+      }
+    });
 
   };
 
-}
+};
 
-function spoilSinglePost(boardUri, thread, post) {
+postingMenu.spoilSinglePost = function(boardUri, thread, post) {
 
-  apiRequest('spoilFiles', {
+  api.apiRequest('spoilFiles', {
     postings : [ {
       board : boardUri,
       thread : thread,
@@ -234,9 +264,9 @@ function spoilSinglePost(boardUri, thread, post) {
     location.reload(true);
   });
 
-}
+};
 
-function transferThread(boardUri, thread) {
+postingMenu.transferThread = function(boardUri, thread) {
 
   var destination = prompt('Transfer to which board?',
       'Board uri without slashes');
@@ -247,7 +277,7 @@ function transferThread(boardUri, thread) {
 
   destination = destination.trim();
 
-  apiRequest('transferThread', {
+  api.apiRequest('transferThread', {
     boardUri : boardUri,
     threadId : thread,
     boardUriDestination : destination
@@ -260,9 +290,9 @@ function transferThread(boardUri, thread) {
     }
   });
 
-}
+};
 
-function editPost(board, thread, post) {
+postingMenu.editPost = function(board, thread, post) {
 
   var url = '/edit.js?json=1&boardUri=' + board + '&threadId=' + thread;
 
@@ -270,7 +300,7 @@ function editPost(board, thread, post) {
     url += '&postId=' + post;
   }
 
-  var editData = localRequest(url, function gotData(error, data) {
+  var editData = api.localRequest(url, function gotData(error, data) {
 
     if (error) {
       alert(error);
@@ -278,19 +308,19 @@ function editPost(board, thread, post) {
 
       data = JSON.parse(data);
 
-      var outerPanel = getCaptchaModal('Edit', true);
+      var outerPanel = captchaModal.getCaptchaModal('Edit', true);
 
       var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
       var subjectField = document.createElement('input');
       subjectField.type = 'text';
       subjectField.value = data.subject || '';
-      addModalRow('Subject', subjectField);
+      captchaModal.addModalRow('Subject', subjectField);
 
       var messageArea = document.createElement('textarea');
       messageArea.setAttribute('placeholder', 'message');
       messageArea.defaultValue = data.message || '';
-      addModalRow('Message', messageArea);
+      captchaModal.addModalRow('Message', messageArea);
 
       okButton.onclick = function() {
 
@@ -315,8 +345,8 @@ function editPost(board, thread, post) {
             parameters.threadId = thread;
           }
 
-          apiRequest('saveEdit', parameters, function requestComplete(status,
-              data) {
+          api.apiRequest('saveEdit', parameters, function requestComplete(
+              status, data) {
 
             if (status === 'ok') {
               location.reload(true);
@@ -333,96 +363,98 @@ function editPost(board, thread, post) {
 
   });
 
-}
+};
 
-function toggleThreadSetting(boardUri, thread, settingIndex) {
+postingMenu.toggleThreadSetting = function(boardUri, thread, settingIndex) {
 
-  localRequest('/' + boardUri + '/res/' + thread + '.json', function gotData(
-      error, data) {
+  api.localRequest('/' + boardUri + '/res/' + thread + '.json',
+      function gotData(error, data) {
 
-    if (error) {
-      alert(error);
-      return;
-    }
+        if (error) {
+          alert(error);
+          return;
+        }
 
-    var data = JSON.parse(data);
+        var data = JSON.parse(data);
 
-    var parameters = {
-      boardUri : boardUri,
-      threadId : thread
-    };
+        var parameters = {
+          boardUri : boardUri,
+          threadId : thread
+        };
 
-    for (var i = 0; i < threadSettingsList.length; i++) {
+        for (var i = 0; i < postingMenu.threadSettingsList.length; i++) {
 
-      var field = threadSettingsList[i];
+          var field = postingMenu.threadSettingsList[i];
 
-      parameters[field.parameter] = settingIndex === i ? !data[field.field]
-          : data[field.field];
+          parameters[field.parameter] = settingIndex === i ? !data[field.field]
+              : data[field.field];
 
-    }
+        }
 
-    apiRequest('changeThreadSettings', parameters, function requestComplete(
-        status, data) {
+        api.apiRequest('changeThreadSettings', parameters,
+            function requestComplete(status, data) {
 
-      if (status === 'ok') {
-        location.reload(true);
-      } else {
-        alert(status + ': ' + JSON.stringify(data));
-      }
-    });
+              if (status === 'ok') {
+                location.reload(true);
+              } else {
+                alert(status + ': ' + JSON.stringify(data));
+              }
+            });
 
-  });
+      });
 
-}
+};
 
-function addToggleSettingButton(extraMenu, board, thread, index) {
+postingMenu.addToggleSettingButton = function(extraMenu, board, thread, index) {
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var toggleButton = document.createElement('label');
-  toggleButton.innerHTML = threadSettingsList[index].label;
+  var toggleButton = document.createElement('div');
+  toggleButton.innerHTML = postingMenu.threadSettingsList[index].label;
   toggleButton.onclick = function() {
-    toggleThreadSetting(board, thread, index);
+    postingMenu.toggleThreadSetting(board, thread, index);
   };
+
   extraMenu.appendChild(toggleButton);
 
-}
+};
 
-function setExtraMenuThread(extraMenu, board, thread) {
+postingMenu.setExtraMenuThread = function(extraMenu, board, thread) {
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var transferButton = document.createElement('label');
+  var transferButton = document.createElement('div');
   transferButton.innerHTML = 'Transfer Thread';
   transferButton.onclick = function() {
-    transferThread(board, thread);
+    postingMenu.transferThread(board, thread);
   };
   extraMenu.appendChild(transferButton);
 
-  for (var i = 0; i < threadSettingsList.length; i++) {
-    addToggleSettingButton(extraMenu, board, thread, i);
+  for (var i = 0; i < postingMenu.threadSettingsList.length; i++) {
+    postingMenu.addToggleSettingButton(extraMenu, board, thread, i);
   }
 
-}
+};
 
-function setExtraMenuMod(checkbox, extraMenu, board, thread, post, hasFiles) {
+postingMenu.setExtraMenuMod = function(checkbox, extraMenu, board, thread,
+    post, hasFiles) {
 
   if (hasFiles) {
     extraMenu.appendChild(document.createElement('hr'));
 
-    var deleteMediaButton = document.createElement('label');
+    var deleteMediaButton = document.createElement('div');
     deleteMediaButton.innerHTML = 'Delete Post And Media';
     extraMenu.appendChild(deleteMediaButton);
     deleteMediaButton.onclick = function() {
-      deleteSinglePost(board, thread, post, false, false, true);
+      postingMenu.deleteSinglePost(board, thread, post, false, false, true);
     };
 
     extraMenu.appendChild(document.createElement('hr'));
 
-    var spoilButton = document.createElement('label');
+    var spoilButton = document.createElement('div');
     spoilButton.innerHTML = 'Spoil Files';
     spoilButton.onclick = function() {
-      spoilSinglePost(board, thread, post);
+      postingMenu.spoilSinglePost(board, thread, post);
     };
     extraMenu.appendChild(spoilButton);
 
@@ -432,12 +464,12 @@ function setExtraMenuMod(checkbox, extraMenu, board, thread, post, hasFiles) {
 
   var innerPart = checkbox.parentNode.parentNode;
 
-  var deleteByIpButton = document.createElement('label');
+  var deleteByIpButton = document.createElement('div');
   deleteByIpButton.innerHTML = 'Delete By Ip';
   deleteByIpButton.onclick = function() {
 
     if (confirm("Are you sure you wish to delete all posts on this board made by this ip?")) {
-      deleteSinglePost(board, thread, post, true);
+      postingMenu.deleteSinglePost(board, thread, post, true);
     }
 
   };
@@ -445,37 +477,38 @@ function setExtraMenuMod(checkbox, extraMenu, board, thread, post, hasFiles) {
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var banButton = document.createElement('label');
+  var banButton = document.createElement('div');
   banButton.innerHTML = 'Ban';
   banButton.onclick = function() {
-    banSinglePost(innerPart, board, thread, post);
+    postingMenu.banSinglePost(innerPart, board, thread, post);
   };
   extraMenu.appendChild(banButton);
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var globalBanButton = document.createElement('label');
+  var globalBanButton = document.createElement('div');
   globalBanButton.innerHTML = 'Global Ban';
   globalBanButton.onclick = function() {
-    banSinglePost(innerPart, board, thread, post, true);
+    postingMenu.banSinglePost(innerPart, board, thread, post, true);
   };
   extraMenu.appendChild(globalBanButton);
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var editButton = document.createElement('label');
+  var editButton = document.createElement('div');
   editButton.innerHTML = 'Edit';
   editButton.onclick = function() {
-    editPost(board, thread, post);
+    postingMenu.editPost(board, thread, post);
   };
   extraMenu.appendChild(editButton);
 
   if (!post) {
-    setExtraMenuThread(extraMenu, board, thread);
+    postingMenu.setExtraMenuThread(extraMenu, board, thread);
   }
-}
 
-function setExtraMenu(checkbox) {
+};
+
+postingMenu.setExtraMenu = function(checkbox) {
 
   var name = checkbox.name;
 
@@ -512,32 +545,32 @@ function setExtraMenu(checkbox) {
     extraMenu.style.top = previewOrigin.y + 'px';
     extraMenu.style.display = 'inline';
 
-    shownPostingMenu = extraMenu;
+    postingMenu.shownPostingMenu = extraMenu;
   };
 
-  var reportButton = document.createElement('label');
+  var reportButton = document.createElement('div');
   reportButton.innerHTML = 'Report';
   reportButton.onclick = function() {
-    showReport(board, thread, post);
+    postingMenu.showReport(board, thread, post);
   };
   extraMenu.appendChild(reportButton);
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var globalReportButton = document.createElement('label');
+  var globalReportButton = document.createElement('div');
   globalReportButton.innerHTML = 'Global Report';
   globalReportButton.onclick = function() {
-    showReport(board, thread, post, true);
+    postingMenu.showReport(board, thread, post, true);
   };
   extraMenu.appendChild(globalReportButton);
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var deleteButton = document.createElement('label');
+  var deleteButton = document.createElement('div');
   deleteButton.innerHTML = 'Delete Post';
   extraMenu.appendChild(deleteButton);
   deleteButton.onclick = function() {
-    deleteSinglePost(board, thread, post);
+    postingMenu.deleteSinglePost(board, thread, post);
   };
 
   var hasFiles = checkbox.parentNode.parentNode
@@ -549,36 +582,20 @@ function setExtraMenu(checkbox) {
 
     extraMenu.appendChild(document.createElement('hr'));
 
-    var unlinkButton = document.createElement('label');
+    var unlinkButton = document.createElement('div');
     unlinkButton.innerHTML = 'Unlink Files';
     extraMenu.appendChild(unlinkButton);
     unlinkButton.onclick = function() {
-      deleteSinglePost(board, thread, post, false, true);
+      postingMenu.deleteSinglePost(board, thread, post, false, true);
     };
 
   }
 
-  if (getCookies().hash) {
-    setExtraMenuMod(checkbox, extraMenu, board, thread, post, hasFiles);
+  if (api.getCookies().hash) {
+    postingMenu.setExtraMenuMod(checkbox, extraMenu, board, thread, post,
+        hasFiles);
   }
 
-}
+};
 
-if (!DISABLE_JS) {
-
-  document.body.addEventListener('click', function clicked() {
-
-    if (shownPostingMenu) {
-      shownPostingMenu.style.display = 'none';
-      shownPostingMenu = null;
-    }
-
-  }, true);
-
-  var checkboxes = document.getElementsByClassName('deletionCheckBox');
-
-  for (var i = 0; i < checkboxes.length; i++) {
-    setExtraMenu(checkboxes[i]);
-  }
-
-}
+postingMenu.init();

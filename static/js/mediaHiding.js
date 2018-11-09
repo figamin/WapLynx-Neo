@@ -1,22 +1,28 @@
-var hiddenMediaRelation = {};
+var mediaHiding = {};
 
-if (!DISABLE_JS) {
+mediaHiding.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  mediaHiding.hiddenMediaRelation = {};
 
   var shownFiles = document.getElementsByClassName('uploadCell');
 
   for (var i = 0; i < shownFiles.length; i++) {
-    processFileForHiding(shownFiles[i]);
+    mediaHiding.processFileForHiding(shownFiles[i]);
   }
 
-  var hiddenMedia = getHiddenMedia();
+  var hiddenMedia = mediaHiding.getHiddenMedia();
 
   for (i = 0; i < hiddenMedia.length; i++) {
-    updateHiddenFiles(hiddenMedia[i], true);
+    mediaHiding.updateHiddenFiles(hiddenMedia[i], true);
   }
 
-}
+};
 
-function getHiddenMedia() {
+mediaHiding.getHiddenMedia = function() {
 
   var hiddenMedia = localStorage.hiddenMedia;
 
@@ -28,11 +34,11 @@ function getHiddenMedia() {
 
   return hiddenMedia;
 
-}
+};
 
-function updateHiddenFiles(file, hiding) {
+mediaHiding.updateHiddenFiles = function(file, hiding) {
 
-  var mediaObject = hiddenMediaRelation[file] || [];
+  var mediaObject = mediaHiding.hiddenMediaRelation[file] || [];
 
   for (var i = 0; i < mediaObject.length; i++) {
 
@@ -53,9 +59,9 @@ function updateHiddenFiles(file, hiding) {
     element.element.style.display = hiding ? 'none' : 'inline';
   }
 
-}
+};
 
-function processFileForHiding(file) {
+mediaHiding.processFileForHiding = function(file) {
 
   var nameLink = file.getElementsByClassName('nameLink')[0];
 
@@ -66,18 +72,18 @@ function processFileForHiding(file) {
   var fileName = nameLink.href.split('/');
   fileName = fileName[fileName.length - 1];
 
-  var mediaObject = hiddenMediaRelation[fileName] || [];
+  var mediaObject = mediaHiding.hiddenMediaRelation[fileName] || [];
 
   mediaObject.push({
     button : hidingButton,
     element : file.getElementsByClassName('imgLink')[0]
   });
 
-  hiddenMediaRelation[fileName] = mediaObject;
+  mediaHiding.hiddenMediaRelation[fileName] = mediaObject;
 
   hidingButton.onclick = function() {
 
-    var hiddenMedia = getHiddenMedia();
+    var hiddenMedia = mediaHiding.getHiddenMedia();
 
     var alreadyHidden = hiddenMedia.indexOf(fileName) > -1;
 
@@ -89,10 +95,12 @@ function processFileForHiding(file) {
 
     localStorage.hiddenMedia = JSON.stringify(hiddenMedia);
 
-    updateHiddenFiles(fileName, !alreadyHidden);
+    mediaHiding.updateHiddenFiles(fileName, !alreadyHidden);
 
   };
 
   nameLink.parentNode.insertBefore(hidingButton, nameLink.nextSibling);
 
-}
+};
+
+mediaHiding.init();

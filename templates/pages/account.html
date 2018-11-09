@@ -37,7 +37,7 @@
         <input
           type="button"
           id="logoutJsButton"
-          onClick="logout()"
+          onClick="account.logout()"
           value="logout"
           class="hidden">
       </form>
@@ -66,7 +66,7 @@
         <button
           type="button"
           style="display: none;"
-          onclick="requestConfirmation()"
+          onclick="account.requestConfirmation()"
           id="requestConfirmationJsButton">Request confirmation e-mail</button>
       </form>
 
@@ -105,7 +105,7 @@
           id="saveFormButton">
         <input
           type="button"
-          onClick="save()"
+          onClick="account.save()"
           value="Save"
           id="saveJsButton"
           class="hidden">
@@ -150,7 +150,7 @@
 
         <input
           type="button"
-          onClick="changePassword()"
+          onClick="account.changePassword()"
           value="Change password"
           id="passwordJsButton"
           class="hidden">
@@ -212,7 +212,7 @@
             <br>
             <input
               type="button"
-              onClick="reloadCaptcha()"
+              onClick="captchaUtils.reloadCaptcha()"
               value="Reload"
               id="reloadCaptchaButton"
               class="hidden">
@@ -239,7 +239,7 @@
 
           <input
             type="button"
-            onClick="createBoard()"
+            onClick="account.createBoard()"
             value="create board"
             id="newBoardJsButton"
             class="hidden">
@@ -257,7 +257,7 @@
 <script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
 <script src="/.static/js/account.js"></script>
-<script src="/.static/js/captcha.js"></script>
+<script src="/.static/js/captchaUtils.js"></script>
 <script src="/.static/js/themes.js"></script>
 <script src="/.static/js/favouriteBoards.js"></script>
 

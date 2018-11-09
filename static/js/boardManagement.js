@@ -1,6 +1,10 @@
-var boardIdentifier;
+var boardManagement = {};
 
-if (!DISABLE_JS) {
+boardManagement.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   var volunteerCellTemplate = '<span class="userLabel"></span> ';
   volunteerCellTemplate += '<input ';
@@ -25,6 +29,8 @@ if (!DISABLE_JS) {
   volunteerCellTemplate += 'class="removeFormButton" ';
   volunteerCellTemplate += 'value="Remove Volunteer">';
 
+  boardManagement.volunteerCellTemplate = volunteerCellTemplate;
+
   if (document.getElementById('ownerControlDiv')) {
 
     document.getElementById('addVolunteerJsButton').style.display = 'inline';
@@ -47,23 +53,25 @@ if (!DISABLE_JS) {
     var volunteerDiv = document.getElementById('volunteersDiv');
 
     for (var i = 0; i < volunteerDiv.childNodes.length; i++) {
-      processVolunteerCell(volunteerDiv.childNodes[i]);
+      boardManagement.processVolunteerCell(volunteerDiv.childNodes[i]);
 
     }
   }
 
-  boardIdentifier = document.getElementById('boardSettingsIdentifier').value;
+  boardManagement.boardIdentifier = document
+      .getElementById('boardSettingsIdentifier').value;
   document.getElementById('closeReportsJsButton').style.display = 'inline';
   document.getElementById('closeReportsFormButton').style.display = 'none';
   document.getElementById('saveSettingsJsButton').style.display = 'inline';
   document.getElementById('saveSettingsFormButton').style.display = 'none';
 
-}
+};
 
-function makeJsRequest(files) {
-  apiRequest('setCustomJs', {
+boardManagement.makeJsRequest = function(files) {
+
+  api.apiRequest('setCustomJs', {
     files : files || [],
-    boardUri : boardIdentifier,
+    boardUri : boardManagement.boardIdentifier,
   }, function requestComplete(status, data) {
 
     document.getElementById('JsFiles').type = 'text';
@@ -81,14 +89,14 @@ function makeJsRequest(files) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
-}
+};
 
-function setJs() {
+boardManagement.setJs = function() {
 
   var file = document.getElementById('JsFiles').files[0];
 
   if (!file) {
-    makeJsRequest();
+    boardManagement.makeJsRequest();
     return;
   }
 
@@ -96,7 +104,7 @@ function setJs() {
 
   reader.onloadend = function() {
 
-    makeJsRequest([ {
+    boardManagement.makeJsRequest([ {
       name : file.name,
       content : reader.result
     } ]);
@@ -105,12 +113,13 @@ function setJs() {
 
   reader.readAsDataURL(file);
 
-}
+};
 
-function makeSpoilerRequest(files) {
-  apiRequest('setCustomSpoiler', {
+boardManagement.makeSpoilerRequest = function(files) {
+
+  api.apiRequest('setCustomSpoiler', {
     files : files || [],
-    boardUri : boardIdentifier,
+    boardUri : boardManagement.boardIdentifier,
   }, function requestComplete(status, data) {
 
     document.getElementById('files').type = 'text';
@@ -124,14 +133,14 @@ function makeSpoilerRequest(files) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
-}
+};
 
-function setSpoiler() {
+boardManagement.setSpoiler = function() {
 
   var file = document.getElementById('filesSpoiler').files[0];
 
   if (!file) {
-    makeSpoilerRequest();
+    boardManagement.makeSpoilerRequest();
     return;
   }
 
@@ -140,7 +149,7 @@ function setSpoiler() {
   reader.onloadend = function() {
 
     // style exception, too simple
-    makeSpoilerRequest([ {
+    boardManagement.makeSpoilerRequest([ {
       name : file.name,
       content : reader.result
     } ]);
@@ -150,12 +159,13 @@ function setSpoiler() {
 
   reader.readAsDataURL(file);
 
-}
+};
 
-function makeCssRequest(files) {
-  apiRequest('setCustomCss', {
+boardManagement.makeCssRequest = function(files) {
+
+  api.apiRequest('setCustomCss', {
     files : files || [],
-    boardUri : boardIdentifier,
+    boardUri : boardManagement.boardIdentifier,
   }, function requestComplete(status, data) {
 
     document.getElementById('files').type = 'text';
@@ -173,14 +183,14 @@ function makeCssRequest(files) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
-}
+};
 
-function setCss() {
+boardManagement.setCss = function() {
 
   var file = document.getElementById('files').files[0];
 
   if (!file) {
-    makeCssRequest();
+    boardManagement.makeCssRequest();
     return;
   }
 
@@ -189,7 +199,7 @@ function setCss() {
   reader.onloadend = function() {
 
     // style exception, too simple
-    makeCssRequest([ {
+    boardManagement.makeCssRequest([ {
       name : file.name,
       content : reader.result
     } ]);
@@ -199,9 +209,10 @@ function setCss() {
 
   reader.readAsDataURL(file);
 
-}
+};
 
-function saveSettings() {
+boardManagement.saveSettings = function() {
+
   var typedName = document.getElementById('boardNameField').value.trim();
   var typedDescription = document.getElementById('boardDescriptionField').value
       .trim();
@@ -287,65 +298,71 @@ function saveSettings() {
 
   var locationCombo = document.getElementById('locationComboBox');
 
-  apiRequest(
-      'setBoardSettings',
-      {
-        boardName : typedName,
-        captchaMode : combo.options[combo.selectedIndex].value,
-        boardMessage : typedMessage,
-        autoCaptchaLimit : typedAutoCaptcha,
-        locationFlagMode : locationCombo.options[locationCombo.selectedIndex].value,
-        hourlyThreadLimit : typedHourlyLimit,
-        tags : typedTags,
-        anonymousName : typedAnonymousName,
-        boardDescription : typedDescription,
-        boardUri : boardIdentifier,
-        settings : settings,
-        autoSageLimit : typedAutoSage,
-        maxThreadCount : typedThreadLimit,
-        maxFileSizeMB : typedFileSize,
-        acceptedMimes : typedTypedMimes,
-        maxFiles : typedFileLimit,
-        maxBumpAge : typedMaxBumpAge
-      }, function requestComplete(status, data) {
+  api
+      .apiRequest(
+          'setBoardSettings',
+          {
+            boardName : typedName,
+            captchaMode : combo.options[combo.selectedIndex].value,
+            boardMessage : typedMessage,
+            autoCaptchaLimit : typedAutoCaptcha,
+            locationFlagMode : locationCombo.options[locationCombo.selectedIndex].value,
+            hourlyThreadLimit : typedHourlyLimit,
+            tags : typedTags,
+            anonymousName : typedAnonymousName,
+            boardDescription : typedDescription,
+            boardUri : boardManagement.boardIdentifier,
+            settings : settings,
+            autoSageLimit : typedAutoSage,
+            maxThreadCount : typedThreadLimit,
+            maxFileSizeMB : typedFileSize,
+            acceptedMimes : typedTypedMimes,
+            maxFiles : typedFileLimit,
+            maxBumpAge : typedMaxBumpAge
+          }, function requestComplete(status, data) {
 
-        if (status === 'ok') {
+            if (status === 'ok') {
 
-          location.reload(true);
+              location.reload(true);
 
-        } else {
-          alert(status + ': ' + JSON.stringify(data));
-        }
-      });
+            } else {
+              alert(status + ': ' + JSON.stringify(data));
+            }
+          });
 
-}
+};
 
-function processVolunteerCell(cell) {
+boardManagement.processVolunteerCell = function(cell) {
+
   var button = cell.getElementsByClassName('removeJsButton')[0];
   button.style.display = 'inline';
   cell.getElementsByClassName('removeFormButton')[0].style.display = 'none';
 
   button.onclick = function() {
-    setVolunteer(cell.getElementsByClassName('userIdentifier')[0].value, false);
+    boardManagement.setVolunteer(
+        cell.getElementsByClassName('userIdentifier')[0].value, false);
   };
 
-}
+};
 
-function addVolunteer() {
-  setVolunteer(document.getElementById('addVolunteerFieldLogin').value.trim(),
-      true, function(error) {
+boardManagement.addVolunteer = function() {
 
-        if (error) {
-          alert(error);
-        } else {
-          document.getElementById('addVolunteerFieldLogin').value = '';
-        }
+  boardManagement.setVolunteer(document
+      .getElementById('addVolunteerFieldLogin').value.trim(), true, function(
+      error) {
 
-      });
+    if (error) {
+      alert(error);
+    } else {
+      document.getElementById('addVolunteerFieldLogin').value = '';
+    }
 
-}
+  });
 
-function setVolunteersDiv(volunteers) {
+};
+
+boardManagement.setVolunteersDiv = function(volunteers) {
+
   var volunteersDiv = document.getElementById('volunteersDiv');
 
   while (volunteersDiv.firstChild) {
@@ -355,7 +372,7 @@ function setVolunteersDiv(volunteers) {
   for (var i = 0; i < volunteers.length; i++) {
 
     var cell = document.createElement('form');
-    cell.innerHTML = volunteerCellTemplate;
+    cell.innerHTML = boardManagement.volunteerCellTemplate;
 
     cell.getElementsByClassName('userIdentifier')[0].setAttribute('value',
         volunteers[i]);
@@ -363,39 +380,40 @@ function setVolunteersDiv(volunteers) {
     cell.getElementsByClassName('userLabel')[0].innerHTML = volunteers[i];
 
     cell.getElementsByClassName('boardIdentifier')[0].setAttribute('value',
-        boardIdentifier);
+        boardManagement.boardIdentifier);
 
-    processVolunteerCell(cell);
+    boardManagement.processVolunteerCell(cell);
 
     volunteersDiv.appendChild(cell);
   }
-}
 
-function refreshVolunteers() {
+};
 
-  localRequest('/boardManagement.js?json=1&boardUri=' + boardIdentifier,
-      function gotData(error, data) {
+boardManagement.refreshVolunteers = function() {
 
-        if (error) {
-          alert(error);
-        } else {
+  api.localRequest('/boardManagement.js?json=1&boardUri='
+      + boardManagement.boardIdentifier, function gotData(error, data) {
 
-          var parsedData = JSON.parse(data);
+    if (error) {
+      alert(error);
+    } else {
 
-          setVolunteersDiv(parsedData.volunteers || []);
+      var parsedData = JSON.parse(data);
 
-        }
+      boardManagement.setVolunteersDiv(parsedData.volunteers || []);
 
-      });
+    }
 
-}
+  });
 
-function setVolunteer(user, add, callback) {
+};
 
-  apiRequest('setVolunteer', {
+boardManagement.setVolunteer = function(user, add, callback) {
+
+  api.apiRequest('setVolunteer', {
     login : user,
     add : add,
-    boardUri : boardIdentifier
+    boardUri : boardManagement.boardIdentifier
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
@@ -404,36 +422,37 @@ function setVolunteer(user, add, callback) {
         callback();
       }
 
-      refreshVolunteers();
+      boardManagement.refreshVolunteers();
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
 
-}
+};
 
-function transferBoard() {
+boardManagement.transferBoard = function() {
 
-  apiRequest('transferBoardOwnership', {
+  api.apiRequest('transferBoardOwnership', {
     login : document.getElementById('transferBoardFieldLogin').value.trim(),
-    boardUri : boardIdentifier
+    boardUri : boardManagement.boardIdentifier
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
 
-      window.location.pathname = '/' + boardIdentifier + '/';
+      window.location.pathname = '/' + boardManagement.boardIdentifier + '/';
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
 
-}
+};
 
-function deleteBoard() {
-  apiRequest('deleteBoard', {
-    boardUri : boardIdentifier,
+boardManagement.deleteBoard = function() {
+
+  api.apiRequest('deleteBoard', {
+    boardUri : boardManagement.boardIdentifier,
     confirmDeletion : document.getElementById('confirmDelCheckbox').checked
   }, function requestComplete(status, data) {
 
@@ -446,4 +465,6 @@ function deleteBoard() {
     }
   });
 
-}
+};
+
+boardManagement.init();

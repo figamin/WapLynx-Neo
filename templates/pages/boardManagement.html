@@ -69,7 +69,7 @@
 
           <input
             type="button"
-            onClick="addVolunteer()"
+            onClick="boardManagement.addVolunteer()"
             id="addVolunteerJsButton"
             value="Add volunteer"
             class="hidden">
@@ -105,7 +105,7 @@
 
           <input
             type="button"
-            onClick="transferBoard()"
+            onClick="boardManagement.transferBoard()"
             id="transferBoardJsButton"
             value="Transfer board"
             class="hidden">
@@ -148,7 +148,7 @@
             type="button"
             class="hidden"
             id="deleteBoardJsButton"
-            onClick="deleteBoard()"
+            onClick="boardManagement.deleteBoard()"
             value="Delete board">
 
         </form>
@@ -181,7 +181,7 @@
 
           <input
             type="button"
-            onclick="setCss()"
+            onclick="boardManagement.setCss()"
             id="cssJsButton"
             class="hidden"
             value="Upload CSS">
@@ -218,7 +218,7 @@
 
             <input
               type="button"
-              onclick="setJs()"
+              onclick="boardManagement.setJs()"
               id="jsJsButton"
               class="hidden"
               value="Upload Js">
@@ -257,7 +257,7 @@
 
           <input
             type="button"
-            onclick="setSpoiler()"
+            onclick="boardManagement.setSpoiler()"
             id="spoilerJsButton"
             class="hidden"
             value="Upload custom spoiler">
@@ -497,7 +497,7 @@
         <input
           type="button"
           value="Save"
-          onClick="saveSettings()"
+          onClick="boardManagement.saveSettings()"
           class="hidden"
           id="saveSettingsJsButton">
         <input
@@ -520,24 +520,27 @@
         action="/closeReports.js"
         enctype="multipart/form-data">
         <div id="reportDiv"></div>
-        <input
-          type="checkbox"
-          name="deleteContent"
-          id="deleteContentCheckbox">
-        Delete reported content after closing the reports
-        <br>
-        <input
-          type="checkbox"
-          name="banReporter"
-          id="banReporterCheckbox">
-        Ban reporters
-        <br>
-        Ban duration:
-        <input
-          type="text"
-          id="fieldBanDuration"
-          name="duration">
-        <br>
+        <label>
+          <input
+            type="checkbox"
+            name="deleteContent"
+            id="deleteContentCheckbox">
+          Delete reported content after closing the reports
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="banReporter"
+            id="banReporterCheckbox">
+          Ban reporters
+        </label>
+        <label>
+          Ban duration:
+          <input
+            type="text"
+            id="fieldBanDuration"
+            name="duration">
+        </label>
         <button
           type="submit"
           id="closeReportsFormButton">Close selected reports</button>
@@ -545,7 +548,7 @@
           id="closeReportsJsButton"
           type="button"
           class="hidden"
-          onclick="closeReports()">Close selected reports</button>
+          onclick="reports.closeReports()">Close selected reports</button>
       </form>
 
       <hr />

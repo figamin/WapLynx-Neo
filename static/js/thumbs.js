@@ -1,9 +1,15 @@
-var playableTypes = [ 'video/webm', 'audio/mpeg', 'video/mp4', 'video/ogg',
-    'audio/ogg', 'audio/webm' ];
+var thumbs = {};
 
-var videoTypes = [ 'video/webm', 'video/mp4', 'video/ogg' ];
+thumbs.init = function() {
 
-if (!DISABLE_JS) {
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  thumbs.playableTypes = [ 'video/webm', 'audio/mpeg', 'video/mp4',
+      'video/ogg', 'audio/ogg', 'audio/webm' ];
+
+  thumbs.videoTypes = [ 'video/webm', 'video/mp4', 'video/ogg' ];
 
   var imageLinks = document.getElementsByClassName('imgLink');
 
@@ -14,12 +20,11 @@ if (!DISABLE_JS) {
   }
 
   for (i = 0; i < temporaryImageLinks.length; i++) {
-    processImageLink(temporaryImageLinks[i]);
+    thumbs.processImageLink(temporaryImageLinks[i]);
   }
+};
 
-}
-
-function expandImage(mouseEvent, link, mime) {
+thumbs.expandImage = function(mouseEvent, link, mime) {
 
   if (mouseEvent.which === 2 || mouseEvent.ctrlKey) {
     return true;
@@ -56,9 +61,9 @@ function expandImage(mouseEvent, link, mime) {
     return false;
   }
 
-}
+};
 
-function setPlayer(link, mime) {
+thumbs.setPlayer = function(link, mime) {
 
   var path = link.href;
   var parent = link.parentNode;
@@ -67,8 +72,8 @@ function setPlayer(link, mime) {
   src.setAttribute('src', link.href);
   src.setAttribute('type', mime);
 
-  var video = document.createElement(videoTypes.indexOf(mime) > -1 ? 'video'
-      : 'audio');
+  var video = document
+      .createElement(thumbs.videoTypes.indexOf(mime) > -1 ? 'video' : 'audio');
   video.setAttribute('controls', true);
   video.style.display = 'none';
 
@@ -106,19 +111,22 @@ function setPlayer(link, mime) {
   videoContainer.appendChild(newThumb);
 
   parent.replaceChild(videoContainer, link);
-}
 
-function processImageLink(link) {
+};
+
+thumbs.processImageLink = function(link) {
 
   var mime = link.dataset.filemime;
 
   if (mime.indexOf('image/') > -1) {
 
     link.onclick = function(mouseEvent) {
-      return expandImage(mouseEvent, link, mime);
+      return thumbs.expandImage(mouseEvent, link, mime);
     };
 
-  } else if (playableTypes.indexOf(mime) > -1) {
-    setPlayer(link, mime);
+  } else if (thumbs.playableTypes.indexOf(mime) > -1) {
+    thumbs.setPlayer(link, mime);
   }
-}
+};
+
+thumbs.init();

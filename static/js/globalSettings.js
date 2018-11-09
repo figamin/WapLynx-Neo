@@ -1,9 +1,16 @@
-if (!DISABLE_JS) {
+var globalSettings = {};
+
+globalSettings.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
   document.getElementById('saveJSButton').style.display = 'inline';
 
   document.getElementById('saveFormButton').style.display = 'none';
 
-  var siteSettingsRelation = {
+  globalSettings.siteSettingsRelation = {
 
     fieldSlaves : {
       setting : 'slaves',
@@ -375,15 +382,15 @@ if (!DISABLE_JS) {
     }
   };
 
-}
+};
 
-function save() {
+globalSettings.save = function() {
 
   var parameters = {};
 
-  for ( var key in siteSettingsRelation) {
+  for ( var key in globalSettings.siteSettingsRelation) {
 
-    var item = siteSettingsRelation[key];
+    var item = globalSettings.siteSettingsRelation[key];
 
     switch (item.type) {
     case 'string':
@@ -422,7 +429,7 @@ function save() {
 
   }
 
-  apiRequest('saveGlobalSettings', parameters, function requestComplete(status,
+  api.apiRequest('saveGlobalSettings', parameters, function requestComplete(status,
       data) {
 
     if (status === 'ok') {
@@ -435,4 +442,6 @@ function save() {
     }
   });
 
-}
+};
+
+globalSettings.init();

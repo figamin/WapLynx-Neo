@@ -1,49 +1,105 @@
-var currentSettingsPanel;
-var currentSettingsTab;
-var menuContentPanel;
-var tabsDiv;
-var existingFiltersDiv;
+var settingsMenu = {};
 
-var loadedFilters = JSON.parse(localStorage.filterData || '[]');
+settingsMenu.init = function() {
 
-var filterTypes = [ 'Name', 'Tripcode', 'Subject', 'Message' ];
-
-function selectSettingsPanel(tab, panel) {
-
-  if (tab === currentSettingsTab) {
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
     return;
   }
 
-  if (currentSettingsTab) {
-    currentSettingsTab.id = '';
-    currentSettingsPanel.remove();
+  settingsMenu.loadedFilters = JSON.parse(localStorage.filterData || '[]');
+  settingsMenu.filterTypes = [ 'Name', 'Tripcode', 'Subject', 'Message' ];
+
+  var settingsMenuDiv = document.createElement('div');
+
+  settingsMenu.placeNavBarButton(settingsMenuDiv);
+
+  var settingsMenuHeader = document.createElement('div');
+  settingsMenuHeader.className = 'header';
+  settingsMenuDiv.appendChild(settingsMenuHeader);
+
+  var settingsMenuLabel = document.createElement('label');
+  settingsMenuLabel.innerHTML = 'Settings';
+  settingsMenuLabel.className = 'headerLabel';
+
+  settingsMenuHeader.appendChild(settingsMenuLabel);
+
+  settingsMenu.showingSettings = false;
+
+  var closeSettingsMenuButton = document.createElement('span');
+  closeSettingsMenuButton.id = 'closeSettingsMenuButton';
+  closeSettingsMenuButton.className = 'coloredIcon glowOnHover';
+  closeSettingsMenuButton.onclick = function() {
+
+    if (!settingsMenu.showingSettings) {
+      return;
+    }
+
+    settingsMenu.showingSettings = false;
+    settingsMenuDiv.style.display = 'none';
+
+  };
+
+  settingsMenuHeader.appendChild(closeSettingsMenuButton);
+
+  settingsMenuDiv.appendChild(document.createElement('hr'));
+
+  settingsMenuDiv.id = 'settingsMenu';
+  settingsMenuDiv.className = 'floatingMenu';
+  settingsMenuDiv.style.display = 'none';
+
+  document.body.appendChild(settingsMenuDiv);
+
+  draggable.setDraggable(settingsMenuDiv, settingsMenuHeader);
+
+  settingsMenu.tabsDiv = document.createElement('div');
+  settingsMenuDiv.appendChild(settingsMenu.tabsDiv);
+
+  settingsMenu.menuContentPanel = document.createElement('div');
+  settingsMenuDiv.appendChild(settingsMenu.menuContentPanel);
+
+  settingsMenu.registerTab('Filters', settingsMenu.getFiltersContent(), true);
+  settingsMenu.registerTab('CSS', settingsMenu.getCSSContent());
+  settingsMenu.registerTab('JS', settingsMenu.getJSContent());
+  settingsMenu.registerTab('Other', settingsMenu.getOtherContent());
+
+};
+
+settingsMenu.selectSettingsPanel = function(tab, panel) {
+
+  if (tab === settingsMenu.currentSettingsTab) {
+    return;
   }
 
-  menuContentPanel.appendChild(panel);
+  if (settingsMenu.currentSettingsTab) {
+    settingsMenu.currentSettingsTab.id = '';
+    settingsMenu.currentSettingsPanel.remove();
+  }
+
+  settingsMenu.menuContentPanel.appendChild(panel);
   tab.id = 'selectedTab';
 
-  currentSettingsPanel = panel;
-  currentSettingsTab = tab;
+  settingsMenu.currentSettingsPanel = panel;
+  settingsMenu.currentSettingsTab = tab;
 
-}
+};
 
-function registerTab(text, content, select) {
+settingsMenu.registerTab = function(text, content, select) {
 
   var newTab = document.createElement('span');
   newTab.innerHTML = text;
   newTab.className = 'settingsTab';
   newTab.onclick = function() {
-    selectSettingsPanel(newTab, content);
+    settingsMenu.selectSettingsPanel(newTab, content);
   };
-  tabsDiv.appendChild(newTab);
+  settingsMenu.tabsDiv.appendChild(newTab);
 
   if (select) {
     newTab.onclick();
   }
 
-}
+};
 
-function placeNavBarButton(settingsMenu) {
+settingsMenu.placeNavBarButton = function(settingsMenuDiv) {
 
   var postingLink = document.getElementById('navPosting');
   var referenceNode = postingLink.nextSibling;
@@ -66,26 +122,26 @@ function placeNavBarButton(settingsMenu) {
 
   settingsButton.onclick = function() {
 
-    if (showingSettings) {
+    if (settingsMenu.showingSettings) {
       return;
     }
 
-    showingSettings = true;
-    settingsMenu.style.display = 'block';
+    settingsMenu.showingSettings = true;
+    settingsMenuDiv.style.display = 'block';
 
   }
 
-}
+};
 
-function addFilterDisplay(filter) {
+settingsMenu.addFilterDisplay = function(filter) {
 
   var filterCell = document.createElement('div');
 
   var cellWrapper = document.createElement('div');
-  existingFiltersDiv.appendChild(cellWrapper);
+  settingsMenu.existingFiltersDiv.appendChild(cellWrapper);
 
   var filterTypeLabel = document.createElement('span');
-  filterTypeLabel.innerHTML = filterTypes[filter.type];
+  filterTypeLabel.innerHTML = settingsMenu.filterTypes[filter.type];
   filterTypeLabel.className = 'existingFilterTypeLabel';
   filterCell.appendChild(filterTypeLabel);
 
@@ -104,11 +160,12 @@ function addFilterDisplay(filter) {
 
   button.onclick = function() {
 
-    loadedFilters.splice(loadedFilters.indexOf(filter), 1);
+    settingsMenu.loadedFilters.splice(settingsMenu.loadedFilters
+        .indexOf(filter), 1);
 
-    localStorage.filterData = JSON.stringify(loadedFilters);
+    localStorage.filterData = JSON.stringify(settingsMenu.loadedFilters);
 
-    checkFilters();
+    hiding.checkFilters();
 
     cellWrapper.remove();
 
@@ -117,9 +174,9 @@ function addFilterDisplay(filter) {
   cellWrapper.appendChild(document.createElement('hr'));
   cellWrapper.appendChild(filterCell);
 
-}
+};
 
-function createFilter(content, regex, type) {
+settingsMenu.createFilter = function(content, regex, type) {
 
   var newFilterData = {
     filter : content,
@@ -127,16 +184,18 @@ function createFilter(content, regex, type) {
     type : type
   };
 
-  addFilterDisplay(newFilterData);
+  settingsMenu.addFilterDisplay(newFilterData);
 
-  loadedFilters.push(newFilterData);
+  settingsMenu.loadedFilters.push(newFilterData);
 
-  localStorage.setItem('filterData', JSON.stringify(loadedFilters));
+  localStorage
+      .setItem('filterData', JSON.stringify(settingsMenu.loadedFilters));
 
-  checkFilters();
-}
+  hiding.checkFilters();
 
-function getFiltersContent() {
+};
+
+settingsMenu.getFiltersContent = function() {
 
   var filtersPanel = document.createElement('div');
 
@@ -147,9 +206,9 @@ function getFiltersContent() {
 
   var newFilterTypeCombo = document.createElement('select');
 
-  for (var i = 0; i < filterTypes.length; i++) {
+  for (var i = 0; i < settingsMenu.filterTypes.length; i++) {
     var option = document.createElement('option');
-    option.innerHTML = filterTypes[i];
+    option.innerHTML = settingsMenu.filterTypes[i];
     newFilterTypeCombo.appendChild(option);
   }
   newFilterPanel.appendChild(newFilterTypeCombo);
@@ -178,7 +237,7 @@ function getFiltersContent() {
       return;
     }
 
-    createFilter(filterContent, newFilterRegex.checked,
+    settingsMenu.createFilter(filterContent, newFilterRegex.checked,
         newFilterTypeCombo.selectedIndex);
 
   };
@@ -197,19 +256,19 @@ function getFiltersContent() {
   labelContent.id = 'labelExistingFilfterContent';
   existingFiltersLabelsPanel.appendChild(labelContent);
 
-  existingFiltersDiv = document.createElement('div');
-  existingFiltersDiv.id = 'existingFiltersPanel';
-  filtersPanel.appendChild(existingFiltersDiv);
+  settingsMenu.existingFiltersDiv = document.createElement('div');
+  settingsMenu.existingFiltersDiv.id = 'existingFiltersPanel';
+  filtersPanel.appendChild(settingsMenu.existingFiltersDiv);
 
-  for (var i = 0; i < loadedFilters.length; i++) {
-    addFilterDisplay(loadedFilters[i]);
+  for (var i = 0; i < settingsMenu.loadedFilters.length; i++) {
+    settingsMenu.addFilterDisplay(settingsMenu.loadedFilters[i]);
   }
 
   return filtersPanel;
 
-}
+};
 
-function getCSSContent() {
+settingsMenu.getCSSContent = function() {
 
   var savedCSS = localStorage.customCSS;
 
@@ -246,9 +305,9 @@ function getCSSContent() {
 
   return cssPanel;
 
-}
+};
 
-function getOtherContent() {
+settingsMenu.getOtherContent = function() {
 
   var otherPanel = document.createElement('div');
 
@@ -277,9 +336,9 @@ function getOtherContent() {
 
   return otherPanel;
 
-}
+};
 
-function getJSContent() {
+settingsMenu.getJSContent = function() {
 
   var savedJS = localStorage.customJS;
 
@@ -314,61 +373,6 @@ function getJSContent() {
 
   return jsPanel;
 
-}
+};
 
-if (!DISABLE_JS) {
-
-  var settingsMenu = document.createElement('div');
-
-  placeNavBarButton(settingsMenu);
-
-  var settingsMenuHeader = document.createElement('div');
-  settingsMenuHeader.className = 'header';
-  settingsMenu.appendChild(settingsMenuHeader);
-
-  var settingsMenuLabel = document.createElement('label');
-  settingsMenuLabel.innerHTML = 'Settings';
-  settingsMenuLabel.className = 'headerLabel';
-
-  settingsMenuHeader.appendChild(settingsMenuLabel);
-
-  var showingSettings = false;
-
-  var closeSettingsMenuButton = document.createElement('span');
-  closeSettingsMenuButton.id = 'closeSettingsMenuButton';
-  closeSettingsMenuButton.className = 'coloredIcon glowOnHover';
-  closeSettingsMenuButton.onclick = function() {
-
-    if (!showingSettings) {
-      return;
-    }
-
-    showingSettings = false;
-    settingsMenu.style.display = 'none';
-
-  };
-
-  settingsMenuHeader.appendChild(closeSettingsMenuButton);
-
-  settingsMenu.appendChild(document.createElement('hr'));
-
-  settingsMenu.id = 'settingsMenu';
-  settingsMenu.className = 'floatingMenu';
-  settingsMenu.style.display = 'none';
-
-  document.body.appendChild(settingsMenu);
-
-  setDraggable(settingsMenu, settingsMenuHeader);
-
-  tabsDiv = document.createElement('div');
-  settingsMenu.appendChild(tabsDiv);
-
-  menuContentPanel = document.createElement('div');
-  settingsMenu.appendChild(menuContentPanel);
-
-  registerTab('Filters', getFiltersContent(), true);
-  registerTab('CSS', getCSSContent());
-  registerTab('JS', getJSContent());
-  registerTab('Other', getOtherContent());
-
-}
+settingsMenu.init();

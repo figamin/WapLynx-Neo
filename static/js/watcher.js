@@ -1,10 +1,15 @@
-var watchedMenu;
+var watcher = {};
 
-var isInThread = document.getElementById('threadIdentifier') ? true : false;
-var watcherAlertCounter = 0;
-var elementRelation = {};
+watcher.init = function() {
 
-if (!DISABLE_JS) {
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  watcher.isInThread = document.getElementById('threadIdentifier') ? true
+      : false;
+  watcher.watcherAlertCounter = 0;
+  watcher.elementRelation = {};
 
   var postingLink = document.getElementById('navPosting');
   var referenceNode = postingLink.nextSibling;
@@ -24,18 +29,18 @@ if (!DISABLE_JS) {
   watcherButton.id = 'watcherButton';
   watcherButton.className = 'coloredIcon';
 
-  var watcherCounter = document.createElement('span');
+  watcher.watcherCounter = document.createElement('span');
 
-  watcherButton.appendChild(watcherCounter);
+  watcherButton.appendChild(watcher.watcherCounter);
 
   postingLink.parentNode.insertBefore(watcherButton, referenceNode);
 
-  watchedMenu = document.createElement('div');
+  watcher.watchedMenu = document.createElement('div');
 
   var watchedMenuLabel = document.createElement('label');
   watchedMenuLabel.innerHTML = 'Watched threads';
 
-  watchedMenu.appendChild(watchedMenuLabel);
+  watcher.watchedMenu.appendChild(watchedMenuLabel);
 
   var showingWatched = false;
 
@@ -49,19 +54,19 @@ if (!DISABLE_JS) {
     }
 
     showingWatched = false;
-    watchedMenu.style.display = 'none';
+    watcher.watchedMenu.style.display = 'none';
 
   };
 
-  watchedMenu.appendChild(closeWatcherMenuButton);
+  watcher.watchedMenu.appendChild(closeWatcherMenuButton);
 
-  watchedMenu.appendChild(document.createElement('hr'));
+  watcher.watchedMenu.appendChild(document.createElement('hr'));
 
-  watchedMenu.id = 'watchedMenu';
-  watchedMenu.className = 'floatingMenu';
-  watchedMenu.style.display = 'none';
+  watcher.watchedMenu.id = 'watchedMenu';
+  watcher.watchedMenu.className = 'floatingMenu';
+  watcher.watchedMenu.style.display = 'none';
 
-  document.body.appendChild(watchedMenu);
+  document.body.appendChild(watcher.watchedMenu);
 
   watcherButton.onclick = function() {
 
@@ -70,17 +75,17 @@ if (!DISABLE_JS) {
     }
 
     showingWatched = true;
-    watchedMenu.style.display = 'block';
+    watcher.watchedMenu.style.display = 'block';
 
   }
 
   var ops = document.getElementsByClassName('innerOP');
 
   for (var i = 0; i < ops.length; i++) {
-    processOP(ops[i]);
+    watcher.processOP(ops[i]);
   }
 
-  var storedWatchedData = getStoredWatchedData();
+  var storedWatchedData = watcher.getStoredWatchedData();
 
   for ( var currentBoard in storedWatchedData) {
 
@@ -91,32 +96,33 @@ if (!DISABLE_JS) {
       for ( var thread in threads) {
         if (threads.hasOwnProperty(thread)) {
 
-          if (isInThread && currentBoard == boardUri && thread == threadId) {
+          if (watcher.isInThread && currentBoard == api.boardUri
+              && thread == api.threadId) {
             threads[thread].lastSeen = new Date().getTime();
             localStorage.watchedData = JSON.stringify(storedWatchedData);
           }
 
-          addWatchedCell(currentBoard, thread, threads[thread]);
+          watcher.addWatchedCell(currentBoard, thread, threads[thread]);
         }
       }
     }
 
   }
 
-  updateWatcherCounter();
+  watcher.updateWatcherCounter();
 
-  scheduleWatchedThreadsCheck();
+  watcher.scheduleWatchedThreadsCheck();
 
-  setDraggable(watchedMenu, watchedMenuLabel);
+  draggable.setDraggable(watcher.watchedMenu, watchedMenuLabel);
 
-}
+};
 
-function updateWatcherCounter() {
-  watcherCounter.innerHTML = watcherAlertCounter ? '(' + watcherAlertCounter
-      + ')' : '';
-}
+watcher.updateWatcherCounter = function() {
+  watcher.watcherCounter.innerHTML = watcher.watcherAlertCounter ? '('
+      + watcher.watcherAlertCounter + ')' : '';
+};
 
-function getStoredWatchedData() {
+watcher.getStoredWatchedData = function() {
 
   var storedWatchedData = localStorage.watchedData;
 
@@ -128,25 +134,26 @@ function getStoredWatchedData() {
 
   return storedWatchedData;
 
-}
+};
 
-function iterateWatchedThreads(urls, index) {
+watcher.iterateWatchedThreads = function(urls, index) {
 
   index = index || 0;
 
   if (index >= urls.length) {
-    updateWatcherCounter();
-    scheduleWatchedThreadsCheck();
+    watcher.updateWatcherCounter();
+    watcher.scheduleWatchedThreadsCheck();
     return;
   }
 
   var url = urls[index];
 
-  localRequest('/' + url.board + '/res/' + url.thread + '.json',
+  api.localRequest(
+      '/' + url.board + '/res/' + url.thread + '.json',
       function gotThreadInfo(error, data) {
 
         if (error) {
-          iterateWatchedThreads(urls, ++index);
+          watcher.iterateWatchedThreads(urls, ++index);
           return;
         }
 
@@ -160,7 +167,7 @@ function iterateWatchedThreads(urls, index) {
 
           var parsedCreation = new Date(lastPost.creation);
 
-          var storedWatchedData = getStoredWatchedData();
+          var storedWatchedData = watcher.getStoredWatchedData();
 
           var watchData = storedWatchedData[url.board][url.thread];
 
@@ -169,33 +176,33 @@ function iterateWatchedThreads(urls, index) {
             localStorage.watchedData = JSON.stringify(storedWatchedData);
           }
 
-          if (!elementRelation[url.board]
-              || !elementRelation[url.board][url.thread]) {
-            addWatchedCell(url.board, url.thread, watchData);
+          if (!watcher.elementRelation[url.board]
+              || !watcher.elementRelation[url.board][url.thread]) {
+            watcher.addWatchedCell(url.board, url.thread, watchData);
           } else if (watchData.lastSeen >= watchData.lastReplied) {
-            elementRelation[url.board][url.thread].style.display = 'none';
+            watcher.elementRelation[url.board][url.thread].style.display = 'none';
           } else {
-            watcherAlertCounter++;
-            elementRelation[url.board][url.thread].style.display = 'inline';
+            watcher.watcherAlertCounter++;
+            watcher.elementRelation[url.board][url.thread].style.display = 'inline';
           }
 
         }
 
-        iterateWatchedThreads(urls, ++index);
+        watcher.iterateWatchedThreads(urls, ++index);
 
       });
 
-}
+};
 
-function runWatchedThreadsCheck() {
+watcher.runWatchedThreadsCheck = function() {
 
-  watcherAlertCounter = 0;
+  watcher.watcherAlertCounter = 0;
 
   localStorage.lastWatchCheck = new Date().getTime();
 
   var urls = [];
 
-  var storedWatchedData = getStoredWatchedData();
+  var storedWatchedData = watcher.getStoredWatchedData();
 
   for ( var board in storedWatchedData) {
 
@@ -206,7 +213,8 @@ function runWatchedThreadsCheck() {
       for ( var thread in threads) {
         if (threads.hasOwnProperty(thread)) {
 
-          if (isInThread && board == boardUri && thread == threadId) {
+          if (watcher.isInThread && board == api.boardUri
+              && thread == api.threadId) {
             threads[thread].lastSeen = new Date().getTime();
             localStorage.watchedData = JSON.stringify(storedWatchedData);
           }
@@ -221,29 +229,31 @@ function runWatchedThreadsCheck() {
 
   }
 
-  iterateWatchedThreads(urls);
-}
+  watcher.iterateWatchedThreads(urls);
 
-function scheduleWatchedThreadsCheck() {
+};
+
+watcher.scheduleWatchedThreadsCheck = function() {
 
   var lastCheck = localStorage.lastWatchCheck;
 
   if (!lastCheck) {
-    runWatchedThreadsCheck();
+    watcher.runWatchedThreadsCheck();
     return;
   }
 
   lastCheck = new Date(+lastCheck);
 
-  lastCheck.setUTCMinutes(lastCheck.getUTCMinutes() + 5);
+  // lastCheck.setUTCMinutes(lastCheck.getUTCMinutes() + 5);
+  lastCheck.setUTCSeconds(lastCheck.getUTCSeconds() + 10);
 
   setTimeout(function() {
-    runWatchedThreadsCheck();
+    watcher.runWatchedThreadsCheck();
   }, lastCheck.getTime() - new Date().getTime());
 
 }
 
-function addWatchedCell(board, thread, watchData) {
+watcher.addWatchedCell = function(board, thread, watchData) {
 
   var cellWrapper = document.createElement('div');
 
@@ -261,16 +271,16 @@ function addWatchedCell(board, thread, watchData) {
   var notification = document.createElement('span');
   notification.className = 'watchedNotification';
 
-  if (!elementRelation[board]) {
-    elementRelation[board] = {};
+  if (!watcher.elementRelation[board]) {
+    watcher.elementRelation[board] = {};
   }
 
-  elementRelation[board][thread] = notification;
+  watcher.elementRelation[board][thread] = notification;
 
   if (watchData.lastSeen >= watchData.lastReplied) {
     notification.style.display = 'none';
   } else {
-    watcherAlertCounter++;
+    watcher.watcherAlertCounter++;
   }
 
   labelWrapper.appendChild(notification);
@@ -283,9 +293,9 @@ function addWatchedCell(board, thread, watchData) {
 
   button.onclick = function() {
 
-    watchedMenu.removeChild(cellWrapper);
+    watcher.watchedMenu.removeChild(cellWrapper);
 
-    var storedWatchedData = getStoredWatchedData();
+    var storedWatchedData = watcher.getStoredWatchedData();
 
     var boardThreads = storedWatchedData[board];
 
@@ -301,11 +311,11 @@ function addWatchedCell(board, thread, watchData) {
 
   cellWrapper.appendChild(cell);
   cellWrapper.appendChild(document.createElement('hr'));
-  watchedMenu.appendChild(cellWrapper);
+  watcher.watchedMenu.appendChild(cellWrapper);
 
-}
+};
 
-function processOP(op) {
+watcher.processOP = function(op) {
 
   var checkBox = op.getElementsByClassName('deletionCheckBox')[0];
 
@@ -323,7 +333,7 @@ function processOP(op) {
 
   watchButton.onclick = function() {
 
-    var storedWatchedData = getStoredWatchedData();
+    var storedWatchedData = watcher.getStoredWatchedData();
 
     var boardThreads = storedWatchedData[board] || {};
 
@@ -351,8 +361,10 @@ function processOP(op) {
 
     localStorage.watchedData = JSON.stringify(storedWatchedData);
 
-    addWatchedCell(board, thread, boardThreads[thread]);
+    watcher.addWatchedCell(board, thread, boardThreads[thread]);
 
   };
 
-}
+};
+
+watcher.init();

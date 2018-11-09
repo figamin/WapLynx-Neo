@@ -1,11 +1,15 @@
-var boardUri;
+var hashBans = {};
 
-if (!DISABLE_JS) {
+hashBans.init = function() {
+
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
 
   var boardIdentifier = document.getElementById('boardIdentifier');
 
   if (boardIdentifier) {
-    boardUri = boardIdentifier.value;
+    api.boardUri = boardIdentifier.value;
   }
 
   document.getElementById('createFormButton').style.display = 'none';
@@ -14,25 +18,27 @@ if (!DISABLE_JS) {
   var hashBansDiv = document.getElementById('hashBansDiv');
 
   for (var j = 0; j < hashBansDiv.childNodes.length; j++) {
-    processHashBanCell(hashBansDiv.childNodes[j]);
+    hashBans.processHashBanCell(hashBansDiv.childNodes[j]);
   }
-}
 
-function processHashBanCell(cell) {
+};
+
+hashBans.processHashBanCell = function(cell) {
 
   var button = cell.getElementsByClassName('liftJsButton')[0];
   button.style.display = 'inline';
 
   button.onclick = function() {
-    liftHashBan(cell.getElementsByClassName('idIdentifier')[0].value);
+    hashBans.liftHashBan(cell.getElementsByClassName('idIdentifier')[0].value);
   };
 
   cell.getElementsByClassName('liftFormButton')[0].style.display = 'none';
 
-}
+};
 
-function liftHashBan(hashBan) {
-  apiRequest('liftHashBan', {
+hashBans.liftHashBan = function(hashBan) {
+
+  api.apiRequest('liftHashBan', {
     hashBanId : hashBan
   }, function requestComplete(status, data) {
 
@@ -44,30 +50,27 @@ function liftHashBan(hashBan) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
-}
 
-function placeHashBan() {
+};
+
+hashBans.placeHashBan = function() {
 
   var typedHash = document.getElementById('hashField').value.trim();
 
-  var parameters = {
-    hash : typedHash
-  };
+  api.apiRequest('placeHashBan', {
+    hash : typedHash,
+    boardUri : api.boardUri
+  }, function requestComplete(status, data) {
 
-  if (boardUri) {
-    parameters.boardUri = boardUri;
-  }
+    if (status === 'ok') {
 
-  apiRequest('placeHashBan', parameters,
-      function requestComplete(status, data) {
+      location.reload(true);
 
-        if (status === 'ok') {
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
-          location.reload(true);
+};
 
-        } else {
-          alert(status + ': ' + JSON.stringify(data));
-        }
-      });
-
-}
+hashBans.init();

@@ -1,4 +1,4 @@
-#mainPanel, #sideCatalog {
+#mainPanel, #sideCatalogDiv {
   overflow-y: auto;
   height: calc(100vh - 22px);
   margin-top: 22px;
@@ -8,7 +8,7 @@
   content: "\e088";
 }
 
-#sideCatalog {
+#sideCatalogDiv {
   float: right;
   padding: 0 10px 0 10px;
   max-width: 20%;

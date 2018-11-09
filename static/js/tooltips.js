@@ -1,46 +1,52 @@
-var loadedPreviews = [];
-var loadingPreviews = [];
-var loadedContent = {};
-var quoteReference = {};
+var tooltips = {};
 
-var knownPosts = {};
+tooltips.init = function() {
 
-if (!DISABLE_JS) {
+  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
+    return;
+  }
+
+  tooltips.loadedPreviews = [];
+  tooltips.loadingPreviews = [];
+  tooltips.loadedContent = {};
+  tooltips.quoteReference = {};
+  tooltips.knownPosts = {};
 
   var posts = document.getElementsByClassName('postCell');
 
   for (var i = 0; i < posts.length; i++) {
-    addToKnownPostsForBackLinks(posts[i])
+    tooltips.addToKnownPostsForBackLinks(posts[i])
   }
 
   var threads = document.getElementsByClassName('opCell');
 
   for (i = 0; i < threads.length; i++) {
-    addToKnownPostsForBackLinks(threads[i])
+    tooltips.addToKnownPostsForBackLinks(threads[i])
   }
 
   var quotes = document.getElementsByClassName('quoteLink');
 
   for (i = 0; i < quotes.length; i++) {
-    processQuote(quotes[i]);
+    tooltips.processQuote(quotes[i]);
   }
-}
 
-function addToKnownPostsForBackLinks(posting) {
+};
+
+tooltips.addToKnownPostsForBackLinks = function(posting) {
 
   var postBoard = posting.dataset.boarduri;
 
-  var list = knownPosts[postBoard] || {};
-  knownPosts[postBoard] = list;
+  var list = tooltips.knownPosts[postBoard] || {};
+  tooltips.knownPosts[postBoard] = list;
 
   list[posting.id] = {
     added : [],
     container : posting.getElementsByClassName('panelBacklinks')[0]
   };
 
-}
+};
 
-function addBackLink(quoteUrl, quote) {
+tooltips.addBackLink = function(quoteUrl, quote) {
 
   var matches = quoteUrl.match(/\/(\w+)\/res\/(\d+)\.html\#(\d+)/);
 
@@ -48,7 +54,7 @@ function addBackLink(quoteUrl, quote) {
   var thread = matches[2];
   var post = matches[3];
 
-  var knownBoard = knownPosts[board];
+  var knownBoard = tooltips.knownPosts[board];
 
   if (knownBoard) {
 
@@ -91,15 +97,15 @@ function addBackLink(quoteUrl, quote) {
 
       knownBackLink.container.appendChild(backLink);
 
-      processQuote(backLink, true);
+      tooltips.processQuote(backLink, true);
 
     }
 
   }
 
-}
+};
 
-function processQuote(quote, backLink) {
+tooltips.processQuote = function(quote, backLink) {
 
   var tooltip = document.createElement('div');
   tooltip.className = 'quoteTooltip';
@@ -109,17 +115,17 @@ function processQuote(quote, backLink) {
   var quoteUrl = quote.href;
 
   if (!backLink) {
-    addBackLink(quoteUrl, quote);
+    tooltips.addBackLink(quoteUrl, quote);
   }
 
-  if (loadedPreviews.indexOf(quoteUrl) > -1) {
-    tooltip.innerHTML = loadedContent[quoteUrl];
+  if (tooltips.loadedPreviews.indexOf(quoteUrl) > -1) {
+    tooltip.innerHTML = tooltips.loadedContent[quoteUrl];
   } else {
-    var referenceList = quoteReference[quoteUrl] || [];
+    var referenceList = tooltips.quoteReference[quoteUrl] || [];
 
     referenceList.push(tooltip);
 
-    quoteReference[quoteUrl] = referenceList;
+    tooltips.quoteReference[quoteUrl] = referenceList;
     tooltip.innerHTML = 'Loading';
   }
 
@@ -135,9 +141,9 @@ function processQuote(quote, backLink) {
     tooltip.style.top = previewOrigin.y + 'px';
     tooltip.style.display = 'inline';
 
-    if (loadedPreviews.indexOf(quoteUrl) < 0
-        && loadingPreviews.indexOf(quoteUrl) < 0) {
-      loadQuote(tooltip, quoteUrl);
+    if (tooltips.loadedPreviews.indexOf(quoteUrl) < 0
+        && tooltips.loadingPreviews.indexOf(quoteUrl) < 0) {
+      tooltips.loadQuote(tooltip, quoteUrl);
     }
 
   };
@@ -146,7 +152,7 @@ function processQuote(quote, backLink) {
     tooltip.style.display = 'none';
   };
 
-  if (!board) {
+  if (!api.isBoard) {
     var matches = quote.href.match(/\#(\d+)/);
 
     quote.onclick = function() {
@@ -154,9 +160,9 @@ function processQuote(quote, backLink) {
     };
   }
 
-}
+};
 
-function loadQuote(tooltip, quoteUrl) {
+tooltips.loadQuote = function(tooltip, quoteUrl) {
 
   var matches = quoteUrl.match(/\/(\w+)\/res\/(\d+)\.html\#(\d+)/);
 
@@ -166,11 +172,12 @@ function loadQuote(tooltip, quoteUrl) {
 
   var threadUrl = '/' + board + '/res/' + thread + '.json';
 
-  loadingPreviews.push(quoteUrl);
+  tooltips.loadingPreviews.push(quoteUrl);
 
-  localRequest(threadUrl, function receivedData(error, data) {
+  api.localRequest(threadUrl, function receivedData(error, data) {
 
-    loadingPreviews.splice(loadingPreviews.indexOf(quoteUrl), 1);
+    tooltips.loadingPreviews.splice(tooltips.loadingPreviews.indexOf(quoteUrl),
+        1);
 
     if (error) {
       return;
@@ -199,22 +206,24 @@ function loadQuote(tooltip, quoteUrl) {
       return;
     }
 
-    var tempDiv = addPost(postingData, board, thread, true)
+    var tempDiv = posting.addPost(postingData, board, thread, true)
         .getElementsByClassName('innerPost')[0];
 
     tempDiv.getElementsByClassName('deletionCheckBox')[0].remove();
 
     var finalHTML = tempDiv.outerHTML;
 
-    var referenceList = quoteReference[quoteUrl];
+    var referenceList = tooltips.quoteReference[quoteUrl];
 
     for (i = 0; i < referenceList.length; i++) {
       referenceList[i].innerHTML = finalHTML;
     }
 
-    loadedContent[quoteUrl] = finalHTML;
-    loadedPreviews.push(quoteUrl);
+    tooltips.loadedContent[quoteUrl] = finalHTML;
+    tooltips.loadedPreviews.push(quoteUrl);
 
   });
 
-}
+};
+
+tooltips.init();

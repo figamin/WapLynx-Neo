@@ -1,6 +1,6 @@
-var lockedDrag = false;
+var draggable = {};
 
-function setDraggable(element, dragElement) {
+draggable.setDraggable = function(element, dragElement) {
 
   var dragglableInfo = {};
 
@@ -11,7 +11,7 @@ function setDraggable(element, dragElement) {
     }
 
     dragglableInfo.shouldMove = false
-    lockedDrag = false
+    draggable.lockedDrag = false
 
     var body = document.getElementsByTagName('body')[0];
 
@@ -21,13 +21,13 @@ function setDraggable(element, dragElement) {
 
   var startMoving = function(evt) {
 
-    if (dragglableInfo.shouldMove || lockedDrag) {
+    if (dragglableInfo.shouldMove || draggable.lockedDrag) {
       return;
     }
 
     evt.preventDefault();
 
-    lockedDrag = true;
+    draggable.lockedDrag = true;
 
     var body = document.getElementsByTagName('body')[0];
 
@@ -87,4 +87,4 @@ function setDraggable(element, dragElement) {
   dragElement.onmousedown = startMoving
   document.getElementsByTagName('body')[0].addEventListener('mousemove', move);
 
-}
+};

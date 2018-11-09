@@ -1,4 +1,6 @@
-function getCookies() {
+var api = {};
+
+api.getCookies = function() {
 
   var parsedCookies = {};
 
@@ -14,17 +16,16 @@ function getCookies() {
   }
 
   return parsedCookies;
-}
 
-function handleConnectionResponse(xhr, callback) {
+};
+
+api.handleConnectionResponse = function(xhr, callback) {
+
   var response;
 
   try {
     response = JSON.parse(xhr.responseText);
 
-    if (VERBOSE) {
-      console.log(JSON.stringify(response, null, 2));
-    }
   } catch (error) {
     alert('Error in parsing response.');
     return;
@@ -64,7 +65,7 @@ function handleConnectionResponse(xhr, callback) {
     alert('Parameter ' + response.data + ' was sent in blank.');
   } else if (response.status === 'bypassable') {
 
-    displayBlockBypassPrompt(function() {
+    postCommon.displayBlockBypassPrompt(function() {
       alert('You may now post');
     });
 
@@ -98,7 +99,7 @@ function handleConnectionResponse(xhr, callback) {
 
         if (appeal) {
 
-          apiRequest('appealBan', {
+          api.apiRequest('appealBan', {
             appeal : appeal,
             banId : response.data.banId
           }, function appealed() {
@@ -118,7 +119,7 @@ function handleConnectionResponse(xhr, callback) {
     callback(response.status, response.data);
   }
 
-}
+};
 
 // Makes a request to the back-end.
 // page: url of the api page
@@ -126,7 +127,8 @@ function handleConnectionResponse(xhr, callback) {
 // callback: callback that will receive (data,status). If the callback
 // has a function in stop property, it will be called when the connection stops
 // loading.
-function apiRequest(page, parameters, callback) {
+api.apiRequest = function(page, parameters, callback) {
+
   var xhr = new XMLHttpRequest();
 
   if ('withCredentials' in xhr) {
@@ -150,7 +152,7 @@ function apiRequest(page, parameters, callback) {
   xhr.onreadystatechange = function connectionStateChanged() {
 
     if (parameters.captcha) {
-      reloadCaptcha();
+      captchaUtils.reloadCaptcha();
     }
 
     if (xhr.readyState == 4) {
@@ -164,11 +166,11 @@ function apiRequest(page, parameters, callback) {
         return;
       }
 
-      handleConnectionResponse(xhr, callback);
+      api.handleConnectionResponse(xhr, callback);
     }
   };
 
-  var parsedCookies = getCookies();
+  var parsedCookies = api.getCookies();
 
   var body = {
     captchaId : parsedCookies.captchaid,
@@ -180,15 +182,11 @@ function apiRequest(page, parameters, callback) {
     }
   };
 
-  if (VERBOSE) {
-    console.log(JSON.stringify(body, null, 2));
-  }
-
   xhr.send(JSON.stringify(body));
 
-}
+};
 
-function localRequest(address, callback) {
+api.localRequest = function(address, callback) {
 
   var xhr = new XMLHttpRequest();
 
@@ -221,4 +219,5 @@ function localRequest(address, callback) {
   };
 
   xhr.send();
-}
+
+};
