@@ -27,7 +27,7 @@ postingMenu.init = function() {
   document.body.addEventListener('click', function clicked() {
 
     if (postingMenu.shownPostingMenu) {
-      postingMenu.shownPostingMenu.style.display = 'none';
+      postingMenu.shownPostingMenu.remove();
       delete postingMenu.shownPostingMenu;
     }
 
@@ -508,7 +508,7 @@ postingMenu.setExtraMenuMod = function(checkbox, extraMenu, board, thread,
 
 };
 
-postingMenu.setExtraMenu = function(checkbox) {
+postingMenu.buildMenu = function(checkbox, extraMenu) {
 
   var name = checkbox.name;
 
@@ -519,34 +519,6 @@ postingMenu.setExtraMenu = function(checkbox) {
   var thread = parts[1];
 
   var post = parts[2];
-
-  var extraMenuButton = document.createElement('span');
-  extraMenuButton.className = 'extraMenuButton glowOnHover coloredIcon';
-  extraMenuButton.title = 'Post Menu';
-  checkbox.parentNode.insertBefore(extraMenuButton, checkbox.nextSibling);
-
-  var extraMenu = document.createElement('div');
-  extraMenu.className = 'floatingMenu extraMenu';
-  extraMenu.style.display = 'none';
-  extraMenu.style.position = 'absolute';
-
-  document.body.appendChild(extraMenu);
-
-  extraMenuButton.onclick = function() {
-
-    var rect = extraMenuButton.getBoundingClientRect();
-
-    var previewOrigin = {
-      x : rect.right + 10 + window.scrollX,
-      y : rect.top + window.scrollY
-    };
-
-    extraMenu.style.left = previewOrigin.x + 'px';
-    extraMenu.style.top = previewOrigin.y + 'px';
-    extraMenu.style.display = 'inline';
-
-    postingMenu.shownPostingMenu = extraMenu;
-  };
 
   var reportButton = document.createElement('div');
   reportButton.innerHTML = 'Report';
@@ -595,6 +567,41 @@ postingMenu.setExtraMenu = function(checkbox) {
     postingMenu.setExtraMenuMod(checkbox, extraMenu, board, thread, post,
         hasFiles);
   }
+
+};
+
+postingMenu.setExtraMenu = function(checkbox) {
+
+  var extraMenuButton = document.createElement('span');
+  extraMenuButton.className = 'extraMenuButton glowOnHover coloredIcon';
+  extraMenuButton.title = 'Post Menu';
+  checkbox.parentNode.insertBefore(extraMenuButton, checkbox.nextSibling);
+
+  extraMenuButton.onclick = function() {
+
+    var rect = extraMenuButton.getBoundingClientRect();
+
+    var previewOrigin = {
+      x : rect.right + 10 + window.scrollX,
+      y : rect.top + window.scrollY
+    };
+
+    var extraMenu = document.createElement('div');
+    extraMenu.className = 'floatingMenu extraMenu';
+    extraMenu.style.display = 'none';
+    extraMenu.style.position = 'absolute';
+
+    document.body.appendChild(extraMenu);
+
+    extraMenu.style.left = previewOrigin.x + 'px';
+    extraMenu.style.top = previewOrigin.y + 'px';
+    extraMenu.style.display = 'inline';
+
+    postingMenu.shownPostingMenu = extraMenu;
+
+    postingMenu.buildMenu(checkbox, extraMenu);
+
+  };
 
 };
 

@@ -13,7 +13,7 @@ hiding.init = function() {
   document.body.addEventListener('click', function clicked() {
 
     if (hiding.shownMenu) {
-      hiding.shownMenu.style.display = 'none';
+      hiding.shownMenu.remove();
       delete hiding.shownMenu;
     }
 
@@ -169,7 +169,7 @@ hiding.registerHiding = function(board, thread, post, unhiding) {
 
 };
 
-hiding.setHideMenu = function(checkbox) {
+hiding.buildHideMenu = function(checkbox, hideMenu) {
 
   var name = checkbox.name;
 
@@ -180,17 +180,6 @@ hiding.setHideMenu = function(checkbox) {
   var thread = parts[1];
 
   var post = parts[2];
-
-  var hideButton = document.createElement('span');
-  hideButton.className = 'hideButton glowOnHover coloredIcon';
-  hideButton.title = "Hide";
-
-  checkbox.parentNode.insertBefore(hideButton, checkbox.nextSibling);
-
-  var hideMenu = document.createElement('div');
-  hideMenu.className = 'floatingMenu hideMenu';
-  hideMenu.style.display = 'none';
-  hideMenu.style.position = 'absolute';
 
   var postHideButton;
   postHideButton = document.createElement('div');
@@ -244,24 +233,6 @@ hiding.setHideMenu = function(checkbox) {
 
     hideMenu.appendChild(document.createElement('hr'));
   }
-
-  document.body.appendChild(hideMenu);
-
-  hideButton.onclick = function() {
-
-    var rect = hideButton.getBoundingClientRect();
-
-    var previewOrigin = {
-      x : rect.right + 10 + window.scrollX,
-      y : rect.top + window.scrollY
-    };
-
-    hideMenu.style.left = previewOrigin.x + 'px';
-    hideMenu.style.top = previewOrigin.y + 'px';
-    hideMenu.style.display = 'inline';
-
-    hiding.shownMenu = hideMenu;
-  };
 
   var unhidePostButton = document.createElement('span');
 
@@ -332,6 +303,42 @@ hiding.setHideMenu = function(checkbox) {
   if (!post && boardData.threads.indexOf(thread) > -1) {
     threadHideButton.onclick();
   }
+
+};
+
+hiding.setHideMenu = function(checkbox) {
+
+  var hideButton = document.createElement('span');
+  hideButton.className = 'hideButton glowOnHover coloredIcon';
+  hideButton.title = "Hide";
+
+  checkbox.parentNode.insertBefore(hideButton, checkbox.nextSibling);
+
+  hideButton.onclick = function() {
+
+    var rect = hideButton.getBoundingClientRect();
+
+    var previewOrigin = {
+      x : rect.right + 10 + window.scrollX,
+      y : rect.top + window.scrollY
+    };
+
+    var hideMenu = document.createElement('div');
+    hideMenu.className = 'floatingMenu hideMenu';
+    hideMenu.style.display = 'none';
+    hideMenu.style.position = 'absolute';
+
+    document.body.appendChild(hideMenu);
+
+    hideMenu.style.left = previewOrigin.x + 'px';
+    hideMenu.style.top = previewOrigin.y + 'px';
+    hideMenu.style.display = 'inline';
+
+    hiding.shownMenu = hideMenu;
+
+    hiding.buildHideMenu(checkbox, hideMenu);
+
+  };
 
 };
 
