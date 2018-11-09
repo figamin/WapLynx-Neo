@@ -33,6 +33,34 @@ postingMenu.init = function() {
 
   }, true);
 
+  api.localRequest('/account.js?json=1', function gotLoginData(error, data) {
+
+    if (!data) {
+      return;
+    }
+
+    try {
+      data = JSON.parse(data);
+    } catch (error) {
+      return;
+    }
+
+    postingMenu.loggedIn = true;
+
+    postingMenu.globalRole = data.globalRole;
+
+    postingMenu.moddedBoards = [];
+
+    for (var i = 0; i < data.ownedBoards.length; i++) {
+      postingMenu.moddedBoards.push(data.ownedBoards[i]);
+    }
+
+    for (i = 0; i < data.volunteeredBoards.length; i++) {
+      postingMenu.moddedBoards.push(data.volunteeredBoards[i]);
+    }
+
+  });
+
   var checkboxes = document.getElementsByClassName('deletionCheckBox');
 
   for (var i = 0; i < checkboxes.length; i++) {
@@ -421,14 +449,18 @@ postingMenu.addToggleSettingButton = function(extraMenu, board, thread, index) {
 
 postingMenu.setExtraMenuThread = function(extraMenu, board, thread) {
 
-  extraMenu.appendChild(document.createElement('hr'));
+  if (postingMenu.globalRole <= 1) {
 
-  var transferButton = document.createElement('div');
-  transferButton.innerHTML = 'Transfer Thread';
-  transferButton.onclick = function() {
-    postingMenu.transferThread(board, thread);
-  };
-  extraMenu.appendChild(transferButton);
+    extraMenu.appendChild(document.createElement('hr'));
+
+    var transferButton = document.createElement('div');
+    transferButton.innerHTML = 'Transfer Thread';
+    transferButton.onclick = function() {
+      postingMenu.transferThread(board, thread);
+    };
+    extraMenu.appendChild(transferButton);
+
+  }
 
   for (var i = 0; i < postingMenu.threadSettingsList.length; i++) {
     postingMenu.addToggleSettingButton(extraMenu, board, thread, i);
@@ -436,28 +468,37 @@ postingMenu.setExtraMenuThread = function(extraMenu, board, thread) {
 
 };
 
+postingMenu.setModFileOptions = function(extraMenu, board, thread, post) {
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var spoilButton = document.createElement('div');
+  spoilButton.innerHTML = 'Spoil Files';
+  spoilButton.onclick = function() {
+    postingMenu.spoilSinglePost(board, thread, post);
+  };
+  extraMenu.appendChild(spoilButton);
+
+  if (postingMenu.globalRole > 3) {
+    return;
+  }
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var deleteMediaButton = document.createElement('div');
+  deleteMediaButton.innerHTML = 'Delete Post And Media';
+  extraMenu.appendChild(deleteMediaButton);
+  deleteMediaButton.onclick = function() {
+    postingMenu.deleteSinglePost(board, thread, post, false, false, true);
+  };
+
+};
+
 postingMenu.setExtraMenuMod = function(checkbox, extraMenu, board, thread,
     post, hasFiles) {
 
   if (hasFiles) {
-    extraMenu.appendChild(document.createElement('hr'));
-
-    var deleteMediaButton = document.createElement('div');
-    deleteMediaButton.innerHTML = 'Delete Post And Media';
-    extraMenu.appendChild(deleteMediaButton);
-    deleteMediaButton.onclick = function() {
-      postingMenu.deleteSinglePost(board, thread, post, false, false, true);
-    };
-
-    extraMenu.appendChild(document.createElement('hr'));
-
-    var spoilButton = document.createElement('div');
-    spoilButton.innerHTML = 'Spoil Files';
-    spoilButton.onclick = function() {
-      postingMenu.spoilSinglePost(board, thread, post);
-    };
-    extraMenu.appendChild(spoilButton);
-
+    postingMenu.setModFileOptions(extraMenu, board, thread, post);
   }
 
   extraMenu.appendChild(document.createElement('hr'));
@@ -484,14 +525,18 @@ postingMenu.setExtraMenuMod = function(checkbox, extraMenu, board, thread,
   };
   extraMenu.appendChild(banButton);
 
-  extraMenu.appendChild(document.createElement('hr'));
+  if (postingMenu.globalRole <= 2) {
 
-  var globalBanButton = document.createElement('div');
-  globalBanButton.innerHTML = 'Global Ban';
-  globalBanButton.onclick = function() {
-    postingMenu.banSinglePost(innerPart, board, thread, post, true);
-  };
-  extraMenu.appendChild(globalBanButton);
+    extraMenu.appendChild(document.createElement('hr'));
+
+    var globalBanButton = document.createElement('div');
+    globalBanButton.innerHTML = 'Global Ban';
+    globalBanButton.onclick = function() {
+      postingMenu.banSinglePost(innerPart, board, thread, post, true);
+    };
+    extraMenu.appendChild(globalBanButton);
+
+  }
 
   extraMenu.appendChild(document.createElement('hr'));
 
@@ -563,7 +608,8 @@ postingMenu.buildMenu = function(checkbox, extraMenu) {
 
   }
 
-  if (api.getCookies().hash) {
+  if (postingMenu.loggedIn
+      && (postingMenu.globalRole < 4 || postingMenu.moddedBoards.indexOf(board) >= 0)) {
     postingMenu.setExtraMenuMod(checkbox, extraMenu, board, thread, post,
         hasFiles);
   }
