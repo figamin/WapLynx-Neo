@@ -19,51 +19,42 @@ boardManagement.init = function() {
   volunteerCellTemplate += 'type="hidden" ';
   volunteerCellTemplate += 'name="add" ';
   volunteerCellTemplate += 'value=false>';
-  volunteerCellTemplate += '<input ';
-  volunteerCellTemplate += 'type="button" ';
-  volunteerCellTemplate += 'class="removeJsButton" ';
-  volunteerCellTemplate += 'value="Remove Volunteer" ';
-  volunteerCellTemplate += 'class="hidden"> ';
-  volunteerCellTemplate += '<input ';
+  volunteerCellTemplate += '<button ';
   volunteerCellTemplate += 'type="submit" ';
   volunteerCellTemplate += 'class="removeFormButton" ';
-  volunteerCellTemplate += 'value="Remove Volunteer">';
+  volunteerCellTemplate += '>Remove Volunteer</button';
 
   boardManagement.volunteerCellTemplate = volunteerCellTemplate;
 
   if (document.getElementById('ownerControlDiv')) {
 
-    document.getElementById('addVolunteerJsButton').style.display = 'inline';
-    document.getElementById('transferBoardJsButton').style.display = 'inline';
-    document.getElementById('deleteBoardJsButton').style.display = 'inline';
-    document.getElementById('cssJsButton').style.display = 'inline';
-    document.getElementById('spoilerJsButton').style.display = 'inline';
-    document.getElementById('spoilerFormButton').style.display = 'none';
-    document.getElementById('cssFormButton').style.display = 'none';
-    document.getElementById('deleteBoardFormButton').style.display = 'none';
-    document.getElementById('addVolunteerFormButton').style.display = 'none';
-    document.getElementById('transferBoardFormButton').style.display = 'none';
+    api.convertButton('spoilerFormButton', boardManagement.setSpoiler);
+    api.convertButton('cssFormButton', boardManagement.setCss);
+    api.convertButton('deleteBoardFormButton', boardManagement.deleteBoard,
+        'deleteBoardField');
+    api.convertButton('addVolunteerFormButton', boardManagement.addVolunteer,
+        'addVolunteerField');
+    api.convertButton('transferBoardFormButton', boardManagement.transferBoard,
+        'transferBoardField');
 
     if (document.getElementById('customJsForm')) {
-      document.getElementById('jsJsButton').style.display = 'inline';
-
-      document.getElementById('jsFormButton').style.display = 'none';
+      api.convertButton('jsFormButton', boardManagement.setJs);
     }
 
     var volunteerDiv = document.getElementById('volunteersDiv');
 
     for (var i = 0; i < volunteerDiv.childNodes.length; i++) {
       boardManagement.processVolunteerCell(volunteerDiv.childNodes[i]);
-
     }
   }
 
-  boardManagement.boardIdentifier = document
-      .getElementById('boardSettingsIdentifier').value;
-  document.getElementById('closeReportsJsButton').style.display = 'inline';
-  document.getElementById('closeReportsFormButton').style.display = 'none';
-  document.getElementById('saveSettingsJsButton').style.display = 'inline';
-  document.getElementById('saveSettingsFormButton').style.display = 'none';
+  api.boardUri = document.getElementById('boardSettingsIdentifier').value;
+
+  api.convertButton('closeReportsFormButton', reports.closeReports,
+      'closeReportsField');
+
+  api.convertButton('saveSettingsFormButton', boardManagement.saveSettings,
+      'boardSettingsField');
 
 };
 
@@ -71,7 +62,7 @@ boardManagement.makeJsRequest = function(files) {
 
   api.apiRequest('setCustomJs', {
     files : files || [],
-    boardUri : boardManagement.boardIdentifier,
+    boardUri : api.boardUri,
   }, function requestComplete(status, data) {
 
     document.getElementById('JsFiles').type = 'text';
@@ -119,7 +110,7 @@ boardManagement.makeSpoilerRequest = function(files) {
 
   api.apiRequest('setCustomSpoiler', {
     files : files || [],
-    boardUri : boardManagement.boardIdentifier,
+    boardUri : api.boardUri,
   }, function requestComplete(status, data) {
 
     document.getElementById('files').type = 'text';
@@ -165,7 +156,7 @@ boardManagement.makeCssRequest = function(files) {
 
   api.apiRequest('setCustomCss', {
     files : files || [],
-    boardUri : boardManagement.boardIdentifier,
+    boardUri : api.boardUri,
   }, function requestComplete(status, data) {
 
     document.getElementById('files').type = 'text';
@@ -311,7 +302,7 @@ boardManagement.saveSettings = function() {
             tags : typedTags,
             anonymousName : typedAnonymousName,
             boardDescription : typedDescription,
-            boardUri : boardManagement.boardIdentifier,
+            boardUri : api.boardUri,
             settings : settings,
             autoSageLimit : typedAutoSage,
             maxThreadCount : typedThreadLimit,
@@ -334,14 +325,12 @@ boardManagement.saveSettings = function() {
 
 boardManagement.processVolunteerCell = function(cell) {
 
-  var button = cell.getElementsByClassName('removeJsButton')[0];
-  button.style.display = 'inline';
-  cell.getElementsByClassName('removeFormButton')[0].style.display = 'none';
+  var button = cell.getElementsByClassName('removeFormButton')[0];
 
-  button.onclick = function() {
+  api.convertButton(button, function() {
     boardManagement.setVolunteer(
         cell.getElementsByClassName('userIdentifier')[0].value, false);
-  };
+  });
 
 };
 
@@ -380,7 +369,7 @@ boardManagement.setVolunteersDiv = function(volunteers) {
     cell.getElementsByClassName('userLabel')[0].innerHTML = volunteers[i];
 
     cell.getElementsByClassName('boardIdentifier')[0].setAttribute('value',
-        boardManagement.boardIdentifier);
+        api.boardUri);
 
     boardManagement.processVolunteerCell(cell);
 
@@ -391,20 +380,20 @@ boardManagement.setVolunteersDiv = function(volunteers) {
 
 boardManagement.refreshVolunteers = function() {
 
-  api.localRequest('/boardManagement.js?json=1&boardUri='
-      + boardManagement.boardIdentifier, function gotData(error, data) {
+  api.localRequest('/boardManagement.js?json=1&boardUri=' + api.boardUri,
+      function gotData(error, data) {
 
-    if (error) {
-      alert(error);
-    } else {
+        if (error) {
+          alert(error);
+        } else {
 
-      var parsedData = JSON.parse(data);
+          var parsedData = JSON.parse(data);
 
-      boardManagement.setVolunteersDiv(parsedData.volunteers || []);
+          boardManagement.setVolunteersDiv(parsedData.volunteers || []);
 
-    }
+        }
 
-  });
+      });
 
 };
 
@@ -413,7 +402,7 @@ boardManagement.setVolunteer = function(user, add, callback) {
   api.apiRequest('setVolunteer', {
     login : user,
     add : add,
-    boardUri : boardManagement.boardIdentifier
+    boardUri : api.boardUri
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
@@ -435,12 +424,12 @@ boardManagement.transferBoard = function() {
 
   api.apiRequest('transferBoardOwnership', {
     login : document.getElementById('transferBoardFieldLogin').value.trim(),
-    boardUri : boardManagement.boardIdentifier
+    boardUri : api.boardUri
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
 
-      window.location.pathname = '/' + boardManagement.boardIdentifier + '/';
+      window.location.pathname = '/' + api.boardUri + '/';
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
@@ -452,7 +441,7 @@ boardManagement.transferBoard = function() {
 boardManagement.deleteBoard = function() {
 
   api.apiRequest('deleteBoard', {
-    boardUri : boardManagement.boardIdentifier,
+    boardUri : api.boardUri,
     confirmDeletion : document.getElementById('confirmDelCheckbox').checked
   }, function requestComplete(status, data) {
 

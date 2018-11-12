@@ -6,13 +6,14 @@ boardModeration.init = function() {
     return;
   }
 
-  document.getElementById('transferJsButton').style.display = 'inline';
-  document.getElementById('deleteJsButton').style.display = 'inline';
-  document.getElementById('saveSpecialJsButton').style.display = 'inline';
+  api.convertButton('saveSpecialFormButton',
+      boardModeration.saveSpecialSettings, 'specialSettingsField');
 
-  document.getElementById('saveSpecialFormButton').style.display = 'none';
-  document.getElementById('deleteFormButton').style.display = 'none';
-  document.getElementById('transferFormButton').style.display = 'none';
+  api.convertButton('deleteFormButton', boardModeration.deleteBoard,
+      'deleteBoardField');
+
+  api.convertButton('transferFormButton', boardModeration.transferBoard,
+      'transferField');
 
   api.boardUri = document.getElementById('boardTransferIdentifier').value;
 
@@ -37,9 +38,15 @@ boardModeration.transferBoard = function() {
 };
 
 boardModeration.deleteBoard = function() {
+
+  if (!document.getElementById('confirmDelCheckbox').checked) {
+    alert('You must confirm that you wish to delete this board.')
+    return;
+  }
+
   api.apiRequest('deleteBoard', {
     boardUri : api.boardUri,
-    confirmDeletion : document.getElementById('confirmDelCheckbox').checked
+    confirmDeletion : true
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {

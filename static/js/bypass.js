@@ -6,8 +6,7 @@ bypass.init = function() {
     return;
   }
 
-  document.getElementById('bypassJsButton').style.display = 'inline';
-  document.getElementById('bypassFormButton').style.display = 'none';
+  api.convertButton('bypassFormButton', bypass.blockBypass, 'bypassField');
 
 };
 

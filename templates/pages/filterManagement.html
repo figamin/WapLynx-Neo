@@ -9,15 +9,6 @@
   href="/.static/css/global.css"
   type="text/css"
   rel="stylesheet" />
-<script
-  src="/.static/js/settings.js"
-  defer></script>
-<script
-  src="/.static/js/api.js"
-  defer></script>
-<script
-  src="/.static/js/filterManagement.js"
-  defer></script>
 </head>
 <body>
 
@@ -47,6 +38,7 @@
           Original term:
           <input
             type="text"
+            class="addFilterField"
             name="originalTerm"
             id="fieldOriginalTerm">
         </label>
@@ -54,26 +46,22 @@
           Replacement term:
           <input
             type="text"
+            class="addFilterField"
             name="replacementTerm"
             id="fieldReplacementTerm">
         </label>
         <label>
           <input
             type="checkbox"
+            class="addFilterField"
             name="caseInsensitive"
             id="checkboxCaseInsensitive">
           Case-insensitive
         </label>
-        <input
+        <button
           type="submit"
-          value="Add filter"
-          id="addFormButton">
-        <input
-          type="button"
-          onClick="filterManagement.addFilter()"
-          class="hidden"
-          value="Add filter"
-          id="addJsButton">
+          id="addFormButton">Add filter</button>
+
       </form>
       <hr />
       <div id="divFilters"></div>

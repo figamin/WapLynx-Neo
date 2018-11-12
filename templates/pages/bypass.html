@@ -55,22 +55,16 @@
           <input
             name="captcha"
             type="text"
+            class="bypassField"
             id="fieldCaptcha"
             placeholder="Answer">
           <a
             href="/noCookieCaptcha.js"
             class="small">no cookies?</a>
           <br>
-          <input
+          <button
             type="submit"
-            id="bypassFormButton"
-            value="Renew block bypass">
-          <input
-            type="button"
-            id="bypassJsButton"
-            onclick="blockBypass()"
-            value="Renew block bypass"
-            class="hidden">
+            id="bypassFormButton">Renew block bypass</button>
         </div>
       </form>
     </fieldset>

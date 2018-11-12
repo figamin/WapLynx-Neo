@@ -6,8 +6,7 @@ edit.init = function() {
     return;
   }
 
-  document.getElementById('saveJsButton').style.display = 'inline';
-  document.getElementById('saveFormButton').style.display = 'none';
+  api.convertButton('saveFormButton', edit.save, 'editField');
 
   edit.messageLimit = +document.getElementById('labelMessageLength').innerHTML;
   api.boardUri = document.getElementById('boardIdentifier').value;
@@ -49,7 +48,8 @@ edit.save = function() {
       parameters.threadId = api.threadId;
     }
 
-    api.apiRequest('saveEdit', parameters, function requestComplete(status, data) {
+    api.apiRequest('saveEdit', parameters, function requestComplete(status,
+        data) {
 
       if (status === 'ok') {
         alert('Posting edited.');

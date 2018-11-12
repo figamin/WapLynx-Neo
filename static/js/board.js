@@ -26,10 +26,11 @@ board.init = function() {
 
     board.messageLimit = +document.getElementById('labelMessageLength').innerHTML;
 
-    board.postButton = document.getElementById('jsButton');
-    board.postButton.style.display = 'inline';
+    board.postButton = document.getElementById('formButton');
+
+    api.convertButton(board.postButton, board.postThread, 'postingInput');
+
     board.postButton.disabled = false;
-    document.getElementById('formButton').style.display = 'none';
 
   }
 

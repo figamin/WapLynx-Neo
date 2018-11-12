@@ -9,15 +9,13 @@ loginObj.init = function() {
   }
 
   if (document.getElementById('divCreation')) {
-    document.getElementById('registerJsButton').style.display = 'inline';
-    document.getElementById('registerFormButton').style.display = 'none';
+    api.convertButton('registerFormButton', loginObj.registerAccount,
+        'registerField');
   }
 
-  document.getElementById('loginJsButton').style.display = 'inline';
-  document.getElementById('recoverJsButton').style.display = 'inline';
-
-  document.getElementById('recoverFormButton').style.display = 'none';
-  document.getElementById('loginFormButton').style.display = 'none';
+  api.convertButton('recoverFormButton', loginObj.recoverAccount,
+      'recoverField');
+  api.convertButton('loginFormButton', loginObj.loginUser, 'loginField');
 
 };
 

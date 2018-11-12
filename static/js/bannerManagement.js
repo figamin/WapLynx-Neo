@@ -7,13 +7,10 @@ bannerManagement.init = function() {
   }
 
   if (document.getElementById('boardIdentifier')) {
-    api.boardUri = document
-        .getElementById('boardIdentifier').value;
+    api.boardUri = document.getElementById('boardIdentifier').value;
   }
 
-  document.getElementById('addJsButton').style.display = 'inline';
-
-  document.getElementById('addFormButton').style.display = 'none';
+  api.convertButton('addFormButton', bannerManagement.addBanner);
 
   var bannersDiv = document.getElementById('bannersDiv');
 
@@ -25,15 +22,12 @@ bannerManagement.init = function() {
 
 bannerManagement.processBannerCell = function(cell) {
 
-  var button = cell.getElementsByClassName('deleteJsButton')[0];
-  button.style.display = 'inline';
+  var button = cell.getElementsByClassName('deleteFormButton')[0];
 
-  button.onclick = function() {
+  api.convertButton(button, function() {
     bannerManagement.removeBanner(cell
         .getElementsByClassName('bannerIdentifier')[0].value);
-  };
-
-  cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
+  });
 
 };
 

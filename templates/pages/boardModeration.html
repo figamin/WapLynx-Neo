@@ -54,6 +54,7 @@
             <input
               type="text"
               name="login"
+              class="transferField"
               id="fieldTransferLogin"
               name="userLogin">
           </label>
@@ -61,16 +62,10 @@
             type="hidden"
             name="boardUri"
             id="boardTransferIdentifier">
-          <input
+          <button
             type="submit"
-            value="Transfer board"
-            id="transferFormButton">
-          <input
-            type="button"
-            onclick="boardModeration.transferBoard()"
-            class="hidden"
-            value="Transfer board"
-            id="transferJsButton">
+            id="transferFormButton">Transfer board</button>
+
         </form>
       </div>
       <hr>
@@ -83,6 +78,7 @@
           <label>
             <input
               type="checkbox"
+              class="deleteBoardField"
               name="confirmDeletion"
               id="confirmDelCheckbox">
             Yes, I wish to delete this board
@@ -91,16 +87,10 @@
             type="hidden"
             name="boardUri"
             id="boardDeletionIdentifier">
-          <input
+          <button
             type="submit"
-            value="Delete board"
-            id="deleteFormButton">
-          <input
-            type="button"
-            onclick="boardModeration.deleteBoard()"
-            class="hidden"
-            value="Delete board"
-            id="deleteJsButton">
+            id="deleteFormButton">Delete board</button>
+
         </form>
       </div>
       <hr>
@@ -113,6 +103,7 @@
           <label>
             <input
               type="checkbox"
+              class="specialSettingsField"
               name="sfw"
               id="checkboxSfw">
             Safe for work board
@@ -120,6 +111,7 @@
           <label>
             <input
               type="checkbox"
+              class="specialSettingsField"
               name="locked"
               id="checkboxLocked">
             Locked
@@ -128,16 +120,10 @@
             type="hidden"
             name="boardUri"
             id="specialSettingsIdentifier">
-          <input
+          <button
             type="submit"
-            value="Save special settings"
-            id="saveSpecialFormButton">
-          <input
-            type="button"
-            onclick="boardModeration.saveSpecialSettings()"
-            class="hidden"
-            value="Save special settings"
-            id="saveSpecialJsButton">
+            id="saveSpecialFormButton">Save special settings</button>
+
         </form>
       </div>
 

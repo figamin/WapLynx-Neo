@@ -35,13 +35,14 @@
         <br>
         <input
           type="text"
+          class="editField"
           placeholder="Subject"
           id="fieldSubject"
           name="subject">
         <textarea
           name="message"
           id="fieldMessage"
-          class="wide"></textarea>
+          class="wide editField"></textarea>
         <input
           type="hidden"
           name="boardUri"
@@ -54,16 +55,9 @@
           type="hidden"
           name="postId"
           id="postIdentifier">
-        <input
+        <button
           type="submit"
-          id="saveFormButton"
-          value="Save">
-        <input
-          class="hidden"
-          onclick="edit.save()"
-          type="button"
-          id="saveJsButton"
-          value="Save">
+          id="saveFormButton">Save</button>
       </form>
 
     </fieldset>

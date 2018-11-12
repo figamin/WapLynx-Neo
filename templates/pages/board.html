@@ -92,6 +92,7 @@
               <th>Name</th>
               <td><input
                   type="text"
+                  class="postingInput"
                   id="fieldName"
                   name="name"></td>
             </tr>
@@ -101,6 +102,7 @@
               <td><input
                   type="text"
                   id="fieldSubject"
+                  class="postingInput"
                   name="subject"></td>
             </tr>
 
@@ -152,7 +154,7 @@
                 </div> <span class="small">Spoiler</span> <input
                   type="checkbox"
                   name="spoiler"
-                  class="postingCheckbox"
+                  class="postingCheckbox postingInput"
                   id="checkboxSpoiler"> <label for="checkboxSpoiler"></label>
 
                 <p class="small">
@@ -185,7 +187,7 @@
                   <input
                     name="captcha"
                     type="text"
-                    class="captchaField"
+                    class="captchaField postingInput"
                     id="fieldCaptcha"
                     placeholder="answer">
 
@@ -209,6 +211,7 @@
               <th>E-mail</th>
               <td><input
                   type="text"
+                  class="postingInput"
                   id="fieldEmail"
                   name="email"></td>
             </tr>
@@ -218,6 +221,7 @@
               <td><input
                   id="fieldPostingPassword"
                   name="password"
+                  class="postingInput"
                   type="password">
                 <p class="small">(used to delete files and postings)</p></td>
             </tr>
@@ -234,7 +238,7 @@
               <th>No location</th>
               <td><input
                   type="checkbox"
-                  class="postingCheckbox"
+                  class="postingCheckbox postingInput"
                   id="checkboxNoFlag"
                   name="noFlag"> <label for="checkboxNoFlag"></label></td>
             </tr>
@@ -245,7 +249,7 @@
               <th>Bypass check</th>
               <td><input
                   type="checkbox"
-                  class="postingCheckbox"
+                  class="postingCheckbox postingInput"
                   id="alwaysUseBypassCheckBox"> <label
                   for="alwaysUseBypassCheckBox"></label></td>
             </tr>
@@ -256,11 +260,6 @@
           type="submit"
           id="formButton">Post</button>
 
-        <button
-          type="button"
-          onClick="board.postThread()"
-          id="jsButton"
-          class="hidden">Post</button>
       </form>
 
     </fieldset>

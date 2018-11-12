@@ -11,22 +11,23 @@ account.init = function() {
     return;
   }
 
-  document.getElementById('logoutJsButton').style.display = 'inline';
-  document.getElementById('saveJsButton').style.display = 'inline';
-  document.getElementById('passwordJsButton').style.display = 'inline';
+  if (document.getElementById('requestConfirmationFormButton')) {
 
-  if (document.getElementById('requestConfirmationJsButton')) {
-    document.getElementById('requestConfirmationJsButton').style.display = 'inline';
-    document.getElementById('requestConfirmationFormButton').style.display = 'none';
+    api.convertButton('requestConfirmationFormButton',
+        account.requestConfirmation);
+
   }
 
-  document.getElementById('passwordFormButton').style.display = 'none';
-  document.getElementById('saveFormButton').style.display = 'none';
-  document.getElementById('logoutFormButton').style.display = 'none';
+  api.convertButton('passwordFormButton', account.changePassword,
+      'passwordChangeField');
+
+  api.convertButton('saveFormButton', account.save, 'settingsField');
+
+  api.convertButton('logoutFormButton', account.logout);
 
   if (document.getElementById('boardCreationDiv')) {
-    document.getElementById('newBoardFormButton').style.display = 'none';
-    document.getElementById('newBoardJsButton').style.display = 'inline';
+    api.convertButton('newBoardFormButton', account.createBoard,
+        'creationField');
   }
 
 };

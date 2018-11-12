@@ -30,16 +30,10 @@
       </h3>
 
       <form action="/logout.js">
-        <input
+        <button
           id="logoutFormButton"
-          type="submit"
-          value="logout">
-        <input
-          type="button"
-          id="logoutJsButton"
-          onClick="account.logout()"
-          value="logout"
-          class="hidden">
+          type="submit">Logout</button>
+
       </form>
 
       <hr />
@@ -63,11 +57,6 @@
           type="submit"
           id="requestConfirmationFormButton">Request confirmation
           e-mail</button>
-        <button
-          type="button"
-          style="display: none;"
-          onclick="account.requestConfirmation()"
-          id="requestConfirmationJsButton">Request confirmation e-mail</button>
       </form>
 
       <h3>Settings</h3>
@@ -82,11 +71,13 @@
           <input
             type="email"
             name="email"
+            class="settingsField"
             id="emailField">
         </label>
         <label>
           <input
             type="checkbox"
+            class="settingsField"
             name="alwaysSignRole"
             id="checkboxAlwaysSign">
           Always use role signature
@@ -94,21 +85,15 @@
         <label>
           <input
             type="checkbox"
+            class="settingsField"
             name="reportNotify"
             id="checkboxReportNotify">
           Receive e-mail report notifications
         </label>
 
-        <input
+        <button
           type="submit"
-          value="Save"
-          id="saveFormButton">
-        <input
-          type="button"
-          onClick="account.save()"
-          value="Save"
-          id="saveJsButton"
-          class="hidden">
+          id="saveFormButton">Save</button>
 
       </form>
 
@@ -125,6 +110,7 @@
           Current Password:
           <input
             type="password"
+            class="passwordChangeField"
             name="password"
             id="fieldPassword">
         </label>
@@ -132,6 +118,7 @@
           New Password:
           <input
             type="password"
+            class="passwordChangeField"
             name="newPassword"
             id="fieldNewPassword">
         </label>
@@ -139,21 +126,14 @@
           Confirm New Password:
           <input
             type="password"
+            class="passwordChangeField"
             name="confirmation"
             id="fieldConfirmation">
         </label>
 
-        <input
+        <button
           type="submit"
-          value="Change password"
-          id="passwordFormButton">
-
-        <input
-          type="button"
-          onClick="account.changePassword()"
-          value="Change password"
-          id="passwordJsButton"
-          class="hidden">
+          id="passwordFormButton">Change password</button>
 
       </form>
 
@@ -185,6 +165,7 @@
             Board URI:
             <input
               type="text"
+              class="creationField"
               name="boardUri"
               id="newBoardFieldUri">
           </label>
@@ -192,12 +173,14 @@
             Board Name:
             <input
               type="text"
+              class="creationField"
               name="boardName"
               id="newBoardFieldName">
           </label>
           <label>
             Board Description:
             <input
+              class="creationField"
               type="text"
               name="boardDescription"
               id="newBoardFieldDescription">
@@ -220,7 +203,7 @@
 
             <input
               type="text"
-              class="captchaField"
+              class="captchaField creationField"
               name="captcha"
               id="fieldCaptcha"
               placeholder="answer">
@@ -231,17 +214,9 @@
 
           </div>
 
-          <input
+          <button
             type="submit"
-            value="create board"
-            id="newBoardFormButton">
-
-          <input
-            type="button"
-            onClick="account.createBoard()"
-            value="create board"
-            id="newBoardJsButton"
-            class="hidden">
+            id="newBoardFormButton">Create board</button>
 
         </form>
 

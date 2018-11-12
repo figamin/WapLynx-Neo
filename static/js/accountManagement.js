@@ -6,8 +6,8 @@ accountManagement.init = function() {
     return;
   }
 
-  document.getElementById('deleteAccountJsButton').style.display = 'inline';
-  document.getElementById('deleteAccountFormButton').style.display = 'none';
+  api.convertButton('deleteAccountFormButton', accountManagement.deleteAccount,
+      'deleteAccountField');
 
 };
 

@@ -11,9 +11,7 @@ flags.init = function() {
 
   api.boardUri = document.getElementById('boardIdentifier').value;
 
-  document.getElementById('addJsButton').style.display = 'inline';
-
-  document.getElementById('addFormButton').style.display = 'none';
+  api.convertButton('addFormButton', flags.uploadFlags);
 
   var flagCells = document.getElementsByClassName('flagCell');
 
@@ -87,6 +85,13 @@ flags.addSelectedFlag = function(file) {
   var nameField = document.createElement('input');
   nameField.className = 'nameField';
   nameField.type = 'text';
+  nameField.addEventListener('keydown', function(event) {
+
+    if (event.key === 'Enter') {
+      flags.uploadFlags();
+    }
+
+  });
   nameField.value = file.name.substring(0, file.name.lastIndexOf('.'));
   cell.appendChild(nameField);
 
@@ -122,14 +127,11 @@ flags.addSelectedFlag = function(file) {
 
 flags.processFlagCell = function(cell) {
 
-  var button = cell.getElementsByClassName('deleteJsButton')[0];
-  button.style.display = 'inline';
+  var button = cell.getElementsByClassName('deleteFormButton')[0];
 
-  button.onclick = function() {
+  api.convertButton(button, function() {
     flags.removeFlag(cell.getElementsByClassName('idIdentifier')[0].value);
-  };
-
-  cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
+  });
 
 };
 

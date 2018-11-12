@@ -6,8 +6,8 @@ accounts.init = function() {
     return;
   }
 
-  document.getElementById('addAccountJsButton').style.display = 'inline';
-  document.getElementById('addAccountFormButton').style.display = 'none';
+  api.convertButton('addAccountFormButton', accounts.addAccount,
+      'addAccountField');
 
 };
 

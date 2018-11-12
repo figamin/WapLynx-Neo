@@ -35,11 +35,13 @@
         <input
           type="text"
           name="login"
+          class="loginField"
           id="loginFieldLogin"
           placeholder="login">
 
         <input
           type="password"
+          class="loginField"
           id="loginFieldPassword"
           name="password"
           placeholder="password">
@@ -48,21 +50,14 @@
           <input
             type="checkbox"
             name="remember"
+            class="loginField"
             id="checkboxRemember">
           Remember me
         </div>
 
-        <input
+        <button
           type="submit"
-          id="loginFormButton"
-          value="login">
-
-        <input
-          type="button"
-          id="loginJsButton"
-          onclick="loginObj.loginUser()"
-          value="login"
-          class="hidden">
+          id="loginFormButton">Login</button>
 
       </form>
 
@@ -78,17 +73,20 @@
           <input
             type="text"
             name="login"
+            class="registerField"
             id="registerFieldLogin"
             placeholder="login">
 
           <input
             type="password"
+            class="registerField"
             id="registerFieldPassword"
             name="password"
             placeholder="password">
 
           <input
             type="email"
+            class="registerField"
             id="registerFieldEmail"
             name="email"
             placeholder="email">
@@ -113,7 +111,7 @@
             <input
               name="captcha"
               type="text"
-              class="captchaField"
+              class="captchaField registerField"
               id="fieldCaptcha"
               placeholder="answer">
 
@@ -122,17 +120,9 @@
               href="/noCookieCaptcha.js">no cookies?</a>
           </div>
 
-          <input
+          <button
             type="submit"
-            id="registerFormButton"
-            value="register">
-
-          <input
-            type="button"
-            id="registerJsButton"
-            onclick="loginObj.registerAccount()"
-            value="register"
-            class="hidden">
+            id="registerFormButton">Register</button>
 
         </form>
         <hr />
@@ -149,6 +139,7 @@
           <input
             type="text"
             name="login"
+            class="recoverField"
             id="recoverFieldLogin"
             placeholder="login">
 
@@ -172,7 +163,7 @@
             <input
               name="captcha"
               type="text"
-              class="captchaField"
+              class="captchaField recoverField"
               id="fieldCaptchaRecover"
               placeholder="answer">
 
@@ -181,17 +172,10 @@
               href="/noCookieCaptcha.js">no cookies?</a>
           </div>
 
-          <input
+          <button
             type="submit"
-            id="recoverFormButton"
-            value="request recovery">
+            id="recoverFormButton">Request recovery</button>
 
-          <input
-            type="button"
-            id="recoverJsButton"
-            onclick="loginObj.recoverAccount()"
-            value="request recovery"
-            class="hidden">
         </form>
 
       </div>

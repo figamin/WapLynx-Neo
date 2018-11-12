@@ -6,43 +6,29 @@ bans.init = function() {
     return;
   }
 
-  var bansDiv = document.getElementById('bansDiv')
-      || document.getElementById('appealedBansPanel');
+  var banCells = document.getElementsByClassName('banCell');
 
-  if (bansDiv) {
-
-    for (var j = 0; j < bansDiv.childNodes.length; j++) {
-      bans.processBanCell(bansDiv.childNodes[j]);
-    }
+  for (var j = 0; j < banCells.length; j++) {
+    bans.processBanCell(banCells[j]);
   }
 
 };
 
 bans.processBanCell = function(cell) {
 
-  if (cell.className !== 'banCell') {
-    return;
-  }
+  var liftButton = cell.getElementsByClassName('liftFormButton')[0];
 
-  var button = cell.getElementsByClassName('liftJsButton')[0];
-  button.style.display = 'inline';
-
-  button.onclick = function() {
+  api.convertButton(liftButton, function() {
     bans.liftBan(cell.getElementsByClassName('liftIdentifier')[0].value);
-  };
-
-  cell.getElementsByClassName('liftFormButton')[0].style.display = 'none';
+  });
 
   if (cell.getElementsByClassName('denyForm')[0]) {
 
-    var denyButton = cell.getElementsByClassName('denyJsButton')[0];
-    denyButton.style.display = 'inline'
+    var denyButton = cell.getElementsByClassName('denyFormButton')[0];
 
-    denyButton.onclick = function() {
+    api.convertButton(denyButton, function() {
       bans.denyAppeal(cell.getElementsByClassName('denyIdentifier')[0].value);
-    };
-
-    cell.getElementsByClassName('denyFormButton')[0].style.display = 'none';
+    });
 
   }
 

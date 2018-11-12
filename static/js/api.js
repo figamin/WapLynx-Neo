@@ -1,5 +1,39 @@
 var api = {};
 
+api.addEnterEvent = function(element, onclick) {
+
+  element.addEventListener('keydown', function(event) {
+
+    if (event.key === 'Enter') {
+      onclick();
+      event.preventDefault();
+    }
+
+  });
+
+};
+
+api.convertButton = function(button, onclick, inputs) {
+
+  if (typeof (button) === 'string') {
+    button = document.getElementById(button);
+  }
+
+  button.type = 'button';
+  button.onclick = onclick;
+
+  if (!inputs) {
+    return;
+  }
+
+  inputs = document.getElementsByClassName(inputs);
+
+  for (var i = 0; i < inputs.length; i++) {
+    api.addEnterEvent(inputs[i], onclick);
+  }
+
+};
+
 api.getCookies = function() {
 
   var parsedCookies = {};

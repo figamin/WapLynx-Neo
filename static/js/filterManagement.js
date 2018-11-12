@@ -8,9 +8,8 @@ filterManagement.init = function() {
 
   api.boardUri = document.getElementById('boardIdentifier').value;
 
-  document.getElementById('addJsButton').style.display = 'inline';
-
-  document.getElementById('addFormButton').style.display = 'none';
+  api.convertButton('addFormButton', filterManagement.addFilter,
+      'addFilterField');
 
   var filtersDiv = document.getElementById('divFilters');
 
@@ -22,15 +21,13 @@ filterManagement.init = function() {
 
 filterManagement.processFilterCell = function(cell) {
 
-  var button = cell.getElementsByClassName('deleteJsButton')[0];
-  button.style.display = 'inline';
+  var button = cell.getElementsByClassName('deleteFormButton')[0];
 
-  button.onclick = function() {
+  api.convertButton(button, function() {
     filterManagement.removeFilter(cell
         .getElementsByClassName('filterIdentifier')[0].value);
-  };
+  });
 
-  cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
 };
 
 filterManagement.removeFilter = function(filter) {
