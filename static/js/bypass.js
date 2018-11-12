@@ -6,7 +6,6 @@ bypass.init = function() {
     return;
   }
 
-  document.getElementById('reloadCaptchaButton').style.display = 'inline';
   document.getElementById('bypassJsButton').style.display = 'inline';
   document.getElementById('bypassFormButton').style.display = 'none';
 

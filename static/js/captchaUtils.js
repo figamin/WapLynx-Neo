@@ -6,6 +6,12 @@ captchaUtils.init = function() {
     return;
   }
 
+  var reloadButtons = document.getElementsByClassName('reloadCaptchaButton');
+
+  for (var i = 0; i < reloadButtons.length; i++) {
+    reloadButtons[i].style.display = 'inline-block';
+  }
+
   captchaUtils.updateFunction();
 
 };

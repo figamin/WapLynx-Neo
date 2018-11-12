@@ -25,7 +25,6 @@ account.init = function() {
   document.getElementById('logoutFormButton').style.display = 'none';
 
   if (document.getElementById('boardCreationDiv')) {
-    document.getElementById('reloadCaptchaButton').style.display = 'inline';
     document.getElementById('newBoardFormButton').style.display = 'none';
     document.getElementById('newBoardJsButton').style.display = 'inline';
   }
@@ -34,8 +33,8 @@ account.init = function() {
 
 account.requestConfirmation = function() {
 
-  api.apiRequest('requestEmailConfirmation', {}, function requestComplete(status,
-      data) {
+  api.apiRequest('requestEmailConfirmation', {}, function requestComplete(
+      status, data) {
 
     if (status === 'ok') {
       alert('Confirmation requested.');

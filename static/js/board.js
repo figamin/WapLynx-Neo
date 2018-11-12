@@ -31,14 +31,6 @@ board.init = function() {
     board.postButton.disabled = false;
     document.getElementById('formButton').style.display = 'none';
 
-    if (!api.hiddenCaptcha) {
-      document.getElementById('reloadCaptchaButton').style.display = 'inline';
-    }
-
-  }
-
-  if (document.getElementById('reloadCaptchaButtonReport')) {
-    document.getElementById('reloadCaptchaButtonReport').style.display = 'inline';
   }
 
 };

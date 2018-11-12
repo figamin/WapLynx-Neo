@@ -58,12 +58,6 @@ thread.init = function() {
   thread.replyButton.style.display = 'inline';
   thread.replyButton.disabled = false;
 
-  if (document.getElementById('captchaDiv')) {
-    document.getElementById('reloadCaptchaButton').style.display = 'inline';
-  }
-
-  document.getElementById('reloadCaptchaButtonReport').style.display = 'inline';
-
   document.getElementById('formButton').style.display = 'none';
 
   var replies = document.getElementsByClassName('postCell');
