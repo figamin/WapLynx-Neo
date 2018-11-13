@@ -2,6 +2,8 @@ var accounts = {};
 
 accounts.init = function() {
 
+  accounts.divAccounts = document.getElementById('divAccounts');
+
   api.convertButton('addAccountFormButton', accounts.addAccount,
       'addAccountField');
 
@@ -9,7 +11,7 @@ accounts.init = function() {
 
 accounts.addAccount = function() {
 
-  var typedLogin = document.getElementById('fieldLogin').value;
+  var typedLogin = document.getElementById('fieldLogin').value.trim();
   var typedPassword = document.getElementById('fieldPassword').value;
   var typedEmail = document.getElementById('fieldEmail').value;
 
@@ -28,7 +30,16 @@ accounts.addAccount = function() {
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
-        location.reload(true);
+
+        var newLink = document.createElement('a');
+        newLink.innerHTML = typedLogin;
+        newLink.href = '/accountManagement.js?account=' + typedLogin;
+        accounts.divAccounts.appendChild(newLink);
+
+        document.getElementById('fieldLogin').value = '';
+        document.getElementById('fieldPassword').value = '';
+        document.getElementById('fieldEmail').value = '';
+
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }

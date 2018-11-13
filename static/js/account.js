@@ -8,10 +8,8 @@ account.settingsRelation = {
 account.init = function() {
 
   if (document.getElementById('requestConfirmationFormButton')) {
-
     api.convertButton('requestConfirmationFormButton',
         account.requestConfirmation);
-
   }
 
   api.convertButton('passwordFormButton', account.changePassword,
@@ -38,6 +36,7 @@ account.requestConfirmation = function() {
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
+
   });
 
 };
@@ -74,7 +73,9 @@ account.changePassword = function() {
 
         alert('Password changed.');
 
-        location.reload(true);
+        document.getElementById('fieldPassword').value = '';
+        document.getElementById('fieldNewPassword').value = '';
+        document.getElementById('fieldConfirmation').value = '';
 
       } else {
         alert(status + ': ' + JSON.stringify(data));
@@ -108,9 +109,7 @@ account.save = function() {
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
-
         alert('Settings changed.');
-
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
