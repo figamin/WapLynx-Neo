@@ -2,18 +2,14 @@ var rangeBans = {};
 
 rangeBans.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   var boardIdentifier = document.getElementById('boardIdentifier');
 
   if (boardIdentifier) {
     api.boardUri = boardIdentifier.value;
   }
 
-  document.getElementById('createFormButton').style.display = 'none';
-  document.getElementById('createJsButton').style.display = 'inline';
+  api.convertButton('createFormButton', rangeBans.placeRangeBan,
+      'rangeBanField');
 
   var rangeBanCells = document.getElementsByClassName('rangeBanCell');
 
@@ -25,14 +21,11 @@ rangeBans.init = function() {
 
 rangeBans.processRangeBanCell = function(cell) {
 
-  var button = cell.getElementsByClassName('liftJsButton')[0];
-  button.style.display = 'inline';
+  var button = cell.getElementsByClassName('liftFormButton')[0];
 
-  button.onclick = function() {
+  api.convertButton(button, function() {
     rangeBans.liftBan(cell.getElementsByClassName('idIdentifier')[0].value);
-  };
-
-  cell.getElementsByClassName('liftFormButton')[0].style.display = 'none';
+  });
 
 };
 
@@ -62,17 +55,17 @@ rangeBans.placeRangeBan = function() {
     boardUri : api.boardUri
   };
 
-  api.apiRequest('placeRangeBan', parameters,
-      function requestComplete(status, data) {
+  api.apiRequest('placeRangeBan', parameters, function requestComplete(status,
+      data) {
 
-        if (status === 'ok') {
+    if (status === 'ok') {
 
-          location.reload(true);
+      location.reload(true);
 
-        } else {
-          alert(status + ': ' + JSON.stringify(data));
-        }
-      });
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 };
 

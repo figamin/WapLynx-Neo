@@ -2,10 +2,6 @@ var languages = {};
 
 languages.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.convertButton('addFormButton', languages.addLanguage, 'newLanguageField');
 
   var cells = document.getElementsByClassName('languageCell');

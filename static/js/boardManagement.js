@@ -2,10 +2,6 @@ var boardManagement = {};
 
 boardManagement.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   var volunteerCellTemplate = '<span class="userLabel"></span> ';
   volunteerCellTemplate += '<input ';
   volunteerCellTemplate += 'type="hidden" ';

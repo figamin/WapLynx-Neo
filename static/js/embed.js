@@ -6,10 +6,6 @@ embed.embedHTML += 'frameborder="0" allowfullscreen></iframe>';
 
 embed.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   var messages = document.getElementsByClassName('divMessage');
 
   for (var i = 0; i < messages.length; i++) {

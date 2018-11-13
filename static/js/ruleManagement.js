@@ -2,13 +2,8 @@ var ruleManagement = {};
 
 ruleManagement.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
-  document.getElementById('addJsButton').style.display = 'inline';
-
-  document.getElementById('addFormButton').style.display = 'none';
+  api.convertButton('addFormButton', ruleManagement.addRule,
+      'ruleManagementField');
 
   api.boardUri = document.getElementById('boardIdentifier').value;
 
@@ -22,13 +17,9 @@ ruleManagement.init = function() {
 
 ruleManagement.processRuleCell = function(cell) {
 
-  var button = cell.getElementsByClassName('deleteJsButton')[0];
+  var button = cell.getElementsByClassName('deleteFormButton')[0];
 
-  button.style.display = 'inline';
-
-  cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
-
-  button.onclick = function() {
+  api.convertButton(button, function() {
 
     var index = cell.getElementsByClassName('indexIdentifier')[0].value;
 
@@ -37,15 +28,13 @@ ruleManagement.processRuleCell = function(cell) {
       ruleIndex : index,
     }, function requestComplete(status, data) {
       if (status === 'ok') {
-
         location.reload(true);
-
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
     });
 
-  }
+  });
 
 };
 

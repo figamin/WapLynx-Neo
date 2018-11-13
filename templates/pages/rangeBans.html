@@ -17,6 +17,7 @@
   <header>
     <img
       src="/.static/logo.png"
+      class="logoImg"
       alt="logo" />
   </header>
 
@@ -35,6 +36,7 @@
           <input
             type="text"
             name="range"
+            class="rangeBanField"
             id="rangeField">
         </label>
         <input
@@ -42,23 +44,16 @@
           type="hidden"
           name="boardUri">
 
-        <input
+        <button
           type="submit"
-          id="createFormButton"
-          value="Place Range Ban">
-        <input
-          type="button"
-          id="createJsButton"
-          onClick="rangeBans.placeRangeBan()"
-          class="hidden"
-          value="Place Range Ban">
+          id="createFormButton">Place range ban</button>
+
       </form>
       <div id="rangeBansDiv"></div>
     </fieldset>
   </div>
 </body>
 
-<script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
 <script src="/.static/js/rangeBans.js"></script>
 <script src="/.static/js/themes.js"></script>

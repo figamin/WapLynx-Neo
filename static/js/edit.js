@@ -2,10 +2,6 @@ var edit = {};
 
 edit.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.convertButton('saveFormButton', edit.save, 'editField');
 
   edit.messageLimit = +document.getElementById('labelMessageLength').innerHTML;

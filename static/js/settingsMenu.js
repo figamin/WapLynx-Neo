@@ -2,10 +2,6 @@ var settingsMenu = {};
 
 settingsMenu.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   settingsMenu.loadedFilters = JSON.parse(localStorage.filterData || '[]');
   settingsMenu.filterTypes = [ 'Name', 'Tripcode', 'Subject', 'Message' ];
 

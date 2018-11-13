@@ -2,10 +2,6 @@ var latestPostings = {};
 
 latestPostings.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   latestPostings.unread = 0;
   latestPostings.originalTitle = document.title;
 

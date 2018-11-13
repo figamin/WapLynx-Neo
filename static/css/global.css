@@ -23,6 +23,10 @@
   border: 1px dashed #117743;
 }
 
+.logoImg{
+  height: 250px;
+}
+
 .captchaImage {
   width: 300px;
   height: 100px;

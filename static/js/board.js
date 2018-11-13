@@ -4,10 +4,6 @@ var board = {};
 
 board.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.hiddenCaptcha = !document.getElementById('captchaDiv');
 
   var identifierElement = document.getElementById('boardIdentifier');

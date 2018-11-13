@@ -2,10 +2,6 @@ var accountManagement = {};
 
 accountManagement.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.convertButton('deleteAccountFormButton', accountManagement.deleteAccount,
       'deleteAccountField');
 

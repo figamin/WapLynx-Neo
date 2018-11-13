@@ -2,10 +2,6 @@ var mediaHiding = {};
 
 mediaHiding.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   mediaHiding.hiddenMediaRelation = {};
 
   var shownFiles = document.getElementsByClassName('uploadCell');

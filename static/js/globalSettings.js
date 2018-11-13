@@ -2,10 +2,6 @@ var globalSettings = {};
 
 globalSettings.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.convertButton('saveFormButton', globalSettings.save,
       'globalSettingsField');
 

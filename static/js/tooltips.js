@@ -2,10 +2,6 @@ var tooltips = {};
 
 tooltips.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   tooltips.loadedPreviews = [];
   tooltips.loadingPreviews = [];
   tooltips.loadedContent = {};

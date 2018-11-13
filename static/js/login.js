@@ -4,10 +4,6 @@ var loginObj = {};
 
 loginObj.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   if (document.getElementById('divCreation')) {
     api.convertButton('registerFormButton', loginObj.registerAccount,
         'registerField');

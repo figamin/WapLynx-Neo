@@ -2,10 +2,6 @@ var hashBans = {};
 
 hashBans.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   var boardIdentifier = document.getElementById('boardIdentifier');
 
   if (boardIdentifier) {

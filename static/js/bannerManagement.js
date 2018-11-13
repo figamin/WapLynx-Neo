@@ -2,10 +2,6 @@ var bannerManagement = {};
 
 bannerManagement.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   if (document.getElementById('boardIdentifier')) {
     api.boardUri = document.getElementById('boardIdentifier').value;
   }

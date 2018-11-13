@@ -17,6 +17,7 @@
   <header>
     <img
       src="/.static/logo.png"
+      class="logoImg"
       alt="logo" />
   </header>
 
@@ -37,17 +38,12 @@
         <input
           type="text"
           name="rule"
+          class="ruleManagementField"
           id="fieldRule">
-        <input
+        <button
           type="submit"
-          value="Add Rule"
-          id="addFormButton">
-        <input
-          type="button"
-          onClick="ruleManagement.addRule()"
-          class="hidden"
-          value="Add Rule"
-          id="addJsButton">
+          id="addFormButton">Add Rule</button>
+
       </form>
 
       <hr />
@@ -60,7 +56,6 @@
 
 </body>
 
-<script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
 <script src="/.static/js/ruleManagement.js"></script>
 <script src="/.static/js/themes.js"></script>

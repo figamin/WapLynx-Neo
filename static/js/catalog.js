@@ -2,10 +2,6 @@ var catalog = {};
 
 catalog.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   catalog.catalogDiv = document.getElementById('divThreads');
 
   catalog.indicatorsRelation = {

@@ -2,10 +2,6 @@ var postingMenu = {};
 
 postingMenu.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   postingMenu.banLabels = [ 'Regular ban', 'Range ban (1/2 octects)',
       'Range ban (3/4 octects)' ];
   postingMenu.deletionOptions = [ 'Do not delete', 'Delete post',
@@ -119,10 +115,6 @@ postingMenu.showReport = function(board, thread, post, global) {
 
 postingMenu.deleteSinglePost = function(boardUri, thread, post, fromIp,
     unlinkFiles, wipeMedia, forcedPassword) {
-
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
 
   var key = boardUri + '/' + thread
 

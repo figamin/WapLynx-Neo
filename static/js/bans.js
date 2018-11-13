@@ -2,10 +2,6 @@ var bans = {};
 
 bans.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   var banCells = document.getElementsByClassName('banCell');
 
   for (var j = 0; j < banCells.length; j++) {

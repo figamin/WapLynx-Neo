@@ -2,10 +2,6 @@ var flags = {};
 
 flags.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   flags.maxLength = +document.getElementById('maxNameLengthLabel').innerHTML;
   flags.selectedFiles = [];
 

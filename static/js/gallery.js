@@ -2,10 +2,6 @@ var gallery = {};
 
 gallery.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   gallery.galleryFiles = [];
   gallery.currentIndex = 0;
 

@@ -2,10 +2,6 @@ var posting = {};
 
 posting.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   posting.postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
       + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
       + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
@@ -572,9 +568,7 @@ posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
   hiding.setHideMenu(checkbox);
   postingMenu.setExtraMenu(checkbox)
 
-  if (!api.isBoard) {
-    thread.processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
-  }
+  thread.processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
 
 };
 

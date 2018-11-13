@@ -2,10 +2,6 @@ var thumbs = {};
 
 thumbs.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   thumbs.playableTypes = [ 'video/webm', 'audio/mpeg', 'video/mp4',
       'video/ogg', 'audio/ogg', 'audio/webm' ];
 

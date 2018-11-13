@@ -2,10 +2,6 @@ var themes = {};
 
 themes.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   themes.themes = [ {
     file : 'clear.css',
     label : 'Clear',

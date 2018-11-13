@@ -2,10 +2,6 @@ var captchaUtils = {};
 
 captchaUtils.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   var reloadButtons = document.getElementsByClassName('reloadCaptchaButton');
 
   for (var i = 0; i < reloadButtons.length; i++) {

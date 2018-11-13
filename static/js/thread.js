@@ -2,10 +2,6 @@ var thread = {};
 
 thread.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.hiddenCaptcha = !document.getElementById('captchaDiv');
 
   document.getElementById('mainPanel').onscroll = function() {
@@ -321,6 +317,7 @@ thread.replyCallback = function(status, data) {
   } else {
     alert(status + ': ' + JSON.stringify(data));
   }
+
 };
 
 thread.replyCallback.stop = function() {

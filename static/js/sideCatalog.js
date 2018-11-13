@@ -2,10 +2,6 @@ var sideCatalog = {};
 
 sideCatalog.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   sideCatalog.htmlReplaceTable = {
     '<' : '&lt;',
     '>' : '&gt;'

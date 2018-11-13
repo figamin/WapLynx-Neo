@@ -1,14 +1,7 @@
 var socketControl = {};
 
 socketControl.init = function() {
-
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
-  document.getElementById('restartFormButton').style.display = 'none';
-  document.getElementById('restartJsButton').style.display = 'inline';
-
+  api.convertButton('restartFormButton', socketControl.restartSocket);
 };
 
 socketControl.restartSocket = function() {

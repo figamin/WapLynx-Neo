@@ -2,10 +2,6 @@ var bypass = {};
 
 bypass.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.convertButton('bypassFormButton', bypass.blockBypass, 'bypassField');
 
 };

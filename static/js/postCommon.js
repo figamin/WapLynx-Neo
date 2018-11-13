@@ -2,9 +2,7 @@ var postCommon = {};
 
 postCommon.init = function() {
 
-  if ((typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS)
-      || typeof (Storage) === "undefined"
-      || !document.getElementById('fieldPostingPassword')) {
+  if (!document.getElementById('fieldPostingPassword')) {
     return;
   }
 

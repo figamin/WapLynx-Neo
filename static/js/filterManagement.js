@@ -2,10 +2,6 @@ var filterManagement = {};
 
 filterManagement.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.boardUri = document.getElementById('boardIdentifier').value;
 
   api.convertButton('addFormButton', filterManagement.addFilter,

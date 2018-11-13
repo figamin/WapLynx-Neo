@@ -2,10 +2,6 @@ var qr = {};
 
 qr.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   qr.setQr();
 
   var hash = window.location.hash.substring(1);

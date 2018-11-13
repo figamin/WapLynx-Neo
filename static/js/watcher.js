@@ -2,10 +2,6 @@ var watcher = {};
 
 watcher.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   watcher.isInThread = document.getElementById('threadIdentifier') ? true
       : false;
   watcher.watcherAlertCounter = 0;

@@ -2,10 +2,6 @@ var boardModeration = {};
 
 boardModeration.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   api.convertButton('saveSpecialFormButton',
       boardModeration.saveSpecialSettings, 'specialSettingsField');
 

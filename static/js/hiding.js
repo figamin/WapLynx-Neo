@@ -2,10 +2,6 @@ var hiding = {};
 
 hiding.init = function() {
 
-  if (typeof (DISABLE_JS) !== 'undefined' && DISABLE_JS) {
-    return;
-  }
-
   hiding.updateHidingData();
 
   hiding.filtered = [];
