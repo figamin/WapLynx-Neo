@@ -7,16 +7,17 @@ globalManagement.init = function() {
   }
 
   if (document.getElementById('addStaffForm')) {
-    document.getElementById('addJsButton').style.display = 'inline';
-    document.getElementById('massBanJsButton').style.display = 'inline';
 
-    document.getElementById('massBanFormButton').style.display = 'none';
-    document.getElementById('addFormButton').style.display = 'none';
+    api
+        .convertButton('addFormButton', globalManagement.addUser,
+            'addUserField');
+    api.convertButton('massBanFormButton', globalManagement.massBan,
+        'massBanField');
 
   }
 
-  document.getElementById('closeReportsFormButton').style.display = 'none';
-  document.getElementById('closeReportsJsButton').style.display = 'inline';
+  api.convertButton('closeReportsFormButton', reports.closeReports,
+      'closeReportsField');
 
   var staffCells = document.getElementsByClassName('staffCell');
 
@@ -28,17 +29,14 @@ globalManagement.init = function() {
 
 globalManagement.processCell = function(cell) {
 
-  var button = cell.getElementsByClassName('saveJsButton')[0];
-  button.style.display = 'inline';
-
-  cell.getElementsByClassName('saveFormButton')[0].style.display = 'none';
+  var button = cell.getElementsByClassName('saveFormButton')[0];
 
   var comboBox = cell.getElementsByClassName('roleCombo')[0];
   var user = cell.getElementsByClassName('userIdentifier')[0].value;
 
-  button.onclick = function() {
+  api.convertButton(button, function() {
     globalManagement.saveUser(user, comboBox);
-  };
+  });
 
 };
 

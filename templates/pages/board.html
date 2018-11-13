@@ -306,12 +306,14 @@
             Password
             <input
               type="text"
+              class="deletionField"
               id="deletionFieldPassword"
               name="password">
           </label>
           <label>
             <input
               type="checkbox"
+              class="deletionField"
               id="checkboxOnlyFiles"
               name="deleteUploads">
             Delete only files (Removes the file reference to the posts)
@@ -319,22 +321,17 @@
           <label>
             <input
               type="checkbox"
+              class="deletionField"
               id="checkboxMediaDeletion"
               name="deleteMedia">
             Delete media (Removes the saved files from the server)
           </label>
-          <input
+          <button
             type="submit"
             id="deleteFormButton"
-            value="Delete"
-            name="action">
+            value="delete"
+            name="action">Delete</button>
 
-          <input
-            type="button"
-            class="hidden"
-            id="deleteJsButton"
-            onClick="posting.deletePosts()"
-            value="Delete">
         </div>
       </fieldset>
 
@@ -347,12 +344,14 @@
             Reason
             <input
               type="text"
+              class="reportField"
               id="reportFieldReason"
               name="reason">
           </label>
           <label>
             <input
               type="checkbox"
+              class="reportField"
               id="checkboxGlobal"
               name="global">
             Global
@@ -370,11 +369,10 @@
           <span class="captchaTimer"></span>
           <br>
 
-
           <input
             name="captcha"
             type="text"
-            class="captchaField"
+            class="captchaField reportField"
             id="fieldCaptchaReport"
             placeholder="answer">
 
@@ -383,19 +381,11 @@
             class="small">no cookies?</a>
           <br>
 
-          <input
+          <button
             type="submit"
             id="reportFormButton"
-            value="Report"
-            name="action">
-
-          <input
-            type="button"
-            class="hidden"
-            id="reportJsButton"
-            onClick="posting.reportPosts()"
-            value="Report">
-
+            value="report"
+            name="action">Report</button>
 
         </div>
 

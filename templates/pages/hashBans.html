@@ -34,6 +34,7 @@
           Hash of the file to be banned:
           <input
             type="text"
+            class="addHashBanField"
             name="hash"
             id="hashField">
         </label>
@@ -42,16 +43,10 @@
           type="hidden"
           name="boardUri">
 
-        <input
+        <button
           type="submit"
-          id="createFormButton"
-          value="Place Hash Ban">
-        <input
-          type="button"
-          id="createJsButton"
-          onClick="hashBans.placeHashBan()"
-          class="hidden"
-          value="Place Hash Ban">
+          id="createFormButton">Place hash ban</button>
+
       </form>
       <div id="hashBansDiv"></div>
     </fieldset>

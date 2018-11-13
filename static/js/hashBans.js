@@ -12,8 +12,8 @@ hashBans.init = function() {
     api.boardUri = boardIdentifier.value;
   }
 
-  document.getElementById('createFormButton').style.display = 'none';
-  document.getElementById('createJsButton').style.display = 'inline';
+  api.convertButton('createFormButton', hashBans.placeHashBan,
+      'addHashBanField');
 
   var hashBansDiv = document.getElementById('hashBansDiv');
 
@@ -25,14 +25,11 @@ hashBans.init = function() {
 
 hashBans.processHashBanCell = function(cell) {
 
-  var button = cell.getElementsByClassName('liftJsButton')[0];
-  button.style.display = 'inline';
+  var button = cell.getElementsByClassName('liftFormButton')[0];
 
-  button.onclick = function() {
+  api.convertButton(button, function() {
     hashBans.liftHashBan(cell.getElementsByClassName('idIdentifier')[0].value);
-  };
-
-  cell.getElementsByClassName('liftFormButton')[0].style.display = 'none';
+  });
 
 };
 

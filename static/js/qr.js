@@ -21,11 +21,11 @@ qr.init = function() {
       post.scrollIntoView();
       qr.showQr(post.getElementsByClassName('linkQuote')[0], hash);
 
-      markPost(hash);
+      thread.markPost(hash);
     }
 
   } else if (hash.length > 0) {
-    markPost(hash);
+    thread.markPost(hash);
   }
 
 };
@@ -49,6 +49,8 @@ qr.showQr = function(link, quote) {
   qrPanel.style.top = (previewOrigin.y - 5) + 'px';
 
   document.getElementById('qrbody').value += '>>' + quote + '\n';
+  document.getElementById('fieldMessage').value = document
+      .getElementById('qrbody').value;
 
   var selectedText = window.getSelection();
   if (selectedText != '') {
@@ -161,7 +163,7 @@ qr.setQr = function() {
   }
 
   qrhtml += '<tr> <td colspan="2" class="centered">';
-  qrhtml += '<button accesskey="s" id="qrbutton" type="button" onclick="postReply()">Reply';
+  qrhtml += '<button accesskey="s" id="qrbutton" type="button" onclick="thread.postReply()">Reply';
   qrhtml += '</td></tr>';
 
   qrhtml += '</tbody> </table></div></div>';

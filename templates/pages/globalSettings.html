@@ -34,20 +34,23 @@
           Address<sup>2</sup>:
           <input
             type="text"
+            class="globalSettingsField"
             name="address"
             id="fieldAddress">
         </label>
         <label>
           Port<sup>2</sup>:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="port"
             id="fieldPort">
         </label>
         <label>
           Tor Port<sup>2</sup>:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="torPort"
             id="fieldTorPort">
         </label>
@@ -62,33 +65,38 @@
           CSP directives (e.g: "default-src 'self'", without the quotations):
           <input
             type="text"
+            class="globalSettingsField"
             name="CSP"
             id="fieldCSP">
         </label>
         <label>
           Static files expiration (minutes):
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="staticExpiration"
             id="fieldStaticExpiration">
         </label>
         <label>
           Maximum size for requests (MB):
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxRequestSizeMB"
             id="fieldMaxRequestSize">
         </label>
         <label>
           Cluster Port<sup>2</sup>:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="clusterPort"
             id="fieldClusterPort">
         </label>
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxDisable304"
             name="disable304">
           Disable http response 304 (Only turn on if you know what you are
@@ -108,6 +116,7 @@
           Master Ip:
           <input
             type="text"
+            class="globalSettingsField"
             name="master"
             id="fieldMaster">
         </label>
@@ -115,6 +124,7 @@
           Slaves ips<sup>1</sup>:
           <input
             type="text"
+            class="globalSettingsField"
             name="slaves"
             id="fieldSlaves">
         </label>
@@ -122,13 +132,15 @@
           Front-end directory:
           <input
             type="text"
+            class="globalSettingsField"
             name="fePath"
             id="fieldFePath">
         </label>
         <label>
           Url for the list of TOR exit node ips:
           <input
-            type="text"
+            type="url"
+            class="globalSettingsField"
             name="torSource"
             id="fieldTorSource">
         </label>
@@ -136,7 +148,8 @@
           Url for the list of spammer ips(Requirements for the file format are
           specified on src/be/readme):
           <input
-            type="text"
+            type="url"
+            class="globalSettingsField"
             name="spamIpsSource"
             id="fieldSpamIpsSource">
         </label>
@@ -144,7 +157,8 @@
           Url for the list of incremental spammer ips(Requirements for the file
           format are specified on src/be/readme):
           <input
-            type="text"
+            type="url"
+            class="globalSettingsField"
             name="incSpamIpsSource"
             id="fieldIncrementalSpamIpsSource">
         </label>
@@ -152,6 +166,7 @@
           Path to an optional language pack:
           <input
             type="text"
+            class="globalSettingsField"
             name="languagePackPath"
             id="fieldLanguagePack">
         </label>
@@ -160,6 +175,7 @@
           animate):
           <input
             type="text"
+            class="globalSettingsField"
             id="fieldThumbExtension"
             name="thumbExtension">
         </label>
@@ -167,6 +183,7 @@
           Temporary directory:
           <input
             type="text"
+            class="globalSettingsField"
             name="tempDirectory"
             id="fieldTempDir">
         </label>
@@ -176,14 +193,16 @@
         <label>
           Character limit for messages:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="messageLength"
             id="fieldMessageLength">
         </label>
         <label>
           Maximum size for uploaded files (MB):
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxFileSizeMB"
             id="fieldMaxFileSize">
         </label>
@@ -191,34 +210,39 @@
           Allowed mime-types<sup>1</sup>:
           <input
             type="text"
+            class="globalSettingsField"
             name="acceptedMimes"
             id="fieldAcceptedMimes">
         </label>
         <label>
           Maximum number of uploaded files on posting:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxFiles"
             id="fieldMaxFiles">
         </label>
         <label>
           Minimum amount of seconds between posts from the same ip:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="floodTimerSec"
             id="fieldFloodInterval">
         </label>
         <label>
           How many posts a block bypass allows:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="bypassMaxPosts"
             id="fieldBypassPosts">
         </label>
         <label>
           How many hours a block bypass lasts:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="bypassDurationHours"
             id="fieldBypassHours">
         </label>
@@ -226,12 +250,14 @@
           Default anonymous name:
           <input
             type="text"
+            class="globalSettingsField"
             name="defaultAnonymousName"
             id="fieldAnonymousName">
         </label>
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxDisableFloodCheck"
             name="disableFloodCheck">
           Disable flood checks
@@ -239,13 +265,15 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxGlobalCaptcha"
             name="forceCaptcha">
-          Forces all boards to use captcha
+          Force all boards to use captcha
         </label>
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxDisableCatalogPosting"
             name="disableCatalogPosting">
           Disable thread creation from catalog
@@ -253,6 +281,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxAllowTorFiles"
             name="allowTorFiles">
           Allow TOR users to post files
@@ -260,6 +289,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxDisableSpamCheck"
             name="disableSpamCheck">
           Disable check on spammer ips (Use it if you can't obtain the spam ip
@@ -275,6 +305,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxSpamBypass"
             name="allowSpamBypass">
           Allow ips caught on the spammer list to use the block bypass if block
@@ -294,70 +325,80 @@
         <label>
           Amount of latest posts to show on front-page:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="globalLatestPosts"
             id="fieldGlobalLatestPosts">
         </label>
         <label>
           Amount of latest images to show on front-page:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="globalLatestImages"
             id="fieldGlobalLatestImages">
         </label>
         <label>
           Amount of threads on the multi-board:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="multiboardThreadCount"
             id="fieldMultiBoardThreadCount">
         </label>
         <label>
           Number of preview posts:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="latestPostCount"
             id="fieldLatestPostsCount">
         </label>
         <label>
           Maximum amount of threads per board:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxThreadCount"
             id="fieldThreadLimit">
         </label>
         <label>
           Boards page size:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="pageSize"
             id="fieldPageSize">
         </label>
         <label>
           Amount of boards to be picked as top boards:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="topBoardsCount"
             id="fieldTopBoardsCount">
         </label>
         <label>
           Maximum amount of boards per page on boards list:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="boardsPerPage"
             id="fieldBoardsPerPage">
         </label>
         <label>
           Amount of threads on the overboard:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="overBoardThreadCount"
             id="fieldOverBoardThreads">
         </label>
         <label>
           Size of media management pages:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="mediaPageSize"
             id="fieldMediaPageSize">
         </label>
@@ -367,69 +408,79 @@
         <label>
           Maximum size for flags (KB):
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxFlagSizeKB"
             id="fieldMaxFlagSize">
         </label>
         <label>
           Maximum board message size:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="boardMessageLength"
             id="fieldBoardMessageLength">
         </label>
         <label>
           Maximum number of board hash bans:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxBoardHashBans"
             id="fieldMaxBoardHashBans">
         </label>
         <label>
           Maximum number of board range bans:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxBoardRangeBans"
             id="fieldMaxBoardRangeBans">
         </label>
         <label>
           Maximum number of rules in boards:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxBoardRules"
             id="fieldMaxRules">
         </label>
         <label>
           Maximum number of filters in boards:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxFilters"
             id="fieldMaxFilters">
         </label>
         <label>
           Maximum number of tags per board:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxBoardTags"
             id="fieldMaxTags">
         </label>
         <label>
           Maximum number of volunteers in boards:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxBoardVolunteers"
             id="fieldMaxVolunteers">
         </label>
         <label>
           Maximum size for banners (KB):
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="maxBannerSizeKB"
             id="fieldMaxBannerSize">
         </label>
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             name="omitUnindexedContent"
             id="checkboxOmitUnindexedContent">
           Omit content from unindexed boards from front-page or overboards
@@ -441,49 +492,56 @@
           Amount of days before removing ips from posts (any value below 1 or
           null means to never remove):
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="ipExpirationDays"
             id="fieldIpExpiration">
         </label>
         <label>
           Number of replies before a thread enters auto-sage:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="autoSageLimit"
             id="fieldAutoSageLimit">
         </label>
         Maximum size for custom flag names:
         <label>
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name=flagNameLength
             id="fieldFlagNameLength">
         </label>
         <label>
           Mark accounts after these many days of inactivity<sup>2</sup>:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="inactivityThreshold"
             id="fieldInactivityThreshold">
         </label>
         <label>
           Maximum dimension for thumbnails, for both height and width:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="thumbSize"
             id="fieldThumbSize">
         </label>
         <label>
           Sender address for automated e-mails:
           <input
-            type="text"
+            type="email"
+            class="globalSettingsField"
             name="emailSender"
             id="fieldSenderEmail">
         </label>
         <label>
           Amount of minutes before a captcha expires:
           <input
-            type="text"
+            type="number"
+            class="globalSettingsField"
             name="captchaExpiration"
             id="fieldCaptchaExpiration">
         </label>
@@ -491,6 +549,7 @@
           Site title:
           <input
             type="text"
+            class="globalSettingsField"
             name="siteTitle"
             id="fieldSiteTitle">
         </label>
@@ -498,6 +557,7 @@
           Default ban message to be displayed on banned posts:
           <input
             type="text"
+            class="globalSettingsField"
             name="defaultBanMessage"
             id="fieldBanMessage">
         </label>
@@ -505,6 +565,7 @@
           RSS link domain:
           <input
             type="text"
+            class="globalSettingsField"
             name="rssDomain"
             id="fieldRssDomain">
         </label>
@@ -512,6 +573,7 @@
           Overboard uri:
           <input
             type="text"
+            class="globalSettingsField"
             name="overboard"
             id="fieldOverboard">
         </label>
@@ -519,6 +581,7 @@
           SFW overboard uri:
           <input
             type="text"
+            class="globalSettingsField"
             name="sfwOverboard"
             id="fieldSfwOverboard">
         </label>
@@ -526,8 +589,18 @@
         <hr>
         <p class="title">Misc</p>
         <label>
+          Addons<sup>1</sup>,<sup>2</sup>(They will be loaded in the order they
+          appear in this list):
+          <input
+            type="text"
+            class="globalSettingsField"
+            name="addons"
+            id="fieldAddons">
+        </label>
+        <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxVerbose"
             name="verbose">
           Full verbose mode
@@ -535,6 +608,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxVerboseApis"
             name="verboseApis">
           Verbose APIs mode
@@ -542,6 +616,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxVerboseCache"
             name="verboseCache">
           Verbose cache mode
@@ -549,6 +624,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxVerboseGridfs"
             name="verboseGridfs">
           Verbose gridfs mode
@@ -556,6 +632,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxVerboseQueue"
             name="verboseQueue">
           Verbose message queue mode
@@ -563,6 +640,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxVerboseMisc"
             name="verboseMisc">
           Verbose miscellaneous mode
@@ -570,6 +648,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxVerboseGenerator"
             name="verboseGenerator">
           Verbose generator mode
@@ -577,6 +656,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxUseAlternativeLanguages"
             name="useAlternativeLanguages">
           Use alternative languages
@@ -584,6 +664,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxBlockedReport"
             name="allowBlockedToReport">
           Allow blocked or banned users to report
@@ -591,22 +672,16 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxFfmpegGifs"
             name="ffmpegGifs">
           Use ffmpeg to generate animated gif thumbnails (requires ffmpeg
           installed)
         </label>
         <label>
-          Addons<sup>1</sup>,<sup>2</sup>(They will be loaded in the order they
-          appear in this list):
-          <input
-            type="text"
-            name="addons"
-            id="fieldAddons">
-        </label>
-        <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxGlobalBoardModeration"
             name="allowGlobalBoardModeration">
           Allow global staff to moderate boards
@@ -614,6 +689,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxGlobalBanners"
             name="useGlobalBanners">
           Make boards use global banners
@@ -621,6 +697,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxAllowCustomJs"
             name="allowBoardCustomJs">
           Allow board custom javascript
@@ -628,6 +705,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxMediaThumb"
             name="mediaThumb">
           Generate thumbnails from media files (requires ffmpeg installed)
@@ -635,6 +713,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxFrontPageStats"
             name="frontPageStats">
           Display total post count and total unique ips on front-page
@@ -642,6 +721,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxAutoPruneFiles"
             name="autoPruneFiles">
           Prune orphaned files weekly<sup>2</sup>
@@ -649,6 +729,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxMaintenance"
             name="maintenance">
           Maintenance mode (Disables input to the server and let users know it
@@ -657,6 +738,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxDisableAccountCreation"
             name="disableAccountCreation">
           Disable account creation
@@ -664,6 +746,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxSFWLatestImages"
             name="onlySfwLatestImages">
           Display only SFW images on the front-page
@@ -671,6 +754,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxDisableLatestPostings"
             name="disableLatestPostings">
           Disable latest postings
@@ -678,6 +762,7 @@
         <label>
           <input
             type="checkbox"
+            class="globalSettingsField"
             id="checkboxMultipleReports"
             name="multipleReports">
           Allow multiple reports at once
@@ -696,17 +781,9 @@
             name="boardCreationRequirement">
           </select>
         </label>
-        <input
+        <button
           type="submit"
-          value="Save"
-          id="saveFormButton">
-
-        <input
-          id="saveJSButton"
-          type="button"
-          value="Save"
-          onclick="globalSettings.save()"
-          class="hidden">
+          id="saveFormButton">Save</button>
 
       </form>
       <br>

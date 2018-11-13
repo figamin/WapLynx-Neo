@@ -6,9 +6,7 @@ languages.init = function() {
     return;
   }
 
-  document.getElementById('addJsButton').style.display = 'inline';
-
-  document.getElementById('addFormButton').style.display = 'none';
+  api.convertButton('addFormButton', languages.addLanguage, 'newLanguageField');
 
   var cells = document.getElementsByClassName('languageCell');
 
@@ -20,11 +18,9 @@ languages.init = function() {
 
 languages.setLanguageCell = function(cell) {
 
-  var jsButton = cell.getElementsByClassName('deleteJsButton')[0];
-  jsButton.style.display = 'inline';
-  cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
+  var button = cell.getElementsByClassName('deleteFormButton')[0];
 
-  jsButton.onclick = function() {
+  api.convertButton(button, function() {
 
     api.apiRequest('deleteLanguage', {
       languageId : cell.getElementsByClassName('languageIdentifier')[0].value
@@ -39,7 +35,7 @@ languages.setLanguageCell = function(cell) {
       }
     });
 
-  };
+  });
 
 };
 

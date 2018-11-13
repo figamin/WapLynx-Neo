@@ -6,8 +6,7 @@ mediaManagement.init = function() {
     return;
   }
 
-  document.getElementById('deleteJsButton').style.display = 'inline';
-  document.getElementById('deleteFormButton').style.display = 'none';
+  api.convertButton('deleteFormButton', mediaManagement.deleteMedia);
 
 };
 

@@ -37,28 +37,29 @@ thread.init = function() {
   thread.refreshButton = document.getElementById('refreshButton');
 
   if (document.getElementById('controlThreadIdentifier')) {
-    document.getElementById('settingsJsButon').style.display = 'inline';
-    document.getElementById('settingsFormButon').style.display = 'none';
+
+    api.convertButton('settingsFormButon', thread.saveThreadSettings,
+        'threadSettingsField');
 
     if (document.getElementById('ipDeletionForm')) {
-      document.getElementById('deleteFromIpJsButton').style.display = 'inline';
-
-      document.getElementById('deleteFromIpFormButton').style.display = 'none';
+      api.convertButton('deleteFromIpFormButton', thread.deleteFromIp,
+          'ipDeletionField');
     }
 
     if (document.getElementById('formTransfer')) {
-      document.getElementById('transferJsButton').style.display = 'inline';
-
-      document.getElementById('transferFormButton').style.display = 'none';
+      api.convertButton('transferFormButton', thread.transfer, 'transferField');
     }
+
+    api.convertButton('inputBan', thread.banPosts, 'banField');
+    api.convertButton('inputIpDelete', thread.deleteFromIpOnBoard);
+    api.convertButton('inputSpoil', posting.spoilFiles);
 
   }
 
-  thread.replyButton = document.getElementById('jsButton');
-  thread.replyButton.style.display = 'inline';
+  thread.replyButton = document.getElementById('formButton');
   thread.replyButton.disabled = false;
 
-  document.getElementById('formButton').style.display = 'none';
+  api.convertButton(thread.replyButton, thread.postReply, 'postingInput');
 
   var replies = document.getElementsByClassName('postCell');
 
@@ -71,13 +72,13 @@ thread.init = function() {
   var postingQuotes = document.getElementsByClassName('linkQuote');
 
   for (var i = 0; i < postingQuotes.length; i++) {
-    processPostingQuote(postingQuotes[i]);
+    thread.processPostingQuote(postingQuotes[i]);
   }
 
   var ids = document.getElementsByClassName('labelId');
 
   for (i = 0; i < ids.length; i++) {
-    processIdLabel(ids[i]);
+    thread.processIdLabel(ids[i]);
   }
 };
 
@@ -92,6 +93,31 @@ thread.initThread = function() {
   thread.refreshURL = document.getElementById('divMod') ? '/mod.js?boardUri='
       + api.boardUri + '&threadId=' + api.threadId + '&json=1' : '/'
       + api.boardUri + '/res/' + api.threadId + '.json';
+
+};
+
+thread.deleteFromIpOnBoard = function() {
+
+  var selected = posting.getSelectedContent();
+
+  var redirect = '/' + selected[0].board + '/';
+
+  var confirmationBox = document
+      .getElementById('ipDeletionConfirmationCheckbox');
+
+  api.apiRequest('deleteFromIpOnBoard', {
+    postings : selected,
+    confirmation : confirmationBox.checked
+  }, function requestComplete(status, data) {
+
+    if (status === 'ok') {
+
+      window.location.pathname = redirect;
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 };
 
@@ -127,7 +153,7 @@ thread.applyBans = function(captcha) {
 thread.banPosts = function() {
 
   if (!document.getElementsByClassName('panelRange').length) {
-    posting.applyBans();
+    thread.applyBans();
     return;
   }
 
@@ -139,7 +165,7 @@ thread.banPosts = function() {
   }
 
   if (typedCaptcha.length == 24 || !typedCaptcha) {
-    posting.applyBans(typedCaptcha);
+    thread.applyBans(typedCaptcha);
   } else {
     var parsedCookies = api.getCookies();
 
@@ -147,13 +173,13 @@ thread.banPosts = function() {
       captchaId : parsedCookies.captchaid,
       answer : typedCaptcha
     }, function solvedCaptcha(status, data) {
-      posting.applyBans(parsedCookies.captchaid);
+      thread.applyBans(parsedCookies.captchaid);
     });
   }
 
 };
 
-function processIdLabel(label) {
+thread.processIdLabel = function(label) {
 
   var id = label.innerHTML;
 
@@ -194,9 +220,9 @@ function processIdLabel(label) {
 
   };
 
-}
+};
 
-function transfer() {
+thread.transfer = function() {
 
   var informedBoard = document.getElementById("fieldDestinationBoard").value
       .trim();
@@ -212,8 +238,6 @@ function transfer() {
 
     if (status === 'ok') {
 
-      alert('Thread moved.');
-
       var redirect = '/' + informedBoard + '/res/';
 
       window.location.pathname = redirect + data + '.html';
@@ -223,9 +247,9 @@ function transfer() {
     }
   });
 
-}
+};
 
-function markPost(id) {
+thread.markPost = function(id) {
 
   if (isNaN(id)) {
     return;
@@ -246,9 +270,10 @@ function markPost(id) {
   if (thread.markedPosting) {
     thread.markedPosting.className = 'markedPost';
   }
-}
 
-function processPostingQuote(link) {
+};
+
+thread.processPostingQuote = function(link) {
 
   link.onclick = function() {
     var toQuote = link.href.match(/#q(\d+)/)[1];
@@ -259,9 +284,9 @@ function processPostingQuote(link) {
 
   };
 
-}
+};
 
-function saveThreadSettings() {
+thread.saveThreadSettings = function() {
 
   api.apiRequest('changeThreadSettings', {
     boardUri : api.boardUri,
@@ -272,19 +297,15 @@ function saveThreadSettings() {
   }, function setLock(status, data) {
 
     if (status === 'ok') {
-
-      alert('Settings saved.');
-
       location.reload(true);
-
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
 
-}
+};
 
-var replyCallback = function(status, data) {
+thread.replyCallback = function(status, data) {
 
   if (status === 'ok') {
 
@@ -295,23 +316,25 @@ var replyCallback = function(status, data) {
     qr.clearQRAfterPosting();
     postCommon.clearSelectedFiles();
 
-    refreshPosts(true);
+    thread.refreshPosts(true);
 
   } else {
     alert(status + ': ' + JSON.stringify(data));
   }
 };
 
-replyCallback.stop = function() {
+thread.replyCallback.stop = function() {
+
   thread.replyButton.innerHTML = thread.originalButtonText;
 
   qr.setQRReplyText(thread.originalButtonText);
 
   thread.replyButton.disabled = false;
   qr.setQRReplyEnabled(true);
+
 };
 
-replyCallback.progress = function(info) {
+thread.replyCallback.progress = function(info) {
 
   if (info.lengthComputable) {
     var newText = 'Uploading ' + Math.floor((info.loaded / info.total) * 100)
@@ -320,9 +343,10 @@ replyCallback.progress = function(info) {
 
     qr.setQRReplyText(newText);
   }
+
 };
 
-var refreshCallback = function(error, data) {
+thread.refreshCallback = function(error, data) {
 
   if (error) {
     return;
@@ -377,12 +401,13 @@ var refreshCallback = function(error, data) {
   }
 
   if (thread.autoRefresh) {
-    startTimer(thread.manualRefresh || foundPosts ? 5 : thread.lastRefresh * 2);
+    thread.startTimer(thread.manualRefresh || foundPosts ? 5
+        : thread.lastRefresh * 2);
   }
 
 };
 
-refreshCallback.stop = function() {
+thread.refreshCallback.stop = function() {
 
   thread.refreshButton.disabled = false;
 
@@ -396,7 +421,7 @@ refreshCallback.stop = function() {
 
 };
 
-function refreshPosts(manual, full) {
+thread.refreshPosts = function(manual, full) {
 
   if (manual && sideCatalog.loadingThread) {
     return;
@@ -413,11 +438,11 @@ function refreshPosts(manual, full) {
 
   thread.refreshingThread = true;
 
-  api.localRequest(thread.refreshURL, refreshCallback);
+  api.localRequest(thread.refreshURL, thread.refreshCallback);
 
-}
+};
 
-function sendReplyData(files, captchaId) {
+thread.sendReplyData = function(files, captchaId) {
 
   var forcedAnon = !document.getElementById('fieldName');
   var hiddenFlags = !document.getElementById('flagsDiv');
@@ -492,22 +517,22 @@ function sendReplyData(files, captchaId) {
     files : files,
     boardUri : api.boardUri,
     threadId : api.threadId
-  }, replyCallback);
+  }, thread.replyCallback);
 
-}
+};
 
-function processFilesToPost(captchaId) {
+thread.processFilesToPost = function(captchaId) {
 
   postCommon.getFilestToUpload(function gotFiles(files) {
-    sendReplyData(files, captchaId);
+    thread.sendReplyData(files, captchaId);
   });
 
-}
+};
 
-function processReplyRequest() {
+thread.processReplyRequest = function() {
 
   if (api.hiddenCaptcha) {
-    processFilesToPost();
+    thread.processFilesToPost();
   } else {
     var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
 
@@ -520,7 +545,7 @@ function processReplyRequest() {
     }
 
     if (typedCaptcha.length == 24) {
-      processFilesToPost(typedCaptcha);
+      thread.processFilesToPost(typedCaptcha);
     } else {
       var parsedCookies = api.getCookies();
 
@@ -529,15 +554,15 @@ function processReplyRequest() {
         captchaId : parsedCookies.captchaid,
         answer : typedCaptcha
       }, function solvedCaptcha(status, data) {
-        processFilesToPost(parsedCookies.captchaid);
+        thread.processFilesToPost(parsedCookies.captchaid);
       });
     }
 
   }
 
-}
+};
 
-function postReply() {
+thread.postReply = function() {
 
   api.localRequest('/blockBypass.js?json=1',
       function checked(error, response) {
@@ -556,18 +581,18 @@ function postReply() {
             && (data.mode == 2 || (data.mode == 1 && alwaysUseBypass))) {
 
           postCommon.displayBlockBypassPrompt(function() {
-            processReplyRequest();
+            thread.processReplyRequest();
           });
 
         } else {
-          processReplyRequest();
+          thread.processReplyRequest();
         }
 
       });
 
-}
+};
 
-function startTimer(time) {
+thread.startTimer = function(time) {
 
   if (time > 600) {
     time = 600;
@@ -586,14 +611,14 @@ function startTimer(time) {
 
     if (!thread.currentRefresh) {
       clearInterval(thread.refreshTimer);
-      refreshPosts();
+      thread.refreshPosts();
       thread.refreshLabel.innerHTML = '';
     } else {
       thread.refreshLabel.innerHTML = thread.currentRefresh;
     }
 
   }, 1000);
-}
+};
 
 thread.changeRefresh = function() {
 
@@ -603,7 +628,7 @@ thread.changeRefresh = function() {
     thread.refreshLabel.innerHTML = '';
     clearInterval(thread.refreshTimer);
   } else {
-    startTimer(5);
+    thread.startTimer(5);
   }
 
 };

@@ -156,7 +156,7 @@ tooltips.processQuote = function(quote, backLink) {
     var matches = quote.href.match(/\#(\d+)/);
 
     quote.onclick = function() {
-      markPost(matches[1]);
+      thread.markPost(matches[1]);
     };
   }
 

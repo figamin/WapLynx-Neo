@@ -6,9 +6,8 @@ globalSettings.init = function() {
     return;
   }
 
-  document.getElementById('saveJSButton').style.display = 'inline';
-
-  document.getElementById('saveFormButton').style.display = 'none';
+  api.convertButton('saveFormButton', globalSettings.save,
+      'globalSettingsField');
 
   globalSettings.siteSettingsRelation = {
 
@@ -429,13 +428,10 @@ globalSettings.save = function() {
 
   }
 
-  api.apiRequest('saveGlobalSettings', parameters, function requestComplete(status,
-      data) {
+  api.apiRequest('saveGlobalSettings', parameters, function requestComplete(
+      status, data) {
 
     if (status === 'ok') {
-
-      alert('Settings saved.');
-
       location.reload(true);
     } else {
       alert(status + ': ' + JSON.stringify(data));

@@ -37,22 +37,10 @@ posting.init = function() {
     '&gt;' : '>'
   };
 
-  if (document.getElementById('deleteJsButton')) {
-    document.getElementById('deleteJsButton').style.display = 'inline';
-    document.getElementById('reportJsButton').style.display = 'inline';
-    document.getElementById('reportFormButton').style.display = 'none';
-    document.getElementById('deleteFormButton').style.display = 'none';
+  if (document.getElementById('deleteFormButton')) {
 
-    if (document.getElementById('divMod')) {
-
-      document.getElementById('banJsButton').style.display = 'inline';
-      document.getElementById('spoilJsButton').style.display = 'inline';
-      document.getElementById('ipDeletionJsButton').style.display = 'inline';
-
-      document.getElementById('inputIpDelete').style.display = 'none';
-      document.getElementById('inputBan').style.display = 'none';
-      document.getElementById('inputSpoil').style.display = 'none';
-    }
+    api.convertButton('reportFormButton', posting.reportPosts, 'reportField');
+    api.convertButton('deleteFormButton', posting.deletePosts, 'deletionField');
 
   }
 
@@ -140,6 +128,7 @@ posting.spoilFiles = function() {
 };
 
 posting.getSelectedContent = function() {
+
   var selectedContent = [];
 
   var checkBoxes = document.getElementsByClassName('deletionCheckBox');
@@ -228,37 +217,10 @@ posting.deletePosts = function() {
           + ' posts were successfully deleted.');
 
       if (!api.isBoard && !data.removedThreads && data.removedPosts) {
-        refreshPosts(true, true);
+        thread.refreshPosts(true, true);
       } else if (data.removedThreads || data.removedPosts) {
         window.location.pathname = '/' + toDelete[0].board + '/';
       }
-
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
-
-};
-
-posting.deleteFromIpOnBoard = function() {
-
-  var selected = posting.getSelectedContent();
-
-  var redirect = '/' + selected[0].board + '/';
-
-  var confirmationBox = document
-      .getElementById('ipDeletionConfirmationCheckbox');
-
-  api.apiRequest('deleteFromIpOnBoard', {
-    postings : selected,
-    confirmation : confirmationBox.checked
-  }, function requestComplete(status, data) {
-
-    if (status === 'ok') {
-
-      alert('Content deleted');
-
-      window.location.pathname = redirect;
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
@@ -421,7 +383,7 @@ posting.setPostHideableElements = function(postCell, post, noExtras) {
     labelId.innerHTML = post.id;
 
     if (!noExtras) {
-      processIdLabel(labelId);
+      thread.processIdLabel(labelId);
     }
 
   } else {
@@ -610,7 +572,9 @@ posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
   hiding.setHideMenu(checkbox);
   postingMenu.setExtraMenu(checkbox)
 
-  processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
+  if (!api.isBoard) {
+    thread.processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
+  }
 
 };
 

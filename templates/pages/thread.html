@@ -118,6 +118,7 @@
                 <td><input
                     type="text"
                     id="fieldName"
+                    class="postingInput"
                     name="name"></td>
               </tr>
 
@@ -125,6 +126,7 @@
                 <th>Subject</th>
                 <td><input
                     type="text"
+                    class="postingInput"
                     id="fieldSubject"
                     name="subject"></td>
               </tr>
@@ -213,6 +215,7 @@
                     <input
                       name="captcha"
                       type="text"
+                      class="postingInput"
                       class="captchaField"
                       id="fieldCaptcha"
                       placeholder="answer">
@@ -238,6 +241,7 @@
                 <td><input
                     type="text"
                     id="fieldEmail"
+                    class="postingInput"
                     name="email"></td>
               </tr>
 
@@ -246,6 +250,7 @@
                 <td><input
                     id="fieldPostingPassword"
                     name="password"
+                    class="postingInput"
                     type="password">
                   <p class="small">(used to delete files and postings)</p></td>
               </tr>
@@ -262,7 +267,7 @@
                 <th>No location</th>
                 <td><input
                     type="checkbox"
-                    class="postingCheckbox"
+                    class="postingCheckbox postingInput"
                     id="checkboxNoFlag"
                     name="noFlag"> <label for="checkboxNoFlag"></label></td>
               </tr>
@@ -273,7 +278,7 @@
                 <th>Bypass check</th>
                 <td><input
                     type="checkbox"
-                    class="postingCheckbox"
+                    class="postingCheckbox postingInput"
                     id="alwaysUseBypassCheckBox"> <label
                     for="alwaysUseBypassCheckBox"></label></td>
               </tr>
@@ -284,12 +289,6 @@
           <button
             type="submit"
             id="formButton">Reply</button>
-
-          <button
-            type="button"
-            onClick="postReply()"
-            id="jsButton"
-            class="hidden">Reply</button>
 
         </form>
 
@@ -310,12 +309,14 @@
           <label>
             <input
               name="lock"
+              class="threadSettingsField"
               id="checkboxLock"
               type="checkbox">
             Lock
           </label>
           <label>
             <input
+              class="threadSettingsField"
               name="pin"
               id="checkboxPin"
               type="checkbox">
@@ -324,6 +325,7 @@
           <label>
             <input
               type="checkbox"
+              class="threadSettingsField"
               name="cyclic"
               id="checkboxCyclic">
             Cyclic
@@ -337,17 +339,10 @@
             type="hidden"
             name="threadId"
             id="controlThreadIdentifier">
-          <input
+          <button
             type="submit"
-            id="settingsFormButon"
-            value="Save">
+            id="settingsFormButon">Save</button>
 
-          <input
-            type="button"
-            id="settingsJsButon"
-            onClick="saveThreadSettings()"
-            class="hidden"
-            value="Save">
         </fieldset>
       </form>
 
@@ -379,20 +374,15 @@
             Destination board:
             <input
               type="text"
+              class="transferField"
               id="fieldDestinationBoard"
               name="boardUriDestination">
           </label>
-          <input
-            type="submit"
-            id="transferFormButton"
-            value="Transfer thread">
 
-          <input
-            type="button"
-            class="hidden"
-            onclick="transfer()"
-            id="transferJsButton"
-            value="Transfer thread">
+          <button
+            type="submit"
+            id="transferFormButton">Transfer thread</button>
+
         </fieldset>
       </form>
 
@@ -413,6 +403,7 @@
             Non-hashed ip:
             <input
               type="text"
+              class="ipDeletionField"
               name="ip"
               id="ipField">
           </label>
@@ -421,20 +412,14 @@
             from all boards)
             <input
               type="text"
+              class="ipDeletionField"
               name="boards"
               id="fieldBoards">
           </label>
-          <input
-            type="button"
-            value="Delete"
-            onclick="thread.deleteFromIp()"
-            id="deleteFromIpJsButton"
-            class="hidden">
 
-          <input
-            value="Delete"
+          <button
             type="submit"
-            id="deleteFromIpFormButton">
+            id="deleteFromIpFormButton">Delete from IP</button>
         </fieldset>
       </form>
 
@@ -461,7 +446,7 @@
           <input
             type="button"
             id="refreshButton"
-            onclick="refreshPosts(true)"
+            onclick="thread.refreshPosts(true)"
             value="Refresh">
 
           <label>
@@ -490,12 +475,14 @@
             <label>
               Password
               <input
+                class="deletionField"
                 type="text"
                 id="deletionFieldPassword"
                 name="password">
             </label>
             <label>
               <input
+                class="deletionField"
                 type="checkbox"
                 id="checkboxOnlyFiles"
                 name="deleteUploads">
@@ -503,23 +490,17 @@
             </label>
             <label>
               <input
+                class="deletionField"
                 type="checkbox"
                 id="checkboxMediaDeletion"
                 name="deleteMedia">
               Delete media (Removes the saved files from the server)
             </label>
-            <input
+            <button
               type="submit"
               id="deleteFormButton"
-              value="Delete"
-              name="action">
-
-            <input
-              type="button"
-              class="hidden"
-              id="deleteJsButton"
-              onClick="posting.deletePosts()"
-              value="Delete">
+              value="delete"
+              name="action">Delete</button>
           </div>
         </fieldset>
 
@@ -570,18 +551,11 @@
 
             <br>
 
-            <input
+            <button
               type="submit"
               id="reportFormButton"
-              value="Report"
-              name="action">
-
-            <input
-              type="button"
-              class="hidden"
-              id="reportJsButton"
-              onClick="posting.reportPosts()"
-              value="Report">
+              value="report"
+              name="action">Report</button>
 
             <div id="divMod">
               <hr>
@@ -589,15 +563,18 @@
               <label>
                 Ban duration (Defaults to 5 years):
                 <input
+                  class="banField"
                   type="text"
                   id="fieldDuration"
                   name="duration">
                 <a href="/.static/moderation.html#banSection">Duration
                   format</a>
               </label>
+
               <label>
                 Ban Message
                 <input
+                  class="banField"
                   type="text"
                   id="fieldbanMessage"
                   name="banMessage">
@@ -617,6 +594,7 @@
               <label>
                 <input
                   type="checkbox"
+                  class="ipDeletionField"
                   name="confirmation"
                   id="ipDeletionConfirmationCheckbox"
                   value="true">
@@ -629,39 +607,17 @@
                 value="ip-deletion"
                 name="action">Delete by ip on this board</button>
 
-              <input
-                type="button"
-                class="hidden"
-                id="ipDeletionJsButton"
-                onClick="posting.deleteFromIpOnBoard()"
-                value="Delete by ip on this board">
-
-
-              <input
+              <button
                 type="submit"
                 id="inputBan"
-                value="Ban"
-                name="action">
-
-              <input
-                type="button"
-                class="hidden"
-                id="banJsButton"
-                onClick="thread.banPosts()"
-                value="Ban">
+                value="ban"
+                name="action">Ban</button>
 
               <button
                 type="submit"
                 id="inputSpoil"
                 value="spoil"
                 name="action">Spoil Files</button>
-
-              <input
-                type="button"
-                class="hidden"
-                id="spoilJsButton"
-                onClick="posting.spoilFiles()"
-                value="Spoil files">
 
             </div>
 
@@ -682,12 +638,12 @@
 <script src="/.static/js/settings.js"></script>
 <script src="/.static/js/api.js"></script>
 <script src="/.static/js/crypt.js"></script>
-<script src="/.static/js/thread.js"></script>
 <script src="/.static/js/postCommon.js"></script>
 <script src="/.static/js/captchaModal.js"></script>
 <script src="/.static/js/thumbs.js"></script>
 <script src="/.static/js/tooltips.js"></script>
 <script src="/.static/js/posting.js"></script>
+<script src="/.static/js/thread.js"></script>
 <script src="/.static/js/captchaUtils.js"></script>
 <script src="/.static/js/draggable.js"></script>
 <script src="/.static/js/qr.js"></script>

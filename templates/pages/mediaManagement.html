@@ -37,7 +37,6 @@
         <label>
           <input
             type="checkbox"
-            value="1"
             id="orphanedCheckbox"
             name="orphaned">
           Show only orphaned files
@@ -50,16 +49,9 @@
         action="/deleteMedia.js"
         method="POST"
         enctype="multipart/form-data">
-        <input
-          value="Delete selected media"
+        <button
           type="submit"
-          id="deleteFormButton">
-        <input
-          value="Delete selected media"
-          type="button"
-          id="deleteJsButton"
-          onclick="mediaManagement.deleteMedia()"
-          class="hidden">
+          id="deleteFormButton">Delete selected media</button>
 
         <div id="filesDiv"></div>
       </form>

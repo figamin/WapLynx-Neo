@@ -156,7 +156,7 @@ postingMenu.deleteSinglePost = function(boardUri, thread, post, fromIp,
             if (status === 'ok') {
 
               if (!fromIp && !api.isBoard && data.removedPosts) {
-                refreshPosts(true, true);
+                thread.refreshPosts(true, true);
               } else if (fromIp || data.removedThreads || data.removedPosts) {
 
                 if (api.isBoard) {
