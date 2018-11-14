@@ -15,7 +15,7 @@ bans.processBanCell = function(cell) {
   var liftButton = cell.getElementsByClassName('liftFormButton')[0];
 
   api.convertButton(liftButton, function() {
-    bans.liftBan(cell.getElementsByClassName('liftIdentifier')[0].value);
+    bans.liftBan(cell);
   });
 
   if (cell.getElementsByClassName('denyForm')[0]) {
@@ -23,22 +23,26 @@ bans.processBanCell = function(cell) {
     var denyButton = cell.getElementsByClassName('denyFormButton')[0];
 
     api.convertButton(denyButton, function() {
-      bans.denyAppeal(cell.getElementsByClassName('denyIdentifier')[0].value);
+      bans.denyAppeal(cell);
     });
 
   }
 
 };
 
-bans.denyAppeal = function(ban) {
+bans.denyAppeal = function(cell) {
 
   api.apiRequest('denyAppeal', {
-    banId : ban
+    banId : cell.getElementsByClassName('denyIdentifier')[0].value
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
 
-      location.reload(true);
+      if (api.management) {
+        cell.remove();
+      } else {
+        cell.getElementsByClassName('denyFormButton')[0].remove();
+      }
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
@@ -47,16 +51,14 @@ bans.denyAppeal = function(ban) {
 
 };
 
-bans.liftBan = function(ban) {
+bans.liftBan = function(cell) {
 
   api.apiRequest('liftBan', {
-    banId : ban
+    banId : cell.getElementsByClassName('liftIdentifier')[0].value
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
-      location.reload(true);
-
+      cell.remove();
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

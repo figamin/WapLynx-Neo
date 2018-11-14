@@ -1,9 +1,7 @@
 var bypass = {};
 
 bypass.init = function() {
-
   api.convertButton('bypassFormButton', bypass.blockBypass, 'bypassField');
-
 };
 
 bypass.blockBypass = function() {
@@ -27,7 +25,14 @@ bypass.blockBypass = function() {
       document.cookie = 'bypass=' + data.id + '; path=/; expires='
           + new Date(data.expiration).toUTCString();
 
-      location.reload(true);
+      var paragraph = document.getElementsByTagName('p')[0];
+
+      var span = document.createElement('span');
+      span.innerHTML = 'You have a valid block bypass.';
+      span.id = 'indicatorValidBypass';
+      paragraph.appendChild(span);
+
+      document.getElementById('fieldCaptcha').value = '';
 
     } else {
       alert(status + ': ' + JSON.stringify(data));

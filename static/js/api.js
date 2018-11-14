@@ -1,5 +1,10 @@
 var api = {};
 
+api.htmlReplaceTable = {
+  '<' : '&lt;',
+  '>' : '&gt;'
+};
+
 api.addEnterEvent = function(element, onclick) {
 
   element.addEventListener('keydown', function(event) {

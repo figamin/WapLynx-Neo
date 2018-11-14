@@ -2,11 +2,6 @@ var sideCatalog = {};
 
 sideCatalog.init = function() {
 
-  sideCatalog.htmlReplaceTable = {
-    '<' : '&lt;',
-    '>' : '&gt;'
-  };
-
   sideCatalog.sideCatalogBody = document.getElementById('sideCatalogBody');
 
   sideCatalog.sideCatalogDiv = document.getElementById('sideCatalogDiv');
@@ -89,257 +84,255 @@ sideCatalog.loadThread = function(cell, threadData) {
 
   sideCatalog.loadingThread = true;
 
-  api.localRequest(
+  api.localRequest(document.getElementById('divMod') ? '/mod.js?boardUri='
+      + api.boardUri + '&threadId=' + threadData.threadId + '&json=1' : '/'
+      + api.boardUri + '/res/' + threadData.threadId + '.json', function(error,
+      data) {
+
+    sideCatalog.loadingThread = false;
+
+    if (thread.autoRefresh) {
+      thread.currentRefresh = 5;
+    }
+
+    if (!error) {
+      sideCatalog.transitionThread(cell, threadData, data);
+    }
+
+  });
+
+};
+
+sideCatalog.transitionThread = function(cell, threadData, data) {
+
+  if (sideCatalog.selectedThreadCell) {
+    sideCatalog.selectedThreadCell.className = 'sideCatalogCell';
+  }
+
+  sideCatalog.selectedThreadCell = cell;
+
+  sideCatalog.selectedThreadCell.className = 'sideCatalogMarkedCell';
+
+  tooltips.knownPosts = {};
+  window.history.pushState('', '',
       document.getElementById('divMod') ? '/mod.js?boardUri=' + api.boardUri
-          + '&threadId=' + threadData.threadId + '&json=1' : '/' + api.boardUri
-          + '/res/' + threadData.threadId + '.json',
-      function(error, data) {
+          + '&threadId=' + threadData.threadId : '/' + api.boardUri + '/res/'
+          + threadData.threadId + '.html');
 
-        sideCatalog.loadingThread = false;
+  document.getElementById('threadIdentifier').value = threadData.threadId;
 
-        if (thread.autoRefresh) {
-          thread.currentRefresh = 5;
-        }
+  if (document.getElementById('divMod')) {
+    document.getElementById('controlThreadIdentifier').value = threadData.threadId;
+    document.getElementById('transferThreadIdentifier').value = threadData.threadId;
 
-        if (error) {
-          return;
-        }
+    document.getElementById('checkboxLock').checked = threadData.locked;
+    document.getElementById('checkboxPin').checked = threadData.pinned;
+    document.getElementById('checkboxCyclic').checked = threadData.cyclic;
 
-        if (sideCatalog.selectedThreadCell) {
-          sideCatalog.selectedThreadCell.className = 'sideCatalogCell';
-        }
+  }
 
-        sideCatalog.selectedThreadCell = cell;
+  document.title = '/' + api.boardUri + '/ - '
+      + (threadData.subject || threadData.message);
 
-        sideCatalog.selectedThreadCell.className = 'sideCatalogMarkedCell';
+  var opCell = document.getElementsByClassName('opCell')[0];
 
-        tooltips.knownPosts = {};
-        window.history.pushState('', '',
-            document.getElementById('divMod') ? '/mod.js?boardUri='
-                + api.boardUri + '&threadId=' + threadData.threadId : '/'
-                + api.boardUri + '/res/' + threadData.threadId + '.html');
+  opCell.scrollIntoView();
 
-        document.getElementById('threadIdentifier').value = threadData.threadId;
+  document.getElementsByClassName('divPosts')[0].innerHTML = '';
 
-        if (document.getElementById('divMod')) {
-          document.getElementById('controlThreadIdentifier').value = threadData.threadId;
-          document.getElementById('transferThreadIdentifier').value = threadData.threadId;
+  data = JSON.parse(data);
 
-          document.getElementById('checkboxLock').checked = threadData.locked;
-          document.getElementById('checkboxPin').checked = threadData.pinned;
-          document.getElementById('checkboxCyclic').checked = threadData.cyclic;
+  opCell.id = threadData.threadId;
+  opCell.className = 'opCell';
+  if (data.files && data.files.length > 1) {
+    opCell.className += ' multipleUploads';
+  }
 
-        }
+  if (!opCell.getElementsByClassName('labelSubject').length) {
 
-        document.title = '/' + api.boardUri + '/ - '
-            + (threadData.subject || threadData.message);
+    var newSubjectLabel = document.createElement('span');
+    newSubjectLabel.className = 'labelSubject';
 
-        var opCell = document.getElementsByClassName('opCell')[0];
+    var watchButton = document.getElementsByClassName('watchButton')[0];
+    watchButton.parentNode.insertBefore(newSubjectLabel,
+        watchButton.nextSibling);
+    watchButton.parentNode.insertBefore(document.createTextNode(' '),
+        watchButton.nextSibling);
 
-        opCell.scrollIntoView();
+  }
 
-        document.getElementsByClassName('divPosts')[0].innerHTML = '';
+  var divMessage = document.getElementsByClassName('divMessage')[0];
 
-        data = JSON.parse(data);
+  if (!opCell.getElementsByClassName('labelLastEdit').length) {
 
-        opCell.id = threadData.threadId;
-        opCell.className = 'opCell';
-        if (data.files && data.files.length > 1) {
-          opCell.className += ' multipleUploads';
-        }
+    var newBanMessageLabel = document.createElement('div');
+    newBanMessageLabel.className = 'labelLastEdit';
 
-        if (!opCell.getElementsByClassName('labelSubject').length) {
+    divMessage.parentNode.insertBefore(newBanMessageLabel,
+        divMessage.nextSibling);
 
-          var newSubjectLabel = document.createElement('span');
-          newSubjectLabel.className = 'labelSubject';
+  }
 
-          var watchButton = document.getElementsByClassName('watchButton')[0];
-          watchButton.parentNode.insertBefore(newSubjectLabel,
-              watchButton.nextSibling);
-          watchButton.parentNode.insertBefore(document.createTextNode(' '),
-              watchButton.nextSibling);
+  if (!opCell.getElementsByClassName('panelIp').length) {
 
-        }
+    var emptyPanel = document.getElementsByClassName('opHead')[0].nextSibling.nextSibling;
 
-        var divMessage = document.getElementsByClassName('divMessage')[0];
+    var newIpPanel = document.createElement('span');
+    newIpPanel.className = 'panelIp';
 
-        if (!opCell.getElementsByClassName('labelLastEdit').length) {
+    var rangePanel = document.createElement('span');
+    rangePanel.className = 'panelRange';
+    rangePanel.innerHTML = 'Broad range(1/2 octets): '
 
-          var newBanMessageLabel = document.createElement('div');
-          newBanMessageLabel.className = 'labelLastEdit';
+    var broadRangeLabel = document.createElement('span');
+    broadRangeLabel.className = 'labelBroadRange';
 
-          divMessage.parentNode.insertBefore(newBanMessageLabel,
-              divMessage.nextSibling);
+    rangePanel.appendChild(broadRangeLabel);
 
-        }
+    rangePanel.appendChild(document.createElement('br'));
 
-        if (!opCell.getElementsByClassName('panelIp').length) {
+    rangePanel
+        .appendChild(document.createTextNode('Narrow range(3/4 octets):'));
 
-          var emptyPanel = document.getElementsByClassName('opHead')[0].nextSibling.nextSibling;
+    var narrowRangeLabel = document.createElement('span');
+    narrowRangeLabel.className = 'labelNarrowRange';
 
-          var newIpPanel = document.createElement('span');
-          newIpPanel.className = 'panelIp';
+    rangePanel.appendChild(narrowRangeLabel);
 
-          var rangePanel = document.createElement('span');
-          rangePanel.className = 'panelRange';
-          rangePanel.innerHTML = 'Broad range(1/2 octets): '
+    rangePanel.appendChild(document.createElement('br'));
 
-          var broadRangeLabel = document.createElement('span');
-          broadRangeLabel.className = 'labelBroadRange';
+    newIpPanel.appendChild(rangePanel);
 
-          rangePanel.appendChild(broadRangeLabel);
+    newIpPanel.appendChild(document.createTextNode('Ip:'));
 
-          rangePanel.appendChild(document.createElement('br'));
+    var newIpLabel = document.createElement('span');
+    newIpLabel.className = 'labelIp';
+    newIpPanel.appendChild(newIpLabel);
 
-          rangePanel.appendChild(document
-              .createTextNode('Narrow range(3/4 octets):'));
+    emptyPanel.appendChild(newIpPanel);
 
-          var narrowRangeLabel = document.createElement('span');
-          narrowRangeLabel.className = 'labelNarrowRange';
+  }
 
-          rangePanel.appendChild(narrowRangeLabel);
+  if (!opCell.getElementsByClassName('imgFlag').length) {
 
-          rangePanel.appendChild(document.createElement('br'));
+    var newFlagImage = document.createElement('img');
+    newFlagImage.className = 'imgFlag';
 
-          newIpPanel.appendChild(rangePanel);
+    var linkName = document.getElementsByClassName('linkName')[0];
+    linkName.parentNode.insertBefore(newFlagImage, linkName.nextSibling);
+    linkName.parentNode.insertBefore(document.createTextNode(' '),
+        linkName.nextSibling);
 
-          newIpPanel.appendChild(document.createTextNode('Ip:'));
+  }
 
-          var newIpLabel = document.createElement('span');
-          newIpLabel.className = 'labelIp';
-          newIpPanel.appendChild(newIpLabel);
+  if (!opCell.getElementsByClassName('labelRole').length) {
 
-          emptyPanel.appendChild(newIpPanel);
+    var newLabelRole = document.createElement('span');
+    newLabelRole.className = 'labelRole';
 
-        }
+    var flagImage = document.getElementsByClassName('imgFlag')[0];
+    flagImage.parentNode.insertBefore(newLabelRole, flagImage.nextSibling);
+    flagImage.parentNode.insertBefore(document.createTextNode(' '),
+        flagImage.nextSibling);
 
-        if (!opCell.getElementsByClassName('imgFlag').length) {
+  }
 
-          var newFlagImage = document.createElement('img');
-          newFlagImage.className = 'imgFlag';
+  if (!opCell.getElementsByClassName('divBanMessage').length) {
 
-          var linkName = document.getElementsByClassName('linkName')[0];
-          linkName.parentNode.insertBefore(newFlagImage, linkName.nextSibling);
-          linkName.parentNode.insertBefore(document.createTextNode(' '),
-              linkName.nextSibling);
+    var newBanMessageLabel = document.createElement('div');
+    newBanMessageLabel.className = 'divBanMessage';
 
-        }
+    divMessage.parentNode.insertBefore(newBanMessageLabel,
+        divMessage.nextSibling);
 
-        if (!opCell.getElementsByClassName('labelRole').length) {
+  }
 
-          var newLabelRole = document.createElement('span');
-          newLabelRole.className = 'labelRole';
+  if (!opCell.getElementsByClassName('spanId').length) {
 
-          var flagImage = document.getElementsByClassName('imgFlag')[0];
-          flagImage.parentNode
-              .insertBefore(newLabelRole, flagImage.nextSibling);
-          flagImage.parentNode.insertBefore(document.createTextNode(' '),
-              flagImage.nextSibling);
+    var newSpanId = document.createElement('span');
+    newSpanId.className = 'spanId';
 
-        }
+    newSpanId.innerHTML = 'Id:';
 
-        if (!opCell.getElementsByClassName('divBanMessage').length) {
+    var newLabelId = document.createElement('span');
+    newLabelId.className = 'labelId';
+    newSpanId.appendChild(newLabelId);
 
-          var newBanMessageLabel = document.createElement('div');
-          newBanMessageLabel.className = 'divBanMessage';
+    var labelCreated = document.getElementsByClassName('labelCreated')[0];
+    labelCreated.parentNode.insertBefore(newSpanId, labelCreated.nextSibling);
+    labelCreated.parentNode.insertBefore(document.createTextNode(' '),
+        labelCreated.nextSibling);
 
-          divMessage.parentNode.insertBefore(newBanMessageLabel,
-              divMessage.nextSibling);
+  }
 
-        }
+  if (!opCell.getElementsByClassName('opUploadPanel').length) {
 
-        if (!opCell.getElementsByClassName('spanId').length) {
+    var newOpUploadPanel = document.createElement('div');
+    newOpUploadPanel.className = 'panelUploads opUploadPanel';
 
-          var newSpanId = document.createElement('span');
-          newSpanId.className = 'spanId';
+    var innerOP = opCell.getElementsByClassName('innerOP')[0];
+    innerOP.insertBefore(newOpUploadPanel, innerOP.children[0]);
 
-          newSpanId.innerHTML = 'Id:';
+  }
 
-          var newLabelId = document.createElement('span');
-          newLabelId.className = 'labelId';
-          newSpanId.appendChild(newLabelId);
+  document.getElementsByClassName('opUploadPanel')[0].innerHTML = '';
 
-          var labelCreated = document.getElementsByClassName('labelCreated')[0];
-          labelCreated.parentNode.insertBefore(newSpanId,
-              labelCreated.nextSibling);
-          labelCreated.parentNode.insertBefore(document.createTextNode(' '),
-              labelCreated.nextSibling);
+  document.getElementsByClassName('opHead')[0]
+      .getElementsByClassName('deletionCheckBox')[0].value = api.boardUri + '-'
+      + threadData.threadId;
 
-        }
+  sideCatalog.removeAllFromClass('extraMenuButton');
+  sideCatalog.removeAllFromClass('hideMenu');
+  sideCatalog.removeAllFromClass('quoteTooltip');
+  sideCatalog.removeAllFromClass('extraMenu');
+  sideCatalog.removeAllFromClass('hideButton');
+  sideCatalog.removeAllFromClass('watchButton');
+  sideCatalog.removeAllFromClass('relativeTime');
+  sideCatalog.removeAllFromClass('unhideButton');
 
-        if (!opCell.getElementsByClassName('opUploadPanel').length) {
+  sideCatalog.removeIndicator('lockIndicator');
+  sideCatalog.removeIndicator('pinIndicator');
+  sideCatalog.removeIndicator('cyclicIndicator');
 
-          var newOpUploadPanel = document.createElement('div');
-          newOpUploadPanel.className = 'panelUploads opUploadPanel';
+  sideCatalog.addIndicator('cyclicIndicator', 'Cyclical Thread');
+  sideCatalog.addIndicator('pinIndicator', 'Sticky');
+  sideCatalog.addIndicator('lockIndicator', 'Locked');
 
-          var innerOP = opCell.getElementsByClassName('innerOP')[0];
+  if (!threadData.locked) {
+    sideCatalog.removeIndicator('lockIndicator');
+  }
 
-          innerOP.insertBefore(newOpUploadPanel, innerOP.children[0]);
+  if (!threadData.pinned) {
+    sideCatalog.removeIndicator('pinIndicator');
+  }
 
-        }
+  if (!threadData.cyclic) {
+    sideCatalog.removeIndicator('cyclicIndicator');
+  }
 
-        document.getElementsByClassName('opUploadPanel')[0].innerHTML = '';
+  document.getElementsByClassName('panelBacklinks')[0].innerHTML = '';
 
-        document.getElementsByClassName('opHead')[0]
-            .getElementsByClassName('deletionCheckBox')[0].value = api.boardUri
-            + '-' + threadData.threadId;
+  thread.fullRefresh = true;
 
-        innerOP.parentNode.style.display = 'block';
+  thread.initThread();
 
-        sideCatalog.removeAllFromClass('extraMenuButton');
-        sideCatalog.removeAllFromClass('hideMenu');
-        sideCatalog.removeAllFromClass('quoteTooltip');
-        sideCatalog.removeAllFromClass('extraMenu');
-        sideCatalog.removeAllFromClass('hideButton');
-        sideCatalog.removeAllFromClass('watchButton');
-        sideCatalog.removeAllFromClass('relativeTime');
-        sideCatalog.removeAllFromClass('unhideButton');
+  gallery.galleryFiles = [];
+  gallery.currentIndex = 0;
 
-        sideCatalog.removeIndicator('lockIndicator');
-        sideCatalog.removeIndicator('pinIndicator');
-        sideCatalog.removeIndicator('cyclicIndicator');
+  posting.setPostInnerElements(api.boardUri, api.threadId, data, opCell);
 
-        sideCatalog.addIndicator('cyclicIndicator', 'Cyclical Thread');
-        sideCatalog.addIndicator('pinIndicator', 'Sticky');
-        sideCatalog.addIndicator('lockIndicator', 'Locked');
+  watcher.processOP(document.getElementsByClassName('innerOP')[0]);
 
-        if (!threadData.locked) {
-          sideCatalog.removeIndicator('lockIndicator');
-        }
+  if (data.posts && data.posts.length) {
 
-        if (!threadData.pinned) {
-          sideCatalog.removeIndicator('pinIndicator');
-        }
+    thread.lastReplyId = data.posts[data.posts.length - 1].postId;
 
-        if (!threadData.cyclic) {
-          sideCatalog.removeIndicator('cyclicIndicator');
-        }
+    for (var i = 0; i < data.posts.length; i++) {
+      thread.divPosts.appendChild(posting.addPost(data.posts[i], api.boardUri,
+          api.threadId));
+    }
 
-        document.getElementsByClassName('panelBacklinks')[0].innerHTML = '';
-
-        thread.fullRefresh = true;
-
-        thread.initThread();
-
-        gallery.galleryFiles = [];
-        gallery.currentIndex = 0;
-
-        posting.setPostInnerElements(api.boardUri, api.threadId, data, opCell);
-
-        watcher.processOP(document.getElementsByClassName('innerOP')[0]);
-
-        if (data.posts && data.posts.length) {
-
-          thread.lastReplyId = data.posts[data.posts.length - 1].postId;
-
-          for (var i = 0; i < data.posts.length; i++) {
-            thread.divPosts.appendChild(posting.addPost(data.posts[i],
-                api.boardUri, api.threadId));
-          }
-
-        }
-
-      });
+  }
 
 };
 
@@ -386,7 +379,7 @@ sideCatalog.addSideCatalogThread = function(thread) {
 
   upperText.innerHTML = (thread.subject || (thread.message.replace(/[<>]/g,
       function(match) {
-        return sideCatalog.htmlReplaceTable[match];
+        return api.htmlReplaceTable[match];
       }).substring(0, 128) || thread.threadId));
 
   lowerText.innerHTML = 'R: ' + (thread.postCount || 0) + ' / F: '

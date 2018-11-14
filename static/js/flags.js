@@ -9,6 +9,8 @@ flags.init = function() {
 
   api.convertButton('addFormButton', flags.uploadFlags);
 
+  flags.flagsDiv = document.getElementById('flagsDiv');
+
   var flagCells = document.getElementsByClassName('flagCell');
 
   for (var i = 0; i < flagCells.length; i++) {
@@ -126,21 +128,19 @@ flags.processFlagCell = function(cell) {
   var button = cell.getElementsByClassName('deleteFormButton')[0];
 
   api.convertButton(button, function() {
-    flags.removeFlag(cell.getElementsByClassName('idIdentifier')[0].value);
+    flags.removeFlag(cell);
   });
 
 };
 
-flags.removeFlag = function(flagId) {
+flags.removeFlag = function(cell) {
 
   api.apiRequest('deleteFlag', {
-    flagId : flagId,
+    flagId : cell.getElementsByClassName('idIdentifier')[0].value,
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
-      location.reload(true);
-
+      cell.remove();
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
@@ -148,10 +148,76 @@ flags.removeFlag = function(flagId) {
 
 };
 
+flags.showNewFlag = function(typedName) {
+
+  typedName = typedName.replace(/[<>]/g, function(match) {
+    return api.htmlReplaceTable[match];
+  });
+
+  api.localRequest('/flags.js?json=1&boardUri=' + api.boardUri,
+      function gotData(error, data) {
+
+        if (error) {
+          alert(error);
+          return;
+        }
+
+        data = JSON.parse(data);
+
+        for (var i = 0; i < data.length; i++) {
+
+          var flag = data[i];
+
+          if (flag.name === typedName) {
+            data = flag;
+            break;
+          }
+
+        }
+
+        var form = document.createElement('form');
+        form.method = 'post';
+        form.enctype = 'multipart/form-data';
+        form.action = '/deleteFlag.js';
+        form.className = 'flagCell';
+
+        var flagName = document.createElement('div');
+        flagName.innerHTML = data.name;
+        flagName.className = 'nameLabel';
+        form.appendChild(flagName);
+
+        var flagImage = document.createElement('img');
+        flagImage.className = 'flagImg';
+        flagImage.src = '/' + api.boardUri + '/flags/' + data._id;
+        form.appendChild(flagImage);
+
+        form.appendChild(document.createElement('br'));
+
+        var flagIdentifier = document.createElement('input');
+        flagIdentifier.className = 'idIdentifier';
+        flagIdentifier.value = data._id;
+        flagIdentifier.type = 'hidden';
+        form.appendChild(flagIdentifier);
+
+        var deleteButton = document.createElement('button');
+        deleteButton.type = 'submit';
+        deleteButton.className = 'deleteFormButton';
+        deleteButton.innerHTML = 'Delete';
+        form.appendChild(deleteButton);
+
+        form.appendChild(document.createElement('hr'));
+
+        flags.flagsDiv.appendChild(form);
+
+        flags.processFlagCell(form);
+
+      });
+
+};
+
 flags.uploadFlags = function() {
 
   if (!flags.selectedFiles.length) {
-    location.reload(true);
     return;
   }
 
@@ -185,6 +251,9 @@ flags.uploadFlags = function() {
       if (status === 'ok') {
 
         document.getElementsByClassName('removeButton')[0].onclick();
+
+        flags.showNewFlag(typedName);
+        // TODO refactor on 2.2 when this data is returned
 
         flags.uploadFlags();
 

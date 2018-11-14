@@ -73,8 +73,6 @@ postingMenu.showReport = function(board, thread, post, global) {
   var reasonField = document.createElement('input');
   reasonField.type = 'text';
 
-  captchaModal.addModalRow('Reason', reasonField);
-
   var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
   okButton.onclick = function() {
@@ -110,6 +108,8 @@ postingMenu.showReport = function(board, thread, post, global) {
     });
 
   };
+
+  captchaModal.addModalRow('Reason', reasonField, okButton.onclick);
 
 };
 
@@ -186,18 +186,14 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
 
   var reasonField = document.createElement('input');
   reasonField.type = 'text';
-  captchaModal.addModalRow('Reason', reasonField);
 
   var durationField = document.createElement('input');
   durationField.type = 'text';
-  captchaModal.addModalRow('Duration', durationField);
 
   var messageField = document.createElement('input');
   messageField.type = 'text';
-  captchaModal.addModalRow('Message', messageField);
 
   var typeCombo = document.createElement('select');
-  captchaModal.addModalRow('Type', typeCombo);
 
   for (var i = 0; i < postingMenu.banLabels.length; i++) {
 
@@ -208,8 +204,6 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
   }
 
   var deletionCombo = document.createElement('select');
-
-  captchaModal.addModalRow('Deletion action', deletionCombo);
 
   for (var i = 0; i < postingMenu.deletionOptions.length; i++) {
 
@@ -270,6 +264,12 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
 
   };
 
+  captchaModal.addModalRow('Reason', reasonField, okButton.onclick);
+  captchaModal.addModalRow('Duration', durationField, okButton.onclick);
+  captchaModal.addModalRow('Message', messageField, okButton.onclick);
+  captchaModal.addModalRow('Type', typeCombo);
+  captchaModal.addModalRow('Deletion action', deletionCombo);
+
 };
 
 postingMenu.spoilSinglePost = function(boardUri, thread, post) {
@@ -324,62 +324,62 @@ postingMenu.editPost = function(board, thread, post) {
 
     if (error) {
       alert(error);
-    } else {
+      return;
+    }
 
-      data = JSON.parse(data);
+    data = JSON.parse(data);
 
-      var outerPanel = captchaModal.getCaptchaModal('Edit', true);
+    var outerPanel = captchaModal.getCaptchaModal('Edit', true);
 
-      var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
+    var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
-      var subjectField = document.createElement('input');
-      subjectField.type = 'text';
-      subjectField.value = data.subject || '';
-      captchaModal.addModalRow('Subject', subjectField);
+    var subjectField = document.createElement('input');
+    subjectField.type = 'text';
+    subjectField.value = data.subject || '';
 
-      var messageArea = document.createElement('textarea');
-      messageArea.setAttribute('placeholder', 'message');
-      messageArea.defaultValue = data.message || '';
-      captchaModal.addModalRow('Message', messageArea);
+    var messageArea = document.createElement('textarea');
+    messageArea.setAttribute('placeholder', 'message');
+    messageArea.defaultValue = data.message || '';
 
-      okButton.onclick = function() {
+    okButton.onclick = function() {
 
-        var typedSubject = subjectField.value.trim();
-        var typedMessage = messageArea.value.trim();
+      var typedSubject = subjectField.value.trim();
+      var typedMessage = messageArea.value.trim();
 
-        if (typedSubject.length > 128) {
-          alert('Subject too long, keep it under 128 characters.');
-        } else if (!typedMessage.length) {
-          alert('A message is mandatory.');
+      if (typedSubject.length > 128) {
+        alert('Subject too long, keep it under 128 characters.');
+      } else if (!typedMessage.length) {
+        alert('A message is mandatory.');
+      } else {
+
+        var parameters = {
+          boardUri : board,
+          message : typedMessage,
+          subject : typedSubject
+        };
+
+        if (post) {
+          parameters.postId = post;
         } else {
-
-          var parameters = {
-            boardUri : board,
-            message : typedMessage,
-            subject : typedSubject
-          };
-
-          if (post) {
-            parameters.postId = post;
-          } else {
-            parameters.threadId = thread;
-          }
-
-          api.apiRequest('saveEdit', parameters, function requestComplete(
-              status, data) {
-
-            if (status === 'ok') {
-              location.reload(true);
-            } else {
-              alert(status + ': ' + JSON.stringify(data));
-            }
-          });
-
+          parameters.threadId = thread;
         }
 
-      };
+        api.apiRequest('saveEdit', parameters, function requestComplete(status,
+            data) {
 
-    }
+          if (status === 'ok') {
+            location.reload(true);
+          } else {
+            alert(status + ': ' + JSON.stringify(data));
+          }
+        });
+
+      }
+
+    };
+
+    captchaModal.addModalRow('Subject', subjectField, okButton.onclick);
+    captchaModal.addModalRow('Message', messageArea, okButton.onclick);
 
   });
 

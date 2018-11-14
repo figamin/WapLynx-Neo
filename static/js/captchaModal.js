@@ -1,6 +1,6 @@
 var captchaModal = {};
 
-captchaModal.addModalRow = function(label, element) {
+captchaModal.addModalRow = function(label, element, action) {
 
   var tableBody = document.getElementsByClassName('modalTableBody')[0];
 
@@ -17,6 +17,21 @@ captchaModal.addModalRow = function(label, element) {
   fieldHolder.appendChild(element);
 
   tableRow.appendChild(fieldHolder);
+
+  if (action) {
+
+    element.addEventListener('keydown', function(event) {
+
+      if (event.key === 'Enter') {
+
+        action();
+
+        event.preventDefault();
+      }
+
+    });
+
+  }
 
 };
 
@@ -69,23 +84,26 @@ captchaModal.getCaptchaModal = function(header, noCaptcha) {
   captchaTable.appendChild(tableBody);
   decorationPanel.appendChild(captchaTable);
 
+  var okButton = document.createElement('input');
+  okButton.type = 'button';
+  okButton.className = 'modalOkButton';
+  okButton.value = 'Ok';
+
   if (!noCaptcha) {
 
     var captchaField = document.createElement('input');
     captchaField.type = 'text';
     captchaField.className = 'modalAnswer';
 
-    captchaModal.addModalRow('Answer', captchaField);
+    captchaModal.addModalRow('Answer', captchaField, function() {
+      okButton.onclick();
+    });
 
   }
 
   var responseButtonsPanel = document.createElement('span');
   decorationPanel.appendChild(responseButtonsPanel);
 
-  var okButton = document.createElement('input');
-  okButton.type = 'button';
-  okButton.className = 'modalOkButton';
-  okButton.value = 'Ok';
   responseButtonsPanel.appendChild(okButton);
 
   var cancelButton = document.createElement('input');
