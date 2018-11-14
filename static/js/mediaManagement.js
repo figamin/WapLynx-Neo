@@ -24,7 +24,11 @@ mediaManagement.deleteMedia = function() {
 
     if (status === 'ok') {
 
-      location.reload(true);
+      for (var i = checkBoxes.length - 1; i > -1; i--) {
+        if (checkBoxes[i].checked) {
+          checkBoxes[i].parentNode.parentNode.remove();
+        }
+      }
 
     } else {
       alert(status + ': ' + JSON.stringify(data));

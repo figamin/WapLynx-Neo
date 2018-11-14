@@ -1,6 +1,11 @@
 var globalManagement = {};
 
+globalManagement.roles = [ 'Admin', 'Global volunteer', 'Global janitor',
+    'User' ];
+
 globalManagement.init = function() {
+
+  api.management = true;
 
   if (document.getElementById('addStaffForm')) {
 
@@ -11,6 +16,8 @@ globalManagement.init = function() {
         'massBanField');
 
   }
+
+  globalManagement.divStaff = document.getElementById('divStaff');
 
   api.convertButton('closeReportsFormButton', reports.closeReports,
       'closeReportsField');
@@ -31,15 +38,9 @@ globalManagement.processCell = function(cell) {
   var user = cell.getElementsByClassName('userIdentifier')[0].value;
 
   api.convertButton(button, function() {
-    globalManagement.saveUser(user, comboBox);
+    globalManagement.setUser(user,
+        comboBox.options[comboBox.selectedIndex].value, cell);
   });
-
-};
-
-globalManagement.saveUser = function(user, comboBox) {
-
-  globalManagement
-      .setUser(user, comboBox.options[comboBox.selectedIndex].value);
 
 };
 
@@ -52,16 +53,79 @@ globalManagement.addUser = function() {
 
 };
 
-globalManagement.setUser = function(login, role) {
+globalManagement.showNewUser = function(login, role) {
+
+  var form = document.createElement('form');
+  form.method = 'post';
+  form.enctype = 'multipart/form-data';
+  form.action = '/setGlobalRole.js';
+  form.className = 'staffCell';
+
+  var nameLabel = document.createElement('span');
+  nameLabel.innerHTML = login;
+  nameLabel.className = 'userLabel';
+  form.appendChild(nameLabel);
+
+  form.appendChild(document.createTextNode(' '));
+
+  var combo = document.createElement('select');
+  combo.name = 'role';
+  combo.className = 'roleCombo';
+  form.appendChild(combo);
+
+  for (var i = document.getElementById('globalSettingsLink') ? 0 : 1; i < globalManagement.roles.length; i++) {
+
+    var option = document.createElement('option');
+    option.innerHTML = globalManagement.roles[i];
+    option.value = (i + 1).toString();
+
+    if (i === role - 1) {
+      option.setAttribute('selected', 'selected');
+    }
+
+    combo.appendChild(option);
+
+  }
+
+  var identifier = document.createElement('input');
+  identifier.className = 'userIdentifier';
+  identifier.type = 'hidden';
+  identifier.value = login;
+  form.appendChild(identifier);
+
+  var wrapper = document.createElement('label');
+  form.appendChild(wrapper);
+
+  var button = document.createElement('button');
+  button.type = 'submit';
+  button.className = 'saveFormButton';
+  button.innerHTML = 'Save role';
+  wrapper.appendChild(button);
+
+  globalManagement.divStaff.appendChild(form);
+
+  globalManagement.processCell(form);
+
+};
+
+globalManagement.setUser = function(login, role, cell) {
+
+  role = +role;
 
   api.apiRequest('setGlobalRole', {
     login : login,
-    role : +role
+    role : role
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
 
-      location.reload(true);
+      if (role <= 3 && cell) {
+        alert('Role changed.');
+      } else if (cell) {
+        cell.remove();
+      } else {
+        globalManagement.showNewUser(login, role);
+      }
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
@@ -107,6 +171,7 @@ globalManagement.massBan = function() {
   }, function requestCompleted(status, data) {
 
     if (status === 'ok') {
+
       ipField.value = '';
       reasonField.value = '';
       durationField.value = '';

@@ -428,10 +428,11 @@ globalSettings.save = function() {
       status, data) {
 
     if (status === 'ok') {
-      location.reload(true);
+      alert('New settings saved.');
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
+
   });
 
 };

@@ -4,6 +4,8 @@ languages.init = function() {
 
   api.convertButton('addFormButton', languages.addLanguage, 'newLanguageField');
 
+  languages.div = document.getElementById('languagesDiv');
+
   var cells = document.getElementsByClassName('languageCell');
 
   for (var i = 0; i < cells.length; i++) {
@@ -23,13 +25,95 @@ languages.setLanguageCell = function(cell) {
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
-
-        location.reload(true);
-
+        cell.remove();
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
     });
+
+  });
+
+};
+
+languages.showNewLanguage = function() {
+
+  // TODO refactor once this data is returned
+
+  api.localRequest('/languages.js?json=1', function(error, data) {
+
+    if (error) {
+      return;
+    }
+
+    var available = document.getElementsByClassName('languageIdentifier');
+
+    var foundIds = [];
+
+    for (var i = 0; i < available.length; i++) {
+      foundIds.push(available[i].value);
+    }
+
+    data = JSON.parse(data);
+
+    for (i = 0; i < data.length; i++) {
+
+      if (foundIds.indexOf(data[i]._id) < 0) {
+        data = data[i];
+        break;
+      }
+
+    }
+
+    var form = document.createElement('form');
+    form.method = 'post';
+    form.enctype = 'multipart/form-data';
+    form.action = '/deleteLanguage.js';
+    form.className = 'languageCell';
+    form.innerHTML = 'Header values: ';
+
+    var headersLabel = document.createElement('span');
+    headersLabel.className = 'headerValuesLabel';
+    headersLabel.innerHTML = data.headerValues.join(', ');
+    form.appendChild(headersLabel);
+
+    form.appendChild(document.createElement('br'));
+
+    form.appendChild(document.createTextNode('Front-end: '));
+
+    var feLabel = document.createElement('span');
+    feLabel.innerHTML = data.frontEnd;
+    feLabel.className = 'frontEndLabel';
+    form.appendChild(feLabel);
+
+    form.appendChild(document.createElement('br'));
+
+    form.appendChild(document.createTextNode('Language pack: '));
+
+    var packLabel = document.createElement('span');
+    packLabel.innerHTML = data.languagePack;
+    packLabel.className = 'languagePackLabel';
+    form.appendChild(packLabel);
+
+    form.appendChild(document.createElement('br'));
+
+    var identifier = document.createElement('input');
+    identifier.type = 'hidden';
+    identifier.name = 'languageId';
+    identifier.value = data._id;
+    identifier.className = 'languageIdentifier';
+    form.appendChild(identifier);
+
+    var button = document.createElement('button');
+    button.type = 'submit';
+    button.innerHTML = 'Delete language';
+    button.className = 'deleteFormButton';
+    form.appendChild(button);
+
+    form.appendChild(document.createElement('hr'));
+
+    languages.div.appendChild(form);
+
+    languages.setLanguageCell(form);
 
   });
 
@@ -63,8 +147,11 @@ languages.addLanguage = function() {
 
     if (status === 'ok') {
 
-      location.reload(true);
+      document.getElementById('fieldFrontEnd').value = '';
+      document.getElementById('fieldLanguagePack').value = '';
+      document.getElementById('fieldHeaderValues').value = '';
 
+      languages.showNewLanguage();
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

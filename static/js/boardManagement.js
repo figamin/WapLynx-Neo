@@ -104,6 +104,38 @@ boardManagement.setJs = function() {
 
 };
 
+boardManagement.setIndicatorForRequest = function(files) {
+
+  var spoilerIndicator = document.getElementById('customSpoilerIndicator');
+
+  var haveSpoiler = spoilerIndicator ? true : false;
+
+  var obtainedSpoiler = (files && files.length) ? true : false;
+
+  if (haveSpoiler !== obtainedSpoiler) {
+
+    if (obtainedSpoiler) {
+
+      var marker = document.getElementById('indicatorMarker');
+
+      var indicator = document.createElement('div');
+      indicator.id = 'customSpoilerIndicator';
+      marker.parentNode.insertBefore(indicator, marker);
+
+      var indicatorText = document.createElement('p');
+      indicatorText.innerHTML = 'There is a custom spoiler saved for this board';
+      indicator.appendChild(indicatorText);
+
+    } else {
+      spoilerIndicator.remove();
+    }
+
+  } else {
+    alert('New spoiler uploaded.');
+  }
+
+};
+
 boardManagement.makeSpoilerRequest = function(files) {
 
   api.apiRequest('setCustomSpoiler', {
@@ -111,16 +143,15 @@ boardManagement.makeSpoilerRequest = function(files) {
     boardUri : api.boardUri,
   }, function requestComplete(status, data) {
 
-    document.getElementById('files').type = 'text';
-    document.getElementById('files').type = 'file';
+    document.getElementById('filesSpoiler').type = 'text';
+    document.getElementById('filesSpoiler').type = 'file';
 
     if (status === 'ok') {
-
-      location.reload(true);
-
+      boardManagement.setIndicatorForRequest(files);
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
+
   });
 };
 
@@ -287,37 +318,36 @@ boardManagement.saveSettings = function() {
 
   var locationCombo = document.getElementById('locationComboBox');
 
-  api
-      .apiRequest(
-          'setBoardSettings',
-          {
-            boardName : typedName,
-            captchaMode : combo.options[combo.selectedIndex].value,
-            boardMessage : typedMessage,
-            autoCaptchaLimit : typedAutoCaptcha,
-            locationFlagMode : locationCombo.options[locationCombo.selectedIndex].value,
-            hourlyThreadLimit : typedHourlyLimit,
-            tags : typedTags,
-            anonymousName : typedAnonymousName,
-            boardDescription : typedDescription,
-            boardUri : api.boardUri,
-            settings : settings,
-            autoSageLimit : typedAutoSage,
-            maxThreadCount : typedThreadLimit,
-            maxFileSizeMB : typedFileSize,
-            acceptedMimes : typedTypedMimes,
-            maxFiles : typedFileLimit,
-            maxBumpAge : typedMaxBumpAge
-          }, function requestComplete(status, data) {
+  var parameters = {
+    boardName : typedName,
+    captchaMode : combo.options[combo.selectedIndex].value,
+    boardMessage : typedMessage,
+    autoCaptchaLimit : typedAutoCaptcha,
+    locationFlagMode : locationCombo.options[locationCombo.selectedIndex].value,
+    hourlyThreadLimit : typedHourlyLimit,
+    tags : typedTags,
+    anonymousName : typedAnonymousName,
+    boardDescription : typedDescription,
+    boardUri : api.boardUri,
+    settings : settings,
+    autoSageLimit : typedAutoSage,
+    maxThreadCount : typedThreadLimit,
+    maxFileSizeMB : typedFileSize,
+    acceptedMimes : typedTypedMimes,
+    maxFiles : typedFileLimit,
+    maxBumpAge : typedMaxBumpAge
+  };
 
-            if (status === 'ok') {
+  api.apiRequest('setBoardSettings', parameters, function requestComplete(
+      status, data) {
 
-              location.reload(true);
+    if (status === 'ok') {
+      alert('Settings saved.');
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
 
-            } else {
-              alert(status + ': ' + JSON.stringify(data));
-            }
-          });
+  });
 
 };
 
