@@ -13,6 +13,8 @@ ruleManagement.init = function() {
     ruleManagement.processRuleCell(rules[i]);
   }
 
+  ruleManagement.ruleDiv = document.getElementById('divRules');
+
 };
 
 ruleManagement.processRuleCell = function(cell) {
@@ -28,13 +30,63 @@ ruleManagement.processRuleCell = function(cell) {
       ruleIndex : index,
     }, function requestComplete(status, data) {
       if (status === 'ok') {
-        location.reload(true);
+        cell.remove();
+
+        var identifiers = document.getElementsByClassName('indexIdentifier');
+
+        for (var i = 0; i < identifiers.length; i++) {
+          identifiers[i].value = i.toString();
+        }
+
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
     });
 
   });
+
+};
+
+ruleManagement.showNewRule = function(typedRule) {
+
+  var form = document.createElement('form');
+  form.className = 'ruleManagementCell';
+  form.action = '/deleteRule.js';
+  form.method = 'post';
+  form.enctype = 'multipart/form-data';
+  ruleManagement.ruleDiv.appendChild(form);
+
+  var rulePara = document.createElement('p');
+  form.appendChild(rulePara);
+
+  var ruleLabel = document.createElement('span');
+  ruleLabel.className = 'textLabel';
+  ruleLabel.innerHTML = typedRule;
+  rulePara.appendChild(ruleLabel);
+
+  var indexIdentifier = document.createElement('input');
+  indexIdentifier.className = 'indexIdentifier';
+  indexIdentifier.type = 'hidden';
+  indexIdentifier.name = 'ruleIndex';
+  indexIdentifier.value = document.getElementsByClassName('indexIdentifier').length;
+  form.appendChild(indexIdentifier);
+
+  var boardIdentifier = document.createElement('input');
+  boardIdentifier.type = 'hidden';
+  boardIdentifier.name = 'boardUri';
+  boardIdentifier.className = 'boardIdentifier';
+  boardIdentifier.value = api.boardUri;
+  form.appendChild(boardIdentifier);
+
+  var deleteButton = document.createElement('button');
+  deleteButton.type = 'button';
+  deleteButton.innerHTML = 'Delete rule';
+  deleteButton.className = 'deleteFormButton';
+  form.appendChild(deleteButton);
+
+  form.appendChild(document.createElement('hr'));
+
+  ruleManagement.processRuleCell(form);
 
 };
 
@@ -55,7 +107,8 @@ ruleManagement.addRule = function() {
     }, function requestComplete(status, data) {
       if (status === 'ok') {
 
-        location.reload(true);
+        document.getElementById('fieldRule').value = '';
+        ruleManagement.showNewRule(typedRule);
 
       } else {
         alert(status + ': ' + JSON.stringify(data));
