@@ -113,10 +113,10 @@ postingMenu.showReport = function(board, thread, post, global) {
 
 };
 
-postingMenu.deleteSinglePost = function(boardUri, thread, post, fromIp,
-    unlinkFiles, wipeMedia, forcedPassword) {
+postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
+    unlinkFiles, wipeMedia, innerPart, forcedPassword) {
 
-  var key = boardUri + '/' + thread
+  var key = boardUri + '/' + threadId
 
   if (post) {
     key += '/' + post;
@@ -139,38 +139,49 @@ postingMenu.deleteSinglePost = function(boardUri, thread, post, fromIp,
             deleteMedia : wipeMedia,
             postings : [ {
               board : boardUri,
-              thread : thread,
+              thread : threadId,
               post : post
             } ]
           },
           function requestComplete(status, data) {
 
-            if (status === 'ok') {
+            if (status !== 'ok') {
+              alert(status + ': ' + JSON.stringify(data));
+              return;
+            }
 
-              if (!fromIp && !api.isBoard && data.removedPosts) {
-                thread.refreshPosts(true, true);
-              } else if (fromIp || data.removedThreads || data.removedPosts) {
+            var removed = data.removedThreads || data.removedPosts;
 
-                if (api.isBoard) {
-                  location.reload(true);
-                } else {
-                  window.location.pathname = '/' + boardUri + '/';
-                }
+            if (unlinkFiles && removed) {
 
+              innerPart.parentNode.className = innerPart.parentNode.className
+                  .replace(' multipleUploads', '');
+
+              innerPart.getElementsByClassName('panelUploads')[0].remove();
+
+            } else if (fromIp) {
+
+              if (api.isBoard) {
+                location.reload(true);
               } else {
-
-                var newPass = prompt('Could not delete. Would you like to try another password?');
-
-                if (newPass) {
-                  postingMenu.deleteSinglePost(boardUri, thread, post, fromIp,
-                      unlinkFiles, wipeMedia, newPass);
-                }
-
+                window.location.pathname = '/' + boardUri + '/';
               }
 
-            } else {
-              alert(status + ': ' + JSON.stringify(data));
+            } else if (!api.isBoard && data.removedThreads) {
+              window.location.pathname = '/' + boardUri + '/';
+            } else if (removed) {
+              innerPart.parentNode.remove();
+            } else if (!removed) {
+
+              var newPass = prompt('Could not delete. Would you like to try another password?');
+
+              if (newPass) {
+                postingMenu.deleteSinglePost(boardUri, threadId, post, fromIp,
+                    unlinkFiles, wipeMedia, innerPart, newPass);
+              }
+
             }
+
           });
 
 };
@@ -251,10 +262,9 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
         outerPanel.remove();
 
         if (selectedDeletionOption) {
-          postingMenu
-              .deleteSinglePost(boardUri, thread, post,
-                  selectedDeletionOption === 3, false,
-                  selectedDeletionOption === 2);
+          postingMenu.deleteSinglePost(boardUri, thread, post,
+              selectedDeletionOption === 3, false,
+              selectedDeletionOption === 2, innerPart);
         }
 
       } else {
@@ -460,7 +470,8 @@ postingMenu.setExtraMenuThread = function(extraMenu, board, thread) {
 
 };
 
-postingMenu.setModFileOptions = function(extraMenu, board, thread, post) {
+postingMenu.setModFileOptions = function(extraMenu, innerPart, board, thread,
+    post) {
 
   extraMenu.appendChild(document.createElement('hr'));
 
@@ -481,28 +492,28 @@ postingMenu.setModFileOptions = function(extraMenu, board, thread, post) {
   deleteMediaButton.innerHTML = 'Delete Post And Media';
   extraMenu.appendChild(deleteMediaButton);
   deleteMediaButton.onclick = function() {
-    postingMenu.deleteSinglePost(board, thread, post, false, false, true);
+    postingMenu.deleteSinglePost(board, thread, post, false, false, true,
+        innerPart);
   };
 
 };
 
-postingMenu.setExtraMenuMod = function(checkbox, extraMenu, board, thread,
+postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
     post, hasFiles) {
 
   if (hasFiles) {
-    postingMenu.setModFileOptions(extraMenu, board, thread, post);
+    postingMenu.setModFileOptions(extraMenu, innerPart, board, thread, post);
   }
 
   extraMenu.appendChild(document.createElement('hr'));
-
-  var innerPart = checkbox.parentNode.parentNode;
 
   var deleteByIpButton = document.createElement('div');
   deleteByIpButton.innerHTML = 'Delete By Ip';
   deleteByIpButton.onclick = function() {
 
     if (confirm("Are you sure you wish to delete all posts on this board made by this ip?")) {
-      postingMenu.deleteSinglePost(board, thread, post, true);
+      postingMenu.deleteSinglePost(board, thread, post, true, null, null,
+          innerPart);
     }
 
   };
@@ -547,6 +558,8 @@ postingMenu.setExtraMenuMod = function(checkbox, extraMenu, board, thread,
 
 postingMenu.buildMenu = function(checkbox, extraMenu) {
 
+  var innerPart = checkbox.parentNode.parentNode;
+
   var name = checkbox.name;
 
   var parts = name.split('-');
@@ -579,7 +592,8 @@ postingMenu.buildMenu = function(checkbox, extraMenu) {
   deleteButton.innerHTML = 'Delete Post';
   extraMenu.appendChild(deleteButton);
   deleteButton.onclick = function() {
-    postingMenu.deleteSinglePost(board, thread, post);
+    postingMenu.deleteSinglePost(board, thread, post, null, null, null,
+        innerPart);
   };
 
   var hasFiles = checkbox.parentNode.parentNode
@@ -595,14 +609,15 @@ postingMenu.buildMenu = function(checkbox, extraMenu) {
     unlinkButton.innerHTML = 'Unlink Files';
     extraMenu.appendChild(unlinkButton);
     unlinkButton.onclick = function() {
-      postingMenu.deleteSinglePost(board, thread, post, false, true);
+      postingMenu.deleteSinglePost(board, thread, post, false, true, null,
+          innerPart);
     };
 
   }
 
   if (postingMenu.loggedIn
       && (postingMenu.globalRole < 4 || postingMenu.moddedBoards.indexOf(board) >= 0)) {
-    postingMenu.setExtraMenuMod(checkbox, extraMenu, board, thread, post,
+    postingMenu.setExtraMenuMod(innerPart, extraMenu, board, thread, post,
         hasFiles);
   }
 
