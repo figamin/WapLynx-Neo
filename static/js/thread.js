@@ -284,16 +284,26 @@ thread.processPostingQuote = function(link) {
 
 thread.saveThreadSettings = function() {
 
+  var pinned = document.getElementById('checkboxPin').checked;
+  var locked = document.getElementById('checkboxLock').checked;
+  var cyclic = document.getElementById('checkboxCyclic').checked;
+
   api.apiRequest('changeThreadSettings', {
     boardUri : api.boardUri,
     threadId : api.threadId,
-    pin : document.getElementById('checkboxPin').checked,
-    lock : document.getElementById('checkboxLock').checked,
-    cyclic : document.getElementById('checkboxCyclic').checked
+    pin : pinned,
+    lock : locked,
+    cyclic : cyclic
   }, function setLock(status, data) {
 
     if (status === 'ok') {
-      location.reload(true);
+
+      api.resetIndicators({
+        locked : locked,
+        pinned : pinned,
+        cyclic : cyclic
+      });
+
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

@@ -5,6 +5,61 @@ api.htmlReplaceTable = {
   '>' : '&gt;'
 };
 
+api.removeIndicator = function(className, thread) {
+
+  var elements = (thread || document).getElementsByClassName(className);
+
+  if (!elements.length) {
+    return;
+  }
+
+  elements[0].nextSibling.remove();
+  elements[0].remove();
+
+};
+
+api.addIndicator = function(className, title, thread) {
+
+  var spanId = (thread || document).getElementsByClassName('spanId')[0];
+
+  if (!spanId) {
+    spanId = (thread || document).getElementsByClassName('labelCreated')[0];
+  }
+
+  var indicator = document.createElement('span');
+  indicator.className = className;
+  indicator.title = title;
+
+  spanId.parentNode.insertBefore(indicator, spanId.nextSibling);
+  spanId.parentNode.insertBefore(document.createTextNode(' '),
+      spanId.nextSibling);
+
+};
+
+api.resetIndicators = function(data, thread) {
+
+  api.removeIndicator('lockIndicator', thread);
+  api.removeIndicator('pinIndicator', thread);
+  api.removeIndicator('cyclicIndicator', thread);
+
+  api.addIndicator('cyclicIndicator', 'Cyclical Thread', thread);
+  api.addIndicator('pinIndicator', 'Sticky', thread);
+  api.addIndicator('lockIndicator', 'Locked', thread);
+
+  if (!data.locked) {
+    api.removeIndicator('lockIndicator', thread);
+  }
+
+  if (!data.pinned) {
+    api.removeIndicator('pinIndicator', thread);
+  }
+
+  if (!data.cyclic) {
+    api.removeIndicator('cyclicIndicator', thread);
+  }
+
+};
+
 api.addEnterEvent = function(element, onclick) {
 
   element.addEventListener('keydown', function(event) {

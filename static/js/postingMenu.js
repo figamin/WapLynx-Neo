@@ -186,6 +186,53 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
 
 };
 
+postingMenu.applySingleBan = function(typedMessage, deletionOption,
+    typedReason, typedCaptcha, banType, typedDuration, global, boardUri,
+    thread, post, innerPart, outerPanel) {
+
+  localStorage.setItem('autoDeletionOption', deletionOption);
+
+  api.apiRequest('banUsers', {
+    reason : typedReason,
+    captcha : typedCaptcha,
+    banType : banType,
+    duration : typedDuration,
+    banMessage : typedMessage,
+    global : global,
+    postings : [ {
+      board : boardUri,
+      thread : thread,
+      post : post
+    } ]
+  }, function requestComplete(status, data) {
+
+    if (status === 'ok') {
+
+      var banMessageDiv = innerPart.getElementsByClassName('divBanMessage')[0];
+
+      if (!banMessageDiv) {
+        banMessageDiv = document.createElement('div');
+        banMessageDiv.className = 'divBanMessage';
+        innerPart.appendChild(banMessageDiv);
+      }
+
+      banMessageDiv.innerHTML = typedMessage
+          || '(USER WAS BANNED FOR THIS POST)';
+
+      outerPanel.remove();
+
+      if (deletionOption) {
+        postingMenu.deleteSinglePost(boardUri, thread, post,
+            deletionOption === 3, false, deletionOption === 2, innerPart);
+      }
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+
+};
+
 postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) {
 
   var outerPanel = captchaModal.getCaptchaModal(global ? 'Global ban' : 'Ban');
@@ -230,48 +277,10 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
   captchaField.setAttribute('placeholder', 'only for board staff)');
 
   okButton.onclick = function() {
-
-    var typedMessage = messageField.value.trim();
-
-    var selectedDeletionOption = deletionCombo.selectedIndex;
-
-    localStorage.setItem('autoDeletionOption', selectedDeletionOption);
-
-    api.apiRequest('banUsers', {
-      reason : reasonField.value.trim(),
-      captcha : captchaField.value.trim(),
-      banType : typeCombo.selectedIndex,
-      duration : durationField.value.trim(),
-      banMessage : typedMessage,
-      global : global,
-      postings : [ {
-        board : boardUri,
-        thread : thread,
-        post : post
-      } ]
-    }, function requestComplete(status, data) {
-
-      if (status === 'ok') {
-
-        var banMessageDiv = document.createElement('div');
-        banMessageDiv.innerHTML = typedMessage
-            || '(USER WAS BANNED FOR THIS POST)';
-        banMessageDiv.className = 'divBanMessage';
-        innerPart.appendChild(banMessageDiv);
-
-        outerPanel.remove();
-
-        if (selectedDeletionOption) {
-          postingMenu.deleteSinglePost(boardUri, thread, post,
-              selectedDeletionOption === 3, false,
-              selectedDeletionOption === 2, innerPart);
-        }
-
-      } else {
-        alert(status + ': ' + JSON.stringify(data));
-      }
-    });
-
+    postingMenu.applySingleBan(messageField.value.trim(),
+        deletionCombo.selectedIndex, reasonField.value.trim(),
+        captchaField.value.trim(), typeCombo.selectedIndex, durationField.value
+            .trim(), global, boardUri, thread, post, innerPart, outerPanel);
   };
 
   captchaModal.addModalRow('Reason', reasonField, okButton.onclick);
@@ -282,7 +291,7 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
 
 };
 
-postingMenu.spoilSinglePost = function(boardUri, thread, post) {
+postingMenu.spoilSinglePost = function(innerPart, boardUri, thread, post) {
 
   api.apiRequest('spoilFiles', {
     postings : [ {
@@ -291,7 +300,22 @@ postingMenu.spoilSinglePost = function(boardUri, thread, post) {
       post : post
     } ]
   }, function requestComplete(status, data) {
-    location.reload(true);
+
+    api.localRequest('/' + boardUri + '/res/' + thread + '.json', function(
+        error, data) {
+
+      if (error) {
+        return;
+      }
+
+      var thumbs = innerPart.getElementsByClassName('imgLink');
+
+      for (var i = 0; i < thumbs.length; i++) {
+        var thumb = thumbs[i].childNodes[0].src = '/spoiler.png';
+      }
+
+    });
+
   });
 
 };
@@ -322,7 +346,61 @@ postingMenu.transferThread = function(boardUri, thread) {
 
 };
 
-postingMenu.editPost = function(board, thread, post) {
+postingMenu.updateEditedPosting = function(board, thread, post, innerPart, data) {
+
+  innerPart.getElementsByClassName('divMessage')[0].innerHTML = data.markdown;
+
+  var subjectLabel = innerPart.getElementsByClassName('labelSubject')[0];
+
+  if (!subjectLabel && data.subject) {
+
+    var pivot = innerPart.getElementsByClassName('linkName')[0];
+
+    subjectLabel = document.createElement('span');
+    subjectLabel.className = 'labelSubject';
+    pivot.parentNode.insertBefore(subjectLabel, pivot);
+
+    pivot.parentNode.insertBefore(document.createTextNode(' '), pivot);
+
+  } else if (subjectLabel && !data.subject) {
+    subjectLabel.remove();
+  }
+
+  if (data.subject) {
+    subjectLabel.innerHTML = data.subject;
+  }
+
+};
+
+postingMenu.getNewEditData = function(board, thread, post, innerPart) {
+
+  api.localRequest('/' + board + '/res/' + thread + '.json', function(error,
+      data) {
+
+    if (error) {
+      return;
+    }
+
+    data = JSON.parse(data);
+
+    if (post) {
+
+      for (var i = 0; i < data.posts.length; i++) {
+        if (data.posts[i].postId === +post) {
+          data = data.posts[i];
+          break;
+        }
+      }
+
+    }
+
+    postingMenu.updateEditedPosting(board, thread, post, innerPart, data);
+
+  });
+
+};
+
+postingMenu.editPost = function(board, thread, post, innerPart) {
 
   var url = '/edit.js?json=1&boardUri=' + board + '&threadId=' + thread;
 
@@ -330,7 +408,7 @@ postingMenu.editPost = function(board, thread, post) {
     url += '&postId=' + post;
   }
 
-  var editData = api.localRequest(url, function gotData(error, data) {
+  api.localRequest(url, function gotData(error, data) {
 
     if (error) {
       alert(error);
@@ -378,7 +456,8 @@ postingMenu.editPost = function(board, thread, post) {
             data) {
 
           if (status === 'ok') {
-            location.reload(true);
+            outerPanel.remove();
+            postingMenu.getNewEditData(board, thread, post, innerPart);
           } else {
             alert(status + ': ' + JSON.stringify(data));
           }
@@ -389,13 +468,14 @@ postingMenu.editPost = function(board, thread, post) {
     };
 
     captchaModal.addModalRow('Subject', subjectField, okButton.onclick);
-    captchaModal.addModalRow('Message', messageArea, okButton.onclick);
+    captchaModal.addModalRow('Message', messageArea);
 
   });
 
 };
 
-postingMenu.toggleThreadSetting = function(boardUri, thread, settingIndex) {
+postingMenu.toggleThreadSetting = function(boardUri, thread, settingIndex,
+    innerPart) {
 
   api.localRequest('/' + boardUri + '/res/' + thread + '.json',
       function gotData(error, data) {
@@ -425,7 +505,11 @@ postingMenu.toggleThreadSetting = function(boardUri, thread, settingIndex) {
             function requestComplete(status, data) {
 
               if (status === 'ok') {
-                location.reload(true);
+                api.resetIndicators({
+                  locked : parameters.lock,
+                  pinned : parameters.pin,
+                  cyclic : parameters.cyclic
+                }, innerPart);
               } else {
                 alert(status + ': ' + JSON.stringify(data));
               }
@@ -435,21 +519,22 @@ postingMenu.toggleThreadSetting = function(boardUri, thread, settingIndex) {
 
 };
 
-postingMenu.addToggleSettingButton = function(extraMenu, board, thread, index) {
+postingMenu.addToggleSettingButton = function(extraMenu, board, thread, index,
+    innerPart) {
 
   extraMenu.appendChild(document.createElement('hr'));
 
   var toggleButton = document.createElement('div');
   toggleButton.innerHTML = postingMenu.threadSettingsList[index].label;
   toggleButton.onclick = function() {
-    postingMenu.toggleThreadSetting(board, thread, index);
+    postingMenu.toggleThreadSetting(board, thread, index, innerPart);
   };
 
   extraMenu.appendChild(toggleButton);
 
 };
 
-postingMenu.setExtraMenuThread = function(extraMenu, board, thread) {
+postingMenu.setExtraMenuThread = function(extraMenu, board, thread, innerPart) {
 
   if (postingMenu.globalRole <= 1) {
 
@@ -465,7 +550,7 @@ postingMenu.setExtraMenuThread = function(extraMenu, board, thread) {
   }
 
   for (var i = 0; i < postingMenu.threadSettingsList.length; i++) {
-    postingMenu.addToggleSettingButton(extraMenu, board, thread, i);
+    postingMenu.addToggleSettingButton(extraMenu, board, thread, i, innerPart);
   }
 
 };
@@ -478,7 +563,7 @@ postingMenu.setModFileOptions = function(extraMenu, innerPart, board, thread,
   var spoilButton = document.createElement('div');
   spoilButton.innerHTML = 'Spoil Files';
   spoilButton.onclick = function() {
-    postingMenu.spoilSinglePost(board, thread, post);
+    postingMenu.spoilSinglePost(innerPart, board, thread, post);
   };
   extraMenu.appendChild(spoilButton);
 
@@ -546,12 +631,12 @@ postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
   var editButton = document.createElement('div');
   editButton.innerHTML = 'Edit';
   editButton.onclick = function() {
-    postingMenu.editPost(board, thread, post);
+    postingMenu.editPost(board, thread, post, innerPart);
   };
   extraMenu.appendChild(editButton);
 
   if (!post) {
-    postingMenu.setExtraMenuThread(extraMenu, board, thread);
+    postingMenu.setExtraMenuThread(extraMenu, board, thread, innerPart);
   }
 
 };

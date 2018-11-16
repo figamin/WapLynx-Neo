@@ -53,33 +53,6 @@ sideCatalog.removeAllFromClass = function(className) {
 
 };
 
-sideCatalog.removeIndicator = function(className) {
-
-  var elements = document.getElementsByClassName(className);
-
-  if (!elements.length) {
-    return;
-  }
-
-  elements[0].nextSibling.remove();
-  elements[0].remove();
-
-};
-
-sideCatalog.addIndicator = function(className, title) {
-
-  var spanId = document.getElementsByClassName('spanId')[0];
-
-  var indicator = document.createElement('span');
-  indicator.className = className;
-  indicator.title = title;
-
-  spanId.parentNode.insertBefore(indicator, spanId.nextSibling);
-  spanId.parentNode.insertBefore(document.createTextNode(' '),
-      spanId.nextSibling);
-
-};
-
 sideCatalog.loadThread = function(cell, threadData) {
 
   sideCatalog.loadingThread = true;
@@ -290,25 +263,7 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
   sideCatalog.removeAllFromClass('relativeTime');
   sideCatalog.removeAllFromClass('unhideButton');
 
-  sideCatalog.removeIndicator('lockIndicator');
-  sideCatalog.removeIndicator('pinIndicator');
-  sideCatalog.removeIndicator('cyclicIndicator');
-
-  sideCatalog.addIndicator('cyclicIndicator', 'Cyclical Thread');
-  sideCatalog.addIndicator('pinIndicator', 'Sticky');
-  sideCatalog.addIndicator('lockIndicator', 'Locked');
-
-  if (!threadData.locked) {
-    sideCatalog.removeIndicator('lockIndicator');
-  }
-
-  if (!threadData.pinned) {
-    sideCatalog.removeIndicator('pinIndicator');
-  }
-
-  if (!threadData.cyclic) {
-    sideCatalog.removeIndicator('cyclicIndicator');
-  }
+  api.resetIndicators(threadData);
 
   document.getElementsByClassName('panelBacklinks')[0].innerHTML = '';
 
