@@ -15,10 +15,10 @@ hiding.init = function() {
 
   }, true);
 
-  var checkboxes = document.getElementsByClassName('deletionCheckBox');
+  var links = document.getElementsByClassName('linkSelf');
 
-  for (var i = 0; i < checkboxes.length; i++) {
-    hiding.setHideMenu(checkboxes[i]);
+  for (var i = 0; i < links.length; i++) {
+    hiding.setHideMenu(links[i]);
   }
 
 };
@@ -50,9 +50,9 @@ hiding.filterMatches = function(string, filter) {
 
 };
 
-hiding.hideForFilter = function(checkbox) {
+hiding.hideForFilter = function(linkSelf) {
 
-  var toHide = checkbox.parentNode.parentNode.parentNode;
+  var toHide = linkSelf.parentNode.parentNode.parentNode;
 
   toHide.style.display = 'none';
   hiding.filtered.push(toHide);
@@ -69,22 +69,22 @@ hiding.checkFilters = function() {
 
   hiding.filtered = [];
 
-  var checkboxes = document.getElementsByClassName('deletionCheckBox');
+  var links = document.getElementsByClassName('linkSelf');
 
-  for (var i = 0; i < checkboxes.length; i++) {
-    hiding.checkFilterHiding(checkboxes[i]);
+  for (var i = 0; i < links.length; i++) {
+    hiding.checkFilterHiding(links[i]);
   }
 
 };
 
-hiding.checkFilterHiding = function(checkbox) {
+hiding.checkFilterHiding = function(linkSelf) {
 
   for (var i = 0; i < settingsMenu.loadedFilters.length; i++) {
 
     var filter = settingsMenu.loadedFilters[i];
 
     if (filter.type < 2) {
-      var name = checkbox.parentNode.getElementsByClassName('linkName')[0].innerHTML;
+      var name = linkSelf.parentNode.getElementsByClassName('linkName')[0].innerHTML;
 
       if (name.indexOf('#') >= 0) {
 
@@ -100,32 +100,32 @@ hiding.checkFilterHiding = function(checkbox) {
 
     case 0: {
       if (hiding.filterMatches(name, filter)) {
-        return hiding.hideForFilter(checkbox);
+        return hiding.hideForFilter(linkSelf);
       }
       break;
     }
 
     case 1: {
       if (trip && hiding.filterMatches(trip, filter)) {
-        return hiding.hideForFilter(checkbox);
+        return hiding.hideForFilter(linkSelf);
       }
       break;
     }
 
     case 2: {
-      var subjectLabel = checkbox.parentNode
+      var subjectLabel = linkSelf.parentNode
           .getElementsByClassName('labelSubject')[0];
 
       if (subjectLabel && filterMatches(subjectLabel.innerHTML, filter)) {
-        return hiding.hideForFilter(checkbox);
+        return hiding.hideForFilter(linkSelf);
       }
       break;
     }
 
     case 3: {
-      if (filterMatches(checkbox.parentNode.parentNode
+      if (filterMatches(linkSelf.parentNode.parentNode
           .getElementsByClassName('divMessage')[0].innerHTML, filter)) {
-        return hiding.hideForFilter(checkbox);
+        return hiding.hideForFilter(linkSelf);
       }
       break;
     }
@@ -165,17 +165,23 @@ hiding.registerHiding = function(board, thread, post, unhiding) {
 
 };
 
-hiding.buildHideMenu = function(checkbox, hideMenu) {
+hiding.buildHideMenu = function(linkSelf, hideMenu) {
 
-  var name = checkbox.name;
+  var href = linkSelf.href;
 
-  var parts = name.split('-');
+  var parts = href.split('/');
 
-  var board = parts[0];
+  var board = parts[3];
 
-  var thread = parts[1];
+  var finalParts = parts[5].split('.');
 
-  var post = parts[2];
+  var thread = finalParts[0];
+
+  var post = finalParts[1].split('#')[1];
+
+  if (post === thread) {
+    post = undefined;
+  }
 
   var postHideButton;
   postHideButton = document.createElement('div');
@@ -200,7 +206,7 @@ hiding.buildHideMenu = function(checkbox, hideMenu) {
 
   hideMenu.appendChild(document.createElement('hr'));
 
-  var name = checkbox.parentNode.getElementsByClassName('linkName')[0].innerHTML;
+  var name = linkSelf.parentNode.getElementsByClassName('linkName')[0].innerHTML;
 
   var trip;
 
@@ -230,61 +236,61 @@ hiding.buildHideMenu = function(checkbox, hideMenu) {
     hideMenu.appendChild(document.createElement('hr'));
   }
 
-  var unhidePostButton = document.createElement('span');
-
-  var unhideHTML = '[Unhide ' + (post ? 'post' : 'OP') + ' ' + board + '/'
-      + (post || thread) + ']';
-
-  unhidePostButton.innerHTML = unhideHTML;
-  unhidePostButton.className = 'unhideButton glowOnHover';
-  unhidePostButton.style.display = 'none';
-  checkbox.parentNode.parentNode.parentNode.insertBefore(unhidePostButton,
-      checkbox.parentNode.parentNode);
-
-  unhidePostButton.onclick = function() {
-
-    hiding.registerHiding(board, thread, post || thread, true);
-
-    checkbox.parentNode.parentNode.style.display = post ? 'inline-block'
-        : 'inline';
-    unhidePostButton.style.display = 'none';
-
-  };
+  var unhidePostButton;
 
   postHideButton.onclick = function() {
-    checkbox.parentNode.parentNode.style.display = 'none';
-    unhidePostButton.style.display = 'inline';
+
+    hiding.toggleHidden(linkSelf.parentNode.parentNode, true);
 
     hiding.registerHiding(board, thread, post || thread);
+
+    unhidePostButton = document.createElement('span');
+
+    var unhideHTML = '[Unhide ' + (post ? 'post' : 'OP') + ' ' + board + '/'
+        + (post || thread) + ']';
+
+    unhidePostButton.innerHTML = unhideHTML;
+    unhidePostButton.className = 'unhideButton glowOnHover';
+
+    linkSelf.parentNode.parentNode.parentNode.insertBefore(unhidePostButton,
+        linkSelf.parentNode.parentNode);
+
+    unhidePostButton.onclick = function() {
+
+      hiding.registerHiding(board, thread, post || thread, true);
+      unhidePostButton.remove();
+      hiding.toggleHidden(linkSelf.parentNode.parentNode, false);
+
+    };
   };
 
   if (!post) {
 
-    var unhideThreadButton = document.createElement('span');
-
-    unhideThreadButton.innerHTML = '[Unhide thread ' + board + '/' + thread
-        + ']';
-    unhideThreadButton.className = 'unhideButton glowOnHover';
-    unhideThreadButton.style.display = 'none';
-    checkbox.parentNode.parentNode.parentNode.parentNode.insertBefore(
-        unhideThreadButton, checkbox.parentNode.parentNode.parentNode);
+    var unhideThreadButton;
 
     threadHideButton.onclick = function() {
-      checkbox.parentNode.parentNode.parentNode.style.display = 'none';
-      unhideThreadButton.style.display = 'block';
+      hiding.toggleHidden(linkSelf.parentNode.parentNode.parentNode, true);
+      unhideThreadButton = document.createElement('span');
+
+      unhideThreadButton.innerHTML = '[Unhide thread ' + board + '/' + thread
+          + ']';
+      unhideThreadButton.className = 'unhideButton glowOnHover';
+      linkSelf.parentNode.parentNode.parentNode.parentNode.insertBefore(
+          unhideThreadButton, linkSelf.parentNode.parentNode.parentNode);
 
       hiding.registerHiding(board, thread);
-    }
 
-    unhideThreadButton.onclick = function() {
-      checkbox.parentNode.parentNode.parentNode.style.display = 'block';
-      unhideThreadButton.style.display = 'none';
-      hiding.registerHiding(board, thread, null, true);
+      unhideThreadButton.onclick = function() {
+        hiding.toggleHidden(linkSelf.parentNode.parentNode.parentNode, false);
+        unhideThreadButton.remove();
+        hiding.registerHiding(board, thread, null, true);
+      }
+
     }
 
   }
 
-  hiding.checkFilterHiding(checkbox);
+  hiding.checkFilterHiding(linkSelf);
 
   var boardData = hiding.storedHidingData[board];
 
@@ -302,13 +308,30 @@ hiding.buildHideMenu = function(checkbox, hideMenu) {
 
 };
 
-hiding.setHideMenu = function(checkbox) {
+hiding.toggleHidden = function(element, hide) {
+
+  var className = element.className;
+
+  if (hide) {
+    element.className += ' hidden';
+  } else {
+    element.className = className.replace(' hidden', '');
+  }
+
+};
+
+hiding.setHideMenu = function(linkSelf) {
 
   var hideButton = document.createElement('span');
   hideButton.className = 'hideButton glowOnHover coloredIcon';
   hideButton.title = "Hide";
 
-  checkbox.parentNode.insertBefore(hideButton, checkbox.nextSibling);
+  var parentNode = linkSelf.parentNode;
+
+  var checkbox = parentNode.getElementsByClassName('deletionCheckBox')[0];
+
+  parentNode.insertBefore(hideButton, checkbox ? checkbox.nextSibling
+      : parentNode.childNodes[0]);
 
   hideButton.onclick = function() {
 
@@ -332,7 +355,7 @@ hiding.setHideMenu = function(checkbox) {
 
     hiding.shownMenu = hideMenu;
 
-    hiding.buildHideMenu(checkbox, hideMenu);
+    hiding.buildHideMenu(linkSelf, hideMenu);
 
   };
 

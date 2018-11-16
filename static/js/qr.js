@@ -45,14 +45,15 @@ qr.showQr = function(link, quote) {
   qrPanel.style.top = (previewOrigin.y - 5) + 'px';
 
   document.getElementById('qrbody').value += '>>' + quote + '\n';
-  document.getElementById('fieldMessage').value = document
-      .getElementById('qrbody').value;
 
   var selectedText = window.getSelection();
   if (selectedText != '') {
     document.getElementById('qrbody').value += '>' + selectedText + '\n';
-    document.getElementById('fieldMessage').value += '>' + selectedText + '\n';
   }
+
+  document.getElementById('fieldMessage').value = document
+      .getElementById('qrbody').value;
+
 };
 
 qr.registerSync = function(source, destination, field, event) {

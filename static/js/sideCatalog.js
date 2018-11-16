@@ -76,6 +76,32 @@ sideCatalog.loadThread = function(cell, threadData) {
 
 };
 
+sideCatalog.getRangePanel = function() {
+
+  var rangePanel = document.createElement('span');
+  rangePanel.className = 'panelRange';
+  rangePanel.innerHTML = 'Broad range(1/2 octets): '
+
+  var broadRangeLabel = document.createElement('span');
+  broadRangeLabel.className = 'labelBroadRange';
+
+  rangePanel.appendChild(broadRangeLabel);
+
+  rangePanel.appendChild(document.createElement('br'));
+
+  rangePanel.appendChild(document.createTextNode('Narrow range(3/4 octets):'));
+
+  var narrowRangeLabel = document.createElement('span');
+  narrowRangeLabel.className = 'labelNarrowRange';
+
+  rangePanel.appendChild(narrowRangeLabel);
+
+  rangePanel.appendChild(document.createElement('br'));
+
+  return rangePanel;
+
+};
+
 sideCatalog.transitionThread = function(cell, threadData, data) {
 
   if (sideCatalog.selectedThreadCell) {
@@ -146,44 +172,27 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
 
   }
 
-  if (!opCell.getElementsByClassName('panelIp').length) {
+  var panelIp = opCell.getElementsByClassName('panelIp')[0];
+
+  if (!panelIp) {
 
     var emptyPanel = document.getElementsByClassName('opHead')[0].nextSibling.nextSibling;
 
-    var newIpPanel = document.createElement('span');
-    newIpPanel.className = 'panelIp';
+    panelIp = document.createElement('span');
+    panelIp.className = 'panelIp';
 
-    var rangePanel = document.createElement('span');
-    rangePanel.className = 'panelRange';
-    rangePanel.innerHTML = 'Broad range(1/2 octets): '
+    panelIp.appendChild(sideCatalog.getRangePanel());
 
-    var broadRangeLabel = document.createElement('span');
-    broadRangeLabel.className = 'labelBroadRange';
-
-    rangePanel.appendChild(broadRangeLabel);
-
-    rangePanel.appendChild(document.createElement('br'));
-
-    rangePanel
-        .appendChild(document.createTextNode('Narrow range(3/4 octets):'));
-
-    var narrowRangeLabel = document.createElement('span');
-    narrowRangeLabel.className = 'labelNarrowRange';
-
-    rangePanel.appendChild(narrowRangeLabel);
-
-    rangePanel.appendChild(document.createElement('br'));
-
-    newIpPanel.appendChild(rangePanel);
-
-    newIpPanel.appendChild(document.createTextNode('Ip:'));
+    panelIp.appendChild(document.createTextNode('Ip:'));
 
     var newIpLabel = document.createElement('span');
     newIpLabel.className = 'labelIp';
-    newIpPanel.appendChild(newIpLabel);
+    panelIp.appendChild(newIpLabel);
 
-    emptyPanel.appendChild(newIpPanel);
+    emptyPanel.appendChild(panelIp);
 
+  } else if (!opCell.getElementsByClassName('panelRange').length) {
+    panelIp.insertBefore(sideCatalog.getRangePanel(), panelIp.childNodes[0]);
   }
 
   if (!opCell.getElementsByClassName('imgFlag').length) {

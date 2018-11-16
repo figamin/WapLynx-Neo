@@ -563,12 +563,13 @@ posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
     tooltips.processQuote(quotes[i]);
   }
 
-  var checkbox = postCell.getElementsByClassName('deletionCheckBox')[0];
+  var linkSelf = postCell.getElementsByClassName('linkSelf')[0];
+  hiding.setHideMenu(linkSelf);
+  postingMenu.setExtraMenu(linkSelf)
 
-  hiding.setHideMenu(checkbox);
-  postingMenu.setExtraMenu(checkbox)
-
-  thread.processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
+  if (api.threadId) {
+    thread.processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
+  }
 
 };
 

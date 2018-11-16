@@ -57,10 +57,10 @@ postingMenu.init = function() {
 
   });
 
-  var checkboxes = document.getElementsByClassName('deletionCheckBox');
+  var links = document.getElementsByClassName('linkSelf');
 
-  for (var i = 0; i < checkboxes.length; i++) {
-    postingMenu.setExtraMenu(checkboxes[i]);
+  for (var i = 0; i < links.length; i++) {
+    postingMenu.setExtraMenu(links[i]);
   }
 
 };
@@ -161,13 +161,13 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
 
             } else if (fromIp) {
 
-              if (api.isBoard) {
+              if (api.isBoard || !api.boardUri) {
                 location.reload(true);
               } else {
                 window.location.pathname = '/' + boardUri + '/';
               }
 
-            } else if (!api.isBoard && data.removedThreads) {
+            } else if (api.threadId && data.removedThreads) {
               window.location.pathname = '/' + boardUri + '/';
             } else if (removed) {
               innerPart.parentNode.remove();
@@ -641,19 +641,25 @@ postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
 
 };
 
-postingMenu.buildMenu = function(checkbox, extraMenu) {
+postingMenu.buildMenu = function(linkSelf, extraMenu) {
 
-  var innerPart = checkbox.parentNode.parentNode;
+  var innerPart = linkSelf.parentNode.parentNode;
 
-  var name = checkbox.name;
+  var href = linkSelf.href;
 
-  var parts = name.split('-');
+  var parts = href.split('/');
 
-  var board = parts[0];
+  var board = parts[3];
 
-  var thread = parts[1];
+  var finalParts = parts[5].split('.');
 
-  var post = parts[2];
+  var thread = finalParts[0];
+
+  var post = finalParts[1].split('#')[1];
+
+  if (post === thread) {
+    post = undefined;
+  }
 
   var reportButton = document.createElement('div');
   reportButton.innerHTML = 'Report';
@@ -681,7 +687,7 @@ postingMenu.buildMenu = function(checkbox, extraMenu) {
         innerPart);
   };
 
-  var hasFiles = checkbox.parentNode.parentNode
+  var hasFiles = linkSelf.parentNode.parentNode
       .getElementsByClassName('panelUploads')[0];
 
   hasFiles = hasFiles && hasFiles.children.length > 0;
@@ -708,12 +714,18 @@ postingMenu.buildMenu = function(checkbox, extraMenu) {
 
 };
 
-postingMenu.setExtraMenu = function(checkbox) {
+postingMenu.setExtraMenu = function(linkSelf) {
 
   var extraMenuButton = document.createElement('span');
   extraMenuButton.className = 'extraMenuButton glowOnHover coloredIcon';
   extraMenuButton.title = 'Post Menu';
-  checkbox.parentNode.insertBefore(extraMenuButton, checkbox.nextSibling);
+
+  var parentNode = linkSelf.parentNode;
+
+  var checkbox = parentNode.getElementsByClassName('deletionCheckBox')[0];
+
+  parentNode.insertBefore(extraMenuButton, checkbox ? checkbox.nextSibling
+      : parentNode.childNodes[0]);
 
   extraMenuButton.onclick = function() {
 
@@ -737,7 +749,7 @@ postingMenu.setExtraMenu = function(checkbox) {
 
     postingMenu.shownPostingMenu = extraMenu;
 
-    postingMenu.buildMenu(checkbox, extraMenu);
+    postingMenu.buildMenu(linkSelf, extraMenu);
 
   };
 

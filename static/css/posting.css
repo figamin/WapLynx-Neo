@@ -60,15 +60,6 @@
   margin: 0.25em 0;
 }
 
-.innerPost, .markedPost {
-  display: inline-block;
-  overflow: hidden;
-  padding-right: 0.5em;
-  padding-left: 0.25em;
-  padding-top: 0.25em;
-  max-width: 100%;
-}
-
 .linkName {
   font-weight: bold;
   color: #34ED97;

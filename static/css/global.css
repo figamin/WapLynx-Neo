@@ -23,7 +23,7 @@
   border: 1px dashed #117743;
 }
 
-.logoImg{
+.logoImg {
   height: 250px;
 }
 
@@ -374,6 +374,15 @@ footer {
   margin: 3em 0px 2em 0px;
   text-align: center;
   font-size: 75%;
+}
+
+.innerPost, .markedPost {
+  display: inline-block;
+  overflow: hidden;
+  padding-right: 0.5em;
+  padding-left: 0.25em;
+  padding-top: 0.25em;
+  max-width: 100%;
 }
 
 /* this has to go down here to override anything above it */

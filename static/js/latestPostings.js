@@ -51,11 +51,11 @@ latestPostings.startTimer = function() {
             + latestPostings.unread + ')';
       }
 
-      for (var i = 0; i < data.length; i++) {
+      for (var i = data.length - 1; i >= 0; i--) {
 
         var post = data[i];
 
-        var cell = posting.addPost(post, post.boardUri, post.threadId, true);
+        var cell = posting.addPost(post, post.boardUri, post.threadId);
 
         cell.getElementsByClassName('deletionCheckBox')[0].remove();
 
