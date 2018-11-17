@@ -24,7 +24,7 @@ sideCatalog.init = function() {
   sideCatalogButton.id = 'navSideCatalog';
   sideCatalogButton.innerHTML = 'side catalog';
   sideCatalogButton.onclick = function() {
-    sideCatalog.style.display = 'block';
+    sideCatalog.sideCatalogDiv.style.display = 'block';
     localStorage.removeItem('hideSideCatalog');
   };
 
