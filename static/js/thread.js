@@ -71,19 +71,14 @@ thread.init = function() {
     thread.processPostingQuote(postingQuotes[i]);
   }
 
-  var ids = document.getElementsByClassName('labelId');
-
-  for (i = 0; i < ids.length; i++) {
-    thread.processIdLabel(ids[i]);
-  }
 };
 
 thread.initThread = function() {
 
   thread.lastReplyId = 0;
   thread.originalTitle = document.title;
-  thread.highLightedIds = [];
-  thread.idsRelation = {};
+  posting.highLightedIds = [];
+  posting.idsRelation = {};
   thread.unreadPosts = 0;
   api.threadId = +document.getElementsByClassName('opCell')[0].id;
   thread.refreshURL = document.getElementById('divMod') ? '/mod.js?boardUri='
@@ -172,49 +167,6 @@ thread.banPosts = function() {
       thread.applyBans(parsedCookies.captchaid);
     });
   }
-
-};
-
-thread.processIdLabel = function(label) {
-
-  var id = label.innerHTML;
-
-  var array = thread.idsRelation[id] || [];
-  thread.idsRelation[id] = array;
-
-  var cell = label.parentNode.parentNode.parentNode;
-
-  array.push(cell);
-
-  label.onmouseover = function() {
-    label.innerHTML = id + ' (' + array.length + ')';
-  }
-
-  label.onmouseout = function() {
-    label.innerHTML = id;
-  }
-
-  label.onclick = function() {
-
-    var index = thread.highLightedIds.indexOf(id);
-
-    if (index > -1) {
-      thread.highLightedIds.splice(index, 1);
-    } else {
-      thread.highLightedIds.push(id);
-    }
-
-    for (var i = 0; i < array.length; i++) {
-      var cellToChange = array[i];
-
-      if (cellToChange.className === 'innerOP') {
-        continue;
-      }
-
-      cellToChange.className = index > -1 ? 'innerPost' : 'markedPost';
-    }
-
-  };
 
 };
 

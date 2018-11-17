@@ -2,6 +2,9 @@ var posting = {};
 
 posting.init = function() {
 
+  posting.idsRelation = {};
+  posting.highLightedIds = [];
+
   posting.postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
       + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
       + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
@@ -46,6 +49,55 @@ posting.init = function() {
     setInterval(posting.updateAllRelativeTimes, 1000 * 60 * 5);
 
   }
+
+  var ids = document.getElementsByClassName('labelId');
+
+  for (i = 0; i < ids.length; i++) {
+    posting.processIdLabel(ids[i]);
+  }
+
+};
+
+posting.processIdLabel = function(label) {
+
+  var id = label.innerHTML;
+
+  var array = posting.idsRelation[id] || [];
+  posting.idsRelation[id] = array;
+
+  var cell = label.parentNode.parentNode.parentNode;
+
+  array.push(cell);
+
+  label.onmouseover = function() {
+    label.innerHTML = id + ' (' + array.length + ')';
+  }
+
+  label.onmouseout = function() {
+    label.innerHTML = id;
+  }
+
+  label.onclick = function() {
+
+    var index = posting.highLightedIds.indexOf(id);
+
+    if (index > -1) {
+      posting.highLightedIds.splice(index, 1);
+    } else {
+      posting.highLightedIds.push(id);
+    }
+
+    for (var i = 0; i < array.length; i++) {
+      var cellToChange = array[i];
+
+      if (cellToChange.className === 'innerOP') {
+        continue;
+      }
+
+      cellToChange.className = index > -1 ? 'innerPost' : 'markedPost';
+    }
+
+  };
 
 };
 
@@ -379,7 +431,7 @@ posting.setPostHideableElements = function(postCell, post, noExtras) {
     labelId.innerHTML = post.id;
 
     if (!noExtras) {
-      thread.processIdLabel(labelId);
+      posting.processIdLabel(labelId);
     }
 
   } else {
