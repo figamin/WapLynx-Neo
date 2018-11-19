@@ -250,7 +250,7 @@ postCommon.clearSelectedFiles = function() {
 
 postCommon.setDragAndDrop = function(qr) {
 
-  var fileInput = document.getElementById('files')
+  var fileInput = document.getElementById('inputFiles');
 
   if (!qr) {
     fileInput.style.display = 'none';
