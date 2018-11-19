@@ -9,6 +9,10 @@
   max-width: 100%;
 }
 
+.imgLink {
+  float: left;
+}
+
 .reportFieldset {
   margin-top: 1em;
   border: 1px dashed #117743;
