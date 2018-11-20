@@ -35,87 +35,58 @@ languages.setLanguageCell = function(cell) {
 
 };
 
-languages.showNewLanguage = function() {
+languages.showNewLanguage = function(data, id) {
 
-  // TODO refactor once this data is returned
+  var form = document.createElement('form');
+  form.method = 'post';
+  form.enctype = 'multipart/form-data';
+  form.action = '/deleteLanguage.js';
+  form.className = 'languageCell';
+  form.innerHTML = 'Header values: ';
 
-  api.localRequest('/languages.js?json=1', function(error, data) {
+  var headersLabel = document.createElement('span');
+  headersLabel.className = 'headerValuesLabel';
+  headersLabel.innerHTML = data.headerValues.join(', ');
+  form.appendChild(headersLabel);
 
-    if (error) {
-      return;
-    }
+  form.appendChild(document.createElement('br'));
 
-    var available = document.getElementsByClassName('languageIdentifier');
+  form.appendChild(document.createTextNode('Front-end: '));
 
-    var foundIds = [];
+  var feLabel = document.createElement('span');
+  feLabel.innerHTML = data.frontEnd;
+  feLabel.className = 'frontEndLabel';
+  form.appendChild(feLabel);
 
-    for (var i = 0; i < available.length; i++) {
-      foundIds.push(available[i].value);
-    }
+  form.appendChild(document.createElement('br'));
 
-    data = JSON.parse(data);
+  form.appendChild(document.createTextNode('Language pack: '));
 
-    for (i = 0; i < data.length; i++) {
+  var packLabel = document.createElement('span');
+  packLabel.innerHTML = data.languagePack;
+  packLabel.className = 'languagePackLabel';
+  form.appendChild(packLabel);
 
-      if (foundIds.indexOf(data[i]._id) < 0) {
-        data = data[i];
-        break;
-      }
+  form.appendChild(document.createElement('br'));
 
-    }
+  var identifier = document.createElement('input');
+  identifier.type = 'hidden';
+  identifier.name = 'languageId';
+  identifier.value = id;
+  identifier.className = 'languageIdentifier';
+  form.appendChild(identifier);
 
-    var form = document.createElement('form');
-    form.method = 'post';
-    form.enctype = 'multipart/form-data';
-    form.action = '/deleteLanguage.js';
-    form.className = 'languageCell';
-    form.innerHTML = 'Header values: ';
+  var button = document.createElement('button');
+  button.type = 'submit';
+  button.innerHTML = 'Delete language';
+  button.className = 'deleteFormButton';
+  form.appendChild(button);
 
-    var headersLabel = document.createElement('span');
-    headersLabel.className = 'headerValuesLabel';
-    headersLabel.innerHTML = data.headerValues.join(', ');
-    form.appendChild(headersLabel);
+  form.appendChild(document.createElement('hr'));
 
-    form.appendChild(document.createElement('br'));
+  languages.div.appendChild(form);
 
-    form.appendChild(document.createTextNode('Front-end: '));
-
-    var feLabel = document.createElement('span');
-    feLabel.innerHTML = data.frontEnd;
-    feLabel.className = 'frontEndLabel';
-    form.appendChild(feLabel);
-
-    form.appendChild(document.createElement('br'));
-
-    form.appendChild(document.createTextNode('Language pack: '));
-
-    var packLabel = document.createElement('span');
-    packLabel.innerHTML = data.languagePack;
-    packLabel.className = 'languagePackLabel';
-    form.appendChild(packLabel);
-
-    form.appendChild(document.createElement('br'));
-
-    var identifier = document.createElement('input');
-    identifier.type = 'hidden';
-    identifier.name = 'languageId';
-    identifier.value = data._id;
-    identifier.className = 'languageIdentifier';
-    form.appendChild(identifier);
-
-    var button = document.createElement('button');
-    button.type = 'submit';
-    button.innerHTML = 'Delete language';
-    button.className = 'deleteFormButton';
-    form.appendChild(button);
-
-    form.appendChild(document.createElement('hr'));
-
-    languages.div.appendChild(form);
-
-    languages.setLanguageCell(form);
-
-  });
+  languages.setLanguageCell(form);
 
 };
 
@@ -151,7 +122,7 @@ languages.addLanguage = function() {
       document.getElementById('fieldLanguagePack').value = '';
       document.getElementById('fieldHeaderValues').value = '';
 
-      languages.showNewLanguage();
+      languages.showNewLanguage(payload, data);
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

@@ -46,21 +46,14 @@ rangeBans.liftBan = function(cell) {
 
 };
 
-rangeBans.showNewRangeBan = function(typedRange) {
-
-  var shownBans = document.getElementsByClassName('idIdentifier');
-
-  var knownIds = [];
-
-  for (var i = 0; i < shownBans.length; i++) {
-    knownIds.push(shownBans[i].value);
-  }
+rangeBans.showNewRangeBan = function(typedRange, id) {
 
   var form = document.createElement('form');
   form.className = 'rangeBanCell';
   form.action = '/liftBan.js';
   form.method = 'post';
   form.enctype = 'multipart/form-data';
+  rangeBans.bansDiv.appendChild(form);
 
   form.appendChild(document.createElement('hr'));
 
@@ -77,6 +70,7 @@ rangeBans.showNewRangeBan = function(typedRange) {
   idIdentifier.className = 'idIdentifier';
   idIdentifier.type = 'hidden';
   form.appendChild(idIdentifier);
+  idIdentifier.value = id;
 
   var liftButton = document.createElement('button');
   liftButton.type = 'submit';
@@ -84,34 +78,7 @@ rangeBans.showNewRangeBan = function(typedRange) {
   liftButton.className = 'liftFormButton';
   form.appendChild(liftButton);
 
-  var url = '/rangeBans.js?json=1';
-
-  if (api.boardUri) {
-    url += '&boardUri=' + api.boardUri;
-  }
-
-  api.localRequest(url, function(error, data) {
-
-    if (error) {
-      return;
-    }
-
-    data = JSON.parse(data);
-
-    for (i = 0; i < data.length; i++) {
-      if (knownIds.indexOf(data[i]._id) < 0) {
-        data = data[i];
-        break;
-      }
-    }
-
-    idIdentifier.value = data._id;
-
-    rangeBans.bansDiv.appendChild(form);
-
-    rangeBans.processRangeBanCell(form);
-
-  });
+  rangeBans.processRangeBanCell(form);
 
 };
 
@@ -130,8 +97,7 @@ rangeBans.placeRangeBan = function() {
     if (status === 'ok') {
 
       document.getElementById('rangeField').value = '';
-      // TODO refactor after adding info on back-end
-      rangeBans.showNewRangeBan(typedRange);
+      rangeBans.showNewRangeBan(typedRange, data);
 
     } else {
       alert(status + ': ' + JSON.stringify(data));

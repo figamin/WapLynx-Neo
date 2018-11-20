@@ -47,68 +47,41 @@ hashBans.liftHashBan = function(cell) {
 
 };
 
-hashBans.showNewHashBan = function(typedHash) {
+hashBans.showNewHashBan = function(typedHash, id) {
 
-  var url = '/hashBans.js?json=1'
+  var form = document.createElement('form');
+  form.method = 'post';
+  form.enctype = 'multipart/form-data';
+  form.action = '/liftHashBan.js';
+  form.className = 'hashBanCell';
 
-  if (api.boardUri) {
-    url += '&boardUri=' + api.boardUri;
-  }
+  form.appendChild(document.createElement('hr'));
 
-  // TODO once 2.2 returns the data of the new hash ban
-  api.localRequest(url, function(error, data) {
+  var hashPara = document.createElement('p');
+  hashPara.innerHTML = 'MD5: ';
+  form.appendChild(hashPara);
 
-    if (error) {
-      return;
-    }
+  var hashLabel = document.createElement('span');
+  hashLabel.className = 'hashLabel';
+  hashLabel.innerHTML = typedHash;
+  hashPara.appendChild(hashLabel);
 
-    data = JSON.parse(data);
+  var identifier = document.createElement('input');
+  identifier.type = 'hidden';
+  identifier.value = id;
+  identifier.name = 'hashBanId';
+  identifier.className = 'idIdentifier';
+  form.appendChild(identifier);
 
-    for (var i = 0; i < data.length; i++) {
-      var hashBan = data[i];
+  var submit = document.createElement('button');
+  submit.type = 'submit';
+  submit.innerHTML = 'Lift hash ban';
+  submit.className = 'liftFormButton';
+  form.appendChild(submit);
 
-      if (hashBan.md5 === typedHash) {
-        data = hashBan;
-        break;
-      }
+  hashBans.div.appendChild(form);
 
-    }
-
-    var form = document.createElement('form');
-    form.method = 'post';
-    form.enctype = 'multipart/form-data';
-    form.action = '/liftHashBan.js';
-    form.className = 'hashBanCell';
-
-    form.appendChild(document.createElement('hr'));
-
-    var hashPara = document.createElement('p');
-    hashPara.innerHTML = 'MD5: ';
-    form.appendChild(hashPara);
-
-    var hashLabel = document.createElement('span');
-    hashLabel.className = 'hashLabel';
-    hashLabel.innerHTML = typedHash;
-    hashPara.appendChild(hashLabel);
-
-    var identifier = document.createElement('input');
-    identifier.type = 'hidden';
-    identifier.value = hashBan._id;
-    identifier.name = 'hashBanId';
-    identifier.className = 'idIdentifier';
-    form.appendChild(identifier);
-
-    var submit = document.createElement('button');
-    submit.type = 'submit';
-    submit.innerHTML = 'Lift hash ban';
-    submit.className = 'liftFormButton';
-    form.appendChild(submit);
-
-    hashBans.div.appendChild(form);
-
-    hashBans.processHashBanCell(form);
-
-  });
+  hashBans.processHashBanCell(form);
 
 };
 
@@ -123,7 +96,7 @@ hashBans.placeHashBan = function() {
 
     if (status === 'ok') {
       document.getElementById('hashField').value = '';
-      hashBans.showNewHashBan(typedHash);
+      hashBans.showNewHashBan(typedHash, data);
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

@@ -148,70 +148,43 @@ flags.removeFlag = function(cell) {
 
 };
 
-flags.showNewFlag = function(typedName) {
+flags.showNewFlag = function(typedName, id) {
 
-  typedName = typedName.replace(/[<>]/g, function(match) {
-    return api.htmlReplaceTable[match];
-  });
+  var form = document.createElement('form');
+  form.method = 'post';
+  form.enctype = 'multipart/form-data';
+  form.action = '/deleteFlag.js';
+  form.className = 'flagCell';
 
-  api.localRequest('/flags.js?json=1&boardUri=' + api.boardUri,
-      function gotData(error, data) {
+  var flagName = document.createElement('div');
+  flagName.innerHTML = typedName;
+  flagName.className = 'nameLabel';
+  form.appendChild(flagName);
 
-        if (error) {
-          alert(error);
-          return;
-        }
+  var flagImage = document.createElement('img');
+  flagImage.className = 'flagImg';
+  flagImage.src = '/' + api.boardUri + '/flags/' + id;
+  form.appendChild(flagImage);
 
-        data = JSON.parse(data);
+  form.appendChild(document.createElement('br'));
 
-        for (var i = 0; i < data.length; i++) {
+  var flagIdentifier = document.createElement('input');
+  flagIdentifier.className = 'idIdentifier';
+  flagIdentifier.value = id;
+  flagIdentifier.type = 'hidden';
+  form.appendChild(flagIdentifier);
 
-          var flag = data[i];
+  var deleteButton = document.createElement('button');
+  deleteButton.type = 'submit';
+  deleteButton.className = 'deleteFormButton';
+  deleteButton.innerHTML = 'Delete';
+  form.appendChild(deleteButton);
 
-          if (flag.name === typedName) {
-            data = flag;
-            break;
-          }
+  form.appendChild(document.createElement('hr'));
 
-        }
+  flags.flagsDiv.appendChild(form);
 
-        var form = document.createElement('form');
-        form.method = 'post';
-        form.enctype = 'multipart/form-data';
-        form.action = '/deleteFlag.js';
-        form.className = 'flagCell';
-
-        var flagName = document.createElement('div');
-        flagName.innerHTML = data.name;
-        flagName.className = 'nameLabel';
-        form.appendChild(flagName);
-
-        var flagImage = document.createElement('img');
-        flagImage.className = 'flagImg';
-        flagImage.src = '/' + api.boardUri + '/flags/' + data._id;
-        form.appendChild(flagImage);
-
-        form.appendChild(document.createElement('br'));
-
-        var flagIdentifier = document.createElement('input');
-        flagIdentifier.className = 'idIdentifier';
-        flagIdentifier.value = data._id;
-        flagIdentifier.type = 'hidden';
-        form.appendChild(flagIdentifier);
-
-        var deleteButton = document.createElement('button');
-        deleteButton.type = 'submit';
-        deleteButton.className = 'deleteFormButton';
-        deleteButton.innerHTML = 'Delete';
-        form.appendChild(deleteButton);
-
-        form.appendChild(document.createElement('hr'));
-
-        flags.flagsDiv.appendChild(form);
-
-        flags.processFlagCell(form);
-
-      });
+  flags.processFlagCell(form);
 
 };
 
@@ -252,8 +225,7 @@ flags.uploadFlags = function() {
 
         document.getElementsByClassName('removeButton')[0].onclick();
 
-        flags.showNewFlag(typedName);
-        // TODO refactor on 2.2 when this data is returned
+        flags.showNewFlag(typedName, data);
 
         flags.uploadFlags();
 

@@ -28,57 +28,39 @@ bannerManagement.processBannerCell = function(cell) {
 
 };
 
-bannerManagement.refreshBanners = function() {
+bannerManagement.showNewBanner = function(data) {
 
-  var address = '/bannerManagement.js?json=1';
-  if (api.boardUri) {
-    address += '&boardUri=' + api.boardUri;
-  }
+  var form = document.createElement('form');
+  form.className = 'bannerCell';
+  form.action = '/deleteBanner.js';
+  form.method = 'post';
+  form.enctype = 'multipart/form-data';
 
-  api.localRequest(address, function gotBannerData(error, data) {
+  var img = document.createElement('img');
+  img.className = 'bannerImage';
+  img.src = data.path;
+  form.appendChild(img);
 
-    if (error) {
-      alert(error);
-      return;
-    }
+  form.appendChild(document.createElement('br'));
 
-    data = JSON.parse(data);
+  var identifier = document.createElement('input');
+  identifier.name = 'bannerId';
+  identifier.className = 'bannerIdentifier';
+  identifier.value = data.id;
+  identifier.type = 'hidden';
+  form.appendChild(identifier);
 
-    data = data[data.length - 1];
+  var button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'deleteFormButton';
+  button.innerHTML = 'Delete banner';
+  form.appendChild(button);
 
-    var form = document.createElement('form');
-    form.className = 'bannerCell';
-    form.action = '/deleteBanner.js';
-    form.method = 'post';
-    form.enctype = 'multipart/form-data';
+  form.appendChild(document.createElement('hr'));
 
-    var img = document.createElement('img');
-    img.className = 'bannerImage';
-    img.src = data.filename;
-    form.appendChild(img);
+  bannerManagement.bannersDiv.appendChild(form);
 
-    form.appendChild(document.createElement('br'));
-
-    var identifier = document.createElement('input');
-    identifier.name = 'bannerId';
-    identifier.className = 'bannerIdentifier';
-    identifier.value = data._id;
-    identifier.type = 'hidden';
-    form.appendChild(identifier);
-
-    var button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'deleteFormButton';
-    button.innerHTML = 'Delete banner';
-    form.appendChild(button);
-
-    form.appendChild(document.createElement('hr'));
-
-    bannerManagement.bannersDiv.appendChild(form);
-
-    bannerManagement.processBannerCell(form);
-
-  });
+  bannerManagement.processBannerCell(form);
 
 };
 
@@ -113,8 +95,7 @@ bannerManagement.addBanner = function() {
         filePicker.type = 'text';
         filePicker.type = 'file';
 
-        bannerManagement.refreshBanners();
-        // TODO refactor on 2.2 when the data of the new banner is returned
+        bannerManagement.showNewBanner(data);
 
       } else {
         alert(status + ': ' + JSON.stringify(data));
