@@ -272,7 +272,7 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
   sideCatalog.removeAllFromClass('relativeTime');
   sideCatalog.removeAllFromClass('unhideButton');
 
-  api.resetIndicators(threadData);
+  api.resetIndicators(data);
 
   document.getElementsByClassName('panelBacklinks')[0].innerHTML = '';
 

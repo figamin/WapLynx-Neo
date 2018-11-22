@@ -32,6 +32,10 @@ thread.init = function() {
 
   thread.refreshButton = document.getElementById('refreshButton');
 
+  if (document.getElementById('divArchive')) {
+    api.convertButton('archiveFormButon', thread.archiveThread, 'archiveField');
+  }
+
   if (document.getElementById('controlThreadIdentifier')) {
 
     api.convertButton('settingsFormButon', thread.saveThreadSettings,
@@ -229,6 +233,36 @@ thread.processPostingQuote = function(link) {
 
 };
 
+thread.archiveThread = function() {
+
+  if (!document.getElementById('checkboxArchive').checked) {
+    alert('You must confirm that you wish to archive this thread.');
+    return;
+  }
+
+  api.apiRequest('archiveThread', {
+    confirmation : true,
+    boardUri : api.boardUri,
+    threadId : api.threadId
+  }, function archived(status, data) {
+
+    if (status === 'ok') {
+
+      api.resetIndicators({
+        locked : document.getElementsByClassName('lockIndicator').length,
+        pinned : document.getElementsByClassName('pinIndicator').length,
+        cyclic : document.getElementsByClassName('cyclicIndicator').length,
+        archived : true
+      });
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+
+  });
+
+};
+
 thread.saveThreadSettings = function() {
 
   var pinned = document.getElementById('checkboxPin').checked;
@@ -248,7 +282,8 @@ thread.saveThreadSettings = function() {
       api.resetIndicators({
         locked : locked,
         pinned : pinned,
-        cyclic : cyclic
+        cyclic : cyclic,
+        archived : document.getElementsByClassName('archiveIndicator').length
       });
 
     } else {

@@ -508,7 +508,9 @@ postingMenu.toggleThreadSetting = function(boardUri, thread, settingIndex,
                 api.resetIndicators({
                   locked : parameters.lock,
                   pinned : parameters.pin,
-                  cyclic : parameters.cyclic
+                  cyclic : parameters.cyclic,
+                  archived : innerPart
+                      .getElementsByClassName('archiveIndicator').length
                 }, innerPart);
               } else {
                 alert(status + ': ' + JSON.stringify(data));
@@ -551,6 +553,53 @@ postingMenu.setExtraMenuThread = function(extraMenu, board, thread, innerPart) {
 
   for (var i = 0; i < postingMenu.threadSettingsList.length; i++) {
     postingMenu.addToggleSettingButton(extraMenu, board, thread, i, innerPart);
+  }
+
+  if (!innerPart.getElementsByClassName('archiveIndicator').length) {
+
+    extraMenu.appendChild(document.createElement('hr'));
+
+    var archiveButton = document.createElement('div');
+    archiveButton.innerHTML = 'Archive';
+    archiveButton.onclick = function() {
+
+      if (confirm("Are you sure you wish to lock and archive this thread?")) {
+
+        api
+            .apiRequest(
+                'archiveThread',
+                {
+                  confirmation : true,
+                  boardUri : board,
+                  threadId : thread
+                },
+                function(status, data) {
+
+                  if (status === 'ok') {
+
+                    var lock = innerPart
+                        .getElementsByClassName('lockIndicator').length;
+                    var pin = innerPart.getElementsByClassName('pinIndicator').length;
+                    var cyclic = innerPart
+                        .getElementsByClassName('cyclicIndicator').length;
+
+                    api.resetIndicators({
+                      locked : lock,
+                      pinned : pin,
+                      cyclic : cyclic,
+                      archived : true
+                    }, innerPart);
+
+                  } else {
+                    alert(status + ': ' + JSON.stringify(data));
+                  }
+
+                });
+
+      }
+
+    };
+    extraMenu.appendChild(archiveButton);
   }
 
 };
