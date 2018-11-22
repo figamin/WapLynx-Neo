@@ -15,6 +15,12 @@
   color: #A00;
 }
 
+.archiveIndicator:after {
+  font-family: Icons;
+  content: "\e023";
+  color: #A00;
+}
+
 .cyclicIndicator:after {
   font-family: Icons;
   content: "\e08c";

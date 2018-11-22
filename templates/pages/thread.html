@@ -347,6 +347,41 @@
       </form>
 
     </div>
+    <div id="divArchive">
+
+      <form
+        action="/archiveThread.js"
+        method="post"
+        enctype="multipart/form-data">
+
+        <fieldset id="settingsFieldset">
+          <legend>Archive Thread</legend>
+
+          <label>
+            <input
+              name="confirmation"
+              class="threadSettingsField"
+              id="checkboxArchive"
+              type="checkbox">
+            Yes, I wish to lock and archive this thread
+          </label>
+
+          <input
+            type="hidden"
+            name="boardUri"
+            id="archiveBoardIdentifier">
+          <input
+            type="hidden"
+            name="threadId"
+            id="archiveThreadIdentifier">
+          <button
+            type="submit"
+            id="settingsFormButon">Archive</button>
+
+        </fieldset>
+      </form>
+
+    </div>
 
     <div id="transferControls">
 

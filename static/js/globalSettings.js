@@ -27,6 +27,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'verboseGenerator',
     },
+    checkboxBoardStaffArchiving : {
+      type : 'boolean',
+      setting : 'allowBoardStaffArchiving',
+    },
     checkboxVerboseQueue : {
       type : 'boolean',
       setting : 'verboseQueue',

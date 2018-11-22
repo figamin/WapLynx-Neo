@@ -264,7 +264,7 @@
 }
 
 .contentAction label, #divControls label, #transferControls label,
-  #ipDelete label {
+  #ipDelete label, #divArchive label {
   font-size: 80%;
 }
 
