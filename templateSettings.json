@@ -78,5 +78,7 @@
   "confirmationEmail": "emails/confirmationEmail.html",
   "reportNotificationEmail": "emails/reportNotifyEmail.html",
   "latestPostingsPage": "pages/latestPostings.html",
-  "header": "cells/header.html"
+  "header": "cells/header.html",
+  "archivePage": "pages/archivePage.html",
+  "archiveCell": "cells/archiveCell.html"
 }

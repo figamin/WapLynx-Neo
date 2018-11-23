@@ -577,6 +577,11 @@ postingMenu.setExtraMenuThread = function(extraMenu, board, thread, innerPart) {
 
                   if (status === 'ok') {
 
+                    if (!api.threadId) {
+                      innerPart.parentNode.remove();
+                      return;
+                    }
+
                     var lock = innerPart
                         .getElementsByClassName('lockIndicator').length;
                     var pin = innerPart.getElementsByClassName('pinIndicator').length;
