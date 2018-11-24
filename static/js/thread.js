@@ -354,6 +354,8 @@ thread.refreshCallback = function(error, data) {
 
   var receivedData = JSON.parse(data);
 
+  tooltips.cacheData(receivedData);
+
   var posts = receivedData.posts;
 
   var foundPosts = false;

@@ -32,6 +32,10 @@
   content: "\e069";
 }
 
+#linkArchives:before {
+  content: "\e023";
+}
+
 #linkGraphs:before {
   content: "\e018";
 }

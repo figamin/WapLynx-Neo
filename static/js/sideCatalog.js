@@ -69,7 +69,12 @@ sideCatalog.loadThread = function(cell, threadData) {
     }
 
     if (!error) {
+
+      data = JSON.parse(data);
+
       sideCatalog.transitionThread(cell, threadData, data);
+
+      tooltips.cacheData(data);
     }
 
   });
@@ -138,8 +143,6 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
   opCell.scrollIntoView();
 
   document.getElementsByClassName('divPosts')[0].innerHTML = '';
-
-  data = JSON.parse(data);
 
   opCell.id = threadData.threadId;
   opCell.className = 'opCell';

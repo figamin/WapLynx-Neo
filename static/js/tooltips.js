@@ -2,11 +2,11 @@ var tooltips = {};
 
 tooltips.init = function() {
 
-  tooltips.loadedPreviews = [];
-  tooltips.loadingPreviews = [];
+  tooltips.loadingPreviews = {};
   tooltips.loadedContent = {};
   tooltips.quoteReference = {};
   tooltips.knownPosts = {};
+  tooltips.knownData = {};
 
   var posts = document.getElementsByClassName('postCell');
 
@@ -20,10 +20,32 @@ tooltips.init = function() {
     tooltips.addToKnownPostsForBackLinks(threads[i])
   }
 
+  tooltips.cacheExistingHTML('innerOP');
+  tooltips.cacheExistingHTML('innerPost');
+
   var quotes = document.getElementsByClassName('quoteLink');
 
   for (i = 0; i < quotes.length; i++) {
     tooltips.processQuote(quotes[i]);
+  }
+
+};
+
+tooltips.cacheExistingHTML = function(className) {
+
+  var innerContent = document.getElementsByClassName(className);
+
+  for (var i = 0; i < innerContent.length; i++) {
+
+    var inner = innerContent[i];
+
+    var temp = document.createElement('div');
+    temp.className = 'innerPost';
+    temp.innerHTML = inner.innerHTML;
+    temp.getElementsByClassName('deletionCheckBox')[0].remove();
+
+    var quoteLink = temp.getElementsByClassName('linkSelf')[0];
+    tooltips.loadedContent[quoteLink.href] = temp.outerHTML;
   }
 
 };
@@ -103,10 +125,7 @@ tooltips.addBackLink = function(quoteUrl, quote) {
 
 tooltips.processQuote = function(quote, backLink) {
 
-  var tooltip = document.createElement('div');
-  tooltip.className = 'quoteTooltip';
-
-  document.body.appendChild(tooltip);
+  var tooltip;
 
   var quoteUrl = quote.href;
 
@@ -114,18 +133,19 @@ tooltips.processQuote = function(quote, backLink) {
     tooltips.addBackLink(quoteUrl, quote);
   }
 
-  if (tooltips.loadedPreviews.indexOf(quoteUrl) > -1) {
-    tooltip.innerHTML = tooltips.loadedContent[quoteUrl];
-  } else {
-    var referenceList = tooltips.quoteReference[quoteUrl] || [];
-
-    referenceList.push(tooltip);
-
-    tooltips.quoteReference[quoteUrl] = referenceList;
-    tooltip.innerHTML = 'Loading';
-  }
-
   quote.onmouseenter = function() {
+
+    tooltip = document.createElement('div');
+    tooltip.className = 'quoteTooltip';
+
+    document.body.appendChild(tooltip);
+
+    if (tooltips.loadedContent[quoteUrl]) {
+      tooltip.innerHTML = tooltips.loadedContent[quoteUrl];
+    } else {
+      tooltip.innerHTML = 'Loading';
+    }
+
     var rect = quote.getBoundingClientRect();
 
     var previewOrigin = {
@@ -137,24 +157,56 @@ tooltips.processQuote = function(quote, backLink) {
     tooltip.style.top = previewOrigin.y + 'px';
     tooltip.style.display = 'inline';
 
-    if (tooltips.loadedPreviews.indexOf(quoteUrl) < 0
-        && tooltips.loadingPreviews.indexOf(quoteUrl) < 0) {
+    if (!tooltips.loadedContent[quoteUrl]
+        && !tooltips.loadingPreviews[quoteUrl]) {
       tooltips.loadQuote(tooltip, quoteUrl);
+    }
+
+    if (!api.isBoard) {
+      var matches = quote.href.match(/\#(\d+)/);
+
+      quote.onclick = function() {
+        thread.markPost(matches[1]);
+      };
     }
 
   };
 
   quote.onmouseout = function() {
-    tooltip.style.display = 'none';
+    if (tooltip) {
+      tooltip.remove();
+      tooltip = null;
+    }
   };
 
-  if (!api.isBoard) {
-    var matches = quote.href.match(/\#(\d+)/);
+};
 
-    quote.onclick = function() {
-      thread.markPost(matches[1]);
-    };
+tooltips.generateHTMLFromData = function(postingData, tooltip, quoteUrl) {
+
+  if (!postingData) {
+    tooltip.innerHTML = 'Not found';
+    return;
   }
+
+  var tempDiv = posting.addPost(postingData, postingData.boardUri,
+      postingData.threadId, true).getElementsByClassName('innerPost')[0];
+
+  tempDiv.getElementsByClassName('deletionCheckBox')[0].remove();
+
+  tooltip.innerHTML = tempDiv.outerHTML;
+
+  tooltips.loadedContent[quoteUrl] = tempDiv.outerHTML;
+
+};
+
+tooltips.cacheData = function(threadData) {
+
+  for (var i = 0; i < threadData.posts.length; i++) {
+    var postData = threadData.posts[i];
+    tooltips.knownData[threadData.boardUri + '/' + postData.postId] = postData;
+  }
+
+  tooltips.knownData[threadData.boardUri + '/' + threadData.threadId] = threadData;
 
 };
 
@@ -166,57 +218,30 @@ tooltips.loadQuote = function(tooltip, quoteUrl) {
   var thread = +matches[2];
   var post = +matches[3];
 
+  var postingData = tooltips.knownData[board + '/' + post];
+
+  if (postingData) {
+    tooltips.generateHTMLFromData(postingData, tooltip, quoteUrl);
+    return;
+  }
+
   var threadUrl = '/' + board + '/res/' + thread + '.json';
 
-  tooltips.loadingPreviews.push(quoteUrl);
+  tooltips.loadingPreviews[quoteUrl] = true;
 
   api.localRequest(threadUrl, function receivedData(error, data) {
 
-    tooltips.loadingPreviews.splice(tooltips.loadingPreviews.indexOf(quoteUrl),
-        1);
+    delete tooltips.loadingPreviews[quoteUrl];
 
     if (error) {
+      tooltip.innerHTML = 'Not found';
       return;
     }
 
-    var threadData = JSON.parse(data);
+    tooltips.cacheData(JSON.parse(data));
 
-    var postingData;
-
-    if (thread === post) {
-      threadData.postId = post;
-      postingData = threadData;
-    } else {
-      for (var i = 0; i < threadData.posts.length; i++) {
-
-        var postData = threadData.posts[i];
-        if (postData.postId === post) {
-          postingData = postData;
-          break;
-        }
-
-      }
-    }
-
-    if (!postingData) {
-      return;
-    }
-
-    var tempDiv = posting.addPost(postingData, board, thread, true)
-        .getElementsByClassName('innerPost')[0];
-
-    tempDiv.getElementsByClassName('deletionCheckBox')[0].remove();
-
-    var finalHTML = tempDiv.outerHTML;
-
-    var referenceList = tooltips.quoteReference[quoteUrl];
-
-    for (i = 0; i < referenceList.length; i++) {
-      referenceList[i].innerHTML = finalHTML;
-    }
-
-    tooltips.loadedContent[quoteUrl] = finalHTML;
-    tooltips.loadedPreviews.push(quoteUrl);
+    tooltips.generateHTMLFromData(tooltips.knownData[board + '/' + post],
+        tooltip, quoteUrl);
 
   });
 
