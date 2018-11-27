@@ -11,6 +11,10 @@ globalSettings.init = function() {
       setting : 'slaves',
       type : 'array'
     },
+    checkboxSendmail : {
+      type : 'boolean',
+      setting : 'useSendmail',
+    },
     checkboxGlobalBanners : {
       type : 'boolean',
       setting : 'useGlobalBanners',
