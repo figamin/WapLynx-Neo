@@ -335,6 +335,72 @@ postCommon.checkExistance = function(file, callback) {
 
 };
 
+postCommon.newCheckExistance = function(file, callback) {
+
+  var reader = new FileReader();
+
+  reader.onloadend = function() {
+
+    var mime = file.type;
+    var md5 = SparkMD5.ArrayBuffer.hash(reader.result);
+
+    var identifier = md5 + '-' + mime.replace('/', '');
+
+    api.localRequest('/checkFileIdentifier.js?identifier=' + identifier,
+        function requested(error, response) {
+
+          if (error) {
+            console.log(error);
+            callback();
+          } else {
+            callback(md5, mime, JSON.parse(response));
+          }
+
+        });
+
+  };
+
+  reader.readAsArrayBuffer(file);
+
+};
+
+postCommon.newGetFilesToUpload = function(callback, index, files) {
+
+  index = index || 0;
+  files = files || [];
+
+  if (!document.getElementById('divUpload')
+      || index >= postCommon.selectedFiles.length) {
+    callback(files);
+    return;
+  }
+
+  var spoiled = postCommon.selectedDiv
+      .getElementsByClassName('spoilerCheckBox')[index].checked;
+
+  var file = postCommon.selectedFiles[index];
+
+  postCommon.newCheckExistance(file, function checked(md5, mime, found) {
+
+    var toPush = {
+      name : postCommon.selectedFiles[index].name,
+      spoiler : spoiled,
+      md5 : md5,
+      mime : mime
+    };
+
+    if (!found) {
+      toPush.content = file;
+    }
+
+    files.push(toPush);
+
+    postCommon.newGetFilesToUpload(callback, ++index, files);
+
+  });
+
+};
+
 postCommon.getFilestToUpload = function(callback, currentIndex, files) {
 
   currentIndex = currentIndex || 0;

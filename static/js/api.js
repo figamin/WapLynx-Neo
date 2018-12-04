@@ -171,10 +171,6 @@ api.handleConnectionResponse = function(xhr, callback) {
 
   } else if (response.status === 'tooLarge') {
     alert('Request refused because it was too large');
-  } else if (response.status === 'construction') {
-    alert('This page is under construction. Come back later, your grandma is almost done sucking me.');
-  } else if (response.status === 'denied') {
-    alert('You are not allowed to perform this operation.');
   } else if (response.status === 'maintenance') {
     alert('The site is going under maintenance and all of it\'s functionalities are disabled temporarily.');
   } else if (response.status === 'fileParseError') {
@@ -238,8 +234,7 @@ api.apiRequest = function(page, parameters, callback) {
     xhr = new XDomainRequest();
     xhr.open('POST', '/.api/' + page);
   } else {
-    alert('This site can\'t run js on your shitty browser because it does not support CORS requests. Disable js and try again.');
-
+    alert('Update your browser or turn off javascript.');
     return;
   }
 
@@ -251,23 +246,25 @@ api.apiRequest = function(page, parameters, callback) {
 
   xhr.onreadystatechange = function connectionStateChanged() {
 
+    if (xhr.readyState !== 4) {
+      return;
+    }
+
     if (parameters.captcha) {
       captchaUtils.reloadCaptcha();
     }
 
-    if (xhr.readyState == 4) {
-
-      if (callback.hasOwnProperty('stop')) {
-        callback.stop();
-      }
-
-      if (xhr.status != 200) {
-        alert('Connection failed.');
-        return;
-      }
-
-      api.handleConnectionResponse(xhr, callback);
+    if (callback.hasOwnProperty('stop')) {
+      callback.stop();
     }
+
+    if (xhr.status != 200) {
+      alert('Connection failed.');
+      return;
+    }
+
+    api.handleConnectionResponse(xhr, callback);
+
   };
 
   var parsedCookies = api.getCookies();
@@ -286,6 +283,88 @@ api.apiRequest = function(page, parameters, callback) {
 
 };
 
+api.formApiRequest = function(page, parameters, callback) {
+
+  page += '.js?json=1';
+
+  var xhr = new XMLHttpRequest();
+
+  if ('withCredentials' in xhr) {
+    xhr.open('POST', '/' + page, true);
+  } else if (typeof XDomainRequest != 'undefined') {
+
+    xhr = new XDomainRequest();
+    xhr.open('POST', '/' + page);
+  } else {
+    alert('Update your browser or turn off javascript.');
+
+    return;
+  }
+
+  if (callback.hasOwnProperty('progress')) {
+    xhr.upload.onprogress = callback.progress;
+  }
+
+  xhr.onreadystatechange = function connectionStateChanged() {
+
+    if (xhr.readyState !== 4) {
+      return;
+    }
+
+    if (parameters.captcha) {
+      captchaUtils.reloadCaptcha();
+    }
+
+    if (callback.hasOwnProperty('stop')) {
+      callback.stop();
+    }
+
+    if (xhr.status != 200) {
+      callback('Connection failed.');
+      return;
+    }
+
+    api.handleConnectionResponse(xhr, callback);
+
+  };
+
+  var form = new FormData();
+
+  for ( var entry in parameters) {
+
+    if (!parameters[entry] && typeof (parameters[entry] !== 'number')) {
+      continue;
+    }
+
+    if (entry !== 'files') {
+      form.append(entry, parameters[entry]);
+    } else {
+
+      var files = parameters.files;
+
+      for (var i = 0; i < files.length; i++) {
+
+        var file = files[i];
+
+        form.append('fileMd5', file.md5);
+        form.append('fileMime', file.mime);
+        form.append('fileSpoiler', file.spoiler || '');
+        form.append('fileName', file.name);
+
+        if (file.content) {
+          form.append('files', file.content, file.name);
+        }
+
+      }
+
+    }
+
+  }
+
+  xhr.send(form);
+
+};
+
 api.localRequest = function(address, callback) {
 
   var xhr = new XMLHttpRequest();
@@ -297,7 +376,7 @@ api.localRequest = function(address, callback) {
     xhr = new XDomainRequest();
     xhr.open('GET', address);
   } else {
-    alert('This site can\'t run js on your shitty browser because it does not support CORS requests. Disable js and try again.');
+    alert('Update your browser or turn off javascript.');
     return;
   }
 

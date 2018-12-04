@@ -120,7 +120,7 @@ board.sendThreadData = function(files, captchaId) {
 
   var noFlagCheckBox = document.getElementById('checkboxNoFlag');
 
-  api.apiRequest('newThread', {
+  api.formApiRequest('newThread', {
     name : forcedAnon ? null : typedName,
     flag : hiddenFlags ? null : selectedFlag,
     captcha : captchaId,
@@ -138,7 +138,7 @@ board.sendThreadData = function(files, captchaId) {
 
 board.processFilesToPost = function(captchaId) {
 
-  postCommon.getFilestToUpload(function gotFiles(files) {
+  postCommon.newGetFilesToUpload(function gotFiles(files) {
     board.sendThreadData(files, captchaId);
   });
 
