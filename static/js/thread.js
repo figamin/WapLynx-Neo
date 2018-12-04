@@ -495,7 +495,7 @@ thread.sendReplyData = function(files, captchaId) {
   thread.replyButton.disabled = true;
   qr.setQRReplyEnabled(false);
 
-  api.apiRequest('replyThread', {
+  api.formApiRequest('replyThread', {
     name : forcedAnon ? null : typedName,
     flag : hiddenFlags ? null : selectedFlag,
     captcha : captchaId,
@@ -514,7 +514,7 @@ thread.sendReplyData = function(files, captchaId) {
 
 thread.processFilesToPost = function(captchaId) {
 
-  postCommon.getFilestToUpload(function gotFiles(files) {
+  postCommon.newGetFilesToUpload(function gotFiles(files) {
     thread.sendReplyData(files, captchaId);
   });
 

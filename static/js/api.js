@@ -119,15 +119,16 @@ api.getCookies = function() {
 
 };
 
-api.handleConnectionResponse = function(xhr, callback) {
+api.handleConnectionResponse = function(xhr, callback, silent) {
 
   var response;
 
   try {
     response = JSON.parse(xhr.responseText);
-
   } catch (error) {
-    alert('Error in parsing response.');
+    if (!silent) {
+      alert('Error in parsing response.');
+    }
     return;
   }
 
@@ -137,7 +138,11 @@ api.handleConnectionResponse = function(xhr, callback) {
   }
 
   if (response.status === 'error') {
-    alert('Internal server error. ' + response.data);
+
+    if (!silent) {
+      alert('Internal server error. ' + response.data);
+    }
+
   } else if (response.status === 'fileTooLarge') {
     alert('Maximum file size exceeded for a file.');
   } else if (response.status === 'hashBan') {
@@ -172,7 +177,11 @@ api.handleConnectionResponse = function(xhr, callback) {
   } else if (response.status === 'tooLarge') {
     alert('Request refused because it was too large');
   } else if (response.status === 'maintenance') {
-    alert('The site is going under maintenance and all of it\'s functionalities are disabled temporarily.');
+
+    if (!silent) {
+      alert('The site is going under maintenance and all of it\'s functionalities are disabled temporarily.');
+    }
+
   } else if (response.status === 'fileParseError') {
     alert('An uploaded file could not be parsed.');
   } else if (response.status === 'parseError') {
@@ -283,9 +292,17 @@ api.apiRequest = function(page, parameters, callback) {
 
 };
 
-api.formApiRequest = function(page, parameters, callback) {
+api.formApiRequest = function(page, parameters, callback, silent, getParameters) {
+
+  var silent;
 
   page += '.js?json=1';
+
+  getParameters = getParameters || {};
+
+  for ( var parameter in getParameters) {
+    page += encodeURIComponent('&' + parameter + '=' + getParameters[parameter]);
+  }
 
   var xhr = new XMLHttpRequest();
 
@@ -324,7 +341,7 @@ api.formApiRequest = function(page, parameters, callback) {
       return;
     }
 
-    api.handleConnectionResponse(xhr, callback);
+    api.handleConnectionResponse(xhr, callback, silent);
 
   };
 
@@ -346,10 +363,12 @@ api.formApiRequest = function(page, parameters, callback) {
 
         var file = files[i];
 
-        form.append('fileMd5', file.md5);
-        form.append('fileMime', file.mime);
-        form.append('fileSpoiler', file.spoiler || '');
-        form.append('fileName', file.name);
+        if (file.md5 && file.mime) {
+          form.append('fileMd5', file.md5);
+          form.append('fileMime', file.mime);
+          form.append('fileSpoiler', file.spoiler || '');
+          form.append('fileName', file.name);
+        }
 
         if (file.content) {
           form.append('files', file.content, file.name);

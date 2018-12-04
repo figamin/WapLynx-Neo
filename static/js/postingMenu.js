@@ -29,15 +29,9 @@ postingMenu.init = function() {
 
   }, true);
 
-  api.localRequest('/account.js?json=1', function gotLoginData(error, data) {
+  api.formApiRequest('account', function gotLoginData(status, data) {
 
-    if (!data) {
-      return;
-    }
-
-    try {
-      data = JSON.parse(data);
-    } catch (error) {
+    if (status !== 'ok') {
       return;
     }
 
@@ -55,7 +49,7 @@ postingMenu.init = function() {
       postingMenu.moddedBoards.push(data.volunteeredBoards[i]);
     }
 
-  });
+  }, true);
 
   var links = document.getElementsByClassName('linkSelf');
 
