@@ -337,7 +337,10 @@ api.formApiRequest = function(page, parameters, callback, silent, getParameters)
     }
 
     if (xhr.status != 200) {
-      callback('Connection failed.');
+      if (!silent) {
+        alert('Connection failed.');
+      }
+
       return;
     }
 
