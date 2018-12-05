@@ -29,7 +29,7 @@ postingMenu.init = function() {
 
   }, true);
 
-  api.formApiRequest('account', function gotLoginData(status, data) {
+  api.formApiRequest('account', {}, function gotLoginData(status, data) {
 
     if (status !== 'ok') {
       return;
@@ -49,7 +49,7 @@ postingMenu.init = function() {
       postingMenu.moddedBoards.push(data.volunteeredBoards[i]);
     }
 
-  }, true);
+  }, {}, true);
 
   var links = document.getElementsByClassName('linkSelf');
 
@@ -82,16 +82,23 @@ postingMenu.showReport = function(board, thread, post, global) {
       return;
     }
 
-    api.apiRequest('reportContent', {
+    var params = {
       captcha : typedCaptcha,
       reason : reasonField.value.trim(),
       global : global,
-      postings : [ {
-        board : board,
-        thread : thread,
-        post : post
-      } ]
-    }, function requestComplete(status, data) {
+      action : 'report'
+    };
+
+    var key = board + '-' + thread;
+
+    if (post) {
+      key += '-' + post;
+    }
+
+    params[key] = true;
+
+    api.formApiRequest('contentActions', params, function requestComplete(
+        status, data) {
 
       if (status === 'ok') {
         outerPanel.remove();
@@ -123,60 +130,66 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
       || document.getElementById('deletionFieldPassword').value.trim()
       || Math.random().toString(36).substring(2, 10);
 
-  api
-      .apiRequest(
-          fromIp ? 'deleteFromIpOnBoard' : 'deleteContent',
-          {
-            confirmation : true,
-            password : password,
-            deleteUploads : unlinkFiles,
-            deleteMedia : wipeMedia,
-            postings : [ {
-              board : boardUri,
-              thread : threadId,
-              post : post
-            } ]
-          },
-          function requestComplete(status, data) {
+  var params = {
+    confirmation : true,
+    password : password,
+    deleteUploads : unlinkFiles,
+    deleteMedia : wipeMedia,
+    action : fromIp ? 'ip-deletion' : 'delete'
+  };
 
-            if (status !== 'ok') {
-              alert(status + ': ' + JSON.stringify(data));
-              return;
-            }
+  var key = boardUri + '-' + threadId;
 
-            var removed = data.removedThreads || data.removedPosts;
+  if (post) {
+    key += '-' + post;
+  }
 
-            if (unlinkFiles && removed) {
+  params[key] = true;
 
-              innerPart.parentNode.className = innerPart.parentNode.className
-                  .replace(' multipleUploads', '');
+  var deletionCb = function requestComplete(status, data) {
 
-              innerPart.getElementsByClassName('panelUploads')[0].remove();
+    if (status !== 'ok') {
+      alert(status + ': ' + JSON.stringify(data));
+      return;
+    }
 
-            } else if (fromIp) {
+    var data = data || {};
 
-              if (api.isBoard || !api.boardUri) {
-                location.reload(true);
-              } else {
-                window.location.pathname = '/' + boardUri + '/';
-              }
+    var removed = data.removedThreads || data.removedPosts;
 
-            } else if (api.threadId && data.removedThreads) {
-              window.location.pathname = '/' + boardUri + '/';
-            } else if (removed) {
-              innerPart.parentNode.remove();
-            } else if (!removed) {
+    if (unlinkFiles && removed) {
 
-              var newPass = prompt('Could not delete. Would you like to try another password?');
+      innerPart.parentNode.className = innerPart.parentNode.className.replace(
+          ' multipleUploads', '');
 
-              if (newPass) {
-                postingMenu.deleteSinglePost(boardUri, threadId, post, fromIp,
-                    unlinkFiles, wipeMedia, innerPart, newPass);
-              }
+      innerPart.getElementsByClassName('panelUploads')[0].remove();
 
-            }
+    } else if (fromIp) {
 
-          });
+      if (api.isBoard || !api.boardUri) {
+        location.reload(true);
+      } else {
+        window.location.pathname = '/' + boardUri + '/';
+      }
+
+    } else if (api.threadId && data.removedThreads) {
+      window.location.pathname = '/' + boardUri + '/';
+    } else if (removed) {
+      innerPart.parentNode.remove();
+    } else if (!removed) {
+
+      var newPass = prompt('Could not delete. Would you like to try another password?');
+
+      if (newPass) {
+        postingMenu.deleteSinglePost(boardUri, threadId, post, fromIp,
+            unlinkFiles, wipeMedia, innerPart, newPass);
+      }
+
+    }
+
+  };
+
+  api.formApiRequest('contentActions', params, deletionCb);
 
 };
 
@@ -186,19 +199,26 @@ postingMenu.applySingleBan = function(typedMessage, deletionOption,
 
   localStorage.setItem('autoDeletionOption', deletionOption);
 
-  api.apiRequest('banUsers', {
+  var params = {
+    action : 'ban',
     reason : typedReason,
     captcha : typedCaptcha,
     banType : banType,
     duration : typedDuration,
     banMessage : typedMessage,
-    global : global,
-    postings : [ {
-      board : boardUri,
-      thread : thread,
-      post : post
-    } ]
-  }, function requestComplete(status, data) {
+    global : global
+  };
+
+  var key = boardUri + '-' + thread;
+
+  if (post) {
+    key += '-' + post;
+  }
+
+  params[key] = true;
+
+  api.formApiRequest('contentActions', params, function requestComplete(status,
+      data) {
 
     if (status === 'ok') {
 
@@ -287,14 +307,22 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
 
 postingMenu.spoilSinglePost = function(innerPart, boardUri, thread, post) {
 
-  api.apiRequest('spoilFiles', {
-    postings : [ {
-      board : boardUri,
-      thread : thread,
-      post : post
-    } ]
-  }, function requestComplete(status, data) {
+  var params = {
+    action : 'spoil'
+  };
 
+  var key = boardUri + '-' + thread;
+
+  if (post) {
+    key += '-' + post;
+  }
+
+  params[key] = true;
+
+  api.formApiRequest('contentActions', params, function requestComplete(status,
+      data) {
+
+    // style exception, too simple
     api.localRequest('/' + boardUri + '/res/' + thread + '.json', function(
         error, data) {
 
@@ -309,6 +337,7 @@ postingMenu.spoilSinglePost = function(innerPart, boardUri, thread, post) {
       }
 
     });
+    // style exception, too simple
 
   });
 
@@ -325,11 +354,11 @@ postingMenu.transferThread = function(boardUri, thread) {
 
   destination = destination.trim();
 
-  api.apiRequest('transferThread', {
+  api.formApiRequest('transferThread', {
     boardUri : boardUri,
     threadId : thread,
     boardUriDestination : destination
-  }, function setLock(status, data) {
+  }, function transferred(status, data) {
 
     if (status === 'ok') {
       window.location.pathname = '/' + destination + '/res/' + data + '.html';

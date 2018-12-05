@@ -100,15 +100,18 @@ thread.deleteFromIpOnBoard = function() {
   var confirmationBox = document
       .getElementById('ipDeletionConfirmationCheckbox');
 
-  api.apiRequest('deleteFromIpOnBoard', {
-    postings : selected,
+  var param = {
+    action : 'ip-deletion',
     confirmation : confirmationBox.checked
-  }, function requestComplete(status, data) {
+  };
+
+  posting.newGetSelectedContent(param);
+
+  api.formApiRequest('contentActions', param, function requestComplete(status,
+      data) {
 
     if (status === 'ok') {
-
       window.location.pathname = redirect;
-
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
@@ -123,25 +126,27 @@ thread.applyBans = function(captcha) {
   var typedMessage = document.getElementById('fieldbanMessage').value.trim();
   var banType = document.getElementById('comboBoxBanTypes').selectedIndex;
 
-  var toBan = posting.getSelectedContent();
-
-  api.apiRequest('banUsers', {
+  var params = {
+    action : 'ban',
     reason : typedReason,
     captcha : captcha,
     banType : banType,
     duration : typedDuration,
     banMessage : typedMessage,
-    global : document.getElementById('checkboxGlobal').checked,
-    postings : toBan
-  }, function requestComplete(status, data) {
+    global : document.getElementById('checkboxGlobal').checked
+  };
+
+  posting.newGetSelectedContent(params);
+
+  api.formApiRequest('contentActions', params, function requestComplete(status,
+      data) {
 
     if (status === 'ok') {
-
       alert('Bans applied');
-
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
+
   });
 };
 
@@ -182,22 +187,20 @@ thread.transfer = function() {
   var originThread = document.getElementById("transferThreadIdentifier").value;
   var originBoard = document.getElementById("transferBoardIdentifier").value;
 
-  api.apiRequest('transferThread', {
+  api.formApiRequest('transferThread', {
     boardUri : api.boardUri,
     threadId : api.threadId,
     boardUriDestination : informedBoard
-  }, function setLock(status, data) {
+  },
+      function setLock(status, data) {
 
-    if (status === 'ok') {
-
-      var redirect = '/' + informedBoard + '/res/';
-
-      window.location.pathname = redirect + data + '.html';
-
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
+        if (status === 'ok') {
+          window.location.pathname = '/' + informedBoard + '/res/' + data
+              + '.html';
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
+        }
+      });
 
 };
 

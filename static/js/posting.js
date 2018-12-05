@@ -160,9 +160,14 @@ posting.addRelativeTime = function(time) {
 
 posting.spoilFiles = function() {
 
-  api.apiRequest('spoilFiles', {
-    postings : posting.getSelectedContent()
-  }, function requestComplete(status, data) {
+  var posts = {
+    action : 'spoil'
+  };
+
+  posting.newGetSelectedContent(posts);
+
+  api.formApiRequest('contentActions', posts, function requestComplete(status,
+      data) {
 
     if (status === 'ok') {
 
@@ -175,6 +180,21 @@ posting.spoilFiles = function() {
 
 };
 
+posting.newGetSelectedContent = function(object) {
+
+  var checkBoxes = document.getElementsByClassName('deletionCheckBox');
+
+  for (var i = 0; i < checkBoxes.length; i++) {
+    var checkBox = checkBoxes[i];
+
+    if (checkBox.checked) {
+      object[checkBox.name] = true;
+    }
+  }
+
+};
+
+// TODO remove
 posting.getSelectedContent = function() {
 
   var selectedContent = [];
@@ -211,8 +231,6 @@ posting.reportPosts = function() {
   var typedReason = document.getElementById('reportFieldReason').value.trim();
   var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
 
-  var toReport = posting.getSelectedContent();
-
   if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
     alert('Captchas are exactly 6 (24 if no cookies) characters long.');
     return;
@@ -221,12 +239,16 @@ posting.reportPosts = function() {
     return;
   }
 
-  api.apiRequest('reportContent', {
+  var params = {
+    action : 'report',
     reason : typedReason,
     captcha : typedCaptcha,
     global : document.getElementById('checkboxGlobal').checked,
-    postings : toReport
-  }, function reported(status, data) {
+  };
+
+  posting.newGetSelectedContent(params);
+
+  api.formApiRequest('contentActions', params, function reported(status, data) {
 
     if (status === 'ok') {
 
@@ -245,19 +267,17 @@ posting.deletePosts = function() {
   var typedPassword = document.getElementById('deletionFieldPassword').value
       .trim();
 
-  var toDelete = posting.getSelectedContent();
-
-  if (!toDelete.length) {
-    alert('Nothing selected');
-    return;
-  }
-
-  api.apiRequest('deleteContent', {
+  var params = {
     password : typedPassword,
     deleteMedia : document.getElementById('checkboxMediaDeletion').checked,
     deleteUploads : document.getElementById('checkboxOnlyFiles').checked,
-    postings : toDelete
-  }, function requestComplete(status, data) {
+    action : 'delete'
+  };
+
+  posting.newGetSelectedContent(params);
+
+  api.formApiRequest('contentActions', params, function requestComplete(status,
+      data) {
 
     if (status === 'ok') {
 
@@ -267,7 +287,7 @@ posting.deletePosts = function() {
       if (!api.isBoard && !data.removedThreads && data.removedPosts) {
         thread.refreshPosts(true, true);
       } else if (data.removedThreads || data.removedPosts) {
-        window.location.pathname = '/' + toDelete[0].board + '/';
+        window.location.pathname = '/';
       }
 
     } else {

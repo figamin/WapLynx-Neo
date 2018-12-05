@@ -298,6 +298,7 @@ postCommon.setDragAndDrop = function(qr) {
 
 };
 
+// TODO remove
 postCommon.checkExistance = function(file, callback) {
 
   var reader = new FileReader();
@@ -401,6 +402,7 @@ postCommon.newGetFilesToUpload = function(callback, index, files) {
 
 };
 
+// TODO remove
 postCommon.getFilestToUpload = function(callback, currentIndex, files) {
 
   currentIndex = currentIndex || 0;
