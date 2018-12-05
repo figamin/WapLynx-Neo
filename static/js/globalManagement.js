@@ -112,7 +112,7 @@ globalManagement.setUser = function(login, role, cell) {
 
   role = +role;
 
-  api.apiRequest('setGlobalRole', {
+  api.formApiRequest('setGlobalRole', {
     login : login,
     role : role
   }, function requestComplete(status, data) {

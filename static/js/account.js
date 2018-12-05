@@ -139,7 +139,7 @@ account.createBoard = function() {
     alert('Invalid captcha.');
     return;
   } else {
-    api.apiRequest('createBoard', {
+    api.formApiRequest('createBoard', {
       boardUri : typedUri,
       boardName : typedName,
       boardDescription : typedDescription,

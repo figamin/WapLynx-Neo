@@ -427,7 +427,7 @@ boardManagement.refreshVolunteers = function() {
 
 boardManagement.setVolunteer = function(user, add, callback) {
 
-  api.apiRequest('setVolunteer', {
+  api.formApiRequest('setVolunteer', {
     login : user,
     add : add,
     boardUri : api.boardUri
@@ -450,15 +450,13 @@ boardManagement.setVolunteer = function(user, add, callback) {
 
 boardManagement.transferBoard = function() {
 
-  api.apiRequest('transferBoardOwnership', {
+  api.formApiRequest('transferBoardOwnership', {
     login : document.getElementById('transferBoardFieldLogin').value.trim(),
     boardUri : api.boardUri
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
       window.location.pathname = '/' + api.boardUri + '/';
-
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
