@@ -17,15 +17,13 @@ boardModeration.init = function() {
 
 boardModeration.transferBoard = function() {
 
-  api.apiRequest('transferBoardOwnership', {
+  api.formApiRequest('transferBoardOwnership', {
     login : document.getElementById('fieldTransferLogin').value.trim(),
     boardUri : api.boardUri
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
       window.location.pathname = '/' + api.boardUri + '/';
-
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
@@ -40,15 +38,13 @@ boardModeration.deleteBoard = function() {
     return;
   }
 
-  api.apiRequest('deleteBoard', {
+  api.formApiRequest('deleteBoard', {
     boardUri : api.boardUri,
     confirmDeletion : true
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
       window.location.pathname = '/';
-
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

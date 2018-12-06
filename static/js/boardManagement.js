@@ -408,20 +408,17 @@ boardManagement.setVolunteersDiv = function(volunteers) {
 
 boardManagement.refreshVolunteers = function() {
 
-  api.localRequest('/boardManagement.js?json=1&boardUri=' + api.boardUri,
-      function gotData(error, data) {
+  api.formApiRequest('boardManagement', {}, function gotData(status, data) {
 
-        if (error) {
-          alert(error);
-        } else {
+    if (status !== 'ok') {
+      return;
+    }
 
-          var parsedData = JSON.parse(data);
+    boardManagement.setVolunteersDiv(data.volunteers);
 
-          boardManagement.setVolunteersDiv(parsedData.volunteers || []);
-
-        }
-
-      });
+  }, false, {
+    boardUri : api.boardUri
+  });
 
 };
 
@@ -466,15 +463,18 @@ boardManagement.transferBoard = function() {
 
 boardManagement.deleteBoard = function() {
 
-  api.apiRequest('deleteBoard', {
+  if (!document.getElementById('confirmDelCheckbox').checked) {
+    alert('You must confirm that you wish to delete this board.')
+    return;
+  }
+
+  api.formApiRequest('deleteBoard', {
     boardUri : api.boardUri,
-    confirmDeletion : document.getElementById('confirmDelCheckbox').checked
+    confirmDeletion : true
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
       window.location.pathname = '/';
-
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

@@ -4,8 +4,13 @@ reports.closeReports = function() {
 
   var reportDiv = document.getElementById('reportDiv');
 
-  var ids = [];
   var cells = [];
+
+  var params = {
+    duration : document.getElementById('fieldBanDuration').value,
+    banReporter : document.getElementById('banReporterCheckbox').checked,
+    deleteContent : document.getElementById('deleteContentCheckbox').checked
+  };
 
   for (var i = 0; i < reportDiv.childNodes.length; i++) {
 
@@ -14,21 +19,13 @@ reports.closeReports = function() {
 
     if (checkbox.checked) {
       cells.push(reportDiv.childNodes[i]);
-      ids.push(checkbox.name.substring(7));
+      params[checkbox.name] = true;
     }
 
   }
 
-  if (!ids.length) {
-    return;
-  }
-
-  api.apiRequest('closeReports', {
-    reports : ids,
-    duration : document.getElementById('fieldBanDuration').value,
-    banReporter : document.getElementById('banReporterCheckbox').checked,
-    deleteContent : document.getElementById('deleteContentCheckbox').checked
-  }, function requestComplete(status, data) {
+  api.formApiRequest('closeReports', params, function requestComplete(status,
+      data) {
 
     if (status === 'ok') {
 

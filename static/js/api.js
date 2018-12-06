@@ -301,7 +301,8 @@ api.formApiRequest = function(page, parameters, callback, silent, getParameters)
   getParameters = getParameters || {};
 
   for ( var parameter in getParameters) {
-    page += encodeURIComponent('&' + parameter + '=' + getParameters[parameter]);
+    page += '&' + parameter + '='
+        + encodeURIComponent(getParameters[parameter]);
   }
 
   var xhr = new XMLHttpRequest();
