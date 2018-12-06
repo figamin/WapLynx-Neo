@@ -2,6 +2,8 @@ var thread = {};
 
 thread.init = function() {
 
+  thread.mod = !!document.getElementById('divMod');
+
   api.hiddenCaptcha = !document.getElementById('captchaDiv');
 
   document.getElementById('mainPanel').onscroll = function() {
@@ -85,9 +87,11 @@ thread.initThread = function() {
   posting.idsRelation = {};
   thread.unreadPosts = 0;
   api.threadId = +document.getElementsByClassName('opCell')[0].id;
-  thread.refreshURL = document.getElementById('divMod') ? '/mod.js?boardUri='
-      + api.boardUri + '&threadId=' + api.threadId + '&json=1' : '/'
-      + api.boardUri + '/res/' + api.threadId + '.json';
+  thread.refreshURL = '/' + api.boardUri + '/res/' + api.threadId + '.json';
+  thread.refreshParameters = {
+    boardUri : api.boardUri,
+    threadId : api.threadId
+  };
 
 };
 
@@ -272,7 +276,7 @@ thread.saveThreadSettings = function() {
   var locked = document.getElementById('checkboxLock').checked;
   var cyclic = document.getElementById('checkboxCyclic').checked;
 
-  api.apiRequest('changeThreadSettings', {
+  api.formApiRequest('changeThreadSettings', {
     boardUri : api.boardUri,
     threadId : api.threadId,
     pin : pinned,
@@ -338,10 +342,15 @@ thread.replyCallback.progress = function(info) {
 
 };
 
-thread.refreshCallback = function(error, data) {
+thread.refreshCallback = function(error, receivedData) {
 
-  if (error) {
+  if ((thread.mod && (error !== 'ok')) || (!thread.mod && error)) {
+    console.log('retrun');
     return;
+  }
+
+  if (!thread.mod) {
+    receivedData = JSON.parse(receivedData);
   }
 
   if (thread.fullRefresh) {
@@ -354,8 +363,6 @@ thread.refreshCallback = function(error, data) {
     document.title = thread.originalTitle;
 
   }
-
-  var receivedData = JSON.parse(data);
 
   tooltips.cacheData(receivedData);
 
@@ -432,7 +439,12 @@ thread.refreshPosts = function(manual, full) {
 
   thread.refreshingThread = true;
 
-  api.localRequest(thread.refreshURL, thread.refreshCallback);
+  if (thread.mod) {
+    api.formApiRequest('mod', {}, thread.refreshCallback, true,
+        thread.refreshParameters);
+  } else {
+    api.localRequest(thread.refreshURL, thread.refreshCallback);
+  }
 
 };
 

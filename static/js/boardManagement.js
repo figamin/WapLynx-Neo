@@ -338,7 +338,7 @@ boardManagement.saveSettings = function() {
     maxBumpAge : typedMaxBumpAge
   };
 
-  api.apiRequest('setBoardSettings', parameters, function requestComplete(
+  api.formApiRequest('setBoardSettings', parameters, function requestComplete(
       status, data) {
 
     if (status === 'ok') {

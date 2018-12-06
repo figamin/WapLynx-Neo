@@ -33,7 +33,7 @@ rangeBans.processRangeBanCell = function(cell) {
 
 rangeBans.liftBan = function(cell) {
 
-  api.apiRequest('liftBan', {
+  api.formApiRequest('liftBan', {
     banId : cell.getElementsByClassName('idIdentifier')[0].value
   }, function requestComplete(status, data) {
 

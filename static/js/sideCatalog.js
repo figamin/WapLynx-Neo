@@ -53,31 +53,52 @@ sideCatalog.removeAllFromClass = function(className) {
 
 };
 
+sideCatalog.handleReceivedData = function(data, cell, threadData) {
+
+  sideCatalog.loadingThread = false;
+
+  if (thread.autoRefresh) {
+    thread.currentRefresh = 5;
+  }
+
+  sideCatalog.transitionThread(cell, threadData, data);
+
+  tooltips.cacheData(data);
+
+};
+
 sideCatalog.loadThread = function(cell, threadData) {
 
   sideCatalog.loadingThread = true;
 
-  api.localRequest(document.getElementById('divMod') ? '/mod.js?boardUri='
-      + api.boardUri + '&threadId=' + threadData.threadId + '&json=1' : '/'
-      + api.boardUri + '/res/' + threadData.threadId + '.json', function(error,
-      data) {
+  if (thread.mod) {
 
-    sideCatalog.loadingThread = false;
+    api.formApiRequest('mod', {}, function(status, data) {
 
-    if (thread.autoRefresh) {
-      thread.currentRefresh = 5;
-    }
+      if (status !== 'ok') {
+        return;
+      }
 
-    if (!error) {
+      sideCatalog.handleReceivedData(data, cell, threadData);
 
-      data = JSON.parse(data);
+    }, false, {
+      boardUri : api.boardUri,
+      threadId : threadData.threadId
+    });
 
-      sideCatalog.transitionThread(cell, threadData, data);
+  } else {
 
-      tooltips.cacheData(data);
-    }
+    api.localRequest('/' + api.boardUri + '/res/' + threadData.threadId
+        + '.json', function(error, data) {
 
-  });
+      if (error) {
+        alert(error);
+      }
+
+      sideCatalog.handleReceivedData(JSON.parse(data), cell, threadData);
+
+    });
+  }
 
 };
 

@@ -75,43 +75,30 @@ bannerManagement.addBanner = function() {
     return;
   }
 
-  var reader = new FileReader();
+  api.formApiRequest('createBanner', {
+    files : [ {
+      content : file
+    } ],
+    boardUri : api.boardUri,
+  }, function requestComplete(status, data) {
 
-  reader.onloadend = function() {
+    if (status === 'ok') {
 
-    var files = [ {
-      name : file.name,
-      content : reader.result
-    } ];
+      filePicker.type = 'text';
+      filePicker.type = 'file';
 
-    // style exception, too simple
-    api.apiRequest('createBanner', {
-      files : files,
-      boardUri : api.boardUri,
-    }, function requestComplete(status, data) {
+      bannerManagement.showNewBanner(data);
 
-      if (status === 'ok') {
-
-        filePicker.type = 'text';
-        filePicker.type = 'file';
-
-        bannerManagement.showNewBanner(data);
-
-      } else {
-        alert(status + ': ' + JSON.stringify(data));
-      }
-    });
-    // style exception, too simple
-
-  };
-
-  reader.readAsDataURL(file);
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 };
 
 bannerManagement.removeBanner = function(cell) {
 
-  api.apiRequest('deleteBanner', {
+  api.formApiRequest('deleteBanner', {
     bannerId : cell.getElementsByClassName('bannerIdentifier')[0].value,
   }, function requestComplete(status, data) {
 

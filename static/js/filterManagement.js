@@ -29,7 +29,7 @@ filterManagement.processFilterCell = function(cell) {
 
 filterManagement.removeFilter = function(cell) {
 
-  api.apiRequest('deleteFilter', {
+  api.formApiRequest('deleteFilter', {
     boardUri : api.boardUri,
     filterIdentifier : cell.getElementsByClassName('filterIdentifier')[0].value
   }, function requestComplete(status, data) {
@@ -40,6 +40,20 @@ filterManagement.removeFilter = function(cell) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
+
+};
+
+filterManagement.seekCell = function(filter) {
+
+  var candidates = document.getElementsByClassName('labelOriginal');
+
+  for (var i = 0; i < candidates.length; i++) {
+
+    if (candidates[i].innerHTML === filter) {
+      return candidates[i];
+    }
+
+  }
 
 };
 
@@ -58,77 +72,89 @@ filterManagement.addFilter = function() {
     return;
   }
 
-  api.apiRequest('createFilter', {
-    boardUri : api.boardUri,
-    originalTerm : typedOriginal,
-    caseInsensitive : caseInsensitive,
-    replacementTerm : typedReplacement
-  }, function requestComplete(status, data) {
+  api
+      .formApiRequest(
+          'createFilter',
+          {
+            boardUri : api.boardUri,
+            originalTerm : typedOriginal,
+            caseInsensitive : caseInsensitive,
+            replacementTerm : typedReplacement
+          },
+          function requestComplete(status, data) {
 
-    if (status === 'ok') {
+            if (status === 'ok') {
 
-      document.getElementById('fieldOriginalTerm').value = '';
-      document.getElementById('fieldReplacementTerm').value = '';
+              document.getElementById('fieldOriginalTerm').value = '';
+              document.getElementById('fieldReplacementTerm').value = '';
 
-      var form = document.createElement('form');
-      form.className = 'filterCell';
-      form.action = '/deleteFilter.js';
-      form.method = 'post';
-      form.enctype = 'multipart/form-data';
+              var existing = filterManagement.seekCell(typedOriginal);
 
-      var originalPara = document.createElement('p');
-      originalPara.innerHTML = 'Original term: ';
-      form.appendChild(originalPara);
+              if (existing) {
+                existing.parentNode.parentNode
+                    .getElementsByClassName('labelReplacement')[0].innerHTML = typedReplacement;
+                return;
+              }
 
-      var originalLabel = document.createElement('span');
-      originalLabel.className = 'labelOriginal';
-      originalLabel.innerHTML = typedOriginal;
-      originalPara.appendChild(originalLabel);
+              var form = document.createElement('form');
+              form.className = 'filterCell';
+              form.action = '/deleteFilter.js';
+              form.method = 'post';
+              form.enctype = 'multipart/form-data';
 
-      var replacementPara = document.createElement('p');
-      replacementPara.innerHTML = 'Replacement term: ';
-      form.appendChild(replacementPara);
+              var originalPara = document.createElement('p');
+              originalPara.innerHTML = 'Original term: ';
+              form.appendChild(originalPara);
 
-      var replacementLabel = document.createElement('span');
-      replacementLabel.className = 'labelReplacement';
-      replacementLabel.innerHTML = typedReplacement;
-      replacementPara.appendChild(replacementLabel);
+              var originalLabel = document.createElement('span');
+              originalLabel.className = 'labelOriginal';
+              originalLabel.innerHTML = typedOriginal;
+              originalPara.appendChild(originalLabel);
 
-      if (caseInsensitive) {
-        var casePara = document.createElement('p');
-        casePara.innerHTML = 'Case-insensitive';
-        casePara.className = 'labelCaseInsensitive';
-        form.appendChild(casePara);
-      }
+              var replacementPara = document.createElement('p');
+              replacementPara.innerHTML = 'Replacement term: ';
+              form.appendChild(replacementPara);
 
-      var boardIdentifier = document.createElement('input');
-      boardIdentifier.value = api.boardUri;
-      boardIdentifier.name = 'boardUri';
-      boardIdentifier.type = 'hidden';
-      boardIdentifier.className = 'boardIdentifier';
-      form.appendChild(boardIdentifier);
+              var replacementLabel = document.createElement('span');
+              replacementLabel.className = 'labelReplacement';
+              replacementLabel.innerHTML = typedReplacement;
+              replacementPara.appendChild(replacementLabel);
 
-      var filterIdentifier = document.createElement('input');
-      filterIdentifier.value = typedOriginal;
-      filterIdentifier.name = 'filterIdentifier';
-      filterIdentifier.type = 'hidden';
-      filterIdentifier.className = 'filterIdentifier';
-      form.appendChild(filterIdentifier);
+              if (caseInsensitive) {
+                var casePara = document.createElement('p');
+                casePara.innerHTML = 'Case-insensitive';
+                casePara.className = 'labelCaseInsensitive';
+                form.appendChild(casePara);
+              }
 
-      var submitButton = document.createElement('button');
-      submitButton.type = 'submit';
-      submitButton.className = 'deleteFormButton';
-      submitButton.innerHTML = 'Delete';
-      form.appendChild(submitButton);
+              var boardIdentifier = document.createElement('input');
+              boardIdentifier.value = api.boardUri;
+              boardIdentifier.name = 'boardUri';
+              boardIdentifier.type = 'hidden';
+              boardIdentifier.className = 'boardIdentifier';
+              form.appendChild(boardIdentifier);
 
-      filterManagement.divFilters.appendChild(form);
+              var filterIdentifier = document.createElement('input');
+              filterIdentifier.value = typedOriginal;
+              filterIdentifier.name = 'filterIdentifier';
+              filterIdentifier.type = 'hidden';
+              filterIdentifier.className = 'filterIdentifier';
+              form.appendChild(filterIdentifier);
 
-      filterManagement.processFilterCell(form);
+              var submitButton = document.createElement('button');
+              submitButton.type = 'submit';
+              submitButton.className = 'deleteFormButton';
+              submitButton.innerHTML = 'Delete';
+              form.appendChild(submitButton);
 
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
+              filterManagement.divFilters.appendChild(form);
+
+              filterManagement.processFilterCell(form);
+
+            } else {
+              alert(status + ': ' + JSON.stringify(data));
+            }
+          });
 
 }
 

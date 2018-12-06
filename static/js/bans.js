@@ -53,7 +53,7 @@ bans.denyAppeal = function(cell) {
 
 bans.liftBan = function(cell) {
 
-  api.apiRequest('liftBan', {
+  api.formApiRequest('liftBan', {
     banId : cell.getElementsByClassName('liftIdentifier')[0].value
   }, function requestComplete(status, data) {
 

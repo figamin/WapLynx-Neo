@@ -63,7 +63,7 @@ account.changePassword = function() {
   } else if (!typedNewPassword.length) {
     alert('You cannot provide a blank password.');
   } else {
-    api.apiRequest('changeAccountPassword', {
+    api.formApiRequest('changeAccountPassword', {
       password : typedPassword,
       newPassword : typedNewPassword,
       confirmation : typedConfirmation
@@ -103,7 +103,7 @@ account.save = function() {
     alert('Email too long, keep it under 64 characters');
   } else {
 
-    api.apiRequest('changeAccountSettings', {
+    api.formApiRequest('changeAccountSettings', {
       email : typedEmail,
       settings : selectedSettings
     }, function requestComplete(status, data) {

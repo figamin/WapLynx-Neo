@@ -524,7 +524,7 @@ postingMenu.toggleThreadSetting = function(boardUri, thread, settingIndex,
 
         }
 
-        api.apiRequest('changeThreadSettings', parameters,
+        api.formApiRequest('changeThreadSettings', parameters,
             function requestComplete(status, data) {
 
               if (status === 'ok') {
