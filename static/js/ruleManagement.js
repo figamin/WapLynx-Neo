@@ -25,7 +25,7 @@ ruleManagement.processRuleCell = function(cell) {
 
     var index = cell.getElementsByClassName('indexIdentifier')[0].value;
 
-    api.apiRequest('deleteRule', {
+    api.formApiRequest('deleteRule', {
       boardUri : api.boardUri,
       ruleIndex : index,
     }, function requestComplete(status, data) {
@@ -101,7 +101,7 @@ ruleManagement.addRule = function() {
     alert('Rule too long, keep in under 512 characters.');
   } else {
 
-    api.apiRequest('createRule', {
+    api.formApiRequest('createRule', {
       boardUri : api.boardUri,
       rule : typedRule,
     }, function requestComplete(status, data) {

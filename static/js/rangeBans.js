@@ -91,8 +91,8 @@ rangeBans.placeRangeBan = function() {
     boardUri : api.boardUri
   };
 
-  api.apiRequest('placeRangeBan', parameters, function requestComplete(status,
-      data) {
+  api.formApiRequest('placeRangeBan', parameters, function requestComplete(
+      status, data) {
 
     if (status === 'ok') {
 

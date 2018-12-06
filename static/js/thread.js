@@ -173,10 +173,16 @@ thread.banPosts = function() {
   } else {
     var parsedCookies = api.getCookies();
 
-    api.apiRequest('solveCaptcha', {
+    api.formaApiRequest('solveCaptcha', {
       captchaId : parsedCookies.captchaid,
       answer : typedCaptcha
     }, function solvedCaptcha(status, data) {
+
+      if (status !== 'ok') {
+        alert(status);
+        return;
+      }
+
       thread.applyBans(parsedCookies.captchaid);
     });
   }
@@ -555,11 +561,17 @@ thread.processReplyRequest = function() {
     } else {
       var parsedCookies = api.getCookies();
 
-      api.apiRequest('solveCaptcha', {
+      api.formApiRequest('solveCaptcha', {
 
         captchaId : parsedCookies.captchaid,
         answer : typedCaptcha
       }, function solvedCaptcha(status, data) {
+
+        if (status !== 'ok') {
+          alert(status);
+          return;
+        }
+
         thread.processFilesToPost(parsedCookies.captchaid);
       });
     }

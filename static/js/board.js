@@ -164,14 +164,17 @@ board.processThreadRequest = function() {
     } else {
       var parsedCookies = api.getCookies();
 
-      api.apiRequest('solveCaptcha', {
-
+      api.formApiRequest('solveCaptcha', {
         captchaId : parsedCookies.captchaid,
         answer : typedCaptcha
       }, function solvedCaptcha(status, data) {
 
-        board.processFilesToPost(parsedCookies.captchaid);
+        if (status !== 'ok') {
+          alert(status);
+          return;
+        }
 
+        board.processFilesToPost(parsedCookies.captchaid);
       });
     }
 

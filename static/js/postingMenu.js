@@ -425,20 +425,21 @@ postingMenu.getNewEditData = function(board, thread, post, innerPart) {
 
 postingMenu.editPost = function(board, thread, post, innerPart) {
 
-  var url = '/edit.js?json=1&boardUri=' + board + '&threadId=' + thread;
+  var parameters = {
+    boardUri : board,
+    threadId : thread
+  };
 
   if (post) {
-    url += '&postId=' + post;
+    parameters.post = post;
   }
 
-  api.localRequest(url, function gotData(error, data) {
+  api.formApiRequest('edit', {}, function gotData(status, data) {
 
-    if (error) {
-      alert(error);
+    if (status !== 'ok') {
+      alert(status);
       return;
     }
-
-    data = JSON.parse(data);
 
     var outerPanel = captchaModal.getCaptchaModal('Edit', true);
 
@@ -493,7 +494,7 @@ postingMenu.editPost = function(board, thread, post, innerPart) {
     captchaModal.addModalRow('Subject', subjectField, okButton.onclick);
     captchaModal.addModalRow('Message', messageArea);
 
-  });
+  }, false, parameters);
 
 };
 

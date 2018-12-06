@@ -181,10 +181,14 @@ boardManagement.setSpoiler = function() {
 
 };
 
-boardManagement.makeCssRequest = function(files) {
+boardManagement.setCss = function() {
 
-  api.apiRequest('setCustomCss', {
-    files : files || [],
+  var file = document.getElementById('files').files[0];
+
+  api.formApiRequest('setCustomCss', {
+    files : [ {
+      content : file
+    } ],
     boardUri : api.boardUri,
   }, function requestComplete(status, data) {
 
@@ -193,7 +197,7 @@ boardManagement.makeCssRequest = function(files) {
 
     if (status === 'ok') {
 
-      if (files) {
+      if (file) {
         alert('New CSS set.');
       } else {
         alert('CSS deleted.');
@@ -203,31 +207,6 @@ boardManagement.makeCssRequest = function(files) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
-};
-
-boardManagement.setCss = function() {
-
-  var file = document.getElementById('files').files[0];
-
-  if (!file) {
-    boardManagement.makeCssRequest();
-    return;
-  }
-
-  var reader = new FileReader();
-
-  reader.onloadend = function() {
-
-    // style exception, too simple
-    boardManagement.makeCssRequest([ {
-      name : file.name,
-      content : reader.result
-    } ]);
-    // style exception, too simple
-
-  };
-
-  reader.readAsDataURL(file);
 
 };
 

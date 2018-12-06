@@ -33,7 +33,7 @@ hashBans.processHashBanCell = function(cell) {
 
 hashBans.liftHashBan = function(cell) {
 
-  api.apiRequest('liftHashBan', {
+  api.formApiRequest('liftHashBan', {
     hashBanId : cell.getElementsByClassName('idIdentifier')[0].value
   }, function requestComplete(status, data) {
 
@@ -89,7 +89,7 @@ hashBans.placeHashBan = function() {
 
   var typedHash = document.getElementById('hashField').value.trim();
 
-  api.apiRequest('placeHashBan', {
+  api.formApiRequest('placeHashBan', {
     hash : typedHash,
     boardUri : api.boardUri
   }, function requestComplete(status, data) {
