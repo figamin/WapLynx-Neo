@@ -16,14 +16,11 @@ bypass.blockBypass = function() {
     return;
   }
 
-  api.apiRequest('renewBypass', {
+  api.formApiRequest('renewBypass', {
     captcha : typedCaptcha
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
-      document.cookie = 'bypass=' + data.id + '; path=/; expires='
-          + new Date(data.expiration).toUTCString();
 
       var paragraph = document.getElementsByTagName('p')[0];
 

@@ -582,15 +582,13 @@ thread.processReplyRequest = function() {
 
 thread.postReply = function() {
 
-  api.localRequest('/blockBypass.js?json=1',
-      function checked(error, response) {
+  api.formApiRequest('blockBypass', {},
+      function checked(status, data) {
 
-        if (error) {
-          alert(error);
+        if (status !== 'ok') {
+          alert(data);
           return;
         }
-
-        var data = JSON.parse(response);
 
         var alwaysUseBypass = document
             .getElementById('alwaysUseBypassCheckBox').checked;
@@ -661,7 +659,7 @@ thread.deleteFromIp = function() {
     return;
   }
 
-  api.apiRequest('deleteFromIp', {
+  api.formApiRequest('deleteFromIp', {
     ip : typedIp,
     boards : typedBoards
   }, function requestComplete(status, data) {

@@ -56,10 +56,14 @@ boardManagement.init = function() {
 
 };
 
-boardManagement.makeJsRequest = function(files) {
+boardManagement.setJs = function() {
 
-  api.apiRequest('setCustomJs', {
-    files : files || [],
+  var file = document.getElementById('JsFiles').files[0];
+
+  api.formApiRequest('setCustomJs', {
+    files : [ {
+      content : file
+    } ],
     boardUri : api.boardUri,
   }, function requestComplete(status, data) {
 
@@ -68,7 +72,7 @@ boardManagement.makeJsRequest = function(files) {
 
     if (status === 'ok') {
 
-      if (files) {
+      if (file) {
         alert('New javascript set.');
       } else {
         alert('Javascript deleted.');
@@ -78,39 +82,14 @@ boardManagement.makeJsRequest = function(files) {
       alert(status + ': ' + JSON.stringify(data));
     }
   });
-};
-
-boardManagement.setJs = function() {
-
-  var file = document.getElementById('JsFiles').files[0];
-
-  if (!file) {
-    boardManagement.makeJsRequest();
-    return;
-  }
-
-  var reader = new FileReader();
-
-  reader.onloadend = function() {
-
-    boardManagement.makeJsRequest([ {
-      name : file.name,
-      content : reader.result
-    } ]);
-
-  };
-
-  reader.readAsDataURL(file);
 
 };
 
-boardManagement.setIndicatorForRequest = function(files) {
+boardManagement.setIndicatorForRequest = function(obtainedSpoiler) {
 
   var spoilerIndicator = document.getElementById('customSpoilerIndicator');
 
   var haveSpoiler = spoilerIndicator ? true : false;
-
-  var obtainedSpoiler = (files && files.length) ? true : false;
 
   if (haveSpoiler !== obtainedSpoiler) {
 
@@ -130,54 +109,33 @@ boardManagement.setIndicatorForRequest = function(files) {
       spoilerIndicator.remove();
     }
 
-  } else {
+  } else if (obtainedSpoiler) {
     alert('New spoiler uploaded.');
   }
 
-};
-
-boardManagement.makeSpoilerRequest = function(files) {
-
-  api.apiRequest('setCustomSpoiler', {
-    files : files || [],
-    boardUri : api.boardUri,
-  }, function requestComplete(status, data) {
-
-    document.getElementById('filesSpoiler').type = 'text';
-    document.getElementById('filesSpoiler').type = 'file';
-
-    if (status === 'ok') {
-      boardManagement.setIndicatorForRequest(files);
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-
-  });
 };
 
 boardManagement.setSpoiler = function() {
 
   var file = document.getElementById('filesSpoiler').files[0];
 
-  if (!file) {
-    boardManagement.makeSpoilerRequest();
-    return;
-  }
+  api.formApiRequest('setCustomSpoiler', {
+    files : [ {
+      content : file
+    } ],
+    boardUri : api.boardUri,
+  }, function requestComplete(status, data) {
 
-  var reader = new FileReader();
+    if (status === 'ok') {
+      boardManagement.setIndicatorForRequest(!!file);
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
 
-  reader.onloadend = function() {
+    document.getElementById('filesSpoiler').type = 'text';
+    document.getElementById('filesSpoiler').type = 'file';
 
-    // style exception, too simple
-    boardManagement.makeSpoilerRequest([ {
-      name : file.name,
-      content : reader.result
-    } ]);
-    // style exception, too simple
-
-  };
-
-  reader.readAsDataURL(file);
+  });
 
 };
 

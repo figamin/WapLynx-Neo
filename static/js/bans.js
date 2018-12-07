@@ -32,7 +32,7 @@ bans.processBanCell = function(cell) {
 
 bans.denyAppeal = function(cell) {
 
-  api.apiRequest('denyAppeal', {
+  api.formApiRequest('denyAppeal', {
     banId : cell.getElementsByClassName('denyIdentifier')[0].value
   }, function requestComplete(status, data) {
 

@@ -44,7 +44,7 @@ edit.save = function() {
       parameters.threadId = api.threadId;
     }
 
-    api.apiRequest('saveEdit', parameters, function requestComplete(status,
+    api.formApiRequest('saveEdit', parameters, function requestComplete(status,
         data) {
 
       if (status === 'ok') {

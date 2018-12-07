@@ -432,16 +432,16 @@ globalSettings.save = function() {
 
   }
 
-  api.apiRequest('saveGlobalSettings', parameters, function requestComplete(
-      status, data) {
+  api.formApiRequest('saveGlobalSettings', parameters,
+      function requestComplete(status, data) {
 
-    if (status === 'ok') {
-      alert('New settings saved.');
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
+        if (status === 'ok') {
+          alert('New settings saved.');
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
+        }
 
-  });
+      });
 
 };
 

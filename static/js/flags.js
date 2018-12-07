@@ -135,7 +135,7 @@ flags.processFlagCell = function(cell) {
 
 flags.removeFlag = function(cell) {
 
-  api.apiRequest('deleteFlag', {
+  api.formApiRequest('deleteFlag', {
     flagId : cell.getElementsByClassName('idIdentifier')[0].value,
   }, function requestComplete(status, data) {
 
@@ -205,39 +205,26 @@ flags.uploadFlags = function() {
     return;
   }
 
-  var reader = new FileReader();
+  api.formApiRequest('createFlag', {
+    files : [ {
+      content : flags.selectedFiles[0]
+    } ],
+    flagName : typedName,
+    boardUri : api.boardUri,
+  }, function requestComplete(status, data) {
 
-  reader.onloadend = function() {
+    if (status === 'ok') {
 
-    var files = [ {
-      name : flags.selectedFiles[0].name,
-      content : reader.result
-    } ];
+      document.getElementsByClassName('removeButton')[0].onclick();
 
-    // style exception, too simple
-    api.apiRequest('createFlag', {
-      files : files,
-      flagName : typedName,
-      boardUri : api.boardUri,
-    }, function requestComplete(status, data) {
+      flags.showNewFlag(typedName, data);
 
-      if (status === 'ok') {
+      flags.uploadFlags();
 
-        document.getElementsByClassName('removeButton')[0].onclick();
-
-        flags.showNewFlag(typedName, data);
-
-        flags.uploadFlags();
-
-      } else {
-        alert(status + ': ' + JSON.stringify(data));
-      }
-    });
-    // style exception, too simple
-
-  };
-
-  reader.readAsDataURL(flags.selectedFiles[0]);
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 };
 

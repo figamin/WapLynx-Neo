@@ -204,12 +204,16 @@ api.handleConnectionResponse = function(xhr, callback, silent) {
 
         if (appeal) {
 
-          api.apiRequest('appealBan', {
+          api.formApiRequest('appealBan', {
             appeal : appeal,
             banId : response.data.banId
-          }, function appealed() {
+          }, function appealed(status, data) {
 
-            alert('Ban appealed');
+            if (status !== 'ok') {
+              alert(data);
+            } else {
+              alert('Ban appealed');
+            }
 
           });
 

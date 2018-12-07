@@ -184,15 +184,13 @@ board.processThreadRequest = function() {
 
 board.postThread = function() {
 
-  api.localRequest('/blockBypass.js?json=1',
-      function checked(error, response) {
+  api.formApiRequest('blockBypass', {},
+      function checked(status, data) {
 
-        if (error) {
-          alert(error);
+        if (status !== 'ok') {
+          alert(data);
           return;
         }
-
-        var data = JSON.parse(response);
 
         var alwaysUseBypass = document
             .getElementById('alwaysUseBypassCheckBox').checked;

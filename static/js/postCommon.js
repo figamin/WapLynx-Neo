@@ -347,17 +347,19 @@ postCommon.newCheckExistance = function(file, callback) {
 
     var identifier = md5 + '-' + mime.replace('/', '');
 
-    api.localRequest('/checkFileIdentifier.js?identifier=' + identifier,
-        function requested(error, response) {
+    api.formApiRequest('checkFileIdentifier', {}, function requested(status,
+        data) {
 
-          if (error) {
-            console.log(error);
-            callback();
-          } else {
-            callback(md5, mime, JSON.parse(response));
-          }
+      if (status !== 'ok') {
+        console.log(data);
+        callback();
+      } else {
+        callback(md5, mime, data);
+      }
 
-        });
+    }, false, {
+      identifier : identifier
+    });
 
   };
 
@@ -481,14 +483,11 @@ postCommon.displayBlockBypassPrompt = function(callback) {
       return;
     }
 
-    api.apiRequest('renewBypass', {
+    api.formApiRequest('renewBypass', {
       captcha : typedCaptcha
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
-
-        document.cookie = 'bypass=' + data.id + '; path=/; expires='
-            + new Date(data.expiration).toUTCString();
 
         if (callback) {
           callback();

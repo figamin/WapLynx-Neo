@@ -476,8 +476,9 @@ postingMenu.editPost = function(board, thread, post, innerPart) {
           parameters.threadId = thread;
         }
 
-        api.apiRequest('saveEdit', parameters, function requestComplete(status,
-            data) {
+        // style exception, too simple
+        api.formApiRequest('saveEdit', parameters, function requestComplete(
+            status, data) {
 
           if (status === 'ok') {
             outerPanel.remove();
@@ -486,6 +487,7 @@ postingMenu.editPost = function(board, thread, post, innerPart) {
             alert(status + ': ' + JSON.stringify(data));
           }
         });
+        // style exception, too simple
 
       }
 
