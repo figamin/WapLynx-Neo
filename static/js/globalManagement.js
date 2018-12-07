@@ -164,7 +164,7 @@ globalManagement.massBan = function() {
   var typedReason = reasonField.value;
   var typedDuration = durationField.value;
 
-  api.apiRequest('massBan.js', {
+  api.formApiRequest('massBan', {
     ips : finalIpArray,
     reason : typedReason,
     duration : typedDuration

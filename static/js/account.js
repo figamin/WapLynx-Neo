@@ -28,7 +28,7 @@ account.init = function() {
 
 account.requestConfirmation = function() {
 
-  api.apiRequest('requestEmailConfirmation', {}, function requestComplete(
+  api.formApiRequest('requestEmailConfirmation', {}, function requestComplete(
       status, data) {
 
     if (status === 'ok') {

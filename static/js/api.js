@@ -140,7 +140,7 @@ api.handleConnectionResponse = function(xhr, callback, silent) {
   if (response.status === 'error') {
 
     if (!silent) {
-      alert('Internal server error. ' + response.data);
+      alert(response.data);
     }
 
   } else if (response.status === 'fileTooLarge') {
@@ -227,72 +227,6 @@ api.handleConnectionResponse = function(xhr, callback, silent) {
   } else {
     callback(response.status, response.data);
   }
-
-};
-
-// Makes a request to the back-end.
-// page: url of the api page
-// parameters: parameter block of the request
-// callback: callback that will receive (data,status). If the callback
-// has a function in stop property, it will be called when the connection stops
-// loading.
-api.apiRequest = function(page, parameters, callback) {
-
-  var xhr = new XMLHttpRequest();
-
-  if ('withCredentials' in xhr) {
-    xhr.open('POST', '/.api/' + page, true);
-  } else if (typeof XDomainRequest != 'undefined') {
-
-    xhr = new XDomainRequest();
-    xhr.open('POST', '/.api/' + page);
-  } else {
-    alert('Update your browser or turn off javascript.');
-    return;
-  }
-
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-  if (callback.hasOwnProperty('progress')) {
-    xhr.upload.onprogress = callback.progress;
-  }
-
-  xhr.onreadystatechange = function connectionStateChanged() {
-
-    if (xhr.readyState !== 4) {
-      return;
-    }
-
-    if (parameters.captcha) {
-      captchaUtils.reloadCaptcha();
-    }
-
-    if (callback.hasOwnProperty('stop')) {
-      callback.stop();
-    }
-
-    if (xhr.status != 200) {
-      alert('Connection failed.');
-      return;
-    }
-
-    api.handleConnectionResponse(xhr, callback);
-
-  };
-
-  var parsedCookies = api.getCookies();
-
-  var body = {
-    captchaId : parsedCookies.captchaid,
-    bypassId : parsedCookies.bypass,
-    parameters : parameters,
-    auth : {
-      login : parsedCookies.login,
-      hash : parsedCookies.hash
-    }
-  };
-
-  xhr.send(JSON.stringify(body));
 
 };
 

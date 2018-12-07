@@ -298,44 +298,6 @@ postCommon.setDragAndDrop = function(qr) {
 
 };
 
-// TODO remove
-postCommon.checkExistance = function(file, callback) {
-
-  var reader = new FileReader();
-
-  reader.onloadend = function() {
-
-    var mime = file.type;
-    var md5 = SparkMD5.ArrayBuffer.hash(reader.result);
-
-    var identifier = md5 + '-' + mime.replace('/', '');
-
-    api.localRequest('/checkFileIdentifier.js?identifier=' + identifier,
-        function requested(error, response) {
-
-          if (error) {
-            console.log(error);
-            callback();
-          } else {
-
-            var exists = JSON.parse(response);
-
-            if (exists) {
-              callback(md5, mime);
-            } else {
-              callback();
-            }
-
-          }
-
-        });
-
-  };
-
-  reader.readAsArrayBuffer(file);
-
-};
-
 postCommon.newCheckExistance = function(file, callback) {
 
   var reader = new FileReader();
@@ -401,65 +363,6 @@ postCommon.newGetFilesToUpload = function(callback, index, files) {
     postCommon.newGetFilesToUpload(callback, ++index, files);
 
   });
-
-};
-
-// TODO remove
-postCommon.getFilestToUpload = function(callback, currentIndex, files) {
-
-  currentIndex = currentIndex || 0;
-  files = files || [];
-
-  if (!document.getElementById('divUpload')) {
-    callback(files);
-    return;
-  }
-
-  if (currentIndex < postCommon.selectedFiles.length) {
-
-    var spoiled = postCommon.selectedDiv
-        .getElementsByClassName('spoilerCheckBox')[currentIndex].checked;
-
-    var file = postCommon.selectedFiles[currentIndex];
-
-    postCommon.checkExistance(file, function checked(md5, mime) {
-
-      if (md5) {
-
-        files.push({
-          name : postCommon.selectedFiles[currentIndex].name,
-          spoiler : spoiled,
-          md5 : md5,
-          mime : mime
-        });
-
-        postCommon.getFilestToUpload(callback, ++currentIndex, files)
-
-      } else {
-
-        var reader = new FileReader();
-
-        reader.onloadend = function() {
-
-          files.push({
-            name : postCommon.selectedFiles[currentIndex].name,
-            content : reader.result,
-            spoiler : spoiled
-          });
-
-          postCommon.getFilestToUpload(callback, ++currentIndex, files)
-
-        };
-
-        reader.readAsDataURL(postCommon.selectedFiles[currentIndex]);
-
-      }
-
-    });
-
-  } else {
-    callback(files);
-  }
 
 };
 

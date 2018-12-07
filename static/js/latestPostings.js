@@ -26,19 +26,15 @@ latestPostings.startTimer = function() {
 
     var currentCheck = new Date();
 
-    api.localRequest('/latestPostings.js?json=1&date='
-        + latestPostings.latestCheck.toUTCString() + '&boards='
-        + document.getElementById('fieldBoards').value, function gotData(error,
-        data) {
+    api.formApiRequest('latestPostings', {}, function gotData(status, data) {
 
-      latestPostings.latestCheck = currentCheck;
       latestPostings.startTimer();
 
-      if (!data) {
+      if (status !== 'ok') {
         return;
       }
 
-      data = JSON.parse(data);
+      latestPostings.latestCheck = currentCheck;
 
       if (document.hidden) {
         latestPostings.unread += data.length;
@@ -64,6 +60,9 @@ latestPostings.startTimer = function() {
 
       }
 
+    }, true, {
+      date : latestPostings.latestCheck,
+      boards : document.getElementById('fieldBoards').value
     });
 
   }, 1000 * 60);

@@ -97,9 +97,23 @@ thread.initThread = function() {
 
 thread.deleteFromIpOnBoard = function() {
 
-  var selected = posting.getSelectedContent();
+  var checkBoxes = document.getElementsByClassName('deletionCheckBox');
 
-  var redirect = '/' + selected[0].board + '/';
+  for (var i = 0; i < checkBoxes.length; i++) {
+    var checkBox = checkBoxes[i];
+
+    if (checkBox.checked) {
+      var splitName = checkBox.name.split('-')[0];
+      break;
+    }
+
+  }
+
+  if (!splitName) {
+    return;
+  }
+
+  var redirect = '/' + splitName + '/';
 
   var confirmationBox = document
       .getElementById('ipDeletionConfirmationCheckbox');
@@ -253,7 +267,7 @@ thread.archiveThread = function() {
     return;
   }
 
-  api.apiRequest('archiveThread', {
+  api.formApiRequest('archiveThread', {
     confirmation : true,
     boardUri : api.boardUri,
     threadId : api.threadId

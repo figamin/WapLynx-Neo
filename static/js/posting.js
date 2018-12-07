@@ -194,38 +194,6 @@ posting.newGetSelectedContent = function(object) {
 
 };
 
-// TODO remove
-posting.getSelectedContent = function() {
-
-  var selectedContent = [];
-
-  var checkBoxes = document.getElementsByClassName('deletionCheckBox');
-
-  for (var i = 0; i < checkBoxes.length; i++) {
-    var checkBox = checkBoxes[i];
-
-    if (checkBox.checked) {
-
-      var splitName = checkBox.name.split('-');
-
-      var toAdd = {
-        board : splitName[0],
-        thread : splitName[1]
-      };
-
-      if (splitName.length > 2) {
-        toAdd.post = splitName[2];
-      }
-
-      selectedContent.push(toAdd);
-
-    }
-  }
-
-  return selectedContent;
-
-};
-
 posting.reportPosts = function() {
 
   var typedReason = document.getElementById('reportFieldReason').value.trim();

@@ -562,6 +562,40 @@ postingMenu.addToggleSettingButton = function(extraMenu, board, thread, index,
 
 };
 
+postingMenu.sendArchiveRequest = function(board, thread, innerPart) {
+
+  api.formApiRequest('archiveThread', {
+    confirmation : true,
+    boardUri : board,
+    threadId : thread
+  }, function(status, data) {
+
+    if (status === 'ok') {
+
+      if (!api.threadId) {
+        innerPart.parentNode.remove();
+        return;
+      }
+
+      var lock = innerPart.getElementsByClassName('lockIndicator').length;
+      var pin = innerPart.getElementsByClassName('pinIndicator').length;
+      var cyclic = innerPart.getElementsByClassName('cyclicIndicator').length;
+
+      api.resetIndicators({
+        locked : lock,
+        pinned : pin,
+        cyclic : cyclic,
+        archived : true
+      }, innerPart);
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+
+  });
+
+};
+
 postingMenu.setExtraMenuThread = function(extraMenu, board, thread, innerPart) {
 
   if (postingMenu.globalRole <= 1) {
@@ -590,43 +624,7 @@ postingMenu.setExtraMenuThread = function(extraMenu, board, thread, innerPart) {
     archiveButton.onclick = function() {
 
       if (confirm("Are you sure you wish to lock and archive this thread?")) {
-
-        api
-            .apiRequest(
-                'archiveThread',
-                {
-                  confirmation : true,
-                  boardUri : board,
-                  threadId : thread
-                },
-                function(status, data) {
-
-                  if (status === 'ok') {
-
-                    if (!api.threadId) {
-                      innerPart.parentNode.remove();
-                      return;
-                    }
-
-                    var lock = innerPart
-                        .getElementsByClassName('lockIndicator').length;
-                    var pin = innerPart.getElementsByClassName('pinIndicator').length;
-                    var cyclic = innerPart
-                        .getElementsByClassName('cyclicIndicator').length;
-
-                    api.resetIndicators({
-                      locked : lock,
-                      pinned : pin,
-                      cyclic : cyclic,
-                      archived : true
-                    }, innerPart);
-
-                  } else {
-                    alert(status + ': ' + JSON.stringify(data));
-                  }
-
-                });
-
+        postingMenu.sendArchiveRequest(board, thread, innerPart);
       }
 
     };
