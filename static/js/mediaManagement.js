@@ -10,17 +10,18 @@ mediaManagement.deleteMedia = function() {
 
   var checkBoxes = document.getElementsByClassName('identifierCheckbox');
 
-  var identifiers = [];
+  var identifiers = {
+    identifiers : identifiers
+  };
 
   for (var i = 0; i < checkBoxes.length; i++) {
     if (checkBoxes[i].checked) {
-      identifiers.push(checkBoxes[i].name);
+      identifiers[checkBoxes[i].name] = true;
     }
   }
 
-  api.apiRequest('deleteMedia', {
-    identifiers : identifiers
-  }, function deletedMedia(status, data) {
+  api.formApiRequest('deleteMedia', identifiers, function deletedMedia(status,
+      data) {
 
     if (status === 'ok') {
 

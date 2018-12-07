@@ -6,7 +6,7 @@ socketControl.init = function() {
 
 socketControl.restartSocket = function() {
 
-  api.apiRequest('restartSocket', {}, function restarted(status, data) {
+  api.formApiRequest('restartSocket', {}, function restarted(status, data) {
 
     if (status === 'ok') {
       window.location = '/socketControl.js';

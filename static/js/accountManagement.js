@@ -15,7 +15,7 @@ accountManagement.deleteAccount = function() {
     alert('You must confirm that you wish to delete this account.');
   } else {
 
-    api.apiRequest('deleteAccount', {
+    api.formApiRequest('deleteAccount', {
       confirmation : confirmed,
       account : document.getElementById('userIdentifier').value
     }, function requestComplete(status, data) {

@@ -23,7 +23,7 @@ accounts.addAccount = function() {
     alert('Invalid login.');
   } else {
 
-    api.apiRequest('addAccount', {
+    api.formApiRequest('addAccount', {
       login : typedLogin,
       password : typedPassword,
       email : typedEmail

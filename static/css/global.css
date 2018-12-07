@@ -25,13 +25,13 @@
 
 .logoImg {
   height: 250px;
+  min-width: 1px;
 }
 
 .captchaImage {
   width: 300px;
   height: 100px;
   background-color: white;
-  height: 100px;
 }
 
 .small {

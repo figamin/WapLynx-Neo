@@ -20,7 +20,7 @@ languages.setLanguageCell = function(cell) {
 
   api.convertButton(button, function() {
 
-    api.apiRequest('deleteLanguage', {
+    api.formApiRequest('deleteLanguage', {
       languageId : cell.getElementsByClassName('languageIdentifier')[0].value
     }, function requestComplete(status, data) {
 
@@ -110,7 +110,7 @@ languages.addLanguage = function() {
     headerValues : parsedHeaderValues
   };
 
-  api.apiRequest('addLanguage', {
+  api.formApiRequest('addLanguage', {
     frontEnd : typedFrontEnd,
     languagePack : typedLanguagePack,
     headerValues : parsedHeaderValues

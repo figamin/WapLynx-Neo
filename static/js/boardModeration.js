@@ -64,7 +64,7 @@ boardModeration.saveSpecialSettings = function() {
     specialSettings.push('locked');
   }
 
-  api.apiRequest('setSpecialBoardSettings', {
+  api.formApiRequest('setSpecialBoardSettings', {
     boardUri : api.boardUri,
     specialSettings : specialSettings
   }, function requestComplete(status, data) {
