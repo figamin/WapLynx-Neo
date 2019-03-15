@@ -4,7 +4,19 @@ mediaManagement.init = function() {
 
   api.convertButton('deleteFormButton', mediaManagement.deleteMedia);
 
+  document.getElementById('selectAllButton').className = '';
+
 };
+
+mediaManagement.selectAll = function() {
+
+  var checkBoxes = document.getElementsByClassName('identifierCheckbox');
+
+  for (var i = 0; i < checkBoxes.length; i++) {
+    checkBoxes[i].checked = true;
+  }
+
+}
 
 mediaManagement.deleteMedia = function() {
 
