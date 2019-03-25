@@ -183,6 +183,10 @@ globalSettings.init = function() {
       setting : 'maxBoardTags',
       type : 'string'
     },
+    fieldArchiveThreshold : {
+      setting : 'archiveThreshold',
+      type : 'string'
+    },
     fieldLatestPostsCount : {
       setting : 'latestPostCount',
       type : 'string'
