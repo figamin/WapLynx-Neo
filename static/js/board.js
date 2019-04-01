@@ -24,7 +24,7 @@ board.init = function() {
 
     board.postButton = document.getElementById('formButton');
 
-    api.convertButton(board.postButton, board.postThread, 'postingInput');
+    api.convertButton(board.postButton, board.postThread);
 
     board.postButton.disabled = false;
 

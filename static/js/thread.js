@@ -61,7 +61,7 @@ thread.init = function() {
   thread.replyButton = document.getElementById('formButton');
   thread.replyButton.disabled = false;
 
-  api.convertButton(thread.replyButton, thread.postReply, 'postingInput');
+  api.convertButton(thread.replyButton, thread.postReply);
 
   var replies = document.getElementsByClassName('postCell');
 
