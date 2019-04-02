@@ -19,7 +19,7 @@
 }
 
 #newPostFieldset, #quick-reply table, .modalDecorationPanel,
-  .floatingMenu, #settingsFieldset {
+  .floatingMenu, #settingsFieldset, .reportFieldset {
   border: 1px dashed #117743;
 }
 
