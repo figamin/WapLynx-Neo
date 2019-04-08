@@ -409,3 +409,7 @@ footer {
 #divRemember input {
   display: inline;
 }
+
+#ownedDiv a, #volunteeredDiv a {
+  display: block;
+}

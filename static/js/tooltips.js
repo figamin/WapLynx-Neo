@@ -42,7 +42,12 @@ tooltips.cacheExistingHTML = function(className) {
     var temp = document.createElement('div');
     temp.className = 'innerPost';
     temp.innerHTML = inner.innerHTML;
-    temp.getElementsByClassName('deletionCheckBox')[0].remove();
+
+    var deletionCheckBox = temp.getElementsByClassName('deletionCheckBox')[0];
+
+    if (deletionCheckBox) {
+      deletionCheckBox.remove();
+    }
 
     var quoteLink = temp.getElementsByClassName('linkSelf')[0];
     tooltips.loadedContent[quoteLink.href] = temp.outerHTML;
