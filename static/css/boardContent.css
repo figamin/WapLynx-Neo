@@ -166,7 +166,3 @@ input[type=checkbox].postingCheckbox:checked+label:before {
   margin-left: 0.5em;
   cursor: pointer;
 }
-
-.checkedFavouriteButton:before {
-  color: #FFB300;
-}
