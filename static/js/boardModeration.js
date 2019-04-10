@@ -54,28 +54,23 @@ boardModeration.deleteBoard = function() {
 
 boardModeration.saveSpecialSettings = function() {
 
-  var specialSettings = [];
+  var parameters = {
+    boardUri : api.boardUri
+  };
 
-  if (document.getElementById('checkboxSfw').checked) {
-    specialSettings.push('sfw');
-  }
+  parameters.sfw = document.getElementById('checkboxSfw').checked;
+  parameters.locked = document.getElementById('checkboxLocked').checked;
 
-  if (document.getElementById('checkboxLocked').checked) {
-    specialSettings.push('locked');
-  }
+  api.formApiRequest('setSpecialBoardSettings', parameters,
+      function requestComplete(status, data) {
 
-  api.formApiRequest('setSpecialBoardSettings', {
-    boardUri : api.boardUri,
-    specialSettings : specialSettings
-  }, function requestComplete(status, data) {
+        if (status === 'ok') {
+          alert('Special settings saved');
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
+        }
 
-    if (status === 'ok') {
-      alert('Special settings saved');
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-
-  });
+      });
 
 };
 

@@ -87,14 +87,10 @@ account.changePassword = function() {
 
 account.save = function() {
 
-  var selectedSettings = [];
+  var parameters = {};
 
   for ( var key in account.settingsRelation) {
-
-    if (document.getElementById(key).checked) {
-      selectedSettings.push(account.settingsRelation[key]);
-    }
-
+    parameters[account.settingsRelation[key]] = document.getElementById(key).checked;
   }
 
   var typedEmail = document.getElementById('emailField').value.trim();
@@ -103,17 +99,17 @@ account.save = function() {
     alert('Email too long, keep it under 64 characters');
   } else {
 
-    api.formApiRequest('changeAccountSettings', {
-      email : typedEmail,
-      settings : selectedSettings
-    }, function requestComplete(status, data) {
+    parameters.email = typedEmail
 
-      if (status === 'ok') {
-        alert('Settings changed.');
-      } else {
-        alert(status + ': ' + JSON.stringify(data));
-      }
-    });
+    api.formApiRequest('changeAccountSettings', parameters,
+        function requestComplete(status, data) {
+
+          if (status === 'ok') {
+            alert('Settings changed.');
+          } else {
+            alert(status + ': ' + JSON.stringify(data));
+          }
+        });
 
   }
 

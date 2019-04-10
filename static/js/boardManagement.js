@@ -207,48 +207,6 @@ boardManagement.saveSettings = function() {
     return;
   }
 
-  var settings = [];
-
-  if (document.getElementById('blockDeletionCheckbox').checked) {
-    settings.push('blockDeletion');
-  }
-
-  if (document.getElementById('requireFileCheckbox').checked) {
-    settings.push('requireThreadFile');
-  }
-
-  if (document.getElementById('disableIdsCheckbox').checked) {
-    settings.push('disableIds');
-  }
-
-  if (document.getElementById('allowCodeCheckbox').checked) {
-    settings.push('allowCode');
-  }
-
-  if (document.getElementById('early404Checkbox').checked) {
-    settings.push('early404');
-  }
-
-  if (document.getElementById('uniquePostsCheckbox').checked) {
-    settings.push('uniquePosts');
-  }
-
-  if (document.getElementById('uniqueFilesCheckbox').checked) {
-    settings.push('uniqueFiles');
-  }
-
-  if (document.getElementById('unindexCheckbox').checked) {
-    settings.push('unindex');
-  }
-
-  if (document.getElementById('forceAnonymityCheckbox').checked) {
-    settings.push('forceAnonymity');
-  }
-
-  if (document.getElementById('textBoardCheckbox').checked) {
-    settings.push('textBoard');
-  }
-
   var typedTags = document.getElementById('tagsField').value.split(',');
 
   var combo = document.getElementById('captchaModeComboBox');
@@ -266,7 +224,6 @@ boardManagement.saveSettings = function() {
     anonymousName : typedAnonymousName,
     boardDescription : typedDescription,
     boardUri : api.boardUri,
-    settings : settings,
     autoSageLimit : typedAutoSage,
     maxThreadCount : typedThreadLimit,
     maxFileSizeMB : typedFileSize,
@@ -274,6 +231,17 @@ boardManagement.saveSettings = function() {
     maxFiles : typedFileLimit,
     maxBumpAge : typedMaxBumpAge
   };
+
+  parameters.blockDeletion = document.getElementById('blockDeletionCheckbox').checked;
+  parameters.disableIds = document.getElementById('disableIdsCheckbox').checked;
+  parameters.requireThreadFile = document.getElementById('requireFileCheckbox').checked;
+  parameters.allowCode = document.getElementById('allowCodeCheckbox').checked;
+  parameters.early404 = document.getElementById('early404Checkbox').checked;
+  parameters.uniquePosts = document.getElementById('uniquePostsCheckbox').checked;
+  parameters.uniqueFiles = document.getElementById('uniqueFilesCheckbox').checked;
+  parameters.unindex = document.getElementById('unindexCheckbox').checked;
+  parameters.forceAnonymity = document.getElementById('forceAnonymityCheckbox').checked;
+  parameters.textBoard = document.getElementById('textBoardCheckbox').checked;
 
   api.formApiRequest('setBoardSettings', parameters, function requestComplete(
       status, data) {
