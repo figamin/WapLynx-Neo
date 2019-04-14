@@ -39,9 +39,24 @@
   font-size: 80%;
 }
 
+.extraMenu, .hideMenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 10px;
+  z-index: 1;
+  font-weight: normal;
+  white-space: nowrap;
+  cursor: default;
+  color: #ACACAC;
+}
+
 .hideMenu div, .extraMenu div {
-  font-size: 80%;
   cursor: pointer;
+}
+
+.extraMenuButton, .hideButton {
+  position: relative;
 }
 
 .hideButton::before {

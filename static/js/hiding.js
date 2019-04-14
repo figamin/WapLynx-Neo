@@ -327,21 +327,10 @@ hiding.setHideMenu = function(linkSelf) {
 
     var rect = hideButton.getBoundingClientRect();
 
-    var previewOrigin = {
-      x : rect.right + 10 + window.scrollX,
-      y : rect.top + window.scrollY
-    };
-
     var hideMenu = document.createElement('div');
     hideMenu.className = 'floatingMenu hideMenu';
-    hideMenu.style.display = 'none';
-    hideMenu.style.position = 'absolute';
 
-    document.body.appendChild(hideMenu);
-
-    hideMenu.style.left = previewOrigin.x + 'px';
-    hideMenu.style.top = previewOrigin.y + 'px';
-    hideMenu.style.display = 'inline';
+    hideButton.appendChild(hideMenu);
 
     hiding.shownMenu = hideMenu;
 

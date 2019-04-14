@@ -807,23 +807,10 @@ postingMenu.setExtraMenu = function(linkSelf) {
 
   extraMenuButton.onclick = function() {
 
-    var rect = extraMenuButton.getBoundingClientRect();
-
-    var previewOrigin = {
-      x : rect.right + 10 + window.scrollX,
-      y : rect.top + window.scrollY
-    };
-
     var extraMenu = document.createElement('div');
     extraMenu.className = 'floatingMenu extraMenu';
-    extraMenu.style.display = 'none';
-    extraMenu.style.position = 'absolute';
 
-    document.body.appendChild(extraMenu);
-
-    extraMenu.style.left = previewOrigin.x + 'px';
-    extraMenu.style.top = previewOrigin.y + 'px';
-    extraMenu.style.display = 'inline';
+    extraMenuButton.appendChild(extraMenu);
 
     postingMenu.shownPostingMenu = extraMenu;
 
