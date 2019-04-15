@@ -379,10 +379,7 @@ footer {
 
 .innerPost, .markedPost {
   display: inline-block;
-  overflow: hidden;
-  padding-right: 0.5em;
-  padding-left: 0.25em;
-  padding-top: 0.25em;
+  padding: 0.25em;
   max-width: 100%;
 }
 
