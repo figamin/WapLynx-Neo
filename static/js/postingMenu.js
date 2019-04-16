@@ -450,6 +450,8 @@ postingMenu.editPost = function(board, thread, post, innerPart) {
     subjectField.value = data.subject || '';
 
     var messageArea = document.createElement('textarea');
+    messageArea.setAttribute('rows', '5');
+    messageArea.setAttribute('cols', '35');
     messageArea.setAttribute('placeholder', 'message');
     messageArea.defaultValue = data.message || '';
 
