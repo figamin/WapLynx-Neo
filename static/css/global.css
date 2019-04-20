@@ -411,3 +411,48 @@ footer {
 #ownedDiv a, #volunteeredDiv a {
   display: block;
 }
+
+#navBoardList::after {
+  content: 'boards';
+}
+
+#navOverboard::after {
+  content: 'overboard';
+}
+
+#linkSfwOver::after {
+  content: 'overboard sfw';
+}
+
+#navPosting::after {
+  content: 'help';
+}
+
+#navLinkHome::after {
+  content: 'home';
+}
+
+#watcherButton::after {
+  content: 'watched threads';
+}
+
+#settingsButton::after {
+  content: 'settings';
+}
+
+@media only screen and (max-device-width: 812px) {
+  #navLinkSpan span, #navOptionsSpan span, legend, #settingsButton {
+    display: none;
+  }
+  #navLinkSpan a::after, #navOptionsSpan a::after {
+    content: '';
+  }
+  nav {
+    font-size: 110%;
+    height: auto;
+    padding: 2px 2px;
+  }
+  #themeSelector {
+    max-width: 100px;
+  }
+}

@@ -22,7 +22,6 @@ sideCatalog.init = function() {
   var sideCatalogButton = document.createElement('a');
   sideCatalogButton.className = 'coloredIcon';
   sideCatalogButton.id = 'navSideCatalog';
-  sideCatalogButton.innerHTML = 'side catalog';
   sideCatalogButton.onclick = function() {
     sideCatalog.sideCatalogDiv.style.display = 'block';
     localStorage.removeItem('hideSideCatalog');

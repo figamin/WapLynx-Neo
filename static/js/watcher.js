@@ -21,7 +21,6 @@ watcher.init = function() {
       referenceNode);
 
   var watcherButton = document.createElement('a');
-  watcherButton.innerHTML = 'watched threads';
   watcherButton.id = 'watcherButton';
   watcherButton.className = 'coloredIcon';
 
