@@ -53,6 +53,7 @@ video {
   white-space: nowrap;
   cursor: default;
   color: #ACACAC;
+  text-shadow: none;
 }
 
 .hideMenu div, .extraMenu div {
