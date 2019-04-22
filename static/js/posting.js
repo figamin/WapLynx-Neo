@@ -22,7 +22,7 @@ posting.init = function() {
       + '<div class="divBanMessage"></div><div class="labelLastEdit"></div></div>';
 
   posting.uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
-      + 'Open file</a> (<span class="sizeLabel"></span> <span class="dimensionLabel">'
+      + '</a> (<span class="sizeLabel"></span> <span class="dimensionLabel">'
       + '</span> <a class="originalNameLink"></a>)</div>'
       + '<div class="divHash"><span>MD5: <span class="labelHash"></span></span></div>'
       + '<a class="imgLink" ' + 'target="blank"></a>';

@@ -182,7 +182,6 @@ body {
 
 /* header and nav / top of page styles */
 header {
-  width: 50%;
   margin: 3em auto 0 auto;
   text-align: center;
 }
@@ -473,7 +472,7 @@ footer {
 }
 
 @media only screen and (max-device-width: 812px) {
-  #navLinkSpan span, #navOptionsSpan span, legend, #settingsButton, #links span
+  #navLinkSpan span, #navOptionsSpan span, legend, #settingsButton, #links span, .hideMobile
     {
     display: none;
   }

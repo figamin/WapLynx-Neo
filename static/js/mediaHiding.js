@@ -62,7 +62,6 @@ mediaHiding.processFileForHiding = function(file) {
   var nameLink = file.getElementsByClassName('nameLink')[0];
 
   var hidingButton = document.createElement('a');
-  hidingButton.innerHTML = '(Hide file)';
   hidingButton.className = 'hideFileButton glowOnHover coloredIcon';
 
   var fileName = nameLink.href.split('/');

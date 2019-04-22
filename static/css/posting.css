@@ -288,3 +288,52 @@ video {
 .extraMenuButton::before {
   content: '\e02f';
 }
+
+.nameLink::after {
+  content: 'Open file';
+}
+
+.hideFileButton::after {
+  content: '(Hide file)';
+}
+
+@media only screen and (max-device-width: 812px) {
+  .uploadCell img:not(.imgExpanded) {
+    max-width: 75px;
+    max-height: 75px;
+    object-fit: cover;
+  }
+  .multipleUploads .opUploadPanel, .multipleUploads .panelUploads {
+    display: inline-flex;
+  }
+  .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
+    .contentOmissionIndicator, .labelOmission, .labelId {
+    font-size: 100%;
+  }
+  .innerPost, .markedPost {
+    width: 100%;
+    padding: 0;
+  }
+  #threadList {
+    margin: 0;
+  }
+  iframe {
+    display: block;
+    width: 100%;
+  }
+  .postInfo {
+    border-bottom: 1px solid #117743;
+  }
+  .divPosts {
+    margin: .25em;
+  }
+  .nameLink::after {
+    content: 'Open';
+  }
+  .hideFileButton::after {
+    content: '(Hide)';
+  }
+  .originalNameLink, .labelCreated, .sizeLabel, .dimensionLabel {
+    display: none;
+  }
+}
