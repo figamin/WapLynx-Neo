@@ -52,3 +52,16 @@
 .threadStats {
   font-size: 75%;
 }
+
+@media only screen and (max-device-width: 812px) {
+  .linkThumb img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+  #catalogId {
+    margin: 3em 0 2em 0;
+  }
+  .catalogCell {
+    width: 7em;
+  }
+}

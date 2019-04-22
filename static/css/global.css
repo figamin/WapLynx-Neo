@@ -440,19 +440,65 @@ footer {
   content: 'settings';
 }
 
+#linkLogs::after {
+  content: 'logs';
+}
+
+#linkArchives::after {
+  content: 'archives';
+}
+
+#linkGraphs::after {
+  content: 'daily graphs';
+}
+
+#linkGlobalRules::after {
+  content: 'global rules';
+}
+
+#linkLinks::after {
+  content: 'links';
+}
+
+#linkAbout::after {
+  content: 'about';
+}
+
+#linkContact::after {
+  content: 'contact';
+}
+
+#linkAccount::after {
+  content: 'account';
+}
+
 @media only screen and (max-device-width: 812px) {
-  #navLinkSpan span, #navOptionsSpan span, legend, #settingsButton {
+  #navLinkSpan span, #navOptionsSpan span, legend, #settingsButton, #links span
+    {
     display: none;
   }
-  #navLinkSpan a::after, #navOptionsSpan a::after {
+  #navLinkSpan a::after, #navOptionsSpan a::after, #links a::after {
     content: '';
   }
   nav {
-    font-size: 110%;
+    font-size: 115%;
     height: auto;
     padding: 2px 2px;
   }
   #themeSelector {
     max-width: 100px;
+  }
+  .logoImg {
+    margin-top: 10px;
+    height: 75px;
+  }
+  body {
+    font-size: 85%;
+    margin-top: 5px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
   }
 }

@@ -116,3 +116,18 @@
   max-height: 125px;
   padding: 5px;
 }
+
+@media only screen and (max-device-width: 812px) {
+  .topBoards, #divLatestPosts {
+    margin: 0;
+  }
+  #indexWrapper {
+    width: 100%;
+  }
+  #links a, #divStats {
+    font-size: 153%;
+  }
+  #linkEngine {
+    display: none;
+  }
+}

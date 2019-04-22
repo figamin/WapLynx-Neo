@@ -63,3 +63,17 @@
   text-align: center;
   display: inherit;
 }
+
+@media only screen and (max-device-width: 812px) {
+  #boardsWrapper #divBoards {
+    display: inline;
+  }
+  .boardsCellHeader {
+    width: 100%;
+    display: inline-table;
+    text-align: center;
+  }
+  .boardsCellStats, #divBoardsLegend, .labelTags {
+    display: none;
+  }
+}
