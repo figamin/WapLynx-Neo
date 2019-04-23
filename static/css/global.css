@@ -503,4 +503,9 @@ footer {
     padding-left: 0;
     padding-right: 0;
   }
+  .captchaImage {
+    max-width: 100%;
+    height: auto;
+    max-height: 100px;
+  }
 }
