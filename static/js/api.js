@@ -1,5 +1,7 @@
 var api = {};
 
+api.mobile = window.innerWidth < 812;
+
 api.htmlReplaceTable = {
   '<' : '&lt;',
   '>' : '&gt;'

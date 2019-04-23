@@ -169,4 +169,6 @@ gallery.addGalleryFile = function(url) {
 
 };
 
-gallery.init();
+if (!api.mobile) {
+  gallery.init();
+}

@@ -22,10 +22,10 @@ posting.init = function() {
       + '<div class="divBanMessage"></div><div class="labelLastEdit"></div></div>';
 
   posting.uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
-      + '</a> (<span class="sizeLabel"></span> <span class="dimensionLabel">'
-      + '</span> <a class="originalNameLink"></a>)</div>'
-      + '<div class="divHash"><span>MD5: <span class="labelHash"></span></span></div>'
-      + '<a class="imgLink" ' + 'target="blank"></a>';
+      + '</a> <span class="hideMobile">(</span><span class="sizeLabel"></span> '
+      + '<span class="dimensionLabel"></span> <a class="originalNameLink"></a><span '
+      + 'class="hideMobile">)</span></div><div class="divHash"><span>MD5: <span '
+      + 'class="labelHash"></span></span></div><a class="imgLink" target="blank"></a>';
 
   posting.sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
 

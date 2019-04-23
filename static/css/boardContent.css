@@ -11,7 +11,7 @@
   cursor: default;
 }
 
-.bannerImage {
+#bannerImage {
   max-width: 100%;
 }
 
@@ -109,13 +109,17 @@ input[type=checkbox].postingCheckbox {
   display: none;
 }
 
-input[type=checkbox].postingCheckbox+label:before {
+input[type=checkbox].postingCheckbox+label::before {
   font-family: Icons;
   content: "\e0db";
   margin-right: 0.5em;
   color: #117743;
   display: inline-block;
   cursor: pointer;
+}
+
+#checkboxSpoiler+label:after {
+  content: "Spoiler";
 }
 
 input[type=checkbox].postingCheckbox:checked+label:before {
@@ -174,5 +178,8 @@ input[type=checkbox].postingCheckbox:checked+label:before {
 @media only screen and (max-device-width: 812px) {
   .boardHeader p#labelDescription {
     display: none;
+  }
+  #fieldMessage {
+    width: 100%;
   }
 }

@@ -40,7 +40,7 @@ mediaHiding.updateHiddenFiles = function(file, hiding) {
 
     var element = mediaObject[i];
 
-    element.button.innerHTML = hiding ? '(Show file)' : '(Hide file)';
+    element.button.classList.toggle('hiddenFile', hiding);
 
     if (element.element.style.display === 'none' && hiding) {
 

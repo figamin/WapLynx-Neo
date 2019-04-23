@@ -297,6 +297,10 @@ video {
   content: '(Hide file)';
 }
 
+.hiddenFile::after {
+  content: '(Show file)';
+}
+
 @media only screen and (max-device-width: 812px) {
   .uploadCell img:not(.imgExpanded) {
     max-width: 75px;
@@ -332,6 +336,9 @@ video {
   }
   .hideFileButton::after {
     content: '(Hide)';
+  }
+  .hiddenFile::after {
+    content: '(Show)';
   }
   .originalNameLink, .labelCreated, .sizeLabel, .dimensionLabel {
     display: none;

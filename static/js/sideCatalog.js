@@ -425,4 +425,6 @@ sideCatalog.refreshSideCatalog = function() {
 
 };
 
-sideCatalog.init();
+if (!api.mobile) {
+  sideCatalog.init();
+}
