@@ -134,9 +134,7 @@ video {
 }
 
 .divMessage {
-  margin-left: 3em;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
+  margin: 1em 1em 1em 3em;
   word-wrap: break-word;
 }
 
@@ -325,9 +323,6 @@ video {
     display: block;
     width: 100%;
   }
-  .postInfo {
-    border-bottom: 1px solid #117743;
-  }
   .divPosts {
     margin: .25em;
   }
@@ -342,5 +337,8 @@ video {
   }
   .originalNameLink, .labelCreated, .sizeLabel, .dimensionLabel {
     display: none;
+  }
+  .divMessage {
+    margin-left: 1em;
   }
 }
