@@ -299,7 +299,7 @@ video {
   content: '(Show file)';
 }
 
-@media only screen and (max-device-width: 812px) {
+@media only screen and (max-width: 812px) {
   .uploadCell img:not(.imgExpanded) {
     max-width: 75px;
     max-height: 75px;

@@ -261,6 +261,7 @@ nav span, nav a {
 #divPages a {
   text-decoration: none;
   padding: 0 0.25em;
+  display: inline-block;
 }
 
 a.rules:after {
@@ -471,7 +472,7 @@ footer {
   content: 'account';
 }
 
-@media only screen and (max-device-width: 812px) {
+@media only screen and (max-width: 812px) {
   #navLinkSpan span, #navOptionsSpan span, legend, #settingsButton, #links span,
     .hideMobile {
     display: none;

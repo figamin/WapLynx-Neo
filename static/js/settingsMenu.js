@@ -309,17 +309,28 @@ settingsMenu.getOtherContent = function() {
   var relativeDiv = document.createElement('div');
   otherPanel.appendChild(relativeDiv);
 
+  var relativeCheckBox = document.createElement('input');
+  relativeCheckBox.type = 'checkbox';
+  relativeDiv.appendChild(relativeCheckBox);
+  relativeCheckBox.checked = JSON.parse(localStorage.relativeTime || 'false');
+
   var relativeLabel = document.createElement('label');
   relativeLabel.className = 'small';
   relativeLabel.innerHTML = 'Relative Times';
   relativeDiv.appendChild(relativeLabel);
 
-  var relativeCheckBox = document.createElement('input');
-  relativeCheckBox.type = 'checkbox';
-  relativeDiv.appendChild(relativeCheckBox);
+  var noAutoLoopiv = document.createElement('div');
+  otherPanel.appendChild(noAutoLoopiv);
 
-  relativeCheckBox.checked = localStorage.relativeTime
-      && JSON.parse(localStorage.relativeTime);
+  var noAutoLoopCheckBox = document.createElement('input');
+  noAutoLoopCheckBox.type = 'checkbox';
+  noAutoLoopiv.appendChild(noAutoLoopCheckBox);
+  noAutoLoopCheckBox.checked = JSON.parse(localStorage.noAutoLoop || 'false');
+
+  var noAutoLoopLabel = document.createElement('label');
+  noAutoLoopLabel.className = 'small';
+  noAutoLoopLabel.innerHTML = 'No Autoloop';
+  noAutoLoopiv.appendChild(noAutoLoopLabel);
 
   var saveButton = document.createElement('button');
   otherPanel.appendChild(saveButton);
@@ -327,6 +338,7 @@ settingsMenu.getOtherContent = function() {
 
   saveButton.onclick = function() {
     localStorage.setItem('relativeTime', relativeCheckBox.checked);
+    localStorage.setItem('noAutoLoop', noAutoLoopCheckBox.checked);
   }
 
   return otherPanel;

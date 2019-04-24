@@ -53,7 +53,7 @@
   font-size: 75%;
 }
 
-@media only screen and (max-device-width: 812px) {
+@media only screen and (max-width: 812px) {
   .linkThumb img {
     max-height: 100%;
     max-width: 100%;

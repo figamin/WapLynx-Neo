@@ -174,7 +174,7 @@ input[type=checkbox].postingCheckbox:checked+label:before {
   cursor: pointer;
 }
 
-@media only screen and (max-device-width: 812px) {
+@media only screen and (max-width: 812px) {
   .boardHeader p#labelDescription {
     display: none;
   }

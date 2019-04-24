@@ -68,8 +68,13 @@ thumbs.setPlayer = function(link, mime) {
   src.setAttribute('src', link.href);
   src.setAttribute('type', mime);
 
-  var video = document
-      .createElement(thumbs.videoTypes.indexOf(mime) > -1 ? 'video' : 'audio');
+  var isVideo = thumbs.videoTypes.indexOf(mime) > -1;
+
+  var video = document.createElement(isVideo ? 'video' : 'audio');
+  if (isVideo) {
+    video.loop = !JSON.parse(localStorage.noAutoLoop || 'false');
+  }
+
   video.setAttribute('controls', true);
   video.style.display = 'none';
 
