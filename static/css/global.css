@@ -75,7 +75,7 @@ hr {
 }
 
 .coloredIcon, .unhideButton, .embedButton, .checkedFavouriteButton:before,
-  #selectedTab {
+  #selectedTab, #showFormsButton {
   color: #FFB300;
   cursor: pointer
 }
