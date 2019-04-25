@@ -34,7 +34,7 @@ postCommon.init = function() {
     nameField.value = localStorage.name || '';
   }
 
-  document.getElementById('alwaysUseBypassDiv').style.display = 'table-row';
+  document.getElementById('alwaysUseBypassDiv').classList.toggle('hidden');
 
   var bypassCheckBox = document.getElementById('alwaysUseBypassCheckBox');
 
@@ -75,24 +75,17 @@ postCommon.init = function() {
   }
 
   var formMore = document.getElementById('formMore');
-
-  formMore.style.display = 'table-row';
+  formMore.classList.toggle('hidden');
 
   var toggled = false;
 
   var extra = document.getElementById('extra');
-
-  extra.className = 'hidden';
+  extra.classList.toggle('hidden');
 
   formMore.children[0].onclick = function() {
 
-    if (toggled) {
-      formMore.children[0].innerHTML = 'More';
-      extra.className = 'hidden';
-    } else {
-      formMore.children[0].innerHTML = 'Less';
-      extra.className = '';
-    }
+    extra.classList.toggle('hidden');
+    formMore.children[0].innerHTML = toggled ? 'More' : 'Less';
 
     toggled = !toggled;
 

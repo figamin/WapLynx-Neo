@@ -135,32 +135,32 @@
       <p class="small">(used to delete files and postings)</p></td>
   </tr>
 
-  <tr id="flagsDiv">
-    <th>Flag</th>
-    <td><select
-        name="flag"
-        id="flagCombobox">
-      </select> <img class="flagPreview"></td>
+  <tr>
+    <th>Misc</th>
+    <td>
+      <div id="flagsDiv">
+        <select
+          name="flag"
+          id="flagCombobox"></select>
+        <img class="flagPreview">
+      </div>
+      <div id="noFlagDiv">
+        <input
+          type="checkbox"
+          class="postingCheckbox postingInput"
+          id="checkboxNoFlag"
+          name="noFlag">
+        <label for="checkboxNoFlag"></label>
+      </div>
+      <div
+        class="hidden"
+        id="alwaysUseBypassDiv">
+        <input
+          type="checkbox"
+          class="postingCheckbox postingInput"
+          id="alwaysUseBypassCheckBox">
+        <label for="alwaysUseBypassCheckBox"></label>
+      </div>
+    </td>
   </tr>
-
-  <tr id="noFlagDiv">
-    <th>No location</th>
-    <td><input
-        type="checkbox"
-        class="postingCheckbox postingInput"
-        id="checkboxNoFlag"
-        name="noFlag"> <label for="checkboxNoFlag"></label></td>
-  </tr>
-
-  <tr
-    id="alwaysUseBypassDiv"
-    class="hidden">
-    <th>Bypass</th>
-    <td><input
-        type="checkbox"
-        class="postingCheckbox postingInput"
-        id="alwaysUseBypassCheckBox"> <label
-        for="alwaysUseBypassCheckBox"></label></td>
-  </tr>
-
 </tbody>
