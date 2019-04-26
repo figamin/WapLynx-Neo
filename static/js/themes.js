@@ -3,40 +3,9 @@ var themes = {};
 themes.init = function() {
 
   themes.themes = [ {
-    file : 'clear.css',
     label : 'Clear',
     id : 'clear'
-  }, {
-    file : 'jungle.css',
-    label : 'Jungle',
-    id : 'jungle'
   } ];
-
-  for (var i = 0; i < themes.themes.length; i++) {
-    themes.themes[i].element = document.createElement('link');
-    themes.themes[i].element.type = 'text/css';
-    themes.themes[i].element.rel = 'stylesheet';
-    themes.themes[i].element.href = '/.static/css/' + themes.themes[i].file;
-  }
-
-  if (api.boardUri) {
-
-    var linkedCss = document.getElementsByTagName('link');
-
-    for (var i = 0; i < linkedCss.length; i++) {
-
-      var ending = '/' + api.boardUri + '/custom.css';
-
-      if (linkedCss[i].href.indexOf(ending) === linkedCss[i].href.length
-          - ending.length) {
-        themes.customCss = linkedCss[i];
-        break;
-      }
-    }
-
-  }
-
-  themes.updateCss();
 
   var postingLink = document.getElementById('navPosting');
 
@@ -61,7 +30,7 @@ themes.init = function() {
     vanillaOption.innerHTML = 'Default';
     themeSelector.appendChild(vanillaOption);
 
-    for (i = 0; i < themes.themes.length; i++) {
+    for (var i = 0; i < themes.themes.length; i++) {
 
       var theme = themes.themes[i];
 
@@ -81,10 +50,8 @@ themes.init = function() {
       if (!themeSelector.selectedIndex) {
 
         if (localStorage.selectedTheme) {
-
           delete localStorage.selectedTheme;
-
-          themes.updateCss();
+          themeLoader.load();
         }
 
         return;
@@ -98,40 +65,12 @@ themes.init = function() {
 
       localStorage.selectedTheme = selectedTheme.id;
 
-      themes.updateCss();
+      themeLoader.load();
 
     };
 
     postingLink.parentNode.insertBefore(themeSelector, referenceNode);
 
-  }
-
-};
-
-themes.updateCss = function() {
-
-  if (themes.addedTheme) {
-
-    if (themes.customCss && !themes.customCss.parentNode) {
-      document.head.appendChild(themes.customCss);
-    }
-
-    themes.addedTheme.remove();
-    themes.addedTheme = null;
-  }
-
-  for (var i = 0; i < themes.themes.length; i++) {
-    var theme = themes.themes[i];
-
-    if (theme.id === localStorage.selectedTheme) {
-      themes.addedTheme = theme.element;
-
-      if (themes.customCss && themes.customCss.parentNode) {
-        themes.customCss.remove();
-      }
-
-      document.head.appendChild(theme.element);
-    }
   }
 
 };

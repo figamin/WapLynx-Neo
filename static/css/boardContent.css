@@ -102,6 +102,10 @@
   background: #282A2E;
 }
 
+.theme_clear #postingForm th, .theme_clear  .modalTableBody th {
+  background: #dddddd;
+}
+
 input[type=checkbox].postingCheckbox {
   display: none;
 }
@@ -157,6 +161,10 @@ input[type=checkbox].postingCheckbox:checked+label:before {
   background: #1D1F21;
   padding: 10px;
   display: inline-block;
+}
+
+.theme_clear .modalDecorationPanel {
+  background: #cccccc;
 }
 
 .modalHeader {
