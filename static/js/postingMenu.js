@@ -431,7 +431,7 @@ postingMenu.editPost = function(board, thread, post, innerPart) {
   };
 
   if (post) {
-    parameters.post = post;
+    parameters.postId = post;
   }
 
   api.formApiRequest('edit', {}, function gotData(status, data) {

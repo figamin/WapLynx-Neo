@@ -279,6 +279,10 @@ video {
   text-align: center;
 }
 
+.multipleUploads .labelHash {
+  word-wrap: anywhere;
+}
+
 .contentAction label, #divControls label, #transferControls label,
   #ipDelete label, #divArchive label {
   font-size: 80%;

@@ -365,7 +365,6 @@ thread.replyCallback.progress = function(info) {
 thread.refreshCallback = function(error, receivedData) {
 
   if ((thread.mod && (error !== 'ok')) || (!thread.mod && error)) {
-    console.log('retrun');
     return;
   }
 
