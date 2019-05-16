@@ -38,7 +38,7 @@ edit.save = function() {
       subject : typedSubject
     };
 
-    if (edit.postId) {
+    if (api.postId) {
       parameters.postId = api.postId;
     } else {
       parameters.threadId = api.threadId;
