@@ -138,11 +138,6 @@ video {
   word-wrap: break-word;
 }
 
-.multipleUploads .innerPost .divMessage, .multipleUploads .markedPost .divMessage
-  {
-  clear: both;
-}
-
 .divBanMessage {
   color: #ff0000;
   font-weight: bold;
@@ -174,7 +169,7 @@ video {
   object-fit: contain;
 }
 
-.multipleUploads .opUploadPanel, .multipleUploads .panelUploads {
+.multipleUploads {
   float: left;
   width: 100%;
 }
@@ -310,7 +305,7 @@ video {
     max-height: 75px;
     object-fit: cover;
   }
-  .multipleUploads .opUploadPanel, .multipleUploads .panelUploads {
+  .multipleUploads {
     display: inline-flex;
   }
   .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
