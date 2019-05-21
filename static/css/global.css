@@ -457,7 +457,7 @@ footer {
   content: 'boards';
 }
 
-#navOverboard::after {
+#navOverboard::after, #linkOverboard::after {
   content: 'overboard';
 }
 
