@@ -115,6 +115,10 @@ globalSettings.init = function() {
       setting : 'spamIpsSource',
       type : 'string'
     },
+    fieldCaptchaLimit : {
+      setting : 'captchaLimit',
+      type : 'string'
+    },
     fieldAddress : {
       setting : 'address',
       type : 'string'
