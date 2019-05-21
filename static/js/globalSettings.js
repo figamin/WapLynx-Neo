@@ -99,6 +99,10 @@ globalSettings.init = function() {
       setting : 'master',
       type : 'string'
     },
+    fieldFileLimit : {
+      setting : 'fileLimit',
+      type : 'string'
+    },
     fieldMessageLength : {
       setting : 'messageLength',
       type : 'string'
