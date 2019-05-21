@@ -26,6 +26,8 @@ thumbs.expandImage = function(mouseEvent, link, mime) {
     return true;
   }
 
+  link.parentNode.classList.toggle('expandedCell');
+
   var thumb = link.getElementsByTagName('img')[0];
 
   if (thumb.style.display === 'none') {
@@ -44,7 +46,6 @@ thumbs.expandImage = function(mouseEvent, link, mime) {
   if (expanded) {
     thumb.style.display = 'none';
     expanded.style.display = '';
-    return false;
   } else {
     var expandedSrc = link.href;
 
@@ -58,8 +59,9 @@ thumbs.expandImage = function(mouseEvent, link, mime) {
 
     thumb.style.display = 'none';
     link.appendChild(expanded);
-    return false;
   }
+
+  return false;
 
 };
 
