@@ -4,7 +4,9 @@ api.mobile = window.innerWidth < 812;
 
 api.htmlReplaceTable = {
   '<' : '&lt;',
-  '>' : '&gt;'
+  '>' : '&gt;',
+  '\"' : '&quot;',
+  '\'' : '&apos;'
 };
 
 api.removeIndicator = function(className, thread) {

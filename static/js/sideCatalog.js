@@ -364,7 +364,7 @@ sideCatalog.addSideCatalogThread = function(thread) {
   linkContent.appendChild(upperText);
   linkContent.appendChild(lowerText);
 
-  upperText.innerHTML = (thread.subject || (thread.message.replace(/[<>]/g,
+  upperText.innerHTML = (thread.subject || (thread.message.replace(/[<>'"]/g,
       function(match) {
         return api.htmlReplaceTable[match];
       }).substring(0, 128) || thread.threadId));

@@ -31,10 +31,11 @@ posting.init = function() {
 
   posting.guiEditInfo = 'Edited last time by {$login} on {$date}.';
 
-  posting.reverseHTMLReplaceTable = {
-    '&lt;' : '<',
-    '&gt;' : '>'
-  };
+  posting.reverseHTMLReplaceTable = {};
+
+  for ( var key in api.htmlReplaceTable) {
+    posting.reverseHTMLReplaceTable[api.htmlReplaceTable[key]] = key;
+  }
 
   if (document.getElementById('deleteFormButton')) {
 

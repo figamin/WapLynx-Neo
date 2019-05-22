@@ -131,6 +131,44 @@ watcher.getStoredWatchedData = function() {
 
 };
 
+watcher.processThread = function(urls, index, data) {
+
+  data = JSON.parse(data);
+  var url = urls[index];
+
+  var posts = data.posts;
+
+  if (posts && posts.length) {
+
+    var lastPost = posts[posts.length - 1];
+
+    var parsedCreation = new Date(lastPost.creation);
+
+    var storedWatchedData = watcher.getStoredWatchedData();
+
+    var watchData = storedWatchedData[url.board][url.thread];
+
+    if (parsedCreation.getTime() > watchData.lastReplied) {
+      watchData.lastReplied = parsedCreation.getTime();
+      localStorage.watchedData = JSON.stringify(storedWatchedData);
+    }
+
+    if (!watcher.elementRelation[url.board]
+        || !watcher.elementRelation[url.board][url.thread]) {
+      watcher.addWatchedCell(url.board, url.thread, watchData);
+    } else if (watchData.lastSeen >= watchData.lastReplied) {
+      watcher.elementRelation[url.board][url.thread].style.display = 'none';
+    } else {
+      watcher.watcherAlertCounter++;
+      watcher.elementRelation[url.board][url.thread].style.display = 'inline';
+    }
+
+  }
+
+  watcher.iterateWatchedThreads(urls, ++index);
+
+};
+
 watcher.iterateWatchedThreads = function(urls, index) {
 
   index = index || 0;
@@ -143,47 +181,14 @@ watcher.iterateWatchedThreads = function(urls, index) {
 
   var url = urls[index];
 
-  api.localRequest(
-      '/' + url.board + '/res/' + url.thread + '.json',
+  api.localRequest('/' + url.board + '/res/' + url.thread + '.json',
       function gotThreadInfo(error, data) {
 
         if (error) {
           watcher.iterateWatchedThreads(urls, ++index);
-          return;
+        } else {
+          watcher.processThread(urls, index, data);
         }
-
-        data = JSON.parse(data);
-
-        var posts = data.posts;
-
-        if (posts && posts.length) {
-
-          var lastPost = posts[posts.length - 1];
-
-          var parsedCreation = new Date(lastPost.creation);
-
-          var storedWatchedData = watcher.getStoredWatchedData();
-
-          var watchData = storedWatchedData[url.board][url.thread];
-
-          if (parsedCreation.getTime() > watchData.lastReplied) {
-            watchData.lastReplied = parsedCreation.getTime();
-            localStorage.watchedData = JSON.stringify(storedWatchedData);
-          }
-
-          if (!watcher.elementRelation[url.board]
-              || !watcher.elementRelation[url.board][url.thread]) {
-            watcher.addWatchedCell(url.board, url.thread, watchData);
-          } else if (watchData.lastSeen >= watchData.lastReplied) {
-            watcher.elementRelation[url.board][url.thread].style.display = 'none';
-          } else {
-            watcher.watcherAlertCounter++;
-            watcher.elementRelation[url.board][url.thread].style.display = 'inline';
-          }
-
-        }
-
-        watcher.iterateWatchedThreads(urls, ++index);
 
       });
 
@@ -259,6 +264,7 @@ watcher.addWatchedCell = function(board, thread, watchData) {
   labelWrapper.className = 'watchedCellLabel';
 
   var label = document.createElement('a');
+
   label.innerHTML = watchData.label || (board + '/' + thread);
   label.href = '/' + board + '/res/' + thread + '.html';
   labelWrapper.appendChild(label);
@@ -340,10 +346,14 @@ watcher.processOP = function(op) {
     var message = op.getElementsByClassName('divMessage')[0];
 
     var label = (subject.length ? subject[0].innerHTML : null)
-        || message.innerHTML.substr(0, 16).trim();
+        || message.innerHTML.replace(/(<([^>]+)>)/ig, "").substr(0, 16).trim();
 
     if (!label.length) {
       label = null;
+    } else {
+      label = label.replace(/[<>"']/g, function(match) {
+        return api.htmlReplaceTable[match]
+      });
     }
 
     boardThreads[thread] = {
