@@ -323,11 +323,12 @@
           list, so users are still able to post)
         </label>
         <label>
-          TOR posting permission level:
-          <select
-            id="comboTorPostingLevel"
-            name="torPostingLevel">
-          </select>
+          <input
+            type="checkbox"
+            class="globalSettingsField"
+            id="checkboxDontProcessLinks"
+            name="dontProcessLinks">
+          Don't turn links into hyperlinks on posts
         </label>
         <label>
           <input
@@ -337,6 +338,13 @@
             name="allowSpamBypass">
           Allow ips caught on the spammer list to use the block bypass if block
           bypass is not disabled
+        </label>
+        <label>
+          TOR posting permission level:
+          <select
+            id="comboTorPostingLevel"
+            name="torPostingLevel">
+          </select>
         </label>
         <label>
           Bypass mode:
@@ -540,8 +548,8 @@
             name="archiveThreshold"
             id="fieldArchiveThreshold">
         </label>
-        Maximum size for custom flag names:
         <label>
+          Maximum size for custom flag names:
           <input
             type="number"
             class="globalSettingsField"

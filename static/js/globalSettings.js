@@ -31,6 +31,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'verboseGenerator',
     },
+    checkboxDontProcessLinks : {
+      type : 'boolean',
+      setting : 'dontProcessLinks',
+    },
     checkboxBoardStaffArchiving : {
       type : 'boolean',
       setting : 'allowBoardStaffArchiving',
