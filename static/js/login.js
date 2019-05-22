@@ -55,6 +55,9 @@ loginObj.loginUser = function() {
   if (!typedLogin.length || !typedPassword.length) {
     alert('Both login and password are mandatory.');
   } else {
+
+    var redirect = api.getCookies().loginredirect || '/account.js';
+
     api.formApiRequest('login', {
       login : typedLogin,
       password : typedPassword,
@@ -62,7 +65,7 @@ loginObj.loginUser = function() {
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
-        window.location.pathname = '/account.js';
+        window.location.href = redirect;
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
