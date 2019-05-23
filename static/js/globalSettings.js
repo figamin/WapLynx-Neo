@@ -91,6 +91,10 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'ipExpirationDays'
     },
+    fieldAuthenticationLimit : {
+      type : 'string',
+      setting : 'authenticationLimit'
+    },
     fieldClusterPort : {
       type : 'string',
       setting : 'clusterPort'
