@@ -347,8 +347,8 @@ globalSettings.init = function() {
       setting : 'allowGlobalBoardModeration',
       type : 'boolean'
     },
-    checkboxSpamBypass : {
-      setting : 'allowSpamBypass',
+    checkboxVersatileBlockBypass : {
+      setting : 'allowVersatileBlockBypass',
       type : 'boolean'
     },
     checkboxMediaThumb : {
