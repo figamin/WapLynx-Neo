@@ -131,6 +131,10 @@ globalSettings.init = function() {
       setting : 'captchaLimit',
       type : 'string'
     },
+    fieldDnsbl : {
+      setting : 'dnsbl',
+      type : 'string'
+    },
     fieldAddress : {
       setting : 'address',
       type : 'string'
