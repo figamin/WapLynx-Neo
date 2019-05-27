@@ -13,6 +13,14 @@ video {
   max-width: 100%;
 }
 
+code {
+  white-space: pre;
+}
+
+code br {
+  display: none;
+}
+
 .imgLink {
   float: left;
 }
