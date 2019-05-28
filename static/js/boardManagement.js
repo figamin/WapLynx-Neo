@@ -199,8 +199,8 @@ boardManagement.saveSettings = function() {
   } else if (typedAutoCaptcha.length && isNaN(typedAutoCaptcha)) {
     alert('Invalid auto captcha treshold.');
     return;
-  } else if (!typedName.length || !typedName.length) {
-    alert('Both name and description are mandatory.');
+  } else if (!typedName) {
+    alert('Name is mandatory.');
     return;
   } else if (typedMessage.length > 256) {
     alert('Message too long, keep it under 256 characters.');

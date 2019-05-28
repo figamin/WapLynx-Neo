@@ -123,8 +123,8 @@ account.createBoard = function() {
       .trim();
   var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
 
-  if (!typedUri.length || !typedName.length || !typedDescription.length) {
-    alert('All fields are mandatory.');
+  if (!typedUri.length || !typedName.length) {
+    alert('Uri and name are mandatory.');
   } else if (/\W/.test(typedUri)) {
     alert('Invalid uri.');
     return;
