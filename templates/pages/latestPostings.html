@@ -56,12 +56,28 @@
           name="date"
           id="fieldDate">
         <br>
-        Boards(separate with comma, if empty, all boards will be checked):
+        <span id="panelIp"> Ip: <input
+            type="text"
+            name="ip"
+            id="fieldIp"> <br></span> Boards(separate with comma, if
+        empty, all boards will be checked):
         <input
           id="fieldBoards"
           type="text"
           name="boards">
         <br>
+        <input
+          type="hidden"
+          name="boardUri"
+          id="inputBoardUri">
+        <input
+          type="hidden"
+          name="threadId"
+          id="inputThreadId">
+        <input
+          type="hidden"
+          name="postId"
+          id="inputPostId">
         <button type="submit">Search</button>
       </form>
 
