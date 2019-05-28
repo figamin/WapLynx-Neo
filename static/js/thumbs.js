@@ -92,30 +92,41 @@ thumbs.setPlayer = function(link, mime) {
   hideLink.style.display = 'none';
   hideLink.className = 'hideLink';
   hideLink.onclick = function() {
-    newThumb.style.display = 'inline';
+    newThumbLink.style.display = 'inline';
     video.style.display = 'none';
     hideLink.style.display = 'none';
     video.pause();
   };
 
+  var newThumbLink = document.createElement('a');
+  newThumbLink.href = link.href;
+
   var newThumb = document.createElement('img');
+  newThumbLink.appendChild(newThumb);
   newThumb.className = 'imgLink';
   newThumb.src = link.childNodes[0].src;
-  newThumb.onclick = function() {
+  newThumbLink.onclick = function(mouseEvent) {
+
+    if (mouseEvent.which === 2 || mouseEvent.ctrlKey) {
+      return true;
+    }
+
     if (!video.childNodes.count) {
       video.appendChild(src);
     }
 
-    newThumb.style.display = 'none';
+    newThumbLink.style.display = 'none';
     video.style.display = 'inline';
     hideLink.style.display = 'inline';
     video.play();
+
+    return false;
   };
   newThumb.style.cursor = 'pointer';
 
   videoContainer.appendChild(hideLink);
   videoContainer.appendChild(video);
-  videoContainer.appendChild(newThumb);
+  videoContainer.appendChild(newThumbLink);
 
   parent.replaceChild(videoContainer, link);
 
