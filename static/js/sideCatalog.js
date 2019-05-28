@@ -294,6 +294,21 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
   sideCatalog.removeAllFromClass('watchButton');
   sideCatalog.removeAllFromClass('relativeTime');
   sideCatalog.removeAllFromClass('unhideButton');
+  sideCatalog.removeAllFromClass('linkHistory');
+
+  if (thread.mod) {
+
+    var newLinkHistory = document.createElement('a');
+    newLinkHistory.innerHTML = 'History';
+    newLinkHistory.className = 'linkHistory';
+
+    var editLink = document.getElementsByClassName('linkEdit')[0];
+
+    editLink.parentNode.insertBefore(newLinkHistory, editLink.nextSibling);
+    editLink.parentNode.insertBefore(document.createTextNode(' '),
+        editLink.nextSibling);
+
+  }
 
   api.resetIndicators(data);
 

@@ -10,8 +10,9 @@ posting.init = function() {
       + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
       + '</span> <span class="labelCreated"></span> <span class="spanId"> Id:<span '
       + 'class="labelId"></span></span> <a '
-      + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <span class="panelBacklinks">'
-      + '</span></div>'
+      + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <a class="linkEdit">Edit</a> '
+      + '<a class="linkHistory">History</a> <span class="panelBacklinks"></span>'
+      + '</div>'
       + '<div>'
       + '<span class="panelIp"> <span class="panelRange">Broad'
       + 'range(1/2 octets): <span class="labelBroadRange"> </span> <br>'
@@ -484,6 +485,25 @@ posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
 
   link.href += postingId;
   linkQuote.href += 'q' + postingId;
+
+  var linkEdit = postCell.getElementsByClassName('linkEdit')[0];
+  var linkHistory = postCell.getElementsByClassName('linkHistory')[0];
+
+  var complement = (post.postId ? 'postId' : 'threadId') + '=' + postingId;
+
+  if (thread.mod) {
+    linkEdit.href = '/edit.js?boardUri=' + boardUri + '&';
+    linkEdit.href += complement;
+  } else if (linkEdit) {
+    linkEdit.remove();
+  }
+
+  if (thread.mod && post.ip) {
+    linkHistory.href = '/latestPostings.js?boardUri=' + boardUri + '&';
+    linkHistory.href += complement;
+  } else if (linkHistory) {
+    linkHistory.remove();
+  }
 
   var checkboxName = boardUri + '-' + threadId;
 
