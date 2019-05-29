@@ -372,6 +372,14 @@ thread.refreshCallback = function(error, receivedData) {
     receivedData = JSON.parse(receivedData);
   }
 
+  if (receivedData.threadId !== api.threadId) {
+
+    window.location.href = '/' + receivedData.boardUri + '/res/'
+        + receivedData.threadId + '.html';
+
+    return;
+  }
+
   if (thread.fullRefresh) {
     thread.lastReplyId = 0;
     thread.unreadPosts = 0;
