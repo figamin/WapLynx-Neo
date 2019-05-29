@@ -13,6 +13,7 @@ posting.init = function() {
       + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <a class="linkEdit">Edit</a> '
       + '<a class="linkHistory">History</a> <span class="panelBacklinks"></span>'
       + '</div>'
+      + '<div class="panelASN">ASN: <span class="labelASN"></span> </div>'
       + '<div>'
       + '<span class="panelIp"> <span class="panelRange">Broad'
       + 'range(1/2 octets): <span class="labelBroadRange"> </span> <br>'
@@ -452,6 +453,12 @@ posting.setPostHideableElements = function(postCell, post, noExtras) {
     }
   } else {
     imgFlag.remove();
+  }
+
+  if (!post.asn) {
+    postCell.getElementsByClassName('panelASN')[0].remove();
+  } else {
+    postCell.getElementsByClassName('labelASN')[0].innerHTML = post.asn;
   }
 
   if (!post.ip) {

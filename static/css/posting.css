@@ -77,7 +77,7 @@ code br {
 }
 
 .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
-  .contentOmissionIndicator, .labelOmission, .labelId {
+  .contentOmissionIndicator, .labelOmission, .labelId, .panelASN {
   font-size: 80%;
 }
 

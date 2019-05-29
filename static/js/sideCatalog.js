@@ -218,6 +218,23 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
     panelIp.insertBefore(sideCatalog.getRangePanel(), panelIp.childNodes[0]);
   }
 
+  var panelASN = opCell.getElementsByClassName('panelASN')[0];
+
+  if (!panelASN) {
+
+    panelASN = document.createElement('div');
+    panelASN.className = 'panelASN';
+
+    var labelASN = document.createElement('span');
+    labelASN.className = 'labelASN';
+
+    panelASN.appendChild(document.createTextNode('ASN: '));
+    panelASN.appendChild(labelASN);
+
+    panelIp.parentNode.insertBefore(panelASN, panelIp);
+
+  }
+
   if (!opCell.getElementsByClassName('imgFlag').length) {
 
     var newFlagImage = document.createElement('img');
