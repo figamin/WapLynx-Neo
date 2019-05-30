@@ -51,9 +51,9 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'maxBoardHashBans',
     },
-    fieldMaxBoardRangeBans : {
+    fieldMaxBoardGeneralBans : {
       type : 'string',
-      setting : 'maxBoardRangeBans',
+      setting : 'maxBoardGeneralBans',
     },
     checkboxVerboseGridfs : {
       type : 'boolean',

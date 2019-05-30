@@ -91,5 +91,8 @@
   "reportNotificationEmail": "emails/reportNotifyEmail.html",
   "latestPostingsPage": "pages/latestPostings.html",
   "archivePage": "pages/archivePage.html",
-  "archiveCell": "cells/archiveCell.html"
+  "archiveCell": "cells/archiveCell.html",
+  "asnBanPage": "pages/asnBanPage.html",
+  "asnBansPage": "pages/asnBansPage.html",
+  "asnBanCell": "cells/asnBanCell.html"
 }

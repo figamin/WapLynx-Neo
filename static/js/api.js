@@ -178,22 +178,19 @@ api.handleConnectionResponse = function(xhr, callback, silent) {
       alert('You may now post');
     });
 
-  } else if (response.status === 'tooLarge') {
-    alert('Request refused because it was too large');
   } else if (response.status === 'maintenance') {
 
     if (!silent) {
       alert('The site is going under maintenance and all of it\'s functionalities are disabled temporarily.');
     }
 
-  } else if (response.status === 'fileParseError') {
-    alert('An uploaded file could not be parsed.');
-  } else if (response.status === 'parseError') {
-    alert('Your request could not be parsed.');
   } else if (response.status === 'banned') {
     if (response.data.range) {
       alert('Your ip range ' + response.data.range + ' has been banned from '
           + response.data.board + '.');
+    } else if (response.data.asn) {
+      alert('Your ASN ' + response.data.asn + ' has been banned from '
+          + response.data.board + '.')
     } else {
 
       var message = 'You are banned from ' + response.data.board + ' until '
