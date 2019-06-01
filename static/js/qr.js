@@ -15,7 +15,7 @@ qr.init = function() {
     if (post) {
 
       post.scrollIntoView();
-      qr.showQr(post.getElementsByClassName('linkQuote')[0], hash);
+      qr.showQr(hash);
 
       thread.markPost(hash);
     }
@@ -30,7 +30,7 @@ qr.removeQr = function() {
   qrPanel.style.display = 'none';
 };
 
-qr.showQr = function(link, quote) {
+qr.showQr = function(quote) {
 
   qrPanel.style.display = 'block';
 

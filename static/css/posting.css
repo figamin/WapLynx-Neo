@@ -21,8 +21,16 @@ code br {
   display: none;
 }
 
-.imgLink {
+.imgLink, #selectedDivQr .selectedCell, #selectedDiv .selectedCell {
   float: left;
+}
+
+#selectedDivQr .nameLabel, #selectedDiv .nameLabel {
+  display: inline-block;
+  max-width: 70px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .reportFieldset {

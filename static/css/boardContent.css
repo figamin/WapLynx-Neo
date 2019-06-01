@@ -22,7 +22,7 @@
 
 .dragAndDropThumb {
   max-height: 100px;
-  max-width: 100px;
+  max-width: 85px;
 }
 
 .removeButton {
@@ -84,6 +84,8 @@
 
 #postingForm label {
   font-size: 80%;
+  display: block;
+  clear: both;
 }
 
 #postingForm td, .modalTableBody td {
