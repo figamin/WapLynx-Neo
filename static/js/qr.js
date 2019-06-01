@@ -34,16 +34,8 @@ qr.showQr = function(link, quote) {
 
   qrPanel.style.display = 'block';
 
-  if (!api.mobile) {
-    var rect = link.getBoundingClientRect();
-
-    var previewOrigin = {
-      x : rect.right + 10 + window.scrollX,
-      y : rect.top + window.scrollY
-    };
-
-    qrPanel.style.left = (previewOrigin.x + 35) + 'px';
-    qrPanel.style.top = (previewOrigin.y - 5) + 'px';
+  if (qrPanel.getBoundingClientRect().top < 0) {
+    qrPanel.style.top = '25px';
   }
 
   document.getElementById('qrbody').value += '>>' + quote + '\n';
