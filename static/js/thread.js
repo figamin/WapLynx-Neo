@@ -2,7 +2,7 @@ var thread = {};
 
 thread.init = function() {
 
-  thread.mod = !!document.getElementById('divMod');
+  api.mod = !!document.getElementById('divMod');
 
   api.hiddenCaptcha = !document.getElementById('captchaDiv');
 
@@ -364,11 +364,11 @@ thread.replyCallback.progress = function(info) {
 
 thread.refreshCallback = function(error, receivedData) {
 
-  if ((thread.mod && (error !== 'ok')) || (!thread.mod && error)) {
+  if ((api.mod && (error !== 'ok')) || (!api.mod && error)) {
     return;
   }
 
-  if (!thread.mod) {
+  if (!api.mod) {
     receivedData = JSON.parse(receivedData);
   }
 
@@ -466,7 +466,7 @@ thread.refreshPosts = function(manual, full) {
 
   thread.refreshingThread = true;
 
-  if (thread.mod) {
+  if (api.mod) {
     api.formApiRequest('mod', {}, thread.refreshCallback, true,
         thread.refreshParameters);
   } else {

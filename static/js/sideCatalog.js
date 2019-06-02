@@ -70,7 +70,7 @@ sideCatalog.loadThread = function(cell, threadData) {
 
   sideCatalog.loadingThread = true;
 
-  if (thread.mod) {
+  if (api.mod) {
 
     api.formApiRequest('mod', {}, function(status, data) {
 
@@ -313,7 +313,7 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
   sideCatalog.removeAllFromClass('unhideButton');
   sideCatalog.removeAllFromClass('linkHistory');
 
-  if (thread.mod) {
+  if (api.mod) {
 
     var newLinkHistory = document.createElement('a');
     newLinkHistory.innerHTML = 'History';
