@@ -6,7 +6,18 @@ latestPostings.init = function() {
   latestPostings.originalTitle = document.title;
 
   latestPostings.postsDiv = document.getElementById('divPostings');
-  latestPostings.latestCheck = new Date();
+
+  var parts = document.getElementById('linkNext').href.split('?')[1].split('&');
+
+  var args = {};
+
+  for (var i = 0; i < parts.length; i++) {
+    var subParts = parts[i].split('=');
+
+    args[subParts[0]] = subParts[1];
+  }
+
+  latestPostings.latestCheck = new Date(+args.date);
   latestPostings.startTimer();
 
   document.addEventListener('visibilitychange', function changed() {
@@ -34,8 +45,6 @@ latestPostings.startTimer = function() {
         return;
       }
 
-      latestPostings.latestCheck = currentCheck;
-
       if (document.hidden) {
         latestPostings.unread += data.length;
 
@@ -45,6 +54,10 @@ latestPostings.startTimer = function() {
 
         document.title = latestPostings.originalTitle + '('
             + latestPostings.unread + ')';
+      }
+
+      if (data.length) {
+        latestPostings.latestCheck = new Date(data[0].creation);
       }
 
       for (var i = data.length - 1; i >= 0; i--) {
@@ -61,7 +74,7 @@ latestPostings.startTimer = function() {
       }
 
     }, true, {
-      date : latestPostings.latestCheck,
+      date : latestPostings.latestCheck.getTime(),
       boards : document.getElementById('fieldBoards').value
     });
 
