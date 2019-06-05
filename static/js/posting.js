@@ -342,7 +342,8 @@ posting.setUploadLinks = function(cell, file, noExtras) {
 
   thumbLink.setAttribute('data-filemime', file.mime);
 
-  if (file.mime.indexOf('image/') > -1 && !noExtras) {
+  if (file.mime.indexOf('image/') > -1 && !noExtras
+      && (typeof gallery !== 'undefined')) {
     gallery.addGalleryFile(file.path);
   }
 

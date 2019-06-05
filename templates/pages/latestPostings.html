@@ -44,8 +44,8 @@
     <fieldset id="settingsFieldset">
 
       <legend>Search</legend>
-      <a id="linkPrevious">Previous day</a>
-      <a id="linkNext">Next day</a>
+      <a id="linkPrevious">Previous page</a>
+      <a id="linkNext">Next page</a>
 
       <form
         action="/latestPostings.js"
@@ -83,6 +83,9 @@
 
       <hr>
       <h3>Postings</h3>
+      <button
+        id="buttonLoadMore"
+        class="hidden">Load more</button>
       <div id="divPostings"></div>
 
     </fieldset>

@@ -2,10 +2,11 @@ var latestPostings = {};
 
 latestPostings.init = function() {
 
-  latestPostings.unread = 0;
-  latestPostings.originalTitle = document.title;
-
   latestPostings.postsDiv = document.getElementById('divPostings');
+
+  var moreButton = document.getElementById('buttonLoadMore');
+  moreButton.className = '';
+  moreButton.onclick = latestPostings.loadMore;
 
   var parts = document.getElementById('linkNext').href.split('?')[1].split('&');
 
@@ -18,67 +19,38 @@ latestPostings.init = function() {
   }
 
   latestPostings.latestCheck = new Date(+args.date);
-  latestPostings.startTimer();
-
-  document.addEventListener('visibilitychange', function changed() {
-
-    if (latestPostings.unread && !document.hidden) {
-      latestPostings.unread = 0;
-      document.title = latestPostings.originalTitle;
-    }
-
-  }, false);
 
 };
 
-latestPostings.startTimer = function() {
+latestPostings.loadMore = function() {
 
-  setTimeout(function refresh() {
+  api.formApiRequest('latestPostings', {}, function gotData(status, data) {
 
-    var currentCheck = new Date();
+    if (status !== 'ok') {
+      return;
+    }
 
-    api.formApiRequest('latestPostings', {}, function gotData(status, data) {
+    if (data.length) {
+      latestPostings.latestCheck = new Date(data[0].creation);
+    }
 
-      latestPostings.startTimer();
+    for (var i = data.length - 1; i >= 0; i--) {
 
-      if (status !== 'ok') {
-        return;
-      }
+      var post = data[i];
 
-      if (document.hidden) {
-        latestPostings.unread += data.length;
+      var cell = posting.addPost(post, post.boardUri, post.threadId);
 
-        if (!latestPostings.unread) {
-          return;
-        }
+      cell.getElementsByClassName('deletionCheckBox')[0].remove();
 
-        document.title = latestPostings.originalTitle + '('
-            + latestPostings.unread + ')';
-      }
+      latestPostings.postsDiv.insertBefore(cell,
+          latestPostings.postsDiv.childNodes[0]);
 
-      if (data.length) {
-        latestPostings.latestCheck = new Date(data[0].creation);
-      }
+    }
 
-      for (var i = data.length - 1; i >= 0; i--) {
-
-        var post = data[i];
-
-        var cell = posting.addPost(post, post.boardUri, post.threadId);
-
-        cell.getElementsByClassName('deletionCheckBox')[0].remove();
-
-        latestPostings.postsDiv.insertBefore(cell,
-            latestPostings.postsDiv.childNodes[0]);
-
-      }
-
-    }, true, {
-      date : latestPostings.latestCheck.getTime(),
-      boards : document.getElementById('fieldBoards').value
-    });
-
-  }, 1000 * 60);
+  }, true, {
+    date : latestPostings.latestCheck.getTime(),
+    boards : document.getElementById('fieldBoards').value
+  });
 
 };
 

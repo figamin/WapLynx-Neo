@@ -55,6 +55,10 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'maxBoardGeneralBans',
     },
+    fieldLatestPostsAmount : {
+      type : 'string',
+      setting : 'latestPostsAmount',
+    },
     checkboxVerboseGridfs : {
       type : 'boolean',
       setting : 'verboseGridfs',
