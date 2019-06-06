@@ -270,6 +270,20 @@
       <h3>Settings</h3>
 
       <form
+        action="/resetBoardLock.js"
+        method="post"
+        enctype="multipart/form-data"
+        id="resetBoardLockForm">
+        <input
+          type="hidden"
+          name="boardUri"
+          id="resetLockIdentifier">
+        <button
+          type="submit"
+          id="resetLockButton">Reset auto board lock</button>
+      </form>
+
+      <form
         action="/setBoardSettings.js"
         method="post"
         enctype="multipart/form-data">

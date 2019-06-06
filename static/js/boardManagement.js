@@ -24,6 +24,13 @@ boardManagement.init = function() {
 
   boardManagement.volunteerCellTemplate = volunteerCellTemplate;
 
+  var resetLockButton = document.getElementById('resetLockButton');
+
+  if (resetLockButton) {
+    resetLockButton.type = 'button';
+    resetLockButton.onclick = boardManagement.resetLock;
+  }
+
   if (document.getElementById('ownerControlDiv')) {
 
     api.convertButton('spoilerFormButton', boardManagement.setSpoiler);
@@ -53,6 +60,21 @@ boardManagement.init = function() {
 
   api.convertButton('saveSettingsFormButton', boardManagement.saveSettings,
       'boardSettingsField');
+
+};
+
+boardManagement.resetLock = function() {
+
+  api.formApiRequest('resetBoardLock', {
+    boardUri : api.boardUri,
+  }, function requestComplete(status, data) {
+
+    if (status === 'ok') {
+      document.getElementById('resetBoardLockForm').remove();
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 };
 
