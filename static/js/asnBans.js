@@ -84,10 +84,14 @@ asnBans.showNewAsnBan = function(typedRange, id) {
 asnBans.placeAsnBan = function() {
 
   var typedAsn = document.getElementById('asnField').value.trim();
+  var typedDuration = document.getElementById('durationField').value.trim();
+  var typedReason = document.getElementById('reasonField').value.trim();
 
   var parameters = {
     asn : typedAsn,
-    boardUri : api.boardUri
+    boardUri : api.boardUri,
+    duration : typedDuration,
+    reason : typedReason
   };
 
   api.formApiRequest('placeAsnBan', parameters, function requestComplete(

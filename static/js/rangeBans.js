@@ -85,10 +85,14 @@ rangeBans.showNewRangeBan = function(typedRange, id) {
 rangeBans.placeRangeBan = function() {
 
   var typedRange = document.getElementById('rangeField').value.trim();
+  var typedDuration = document.getElementById('durationField').value.trim();
+  var typedReason = document.getElementById('reasonField').value.trim();
 
   var parameters = {
     range : typedRange,
-    boardUri : api.boardUri
+    boardUri : api.boardUri,
+    duration : typedDuration,
+    reason : typedReason
   };
 
   api.formApiRequest('placeRangeBan', parameters, function requestComplete(
