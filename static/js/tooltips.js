@@ -2,6 +2,7 @@ var tooltips = {};
 
 tooltips.init = function() {
 
+  tooltips.limit = 200;
   tooltips.loadingPreviews = {};
   tooltips.loadedContent = {};
   tooltips.quoteReference = {};
@@ -157,6 +158,12 @@ tooltips.processQuote = function(quote, backLink) {
       x : rect.right + 10 + window.scrollX,
       y : rect.top + window.scrollY
     };
+
+    var windowHeight = document.documentElement.clientHeight;
+
+    if (previewOrigin.y + tooltips.limit > windowHeight) {
+      previewOrigin.y = windowHeight - tooltips.limit;
+    }
 
     tooltip.style.left = previewOrigin.x + 'px';
     tooltip.style.top = previewOrigin.y + 'px';
