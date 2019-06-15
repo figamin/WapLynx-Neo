@@ -159,7 +159,7 @@ tooltips.processQuote = function(quote, backLink) {
       y : rect.top + window.scrollY
     };
 
-    var windowHeight = document.documentElement.clientHeight;
+    var windowHeight = document.documentElement.clientHeight + window.scrollY;
 
     if (previewOrigin.y + tooltips.limit > windowHeight) {
       previewOrigin.y = windowHeight - tooltips.limit;
