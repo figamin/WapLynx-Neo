@@ -2,7 +2,7 @@ var tooltips = {};
 
 tooltips.init = function() {
 
-  tooltips.limit = 200;
+  tooltips.bottomMargin = 25;
   tooltips.loadingPreviews = {};
   tooltips.loadedContent = {};
   tooltips.quoteReference = {};
@@ -129,6 +129,17 @@ tooltips.addBackLink = function(quoteUrl, quote) {
 
 };
 
+tooltips.checkHeight = function(tooltip) {
+
+  var windowHeight = document.documentElement.clientHeight + window.scrollY;
+
+  if (tooltip.offsetHeight + tooltip.offsetTop + tooltips.bottomMargin > windowHeight) {
+    tooltip.style.top = (windowHeight - tooltip.offsetHeight - tooltips.bottomMargin)
+        + 'px';
+  }
+
+}
+
 tooltips.processQuote = function(quote, backLink) {
 
   var tooltip;
@@ -146,12 +157,6 @@ tooltips.processQuote = function(quote, backLink) {
 
     document.body.appendChild(tooltip);
 
-    if (tooltips.loadedContent[quoteUrl]) {
-      tooltip.innerHTML = tooltips.loadedContent[quoteUrl];
-    } else {
-      tooltip.innerHTML = 'Loading';
-    }
-
     var rect = quote.getBoundingClientRect();
 
     var previewOrigin = {
@@ -159,15 +164,18 @@ tooltips.processQuote = function(quote, backLink) {
       y : rect.top + window.scrollY
     };
 
-    var windowHeight = document.documentElement.clientHeight + window.scrollY;
-
-    if (previewOrigin.y + tooltips.limit > windowHeight) {
-      previewOrigin.y = windowHeight - tooltips.limit;
-    }
-
     tooltip.style.left = previewOrigin.x + 'px';
     tooltip.style.top = previewOrigin.y + 'px';
     tooltip.style.display = 'inline';
+
+    if (tooltips.loadedContent[quoteUrl]) {
+      tooltip.innerHTML = tooltips.loadedContent[quoteUrl];
+
+      tooltips.checkHeight(tooltip);
+
+    } else {
+      tooltip.innerHTML = 'Loading';
+    }
 
     if (!tooltips.loadedContent[quoteUrl]
         && !tooltips.loadingPreviews[quoteUrl]) {
@@ -206,6 +214,8 @@ tooltips.generateHTMLFromData = function(postingData, tooltip, quoteUrl) {
   tempDiv.getElementsByClassName('deletionCheckBox')[0].remove();
 
   tooltip.innerHTML = tempDiv.outerHTML;
+
+  tooltips.checkHeight(tooltip);
 
   tooltips.loadedContent[quoteUrl] = tempDiv.outerHTML;
 
