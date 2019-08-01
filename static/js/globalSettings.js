@@ -35,6 +35,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'dontProcessLinks',
     },
+    checkboxHttp2 : {
+      type : 'boolean',
+      setting : 'useHttp2',
+    },
     checkboxBoardStaffArchiving : {
       type : 'boolean',
       setting : 'allowBoardStaffArchiving',
