@@ -304,20 +304,31 @@ hiding.setHideMenu = function(linkSelf) {
 
   var checkbox = parentNode.getElementsByClassName('deletionCheckBox')[0];
 
-  var href = linkSelf.href;
+  if (!checkbox) {
 
-  var parts = href.split('/');
+    var href = linkSelf.href;
 
-  var board = parts[3];
+    var parts = href.split('/');
 
-  var finalParts = parts[5].split('.');
+    var board = parts[3];
 
-  var thread = finalParts[0];
+    var finalParts = parts[5].split('.');
 
-  var post = finalParts[1].split('#')[1];
+    var thread = finalParts[0];
 
-  if (post === thread) {
-    post = undefined;
+    var post = finalParts[1].split('#')[1];
+
+    if (post === thread) {
+      post = undefined;
+    }
+
+  } else {
+
+    parts = checkbox.name.split('-');
+
+    board = parts[0];
+    thread = parts[1];
+    post = parts[2];
   }
 
   parentNode.insertBefore(hideButton, checkbox ? checkbox.nextSibling

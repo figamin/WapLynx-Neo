@@ -486,7 +486,7 @@ posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
 
   var postingId = post.postId || threadId;
 
-  var linkStart = '/' + boardUri + '/res/' + threadId + '.html#';
+  var linkStart = '#';
 
   linkQuote.href = linkStart;
   link.href = linkStart;
