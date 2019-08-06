@@ -27,6 +27,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'verboseCache',
     },
+    checkboxVolunteerSettings : {
+      type : 'boolean',
+      setting : 'allowVolunteerSettings',
+    },
     checkboxVerboseGenerator : {
       type : 'boolean',
       setting : 'verboseGenerator',

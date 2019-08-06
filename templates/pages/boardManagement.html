@@ -264,16 +264,14 @@
         <a id="closedReportsLink">Closed reports</a>
       </p>
 
-
-      <hr />
-
-      <h3>Settings</h3>
-
       <form
         action="/resetBoardLock.js"
         method="post"
         enctype="multipart/form-data"
         id="resetBoardLockForm">
+
+        <hr />
+
         <input
           type="hidden"
           name="boardUri"
@@ -283,10 +281,16 @@
           id="resetLockButton">Reset auto board lock</button>
       </form>
 
+
       <form
+        id="settingsForm"
         action="/setBoardSettings.js"
         method="post"
         enctype="multipart/form-data">
+
+        <hr />
+
+        <h3>Settings</h3>
 
         <input
           type="hidden"
