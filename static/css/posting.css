@@ -322,7 +322,7 @@ code br {
     object-fit: cover;
   }
   .multipleUploads {
-    display: inline-flex;
+    display: block;
   }
   .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
     .contentOmissionIndicator, .labelOmission, .labelId {
