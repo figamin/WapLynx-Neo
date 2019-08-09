@@ -85,6 +85,13 @@ thread.initThread = function() {
   thread.originalTitle = document.title;
   posting.highLightedIds = [];
   posting.idsRelation = {};
+
+  var ids = document.getElementsByClassName('labelId');
+
+  for (i = 0; i < ids.length; i++) {
+    posting.processIdLabel(ids[i]);
+  }
+
   thread.unreadPosts = 0;
   api.threadId = +document.getElementsByClassName('opCell')[0].id;
   thread.refreshURL = '/' + api.boardUri + '/res/' + api.threadId + '.json';

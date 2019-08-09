@@ -53,6 +53,10 @@ posting.init = function() {
 
   }
 
+  if (typeof (thread) !== 'undefined') {
+    return;
+  }
+
   var ids = document.getElementsByClassName('labelId');
 
   for (i = 0; i < ids.length; i++) {
