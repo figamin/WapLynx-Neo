@@ -92,6 +92,7 @@ thumbs.setPlayer = function(link, mime) {
   hideLink.style.display = 'none';
   hideLink.className = 'hideLink';
   hideLink.onclick = function() {
+    videoContainer.parentNode.classList.toggle('expandedCell');
     newThumbLink.style.display = 'inline';
     video.style.display = 'none';
     hideLink.style.display = 'none';
@@ -110,6 +111,8 @@ thumbs.setPlayer = function(link, mime) {
     if (mouseEvent.which === 2 || mouseEvent.ctrlKey) {
       return true;
     }
+
+    videoContainer.parentNode.classList.toggle('expandedCell');
 
     if (!video.childNodes.count) {
       video.appendChild(src);
