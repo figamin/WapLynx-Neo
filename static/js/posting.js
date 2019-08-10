@@ -65,6 +65,114 @@ posting.init = function() {
 
 };
 
+posting.applyBans = function(captcha) {
+
+  var typedReason = document.getElementById('reportFieldReason').value.trim();
+  var typedDuration = document.getElementById('fieldDuration').value.trim();
+  var typedMessage = document.getElementById('fieldbanMessage').value.trim();
+  var banType = document.getElementById('comboBoxBanTypes').selectedIndex;
+
+  var params = {
+    action : 'ban',
+    reason : typedReason,
+    captcha : captcha,
+    banType : banType,
+    duration : typedDuration,
+    banMessage : typedMessage,
+    global : document.getElementById('checkboxGlobal').checked
+  };
+
+  posting.newGetSelectedContent(params);
+
+  api.formApiRequest('contentActions', params, function requestComplete(status,
+      data) {
+
+    if (status === 'ok') {
+      alert('Bans applied');
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+
+  });
+};
+
+posting.banPosts = function() {
+
+  if (!document.getElementsByClassName('panelRange').length) {
+    posting.applyBans();
+    return;
+  }
+
+  var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
+
+  if (typedCaptcha && /\W/.test(typedCaptcha)) {
+    alert('Invalid captcha.');
+    return;
+  }
+
+  if (typedCaptcha.length == 24 || !typedCaptcha) {
+    thread.applyBans(typedCaptcha);
+  } else {
+    var parsedCookies = api.getCookies();
+
+    api.formaApiRequest('solveCaptcha', {
+      captchaId : parsedCookies.captchaid,
+      answer : typedCaptcha
+    }, function solvedCaptcha(status, data) {
+
+      if (status !== 'ok') {
+        alert(status);
+        return;
+      }
+
+      posting.applyBans(parsedCookies.captchaid);
+    });
+  }
+
+};
+
+posting.deleteFromIpOnBoard = function() {
+
+  var checkBoxes = document.getElementsByClassName('deletionCheckBox');
+
+  for (var i = 0; i < checkBoxes.length; i++) {
+    var checkBox = checkBoxes[i];
+
+    if (checkBox.checked) {
+      var splitName = checkBox.name.split('-')[0];
+      break;
+    }
+
+  }
+
+  if (!splitName) {
+    return;
+  }
+
+  var redirect = '/' + splitName + '/';
+
+  var confirmationBox = document
+      .getElementById('ipDeletionConfirmationCheckbox');
+
+  var param = {
+    action : 'ip-deletion',
+    confirmation : confirmationBox.checked
+  };
+
+  posting.newGetSelectedContent(param);
+
+  api.formApiRequest('contentActions', param, function requestComplete(status,
+      data) {
+
+    if (status === 'ok') {
+      window.location.pathname = redirect;
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+
+};
+
 posting.processIdLabel = function(label) {
 
   var id = label.innerHTML;

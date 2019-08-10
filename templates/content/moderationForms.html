@@ -1,0 +1,60 @@
+<hr>
+<p>Moderation actions</p>
+<label>
+  Ban duration (Defaults to 5 years):
+  <input
+    class="banField"
+    type="text"
+    id="fieldDuration"
+    name="duration">
+  <a href="/.static/pages/moderation.html#banSection">Duration format</a>
+</label>
+
+<label>
+  Ban Message
+  <input
+    class="banField"
+    type="text"
+    id="fieldbanMessage"
+    name="banMessage">
+</label>
+
+<label>
+  Ban type:
+  <select
+    name="banType"
+    id="comboBoxBanTypes">
+    <option value="0">Regular ban</option>
+    <option value="1">Range ban (1/2 octects)</option>
+    <option value="2">Range ban (3/4 octects)</option>
+    <option value="3">ASN ban</option>
+  </select>
+</label>
+
+<label>
+  <input
+    type="checkbox"
+    class="ipDeletionField"
+    name="confirmation"
+    id="ipDeletionConfirmationCheckbox"
+    value="true">
+  Confirm board-wise ip deletion
+</label>
+
+<button
+  type="submit"
+  id="inputIpDelete"
+  value="ip-deletion"
+  name="action">Delete by ip on this board</button>
+
+<button
+  type="submit"
+  id="inputBan"
+  value="ban"
+  name="action">Ban</button>
+
+<button
+  type="submit"
+  id="inputSpoil"
+  value="spoil"
+  name="action">Spoil Files</button>

@@ -4,6 +4,7 @@ var board = {};
 
 board.init = function() {
 
+  api.mod = !!document.getElementById('divMod');
   api.hiddenCaptcha = !document.getElementById('captchaDiv');
 
   var identifierElement = document.getElementById('boardIdentifier');
@@ -28,6 +29,12 @@ board.init = function() {
 
     board.postButton.disabled = false;
 
+  }
+
+  if (api.mod) {
+    api.convertButton('inputBan', posting.banPosts, 'banField');
+    api.convertButton('inputIpDelete', posting.deleteFromIpOnBoard);
+    api.convertButton('inputSpoil', posting.spoilFiles);
   }
 
 };
