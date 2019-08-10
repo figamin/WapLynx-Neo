@@ -727,15 +727,26 @@ postingMenu.buildMenu = function(linkSelf, extraMenu) {
 
   var href = linkSelf.href;
 
-  var parts = href.split('/');
+  if (!api.mod) {
 
-  var board = parts[3];
+    var parts = href.split('/');
 
-  var finalParts = parts[5].split('.');
+    var board = parts[3];
 
-  var thread = finalParts[0];
+    var finalParts = parts[5].split('.');
 
-  var post = finalParts[1].split('#')[1];
+    var thread = finalParts[0];
+
+  } else {
+
+    var urlParams = new URLSearchParams(href.split('?')[1]);
+
+    board = urlParams.get('boardUri');
+    thread = urlParams.get('threadId').split('#')[0];
+
+  }
+
+  var post = href.split('#')[1];
 
   if (post === thread) {
     post = undefined;
