@@ -142,6 +142,28 @@
 
       <hr />
 
+      <h3>Delete account</h3>
+      <form
+        action="/deleteAccount.js"
+        method="post"
+        enctype="multipart/form-data">
+
+        <label>
+          <input
+            id="confirmationCheckbox"
+            type="checkbox"
+            class="deleteAccountField"
+            name="confirmation">
+          Yes, I wish to delete my account.
+        </label>
+
+        <button
+          id="deleteAccountFormButton"
+          type="submit">Delete account</button>
+
+      </form>
+      <hr />
+
       <h3>Owned Boards</h3>
       <div id="ownedDiv"></div>
       <hr />
