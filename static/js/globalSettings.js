@@ -9,7 +9,7 @@ globalSettings.init = function() {
 
     fieldSlaves : {
       setting : 'slaves',
-      type : 'array'
+      type : 'string'
     },
     checkboxSendmail : {
       type : 'boolean',
@@ -121,6 +121,10 @@ globalSettings.init = function() {
     },
     fieldFileLimit : {
       setting : 'fileLimit',
+      type : 'string'
+    },
+    fieldTrustedProxies : {
+      setting : 'trustedProxies',
       type : 'string'
     },
     fieldMessageLength : {
@@ -397,11 +401,11 @@ globalSettings.init = function() {
     },
     fieldAcceptedMimes : {
       setting : 'acceptedMimes',
-      type : 'array'
+      type : 'string'
     },
     fieldAddons : {
       setting : 'addons',
-      type : 'array'
+      type : 'string'
     },
     comboBoardCreationRequirement : {
       setting : 'boardCreationRequirement',
@@ -443,25 +447,6 @@ globalSettings.save = function() {
     case 'combo':
       var combo = document.getElementById(key);
       parameters[item.setting] = combo.options[combo.selectedIndex].value;
-      break;
-
-    case 'array':
-      var values = document.getElementById(key).value.trim().split(',');
-
-      var processedValues = [];
-
-      for (var i = 0; i < values.length; i++) {
-        var value = values[i].trim();
-
-        if (value.length) {
-          processedValues.push(value);
-        }
-      }
-
-      if (processedValues.length) {
-        parameters[item.setting] = processedValues;
-      }
-
       break;
 
     }
