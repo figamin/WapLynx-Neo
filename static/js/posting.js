@@ -46,11 +46,20 @@ posting.init = function() {
 
   }
 
-  if (localStorage.relativeTime && JSON.parse(localStorage.relativeTime)) {
+  if (localStorage.localTime && JSON.parse(localStorage.localTime)) {
 
+    var times = document.getElementsByClassName('labelCreated');
+
+    for (var i = 0; i < times.length; i++) {
+      posting.setLocalTime(times[i]);
+    }
+
+    posting.localTimes = true;
+  }
+
+  if (localStorage.relativeTime && JSON.parse(localStorage.relativeTime)) {
     posting.updateAllRelativeTimes();
     setInterval(posting.updateAllRelativeTimes, 1000 * 60 * 5);
-
   }
 
   if (typeof (thread) !== 'undefined') {
@@ -62,6 +71,13 @@ posting.init = function() {
   for (i = 0; i < ids.length; i++) {
     posting.processIdLabel(ids[i]);
   }
+
+};
+
+posting.setLocalTime = function(time) {
+
+  time.innerHTML = posting.formatDateToDisplay(
+      new Date(time.innerHTML + ' UTC'), true);
 
 };
 
@@ -228,7 +244,7 @@ posting.updateAllRelativeTimes = function() {
 
 posting.addRelativeTime = function(time) {
 
-  var timeObject = new Date(time.innerHTML + ' UTC');
+  var timeObject = new Date(time.innerHTML + (posting.localTimes ? '' : ' UTC'));
 
   if (time.nextSibling.nextSibling.className !== 'relativeTime') {
 
@@ -390,21 +406,22 @@ posting.padDateField = function(value) {
 
 };
 
-posting.formatDateToDisplay = function(d) {
+posting.formatDateToDisplay = function(d, local) {
 
-  var day = posting.padDateField(d.getUTCDate());
+  var day = posting.padDateField(d[local ? 'getDate' : 'getUTCDate']());
 
   var weekDays = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
 
-  var month = posting.padDateField(d.getUTCMonth() + 1);
+  var month = posting.padDateField(d[local ? 'getMonth' : 'getUTCMonth']() + 1);
 
-  var year = d.getUTCFullYear();
+  var year = d[local ? 'getFullYear' : 'getUTCFullYear']();
 
-  var weekDay = weekDays[d.getUTCDay()];
+  var weekDay = weekDays[d[local ? 'getDay' : 'getUTCDay']()];
 
-  var hour = posting.padDateField(d.getUTCHours());
+  var hour = posting.padDateField(d[local ? 'getHours' : 'getUTCHours']());
 
-  var minute = posting.padDateField(d.getUTCMinutes());
+  var minute = posting
+      .padDateField(d[local ? 'getMinutes' : 'getUTCMinutes']());
 
   var second = posting.padDateField(d.getUTCSeconds());
 
@@ -688,6 +705,10 @@ posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
   var labelCreated = postCell.getElementsByClassName('labelCreated')[0];
 
   labelCreated.innerHTML = posting.formatDateToDisplay(new Date(post.creation));
+
+  if (posting.localTimes) {
+    posting.setLocalTime(labelCreated);
+  }
 
   if (localStorage.relativeTime && JSON.parse(localStorage.relativeTime)) {
     posting.addRelativeTime(labelCreated);
