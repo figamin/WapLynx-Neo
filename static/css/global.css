@@ -481,7 +481,7 @@ footer {
   content: 'settings';
 }
 
-#linkLogs::after {
+#linkGlobalLogs::after {
   content: 'logs';
 }
 
