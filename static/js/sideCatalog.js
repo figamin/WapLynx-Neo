@@ -316,7 +316,7 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
   if (api.mod) {
 
     var newLinkHistory = document.createElement('a');
-    newLinkHistory.innerHTML = 'History';
+    newLinkHistory.innerHTML = '[History]';
     newLinkHistory.className = 'linkHistory';
 
     var editLink = document.getElementsByClassName('linkEdit')[0];

@@ -10,9 +10,9 @@ posting.init = function() {
       + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
       + '</span> <span class="labelCreated"></span> <span class="spanId"> Id:<span '
       + 'class="labelId"></span></span> <a '
-      + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <a class="linkEdit">Edit</a> '
-      + '<a class="linkHistory">History</a> <span class="panelBacklinks"></span>'
-      + '</div>'
+      + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <a class="linkEdit">[Edit]</a> '
+      + '<a class="linkHistory">[History]</a> <a class="linkFileHistory">[File history]</a>'
+      + ' <span class="panelBacklinks"></span></div>'
       + '<div class="panelASN">ASN: <span class="labelASN"></span> </div>'
       + '<div>'
       + '<span class="panelIp"> <span class="panelRange">Broad'
@@ -625,6 +625,7 @@ posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
 
   var linkEdit = postCell.getElementsByClassName('linkEdit')[0];
   var linkHistory = postCell.getElementsByClassName('linkHistory')[0];
+  var linkFileHistory = postCell.getElementsByClassName('linkFileHistory')[0];
 
   var complement = (post.postId ? 'postId' : 'threadId') + '=' + postingId;
 
@@ -636,10 +637,14 @@ posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
   }
 
   if (api.mod && post.ip) {
+    linkFileHistory.href = '/mediaManagement.js?boardUri=' + boardUri + '&';
+    linkFileHistory.href += complement;
+
     linkHistory.href = '/latestPostings.js?boardUri=' + boardUri + '&';
     linkHistory.href += complement;
   } else if (linkHistory) {
     linkHistory.remove();
+    linkFileHistory.remove();
   }
 
   var checkboxName = boardUri + '-' + threadId;
