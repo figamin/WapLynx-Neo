@@ -351,9 +351,9 @@ globalSettings.init = function() {
       setting : 'disableSpamCheck',
       type : 'boolean'
     },
-    checkboxAutoPruneFiles : {
-      setting : 'autoPruneFiles',
-      type : 'boolean'
+    comboPruningMode : {
+      setting : 'pruningMode',
+      type : 'combo'
     },
     checkboxFrontPageStats : {
       setting : 'frontPageStats',

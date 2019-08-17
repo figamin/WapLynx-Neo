@@ -606,7 +606,7 @@
             id="fieldFlagNameLength">
         </label>
         <label>
-          Mark accounts after these many days of inactivity<sup>2</sup>:
+          Mark accounts after these many days of inactivity:
           <input
             type="number"
             class="globalSettingsField"
@@ -814,14 +814,6 @@
           <input
             type="checkbox"
             class="globalSettingsField"
-            id="checkboxAutoPruneFiles"
-            name="autoPruneFiles">
-          Prune orphaned files weekly<sup>2</sup>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="globalSettingsField"
             id="checkboxMaintenance"
             name="maintenance">
           Maintenance mode (Disables input to the server and let users know it
@@ -873,6 +865,12 @@
             id="comboMinClearIpRole"
             name="clearIpMinRole">
           </select>
+        </label>
+        <label>
+          Pruning mode:
+          <select
+            id="comboPruningMode"
+            name="pruningMode"></select>
         </label>
         <label>
           Minimum global role required for board creation:
