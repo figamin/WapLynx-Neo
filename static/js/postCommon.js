@@ -6,6 +6,21 @@ postCommon.init = function() {
     return;
   }
 
+  var charLimitLabel = document.getElementById('labelMessageLength');
+
+  document.getElementById('fieldMessage').addEventListener('input',
+      postCommon.updateCurrentChar);
+
+  postCommon.currentCharLabel = document.createElement('span');
+
+  charLimitLabel.parentNode.insertBefore(postCommon.currentCharLabel,
+      charLimitLabel);
+
+  charLimitLabel.parentNode.insertBefore(document.createTextNode('/'),
+      charLimitLabel);
+
+  postCommon.updateCurrentChar();
+
   postCommon.selectedCell = '<div class="removeButton">✖</div>'
       + '<span class="nameLabel"></span><div class="spoilerPanel">'
       + '<input type="checkbox" class="spoilerCheckBox">Spoiler</div>';
@@ -97,6 +112,11 @@ postCommon.init = function() {
     formMore.children[0].onclick();
   }
 
+};
+
+postCommon.updateCurrentChar = function() {
+  postCommon.currentCharLabel.innerHTML = document
+      .getElementById('fieldMessage').value.trim().length;
 };
 
 postCommon.showFlagPreview = function(combo) {

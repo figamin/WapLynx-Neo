@@ -48,6 +48,8 @@ qr.showQr = function(quote) {
   document.getElementById('fieldMessage').value = document
       .getElementById('qrbody').value;
 
+  postCommon.updateCurrentChar();
+
 };
 
 qr.registerSync = function(source, destination, field, event) {
@@ -170,6 +172,8 @@ qr.setQr = function() {
   qr.registerSync('fieldEmail', 'qremail', 'value', 'input');
   qr.registerSync('fieldSubject', 'qrsubject', 'value', 'input');
   qr.registerSync('fieldMessage', 'qrbody', 'value', 'input');
+  document.getElementById('qrbody').addEventListener('input',
+      postCommon.updateCurrentChar);
   qr.registerSync('fieldPostingPassword', 'qrpassword', 'value', 'input');
   qr.registerSync('alwaysUseBypassCheckBox', 'qralwaysUseBypassCheckBox',
       'checked', 'change');
