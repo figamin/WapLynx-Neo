@@ -15,6 +15,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'useSendmail',
     },
+    checkboxRedactModNames : {
+      type : 'boolean',
+      setting : 'redactModNames',
+    },
     checkboxGlobalBanners : {
       type : 'boolean',
       setting : 'useGlobalBanners',
