@@ -131,6 +131,10 @@ globalSettings.init = function() {
       setting : 'fileLimit',
       type : 'string'
     },
+    fieldTorDNSL : {
+      setting : 'torDNSBL',
+      type : 'string'
+    },
     fieldTrustedProxies : {
       setting : 'trustedProxies',
       type : 'string'
