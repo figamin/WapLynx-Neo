@@ -27,6 +27,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'useGlobalBanners',
     },
+    checkboxValidateMimes : {
+      type : 'boolean',
+      setting : 'validateMimes',
+    },
     checkboxDisableLatestPostings : {
       type : 'boolean',
       setting : 'disableLatestPostings',
@@ -74,6 +78,10 @@ globalSettings.init = function() {
     fieldLatestPostsAmount : {
       type : 'string',
       setting : 'latestPostsAmount',
+    },
+    fieldFileProcessingLimit : {
+      type : 'string',
+      setting : 'fileProcessingLimit',
     },
     checkboxVerboseGridfs : {
       type : 'boolean',

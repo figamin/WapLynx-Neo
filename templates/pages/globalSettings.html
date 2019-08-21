@@ -89,6 +89,14 @@
             id="fieldStaticExpiration">
         </label>
         <label>
+          Limit of files to be processed in a single request:
+          <input
+            type="number"
+            class="globalSettingsField"
+            name="fileProcessingLimit"
+            id="fieldFileProcessingLimit">
+        </label>
+        <label>
           Maximum size for requests (MB):
           <input
             type="number"
@@ -874,6 +882,15 @@
             id="checkboxUnboundBoardLimits"
             name="unboundBoardLimits">
           Unbound board limits, allowing configurations globally disallowed
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            class="globalSettingsField"
+            id="checkboxValidateMimes"
+            name="validateMimes">
+          Validate mimetypes using 'file', fallback to the informed mime if
+          none is found
         </label>
         <label>
           <input
