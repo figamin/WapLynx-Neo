@@ -19,6 +19,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'redactModNames',
     },
+    checkboxUnboundBoardLimits : {
+      type : 'boolean',
+      setting : 'unboundBoardLimits',
+    },
     checkboxGlobalBanners : {
       type : 'boolean',
       setting : 'useGlobalBanners',
