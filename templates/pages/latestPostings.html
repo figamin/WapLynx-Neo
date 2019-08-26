@@ -83,10 +83,20 @@
 
       <hr>
       <h3>Postings</h3>
-      <button
-        id="buttonLoadMore"
-        class="hidden">Load more</button>
-      <div id="divPostings"></div>
+
+      <form
+        action="/contentActions.js"
+        method="post"
+        enctype="multipart/form-data">
+
+        <div id="actionsForm"></div>
+
+        <button
+          id="buttonLoadMore"
+          class="hidden">Load more</button>
+        <div id="divPostings"></div>
+
+      </form>
 
     </fieldset>
   </div>
@@ -108,5 +118,6 @@
 <script src="/.static/js/thumbs.js"></script>
 <script src="/.static/js/postingMenu.js"></script>
 <script src="/.static/js/captchaUtils.js"></script>
+<script src="/.static/js/bottomForms.js"></script>
 
 </html>

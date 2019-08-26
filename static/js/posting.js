@@ -383,7 +383,20 @@ posting.deletePosts = function() {
       alert(data.removedThreads + ' threads and ' + data.removedPosts
           + ' posts were successfully deleted.');
 
-      if (!api.isBoard && !data.removedThreads && data.removedPosts) {
+      if (latestPostings) {
+
+        var checkBoxes = document.getElementsByClassName('deletionCheckBox');
+
+        for (var i = checkBoxes.length - 1; i >= 0; i--) {
+          var checkBox = checkBoxes[i];
+
+          if (checkBox.checked) {
+            checkBox.parentNode.parentNode.parentNode.remove();
+          }
+
+        }
+
+      } else if (!api.isBoard && !data.removedThreads && data.removedPosts) {
         thread.refreshPosts(true, true);
       } else if (data.removedThreads || data.removedPosts) {
         window.location.pathname = '/';

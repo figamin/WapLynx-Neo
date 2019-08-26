@@ -2,7 +2,7 @@
   "optional": {
     "dynamicHeader": "content/header.html",
     "postingTable": "content/postingForm.html",
-    "divMod": "content/moderationForms.html"
+    "actionsForm": "content/actionsForm.html"
   },
   "templated": [
     "pages/about.html",
