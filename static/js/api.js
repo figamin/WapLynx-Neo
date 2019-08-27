@@ -188,12 +188,18 @@ api.handleConnectionResponse = function(xhr, callback, silent) {
     } else if (response.data.asn) {
       message = 'Your ASN ' + response.data.asn + ' has been banned from '
           + response.data.board + '.';
+    } else if (response.data.warning) {
+      message = 'You have been warned on ' + response.data.board + '.';
     } else {
-      var message = 'You are banned from ' + response.data.board + '.';
+      message = 'You are banned from ' + response.data.board + '.';
     }
 
     if (response.data.reason) {
       message += '\nReason: "' + response.data.reason + '".';
+    }
+
+    if (response.data.warning) {
+      return alert(message);
     }
 
     if (response.data.expiration) {
