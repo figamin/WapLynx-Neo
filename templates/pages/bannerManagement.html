@@ -30,7 +30,7 @@
       <legend>New Banner</legend>
 
       <form
-        action="/createBanner.js"
+        action="/createBanners.js"
         method="post"
         enctype="multipart/form-data">
 
@@ -42,14 +42,18 @@
         <input
           type="file"
           id="files"
+          multiple
           name="files">
 
         <button
           type="submit"
-          id="addFormButton">Add banner</button>
+          id="addFormButton">Add banners</button>
 
         <p>
           Maximum size allowed: <span id="maxSizeLabel"></span>
+        </p>
+        <p id="maxBannerDiv">
+          Maximum banners allowed: <span id="maxBannerLabel"></span>
         </p>
 
       </form>

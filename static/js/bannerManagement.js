@@ -68,17 +68,21 @@ bannerManagement.addBanner = function() {
 
   var filePicker = document.getElementById('files');
 
-  var file = filePicker.files[0];
+  var files = [];
 
-  if (!file) {
+  for (var i = 0; i < filePicker.files.length; i++) {
+    files.push({
+      content : filePicker.files[i]
+    });
+  }
+
+  if (!files.length) {
     alert('You must select a file');
     return;
   }
 
-  api.formApiRequest('createBanner', {
-    files : [ {
-      content : file
-    } ],
+  api.formApiRequest('createBanners', {
+    files : files,
     boardUri : api.boardUri,
   }, function requestComplete(status, data) {
 
@@ -87,7 +91,9 @@ bannerManagement.addBanner = function() {
       filePicker.type = 'text';
       filePicker.type = 'file';
 
-      bannerManagement.showNewBanner(data);
+      for (var i = 0; i < data.length; i++) {
+        bannerManagement.showNewBanner(data[i]);
+      }
 
     } else {
       alert(status + ': ' + JSON.stringify(data));

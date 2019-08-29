@@ -131,6 +131,10 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'incSpamIpsSource'
     },
+    fieldMaxBoardBanners : {
+      type : 'string',
+      setting : 'maxBoardBanners'
+    },
     fieldMaster : {
       setting : 'master',
       type : 'string'
