@@ -235,8 +235,11 @@ boardManagement.saveSettings = function() {
 
   var locationCombo = document.getElementById('locationComboBox');
 
+  var langCombo = document.getElementById('languageCombobox');
+
   var parameters = {
     boardName : typedName,
+    preferredLanguage : langCombo[langCombo.selectedIndex].value,
     captchaMode : combo.options[combo.selectedIndex].value,
     boardMessage : typedMessage,
     autoCaptchaLimit : typedAutoCaptcha,
