@@ -27,6 +27,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'useGlobalBanners',
     },
+    checkboxStripExif : {
+      type : 'boolean',
+      setting : 'stripExif',
+    },
     checkboxValidateMimes : {
       type : 'boolean',
       setting : 'validateMimes',
