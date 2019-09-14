@@ -149,10 +149,6 @@ code br {
   color: #A00;
 }
 
-.opCell, .postCell {
-  overflow: hidden;
-}
-
 .divMessage {
   margin: 1em 1em 1em 3em;
   word-wrap: break-word;
