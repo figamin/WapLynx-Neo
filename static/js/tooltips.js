@@ -122,9 +122,7 @@ tooltips.addBackLink = function(quoteUrl, quote) {
 
       knownBackLink.container.appendChild(backLink);
 
-      var separator = document.createTextNode(' ');
-
-      knownBackLink.container.appendChild(separator);
+      knownBackLink.container.appendChild(document.createTextNode(' '));
 
       tooltips.processQuote(backLink, true);
 
