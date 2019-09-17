@@ -40,3 +40,9 @@
   font-size: 80%;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 812px) {
+  .mobileAlert {
+    color: #A00;
+  }
+}
