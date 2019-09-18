@@ -21,6 +21,8 @@ hiding.init = function() {
     hiding.setHideMenu(links[i]);
   }
 
+  hiding.checkFilters();
+
 };
 
 hiding.updateHidingData = function() {

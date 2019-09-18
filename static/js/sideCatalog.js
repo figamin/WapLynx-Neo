@@ -353,6 +353,8 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
 
   }
 
+  hiding.checkFilters();
+
 };
 
 sideCatalog.addSideCatalogThread = function(thread) {
