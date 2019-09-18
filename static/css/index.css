@@ -33,7 +33,7 @@
 }
 
 #linkArchives:before {
-  content: "\e023";
+  content: "\e021";
 }
 
 #linkGraphs:before {
@@ -45,11 +45,11 @@
 }
 
 #linkGlobalRules:before {
-  content: "\e0c9";
+  content: "\e06f";
 }
 
 #linkAbout:before {
-  content: "\e06c";
+  content: "\e0b0";
 }
 
 #linkEngine:before {
@@ -57,7 +57,7 @@
 }
 
 #linkLinks:before {
-  content: "\e06a";
+  content: "\e086";
 }
 
 #linkContact:before {
