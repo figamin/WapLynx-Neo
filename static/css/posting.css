@@ -17,10 +17,6 @@ code {
   white-space: pre;
 }
 
-code br {
-  display: none;
-}
-
 .imgLink, #selectedDivQr .selectedCell, #selectedDiv .selectedCell {
   float: left;
 }
@@ -151,6 +147,7 @@ code br {
 
 .divMessage {
   margin: 1em 1em 1em 3em;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 
