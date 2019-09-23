@@ -47,7 +47,7 @@ hashBans.liftHashBan = function(cell) {
 
 };
 
-hashBans.showNewHashBan = function(typedHash, id) {
+hashBans.showNewHashBan = function(typedHash, typedReason, id) {
 
   var form = document.createElement('form');
   form.method = 'post';
@@ -65,6 +65,33 @@ hashBans.showNewHashBan = function(typedHash, id) {
   hashLabel.className = 'hashLabel';
   hashLabel.innerHTML = typedHash;
   hashPara.appendChild(hashLabel);
+
+  var reasonPara = document.createElement('p');
+  reasonPara.innerHTML = 'Reason: ';
+  form.appendChild(reasonPara);
+
+  var reasonLabel = document.createElement('span');
+  reasonLabel.className = 'reasonLabel';
+  reasonLabel.innerHTML = typedReason;
+  reasonPara.appendChild(reasonLabel);
+
+  var userPara = document.createElement('p');
+  userPara.innerHTML = 'User: ';
+  form.appendChild(userPara);
+
+  var userLabel = document.createElement('span');
+  userLabel.className = 'userLabel';
+  userLabel.innerHTML = api.getCookies().login;
+  userPara.appendChild(userLabel);
+
+  var datePara = document.createElement('p');
+  datePara.innerHTML = 'Date: ';
+  form.appendChild(datePara);
+
+  var dateLabel = document.createElement('span');
+  dateLabel.className = 'dateLabel';
+  dateLabel.innerHTML = api.formatDateToDisplay(new Date());
+  datePara.appendChild(dateLabel);
 
   var identifier = document.createElement('input');
   identifier.type = 'hidden';
@@ -88,15 +115,18 @@ hashBans.showNewHashBan = function(typedHash, id) {
 hashBans.placeHashBan = function() {
 
   var typedHash = document.getElementById('hashField').value.trim();
+  var typedReason = document.getElementById('reasonField').value.trim();
 
   api.formApiRequest('placeHashBan', {
     hash : typedHash,
+    reason : typedReason,
     boardUri : api.boardUri
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
       document.getElementById('hashField').value = '';
-      hashBans.showNewHashBan(typedHash, data);
+      document.getElementById('reasonField').value = '';
+      hashBans.showNewHashBan(typedHash, typedReason, data);
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }

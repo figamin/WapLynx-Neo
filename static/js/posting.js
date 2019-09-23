@@ -76,8 +76,8 @@ posting.init = function() {
 
 posting.setLocalTime = function(time) {
 
-  time.innerHTML = posting.formatDateToDisplay(
-      new Date(time.innerHTML + ' UTC'), true);
+  time.innerHTML = api.formatDateToDisplay(new Date(time.innerHTML + ' UTC'),
+      true);
 
 };
 
@@ -409,41 +409,6 @@ posting.deletePosts = function() {
 
 };
 
-posting.padDateField = function(value) {
-
-  if (value < 10) {
-    value = '0' + value;
-  }
-
-  return value;
-
-};
-
-posting.formatDateToDisplay = function(d, local) {
-
-  var day = posting.padDateField(d[local ? 'getDate' : 'getUTCDate']());
-
-  var weekDays = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
-
-  var month = posting.padDateField(d[local ? 'getMonth' : 'getUTCMonth']() + 1);
-
-  var year = d[local ? 'getFullYear' : 'getUTCFullYear']();
-
-  var weekDay = weekDays[d[local ? 'getDay' : 'getUTCDay']()];
-
-  var hour = posting.padDateField(d[local ? 'getHours' : 'getUTCHours']());
-
-  var minute = posting
-      .padDateField(d[local ? 'getMinutes' : 'getUTCMinutes']());
-
-  var second = posting.padDateField(d.getUTCSeconds());
-
-  var toReturn = month + '/' + day + '/' + year;
-
-  return toReturn + ' (' + weekDay + ') ' + hour + ':' + minute + ':' + second;
-
-};
-
 posting.formatFileSize = function(size) {
 
   var orderIndex = 0;
@@ -465,7 +430,7 @@ posting.setLastEditedLabel = function(post, cell) {
 
   if (post.lastEditTime) {
 
-    var formatedDate = posting.formatDateToDisplay(new Date(post.lastEditTime));
+    var formatedDate = api.formatDateToDisplay(new Date(post.lastEditTime));
 
     editedLabel.innerHTML = posting.guiEditInfo
         .replace('{$date}', formatedDate).replace('{$login}',
@@ -722,7 +687,7 @@ posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
 
   var labelCreated = postCell.getElementsByClassName('labelCreated')[0];
 
-  labelCreated.innerHTML = posting.formatDateToDisplay(new Date(post.creation));
+  labelCreated.innerHTML = api.formatDateToDisplay(new Date(post.creation));
 
   if (posting.localTimes) {
     posting.setLocalTime(labelCreated);

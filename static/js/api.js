@@ -2,6 +2,40 @@ var api = {};
 
 api.mobile = window.innerWidth < 812;
 
+api.padDateField = function(value) {
+
+  if (value < 10) {
+    value = '0' + value;
+  }
+
+  return value;
+
+};
+
+api.formatDateToDisplay = function(d, local) {
+
+  var day = api.padDateField(d[local ? 'getDate' : 'getUTCDate']());
+
+  var weekDays = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
+
+  var month = api.padDateField(d[local ? 'getMonth' : 'getUTCMonth']() + 1);
+
+  var year = d[local ? 'getFullYear' : 'getUTCFullYear']();
+
+  var weekDay = weekDays[d[local ? 'getDay' : 'getUTCDay']()];
+
+  var hour = api.padDateField(d[local ? 'getHours' : 'getUTCHours']());
+
+  var minute = api.padDateField(d[local ? 'getMinutes' : 'getUTCMinutes']());
+
+  var second = api.padDateField(d.getUTCSeconds());
+
+  var toReturn = month + '/' + day + '/' + year;
+
+  return toReturn + ' (' + weekDay + ') ' + hour + ':' + minute + ':' + second;
+
+};
+
 api.htmlReplaceTable = {
   '<' : '&lt;',
   '>' : '&gt;',
