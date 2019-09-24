@@ -87,6 +87,10 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'fileProcessingLimit',
     },
+    fieldImageFont : {
+      type : 'string',
+      setting : 'imageFont',
+    },
     checkboxVerboseGridfs : {
       type : 'boolean',
       setting : 'verboseGridfs',
