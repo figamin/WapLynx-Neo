@@ -3,6 +3,11 @@ var bottomForms = {};
 bottomForms.init = function() {
 
   var forms = document.getElementById('actionsForm');
+
+  if (!forms) {
+    forms = document.getElementById('bottomForms');
+  }
+
   forms.classList.toggle('hidden');
 
   var showFormsButton = document.createElement('a');
