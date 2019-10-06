@@ -170,11 +170,6 @@ api.handleConnectionResponse = function(xhr, callback, silent) {
     return;
   }
 
-  if (response.auth && response.auth.authStatus === 'expired') {
-    document.cookie = 'hash=' + response.auth.newHash + '; path=/; expires='
-        + new Date(response.auth.expiration).toUTCString();
-  }
-
   if (response.status === 'error') {
 
     if (!silent) {

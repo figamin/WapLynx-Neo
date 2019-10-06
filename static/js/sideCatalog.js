@@ -146,8 +146,12 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
   document.getElementById('threadIdentifier').value = threadData.threadId;
 
   if (document.getElementById('divMod')) {
+
     document.getElementById('controlThreadIdentifier').value = threadData.threadId;
-    document.getElementById('transferThreadIdentifier').value = threadData.threadId;
+
+    if (postingMenu.globalRole <= 3) {
+      document.getElementById('transferThreadIdentifier').value = threadData.threadId;
+    }
 
     document.getElementById('checkboxLock').checked = threadData.locked;
     document.getElementById('checkboxPin').checked = threadData.pinned;
