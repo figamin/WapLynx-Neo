@@ -118,14 +118,14 @@ hiding.checkFilterHiding = function(linkSelf) {
       var subjectLabel = linkSelf.parentNode
           .getElementsByClassName('labelSubject')[0];
 
-      if (subjectLabel && filterMatches(subjectLabel.innerHTML, filter)) {
+      if (subjectLabel && hiding.filterMatches(subjectLabel.innerHTML, filter)) {
         return hiding.hideForFilter(linkSelf);
       }
       break;
     }
 
     case 3: {
-      if (filterMatches(linkSelf.parentNode.parentNode
+      if (hiding.filterMatches(linkSelf.parentNode.parentNode
           .getElementsByClassName('divMessage')[0].innerHTML, filter)) {
         return hiding.hideForFilter(linkSelf);
       }
