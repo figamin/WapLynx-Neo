@@ -13,10 +13,6 @@ video {
   max-width: 100%;
 }
 
-code {
-  white-space: pre;
-}
-
 .imgLink, #selectedDivQr .selectedCell, #selectedDiv .selectedCell {
   float: left;
 }
