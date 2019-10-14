@@ -1,73 +1,195 @@
 var embed = {};
 
-embed.embedHTML = '<iframe width="400" height="305" ';
-embed.embedHTML += 'src="https://www.youtube.com/embed/{$id}" ';
-embed.embedHTML += 'frameborder="0" allowfullscreen></iframe>';
-
 embed.init = function() {
+  var messageElements = document.getElementsByClassName("divMessage");
+  
+  for (var i = 0; i < messageElements.length; ++i) {
+    var linkElements = messageElements[i].getElementsByTagName("a");
+		
+    for (var j = 0; j < linkElements.length; ++j)
+      embed.processLinkForEmbed(linkElements[j]);
+  }
+};
 
-  var messages = document.getElementsByClassName('divMessage');
+embed.processLinkForEmbed = function(linkElement) {
+  var url = linkElement.href;
+  var domain = embed.getDomain(url);
+  
+  if (!domain)
+    return;
 
-  for (var i = 0; i < messages.length; i++) {
+  var domainSrcFunction = embed.domainFunctionMap[domain];
+  
+  if (!domainSrcFunction)
+    return;
 
-    var links = messages[i].getElementsByTagName('a');
+  var embedSrc = domainSrcFunction(url);
+  
+  if (!embedSrc)
+    return;
 
-    for (var j = 0; j < links.length; j++) {
-      embed.processLinkForEmbed(links[j]);
+  var embedElement = embed.buildEmbed(650, 350, embedSrc);
+  linkElement.parentNode.insertBefore(embedElement, linkElement.nextSibling);
+};
+
+embed.buildEmbed = function(width, height, src) {
+  var html = '<iframe';
+  html += ' width="' + width + '"';
+  html += ' height="' + height + '"';
+  html += ' src="' + src + '"';
+  html += ' frameborder="0"';
+  html += ' allowfullscreen';
+  html += '></iframe>';
+  
+  var wrapperElement = document.createElement('div');
+  wrapperElement.style.display = 'inline';
+  
+  var divElement = document.createElement('div');
+  divElement.style.display = 'none';
+  
+  var buttonElement = document.createElement('span');
+  buttonElement.innerHTML = '[Embed]';
+  buttonElement.className = 'embedButton glowOnHover';
+  
+  buttonElement.onclick = function() {
+    if (divElement.style.display === "none") {
+      divElement.style.display = "block";
+      divElement.innerHTML = html;
+      buttonElement.innerHTML = "[Remove]";
     }
-
-  }
-
-};
-
-embed.processLinkForEmbed = function(link) {
-
-  if (link.href.indexOf('youtube.com/watch') < 0
-      && link.href.indexOf('youtu.be/') < 0) {
-    return;
-  }
-
-  var videoId = link.href.split('v=')[1] || link.href.split('/')[3];
-
-  if (!videoId) {
-    return;
-  }
-
-  var ampersandPosition = videoId.indexOf('&');
-  videoId = videoId.substring(0, ampersandPosition < 0 ? videoId.length
-      : ampersandPosition);
-
-  link.style.display = 'inline';
-
-  var finalHTML = embed.embedHTML.replace('{$id}', videoId);
-
-  var embedWrapper = document.createElement('div');
-  embedWrapper.style.display = 'inline';
-
-  var div = document.createElement('div');
-  div.style.display = 'none';
-
-  var embedButton = document.createElement('span');
-
-  embedButton.innerHTML = '[Embed]';
-  embedButton.className = 'embedButton glowOnHover';
-
-  embedButton.onclick = function() {
-
-    var hidden = div.style.display === 'none';
-
-    div.style.display = hidden ? 'block' : 'none';
-
-    embedButton.innerHTML = hidden ? '[Remove]' : '[Embed]';
-
-    div.innerHTML = hidden ? finalHTML : null;
-
+		
+    else {
+      divElement.style.display = "none";
+      divElement.innerHTML = null;
+      buttonElement.innerHTML = "[Embed]";
+     }
   };
-
-  embedWrapper.appendChild(embedButton);
-  embedWrapper.appendChild(div);
-  link.parentNode.insertBefore(embedWrapper, link.nextSibling);
-
+  
+  // note: append order
+  wrapperElement.appendChild(buttonElement);
+  wrapperElement.appendChild(divElement);
+  
+  return wrapperElement;
 };
+
+// substrings to the first occurrence of an input string if present
+embed.getUntil = function(string, input) {
+  var inputIndex = string.indexOf(input);
+
+  return inputIndex !== -1 ?
+	string.substring(0, inputIndex) :
+	string;
+};
+
+embed.getDomain = function(url) {
+  return url.match(/\b(?!www.)\b([a-z0-9]+\.)*[a-z0-9]+\.[a-z]+/i)[0];
+};
+
+embed.getSrcYouTubeCommon = function(url, secure, domain) {
+  var videoId = url.split('v=')[1];
+  
+  if (!videoId)
+    return;
+  
+  videoId = embed.getUntil(videoId, '&');
+  
+  var embedSrc = secure ? 'https' : 'http';
+  embedSrc += '://' + domain + '/embed/' + videoId;
+  
+  var startTime = embed.getYouTubeStartTime(url);
+  
+  if (startTime)
+    embedSrc += '?start=' + startTime;
+  
+  return embedSrc;
+};
+
+embed.getSrcYouTube = function(url) {
+  return embed.getSrcYouTubeCommon(url, true, 'www.youtube.com');
+};
+
+embed.getSrcInvidious = function(url) {
+  return embed.getSrcYouTubeCommon(url, true, 'www.invidio.us');
+};
+
+embed.getSrcYouTubeShortened = function(url) {
+  var videoId = url.split('/')[3];
+  
+  if (!videoId)
+    return;
+  
+  // trim any params in the url
+  videoId = embed.getUntil(videoId, '?');
+  
+  var embedSrc = 'https://www.youtube.com/embed/' + videoId;
+  
+  var startTime = embed.getYouTubeStartTime(url);
+  
+  if (startTime)
+    embedSrc += '?start=' + startTime;
+
+  return embedSrc;
+};
+
+embed.getSrcBitChute = function(url) {
+  if (!url.includes('/video/')) // bitchute has parts of it's main site besides videos
+    return;
+  
+  var videoId = url.split('/')[4];
+  
+  if (!videoId)
+    return;
+  
+  return 'https://www.bitchute.com/embed/' + videoId;
+};
+
+embed.getSrcLiveLeak = function(url) {
+  var videoId = url.split('t=')[1];
+  
+  if (!videoId)
+    return;
+  
+  videoId = embed.getUntil(videoId, '&');
+  
+  return 'https://www.liveleak.com/e/' + videoId;
+};
+
+// translate ?t=XhXmXs to raw seconds (the only input supported by youtube's embed start time)
+// todo: recode with loop
+embed.getYouTubeStartTime = function(url) {
+  var startTime = url.split('t=')[1];
+  
+  if (!startTime)
+    return;
+  
+  startTime = embed.getUntil(startTime, '&');
+  
+  var totalSeconds = 0;
+
+  var hours = startTime.match(/(\d+)(?:h)/);
+  
+  if (hours)
+    totalSeconds += parseInt(hours[1]) * 3600;
+
+  var minutes = startTime.match(/(\d+)(?:m)/);
+  
+  if (minutes)
+    totalSeconds += parseInt(minutes[1]) * 60;
+
+  var seconds = startTime.match(/(\d+)(?:s)/);
+  
+  if (seconds)
+    totalSeconds += parseInt(seconds[1]);
+  
+  return totalSeconds;
+};
+
+embed.domainFunctionMap = {};
+
+embed.domainFunctionMap['youtube.com'] = embed.getSrcYouTube;
+embed.domainFunctionMap['youtu.be'] = embed.getSrcYouTubeShortened;
+embed.domainFunctionMap['invidio.us'] = embed.getSrcInvidious;
+embed.domainFunctionMap['bitchute.com'] = embed.getSrcBitChute;
+embed.domainFunctionMap['liveleak.com'] = embed.getSrcLiveLeak;
 
 embed.init();
