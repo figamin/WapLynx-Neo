@@ -128,6 +128,7 @@ video {
 .labelSubject {
   color: #34ED3A;
   font-weight: bold;
+  word-wrap: break-word;
 }
 
 .labelRole {
@@ -172,7 +173,7 @@ video {
 }
 
 /*Change the dimensions if you wish for larger thumbs*/
-.uploadCell img:not(.imgExpanded) {
+.uploadCell img:not (.imgExpanded ) {
   max-width: 125px;
   height: 125px;
   object-fit: contain;
@@ -183,7 +184,7 @@ video {
   width: 100%;
 }
 
-.multipleUploads .uploadCell:not(.expandedCell) {
+.multipleUploads .uploadCell:not (.expandedCell ) {
   max-width: 150px;
   float: left;
 }
@@ -308,7 +309,7 @@ video {
 }
 
 @media only screen and (max-width: 812px) {
-  .uploadCell img:not(.imgExpanded) {
+  .uploadCell img:not (.imgExpanded ) {
     max-width: 75px;
     max-height: 75px;
     object-fit: cover;
