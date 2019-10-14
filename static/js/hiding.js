@@ -133,11 +133,15 @@ hiding.checkFilterHiding = function(linkSelf) {
     }
 	
 	case 4: {
-	  var id = linkSelf.parentNode.getElementsByClassName('labelId')[0].innerHTML
+	  var labelId = linkSelf.parentNode.getElementsByClassName('labelId')[0];
 	  
-      if (hiding.buildPostFilterId(linkSelf, id) === filter.filter) {
-        return hiding.hideForFilter(linkSelf);
-      }
+	  if (labelId) {
+	     var id = labelId.innerHTML
+	     
+         if (hiding.buildPostFilterId(linkSelf, id) === filter.filter) {
+           return hiding.hideForFilter(linkSelf);
+         }
+	  }
       break;
     }
 
