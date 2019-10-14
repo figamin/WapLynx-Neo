@@ -52,16 +52,16 @@ embed.buildEmbed = function(width, height, src) {
   buttonElement.className = 'embedButton glowOnHover';
   
   buttonElement.onclick = function() {
-    if (divElement.style.display === "none") {
-      divElement.style.display = "block";
+    if (divElement.style.display === 'none') {
+      divElement.style.display = 'block';
       divElement.innerHTML = html;
-      buttonElement.innerHTML = "[Remove]";
+      buttonElement.innerHTML = '[Remove]';
     }
 		
     else {
-      divElement.style.display = "none";
+      divElement.style.display = 'none';
       divElement.innerHTML = null;
-      buttonElement.innerHTML = "[Embed]";
+      buttonElement.innerHTML = '[Embed]';
      }
   };
   
