@@ -201,14 +201,13 @@ settingsMenu.getFiltersContent = function() {
 
   var newFilterTypeCombo = document.createElement('select');
 
-  for (var i = 0; i < settingsMenu.filterTypes.length; i++) {
-	if (i == 4) // Id = 4. ghetto.
-	   continue;
-    
+  for (var i = 0; i < 4; i++) {
+
     var option = document.createElement('option');
     option.innerHTML = settingsMenu.filterTypes[i];
     newFilterTypeCombo.appendChild(option);
   }
+
   newFilterPanel.appendChild(newFilterTypeCombo);
 
   var newFilterField = document.createElement('input');

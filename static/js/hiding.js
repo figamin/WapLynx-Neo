@@ -131,17 +131,15 @@ hiding.checkFilterHiding = function(linkSelf) {
       }
       break;
     }
-	
-	case 4: {
-	  var labelId = linkSelf.parentNode.getElementsByClassName('labelId')[0];
-	  
-	  if (labelId) {
-	     var id = labelId.innerHTML
-	     
-         if (hiding.buildPostFilterId(linkSelf, id) === filter.filter) {
-           return hiding.hideForFilter(linkSelf);
-         }
-	  }
+
+    case 4: {
+      var labelId = linkSelf.parentNode.getElementsByClassName('labelId')[0];
+
+      if (labelId) {
+        if (hiding.buildPostFilterId(linkSelf, labelId.innerHTML) === filter.filter) {
+          return hiding.hideForFilter(linkSelf);
+        }
+      }
       break;
     }
 
@@ -229,12 +227,14 @@ hiding.hideThread = function(linkSelf, board, thread) {
 };
 
 hiding.buildPostFilterId = function(linkSelf, id) {
-   var checkbox = linkSelf.parentNode.getElementsByClassName('deletionCheckBox')[0];
-   var postData = checkbox.name.split('-');
-   var board = postData[0];
-   var threadId = postData[1];
-	
-   return board + '-' + threadId + '-' + id; // boardUri-threadId-id
+
+  var checkbox = linkSelf.parentNode.getElementsByClassName('deletionCheckBox')[0];
+  var postData = checkbox.name.split('-');
+  var board = postData[0];
+  var threadId = postData[1];
+
+  return board + '-' + threadId + '-' + id;
+
 };
 
 hiding.buildHideMenu = function(board, thread, post, linkSelf, hideMenu) {
@@ -291,14 +291,15 @@ hiding.buildHideMenu = function(board, thread, post, linkSelf, hideMenu) {
 
     hideMenu.appendChild(document.createElement('hr'));
   }
-  
+
   var labelId = linkSelf.parentNode.getElementsByClassName('labelId')[0];
-  
+
   if (labelId) {
-	var filterIdButton = document.createElement('div');
+    var filterIdButton = document.createElement('div');
     filterIdButton.innerHTML = 'Filter id';
     filterIdButton.onclick = function() {
-      settingsMenu.createFilter(hiding.buildPostFilterId(linkSelf, labelId.innerHTML), false, 4);
+      settingsMenu.createFilter(hiding.buildPostFilterId(linkSelf,
+          labelId.innerHTML), false, 4);
     };
     hideMenu.appendChild(filterIdButton);
 
