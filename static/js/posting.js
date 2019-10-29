@@ -667,6 +667,11 @@ posting.setPostComplexElements = function(postCell, post, boardUri, threadId,
   if (!post.files || !post.files.length) {
     panelUploads.remove();
   } else {
+
+    if (post.files.length > 1) {
+      panelUploads.className += ' multipleUploads';
+    }
+
     posting.setUploadCell(panelUploads, post.files, noExtras);
   }
 
@@ -765,10 +770,6 @@ posting.addPost = function(post, boardUri, threadId, noExtra) {
 
   postCell.id = post.postId;
   postCell.setAttribute('class', 'postCell');
-
-  if (post.files && post.files.length > 1) {
-    postCell.className += ' multipleUploads';
-  }
 
   postCell.setAttribute('data-boarduri', boardUri);
 

@@ -170,9 +170,6 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
 
   opCell.id = threadData.threadId;
   opCell.className = 'opCell';
-  if (data.files && data.files.length > 1) {
-    opCell.className += ' multipleUploads';
-  }
 
   if (!opCell.getElementsByClassName('labelSubject').length) {
 

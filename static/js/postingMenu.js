@@ -158,12 +158,7 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
     var removed = data.removedThreads || data.removedPosts;
 
     if (unlinkFiles && removed) {
-
-      innerPart.parentNode.className = innerPart.parentNode.className.replace(
-          ' multipleUploads', '');
-
       innerPart.getElementsByClassName('panelUploads')[0].remove();
-
     } else if (fromIp) {
 
       if (api.isBoard || !api.boardUri) {
