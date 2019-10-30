@@ -22,7 +22,9 @@ latestPostings.init = function() {
 
 };
 
-latestPostings.loadMore = function() {
+latestPostings.loadMore = function(event) {
+
+  event.preventDefault();
 
   api.formApiRequest('latestPostings', {}, function gotData(status, data) {
 
