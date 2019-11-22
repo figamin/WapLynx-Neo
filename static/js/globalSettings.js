@@ -15,6 +15,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'useSendmail',
     },
+    checkboxDiskMedia : {
+      type : 'boolean',
+      setting : 'diskMedia',
+    },
     checkboxRedactModNames : {
       type : 'boolean',
       setting : 'redactModNames',
