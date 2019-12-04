@@ -127,6 +127,35 @@ sideCatalog.getRangePanel = function() {
 
 };
 
+sideCatalog.createHistoryLinks = function(cell) {
+
+  var referenceElement = cell.getElementsByClassName('panelBacklinks')[0];
+
+  var historyLink = document.createElement('a');
+  historyLink.innerHTML = '[History]';
+  historyLink.className = 'linkHistory';
+
+  var fileHistoryLink = document.createElement('a');
+  fileHistoryLink.innerHTML = ' [File history]';
+  fileHistoryLink.className = 'linkFileHistory';
+
+  var offenseHistoryLink = document.createElement('a');
+  offenseHistoryLink.innerHTML = '[Offense record]';
+  offenseHistoryLink.className = 'linkOffenseRecord';
+
+  referenceElement.parentNode.insertBefore(historyLink, referenceElement);
+  referenceElement.parentNode.insertBefore(document.createTextNode(' '),
+      referenceElement);
+  referenceElement.parentNode.insertBefore(fileHistoryLink, referenceElement);
+  referenceElement.parentNode.insertBefore(document.createTextNode(' '),
+      referenceElement);
+  referenceElement.parentNode
+      .insertBefore(offenseHistoryLink, referenceElement);
+  referenceElement.parentNode.insertBefore(document.createTextNode(' '),
+      referenceElement);
+
+};
+
 sideCatalog.transitionThread = function(cell, threadData, data) {
 
   if (sideCatalog.selectedThreadCell) {
@@ -194,6 +223,10 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
     divMessage.parentNode.insertBefore(newBanMessageLabel,
         divMessage.nextSibling);
 
+  }
+
+  if (!opCell.getElementsByClassName('linkHistory')[0]) {
+    sideCatalog.createHistoryLinks(opCell);
   }
 
   var panelIp = opCell.getElementsByClassName('panelIp')[0];

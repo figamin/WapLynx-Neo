@@ -12,6 +12,7 @@ posting.init = function() {
       + 'class="labelId"></span></span> <a '
       + 'class="linkSelf">No.</a> <a class="linkQuote"></a> <a class="linkEdit">[Edit]</a> '
       + '<a class="linkHistory">[History]</a> <a class="linkFileHistory">[File history]</a>'
+      + ' <a class="linkOffenseRecord">[Offense record]</a>'
       + ' <span class="panelBacklinks"></span></div>'
       + '<div class="panelASN">ASN: <span class="labelASN"></span> </div>'
       + '<div>'
@@ -604,6 +605,7 @@ posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
   var linkEdit = postCell.getElementsByClassName('linkEdit')[0];
   var linkHistory = postCell.getElementsByClassName('linkHistory')[0];
   var linkFileHistory = postCell.getElementsByClassName('linkFileHistory')[0];
+  var linkOffenseHistory = postCell.getElementsByClassName('linkOffenseRecord')[0];
 
   var complement = (post.postId ? 'postId' : 'threadId') + '=' + postingId;
 
@@ -620,9 +622,14 @@ posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
 
     linkHistory.href = '/latestPostings.js?boardUri=' + boardUri + '&';
     linkHistory.href += complement;
+
+    linkOffenseHistory.href = '/offenseRecord.js?boardUri=' + boardUri + '&';
+    linkOffenseHistory.href += complement;
+
   } else if (linkHistory) {
     linkHistory.remove();
     linkFileHistory.remove();
+    linkOffenseHistory.remove();
   }
 
   var checkboxName = boardUri + '-' + threadId;
