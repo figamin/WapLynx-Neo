@@ -384,7 +384,7 @@ posting.deletePosts = function() {
       alert(data.removedThreads + ' threads and ' + data.removedPosts
           + ' posts were successfully deleted.');
 
-      if (latestPostings) {
+      if (typeof latestPostings !== 'undefined') {
 
         var checkBoxes = document.getElementsByClassName('deletionCheckBox');
 
