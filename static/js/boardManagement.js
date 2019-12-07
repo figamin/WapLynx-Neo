@@ -53,10 +53,16 @@ boardManagement.init = function() {
     }
   }
 
-  api.boardUri = document.getElementById('boardSettingsIdentifier').value;
-
   api.convertButton('closeReportsFormButton', reports.closeReports,
       'closeReportsField');
+
+  var settingsIdentifier = document.getElementById('boardSettingsIdentifier');
+
+  if (!settingsIdentifier) {
+    return;
+  }
+
+  api.boardUri = settingsIdentifier.value;
 
   api.convertButton('saveSettingsFormButton', boardManagement.saveSettings,
       'boardSettingsField');
