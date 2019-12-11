@@ -21,10 +21,10 @@ catalog.init = function() {
   catalogCellTemplate += '<p class="threadStats">R: ';
   catalogCellTemplate += '<span class="labelReplies"></span> / I: ';
   catalogCellTemplate += '<span class="labelImages"></span> / P: ';
-  catalogCellTemplate += '<span class="labelPage"></span>';
-  catalogCellTemplate += '<span class="lockIndicator" title="Locked"></span>';
-  catalogCellTemplate += '<span class="pinIndicator" title="Sticky"></span>';
-  catalogCellTemplate += '<span class="cyclicIndicator" title="Cyclical Thread"></span>';
+  catalogCellTemplate += '<span class="labelPage"></span> ';
+  catalogCellTemplate += '<span class="lockIndicator" title="Locked"></span> ';
+  catalogCellTemplate += '<span class="pinIndicator" title="Sticky"></span> ';
+  catalogCellTemplate += '<span class="cyclicIndicator" title="Cyclical Thread"></span> ';
   catalogCellTemplate += '<span class="bumpLockIndicator" title="Bumplocked"></span>';
   catalogCellTemplate += '</p><p><span class="labelSubject"></span></p>';
   catalogCellTemplate += '<div class="divMessage"></div>';
