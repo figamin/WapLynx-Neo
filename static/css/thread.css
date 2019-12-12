@@ -41,3 +41,9 @@
 .contentAction label, .contentAction img {
   display: block;
 }
+
+#selectedDiv, #selectedDivQr {
+  max-height: 200px;
+  display: inline-block;
+  overflow-y: auto;
+}

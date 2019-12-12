@@ -81,10 +81,6 @@
   width: 85%;
 }
 
-#QRcaptchaDiv {
-  text-align: center;
-}
-
 #quick-reply textarea {
   min-width: 100%;
   box-sizing: border-box;
@@ -126,10 +122,4 @@
 
 .handle {
   cursor: move;
-}
-
-#selectedDiv, #selectedDivQr {
-  max-height: 200px;
-  display: inline-block;
-  overflow-y: auto;
 }

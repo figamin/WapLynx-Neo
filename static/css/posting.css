@@ -43,7 +43,7 @@ video {
   display: none
 }
 
-#formMore {
+#formMore, #qrFormMore, #qrCaptchaButton {
   cursor: pointer;
 }
 
