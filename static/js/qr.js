@@ -102,6 +102,12 @@ qr.setQr = function() {
   qrhtml += '</textarea></td></tr> ';
 
   if (!textBoard) {
+
+    if (api.mobile) {
+      qrhtml += '<tr id="qrFilesButton"><td class="small">Files</td></tr>';
+      qrhtml += '</tbody><tbody class="hidden" id="filesBody">';
+    }
+
     qrhtml += ' <tr><td colspan="2"><div class="dropzone" id="dropzoneQr">';
     qrhtml += 'Drag files to upload or<br> click here to select them</div>';
     qrhtml += '<div id="selectedDivQr"></div></td> </tr>';
@@ -110,17 +116,23 @@ qr.setQr = function() {
     qrhtml += 'id="qrcheckboxSpoiler" class="postingCheckbox">';
     qrhtml += '<label for="qrcheckboxSpoiler" class="spoilerCheckbox">Spoiler</label></td> </tr>';
 
+    if (api.mobile) {
+      qrhtml += '</tbody><tbody>'
+    }
+
   }
 
   if (!api.hiddenCaptcha) {
 
-    qrhtml += '<tr id="qrCaptchaButton"><td class="small">Captcha</td></tr></tbody>';
+    if (api.mobile) {
+      qrhtml += '<tr id="qrCaptchaButton"><td class="small">Captcha</td></tr>';
+      qrhtml += '</tbody><tbody class="hidden" id="captchaBody">'
+    }
 
     var parts = document.getElementById('captchaImage').src.split('/');
 
     var lastPart = '/' + parts[parts.length - 1];
 
-    qrhtml += '<tbody class="hidden" id="captchaBody">'
     qrhtml += '<tr><td colspan="2"><img src="' + lastPart;
     qrhtml += '" class="captchaImage"/></td></tr>';
 
@@ -131,7 +143,9 @@ qr.setQr = function() {
     qrhtml += 'id="QRfieldCaptcha" placeholder="Answer"></td>';
     qrhtml += '<td><a href="/noCookieCaptcha.js" target="_blank" class="small">No cookies?</a></td></tr>';
 
-    qrhtml += '</tbody><tbody>'
+    if (api.mobile) {
+      qrhtml += '</tbody><tbody>'
+    }
   }
 
   qrhtml += '<tr id="qrFormMore"><td class="small">Extra</td></tr>';
@@ -184,13 +198,6 @@ qr.setQr = function() {
     extra.classList.toggle('hidden');
   };
 
-  if (!api.hiddenCaptcha) {
-    var captchaBody = document.getElementById('captchaBody');
-    document.getElementById('qrCaptchaButton').onclick = function() {
-      captchaBody.classList.toggle('hidden');
-    };
-  }
-
   qr.registerSync('fieldEmail', 'qremail', 'value', 'input');
   qr.registerSync('fieldSubject', 'qrsubject', 'value', 'input');
   qr.registerSync('fieldMessage', 'qrbody', 'value', 'input');
@@ -205,6 +212,15 @@ qr.setQr = function() {
   }
 
   if (!textBoard) {
+
+    if (api.mobile) {
+      var fileBodyBody = document.getElementById('filesBody');
+      document.getElementById('qrFilesButton').onclick = function() {
+        fileBodyBody.classList.toggle('hidden');
+      };
+
+    }
+
     qr
         .registerSync('checkboxSpoiler', 'qrcheckboxSpoiler', 'checked',
             'change');
@@ -240,6 +256,14 @@ qr.setQr = function() {
   }
 
   if (!api.hiddenCaptcha) {
+
+    if (api.mobile) {
+      var captchaBody = document.getElementById('captchaBody');
+      document.getElementById('qrCaptchaButton').onclick = function() {
+        captchaBody.classList.toggle('hidden');
+      };
+    }
+
     qr.registerSync('fieldCaptcha', 'QRfieldCaptcha', 'value', 'input');
   }
 
