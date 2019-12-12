@@ -184,10 +184,12 @@ qr.setQr = function() {
     extra.classList.toggle('hidden');
   };
 
-  var captchaBody = document.getElementById('captchaBody');
-  document.getElementById('qrCaptchaButton').onclick = function() {
-    captchaBody.classList.toggle('hidden');
-  };
+  if (!api.hiddenCaptcha) {
+    var captchaBody = document.getElementById('captchaBody');
+    document.getElementById('qrCaptchaButton').onclick = function() {
+      captchaBody.classList.toggle('hidden');
+    };
+  }
 
   qr.registerSync('fieldEmail', 'qremail', 'value', 'input');
   qr.registerSync('fieldSubject', 'qrsubject', 'value', 'input');
