@@ -355,12 +355,6 @@ span.spoiler {
   text-align: left;
 }
 
-#settingsWrapper input {
-  display: block;
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-}
-
 .banners {
   margin: 1em;
   width: auto;
