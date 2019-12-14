@@ -39,17 +39,23 @@
         method="post"
         action="/solveCaptcha.js"
         enctype="multipart/form-data">
+
         <input
           type="hidden"
           name="captchaId"
           id="inputCaptchaId">
-        <input
-          type="text"
-          name="answer"
-          placeholder="answer">
+
+        <label>
+          <input
+            type="text"
+            name="answer"
+            placeholder="answer">
+        </label>
+
         <input
           type="submit"
           value="Solve">
+
       </form>
     </div>
   </fieldset>
