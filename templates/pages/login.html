@@ -35,19 +35,22 @@
         enctype="multipart/form-data"
         method="post">
 
-        <input
-          type="text"
-          name="login"
-          class="loginField"
-          id="loginFieldLogin"
-          placeholder="login">
-
-        <input
-          type="password"
-          class="loginField"
-          id="loginFieldPassword"
-          name="password"
-          placeholder="password">
+        <label>
+          <input
+            type="text"
+            name="login"
+            class="loginField"
+            id="loginFieldLogin"
+            placeholder="login">
+        </label>
+        <label>
+          <input
+            type="password"
+            class="loginField"
+            id="loginFieldPassword"
+            name="password"
+            placeholder="password">
+        </label>
 
         <div id="divRemember">
           <input
@@ -73,26 +76,30 @@
           enctype="multipart/form-data"
           method="post">
 
-          <input
-            type="text"
-            name="login"
-            class="registerField"
-            id="registerFieldLogin"
-            placeholder="login">
-
-          <input
-            type="password"
-            class="registerField"
-            id="registerFieldPassword"
-            name="password"
-            placeholder="password">
-
-          <input
-            type="email"
-            class="registerField"
-            id="registerFieldEmail"
-            name="email"
-            placeholder="email">
+          <label>
+            <input
+              type="text"
+              name="login"
+              class="registerField"
+              id="registerFieldLogin"
+              placeholder="login">
+          </label>
+          <label>
+            <input
+              type="password"
+              class="registerField"
+              id="registerFieldPassword"
+              name="password"
+              placeholder="password">
+          </label>
+          <label>
+            <input
+              type="email"
+              class="registerField"
+              id="registerFieldEmail"
+              name="email"
+              placeholder="email">
+          </label>
 
           <div class="captchaDiv">
 
@@ -138,13 +145,14 @@
           action="/requestAccountRecovery.js"
           enctype="multipart/form-data"
           method="post">
-
-          <input
-            type="text"
-            name="login"
-            class="recoverField"
-            id="recoverFieldLogin"
-            placeholder="login">
+          <label>
+            <input
+              type="text"
+              name="login"
+              class="recoverField"
+              id="recoverFieldLogin"
+              placeholder="login">
+          </label>
 
           <div class="captchaDiv">
 
