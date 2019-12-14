@@ -9,7 +9,7 @@ reports.closeReports = function() {
   var params = {
     duration : document.getElementById('fieldBanDuration').value,
     banReason : document.getElementById('fieldBanReason').value,
-    banReporter : document.getElementById('banReporterCheckbox').checked,
+    banTarget : document.getElementById('banTargetCombo').selectedIndex,
     deleteContent : document.getElementById('deleteContentCheckbox').checked
   };
 

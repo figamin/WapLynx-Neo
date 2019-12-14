@@ -555,12 +555,14 @@
           Delete reported content after closing the reports
         </label>
         <label>
-          <input
-            type="checkbox"
-            class="closeReportsField"
-            name="banReporter"
-            id="banReporterCheckbox">
-          Ban reporters
+          Ban target:
+          <select
+            name="banTarget"
+            id="banTargetCombo">
+            <option value="0">None</option>
+            <option value="1">Post</option>
+            <option value="2">Reporter</option>
+          </select>
         </label>
         <label>
           Ban duration:
