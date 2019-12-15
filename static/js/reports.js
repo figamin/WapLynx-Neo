@@ -10,7 +10,9 @@ reports.closeReports = function() {
     duration : document.getElementById('fieldBanDuration').value,
     banReason : document.getElementById('fieldBanReason').value,
     banTarget : document.getElementById('banTargetCombo').selectedIndex,
-    deleteContent : document.getElementById('deleteContentCheckbox').checked
+    deleteContent : document.getElementById('deleteContentCheckbox').checked,
+    closeAllFromReporter : document
+        .getElementById('closeAllFromReporterCheckbox').checked
   };
 
   for (var i = 0; i < reportDiv.childNodes.length; i++) {

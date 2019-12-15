@@ -137,7 +137,17 @@
         method="post"
         action="/closeReports.js"
         enctype="multipart/form-data">
+
         <div id="reportDiv"></div>
+
+        <label>
+          <input
+            type="checkbox"
+            class="closeReportsField"
+            name="closeAllFromReporter"
+            id="closeAllFromReporterCheckbox">
+          Close all reports from these reporters
+        </label>
 
         <label>
           <input
@@ -147,6 +157,9 @@
             id="deleteContentCheckbox">
           Delete reported content after closing the reports
         </label>
+
+        <label>Ban options</label>
+
         <label>
           Ban target:
           <select
@@ -157,6 +170,7 @@
             <option value="2">Reporter</option>
           </select>
         </label>
+
         <label>
           Ban duration:
           <input
@@ -165,6 +179,7 @@
             id="fieldBanDuration"
             name="duration">
         </label>
+
         <label>
           Ban reason:
           <input
@@ -173,6 +188,7 @@
             id="fieldBanReason"
             name="banReason">
         </label>
+
         <button
           type="submit"
           id="closeReportsFormButton">Close selected reports</button>
