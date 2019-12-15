@@ -5,7 +5,7 @@ posting.init = function() {
   posting.idsRelation = {};
   posting.highLightedIds = [];
 
-  posting.postCellTemplate = '<div class="innerPost"><div class="postInfo title">'
+  posting.postCellTemplate = '<div class="innerPost"><h3 class="labelBoard"></h3><div class="postInfo title">'
       + '<input type="checkbox" class="deletionCheckBox"> <span class="labelSubject">'
       + '</span> <a class="linkName"></a> <img class="imgFlag"> <span class="labelRole">'
       + '</span> <span class="labelCreated"></span> <span class="spanId"> Id:<span '
@@ -590,11 +590,12 @@ posting.setPostHideableElements = function(postCell, post, noExtras) {
 };
 
 posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
-    linkQuote, deletionCheckbox) {
+    linkQuote, deletionCheckbox, preview) {
 
   var postingId = post.postId || threadId;
 
-  var linkStart = '#';
+  var linkStart = (preview ? '/' + boardUri + '/res/' + threadId + '.html' : '')
+      + '#';
 
   linkQuote.href = linkStart;
   link.href = linkStart;
@@ -655,7 +656,7 @@ posting.setRoleSignature = function(postingCell, posting) {
 };
 
 posting.setPostComplexElements = function(postCell, post, boardUri, threadId,
-    noExtras) {
+    noExtras, preview) {
 
   posting.setRoleSignature(postCell, post);
 
@@ -667,7 +668,7 @@ posting.setPostComplexElements = function(postCell, post, boardUri, threadId,
   var deletionCheckbox = postCell.getElementsByClassName('deletionCheckBox')[0];
 
   posting.setPostLinks(postCell, post, boardUri, link, threadId, linkQuote,
-      deletionCheckbox);
+      deletionCheckbox, preview);
 
   var panelUploads = postCell.getElementsByClassName('panelUploads')[0];
 
@@ -685,7 +686,7 @@ posting.setPostComplexElements = function(postCell, post, boardUri, threadId,
 };
 
 posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
-    noExtras) {
+    noExtras, preview) {
 
   var linkName = postCell.getElementsByClassName('linkName')[0];
 
@@ -713,7 +714,8 @@ posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
 
   posting.setPostHideableElements(postCell, post, noExtras);
 
-  posting.setPostComplexElements(postCell, post, boardUri, threadId, noExtras);
+  posting.setPostComplexElements(postCell, post, boardUri, threadId, noExtras,
+      preview);
 
   var messageLinks = postCell.getElementsByClassName('divMessage')[0]
       .getElementsByTagName('a');
@@ -770,7 +772,7 @@ posting.setPostInnerElements = function(boardUri, threadId, post, postCell,
 
 };
 
-posting.addPost = function(post, boardUri, threadId, noExtra) {
+posting.addPost = function(post, boardUri, threadId, noExtra, preview) {
 
   var postCell = document.createElement('div');
   postCell.innerHTML = posting.postCellTemplate;
@@ -780,7 +782,13 @@ posting.addPost = function(post, boardUri, threadId, noExtra) {
 
   postCell.setAttribute('data-boarduri', boardUri);
 
-  posting.setPostInnerElements(boardUri, threadId, post, postCell, noExtra);
+  if (preview) {
+    var labelBoard = '/' + boardUri + '/';
+    postCell.getElementsByClassName('labelBoard')[0].innerHTML = labelBoard;
+  }
+
+  posting.setPostInnerElements(boardUri, threadId, post, postCell, noExtra,
+      preview);
 
   return postCell;
 

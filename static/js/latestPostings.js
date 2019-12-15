@@ -1,5 +1,7 @@
 var latestPostings = {};
 
+api.mod = true;
+
 latestPostings.init = function() {
 
   latestPostings.postsDiv = document.getElementById('divPostings');
@@ -40,9 +42,8 @@ latestPostings.loadMore = function(event) {
 
       var post = data[i];
 
-      var cell = posting.addPost(post, post.boardUri, post.threadId);
-
-      cell.getElementsByClassName('deletionCheckBox')[0].remove();
+      var cell = posting.addPost(post, post.boardUri, post.threadId, false,
+          true);
 
       latestPostings.postsDiv.insertBefore(cell,
           latestPostings.postsDiv.childNodes[0]);
