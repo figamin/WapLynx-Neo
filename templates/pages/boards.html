@@ -56,23 +56,27 @@
           class="cellComponent">Users</span></span></span>
     </div>
 
-    <div class="search">
-
+    <fieldset id="settingsFieldset">
+      <legend>Search</legend>
       <form
         action="/boards.js"
         method="get">
 
-        <input
-          type="text"
-          name="boardUri"
-          placeholder="board">
+        <label>
+          <input
+            type="text"
+            name="boardUri"
+            placeholder="board">
+        </label>
 
-        <input
-          type="text"
-          name="tags"
-          placeholder="tags">
+        <label>
+          <input
+            type="text"
+            name="tags"
+            placeholder="tags">
+        </label>
 
-        <div id="boardsSort">
+        <label>
           <select name="sorting">
             <option value=''>Most popular</option>
             <option value='1'>Least popular</option>
@@ -83,32 +87,43 @@
             <option value='6'>Alphabetic order</option>
             <option value='7'>Reverse alphabetic order</option>
           </select>
-        </div>
+        </label>
 
-        <input
-          type="checkbox"
-          name="sfw">
-        SFW boards only
-        <br>
-        <input
-          type="checkbox"
-          name="inactive">
-        Abandoned boards only
-        <br>
+        <label>
+          <input
+            type="checkbox"
+            name="sfw">
+          SFW boards only
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            name="unindexed">
+          Unindexed boards only
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            name="inactive">
+          Abandoned boards only
+        </label>
 
         <input
           type="submit"
-          value="search"
-          id="searchButton">
+          value="Search">
 
       </form>
+    </fieldset>
+
+
+    <div class="boardPages">
+      [
+      <div id="divPages"></div>
+      ]
     </div>
 
-    <div>
-      <span class="boardPages"> [
-        <div id="divPages"></div> ]
-      </span>
-    </div>
 
   </div>
 
