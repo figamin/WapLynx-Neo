@@ -33,15 +33,20 @@
         action="/createRule.js"
         method="post"
         enctype="multipart/form-data">
+        
         <input
           type="hidden"
           name="boardUri"
           id="boardIdentifier">
-        <input
+        
+        <label>
+          <input
           type="text"
           name="rule"
           class="ruleManagementField"
           id="fieldRule">
+        </label>
+        
         <button
           type="submit"
           id="addFormButton">Add Rule</button>
