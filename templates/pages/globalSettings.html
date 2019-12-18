@@ -57,7 +57,7 @@
             id="fieldSslPass">
         </label>
         <label>
-          CSP directives (e.g: "default-src 'self'", without the quotations):
+          CSP directives (e.g: "default-src 'self'", without the double quotations):
           <input
             type="text"
             class="globalSettingsField"
@@ -135,7 +135,7 @@
             class="globalSettingsField"
             id="checkboxHttp2"
             name="useHttp2">
-          Use HTTP2 for SSL(Might be unstable due to node's implementation)
+          Use HTTP2 for SSL (Might be unstable due to node's implementation)
         </label>
         <label>
           SSL<sup>2</sup> (Make sure you have the proper files)
@@ -148,7 +148,7 @@
 
         <p class="title">System settings</p>
         <label>
-          Master Ip:
+          Master IP:
           <input
             type="text"
             class="globalSettingsField"
@@ -156,7 +156,7 @@
             id="fieldMaster">
         </label>
         <label>
-          Slaves ips<sup>1</sup>:
+          Slaves IPs<sup>1</sup>:
           <input
             type="text"
             class="globalSettingsField"
@@ -172,7 +172,7 @@
             id="fieldFePath">
         </label>
         <label>
-          DNSBL TOR detection:
+          DNSBL Tor detection:
           <input
             type="url"
             class="globalSettingsField"
@@ -180,7 +180,7 @@
             id="fieldTorDNSL">
         </label>
         <label>
-          Url for the list of TOR exit node ips:
+          URL for the list of Tor exit node IPs:
           <input
             type="url"
             class="globalSettingsField"
@@ -188,7 +188,7 @@
             id="fieldTorSource">
         </label>
         <label>
-          Url for the list of spammer ips(Requirements for the file format are
+          URL for the list of spammer IPs (Requirements for the file format are
           specified on src/be/readme):
           <input
             type="url"
@@ -197,7 +197,7 @@
             id="fieldSpamIpsSource">
         </label>
         <label>
-          Url for the list of incremental spammer ips(Requirements for the file
+          URL for the list of incremental spammer IPs (Requirements for the file
           format are specified on src/be/readme):
           <input
             type="url"
@@ -230,7 +230,7 @@
             id="fieldLanguagePack">
         </label>
         <label>
-          Extension used for thumbnails (Will make all gif thumbs do not
+          Extension used for thumbnails (Will make all gif thumbs not
           animate):
           <input
             type="text"
@@ -274,7 +274,7 @@
             id="fieldMaxFileSize">
         </label>
         <label>
-          Allowed mime-types<sup>1</sup>:
+          Allowed MIME types<sup>1</sup>:
           <input
             type="text"
             class="globalSettingsField"
@@ -298,7 +298,7 @@
             id="fieldFileLimit">
         </label>
         <label>
-          Minimum amount of seconds between posts from the same ip:
+          Minimum amount of seconds between posts from the same IP:
           <input
             type="number"
             class="globalSettingsField"
@@ -375,7 +375,7 @@
             class="globalSettingsField"
             id="checkboxAllowTorFiles"
             name="allowTorFiles">
-          Allow TOR users to post files
+          Allow Tor users to post files
         </label>
         <label>
           <input
@@ -383,7 +383,7 @@
             class="globalSettingsField"
             id="checkboxDisableSpamCheck"
             name="disableSpamCheck">
-          Disable check on spammer ips (Use it if you can't obtain the spam ip
+          Disable check on spammer IPs (Use it if you can't obtain the spam IP
           list, so users are still able to post)
         </label>
         <label>
@@ -400,11 +400,11 @@
             class="globalSettingsField"
             id="checkboxVersatileBlockBypass"
             name="allowVersatileBlockBypass">
-          Allow ips caught on the spammer list or range bans to use the block
+          Allow IPs caught on the spammer list or range bans to use the block
           bypass if block bypass is not disabled
         </label>
         <label>
-          TOR posting permission level:
+          Tor posting permission level:
           <select
             id="comboTorPostingLevel"
             name="torPostingLevel">
@@ -420,7 +420,7 @@
 
         <hr>
 
-        <p class="title">Display Limits</p>
+        <p class="title">Display limits</p>
         <label>
           Amount of latest posts to show on front-page:
           <input
@@ -537,7 +537,7 @@
             id="fieldMaxBoardHashBans">
         </label>
         <label>
-          Maximum number of board range and ASN bans(they are counted
+          Maximum number of board range and ASN bans (they are counted
           separately):
           <input
             type="number"
@@ -613,7 +613,7 @@
 
         <p class="title">Variables</p>
         <label>
-          Amount of days before removing ips from posts (any value below 1 or
+          Amount of days before removing IPs from posts (any value below 1 or
           null means to never remove):
           <input
             type="number"
@@ -646,7 +646,7 @@
             id="fieldFlagNameLength">
         </label>
         <label>
-          Mark accounts after these many days of inactivity:
+          Mark accounts after this many days of inactivity:
           <input
             type="number"
             class="globalSettingsField"
@@ -856,7 +856,7 @@
             class="globalSettingsField"
             id="checkboxFrontPageStats"
             name="frontPageStats">
-          Display total post count and total unique ips on front-page
+          Display total post count and total unique IPs on front-page
         </label>
         <label>
           <input
@@ -864,7 +864,7 @@
             class="globalSettingsField"
             id="checkboxMaintenance"
             name="maintenance">
-          Maintenance mode (Disables input to the server and let users know it
+          Maintenance mode (Disables input to the server and lets users know it
           is under maintenance)
         </label>
         <label>
@@ -913,7 +913,7 @@
             class="globalSettingsField"
             id="checkboxValidateMimes"
             name="validateMimes">
-          Validate mimetypes using 'file', fallback to the informed mime if none
+          Validate MIME types using 'file', fall back to the informed MIME if none
           is found
         </label>
         <label>
@@ -933,7 +933,7 @@
           Allow multiple reports at once
         </label>
         <label>
-          Minimum global role for users to be able to see poster's clear ips:
+          Minimum global role for users to be able to see posters' clear IPs:
           <select
             id="comboMinClearIpRole"
             name="clearIpMinRole">
