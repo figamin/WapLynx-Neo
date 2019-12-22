@@ -97,5 +97,6 @@
   "asnBansPage": "pages/asnBansPage.html",
   "asnBanCell": "cells/asnBanCell.html",
   "offenseRecordPage": "pages/offenseRecordPage.html",
-  "offenseCell": "cells/offenseCell.html"
+  "offenseCell": "cells/offenseCell.html",
+  "openReportsPage": "pages/openReportsPage.html"
 }

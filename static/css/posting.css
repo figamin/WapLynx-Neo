@@ -105,6 +105,7 @@ video {
 .noEmailName, .noEmailName:hover {
   color: #117743;
   text-shadow: none;
+  cursor: default;
 }
 
 .quoteLink {
