@@ -53,9 +53,6 @@ boardManagement.init = function() {
     }
   }
 
-  api.convertButton('closeReportsFormButton', reports.closeReports,
-      'closeReportsField');
-
   var settingsIdentifier = document.getElementById('boardSettingsIdentifier');
 
   if (!settingsIdentifier) {

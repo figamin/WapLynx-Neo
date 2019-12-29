@@ -42,3 +42,6 @@ reports.closeReports = function() {
   });
 
 };
+
+api.convertButton('closeReportsFormButton', reports.closeReports,
+    'closeReportsField');

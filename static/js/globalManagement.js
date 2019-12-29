@@ -19,9 +19,6 @@ globalManagement.init = function() {
 
   globalManagement.divStaff = document.getElementById('divStaff');
 
-  api.convertButton('closeReportsFormButton', reports.closeReports,
-      'closeReportsField');
-
   var staffCells = document.getElementsByClassName('staffCell');
 
   for (var i = 0; i < staffCells.length; i++) {
