@@ -782,9 +782,12 @@ posting.addPost = function(post, boardUri, threadId, noExtra, preview) {
 
   postCell.setAttribute('data-boarduri', boardUri);
 
+  var labelBoard = postCell.getElementsByClassName('labelBoard')[0];
+
   if (preview) {
-    var labelBoard = '/' + boardUri + '/';
-    postCell.getElementsByClassName('labelBoard')[0].innerHTML = labelBoard;
+    labelBoard.innerHTML = '/' + boardUri + '/';
+  } else {
+    labelBoard.remove();
   }
 
   posting.setPostInnerElements(boardUri, threadId, post, postCell, noExtra,

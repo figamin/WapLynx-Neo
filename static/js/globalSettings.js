@@ -31,6 +31,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'useGlobalBanners',
     },
+    fieldLatestPostPinned : {
+      type : 'string',
+      setting : 'latestPostPinned',
+    },
     checkboxStripExif : {
       type : 'boolean',
       setting : 'stripExif',
