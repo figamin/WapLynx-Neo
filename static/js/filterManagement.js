@@ -15,6 +15,8 @@ filterManagement.init = function() {
     filterManagement.processFilterCell(filtersDiv.childNodes[j]);
   }
 
+  filterManagement.maxLength = +document.getElementById('maxLengthLabel').innerHTML;
+
   filterManagement.divFilters = filtersDiv;
 
 };
@@ -69,8 +71,10 @@ filterManagement.addFilter = function() {
   if (!typedOriginal.length || !typedReplacement.length) {
     alert('Both fields are mandatory.');
     return;
-  } else if (typedOriginal.length > 32 || typedReplacement.length > 32) {
-    alert('Both fields cannot exceed 32 characters.');
+  } else if (typedOriginal.length > filterManagement.maxLength
+      || typedReplacement.length > filterManagement.maxLength) {
+    alert('Both fields cannot exceed ' + filterManagement.maxLength
+        + ' characters.');
     return;
   }
 
