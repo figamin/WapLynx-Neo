@@ -722,7 +722,7 @@ postingMenu.buildMenu = function(linkSelf, extraMenu) {
 
   var href = linkSelf.href;
 
-  if (!api.mod) {
+  if (href.indexOf('mod.js') < 0) {
 
     var parts = href.split('/');
 
