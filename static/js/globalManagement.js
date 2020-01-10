@@ -5,8 +5,6 @@ globalManagement.roles = [ 'Admin', 'Global volunteer', 'Global janitor',
 
 globalManagement.init = function() {
 
-  api.management = true;
-
   if (document.getElementById('addStaffForm')) {
 
     api

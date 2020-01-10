@@ -2,8 +2,6 @@ var boardManagement = {};
 
 boardManagement.init = function() {
 
-  api.management = true;
-
   var volunteerCellTemplate = '<span class="userLabel"></span> ';
   volunteerCellTemplate += '<input ';
   volunteerCellTemplate += 'type="hidden" ';

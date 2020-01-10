@@ -2,6 +2,8 @@ var bans = {};
 
 bans.init = function() {
 
+  bans.appealed = document.location.toString().indexOf('appealedBans.js') >= 0;
+
   var banCells = document.getElementsByClassName('banCell');
 
   for (var j = 0; j < banCells.length; j++) {
@@ -38,7 +40,7 @@ bans.denyAppeal = function(cell) {
 
     if (status === 'ok') {
 
-      if (api.management) {
+      if (bans.appealed) {
         cell.remove();
       } else {
         cell.getElementsByClassName('denyFormButton')[0].remove();
