@@ -84,7 +84,7 @@ postingMenu.showReport = function(board, thread, post, global) {
 
     var params = {
       captcha : typedCaptcha,
-      reason : reasonField.value.trim(),
+      reasonReport : reasonField.value.trim(),
       global : global,
       action : 'report'
     };
@@ -196,7 +196,7 @@ postingMenu.applySingleBan = function(typedMessage, deletionOption,
 
   var params = {
     action : 'ban',
-    reason : typedReason,
+    reasonBan : typedReason,
     captcha : typedCaptcha,
     banType : banType,
     duration : typedDuration,

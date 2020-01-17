@@ -46,7 +46,7 @@
         type="text"
         class="reportField"
         id="reportFieldReason"
-        name="reason">
+        name="reasonReport">
     </label>
     <label>
       <input
@@ -110,6 +110,15 @@
       </label>
 
       <label>
+        Ban Reason
+        <input
+          class="banField"
+          type="text"
+          id="fieldBanReason"
+          name="reasonBan">
+      </label>
+
+      <label>
         Ban type:
         <select
           name="banType"
@@ -143,6 +152,12 @@
         id="inputBan"
         value="ban"
         name="action">Ban</button>
+
+      <button
+        type="submit"
+        id="inputBanDelete"
+        value="ban-delete"
+        name="action">Ban and delete</button>
 
       <button
         type="submit"

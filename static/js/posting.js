@@ -82,16 +82,16 @@ posting.setLocalTime = function(time) {
 
 };
 
-posting.applyBans = function(captcha) {
+posting.applyBans = function(captcha, banDelete) {
 
-  var typedReason = document.getElementById('reportFieldReason').value.trim();
+  var typedReason = document.getElementById('fieldBanReason').value.trim();
   var typedDuration = document.getElementById('fieldDuration').value.trim();
   var typedMessage = document.getElementById('fieldbanMessage').value.trim();
   var banType = document.getElementById('comboBoxBanTypes').selectedIndex;
 
   var params = {
-    action : 'ban',
-    reason : typedReason,
+    action : banDelete ? 'ban-delete' : 'ban',
+    reasonBan : typedReason,
     captcha : captcha,
     banType : banType,
     duration : typedDuration,
@@ -113,7 +113,11 @@ posting.applyBans = function(captcha) {
   });
 };
 
-posting.banPosts = function() {
+posting.banDeletePosts = function() {
+  posting.banPosts(true);
+};
+
+posting.banPosts = function(banDelete) {
 
   if (!document.getElementsByClassName('panelRange').length) {
     posting.applyBans();
@@ -142,7 +146,7 @@ posting.banPosts = function() {
         return;
       }
 
-      posting.applyBans(parsedCookies.captchaid);
+      posting.applyBans(parsedCookies.captchaid, banDelete);
     });
   }
 
@@ -341,7 +345,7 @@ posting.reportPosts = function() {
 
   var params = {
     action : 'report',
-    reason : typedReason,
+    reasonReport : typedReason,
     captcha : typedCaptcha,
     global : document.getElementById('checkboxGlobal').checked,
   };

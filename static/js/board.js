@@ -33,6 +33,7 @@ board.init = function() {
 
   if (api.mod) {
     api.convertButton('inputBan', posting.banPosts, 'banField');
+    api.convertButton('inputBanDelete', posting.banDeletePosts, 'banField');
     api.convertButton('inputIpDelete', posting.deleteFromIpOnBoard);
     api.convertButton('inputSpoil', posting.spoilFiles);
   }
