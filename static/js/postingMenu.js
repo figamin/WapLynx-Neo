@@ -2,8 +2,8 @@ var postingMenu = {};
 
 postingMenu.init = function() {
 
-  postingMenu.banLabels = [ 'Regular ban', 'Range ban (1/2 octects)',
-      'Range ban (3/4 octects)', 'ASN ban', 'Warning' ];
+  postingMenu.banLabels = [ 'IP/Bypass ban', 'Range ban (1/2 octects)',
+      'Range ban (3/4 octects)', 'ASN ban', 'IP/Bypass warning' ];
   postingMenu.deletionOptions = [ 'Do not delete', 'Delete post',
       'Delete post and media', 'Delete by ip' ];
   postingMenu.threadSettingsList = [ {

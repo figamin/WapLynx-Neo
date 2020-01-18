@@ -81,7 +81,8 @@ video {
 }
 
 .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
-  .contentOmissionIndicator, .labelOmission, .labelId, .panelASN {
+  .contentOmissionIndicator, .labelOmission, .labelId, .panelASN,
+  .panelBypassId {
   font-size: 80%;
 }
 
