@@ -5,7 +5,7 @@ postingMenu.init = function() {
   postingMenu.banLabels = [ 'IP/Bypass ban', 'Range ban (1/2 octects)',
       'Range ban (3/4 octects)', 'ASN ban', 'IP/Bypass warning' ];
   postingMenu.deletionOptions = [ 'Do not delete', 'Delete post',
-      'Delete post and media', 'Delete by ip' ];
+      'Delete post and media', 'Delete by ip/bypass' ];
   postingMenu.threadSettingsList = [ {
     label : 'Toggle Lock',
     field : 'locked',
@@ -668,10 +668,10 @@ postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
   extraMenu.appendChild(document.createElement('hr'));
 
   var deleteByIpButton = document.createElement('div');
-  deleteByIpButton.innerHTML = 'Delete By Ip';
+  deleteByIpButton.innerHTML = 'Delete By Ip/bypass';
   deleteByIpButton.onclick = function() {
 
-    if (confirm("Are you sure you wish to delete all posts on this board made by this ip?")) {
+    if (confirm("Are you sure you wish to delete all posts on this board made by this ip/bypass?")) {
       postingMenu.deleteSinglePost(board, thread, post, true, null, null,
           innerPart);
     }

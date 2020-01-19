@@ -233,14 +233,14 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
 
   if (!panelIp) {
 
-    var emptyPanel = document.getElementsByClassName('opHead')[0].nextSibling.nextSibling;
+    var emptyPanel = document.getElementsByClassName('panelIpContainer')[0];
 
     panelIp = document.createElement('span');
     panelIp.className = 'panelIp';
 
     panelIp.appendChild(sideCatalog.getRangePanel());
 
-    panelIp.appendChild(document.createTextNode('Ip:'));
+    panelIp.appendChild(document.createTextNode('Ip: '));
 
     var newIpLabel = document.createElement('span');
     newIpLabel.className = 'labelIp';
@@ -250,6 +250,25 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
 
   } else if (!opCell.getElementsByClassName('panelRange').length) {
     panelIp.insertBefore(sideCatalog.getRangePanel(), panelIp.childNodes[0]);
+  }
+
+  var panelBypassId = opCell.getElementsByClassName('panelBypassId')[0];
+
+  if (!panelBypassId) {
+
+    console.log('inserting bypass id panel');
+
+    panelBypassId = document.createElement('div');
+    panelBypassId.className = 'panelBypassId';
+
+    var labelBypassId = document.createElement('span');
+    labelBypassId.className = 'labelBypassId';
+
+    panelBypassId.appendChild(document.createTextNode('Bypass Id: '));
+    panelBypassId.appendChild(labelBypassId);
+
+    panelIp.parentNode.insertBefore(panelBypassId, panelIp);
+
   }
 
   var panelASN = opCell.getElementsByClassName('panelASN')[0];
@@ -265,7 +284,7 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
     panelASN.appendChild(document.createTextNode('ASN: '));
     panelASN.appendChild(labelASN);
 
-    panelIp.parentNode.insertBefore(panelASN, panelIp);
+    panelBypassId.parentNode.insertBefore(panelASN, panelBypassId);
 
   }
 

@@ -15,6 +15,7 @@ posting.init = function() {
       + ' <a class="linkOffenseRecord">[Offense record]</a>'
       + ' <span class="panelBacklinks"></span></div>'
       + '<div class="panelASN">ASN: <span class="labelASN"></span> </div>'
+      + '<div class="panelBypassId"> Bypass Id: <span class="labelBypassId"></span> </div>'
       + '<div>'
       + '<span class="panelIp"> <span class="panelRange">Broad'
       + 'range(1/2 octets): <span class="labelBroadRange"> </span> <br>'
@@ -574,6 +575,12 @@ posting.setPostHideableElements = function(postCell, post, noExtras) {
     postCell.getElementsByClassName('labelASN')[0].innerHTML = post.asn;
   }
 
+  if (!post.bypassId) {
+    postCell.getElementsByClassName('panelBypassId')[0].remove();
+  } else {
+    postCell.getElementsByClassName('labelBypassId')[0].innerHTML = post.bypassId;
+  }
+
   if (!post.ip) {
     postCell.getElementsByClassName('panelIp')[0].remove();
   } else {
@@ -621,7 +628,7 @@ posting.setPostLinks = function(postCell, post, boardUri, link, threadId,
     linkEdit.remove();
   }
 
-  if (api.mod && post.ip) {
+  if (api.mod && (post.ip || post.bypassId)) {
     linkFileHistory.href = '/mediaManagement.js?boardUri=' + boardUri + '&';
     linkFileHistory.href += complement;
 
