@@ -61,6 +61,8 @@
         <button type="submit">Filter</button>
       </form>
 
+      <hr>
+
       <button
         class="hidden"
         id="selectAllButton"
@@ -70,6 +72,15 @@
         action="/deleteMedia.js"
         method="POST"
         enctype="multipart/form-data">
+
+        <label id="banPanel">
+          <input
+            name="ban"
+            id="banCheckbox"
+            type="checkbox">
+          <span>Ban deleted files</span>
+        </label>
+
         <button
           type="submit"
           id="deleteFormButton">Delete selected media</button>

@@ -22,32 +22,32 @@ mediaManagement.deleteMedia = function() {
 
   var checkBoxes = document.getElementsByClassName('identifierCheckbox');
 
-  var identifiers = {
-    identifiers : identifiers
+  var params = {
+    ban : (document.getElementById('banCheckbox') || {}).checked
   };
 
   for (var i = 0; i < checkBoxes.length; i++) {
     if (checkBoxes[i].checked) {
-      identifiers[checkBoxes[i].name] = true;
+      params[checkBoxes[i].name] = true;
     }
   }
 
-  api.formApiRequest('deleteMedia', identifiers, function deletedMedia(status,
-      data) {
+  api.formApiRequest('deleteMedia', params,
+      function deletedMedia(status, data) {
 
-    if (status === 'ok') {
+        if (status === 'ok') {
 
-      for (var i = checkBoxes.length - 1; i > -1; i--) {
-        if (checkBoxes[i].checked) {
-          checkBoxes[i].parentNode.parentNode.remove();
+          for (var i = checkBoxes.length - 1; i > -1; i--) {
+            if (checkBoxes[i].checked) {
+              checkBoxes[i].parentNode.parentNode.remove();
+            }
+          }
+
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
         }
-      }
 
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-
-  });
+      });
 
 };
 
