@@ -23,7 +23,8 @@ mediaManagement.deleteMedia = function() {
   var checkBoxes = document.getElementsByClassName('identifierCheckbox');
 
   var params = {
-    ban : (document.getElementById('banCheckbox') || {}).checked
+    ban : (document.getElementById('banCheckbox') || {}).checked,
+    text : document.getElementById('massTextField').value
   };
 
   for (var i = 0; i < checkBoxes.length; i++) {
@@ -36,6 +37,10 @@ mediaManagement.deleteMedia = function() {
       function deletedMedia(status, data) {
 
         if (status === 'ok') {
+
+          if (params.text) {
+            return location.reload(true);
+          }
 
           for (var i = checkBoxes.length - 1; i > -1; i--) {
             if (checkBoxes[i].checked) {
