@@ -14,7 +14,7 @@
   font-size: 80%;
 }
 
-#divControls, #transferControls, #ipDelete, #divArchive {
+#divControls, #transferControls, #ipDelete, #divArchive, #divMerge {
   margin: 1em;
 }
 

@@ -295,7 +295,7 @@ video {
 }
 
 .contentAction label, #divControls label, #transferControls label,
-  #ipDelete label, #divArchive label {
+  #ipDelete label, #divArchive label, #divMerge label {
   font-size: 80%;
 }
 

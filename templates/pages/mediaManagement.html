@@ -80,13 +80,22 @@
             id="massTextField"></textarea>
         </label>
 
-        <label id="banPanel">
-          <input
-            name="ban"
-            id="banCheckbox"
-            type="checkbox">
-          <span>Ban deleted files</span>
-        </label>
+        <div id="banPanel">
+          <label>
+            <span>Ban reason:</span>
+            <input
+              type="text"
+              name="reason"
+              id="reasonField">
+          </label>
+          <label>
+            <input
+              name="ban"
+              id="banCheckbox"
+              type="checkbox">
+            <span>Ban deleted files</span>
+          </label>
+        </div>
 
         <button
           type="submit"

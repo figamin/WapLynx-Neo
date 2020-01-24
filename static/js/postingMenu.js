@@ -338,6 +338,31 @@ postingMenu.spoilSinglePost = function(innerPart, boardUri, thread, post) {
 
 };
 
+postingMenu.mergeThread = function(board, thread) {
+
+  var destination = prompt('Merge with which thread?', 'Thread id');
+
+  if (!destination) {
+    return;
+  }
+
+  destination = destination.trim();
+
+  api.formApiRequest('mergeThread', {
+    boardUri : board,
+    threadSource : thread,
+    threadDestination : destination
+  }, function transferred(status, data) {
+
+    if (status === 'ok') {
+      window.location.pathname = '/' + board + '/res/' + destination + '.html';
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+
+};
+
 postingMenu.transferThread = function(boardUri, thread) {
 
   var destination = prompt('Transfer to which board?',
@@ -612,21 +637,31 @@ postingMenu.setExtraMenuThread = function(extraMenu, board, thread, innerPart) {
     postingMenu.addToggleSettingButton(extraMenu, board, thread, i, innerPart);
   }
 
-  if (!innerPart.getElementsByClassName('archiveIndicator').length) {
-
-    extraMenu.appendChild(document.createElement('hr'));
-
-    var archiveButton = document.createElement('div');
-    archiveButton.innerHTML = 'Archive';
-    archiveButton.onclick = function() {
-
-      if (confirm("Are you sure you wish to lock and archive this thread?")) {
-        postingMenu.sendArchiveRequest(board, thread, innerPart);
-      }
-
-    };
-    extraMenu.appendChild(archiveButton);
+  if (innerPart.getElementsByClassName('archiveIndicator').length) {
+    return;
   }
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var archiveButton = document.createElement('div');
+  archiveButton.innerHTML = 'Archive';
+  archiveButton.onclick = function() {
+
+    if (confirm("Are you sure you wish to lock and archive this thread?")) {
+      postingMenu.sendArchiveRequest(board, thread, innerPart);
+    }
+
+  };
+  extraMenu.appendChild(archiveButton);
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var mergeButton = document.createElement('div');
+  archiveButton.innerHTML = 'Merge';
+  archiveButton.onclick = function() {
+    postingMenu.mergeThread(board, thread);
+  };
+  extraMenu.appendChild(mergeButton);
 
 };
 

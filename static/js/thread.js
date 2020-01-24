@@ -38,6 +38,10 @@ thread.init = function() {
     api.convertButton('archiveFormButon', thread.archiveThread, 'archiveField');
   }
 
+  if (document.getElementById('divMerge')) {
+    api.convertButton('mergeFormButton', thread.mergeThread, 'mergeField');
+  }
+
   if (document.getElementById('controlThreadIdentifier')) {
 
     api.convertButton('settingsFormButon', thread.saveThreadSettings,
@@ -107,9 +111,6 @@ thread.transfer = function() {
   var informedBoard = document.getElementById("fieldDestinationBoard").value
       .trim();
 
-  var originThread = document.getElementById("transferThreadIdentifier").value;
-  var originBoard = document.getElementById("transferBoardIdentifier").value;
-
   api.formApiRequest('transferThread', {
     boardUri : api.boardUri,
     threadId : api.threadId,
@@ -156,6 +157,29 @@ thread.processPostingQuote = function(link) {
   link.onclick = function() {
     qr.showQr(link.href.match(/#q(\d+)/)[1]);
   };
+
+};
+
+thread.mergeThread = function() {
+
+  var informedThread = document.getElementById("fieldDestinationThread").value
+      .trim();
+
+  var destinationThread = document.getElementById("fieldDestinationThread").value;
+
+  api.formApiRequest('mergeThread', {
+    boardUri : api.boardUri,
+    threadSource : api.threadId,
+    threadDestination : destinationThread
+  }, function setLock(status, data) {
+
+    if (status === 'ok') {
+      window.location.pathname = '/' + api.boardUri + '/res/'
+          + destinationThread + '.html';
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 };
 

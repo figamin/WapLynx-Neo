@@ -23,6 +23,7 @@ mediaManagement.deleteMedia = function() {
   var checkBoxes = document.getElementsByClassName('identifierCheckbox');
 
   var params = {
+    reason : (document.getElementById('reasonField') || {}).value,
     ban : (document.getElementById('banCheckbox') || {}).checked,
     text : document.getElementById('massTextField').value
   };

@@ -264,6 +264,46 @@
 
     </div>
 
+    <div id="divMerge">
+
+      <form
+        action="/mergeThread.js"
+        enctype="multipart/form-data"
+        method="post"
+        id="formMerge"
+        class="formMerge">
+
+        <fieldset id="settingsFieldset">
+          <legend>Merge Thread</legend>
+
+          <input
+            type="hidden"
+            name="boardUri"
+            id="mergeBoardIdentifier">
+
+          <input
+            type="hidden"
+            name="threadSource"
+            id="mergeThreadIdentifier">
+
+          <label>
+            Destination thread:
+            <input
+              type="text"
+              class="mergeField"
+              id="fieldDestinationThread"
+              name="threadDestination">
+          </label>
+
+          <button
+            type="submit"
+            id="mergeFormButton">Merge thread</button>
+
+        </fieldset>
+      </form>
+
+    </div>
+
     <div id="ipDelete">
 
       <form
