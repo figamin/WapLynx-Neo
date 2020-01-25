@@ -193,6 +193,8 @@ boardManagement.setCss = function() {
 
 boardManagement.saveSettings = function() {
 
+  var typedAutoFullCaptcha = document
+      .getElementById('autoFullCaptchaThresholdField').value.trim();
   var typedName = document.getElementById('boardNameField').value.trim();
   var typedDescription = document.getElementById('boardDescriptionField').value
       .trim();
@@ -222,6 +224,9 @@ boardManagement.saveSettings = function() {
   } else if (typedAutoCaptcha.length && isNaN(typedAutoCaptcha)) {
     alert('Invalid auto captcha treshold.');
     return;
+  } else if (typedAutoFullCaptcha.length && isNaN(typedAutoFullCaptcha)) {
+    alert('Invalid auto full captcha treshold.');
+    return;
   } else if (!typedName) {
     alert('Name is mandatory.');
     return;
@@ -243,6 +248,7 @@ boardManagement.saveSettings = function() {
     preferredLanguage : langCombo[langCombo.selectedIndex].value,
     captchaMode : combo.options[combo.selectedIndex].value,
     boardMessage : typedMessage,
+    autoFullCaptchaLimit : typedAutoFullCaptcha,
     autoCaptchaLimit : typedAutoCaptcha,
     locationFlagMode : locationCombo.options[locationCombo.selectedIndex].value,
     hourlyThreadLimit : typedHourlyLimit,

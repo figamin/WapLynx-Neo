@@ -401,12 +401,21 @@
         </label>
 
         <label>
-          Enable captcha if this many threads are created within one hour:
+          Enable captcha for new threads if this many threads are created within one hour:
           <input
             id="autoCaptchaThresholdField"
             type="number"
             class="boardSettingsField"
             name="autoCaptchaLimit">
+        </label>
+        
+        <label>
+          Enable captcha for all posts if this many replies are posted within one hour:
+          <input
+            id="autoFullCaptchaThresholdField"
+            type="number"
+            class="boardSettingsField"
+            name="autoFullCaptchaLimit">
         </label>
 
         <label>
