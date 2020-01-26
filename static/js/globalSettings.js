@@ -455,6 +455,10 @@ globalSettings.init = function() {
       setting : 'boardCreationRequirement',
       type : 'combo'
     },
+    comboCaptchaMode : {
+      setting : 'captchaMode',
+      type : 'combo'
+    },
     comboBypassMode : {
       setting : 'bypassMode',
       type : 'combo'
