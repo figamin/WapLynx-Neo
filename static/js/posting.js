@@ -97,7 +97,8 @@ posting.applyBans = function(captcha, banDelete) {
     banType : banType,
     duration : typedDuration,
     banMessage : typedMessage,
-    global : document.getElementById('checkboxGlobal').checked
+    nonBypassable : document.getElementById('checkBoxNonBypassable').checked,
+    globalBan : document.getElementById('checkboxGlobalBan').checked
   };
 
   posting.newGetSelectedContent(params);
@@ -348,7 +349,7 @@ posting.reportPosts = function() {
     action : 'report',
     reasonReport : typedReason,
     captcha : typedCaptcha,
-    global : document.getElementById('checkboxGlobal').checked,
+    globalReport : document.getElementById('checkboxGlobalReport').checked,
   };
 
   posting.newGetSelectedContent(params);

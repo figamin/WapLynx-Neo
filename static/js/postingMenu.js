@@ -85,7 +85,7 @@ postingMenu.showReport = function(board, thread, post, global) {
     var params = {
       captcha : typedCaptcha,
       reasonReport : reasonField.value.trim(),
-      global : global,
+      globalReport : global,
       action : 'report'
     };
 
@@ -189,19 +189,20 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
 };
 
 postingMenu.applySingleBan = function(typedMessage, deletionOption,
-    typedReason, typedCaptcha, banType, typedDuration, global, boardUri,
-    thread, post, innerPart, outerPanel) {
+    typedReason, typedCaptcha, banType, typedDuration, global, nonBypassable,
+    boardUri, thread, post, innerPart, outerPanel) {
 
   localStorage.setItem('autoDeletionOption', deletionOption);
 
   var params = {
     action : 'ban',
+    nonBypassable : nonBypassable,
     reasonBan : typedReason,
     captcha : typedCaptcha,
     banType : banType,
     duration : typedDuration,
     banMessage : typedMessage,
-    global : global
+    globalBan : global
   };
 
   var key = boardUri + '-' + thread;
@@ -285,11 +286,15 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
   var captchaField = outerPanel.getElementsByClassName('modalAnswer')[0];
   captchaField.setAttribute('placeholder', 'only for board staff)');
 
+  var nonBypassableCheckbox = document.createElement('input');
+  nonBypassableCheckbox.type = 'checkbox';
+
   okButton.onclick = function() {
     postingMenu.applySingleBan(messageField.value.trim(),
         deletionCombo.selectedIndex, reasonField.value.trim(),
         captchaField.value.trim(), typeCombo.selectedIndex, durationField.value
-            .trim(), global, boardUri, thread, post, innerPart, outerPanel);
+            .trim(), global, nonBypassableCheckbox.checked, boardUri, thread,
+        post, innerPart, outerPanel);
   };
 
   captchaModal.addModalRow('Reason', reasonField, okButton.onclick);
@@ -297,6 +302,7 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
   captchaModal.addModalRow('Message', messageField, okButton.onclick);
   captchaModal.addModalRow('Type', typeCombo);
   captchaModal.addModalRow('Deletion action', deletionCombo);
+  captchaModal.addModalRow('Non-bypassable', nonBypassableCheckbox);
 
 };
 
