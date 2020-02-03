@@ -192,6 +192,10 @@ api.handleConnectionResponse = function(xhr, callback, silent) {
       desc += 'File ' + ban.file + ' is banned from '
           + (ban.boardUri ? '/' + ban.boardUri + '/' : 'all boards.');
 
+      if (ban.reason) {
+        desc += ' Reason: ' + ban.reason + '.';
+      }
+
     }
 
     alert(desc);
