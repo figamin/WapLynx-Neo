@@ -1,6 +1,7 @@
 var account = {};
 
 account.settingsRelation = {
+  checkboxNoBoardReports : 'noBoardReports',
   checkboxAlwaysSign : 'alwaysSignRole',
   checkboxReportNotify : 'reportNotify'
 };
