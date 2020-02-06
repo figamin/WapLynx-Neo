@@ -29,7 +29,10 @@ posting.init = function() {
       + '</a> <span class="hideMobile">(</span><span class="sizeLabel"></span> '
       + '<span class="dimensionLabel"></span> <a class="originalNameLink"></a><span '
       + 'class="hideMobile">)</span></div><div class="divHash"><span>MD5: <span '
-      + 'class="labelHash"></span></span></div><a class="imgLink" target="blank"></a>';
+      + 'class="labelHash"></span></span></div>'
+      + '<div> <a class="unlinkLink">[Unlink]</a>'
+      + ' <a class="unlinkAndDeleteLink">[Unlink and delete]</a></div>'
+      + '<a class="imgLink" target="blank"></a>';
 
   posting.sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
 
@@ -486,11 +489,13 @@ posting.getUploadCellBase = function() {
 
 }
 
-posting.setUploadCell = function(node, files, noExtras) {
+posting.setUploadCell = function(node, post, boardUri, noExtras) {
 
-  if (!files) {
+  if (!post.files) {
     return;
   }
+
+  var files = post.files;
 
   for (var i = 0; i < files.length; i++) {
     var file = files[i];
@@ -508,6 +513,28 @@ posting.setUploadCell = function(node, files, noExtras) {
       dimensionLabel.innerHTML = file.width + 'x' + file.height;
     } else {
       dimensionLabel.remove();
+    }
+
+    var unlinkCell = cell.getElementsByClassName('unlinkLink')[0];
+    var deleteCell = cell.getElementsByClassName('unlinkAndDeleteLink')[0];
+
+    if (!api.mod) {
+      unlinkCell.remove();
+      deleteCell.remove();
+    } else {
+      var urlToUse = '/unlinkSingle.js?boardUri=' + boardUri;
+
+      if (post.postId) {
+        urlToUse += '&postId=' + post.postId;
+      } else {
+        urlToUse += '&threadId=' + post.threadId;
+      }
+
+      urlToUse += '&index=' + i;
+
+      unlinkCell.href = urlToUse;
+      deleteCell.href = urlToUse + '&delete=1';
+
     }
 
     if (file.md5) {
@@ -692,7 +719,7 @@ posting.setPostComplexElements = function(postCell, post, boardUri, threadId,
       panelUploads.className += ' multipleUploads';
     }
 
-    posting.setUploadCell(panelUploads, post.files, noExtras);
+    posting.setUploadCell(panelUploads, post, boardUri, noExtras);
   }
 
 };
