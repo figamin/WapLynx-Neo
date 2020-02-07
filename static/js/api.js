@@ -353,8 +353,8 @@ api.formApiRequest = function(page, parameters, callback, silent, getParameters)
 
         var file = files[i];
 
-        if (file.md5 && file.mime) {
-          form.append('fileMd5', file.md5);
+        if (file.sha256) {
+          form.append('fileSha256', file.sha256);
           form.append('fileMime', file.mime);
           form.append('fileSpoiler', file.spoiler || '');
           form.append('fileName', file.name);

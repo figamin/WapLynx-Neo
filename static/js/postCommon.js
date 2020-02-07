@@ -315,12 +315,13 @@ postCommon.newCheckExistance = function(file, callback) {
 
   var reader = new FileReader();
 
-  reader.onloadend = function() {
+  reader.onloadend = async function() {
 
-    var mime = file.type;
-    var md5 = SparkMD5.ArrayBuffer.hash(reader.result);
-
-    var identifier = md5 + '-' + mime.replace('/', '');
+    var hashBuffer = await crypto.subtle.digest('SHA-256', reader.result);
+    var hashArray = Array.from(new Uint8Array(hashBuffer));
+    var hashHex = hashArray.map(function(b) {
+      return b.toString(16).padStart(2, '0');
+    }).join('');
 
     api.formApiRequest('checkFileIdentifier', {}, function requested(status,
         data) {
@@ -329,11 +330,11 @@ postCommon.newCheckExistance = function(file, callback) {
         console.log(data);
         callback();
       } else {
-        callback(md5, mime, data);
+        callback(hashHex, file.type, data);
       }
 
     }, false, {
-      identifier : identifier
+      identifier : hashHex
     });
 
   };
@@ -358,15 +359,15 @@ postCommon.newGetFilesToUpload = function(callback, index, files) {
 
   var file = postCommon.selectedFiles[index];
 
-  postCommon.newCheckExistance(file, function checked(md5, mime, found) {
+  postCommon.newCheckExistance(file, function checked(sha256, mime, found) {
 
     var toPush = {
       name : postCommon.selectedFiles[index].name,
       spoiler : spoiled,
-      md5 : md5,
+      sha256 : sha256,
       mime : mime
     };
-
+    
     if (!found) {
       toPush.content = file;
     }
