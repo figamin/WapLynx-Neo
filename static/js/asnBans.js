@@ -45,7 +45,7 @@ asnBans.liftBan = function(cell) {
 
 };
 
-asnBans.showNewAsnBan = function(typedRange, id) {
+asnBans.showNewAsnBan = function(typedRange, typedReason, nonBypassable, id) {
 
   var form = document.createElement('form');
   form.className = 'asnBanCell';
@@ -64,6 +64,21 @@ asnBans.showNewAsnBan = function(typedRange, id) {
   rangeLabel.innerHTML = typedRange;
   rangeLabel.className = 'asnLabel';
   asnPara.appendChild(rangeLabel);
+
+  var reasonPara = document.createElement('p');
+  reasonPara.innerHTML = 'Reason: ';
+  form.appendChild(reasonPara);
+
+  var reasonLabel = document.createElement('span');
+  reasonLabel.innerHTML = typedReason;
+  reasonLabel.className = 'reasonLabel';
+  reasonPara.appendChild(reasonLabel);
+
+  if (nonBypassable) {
+    var nonBypassablePara = document.createElement('p');
+    nonBypassablePara.innerHTML = 'Non-bypassable';
+    form.appendChild(nonBypassablePara);
+  }
 
   var idIdentifier = document.createElement('input');
   idIdentifier.className = 'idIdentifier';
@@ -86,12 +101,14 @@ asnBans.placeAsnBan = function() {
   var typedAsn = document.getElementById('asnField').value.trim();
   var typedDuration = document.getElementById('durationField').value.trim();
   var typedReason = document.getElementById('reasonField').value.trim();
+  var nonBypassable = document.getElementById('nonBypassableCheckbox').checked;
 
   var parameters = {
     asn : typedAsn,
     boardUri : api.boardUri,
     duration : typedDuration,
-    reason : typedReason
+    reasonBan : typedReason,
+    nonBypassable : nonBypassable
   };
 
   api.formApiRequest('placeAsnBan', parameters, function requestComplete(
@@ -100,7 +117,7 @@ asnBans.placeAsnBan = function() {
     if (status === 'ok') {
 
       document.getElementById('asnField').value = '';
-      asnBans.showNewAsnBan(typedAsn, data);
+      asnBans.showNewAsnBan(typedAsn, typedReason, nonBypassable, data);
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
