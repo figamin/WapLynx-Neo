@@ -46,7 +46,7 @@ rangeBans.liftBan = function(cell) {
 
 };
 
-rangeBans.showNewRangeBan = function(typedRange, id) {
+rangeBans.showNewRangeBan = function(typedRange, typedReason, id) {
 
   var form = document.createElement('form');
   form.className = 'rangeBanCell';
@@ -65,6 +65,15 @@ rangeBans.showNewRangeBan = function(typedRange, id) {
   rangeLabel.innerHTML = typedRange;
   rangeLabel.className = 'rangeLabel';
   rangePara.appendChild(rangeLabel);
+
+  var reasonPara = document.createElement('p');
+  reasonPara.innerHTML = 'Reason: ';
+  form.appendChild(reasonPara);
+
+  var reasonLabel = document.createElement('span');
+  reasonLabel.innerHTML = typedReason;
+  reasonLabel.className = 'rangeLabel';
+  reasonPara.appendChild(reasonLabel);
 
   var idIdentifier = document.createElement('input');
   idIdentifier.className = 'idIdentifier';
@@ -92,7 +101,7 @@ rangeBans.placeRangeBan = function() {
     range : typedRange,
     boardUri : api.boardUri,
     duration : typedDuration,
-    reason : typedReason
+    reasonBan : typedReason
   };
 
   api.formApiRequest('placeRangeBan', parameters, function requestComplete(
@@ -101,7 +110,7 @@ rangeBans.placeRangeBan = function() {
     if (status === 'ok') {
 
       document.getElementById('rangeField').value = '';
-      rangeBans.showNewRangeBan(typedRange, data);
+      rangeBans.showNewRangeBan(typedRange, typedReason, data);
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
