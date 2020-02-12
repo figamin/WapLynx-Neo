@@ -58,7 +58,7 @@ hashBans.showNewHashBan = function(typedHash, typedReason, id) {
   form.appendChild(document.createElement('hr'));
 
   var hashPara = document.createElement('p');
-  hashPara.innerHTML = 'MD5: ';
+  hashPara.innerHTML = 'SHA256: ';
   form.appendChild(hashPara);
 
   var hashLabel = document.createElement('span');

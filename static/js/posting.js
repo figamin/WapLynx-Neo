@@ -28,7 +28,7 @@ posting.init = function() {
   posting.uploadCell = '<div class="uploadDetails"><a class="nameLink" target="blank">'
       + '</a> <span class="hideMobile">(</span><span class="sizeLabel"></span> '
       + '<span class="dimensionLabel"></span> <a class="originalNameLink"></a><span '
-      + 'class="hideMobile">)</span></div><div class="divHash"><span>MD5: <span '
+      + 'class="hideMobile">)</span></div><div class="divHash"><span>SHA256: <span '
       + 'class="labelHash"></span></span></div>'
       + '<div> <a class="unlinkLink">[Unlink]</a>'
       + ' <a class="unlinkAndDeleteLink">[Unlink and delete]</a></div>'
@@ -537,8 +537,8 @@ posting.setUploadCell = function(node, post, boardUri, noExtras) {
 
     }
 
-    if (file.md5) {
-      cell.getElementsByClassName('labelHash')[0].innerHTML = file.md5;
+    if (file.sha256) {
+      cell.getElementsByClassName('labelHash')[0].innerHTML = file.sha256;
     } else {
       cell.getElementsByClassName('divHash')[0].remove();
     }
