@@ -20,6 +20,12 @@ boardManagement.init = function() {
   volunteerCellTemplate += 'class="removeFormButton" ';
   volunteerCellTemplate += '>Remove Volunteer</button';
 
+  var messageLenghtLabel = document.getElementById('messageLengthLabel');
+
+  if (messageLenghtLabel) {
+    boardManagement.messageLimit = +messageLenghtLabel.innerHTML;
+  }
+
   boardManagement.volunteerCellTemplate = volunteerCellTemplate;
 
   var resetLockButton = document.getElementById('resetLockButton');
@@ -230,8 +236,9 @@ boardManagement.saveSettings = function() {
   } else if (!typedName) {
     alert('Name is mandatory.');
     return;
-  } else if (typedMessage.length > 256) {
-    alert('Message too long, keep it under 256 characters.');
+  } else if (typedMessage.length > boardManagement.messageLimit) {
+    alert('Message too long, keep it under ' + boardManagement.messageLimit
+        + ' characters.');
     return;
   }
 
