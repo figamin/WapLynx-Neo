@@ -317,11 +317,29 @@ postCommon.newCheckExistance = function(file, callback) {
 
   reader.onloadend = async function() {
 
-    var hashBuffer = await crypto.subtle.digest('SHA-256', reader.result);
-    var hashArray = Array.from(new Uint8Array(hashBuffer));
-    var hashHex = hashArray.map(function(b) {
-      return b.toString(16).padStart(2, '0');
-    }).join('');
+    if (crypto.subtle) {
+
+      var hashBuffer = await
+      crypto.subtle.digest('SHA-256', reader.result);
+
+      var hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      var hashHex = hashArray.map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+
+    } else {
+      
+      var i8a = new Uint8Array(reader.result);
+      var a = [];
+
+      for (var i = 0; i < i8a.length; i += 4) {
+        a.push(i8a[i] << 24 | i8a[i + 1] << 16 | i8a[i + 2] << 8 | i8a[i + 3]);
+      }
+
+      var wordArray = CryptoJS.lib.WordArray.create(a, i8a.length);
+      var hashHex = CryptoJS.SHA256(wordArray).toString();
+    }
 
     api.formApiRequest('checkFileIdentifier', {}, function requested(status,
         data) {
@@ -367,7 +385,7 @@ postCommon.newGetFilesToUpload = function(callback, index, files) {
       sha256 : sha256,
       mime : mime
     };
-    
+
     if (!found) {
       toPush.content = file;
     }
