@@ -92,7 +92,14 @@ embed.getUntil = function(string, input) {
 };
 
 embed.getDomain = function(url) {
-  return url.match(/\b(?!www.)\b([a-z0-9]+\.)*[a-z0-9]+\.[a-z]+/i)[0];
+
+  var match = url.match(/\b(?!www.)\b([a-z0-9]+\.)*[a-z0-9]+\.[a-z]+/i);
+
+  if (!match) {
+    return;
+  }
+
+  return match[0];
 };
 
 embed.getSrcYouTubeCommon = function(url, secure, domain) {
