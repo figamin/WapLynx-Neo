@@ -160,7 +160,7 @@ catalog.initCatalog = function() {
 
   var links = document.getElementsByClassName('linkThumb');
 
-  for (var i = 0; i < links.length; i++) {
+  for (var i = links.length - 1; i >= 0; i--) {
 
     var link = links[i];
 
