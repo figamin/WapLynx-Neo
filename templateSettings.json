@@ -71,7 +71,6 @@
   "ruleCell": "cells/ruleCell.html",
   "reportCell": "cells/reportCell.html",
   "ruleManagementCell": "cells/ruleManagementCell.html",
-  "rangeBanCell": "cells/rangeBanCell.html",
   "staffCell": "cells/staffCell.html",
   "uploadCell": "cells/uploadCell.html",
   "volunteerCell": "cells/volunteerCell.html",
@@ -95,7 +94,6 @@
   "archiveCell": "cells/archiveCell.html",
   "asnBanPage": "pages/asnBanPage.html",
   "asnBansPage": "pages/asnBansPage.html",
-  "asnBanCell": "cells/asnBanCell.html",
   "offenseRecordPage": "pages/offenseRecordPage.html",
   "offenseCell": "cells/offenseCell.html",
   "openReportsPage": "pages/openReportsPage.html"
