@@ -19,6 +19,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'diskMedia',
     },
+    checkboxDisableBanCaptcha : {
+      type : 'boolean',
+      setting : 'disableBanCaptcha',
+    },
     checkboxRedactModNames : {
       type : 'boolean',
       setting : 'redactModNames',

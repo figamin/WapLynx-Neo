@@ -38,6 +38,7 @@ postingMenu.init = function() {
     postingMenu.loggedIn = true;
 
     postingMenu.globalRole = data.globalRole;
+    postingMenu.noBanCaptcha = data.noCaptchaBan;
 
     postingMenu.moddedBoards = [];
 
@@ -245,7 +246,7 @@ postingMenu.applySingleBan = function(typedMessage, deletionOption,
 
 postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) {
 
-  var useCaptcha = !(postingMenu.globalRole < 4);
+  var useCaptcha = !(postingMenu.globalRole < 4 || postingMenu.noBanCaptcha);
 
   var outerPanel = captchaModal.getCaptchaModal(global ? 'Global ban' : 'Ban',
       !useCaptcha);
