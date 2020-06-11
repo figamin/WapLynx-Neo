@@ -83,7 +83,7 @@ postingMenu.showReport = function(board, thread, post, global) {
     }
 
     var params = {
-      captcha : typedCaptcha,
+      captchaReport : typedCaptcha,
       reasonReport : reasonField.value.trim(),
       globalReport : global,
       action : 'report'
@@ -198,7 +198,7 @@ postingMenu.applySingleBan = function(typedMessage, deletionOption,
     action : 'ban',
     nonBypassable : nonBypassable,
     reasonBan : typedReason,
-    captcha : typedCaptcha,
+    captchaBan : typedCaptcha,
     banType : banType,
     duration : typedDuration,
     banMessage : typedMessage,
@@ -245,7 +245,10 @@ postingMenu.applySingleBan = function(typedMessage, deletionOption,
 
 postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) {
 
-  var outerPanel = captchaModal.getCaptchaModal(global ? 'Global ban' : 'Ban');
+  var useCaptcha = !(postingMenu.globalRole < 4);
+
+  var outerPanel = captchaModal.getCaptchaModal(global ? 'Global ban' : 'Ban',
+      !useCaptcha);
 
   var decorationPanel = outerPanel
       .getElementsByClassName('modalDecorationPanel')[0];
@@ -283,18 +286,20 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
 
   deletionCombo.selectedIndex = +localStorage.autoDeletionOption;
 
-  var captchaField = outerPanel.getElementsByClassName('modalAnswer')[0];
-  captchaField.setAttribute('placeholder', 'only for board staff)');
+  var captchaField;
+  if (useCaptcha) {
+    captchaField = outerPanel.getElementsByClassName('modalAnswer')[0];
+  }
 
   var nonBypassableCheckbox = document.createElement('input');
   nonBypassableCheckbox.type = 'checkbox';
 
   okButton.onclick = function() {
     postingMenu.applySingleBan(messageField.value.trim(),
-        deletionCombo.selectedIndex, reasonField.value.trim(),
-        captchaField.value.trim(), typeCombo.selectedIndex, durationField.value
-            .trim(), global, nonBypassableCheckbox.checked, boardUri, thread,
-        post, innerPart, outerPanel);
+        deletionCombo.selectedIndex, reasonField.value.trim(), useCaptcha
+            && captchaField.value.trim(), typeCombo.selectedIndex,
+        durationField.value.trim(), global, nonBypassableCheckbox.checked,
+        boardUri, thread, post, innerPart, outerPanel);
   };
 
   captchaModal.addModalRow('Reason', reasonField, okButton.onclick);

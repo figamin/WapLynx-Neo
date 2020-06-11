@@ -129,7 +129,8 @@ qr.setQr = function() {
       qrhtml += '</tbody><tbody class="hidden" id="captchaBody">'
     }
 
-    var parts = document.getElementById('captchaImage').src.split('/');
+    var parts = document.getElementsByClassName('captchaImage')[0].src
+        .split('/');
 
     var lastPart = '/' + parts[parts.length - 1];
 

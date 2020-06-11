@@ -58,7 +58,6 @@
     </label>
     <img
       class="captchaImage"
-      id="captchaImageReport"
       src="/captcha.js">
 
     <input
@@ -70,7 +69,7 @@
     <br>
 
     <input
-      name="captcha"
+      name="captchaReport"
       type="text"
       class="captchaField reportField"
       id="fieldCaptchaReport"
@@ -148,6 +147,23 @@
           name="globalBan">
         Global
       </label>
+
+      <span id="divBanCaptcha"> <img
+        class="captchaImage"
+        src="/captcha.js"> <input
+          type="button"
+          class="hidden reloadCaptchaButton"
+          onclick="captchaUtils.reloadCaptcha()"
+          value="Reload"> <span class="captchaTimer"></span> <br> <input
+          name="captchaBan"
+          type="text"
+          class="captchaField reportField"
+          id="fieldCaptchaBan"
+          placeholder="answer"> <a
+          href="/noCookieCaptcha.js"
+          class="small">no cookies?</a> <br>
+
+      </span>
 
       <label>
         <input

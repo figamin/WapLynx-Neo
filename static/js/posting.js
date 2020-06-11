@@ -96,7 +96,7 @@ posting.applyBans = function(captcha, banDelete) {
   var params = {
     action : banDelete ? 'ban-delete' : 'ban',
     reasonBan : typedReason,
-    captcha : captcha,
+    captchaBan : captcha,
     banType : banType,
     duration : typedDuration,
     banMessage : typedMessage,
@@ -124,24 +124,22 @@ posting.banDeletePosts = function() {
 
 posting.banPosts = function(banDelete) {
 
-  if (!document.getElementsByClassName('panelRange').length) {
-    posting.applyBans();
-    return;
+  if (!document.getElementsByClassName('divBanCaptcha').length) {
+    return posting.applyBans();
   }
 
-  var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
+  var typedCaptcha = document.getElementById('fieldCaptchaBan').value.trim();
 
   if (typedCaptcha && /\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
-    return;
+    return alert('Invalid captcha.');
   }
 
   if (typedCaptcha.length == 24 || !typedCaptcha) {
-    thread.applyBans(typedCaptcha);
+    posting.applyBans(typedCaptcha);
   } else {
     var parsedCookies = api.getCookies();
 
-    api.formaApiRequest('solveCaptcha', {
+    api.formApiRequest('solveCaptcha', {
       captchaId : parsedCookies.captchaid,
       answer : typedCaptcha
     }, function solvedCaptcha(status, data) {
@@ -351,7 +349,7 @@ posting.reportPosts = function() {
   var params = {
     action : 'report',
     reasonReport : typedReason,
-    captcha : typedCaptcha,
+    captchaReport : typedCaptcha,
     globalReport : document.getElementById('checkboxGlobalReport').checked,
   };
 
