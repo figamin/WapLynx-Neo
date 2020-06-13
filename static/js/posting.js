@@ -155,7 +155,11 @@ posting.banPosts = function(banDelete) {
 
 };
 
-posting.deleteFromIpOnBoard = function() {
+posting.deleteFromIpOnThread = function() {
+  posting.deleteFromIpOnBoard(null, true);
+};
+
+posting.deleteFromIpOnBoard = function(event, onThread) {
 
   var checkBoxes = document.getElementsByClassName('deletionCheckBox');
 
@@ -179,7 +183,7 @@ posting.deleteFromIpOnBoard = function() {
       .getElementById('ipDeletionConfirmationCheckbox');
 
   var param = {
-    action : 'ip-deletion',
+    action : onThread ? 'thread-ip-deletion' : 'ip-deletion',
     confirmation : confirmationBox.checked
   };
 

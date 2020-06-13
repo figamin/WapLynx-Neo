@@ -35,6 +35,7 @@ board.init = function() {
     api.convertButton('inputBan', posting.banPosts, 'banField');
     api.convertButton('inputBanDelete', posting.banDeletePosts, 'banField');
     api.convertButton('inputIpDelete', posting.deleteFromIpOnBoard);
+    api.convertButton('inputThreadIpDelete', posting.deleteFromIpOnThread);
     api.convertButton('inputSpoil', posting.spoilFiles);
   }
 

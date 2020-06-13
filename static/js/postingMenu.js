@@ -116,7 +116,7 @@ postingMenu.showReport = function(board, thread, post, global) {
 };
 
 postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
-    unlinkFiles, wipeMedia, innerPart, forcedPassword) {
+    unlinkFiles, wipeMedia, innerPart, forcedPassword, onThread) {
 
   var key = boardUri + '/' + threadId
 
@@ -131,12 +131,20 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
       || document.getElementById('deletionFieldPassword').value.trim()
       || Math.random().toString(36).substring(2, 10);
 
+  var selectedAction;
+
+  if (fromIp) {
+    selectedAction = onThread ? 'thread-ip-deletion' : 'ip-deletion';
+  } else {
+    selectedAction = 'delete'
+  }
+
   var params = {
     confirmation : true,
     password : password,
     deleteUploads : unlinkFiles,
     deleteMedia : wipeMedia,
-    action : fromIp ? 'ip-deletion' : 'delete'
+    action : selectedAction
   };
 
   var key = boardUri + '-' + threadId;
@@ -178,7 +186,7 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
 
       if (newPass) {
         postingMenu.deleteSinglePost(boardUri, threadId, post, fromIp,
-            unlinkFiles, wipeMedia, innerPart, newPass);
+            unlinkFiles, wipeMedia, innerPart, newPass, onThread);
       }
 
     }
@@ -196,7 +204,7 @@ postingMenu.applySingleBan = function(typedMessage, deletionOption,
   localStorage.setItem('autoDeletionOption', deletionOption);
 
   var params = {
-    action : 'ban',
+    action : deletionOption === 1 ? 'ban-delete' : 'ban',
     nonBypassable : nonBypassable,
     reasonBan : typedReason,
     captchaBan : typedCaptcha,
@@ -232,9 +240,11 @@ postingMenu.applySingleBan = function(typedMessage, deletionOption,
 
       outerPanel.remove();
 
-      if (deletionOption) {
+      if (deletionOption > 1) {
         postingMenu.deleteSinglePost(boardUri, thread, post,
             deletionOption === 3, false, deletionOption === 2, innerPart);
+      } else if (deletionOption) {
+        innerPart.parentNode.remove();
       }
 
     } else {
@@ -725,6 +735,20 @@ postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
 
   };
   extraMenu.appendChild(deleteByIpButton);
+
+  extraMenu.appendChild(document.createElement('hr'));
+
+  var deleteByIpOnThreadButton = document.createElement('div');
+  deleteByIpOnThreadButton.innerHTML = 'Delete By Ip/bypass within thread';
+  deleteByIpOnThreadButton.onclick = function() {
+
+    if (confirm("Are you sure you wish to delete all posts within their thread made by this ip/bypass?")) {
+      postingMenu.deleteSinglePost(board, thread, post, true, null, null,
+          innerPart, null, true);
+    }
+
+  };
+  extraMenu.appendChild(deleteByIpOnThreadButton);
 
   extraMenu.appendChild(document.createElement('hr'));
 
