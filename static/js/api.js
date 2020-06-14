@@ -208,7 +208,7 @@ api.handleConnectionResponse = function(xhr, callback, silent) {
   } else if (response.status === 'maintenance') {
 
     if (!silent) {
-      alert('The site is going under maintenance and all of it\'s functionalities are disabled temporarily.');
+      alert('The site is undergoing maintenance and all of its functionalities are temporarily disabled.');
     }
 
   } else if (response.status === 'banned') {
