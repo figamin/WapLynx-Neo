@@ -23,6 +23,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'disableBanCaptcha',
     },
+    checkboxLowercaseBoardUris : {
+      type : 'boolean',
+      setting : 'lowercaseBoardUris',
+    },
     checkboxRedactModNames : {
       type : 'boolean',
       setting : 'redactModNames',
