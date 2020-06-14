@@ -98,7 +98,7 @@ a, .coloredIcon, .unhideButton, .embedButton, .checkedFavouriteButton:before,
 .theme_clear a, .theme_clear .coloredIcon, .theme_clear .unhideButton,
   .theme_clear .embedButton, .theme_clear .checkedFavouriteButton:before,
   .theme_clear #selectedTab, .theme_clear #showFormsButton {
-  color: #000
+  color: #000;
 }
 
 .coloredIcon::before {
@@ -214,7 +214,7 @@ body {
 
 body.theme_clear {
   background-color: #cccccc;
-  color: #000
+  color: #000;
 }
 
 /* header and nav / top of page styles */
