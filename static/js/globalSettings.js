@@ -27,6 +27,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'lowercaseBoardUris',
     },
+    checkboxUnlockHistory : {
+      type : 'boolean',
+      setting : 'unlockHistory',
+    },
     checkboxRedactModNames : {
       type : 'boolean',
       setting : 'redactModNames',
