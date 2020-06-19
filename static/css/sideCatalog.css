@@ -1,18 +1,19 @@
-#mainPanel, #sideCatalogDiv {
+#sideCatalogDiv {
+  position: fixed;
   overflow-y: auto;
+  left: 80%;
+  top: 22px;
   height: calc(100vh - 22px);
-  margin-top: 22px;
+  width: 20%;
+  overscroll-behavior: contain;
+}
+
+.mainPanelWithSideCatalog {
+  width: 80%;
 }
 
 #navSideCatalog:before {
   content: "\e088";
-}
-
-#sideCatalogDiv {
-  float: right;
-  padding: 0 10px 0 10px;
-  max-width: 20%;
-  margin-top: 0;
 }
 
 #sideCatalogBody hr {
@@ -31,6 +32,10 @@ header {
 #sideCatalogHeader {
   display: table;
   width: 100%;
+}
+
+#closeSideCatalogButton, #sideCatalogBody {
+  padding-right: 10px;
 }
 
 .sideCatalogCell, .sideCatalogMarkedCell {

@@ -3,17 +3,20 @@ var sideCatalog = {};
 sideCatalog.init = function() {
 
   sideCatalog.sideCatalogBody = document.getElementById('sideCatalogBody');
+  sideCatalog.mainBody = document.getElementById('mainPanel');
 
   sideCatalog.sideCatalogDiv = document.getElementById('sideCatalogDiv');
 
   if (!localStorage.hideSideCatalog) {
     sideCatalog.sideCatalogDiv.style.display = 'block';
+    sideCatalog.mainBody.className = 'mainPanelWithSideCatalog';
   }
 
   sideCatalog.refreshSideCatalog();
 
   document.getElementById('closeSideCatalogButton').onclick = function() {
     sideCatalog.sideCatalogDiv.style.display = 'none';
+    sideCatalog.mainBody.className = '';
     localStorage.setItem('hideSideCatalog', true);
   }
 
@@ -23,6 +26,7 @@ sideCatalog.init = function() {
   sideCatalogButton.className = 'coloredIcon';
   sideCatalogButton.id = 'navSideCatalog';
   sideCatalogButton.onclick = function() {
+    sideCatalog.mainBody.className = 'mainPanelWithSideCatalog';
     sideCatalog.sideCatalogDiv.style.display = 'block';
     localStorage.removeItem('hideSideCatalog');
   };
