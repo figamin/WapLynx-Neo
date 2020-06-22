@@ -6,7 +6,7 @@ thread.init = function() {
 
   api.hiddenCaptcha = !document.getElementById('captchaDiv');
 
-  document.getElementById('mainPanel').onscroll = function() {
+  document.getElementsByTagName('body')[0].onscroll = function() {
 
     if (!thread.unreadPosts) {
       return;
