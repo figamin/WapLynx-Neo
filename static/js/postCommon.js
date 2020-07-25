@@ -424,11 +424,38 @@ postCommon.displayBlockBypassPrompt = function(callback) {
 
       if (status === 'ok') {
 
-        if (callback) {
-          callback();
+        if (api.getCookies().bypass.length <= 372) {
+
+          outerPanel.remove();
+
+          if (callback) {
+            callback();
+          }
+
+          return;
+
         }
 
-        outerPanel.remove();
+        okButton.innerHTML = 'Please wait for validation';
+
+        var tempCallback = function(status, data) {
+
+          if (status === 'ok') {
+            if (callback) {
+              callback();
+            }
+          } else {
+            alert(status + ': ' + JSON.stringify(data));
+          }
+
+        };
+
+        tempCallback.stop = function() {
+          outerPanel.remove();
+
+        };
+
+        bypassUtils.runValidation(tempCallback);
 
       } else {
         alert(status + ': ' + JSON.stringify(data));

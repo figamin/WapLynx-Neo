@@ -192,31 +192,7 @@ board.processThreadRequest = function() {
 };
 
 board.postThread = function() {
-
-  api.formApiRequest('blockBypass', {},
-      function checked(status, data) {
-
-        if (status !== 'ok') {
-          alert(data);
-          return;
-        }
-
-        var alwaysUseBypass = document
-            .getElementById('alwaysUseBypassCheckBox').checked;
-
-        if (!data.valid
-            && (data.mode == 2 || (data.mode == 1 && alwaysUseBypass))) {
-
-          postCommon.displayBlockBypassPrompt(function() {
-            board.processThreadRequest();
-          });
-
-        } else {
-          board.processThreadRequest();
-        }
-
-      });
-
+  bypassUtils.checkPass(board.processThreadRequest);
 };
 
 board.init();

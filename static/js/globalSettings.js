@@ -115,6 +115,10 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'imageFont',
     },
+    fieldBypassValidationRange : {
+      type : 'string',
+      setting : 'bypassValidationRange',
+    },
     checkboxVerboseGridfs : {
       type : 'boolean',
       setting : 'verboseGridfs',
