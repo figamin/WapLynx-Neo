@@ -9,7 +9,7 @@
   .theme_clear #divLatestPosts .latestPostCell, .theme_clear .innerPost,
   .theme_clear .sideCatalogCell, .theme_clear .markedPost, .theme_clear .sideCatalogMarkedCell,
   .theme_clear .catalogCell {
-  background-color: #dddddd
+  background-color: #dddddd;
 }
 
 .floatingMenu, #quick-reply table {
@@ -237,7 +237,7 @@ nav {
 }
 
 .theme_clear nav {
-  background-color: #acacac
+  background-color: #acacac;
 }
 
 nav span, nav a {
