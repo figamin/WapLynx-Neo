@@ -436,7 +436,9 @@ postCommon.displayBlockBypassPrompt = function(callback) {
 
         }
 
-        okButton.innerHTML = 'Please wait for validation';
+        okButton.value = 'Please wait for validation';
+        okButton.disabled = true;
+
 
         var tempCallback = function(status, data) {
 
