@@ -12,6 +12,11 @@
   background-color: #dddddd;
 }
 
+#labelBypass {
+  max-width: 80%;
+  word-break: break-all;
+}
+
 .floatingMenu, #quick-reply table {
   background: #1d1f21;
 }

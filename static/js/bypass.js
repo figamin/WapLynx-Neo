@@ -11,6 +11,8 @@ bypass.init = function() {
     return;
   }
 
+  document.getElementById('noJs').remove();
+
   bypass.originalText = bypass.validationButton.innerHTML;
 
   bypass.validationButton.className = "";
@@ -35,6 +37,8 @@ bypass.init = function() {
 
     bypassUtils.runValidation(callback);
 
+    return false;
+
   };
 
 };
@@ -42,15 +46,20 @@ bypass.init = function() {
 bypass.addIndicator = function() {
 
   if (document.getElementById('indicatorValidBypass')) {
+
+    if (document.getElementById("indicatorNotValidated")) {
+      document.getElementById("indicatorNotValidated").remove();
+    }
+
     return;
   }
 
-  var paragraph = document.getElementsByTagName('p')[0];
+  var paragraph = document.getElementById('settingsFieldset');
 
-  var span = document.createElement('span');
-  span.innerHTML = 'You have a valid block bypass.';
-  span.id = 'indicatorValidBypass';
-  paragraph.appendChild(span);
+  var div = document.createElement('div');
+  div.innerHTML = 'You have a valid block bypass.';
+  div.id = 'indicatorValidBypass';
+  paragraph.insertBefore(div, paragraph.children[2]);
 
 };
 
