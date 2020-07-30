@@ -2,7 +2,6 @@ var bypassUtils = {};
 
 bypassUtils.running = false;
 
-
 bypassUtils.checkPass = function(callback) {
 
   api.formApiRequest('blockBypass', {},
@@ -51,38 +50,44 @@ bypassUtils.runValidation = async function(callback) {
   var session = bypassData.substr(24, 344);
   var hash = bypassData.substr(24 + 344);
 
-  var textEncoder = new TextEncoder("utf-8");
-  var passwordBuffer = textEncoder.encode(session);
+  for (var i = 0; i < bypassUtils.workers.length; i++) {
 
-  var importedKey = await
-  crypto.subtle.importKey("raw", passwordBuffer, "PBKDF2", false,
-      [ "deriveBits" ]);
-
-  var params = {
-    name : "PBKDF2",
-    hash : "SHA-512",
-    iterations : 16384
-  };
-
-  var code = 0;
-
-  while (1) {
-
-    params.salt = textEncoder.encode(code);
-
-    if (hash === btoa(String.fromCharCode(...new Uint8Array(
-      await crypto.subtle.deriveBits(params, importedKey, 256 * 8))))) {
-      break;
-    } else {
-      code++;
-    }
+    bypassUtils.workers[i].postMessage({
+      type : 'start',
+      session : session,
+      code : i,
+      hash : hash
+    });
 
   }
 
+  bypassUtils.callback = callback;
+
+};
+
+bypassUtils.workers = [];
+
+bypassUtils.workerResponse = function(code) {
+
+  code = code.data;
+
   bypassUtils.running = false;
+
+  for (var i = 0; i < bypassUtils.workers.length; i++) {
+
+    bypassUtils.workers[i].postMessage({
+      type : 'stop'
+    });
+
+  }
 
   api.formApiRequest('validateBypass', {
     code : code
-  }, callback);
+  }, bypassUtils.callback);
 
 };
+
+for (var i = 0; i < navigator.hardwareConcurrency; i++) {
+  bypassUtils.workers.push(new Worker('/.static/js/validationWorker.js'));
+  bypassUtils.workers[i].onmessage = bypassUtils.workerResponse;
+}

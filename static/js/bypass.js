@@ -1,6 +1,11 @@
 var bypass = {};
 
 bypass.init = function() {
+
+  if (!crypto.subtle) {
+    return;
+  }
+
   api.convertButton('bypassFormButton', bypass.blockBypass, 'bypassField');
 
   bypass.creationButton = document.getElementById('bypassFormButton');
@@ -104,7 +109,7 @@ bypass.blockBypass = function() {
 
       };
 
-      callback.stop = function(){
+      callback.stop = function() {
         bypass.creationButton.innerHTML = bypass.originalCreationText;
       };
 
