@@ -27,6 +27,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'lowercaseBoardUris',
     },
+    checkboxDisableEmail : {
+      type : 'boolean',
+      setting : 'disableEmail',
+    },
     checkboxUnlockHistory : {
       type : 'boolean',
       setting : 'unlockHistory',
