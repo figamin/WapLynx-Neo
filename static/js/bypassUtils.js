@@ -17,17 +17,90 @@ bypassUtils.checkPass = function(callback) {
         var required = data.mode == 2 || (data.mode == 1 && alwaysUseBypass);
 
         if (!data.valid && required) {
-          postCommon.displayBlockBypassPrompt(function() {
-            callback();
-          });
+          postCommon.displayBlockBypassPrompt(callback);
 
         } else if (!data.validated && required) {
-          bypassUtils.runValidation(callback);
+
+          if (JSON.parse(localStorage.noJsValidation || 'false')) {
+            bypassUtils.showNoJsValidation(callback);
+          } else {
+            bypassUtils.runValidation(callback);
+          }
+
         } else {
           callback();
         }
 
       });
+
+};
+
+bypassUtils.showNoJsValidation = function(callback) {
+
+  var outerPanel = captchaModal
+      .getCaptchaModal('No JS bypass validation', true);
+
+  var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
+  var tableBody = outerPanel.getElementsByClassName('modalTableBody')[0];
+
+  var instructions = 'Copy the hash and use the ';
+  instructions += '<a href="https://gitgud.io/LynxChan/PoWSolver"> ';
+  instructions += 'java PoW solver</a> to obtain the code.';
+  var divInstructions = document.createElement('div');
+  divInstructions.innerHTML = instructions;
+
+  var instructionsRow = document.createElement('tr');
+  tableBody.appendChild(instructionsRow);
+
+  var instructionsHolder = document.createElement('td');
+  instructionsHolder.colSpan = 2;
+  instructionsHolder.appendChild(divInstructions);
+
+  instructionsRow.appendChild(instructionsHolder);
+
+  var divHash = document.createElement('div');
+  divHash.innerHTML = 'text';
+
+  var buttonCopyHash = document.createElement('button');
+
+  buttonCopyHash.onclick = function() {
+
+    var tempArea = document.createElement('textarea');
+    tempArea.value = api.getCookies().bypass;
+    document.body.appendChild(tempArea);
+    tempArea.select();
+    document.execCommand('copy');
+    tempArea.remove();
+
+    alert('Bypass copied');
+
+  };
+
+  buttonCopyHash.innerHTML = 'Copy hash';
+
+  var tableRow = document.createElement('tr');
+  tableBody.appendChild(tableRow);
+
+  var buttonHolder = document.createElement('td');
+  buttonHolder.appendChild(buttonCopyHash);
+
+  tableRow.appendChild(buttonHolder);
+
+  var codeField = document.createElement('input');
+  codeField.type = 'text';
+
+  captchaModal.addModalRow('Code', codeField, okButton.onclick);
+
+  okButton.onclick = function() {
+
+    api.formApiRequest('validateBypass', {
+      code : codeField.value
+    }, function(status, data) {
+      outerPanel.remove();
+      callback(status, data);
+    });
+
+  };
 
 };
 

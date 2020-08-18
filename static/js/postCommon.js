@@ -436,6 +436,11 @@ postCommon.displayBlockBypassPrompt = function(callback) {
 
         }
 
+        if (JSON.parse(localStorage.noJsValidation || 'false')) {
+          outerPanel.remove();
+          return bypassUtils.showNoJsValidation(callback);
+        }
+
         okButton.value = 'Please wait for validation';
         okButton.disabled = true;
 

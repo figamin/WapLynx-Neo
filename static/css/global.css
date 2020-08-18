@@ -12,6 +12,10 @@
   background-color: #dddddd;
 }
 
+.validationHashDiv {
+  line-break: anywhere;
+}
+
 #labelBypass {
   max-width: 80%;
   word-break: break-all;
@@ -504,7 +508,7 @@ footer {
   content: 'about';
 }
 
-#navOptionsSpan a{
+#navOptionsSpan a {
   margin-top: 2px;
 }
 

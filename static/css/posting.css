@@ -337,6 +337,7 @@ video {
   background: #1D1F21;
   padding: 10px;
   display: inline-block;
+  max-width: 90%;
 }
 
 .theme_clear .modalDecorationPanel {

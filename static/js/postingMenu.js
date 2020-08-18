@@ -261,9 +261,6 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
   var outerPanel = captchaModal.getCaptchaModal(global ? 'Global ban' : 'Ban',
       !useCaptcha);
 
-  var decorationPanel = outerPanel
-      .getElementsByClassName('modalDecorationPanel')[0];
-
   var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
   var reasonField = document.createElement('input');

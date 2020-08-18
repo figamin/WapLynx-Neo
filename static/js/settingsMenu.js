@@ -347,6 +347,20 @@ settingsMenu.getOtherContent = function() {
   noAutoLoopLabel.innerHTML = 'No Autoloop';
   noAutoLoopiv.appendChild(noAutoLoopLabel);
 
+  var noJsValidationDiv = document.createElement('div');
+  otherPanel.appendChild(noJsValidationDiv);
+
+  var noJsValidationCheckBox = document.createElement('input');
+  noJsValidationCheckBox.type = 'checkbox';
+  noJsValidationDiv.appendChild(noJsValidationCheckBox);
+  noJsValidationCheckBox.checked = JSON.parse(localStorage.noJsValidation
+      || 'false');
+
+  var noJsValidationLabel = document.createElement('label');
+  noJsValidationLabel.className = 'small';
+  noJsValidationLabel.innerHTML = 'No JS bypass validation';
+  noJsValidationDiv.appendChild(noJsValidationLabel);
+
   var saveButton = document.createElement('button');
   otherPanel.appendChild(saveButton);
   saveButton.innerHTML = 'Save';
@@ -355,6 +369,7 @@ settingsMenu.getOtherContent = function() {
     localStorage.setItem('localTime', localCheckBox.checked);
     localStorage.setItem('relativeTime', relativeCheckBox.checked);
     localStorage.setItem('noAutoLoop', noAutoLoopCheckBox.checked);
+    localStorage.setItem('noJsValidation', noJsValidationCheckBox.checked);
   }
 
   return otherPanel;

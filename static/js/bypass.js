@@ -2,7 +2,7 @@ var bypass = {};
 
 bypass.init = function() {
 
-  if (!crypto.subtle) {
+  if (!crypto.subtle || JSON.parse(localStorage.noJsValidation || 'false')) {
     return;
   }
 
