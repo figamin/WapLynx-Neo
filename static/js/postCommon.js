@@ -410,13 +410,10 @@ postCommon.displayBlockBypassPrompt = function(callback) {
     var typedCaptcha = outerPanel.getElementsByClassName('modalAnswer')[0].value
         .trim();
 
-    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-      alert('Captchas are exactly 6 (24 if no cookies) characters long.');
+    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+      alert('Captchas are exactly 6 (112 if no cookies) characters long.');
       return;
-    } else if (/\W/.test(typedCaptcha)) {
-      alert('Invalid captcha.');
-      return;
-    }
+    } 
 
     api.formApiRequest('renewBypass', {
       captcha : typedCaptcha

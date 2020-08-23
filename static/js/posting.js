@@ -130,11 +130,7 @@ posting.banPosts = function(banDelete) {
 
   var typedCaptcha = document.getElementById('fieldCaptchaBan').value.trim();
 
-  if (typedCaptcha && /\W/.test(typedCaptcha)) {
-    return alert('Invalid captcha.');
-  }
-
-  if (typedCaptcha.length == 24 || !typedCaptcha) {
+  if (typedCaptcha.length == 112 || !typedCaptcha) {
     posting.applyBans(typedCaptcha);
   } else {
     var parsedCookies = api.getCookies();
@@ -342,11 +338,8 @@ posting.reportPosts = function() {
   var typedReason = document.getElementById('reportFieldReason').value.trim();
   var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
 
-  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
-    return;
-  } else if (/\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
+  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+    alert('Captchas are exactly 6 (112 if no cookies) characters long.');
     return;
   }
 

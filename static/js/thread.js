@@ -493,15 +493,12 @@ thread.processReplyRequest = function() {
   } else {
     var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
 
-    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-      alert('Captchas are exactly 6 (24 if no cookies) characters long.');
-      return;
-    } else if (/\W/.test(typedCaptcha)) {
-      alert('Invalid captcha.');
+    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+      alert('Captchas are exactly 6 (112 if no cookies) characters long.');
       return;
     }
 
-    if (typedCaptcha.length == 24) {
+    if (typedCaptcha.length == 112) {
       thread.processFilesToPost(typedCaptcha);
     } else {
       var parsedCookies = api.getCookies();

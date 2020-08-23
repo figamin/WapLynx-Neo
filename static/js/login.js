@@ -21,11 +21,8 @@ loginObj.recoverAccount = function() {
   var typedCaptcha = document.getElementById('fieldCaptchaRecover').value
       .trim();
 
-  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
-
-  } else if (/\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
+  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+    alert('Captchas are exactly 6 (112 if no cookies) characters long.');
 
   } else if (typedLogin.length) {
 
@@ -87,11 +84,8 @@ loginObj.registerAccount = function() {
     alert('Login too long, keep it under 16 characters.');
   } else if (typedEmail.length > 64) {
     alert('E-mail too long, keep it under 64 characters.');
-  } else if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
-    return;
-  } else if (/\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
+  } else if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+    alert('Captchas are exactly 6 (112 if no cookies) characters long.');
     return;
   } else if (/\W/.test(typedLogin)) {
     alert('Invalid login.');

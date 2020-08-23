@@ -155,11 +155,8 @@ account.createBoard = function() {
   } else if (/\W/.test(typedUri)) {
     alert('Invalid uri.');
     return;
-  } else if (typedCaptcha.length !== 6 && typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
-    return;
-  } else if (/\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
+  } else if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+    alert('Captchas are exactly 6 (112 if no cookies) characters long.');
     return;
   } else {
     api.formApiRequest('createBoard', {
