@@ -123,9 +123,14 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
 
   var storedData = JSON.parse(localStorage.postingPasswords || '{}');
 
+  var delPass = document.getElementById('deletionFieldPassword');
+
+  if (delPass) {
+    delPass = delPass.value.trim();
+  }
+
   var password = forcedPassword || storedData[key]
-      || localStorage.deletionPassword
-      || document.getElementById('deletionFieldPassword').value.trim()
+      || localStorage.deletionPassword || delPass
       || Math.random().toString(36).substring(2, 10);
 
   var selectedAction;
@@ -176,7 +181,13 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
     } else if (api.threadId && data.removedThreads) {
       window.location.pathname = '/' + boardUri + '/';
     } else if (removed) {
-      innerPart.parentNode.remove();
+
+      if (typeof (reports) !== 'undefined') {
+        innerPart.parentNode.parentNode.remove();
+      } else {
+        innerPart.parentNode.remove();
+      }
+
     } else if (!removed) {
 
       var newPass = prompt('Could not delete. Would you like to try another password?');

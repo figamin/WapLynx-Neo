@@ -129,10 +129,6 @@ embed.getSrcYouTube = function(url) {
   return embed.getSrcYouTubeCommon(url, true, 'www.youtube.com');
 };
 
-embed.getSrcInvidious = function(url) {
-  return embed.getSrcYouTubeCommon(url, true, 'www.invidio.us');
-};
-
 embed.getSrcYouTubeShortened = function(url) {
 
   var videoId = url.split('/')[3];
@@ -225,7 +221,6 @@ embed.domainFunctionMap = {};
 
 embed.domainFunctionMap['youtube.com'] = embed.getSrcYouTube;
 embed.domainFunctionMap['youtu.be'] = embed.getSrcYouTubeShortened;
-embed.domainFunctionMap['invidio.us'] = embed.getSrcInvidious;
 embed.domainFunctionMap['bitchute.com'] = embed.getSrcBitChute;
 embed.domainFunctionMap['liveleak.com'] = embed.getSrcLiveLeak;
 
