@@ -260,8 +260,6 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
 
   if (!panelBypassId) {
 
-    console.log('inserting bypass id panel');
-
     panelBypassId = document.createElement('div');
     panelBypassId.className = 'panelBypassId';
 
