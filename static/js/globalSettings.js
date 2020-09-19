@@ -31,6 +31,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'disableEmail',
     },
+    checkboxUseCacheControl : {
+      type : 'boolean',
+      setting : 'useCacheControl',
+    },
     checkboxUnlockHistory : {
       type : 'boolean',
       setting : 'unlockHistory',
