@@ -183,6 +183,14 @@ globalSettings.init = function() {
       setting : 'master',
       type : 'string'
     },
+    fieldWsPort : {
+      setting : 'wsPort',
+      type : 'string'
+    },
+    fieldWssPort : {
+      setting : 'wssPort',
+      type : 'string'
+    },
     fieldFileLimit : {
       setting : 'fileLimit',
       type : 'string'
