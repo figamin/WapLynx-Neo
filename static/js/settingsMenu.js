@@ -304,72 +304,54 @@ settingsMenu.getCSSContent = function() {
 
 };
 
+settingsMenu.getSettingDiv = function(text, setting) {
+
+  var div = document.createElement('div');
+
+  var checkBox = document.createElement('input');
+  checkBox.type = 'checkbox';
+  div.appendChild(checkBox);
+  checkBox.checked = JSON.parse(localStorage[setting] || 'false');
+
+  var label = document.createElement('label');
+  label.className = 'small';
+  label.innerHTML = text;
+  div.appendChild(label);
+
+  return div;
+
+};
+
 settingsMenu.getOtherContent = function() {
+
+  var settingRelation = {
+    'localTime' : 'Local Times',
+    'relativeTime' : 'Relative Times',
+    'noAutoLoop' : 'No Autoloop',
+    'noJsValidation' : 'No JS bypass validation',
+    'noWs' : 'No web socket updates'
+  };
 
   var otherPanel = document.createElement('div');
 
-  var localDiv = document.createElement('div');
-  otherPanel.appendChild(localDiv);
+  for ( var key in settingRelation) {
 
-  var localCheckBox = document.createElement('input');
-  localCheckBox.type = 'checkbox';
-  localDiv.appendChild(localCheckBox);
-  localCheckBox.checked = JSON.parse(localStorage.localTime || 'false');
+    var div = settingsMenu.getSettingDiv(settingRelation[key], key);
+    otherPanel.appendChild(div);
+    settingRelation[key] = div.getElementsByTagName('input')[0];
 
-  var localLabel = document.createElement('label');
-  localLabel.className = 'small';
-  localLabel.innerHTML = 'Local Times';
-  localDiv.appendChild(localLabel);
-
-  var relativeDiv = document.createElement('div');
-  otherPanel.appendChild(relativeDiv);
-
-  var relativeCheckBox = document.createElement('input');
-  relativeCheckBox.type = 'checkbox';
-  relativeDiv.appendChild(relativeCheckBox);
-  relativeCheckBox.checked = JSON.parse(localStorage.relativeTime || 'false');
-
-  var relativeLabel = document.createElement('label');
-  relativeLabel.className = 'small';
-  relativeLabel.innerHTML = 'Relative Times';
-  relativeDiv.appendChild(relativeLabel);
-
-  var noAutoLoopiv = document.createElement('div');
-  otherPanel.appendChild(noAutoLoopiv);
-
-  var noAutoLoopCheckBox = document.createElement('input');
-  noAutoLoopCheckBox.type = 'checkbox';
-  noAutoLoopiv.appendChild(noAutoLoopCheckBox);
-  noAutoLoopCheckBox.checked = JSON.parse(localStorage.noAutoLoop || 'false');
-
-  var noAutoLoopLabel = document.createElement('label');
-  noAutoLoopLabel.className = 'small';
-  noAutoLoopLabel.innerHTML = 'No Autoloop';
-  noAutoLoopiv.appendChild(noAutoLoopLabel);
-
-  var noJsValidationDiv = document.createElement('div');
-  otherPanel.appendChild(noJsValidationDiv);
-
-  var noJsValidationCheckBox = document.createElement('input');
-  noJsValidationCheckBox.type = 'checkbox';
-  noJsValidationDiv.appendChild(noJsValidationCheckBox);
-  noJsValidationCheckBox.checked = JSON.parse(localStorage.noJsValidation
-      || 'false');
-
-  var noJsValidationLabel = document.createElement('label');
-  noJsValidationLabel.className = 'small';
-  noJsValidationLabel.innerHTML = 'No JS bypass validation';
-  noJsValidationDiv.appendChild(noJsValidationLabel);
+  }
 
   var saveButton = document.createElement('button');
   otherPanel.appendChild(saveButton);
   saveButton.innerHTML = 'Save';
 
   saveButton.onclick = function() {
-    localStorage.setItem('localTime', localCheckBox.checked);
-    localStorage.setItem('relativeTime', relativeCheckBox.checked);
-    localStorage.setItem('noAutoLoop', noAutoLoopCheckBox.checked);
-    localStorage.setItem('noJsValidation', noJsValidationCheckBox.checked);
+
+    for ( var key in settingRelation) {
+      localStorage.setItem(key, settingRelation[key].checked);
+    }
+
   }
 
   return otherPanel;

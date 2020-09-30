@@ -74,7 +74,24 @@ thread.init = function() {
     thread.lastReplyId = replies[replies.length - 1].id;
   }
 
-  thread.changeRefresh();
+  api.localRequest('/' + api.boardUri + '/res/' + api.threadId + '.json',
+      function(error, data) {
+
+        if (error) {
+          return thread.changeRefresh();
+        }
+
+        try {
+          data = JSON.parse(data);
+        } catch (error) {
+          return thread.changeRefresh();
+        }
+
+        thread.wssPort = data.wssPort;
+        thread.wsPort = data.wsPort;
+        thread.changeRefresh();
+
+      });
 
   var postingQuotes = document.getElementsByClassName('linkQuote');
 
@@ -315,6 +332,8 @@ thread.refreshCallback = function(error, receivedData) {
 
   }
 
+  thread.wsPort = receivedData.wsPort;
+  thread.wssPort = receivedData.wssPort;
   tooltips.cacheData(receivedData);
 
   var posts = receivedData.posts;
@@ -352,7 +371,8 @@ thread.refreshCallback = function(error, receivedData) {
     }
   }
 
-  if (thread.autoRefresh) {
+  if (thread.autoRefresh
+      && !(!JSON.parse(localStorage.noWs || 'false') && (thread.wsPort || thread.wssPort))) {
     thread.startTimer(thread.manualRefresh || foundPosts ? 5
         : thread.lastRefresh * 2);
   }
@@ -526,6 +546,21 @@ thread.postReply = function() {
   bypassUtils.checkPass(thread.processReplyRequest);
 };
 
+thread.transition = function() {
+
+  if (!thread.autoRefresh) {
+    return;
+  }
+
+  if (thread.wssPort || thread.wsPort) {
+    thread.stopWs();
+    thread.startWs();
+  } else {
+    thread.currentRefresh = 5;
+  }
+
+};
+
 thread.startTimer = function(time) {
 
   if (time > 600) {
@@ -554,15 +589,107 @@ thread.startTimer = function(time) {
   }, 1000);
 };
 
+thread.stopWs = function() {
+
+  if (!thread.socket) {
+    return;
+  }
+
+  thread.socket.close();
+  delete thread.socket;
+
+};
+
+thread.startWs = function() {
+
+  if (sideCatalog.loadingThread) {
+    return;
+  }
+
+  var protocol = thread.wssPort ? 'wss' : 'ws';
+
+  thread.socket = new WebSocket(protocol + '://localhost:'
+      + (thread.wssPort || thread.wsPort));
+
+  thread.socket.onopen = function(event) {
+    thread.socket.send(api.boardUri + '-' + api.threadId);
+  };
+
+  thread.socket.onmessage = function(message) {
+
+    message = JSON.parse(message.data);
+
+    switch (message.action) {
+    case 'post': {
+      if (!thread.refreshingThread) {
+
+        setInterval(function() {
+          thread.refreshPosts();
+        }, 200);
+
+      }
+      break;
+    }
+    case 'edit': {
+      setInterval(function() {
+        thread.refreshPosts(null, true);
+      }, 200);
+      break;
+    }
+    case 'delete': {
+
+      for (var i = 0; i < message.target.length; i++) {
+
+        var post = document.getElementById(message.target[i]);
+
+        if (!post) {
+          continue;
+        }
+
+        var info = post.getElementsByClassName('postInfo')[0];
+
+        var deletedLabel = document.createElement('span');
+        deletedLabel.innerHTML = '(Deleted)';
+
+        info.insertBefore(deletedLabel,
+            info.getElementsByClassName('linkName')[0]);
+
+      }
+
+      break;
+    }
+
+    }
+
+  };
+
+  thread.socket.onerror = function(error) {
+    delete thread.wsPort;
+    delete thread.wssPort;
+    thread.changeRefresh();
+  };
+
+};
+
 thread.changeRefresh = function() {
 
   thread.autoRefresh = document.getElementById('checkboxChangeRefresh').checked;
 
   if (!thread.autoRefresh) {
     thread.refreshLabel.innerHTML = '';
+
+    thread.stopWs();
+
     clearInterval(thread.refreshTimer);
   } else {
-    thread.startTimer(5);
+
+    if (!JSON.parse(localStorage.noWs || 'false')
+        && (thread.wsPort || thread.wssPort)) {
+      thread.startWs();
+    } else {
+      thread.startTimer(5);
+    }
+
   }
 
 };

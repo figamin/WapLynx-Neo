@@ -60,9 +60,7 @@ sideCatalog.handleReceivedData = function(data, cell, threadData) {
 
   sideCatalog.loadingThread = false;
 
-  if (thread.autoRefresh) {
-    thread.currentRefresh = 5;
-  }
+  thread.transition();
 
   sideCatalog.transitionThread(cell, threadData, data);
 
@@ -73,6 +71,8 @@ sideCatalog.handleReceivedData = function(data, cell, threadData) {
 sideCatalog.loadThread = function(cell, threadData) {
 
   sideCatalog.loadingThread = true;
+
+  thread.stopWs();
 
   if (api.mod) {
 
@@ -165,6 +165,9 @@ sideCatalog.transitionThread = function(cell, threadData, data) {
   if (sideCatalog.selectedThreadCell) {
     sideCatalog.selectedThreadCell.className = 'sideCatalogCell';
   }
+
+  thread.wssSocket = threadData.wssSocket;
+  thread.wsSocket = threadData.wsSocket;
 
   sideCatalog.selectedThreadCell = cell;
 
