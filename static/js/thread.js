@@ -623,7 +623,7 @@ thread.startWs = function() {
     case 'post': {
       if (!thread.refreshingThread) {
 
-        setInterval(function() {
+        setTimeout(function() {
           thread.refreshPosts();
         }, 200);
 
@@ -631,7 +631,7 @@ thread.startWs = function() {
       break;
     }
     case 'edit': {
-      setInterval(function() {
+      setTimeout(function() {
         thread.refreshPosts(null, true);
       }, 200);
       break;
