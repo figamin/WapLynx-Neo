@@ -103,6 +103,11 @@ thread.init = function() {
 
 thread.initThread = function() {
 
+  if (thread.retryTimer) {
+    clearInterval(thread.retryTimer);
+    delete thread.retryTimer;
+  }
+  thread.expectedPosts = [];
   thread.lastReplyId = 0;
   thread.originalTitle = document.title;
   posting.highLightedIds = [];
@@ -272,7 +277,9 @@ thread.replyCallback = function(status, data) {
     qr.clearQRAfterPosting();
     postCommon.clearSelectedFiles();
 
-    thread.refreshPosts(true);
+    if (!thread.autoRefresh || !thread.socket) {
+      thread.refreshPosts(true);
+    }
 
   } else {
     alert(status + ': ' + JSON.stringify(data));
@@ -353,6 +360,12 @@ thread.refreshCallback = function(error, receivedData) {
         if (post.postId > thread.lastReplyId) {
           thread.unreadPosts++;
 
+          if (thread.expectedPosts.indexOf(post.postId) >= 0) {
+            thread.expectedPosts.splice(thread.expectedPosts
+                .indexOf(post.postId), 1);
+
+          }
+
           var postCell = posting.addPost(post, api.boardUri, api.threadId);
 
           thread.divPosts.appendChild(postCell);
@@ -368,6 +381,21 @@ thread.refreshCallback = function(error, receivedData) {
         document.title = '(' + thread.unreadPosts + ') ' + thread.originalTitle;
       }
 
+    }
+
+    if (thread.expectedPosts.length && !thread.retryTimer) {
+
+      thread.expectedPosts = [];
+
+      thread.retryTimer = setTimeout(function() {
+
+        delete thread.retryTimer;
+
+        if (!thread.refreshingThread) {
+          thread.refreshPosts();
+        }
+
+      }, 10000);
     }
   }
 
@@ -395,7 +423,7 @@ thread.refreshCallback.stop = function() {
 
 thread.refreshPosts = function(manual, full) {
 
-  if (manual && sideCatalog.loadingThread) {
+  if (thread.refreshingThread || (manual && sideCatalog.loadingThread)) {
     return;
   }
 
@@ -621,13 +649,16 @@ thread.startWs = function() {
 
     switch (message.action) {
     case 'post': {
-      if (!thread.refreshingThread) {
 
-        setTimeout(function() {
+      thread.expectedPosts.push(message.target[0]);
+
+      setTimeout(function() {
+
+        if (!thread.refreshingThread) {
           thread.refreshPosts();
-        }, 200);
+        }
+      }, 200);
 
-      }
       break;
     }
     case 'edit': {
