@@ -630,13 +630,13 @@ thread.stopWs = function() {
 
 thread.startWs = function() {
 
-  if (sideCatalog.loadingThread) {
+  if (sideCatalog && sideCatalog.loadingThread) {
     return;
   }
 
   var protocol = thread.wssPort ? 'wss' : 'ws';
 
-  thread.socket = new WebSocket(protocol + '://localhost:'
+  thread.socket = new WebSocket(protocol + '://' + window.location.hostname + ':'
       + (thread.wssPort || thread.wsPort));
 
   thread.socket.onopen = function(event) {
