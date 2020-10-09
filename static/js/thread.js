@@ -630,14 +630,14 @@ thread.stopWs = function() {
 
 thread.startWs = function() {
 
-  if (sideCatalog && sideCatalog.loadingThread) {
+  if (typeof (sideCatalog) !== 'undefined' && sideCatalog.loadingThread) {
     return;
   }
 
   var protocol = thread.wssPort ? 'wss' : 'ws';
 
-  thread.socket = new WebSocket(protocol + '://' + window.location.hostname + ':'
-      + (thread.wssPort || thread.wsPort));
+  thread.socket = new WebSocket(protocol + '://' + window.location.hostname
+      + ':' + (thread.wssPort || thread.wsPort));
 
   thread.socket.onopen = function(event) {
     thread.socket.send(api.boardUri + '-' + api.threadId);
