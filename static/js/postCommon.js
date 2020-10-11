@@ -216,8 +216,6 @@ postCommon.addSelectedFile = function(file) {
     postCommon.selectedFiles.splice(postCommon.selectedFiles.indexOf(file), 1);
   };
 
-  postCommon.selectedFiles.push(file);
-
   if (!file.type.indexOf('image/')) {
 
     var fileReader = new FileReader();
@@ -229,6 +227,7 @@ postCommon.addSelectedFile = function(file) {
       dndThumb.className = 'dragAndDropThumb';
       cell.appendChild(dndThumb);
 
+      postCommon.selectedFiles.push(file);
       postCommon.addDndCell(cell, removeButton);
 
     };
@@ -236,6 +235,7 @@ postCommon.addSelectedFile = function(file) {
     fileReader.readAsDataURL(file);
 
   } else {
+    postCommon.selectedFiles.push(file);
     postCommon.addDndCell(cell, removeButton);
   }
 
@@ -440,7 +440,6 @@ postCommon.displayBlockBypassPrompt = function(callback) {
 
         okButton.value = 'Please wait for validation';
         okButton.disabled = true;
-
 
         var tempCallback = function(status, data) {
 
