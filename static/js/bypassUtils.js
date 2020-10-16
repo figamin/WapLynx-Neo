@@ -21,7 +21,8 @@ bypassUtils.checkPass = function(callback) {
 
         } else if (!data.validated && required) {
 
-          if (JSON.parse(localStorage.noJsValidation || 'false')) {
+          if (!crypto.subtle
+              || JSON.parse(localStorage.noJsValidation || 'false')) {
             bypassUtils.showNoJsValidation(callback);
           } else {
             bypassUtils.runValidation(callback);

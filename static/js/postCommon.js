@@ -433,7 +433,7 @@ postCommon.displayBlockBypassPrompt = function(callback) {
 
         }
 
-        if (JSON.parse(localStorage.noJsValidation || 'false')) {
+        if (!crypto.subtle || JSON.parse(localStorage.noJsValidation || 'false')) {
           outerPanel.remove();
           return bypassUtils.showNoJsValidation(callback);
         }
