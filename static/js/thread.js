@@ -534,44 +534,44 @@ thread.processFilesToPost = function(captchaId) {
 
 };
 
-thread.processReplyRequest = function() {
+thread.postReply = function() {
 
   if (api.hiddenCaptcha) {
-    thread.processFilesToPost();
-  } else {
-    var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
-
-    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
-      alert('Captchas are exactly 6 (112 if no cookies) characters long.');
-      return;
-    }
-
-    if (typedCaptcha.length == 112) {
-      thread.processFilesToPost(typedCaptcha);
-    } else {
-      var parsedCookies = api.getCookies();
-
-      api.formApiRequest('solveCaptcha', {
-
-        captchaId : parsedCookies.captchaid,
-        answer : typedCaptcha
-      }, function solvedCaptcha(status, data) {
-
-        if (status !== 'ok') {
-          alert(status);
-          return;
-        }
-
-        thread.processFilesToPost(parsedCookies.captchaid);
-      });
-    }
-
+    return bypassUtils.checkPass(thread.processFilesToPost);
   }
 
-};
+  var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
 
-thread.postReply = function() {
-  bypassUtils.checkPass(thread.processReplyRequest);
+  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+
+    alert('Captchas are exactly 6 (112 if no cookies) characters long.');
+    return;
+  }
+
+  if (typedCaptcha.length == 112) {
+    bypassUtils.checkPass(function() {
+      thread.processFilesToPost(typedCaptcha);
+    });
+  } else {
+    var parsedCookies = api.getCookies();
+
+    api.formApiRequest('solveCaptcha', {
+      captchaId : parsedCookies.captchaid,
+      answer : typedCaptcha
+    }, function solvedCaptcha(status, data) {
+
+      if (status !== 'ok') {
+        alert(status);
+        return;
+      }
+
+      bypassUtils.checkPass(function() {
+        thread.processFilesToPost(parsedCookies.captchaid);
+      });
+
+    });
+  }
+
 };
 
 thread.transition = function() {

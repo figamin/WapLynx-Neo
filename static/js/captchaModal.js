@@ -55,6 +55,8 @@ captchaModal.getCaptchaModal = function(header, noCaptcha) {
   decorationPanel.appendChild(topLabel);
 
   if (!noCaptcha) {
+    document.cookie = 'captchaid=; path=/;';
+
     var captchaImage = document.createElement('img');
     captchaImage.src = '/captcha.js?d=' + new Date().toString();
     captchaImage.className = 'captchaImage';

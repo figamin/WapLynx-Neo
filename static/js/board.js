@@ -153,43 +153,44 @@ board.processFilesToPost = function(captchaId) {
 
 };
 
-board.processThreadRequest = function() {
+board.postThread = function() {
 
   if (api.hiddenCaptcha) {
-    board.processFilesToPost();
-  } else {
-    var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
-
-    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
-      alert('Captchas are exactly 6 (112 if no cookies) characters long.');
-      return;
-    }
-
-    if (typedCaptcha.length == 112) {
-      board.processFilesToPost(typedCaptcha);
-    } else {
-      var parsedCookies = api.getCookies();
-
-      api.formApiRequest('solveCaptcha', {
-        captchaId : parsedCookies.captchaid,
-        answer : typedCaptcha
-      }, function solvedCaptcha(status, data) {
-
-        if (status !== 'ok') {
-          alert(status);
-          return;
-        }
-
-        board.processFilesToPost(parsedCookies.captchaid);
-      });
-    }
-
+    return bypassUtils.checkPass(board.processFilesToPost);
   }
 
-};
+  var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
 
-board.postThread = function() {
-  bypassUtils.checkPass(board.processThreadRequest);
+  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+    return alert('Captchas are exactly 6 (112 if no cookies) characters long.');
+  }
+
+  if (typedCaptcha.length == 112) {
+
+    bypassUtils.checkPass(function() {
+      board.processFilesToPost(typedCaptcha);
+    });
+
+  } else {
+    var parsedCookies = api.getCookies();
+
+    api.formApiRequest('solveCaptcha', {
+      captchaId : parsedCookies.captchaid,
+      answer : typedCaptcha
+    }, function solvedCaptcha(status, data) {
+
+      if (status !== 'ok') {
+        alert(status);
+        return;
+      }
+
+      bypassUtils.checkPass(function() {
+        board.processFilesToPost(parsedCookies.captchaid);
+      });
+
+    });
+  }
+
 };
 
 board.init();
