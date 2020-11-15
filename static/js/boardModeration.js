@@ -60,6 +60,7 @@ boardModeration.saveSpecialSettings = function() {
 
   parameters.sfw = document.getElementById('checkboxSfw').checked;
   parameters.locked = document.getElementById('checkboxLocked').checked;
+  parameters.allowJs = document.getElementById('checkboxAllowJs').checked;
 
   api.formApiRequest('setSpecialBoardSettings', parameters,
       function requestComplete(status, data) {

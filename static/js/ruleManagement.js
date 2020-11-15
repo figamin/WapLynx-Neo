@@ -25,7 +25,7 @@ ruleManagement.processRuleCell = function(cell) {
 
     var index = cell.getElementsByClassName('indexIdentifier')[0].value;
 
-    api.formApiRequest('deleteRule', {
+    api.formApiRequest('ruleAction', {
       boardUri : api.boardUri,
       ruleIndex : index,
     }, function requestComplete(status, data) {
@@ -38,6 +38,27 @@ ruleManagement.processRuleCell = function(cell) {
           identifiers[i].value = i.toString();
         }
 
+      } else {
+        alert(status + ': ' + JSON.stringify(data));
+      }
+    });
+
+  });
+
+  button = cell.getElementsByClassName('editFormButton')[0];
+
+  api.convertButton(button, function() {
+
+    var index = cell.getElementsByClassName('indexIdentifier')[0].value;
+
+    api.formApiRequest('ruleAction', {
+      boardUri : api.boardUri,
+      action : 'edit',
+      rule : cell.getElementsByClassName('textField')[0].value,
+      ruleIndex : index,
+    }, function requestComplete(status, data) {
+      if (status === 'ok') {
+        alert('Rule edited.');
       } else {
         alert(status + ': ' + JSON.stringify(data));
       }
@@ -59,10 +80,11 @@ ruleManagement.showNewRule = function(typedRule) {
   var rulePara = document.createElement('p');
   form.appendChild(rulePara);
 
-  var ruleLabel = document.createElement('span');
-  ruleLabel.className = 'textLabel';
-  ruleLabel.innerHTML = typedRule;
-  rulePara.appendChild(ruleLabel);
+  var ruleField = document.createElement('input');
+  ruleField.className = 'textField';
+  ruleField.type = 'text';
+  ruleField.value = typedRule;
+  rulePara.appendChild(ruleField);
 
   var indexIdentifier = document.createElement('input');
   indexIdentifier.className = 'indexIdentifier';
@@ -78,9 +100,17 @@ ruleManagement.showNewRule = function(typedRule) {
   boardIdentifier.value = api.boardUri;
   form.appendChild(boardIdentifier);
 
+  var editButton = document.createElement('button');
+  editButton.type = 'submit';
+  editButton.name = 'action';
+  editButton.value = 'edit';
+  editButton.innerHTML = 'Edit';
+  editButton.className = 'deleteFormButton';
+  form.appendChild(editButton);
+
   var deleteButton = document.createElement('button');
-  deleteButton.type = 'button';
-  deleteButton.innerHTML = 'Delete rule';
+  deleteButton.type = 'submit';
+  deleteButton.innerHTML = 'Delete';
   deleteButton.className = 'deleteFormButton';
   form.appendChild(deleteButton);
 
