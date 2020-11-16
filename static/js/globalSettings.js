@@ -11,6 +11,10 @@ globalSettings.init = function() {
       setting : 'slaves',
       type : 'string'
     },
+    fieldEmailDomainWhiteList : {
+      setting : 'emailDomainWhiteList',
+      type : 'string'
+    },
     checkboxSendmail : {
       type : 'boolean',
       setting : 'useSendmail',
