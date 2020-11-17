@@ -63,7 +63,7 @@ postingMenu.init = function() {
 postingMenu.showReport = function(board, thread, post, global) {
 
   var outerPanel = captchaModal.getCaptchaModal(global ? 'Global report'
-      : 'Report');
+      : 'Report', api.noReportCaptcha);
 
   var reasonField = document.createElement('input');
   reasonField.type = 'text';
@@ -72,12 +72,15 @@ postingMenu.showReport = function(board, thread, post, global) {
 
   okButton.onclick = function() {
 
-    var typedCaptcha = outerPanel.getElementsByClassName('modalAnswer')[0].value
-        .trim();
+    if (!api.noReportCaptcha) {
 
-    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
-      alert('Captchas are exactly 6 (112 if no cookies) characters long.');
-      return;
+      var typedCaptcha = outerPanel.getElementsByClassName('modalAnswer')[0].value
+          .trim();
+
+      if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+        alert('Captchas are exactly 6 (112 if no cookies) characters long.');
+        return;
+      }
     }
 
     var params = {

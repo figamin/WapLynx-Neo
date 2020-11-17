@@ -3,6 +3,7 @@ var posting = {};
 posting.init = function() {
 
   posting.idsRelation = {};
+  api.noReportCaptcha = !document.getElementById('divReportCaptcha');
   posting.highLightedIds = [];
 
   posting.postCellTemplate = '<div class="innerPost"><h3 class="labelBoard"></h3><div class="postInfo title">'
@@ -336,11 +337,15 @@ posting.newGetSelectedContent = function(object) {
 posting.reportPosts = function() {
 
   var typedReason = document.getElementById('reportFieldReason').value.trim();
-  var typedCaptcha = document.getElementById('fieldCaptchaReport').value.trim();
 
-  if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
-    alert('Captchas are exactly 6 (112 if no cookies) characters long.');
-    return;
+  if (!api.noReportCaptcha) {
+    var typedCaptcha = document.getElementById('fieldCaptchaReport').value
+        .trim();
+
+    if (typedCaptcha.length !== 6 && typedCaptcha.length !== 112) {
+      alert('Captchas are exactly 6 (112 if no cookies) characters long.');
+      return;
+    }
   }
 
   var params = {

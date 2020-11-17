@@ -23,6 +23,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'diskMedia',
     },
+    checkboxNoReportCaptcha : {
+      type : 'boolean',
+      setting : 'noReportCaptcha',
+    },
     checkboxRequireConfirmationForBoardCreation : {
       type : 'boolean',
       setting : 'requireConfirmationForBoardCreation',
