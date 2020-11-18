@@ -181,8 +181,11 @@ video {
 /*Change the dimensions if you wish for larger thumbs*/
 .uploadCell img:not(.imgExpanded) {
   max-width: 125px;
-  height: 125px;
   object-fit: contain;
+}
+
+.variableHeight {
+  height: 125px;
 }
 
 .multipleUploads {
