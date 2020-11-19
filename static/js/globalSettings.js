@@ -31,6 +31,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'requireConfirmationForBoardCreation',
     },
+    fieldReportCategories : {
+      type : 'string',
+      setting : 'reportCategories',
+    },
     checkboxDisableBanCaptcha : {
       type : 'boolean',
       setting : 'disableBanCaptcha',

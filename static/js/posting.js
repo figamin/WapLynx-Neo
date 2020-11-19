@@ -348,8 +348,17 @@ posting.reportPosts = function() {
     }
   }
 
+  var reportCategories = document.getElementById('reportComboboxCategory');
+
+  if (reportCategories) {
+
+    var category = reportCategories.options[reportCategories.selectedIndex].value;
+
+  }
+
   var params = {
     action : 'report',
+    categoryReport : category,
     reasonReport : typedReason,
     captchaReport : typedCaptcha,
     globalReport : document.getElementById('checkboxGlobalReport').checked,

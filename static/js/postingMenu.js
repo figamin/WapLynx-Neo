@@ -68,6 +68,15 @@ postingMenu.showReport = function(board, thread, post, global) {
   var reasonField = document.createElement('input');
   reasonField.type = 'text';
 
+  var categories = document.getElementById('reportComboboxCategory');
+
+  if (categories) {
+
+    var newCategories = categories.cloneNode(true);
+    newCategories.id = null;
+
+  }
+
   var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
   okButton.onclick = function() {
@@ -89,6 +98,10 @@ postingMenu.showReport = function(board, thread, post, global) {
       globalReport : global,
       action : 'report'
     };
+
+    if (categories) {
+      params.categoryReport = newCategories.options[newCategories.selectedIndex].value;
+    }
 
     var key = board + '-' + thread;
 
@@ -112,6 +125,9 @@ postingMenu.showReport = function(board, thread, post, global) {
   };
 
   captchaModal.addModalRow('Reason', reasonField, okButton.onclick);
+  if (categories) {
+    captchaModal.addModalRow('Category', newCategories);
+  }
 
 };
 
