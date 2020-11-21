@@ -34,6 +34,22 @@
       <legend>Open Reports</legend>
 
       <form
+        id="filterForm"
+        method="get"
+        action="/openReports.js">
+        <input
+          id="filterBoardIdentifier"
+          name="boardUri"
+          type="hidden">
+
+        Filter by category:
+        <div id="filterCategoriesDiv"></div>
+        <button
+          id="filterSubmitButton"
+          type="submit">Filter</button>
+        <hr>
+      </form>
+      <form
         method="post"
         action="/closeReports.js"
         enctype="multipart/form-data">
