@@ -120,6 +120,20 @@ account.save = function() {
     parameters[account.settingsRelation[key]] = document.getElementById(key).checked;
   }
 
+  var filters = [];
+
+  var filterCells = document.getElementsByClassName('categoryCheckbox');
+
+  for (var i = 0; i < filterCells.length; i++) {
+
+    if (filterCells[i].checked) {
+      filters.push(filterCells[i].value);
+    }
+
+  }
+
+  parameters.categoryFilter = filters;
+
   var typedEmail = document.getElementById('emailField').value.trim();
 
   if (typedEmail.length > 64) {

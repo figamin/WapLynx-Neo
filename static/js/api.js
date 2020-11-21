@@ -344,7 +344,19 @@ api.formApiRequest = function(page, parameters, callback, silent, getParameters)
     }
 
     if (entry !== 'files') {
-      form.append(entry, parameters[entry]);
+
+      if (Array.isArray(parameters[entry])) {
+
+        var values = parameters[entry];
+
+        for (var i = 0; i < values.length; i++) {
+          form.append(entry, values[i]);
+        }
+
+      } else {
+        form.append(entry, parameters[entry]);
+      }
+
     } else {
 
       var files = parameters.files;
