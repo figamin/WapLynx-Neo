@@ -33,7 +33,7 @@ asnBans.processAsnBanCell = function(cell) {
 asnBans.liftBan = function(cell) {
 
   api.formApiRequest('liftBan', {
-    banId : cell.getElementsByClassName('idIdentifier')[0].value
+    banId : cell.getElementsByClassName('liftIdentifier')[0].value
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
