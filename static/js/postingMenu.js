@@ -750,16 +750,6 @@ postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var deleteButton = document.createElement('div');
-  deleteButton.innerHTML = 'Delete Post';
-  extraMenu.appendChild(deleteButton);
-  deleteButton.onclick = function() {
-    postingMenu.deleteSinglePost(board, thread, post, null, null, null,
-        innerPart);
-  };
-
-  extraMenu.appendChild(document.createElement('hr'));
-
   var deleteByIpButton = document.createElement('div');
   deleteByIpButton.innerHTML = 'Delete By Ip/bypass';
   deleteByIpButton.onclick = function() {
@@ -872,6 +862,15 @@ postingMenu.buildMenu = function(linkSelf, extraMenu) {
 
   extraMenu.appendChild(document.createElement('hr'));
 
+  var deleteButton = document.createElement('div');
+  deleteButton.innerHTML = 'Delete Post';
+  extraMenu.appendChild(deleteButton);
+  deleteButton.onclick = function() {
+    postingMenu.deleteSinglePost(board, thread, post, null, null, null,
+        innerPart);
+  };
+
+  extraMenu.appendChild(document.createElement('hr'));
   var trashButton = document.createElement('div');
   trashButton.innerHTML = 'Trash Post';
   extraMenu.appendChild(trashButton);

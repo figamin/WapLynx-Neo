@@ -419,6 +419,8 @@ posting.deletePosts = function(event, trash) {
 
         }
 
+      } else if (window.location.toString().indexOf('trashBin.js' >= 0)) {
+        location.reload(true);
       } else if (!api.isBoard && !data.removedThreads && data.removedPosts) {
         thread.refreshPosts(true, true);
       } else if (data.removedThreads || data.removedPosts) {

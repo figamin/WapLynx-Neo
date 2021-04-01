@@ -37,11 +37,26 @@
 
       <legend>Trash Bin</legend>
 
-      <div id="threadList"></div>
+      <form
+        method="post"
+        action="/contentActions.js"
+        enctype="multipart/form-data">
+        <div id="actionsForm"></div>
+        <div>
+          <button
+            type="submit"
+            id="restoreFormButton"
+            value="restore"
+            name="action">Restore</button>
+        </div>
 
-      <h4>Posts</h4>
+        <div id="threadList"></div>
 
-      <div id="postList"></div>
+        <h4>Posts</h4>
+
+        <div id="postList"></div>
+
+      </form>
 
     </fieldset>
   </div>
@@ -60,5 +75,7 @@
 <script src="/.static/js/thumbs.js"></script>
 <script src="/.static/js/postingMenu.js"></script>
 <script src="/.static/js/captchaUtils.js"></script>
+<script src="/.static/js/bottomForms.js"></script>
+<script src="/.static/js/bypassUtils.js"></script>
 
 </html>
