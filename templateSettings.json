@@ -97,5 +97,6 @@
   "offenseRecordPage": "pages/offenseRecordPage.html",
   "offenseCell": "cells/offenseCell.html",
   "openReportsPage": "pages/openReportsPage.html",
-  "reportCategoryFilterCell": "cells/reportCategoryFilterCell.html"
+  "reportCategoryFilterCell": "cells/reportCategoryFilterCell.html",
+  "trashBinPage": "pages/trashBin.html"
 }

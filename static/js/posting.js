@@ -46,7 +46,7 @@ posting.init = function() {
   }
 
   if (document.getElementById('deleteFormButton')) {
-
+    api.convertButton('trashFormButton', posting.trashPosts);
     api.convertButton('reportFormButton', posting.reportPosts, 'reportField');
     api.convertButton('deleteFormButton', posting.deletePosts, 'deletionField');
 
@@ -380,7 +380,11 @@ posting.reportPosts = function() {
 
 };
 
-posting.deletePosts = function() {
+posting.trashPosts = function() {
+  posting.deletePosts(null, true);
+};
+
+posting.deletePosts = function(event, trash) {
 
   var typedPassword = document.getElementById('deletionFieldPassword').value
       .trim();
@@ -389,7 +393,7 @@ posting.deletePosts = function() {
     password : typedPassword,
     deleteMedia : document.getElementById('checkboxMediaDeletion').checked,
     deleteUploads : document.getElementById('checkboxOnlyFiles').checked,
-    action : 'delete'
+    action : trash ? 'trash' : 'delete'
   };
 
   posting.newGetSelectedContent(params);

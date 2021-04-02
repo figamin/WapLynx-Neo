@@ -132,7 +132,7 @@ postingMenu.showReport = function(board, thread, post, global) {
 };
 
 postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
-    unlinkFiles, wipeMedia, innerPart, forcedPassword, onThread) {
+    unlinkFiles, wipeMedia, innerPart, forcedPassword, onThread, trash) {
 
   var key = boardUri + '/' + threadId
 
@@ -154,10 +154,12 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
 
   var selectedAction;
 
-  if (fromIp) {
+  if (trash) {
+    selectedAction = 'trash';
+  } else if (fromIp) {
     selectedAction = onThread ? 'thread-ip-deletion' : 'ip-deletion';
   } else {
-    selectedAction = 'delete'
+    selectedAction = 'delete';
   }
 
   var params = {
@@ -213,7 +215,7 @@ postingMenu.deleteSinglePost = function(boardUri, threadId, post, fromIp,
 
       if (newPass) {
         postingMenu.deleteSinglePost(boardUri, threadId, post, fromIp,
-            unlinkFiles, wipeMedia, innerPart, newPass, onThread);
+            unlinkFiles, wipeMedia, innerPart, newPass, onThread, trash);
       }
 
     }
@@ -748,6 +750,16 @@ postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
 
   extraMenu.appendChild(document.createElement('hr'));
 
+  var deleteButton = document.createElement('div');
+  deleteButton.innerHTML = 'Delete Post';
+  extraMenu.appendChild(deleteButton);
+  deleteButton.onclick = function() {
+    postingMenu.deleteSinglePost(board, thread, post, null, null, null,
+        innerPart);
+  };
+
+  extraMenu.appendChild(document.createElement('hr'));
+
   var deleteByIpButton = document.createElement('div');
   deleteByIpButton.innerHTML = 'Delete By Ip/bypass';
   deleteByIpButton.onclick = function() {
@@ -860,12 +872,12 @@ postingMenu.buildMenu = function(linkSelf, extraMenu) {
 
   extraMenu.appendChild(document.createElement('hr'));
 
-  var deleteButton = document.createElement('div');
-  deleteButton.innerHTML = 'Delete Post';
-  extraMenu.appendChild(deleteButton);
-  deleteButton.onclick = function() {
+  var trashButton = document.createElement('div');
+  trashButton.innerHTML = 'Trash Post';
+  extraMenu.appendChild(trashButton);
+  trashButton.onclick = function() {
     postingMenu.deleteSinglePost(board, thread, post, null, null, null,
-        innerPart);
+        innerPart, null, null, true);
   };
 
   var hasFiles = linkSelf.parentNode.parentNode
