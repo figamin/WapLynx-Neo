@@ -19,6 +19,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'useSendmail',
     },
+    fieldTrashLimitDays : {
+      type : 'string',
+      setting : 'trashLimitDays',
+    },
     checkboxDiskMedia : {
       type : 'boolean',
       setting : 'diskMedia',
