@@ -29,6 +29,31 @@
 
       <legend>Custom mime thumbs</legend>
 
+      <form
+        action="/createMimeThumb.js"
+        method="post"
+        enctype="multipart/form-data">
+
+        <label>
+          <input
+            type="file"
+            id="files"
+            name="files">
+        </label>
+
+        <label id="nameLabel">
+          Mime for this thumb:
+          <input
+            name="mime"
+            id="fieldMime"
+            type="text">
+        </label>
+
+        <button
+          type="submit"
+          id="addFormButton">Add thumb</button>
+      </form>
+      <hr>
       <div id="thumbList"></div>
 
     </fieldset>
