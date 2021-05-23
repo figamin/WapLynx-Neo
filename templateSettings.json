@@ -98,5 +98,7 @@
   "offenseCell": "cells/offenseCell.html",
   "openReportsPage": "pages/openReportsPage.html",
   "reportCategoryFilterCell": "cells/reportCategoryFilterCell.html",
-  "trashBinPage": "pages/trashBin.html"
+  "trashBinPage": "pages/trashBin.html",
+  "mimeThumbsPage": "pages/mimeThumbsPage.html",
+  "mimeThumbCell": "cells/mimeThumbCell.html"
 }
