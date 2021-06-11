@@ -13,6 +13,7 @@ catalog.init = function() {
 
   catalog.refreshCheckBox = document
       .getElementById('autoCatalogRefreshCheckBox');
+  catalog.refreshCheckBox.onchange = catalog.changeCatalogRefresh;
   catalog.refreshLabel = document.getElementById('catalogRefreshLabel');
   catalog.originalAutoRefreshText = catalog.refreshLabel.innerHTML;
   catalog.searchField = document.getElementById('catalogSearchField');
@@ -130,6 +131,10 @@ catalog.initCatalog = function() {
   api.boardUri = window.location.toString().match(/\/(\w+)\/catalog.html/)[1];
 
   document.getElementById('divTools').style.display = 'inline-block';
+
+  document.getElementById('catalogRefreshButton').onclick = function() {
+    catalog.refreshCatalog(true)
+  };
 
   catalog.searchField.addEventListener('input', function() {
 

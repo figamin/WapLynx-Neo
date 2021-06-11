@@ -83,8 +83,7 @@ qr.setQr = function() {
   qrhtml += '<div id="post-form-inner">';
   qrhtml += '<table class="post-table"><tbody> <tr><th colspan="2">';
   qrhtml += '<span class="handle">';
-  qrhtml += '<a class="close-btn coloredIcon"';
-  qrhtml += ' onclick=\'qr.removeQr();\'></a>';
+  qrhtml += '<a class="close-btn coloredIcon"></a>';
   qrhtml += 'Quick Reply</span></th> </tr>';
 
   if (QRshowname) {
@@ -137,7 +136,7 @@ qr.setQr = function() {
     qrhtml += '<tr><td colspan="2"><img src="' + lastPart;
     qrhtml += '" class="captchaImage"/></td></tr>';
 
-    qrhtml += '<tr><td colspan="2"><input type="button" onClick="captchaUtils.reloadCaptcha()"';
+    qrhtml += '<tr><td colspan="2"><input class="reloadCaptchaButton" type="button"';
     qrhtml += ' value="Reload"> <span class="captchaTimer"></span></td></tr>';
 
     qrhtml += '<tr><td><input type="text" class="captchaField" ';
@@ -180,19 +179,31 @@ qr.setQr = function() {
   qrhtml += 'Make sure I have a block bypass</label></td></tr>';
 
   qrhtml += '</tbody><tbody> <tr> <td colspan="2" class="centered">';
-  qrhtml += '<button accesskey="s" id="qrbutton" type="button" onclick="thread.postReply()">Reply';
+  qrhtml += '<button accesskey="s" id="qrbutton" type="button">Reply';
   qrhtml += '</td></tr>';
 
   qrhtml += '</tbody> </table></div></div>';
 
   qr.qrPanel = document.createElement('div');
   qr.qrPanel.innerHTML = qrhtml;
+
+
+  qr.qrPanel.getElementsByClassName('close-btn')[0].onclick = qr.removeQr;
+
+  var reloadCaptchaButton = qr.qrPanel
+      .getElementsByClassName('reloadCaptchaButton')[0];
+
+  if (reloadCaptchaButton) {
+    reloadCaptchaButton.onclick = captchaUtils.reloadCaptcha;
+  }
+
   qr.qrPanel = qr.qrPanel.children[0];
 
   draggable.setDraggable(qr.qrPanel, qr.qrPanel
       .getElementsByClassName('handle')[0]);
 
   document.body.appendChild(qr.qrPanel);
+  document.getElementById('qrbutton').onclick = thread.postReply;
 
   var extra = document.getElementById('qrExtra');
   document.getElementById('qrFormMore').onclick = function() {

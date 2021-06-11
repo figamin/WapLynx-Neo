@@ -4,6 +4,8 @@ mediaManagement.init = function() {
 
   api.convertButton('deleteFormButton', mediaManagement.deleteMedia);
 
+  document.getElementById('selectAllButton').onclick = mediaManagement.selectAll;
+
   document.getElementById('selectAllButton').className = '';
 
 };

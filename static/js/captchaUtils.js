@@ -6,6 +6,7 @@ captchaUtils.init = function() {
 
   for (var i = 0; i < reloadButtons.length; i++) {
     reloadButtons[i].style.display = 'inline-block';
+    reloadButtons[i].onclick = captchaUtils.reloadCaptcha;
   }
 
   captchaUtils.updateFunction();

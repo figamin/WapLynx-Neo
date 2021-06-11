@@ -81,9 +81,7 @@
 
       <button
         id="sideCatalogRefreshButton"
-        class="catalogLabel"
-        onclick="sideCatalog.refreshSideCatalog()">Refresh</button>
-      <span
+        class="catalogLabel">Refresh</button> <span
         id="closeSideCatalogButton"
         class="coloredIcon glowOnHover"></span>
     </div>
@@ -362,15 +360,13 @@
           <input
             type="button"
             id="refreshButton"
-            onclick="thread.refreshPosts(true)"
             value="Refresh">
 
           <label>
             <input
               id="checkboxChangeRefresh"
               type="checkbox"
-              checked
-              onchange="thread.changeRefresh()">
+              checked>
             Auto <span id="labelRefresh"></span>
           </label>
 

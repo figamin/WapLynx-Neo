@@ -6,6 +6,8 @@ thread.init = function() {
 
   api.hiddenCaptcha = !document.getElementById('captchaDiv');
 
+  document.getElementById('checkboxChangeRefresh').onchange = thread.changeRefresh;
+
   document.getElementsByTagName('body')[0].onscroll = function() {
 
     if (!thread.unreadPosts) {
@@ -33,6 +35,10 @@ thread.init = function() {
   thread.refreshLabel = document.getElementById('labelRefresh');
 
   thread.refreshButton = document.getElementById('refreshButton');
+
+  thread.refreshButton.onclick = function() {
+    thread.refreshPosts(true)
+  };
 
   if (document.getElementById('divArchive')) {
     api.convertButton('archiveFormButon', thread.archiveThread, 'archiveField');

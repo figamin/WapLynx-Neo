@@ -2,6 +2,8 @@ var sideCatalog = {};
 
 sideCatalog.init = function() {
 
+  document.getElementById('sideCatalogRefreshButton').onclick = sideCatalog.refreshSideCatalog;
+
   sideCatalog.sideCatalogBody = document.getElementById('sideCatalogBody');
   sideCatalog.mainBody = document.getElementById('mainPanel');
 
