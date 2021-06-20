@@ -529,7 +529,15 @@ globalSettings.init = function() {
 
 globalSettings.save = function() {
 
-  var parameters = {};
+  var typedPassword = document.getElementById('fieldPassword').value;
+
+  if (!typedPassword) {
+    return alert('You must provide your password.');
+  }
+
+  var parameters = {
+    password : typedPassword
+  };
 
   for ( var key in globalSettings.siteSettingsRelation) {
 
