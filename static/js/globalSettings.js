@@ -15,6 +15,10 @@ globalSettings.init = function() {
       setting : 'emailDomainWhiteList',
       type : 'string'
     },
+    fieldFlagLimit : {
+      setting : 'flagLimit',
+      type : 'string'
+    },
     checkboxSendmail : {
       type : 'boolean',
       setting : 'useSendmail',
