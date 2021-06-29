@@ -30,6 +30,45 @@
       <legend>Global Management</legend>
 
       <form
+        id="purgeBypassesForm"
+        method="post"
+        enctype="multipart/form-data"
+        action="/purgeBypasses.js">
+
+        <label>
+          <input
+            type="checkbox"
+            class="purgeField"
+            id="checkboxPurgeUnused"
+            name="unused">
+          Only purge unused
+        </label>
+
+        <label>
+          <input
+            type="number"
+            class="purgeField"
+            id="fieldPurgeLimit"
+            name="timeLimit">
+          Do not purge bypasses older than this many hours.
+        </label>
+
+        <label>
+          <input
+            class="purgeField"
+            type="checkbox"
+            id="checkboxPurgeConfirm"
+            name="confirmation">
+          Yes, I am sure I want to purge block bypasses.
+        </label>
+
+
+        <button
+          id="purgeBypassesButton"
+          type="submit">Purge block bypasses</button>
+      </form>
+
+      <form
         id="addStaffForm"
         method="post"
         enctype="multipart/form-data"

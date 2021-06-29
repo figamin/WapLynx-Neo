@@ -15,6 +15,13 @@ globalManagement.init = function() {
 
   }
 
+  if (document.getElementById('purgeBypassesForm')) {
+
+    api.convertButton('purgeBypassesButton', globalManagement.bypassPurge,
+        'purgeField');
+
+  }
+
   globalManagement.divStaff = document.getElementById('divStaff');
 
   var staffCells = document.getElementsByClassName('staffCell');
@@ -22,6 +29,36 @@ globalManagement.init = function() {
   for (var i = 0; i < staffCells.length; i++) {
     globalManagement.processCell(staffCells[i]);
   }
+
+};
+
+globalManagement.bypassPurge = function() {
+
+  var parameters = {};
+
+  var limit = document.getElementById('fieldPurgeLimit').value.trim();
+
+  if (limit) {
+    parameters.timeLimit = limit;
+  }
+
+  if (document.getElementById('checkboxPurgeUnused').checked) {
+    parameters.unused = true;
+  }
+
+  if (document.getElementById('checkboxPurgeConfirm').checked) {
+    parameters.confirmation = true;
+  }
+
+  api.formApiRequest('purgeBypasses', parameters, function requestComplete(
+      status, data) {
+
+    if (status === 'ok') {
+      alert('Bypasses purged.');
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 };
 
