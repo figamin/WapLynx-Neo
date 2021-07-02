@@ -19,10 +19,6 @@ globalSettings.init = function() {
       setting : 'flagLimit',
       type : 'string'
     },
-    checkboxSendmail : {
-      type : 'boolean',
-      setting : 'useSendmail',
-    },
     fieldTrashLimitDays : {
       type : 'string',
       setting : 'trashLimitDays',
@@ -533,10 +529,12 @@ globalSettings.init = function() {
 
 globalSettings.save = function() {
 
-  var typedPassword = document.getElementById('fieldPassword').value;
+  if (document.getElementById('authDiv')) {
+    var typedPassword = document.getElementById('fieldPassword').value;
 
-  if (!typedPassword) {
-    return alert('You must provide your password.');
+    if (!typedPassword) {
+      return alert('You must provide your password.');
+    }
   }
 
   var parameters = {

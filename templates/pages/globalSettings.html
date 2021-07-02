@@ -150,14 +150,6 @@
           <input
             type="checkbox"
             class="globalSettingsField"
-            id="checkboxSendmail"
-            name="useSendmail">
-          Use sendmail
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="globalSettingsField"
             id="checkboxHttp2"
             name="useHttp2">
           Use HTTP2 for SSL (Might be unstable due to node's implementation)
@@ -1090,15 +1082,17 @@
         </label>
 
         <hr>
-        <p class="title">Authentication</p>
-        <label>
-          Your password:
-          <input
-            type="password"
-            name="password"
-            class="globalSettingsField"
-            id="fieldPassword">
-        </label>
+        <div id="authDiv">
+          <p class="title">Authentication</p>
+          <label>
+            Your password:
+            <input
+              type="password"
+              name="password"
+              class="globalSettingsField"
+              id="fieldPassword">
+          </label>
+        </div>
 
         <button
           type="submit"
