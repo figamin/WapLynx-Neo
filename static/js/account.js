@@ -138,22 +138,26 @@ account.save = function() {
   var typedEmail = document.getElementById('emailField').value.trim();
 
   if (typedEmail.length > 64) {
-    alert('Email too long, keep it under 64 characters');
-  } else {
-
-    parameters.email = typedEmail
-
-    api.formApiRequest('changeAccountSettings', parameters,
-        function requestComplete(status, data) {
-
-          if (status === 'ok') {
-            alert('Settings changed.');
-          } else {
-            alert(status + ': ' + JSON.stringify(data));
-          }
-        });
-
+    return alert('Email too long, keep it under 64 characters');
   }
+
+  var passwordField = document.getElementById('fieldPasswordConfirmation');
+
+  if (passwordField) {
+    parameters.password = passwordField.value.trim();
+  }
+
+  parameters.email = typedEmail
+
+  api.formApiRequest('changeAccountSettings', parameters,
+      function requestComplete(status, data) {
+
+        if (status === 'ok') {
+          alert('Settings changed.');
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
+        }
+      });
 
 };
 
