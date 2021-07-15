@@ -18,22 +18,7 @@
 
   <script src="/.static/js/themeLoader.js"></script>
 
-  <nav>
-    <span id="navLinkSpan"> <span>[</span> <a
-        href="/"
-        class="coloredIcon"
-        id="navLinkHome"></a> <span>/</span> <a
-        href="/boards.js"
-        class="coloredIcon"
-        id="navBoardList"></a> <span>/</span> <a
-        class="coloredIcon"
-        id="linkOverboard"></a> <span>/</span> <a id="linkSfwOver"></a> <span>/</span>
-      <a
-        href="/.static/pages/posting.html"
-        class="coloredIcon"
-        id="navPosting"></a> <span>]</span>
-    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> </span>
-  </nav>
+  <nav id="dynamicHeader"></nav>
 
   <header>
     <img
@@ -41,6 +26,20 @@
       class="logoImg"
       alt="logo" />
   </header>
+
+  <div id="secondaryBar">
+
+    <span>[</span>
+    <a
+      class="coloredIcon"
+      id="linkOverboard"></a>
+    <span>/</span>
+    <a
+      class="coloredIcon"
+      id="linkSfwOver"></a>
+    <span>]</span>
+
+  </div>
 
   <div id="boardsWrapper">
 

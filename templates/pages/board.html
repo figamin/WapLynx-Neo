@@ -38,38 +38,7 @@
 
   <script src="/.static/js/themeLoader.js"></script>
 
-  <nav>
-    <span id="navLinkSpan"> <span>[</span> <a
-        href="/"
-        class="coloredIcon"
-        id="navLinkHome"></a> <span>/</span> <a
-        href="/boards.js"
-        class="coloredIcon"
-        id="navBoardList"></a> <span>/</span> <a
-        href="/overboard"
-        class="coloredIcon"
-        id="navOverboard"></a> <span>/</span> <a
-        href="/.static/pages/posting.html"
-        class="coloredIcon"
-        id="navPosting"></a> <span>]</span>
-    </span> <span id="navBoardsSpan"> </span> <span id="navOptionsSpan"> <span>[</span>
-      <a
-        class="coloredIcon"
-        id="linkLogs"></a> <span>/</span> <a
-        href="#"
-        class="coloredIcon"
-        id="linkTop"></a> <span>/</span> <a
-        href="#footer"
-        class="coloredIcon"
-        id="linkBottom"></a> <span>/</span> <a
-        href="catalog.html"
-        class="coloredIcon"
-        id="navCatalog"></a> <span>/</span> <a
-        href="index.rss"
-        class="coloredIcon"
-        id="linkRss"></a> <span>]</span>
-    </span>
-  </nav>
+  <nav id="dynamicHeader"></nav>
 
   <header class="boardHeader">
     <img id="bannerImage" />
@@ -114,6 +83,30 @@
     <div id="divMessage"></div>
   </div>
 
+  <div id="secondaryBar">
+
+    <span>[</span>
+    <a
+      href="#footer"
+      id="linkBottom"
+      class="coloredIcon"></a>
+    <span>/</span>
+    <a
+      class="coloredIcon"
+      id="linkLogs"></a>
+    <span>/</span>
+    <a
+      href="./catalog.html"
+      id="navCatalog"
+      class="coloredIcon"></a>
+    <span>/</span>
+    <a
+      href="index.rss"
+      class="coloredIcon"
+      id="linkRss"></a>
+    <span>]</span>
+  </div>
+
   <div id="threadList">
 
     <form
@@ -150,7 +143,6 @@
   </div>
 
   <footer id="footer"></footer>
-
 </body>
 
 <script src="/.static/js/crypto.js"></script>

@@ -16,6 +16,10 @@
   line-break: anywhere;
 }
 
+#secondaryBar {
+  margin: 1em;
+}
+
 #labelBypass {
   max-width: 80%;
   word-break: break-all;
