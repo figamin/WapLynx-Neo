@@ -309,14 +309,10 @@ input, select, textarea {
 body {
   color: #000;
   background: #EEF2FF
-    url('//media.8kun.top/stylesheets/img/fade-blue.png') repeat-x 50%
-    0%;
+    url('/.static/fade-blue.png') repeat-x 50% 0%;
   font-family: arial, helvetica, sans-serif;
   font-size: 100%;
   margin: 0px;
-  background: #EEF2FF
-    url('//media.8kun.top/stylesheets/img/fade-blue.png') repeat-x 50%
-    0%;
 }
 
 body.theme_cyber {
