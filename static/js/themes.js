@@ -5,6 +5,9 @@ themes.init = function() {
   themes.themes = [ {
     label : 'Clear',
     id : 'clear'
+  }, {
+    label : 'Cyberpunk',
+    id : 'cyber'
   } ];
 
   var postingLink = document.getElementById('navPosting');

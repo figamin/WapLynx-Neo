@@ -107,6 +107,7 @@ video {
   color: #117743;
   text-shadow: none;
   cursor: default;
+  text-decoration: none;
 }
 
 .quoteLink {
@@ -114,8 +115,11 @@ video {
 }
 
 .linkSelf {
-  color: #ACACAC;
   text-decoration: none;
+}
+
+.theme_cyber .linkSelf {
+  color: #ACACAC;
 }
 
 .linkSelf:hover {
@@ -123,8 +127,11 @@ video {
 }
 
 .linkQuote {
-  color: #ACACAC;
   text-decoration: none;
+}
+
+.theme_cyber .linkQuote {
+  color: #ACACAC;
 }
 
 .linkQuote:hover {
@@ -366,8 +373,18 @@ video {
   text-align: left;
   width: 100px;
   font-size: 80%;
-  padding-left: 0.1em;
+  padding-left: 0.3em;
   cursor: default;
+  background: #98E;
+}
+
+.theme_cyber #postingForm th, .theme_cyber .modalTableBody th {
+  border: 1px solid #117743;
+  border-radius: 5px;
+  background: #282A2E;
+}
+
+.theme_clear #postingForm th, .theme_clear .modalTableBody th {
   border: 1px solid #117743;
   border-radius: 5px;
   background: #282A2E;

@@ -46,8 +46,15 @@
   border: 1px solid #117743;
 }
 
-#newPostFieldset, #quick-reply table, .modalDecorationPanel,
-  .floatingMenu, #settingsFieldset, .reportFieldset {
+.theme_cyber #newPostFieldset, .theme_cyber #quick-reply table,
+  .theme_cyber .modalDecorationPanel, .theme_cyber .floatingMenu,
+  .theme_cyber #settingsFieldset, .theme_cyber .reportFieldset {
+  border: 1px dashed #117743;
+}
+
+.theme_clear #newPostFieldset, .theme_clear #quick-reply table,
+  .theme_clear .modalDecorationPanel, .theme_clear .floatingMenu,
+  .theme_clear #settingsFieldset, .theme_clear .reportFieldset {
   border: 1px dashed #117743;
 }
 
@@ -104,8 +111,22 @@ hr {
 
 a, .coloredIcon, .unhideButton, .embedButton, .checkedFavouriteButton:before,
   #selectedTab, #showFormsButton {
+  color: #34345C;
+  cursor: pointer;
+}
+
+.theme_cyber a, .theme_cyber .coloredIcon, .theme_cyber .unhideButton,
+  .theme_cyber .embedButton, .theme_cyber .checkedFavouriteButton:before,
+  .theme_cyber #selectedTab, .theme_cyber #showFormsButton {
   color: #FFB300;
-  cursor: pointer
+}
+
+a:hover, .intro a.post_no:hover {
+  color: #ff0000;
+}
+
+.theme_cyber a:hover, .theme_cyber .intro a.post_no:hover {
+  color: #FFB300;
 }
 
 .theme_clear a, .theme_clear .coloredIcon, .theme_clear .unhideButton,
@@ -124,10 +145,14 @@ a, .coloredIcon, .unhideButton, .embedButton, .checkedFavouriteButton:before,
 }
 
 a {
+  text-decoration: underline;
+}
+
+.theme_cyber a: {
   text-decoration: none;
 }
 
-a:hover, .glowOnHover:hover {
+.theme_cyber a:hover, .theme_cyber .glowOnHover:hover {
   text-shadow: 0px 0px 5px #117743;
 }
 
@@ -148,20 +173,41 @@ em {
 }
 
 input, select, textarea {
-  border: 1px double #07371F;
-  border-radius: 5px;
-  background: #282A2E;
-  color: #ACACAC;
-  font-family: 'Hack', monospace, sans-serif;
   font-size: 80%;
+  border: 1px solid #a9a9a9;
+  font-family: sans-serif;
 }
 
 .theme_clear input, .theme_clear select, .theme_clear textarea {
+  font-family: 'Hack', monospace, sans-serif;
   background: #dddddd;
+  border-radius: 5px;
+  border: 1px double #07371F;
   color: #000;
 }
 
-input[type=button], input[type=submit], button, .dropzone, .selectedCell
+.theme_cyber input, .theme_cyber select, .theme_cyber textarea {
+  font-family: 'Hack', monospace, sans-serif;
+  background: #282A2E;
+  border-radius: 5px;
+  color: #ACACAC;
+  border: 1px double #07371F;
+}
+
+.dropzone, .selectedCell {
+  border: 2px dashed rgba(125, 125, 125, 0.4);
+  background-color: rgba(200, 200, 200, 0.5);
+  color: rgba(0, 0, 0, 0.5);
+  padding-left: 0.25em;
+  font-family: 'Hack', monospace, sans-serif;
+  font-size: 80%;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.theme_cyber input[type=button], .theme_cyber input[type=submit],
+  .theme_cyber button, .theme_cyber .dropzone, .theme_cyber .selectedCell
   {
   border: 3px double #07371F;
   border-radius: 5px;
@@ -173,17 +219,24 @@ input[type=button], input[type=submit], button, .dropzone, .selectedCell
   font-weight: bold;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  cursor: pointer;
 }
 
 .theme_clear input[type=button], .theme_clear input[type=submit],
   .theme_clear button, .theme_clear .dropzone, .theme_clear .selectedCell
   {
+  border: 3px double #07371F;
+  border-radius: 5px;
   background: #a7a7a7;
   color: #000;
+  padding-left: 0.25em;
+  font-family: 'Hack', monospace, sans-serif;
+  font-size: 80%;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
-.title, .unhideButton {
+.theme_cyber .title, .theme_cyber .unhideButton {
   font-weight: bold;
 }
 
@@ -218,16 +271,29 @@ input[type=button], input[type=submit], button, .dropzone, .selectedCell
 
 /* body styles, inherited by whole page */
 body {
-  color: #ACACAC;
-  background: #1D1F21;
-  font-family: 'Hack', monospace, sans-serif;
+  color: #000;
+  background: #EEF2FF
+    url('//media.8kun.top/stylesheets/img/fade-blue.png') repeat-x 50%
+    0%;
+  font-family: arial, helvetica, sans-serif;
   font-size: 100%;
   margin: 0px;
+  background: #EEF2FF
+    url('//media.8kun.top/stylesheets/img/fade-blue.png') repeat-x 50%
+    0%;
+}
+
+body.theme_cyber {
+  color: #ACACAC;
+  font-family: 'Hack', monospace, sans-serif;
+  background: #1D1F21;
 }
 
 body.theme_clear {
+  background: none;
   background-color: #cccccc;
   color: #000;
+  background-color: #cccccc;
 }
 
 /* header and nav / top of page styles */
@@ -241,12 +307,18 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #151515;
-  border-bottom: 1px solid #B0790A;
+  border-bottom: 1px solid #89A;
   padding-bottom: 3px;
+  background-color: #D6DAF0;
   font-size: 70%;
   text-align: center;
   z-index: 1;
+  font-size: 70%;
+}
+
+.theme_cyber nav {
+  border-bottom: 1px solid #B0790A;
+  background-color: #151515;
 }
 
 .theme_clear nav {
