@@ -72,7 +72,11 @@
   font-size: 125%;
 }
 
-#postingForm button:active {
+.theme_cyber #postingForm button:active {
+  box-shadow: 0px 0px 5px #117743;
+}
+
+.theme_clear #postingForm button:active {
   box-shadow: 0px 0px 5px #117743;
 }
 

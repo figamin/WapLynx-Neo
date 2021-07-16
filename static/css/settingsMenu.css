@@ -26,6 +26,14 @@
 }
 
 #selectedTab {
+  text-decoration: underline;
+}
+
+.theme_clear #selectedTab {
+  text-shadow: 0px 0px 5px #117743;
+}
+
+.theme_clear #selectedTab {
   text-shadow: 0px 0px 5px #117743;
 }
 

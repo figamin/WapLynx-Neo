@@ -60,8 +60,15 @@ video {
   font-weight: normal;
   white-space: nowrap;
   cursor: default;
-  color: #ACACAC;
   text-shadow: none;
+}
+
+.theme_clear .extraMenu, .theme_clear .hideMenu {
+  color: #ACACAC;
+}
+
+.theme_cyber .extraMenu, .theme_cyber .hideMenu {
+  color: #ACACAC;
 }
 
 .theme_clear .extraMenu, .theme_clear .hideMenu {
@@ -110,6 +117,14 @@ video {
   text-decoration: none;
 }
 
+.theme_cyber .noEmailName, .noEmailName:hover {
+  color: #117743;
+}
+
+.theme_clear .noEmailName, .noEmailName:hover {
+  color: #117743;
+}
+
 .quoteLink {
   color: #ff0000;
 }
@@ -123,7 +138,7 @@ video {
 }
 
 .linkSelf:hover {
-  color: #AA0000;
+  color: #ff0000;
 }
 
 .linkQuote {
@@ -394,9 +409,17 @@ video {
   text-align: left;
 }
 
-#postingForm input:focus, #postingForm textarea:focus,
-  .modalDecorationPanel input[type='text']:focus, #settingsMenu input[type='text']:focus,
-  #settingsMenu textarea:focus {
+.theme_clear #postingForm input:focus, .theme_clear #postingForm textarea:focus,
+  .theme_clear .modalDecorationPanel input[type='text']:focus,
+  .theme_clear #settingsMenu input[type='text']:focus, .theme_clear #settingsMenu textarea:focus
+  {
+  box-shadow: 0px 0px 5px 2px #117743;
+}
+
+.theme_cyber #postingForm input:focus, .theme_cyber #postingForm textarea:focus,
+  .theme_cyber .modalDecorationPanel input[type='text']:focus,
+  .theme_cyber #settingsMenu input[type='text']:focus, .theme_cyber #settingsMenu textarea:focus
+  {
   box-shadow: 0px 0px 5px 2px #117743;
 }
 
