@@ -359,10 +359,14 @@ video {
 }
 
 .modalDecorationPanel {
-  background: #1D1F21;
+  background: #D6DAF0;
   padding: 10px;
   display: inline-block;
   max-width: 90%;
+}
+
+.theme_cyber .modalDecorationPanel {
+  background: #1D1F21;
 }
 
 .theme_clear .modalDecorationPanel {
