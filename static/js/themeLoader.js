@@ -2,18 +2,26 @@ var themeLoader = {};
 
 themeLoader.load = function(init) {
 
-  if (init && !localStorage.selectedTheme) {
+  var body = document.getElementsByTagName('body')[0];
+
+  if (body.className && init && body.className.indexOf('theme_') >= 0) {
+    localStorage.defaultTheme = body.className.substring(6);
+  } else {
+    delete localStorage.defaultTheme;
+  }
+
+  if (init && !localStorage.selectedTheme && !localStorage.manualDefault) {
     return;
   }
 
-  var body = document.getElementsByTagName('body')[0];
-
   if (localStorage.selectedTheme) {
+
     if (themeLoader.customCss && themeLoader.customCss.parentNode) {
       themeLoader.customCss.remove();
     }
     body.className = 'theme_' + localStorage.selectedTheme;
   } else {
+
     if (themeLoader.customCss && !themeLoader.customCss.parentNode) {
       document.head.appendChild(themeLoader.customCss);
     }

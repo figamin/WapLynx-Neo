@@ -135,6 +135,10 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'fileProcessingLimit',
     },
+    fieldDefaultTheme : {
+      type : 'string',
+      setting : 'defaultTheme',
+    },
     fieldMaxFilterLength : {
       type : 'string',
       setting : 'maxFilterLength',
