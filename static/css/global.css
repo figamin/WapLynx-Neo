@@ -450,6 +450,11 @@ span.spoiler {
 }
 
 .spoiler:hover {
+  color: #000;
+  background: none;
+}
+
+.theme_cyber .spoiler:hover {
   color: #ACACAC;
   background: none;
 }
