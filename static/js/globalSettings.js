@@ -23,6 +23,10 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'trashLimitDays',
     },
+    fieldCaptchaPool : {
+      type : 'string',
+      setting : 'captchaPool',
+    },
     checkboxDiskMedia : {
       type : 'boolean',
       setting : 'diskMedia',
