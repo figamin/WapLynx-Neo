@@ -103,6 +103,10 @@ video {
 
 .linkName {
   font-weight: bold;
+  color: #34345c;
+}
+
+.theme_cyber .linkName {
   color: #34ED97;
 }
 
@@ -125,7 +129,7 @@ video {
   color: #117743;
 }
 
-.quoteLink {
+.quoteLink, .theme_cyber .quoteLink {
   color: #ff0000;
 }
 
@@ -476,5 +480,8 @@ video {
   }
   .divMessage {
     margin-left: 1em;
+  }
+  .labelHash {
+    overflow-wrap: anywhere;
   }
 }

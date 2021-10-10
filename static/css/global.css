@@ -1,6 +1,5 @@
 .topBoards a, #divLatestImages img, #divLatestPosts .latestPostCell,
-  .innerPost, .sideCatalogCell, .markedPost, .sideCatalogMarkedCell,
-  .catalogCell {
+  .innerPost, .sideCatalogCell, .catalogCell {
   background: #D6DAF0;
   border-width: 1px;
   border-style: none solid solid none;
@@ -50,6 +49,9 @@
 
 .markedPost, .sideCatalogMarkedCell {
   background: #d6bad0;
+  border-width: 1px;
+  border-style: none solid solid none;
+  border-color: #B7C5D9;
 }
 
 .theme_cyber .markedPost, .theme_cyber .sideCatalogMarkedCell {
@@ -156,6 +158,7 @@ a, .coloredIcon, .unhideButton, .embedButton, #selectedTab,
 .theme_cyber a, .theme_cyber .coloredIcon, .theme_cyber .unhideButton,
   .theme_cyber .embedButton, .theme_cyber #selectedTab, .theme_cyber #showFormsButton {
   color: #FFB300;
+  text-decoration: none;
 }
 
 a:hover, .intro a.post_no:hover {
@@ -668,5 +671,12 @@ footer {
     max-width: 100%;
     height: auto;
     max-height: 100px;
+  }
+  code {
+    max-width: 90%;
+    overflow: auto;
+  }
+  #divLogs, .hashLabel {
+    overflow-wrap: anywhere;
   }
 }
