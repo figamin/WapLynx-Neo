@@ -154,9 +154,13 @@ video {
 }
 
 .labelSubject {
-  color: #34ED3A;
+  color: #0f0c5d;
   font-weight: bold;
   word-wrap: break-word;
+}
+
+.theme_cyber .labelSubject {
+  color: #34ED3A;
 }
 
 .labelRole {
