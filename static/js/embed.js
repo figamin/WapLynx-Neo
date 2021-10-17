@@ -168,6 +168,22 @@ embed.getSrcBitChute = function(url) {
 
 };
 
+embed.getSrcOdysee = function(url) {
+
+    if (!url.includes('@')) {
+    return;
+  }
+
+  var videoId = url.split('/')[4];
+
+  if (!videoId) {
+    return;
+  }
+
+  return 'https://www.odysee.com/$/embed/' + videoId;
+
+};
+
 embed.getSrcLiveLeak = function(url) {
 
   var videoId = url.split('t=')[1];
@@ -222,6 +238,7 @@ embed.domainFunctionMap = {};
 embed.domainFunctionMap['youtube.com'] = embed.getSrcYouTube;
 embed.domainFunctionMap['youtu.be'] = embed.getSrcYouTubeShortened;
 embed.domainFunctionMap['bitchute.com'] = embed.getSrcBitChute;
+embed.domainFunctionMap['odysee.com'] = embed.getSrcOdysee;
 embed.domainFunctionMap['liveleak.com'] = embed.getSrcLiveLeak;
 
 embed.init();
