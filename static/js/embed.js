@@ -180,7 +180,7 @@ embed.getSrcOdysee = function(url) {
     return;
   }
 
-  return 'https://www.odysee.com/$/embed/' + videoId;
+  return 'https://odysee.com/$/embed/' + videoId;
 
 };
 
