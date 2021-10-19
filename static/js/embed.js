@@ -180,8 +180,13 @@ embed.getSrcOdysee = function(url) {
     return;
   }
 
-  return 'https://odysee.com/$/embed/' + videoId;
+    var videoIdSlice = videoId.slice(-2);
 
+    if (videoIdSlice.includes(':') == true) {	
+	videoId = videoId.slice(0, -2);
+    }
+
+    return 'https://odysee.com/$/embed/' + videoId;
 };
 
 embed.getSrcLiveLeak = function(url) {
