@@ -640,7 +640,9 @@ thread.startWs = function() {
     return;
   }
 
-  var protocol = thread.wssPort ? 'wss' : 'ws';
+  var isOnion = window.location.hostname.endsWith('.onion');
+
+  var protocol = (thread.wssPort && !isOnion) ? 'wss' : 'ws';
 
   thread.socket = new WebSocket(protocol + '://' + window.location.hostname
       + ':' + (thread.wssPort || thread.wsPort));

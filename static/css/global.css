@@ -245,6 +245,10 @@ input, select, textarea {
   margin-bottom: 0.5em;
 }
 
+input[type=button], input[type=submit], button, .selectedCell {
+  cursor: pointer;
+}
+
 .theme_cyber input[type=button], .theme_cyber input[type=submit],
   .theme_cyber button, .theme_cyber .dropzone, .theme_cyber .selectedCell
   {
