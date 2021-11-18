@@ -644,8 +644,10 @@ thread.startWs = function() {
 
   var protocol = (thread.wssPort && !isOnion) ? 'wss' : 'ws';
 
+  var portToUse = (thread.wssPort && !isOnion) ? thread.wssPort : thread.wsPort;
+  
   thread.socket = new WebSocket(protocol + '://' + window.location.hostname
-      + ':' + (thread.wssPort || thread.wsPort));
+      + ':' + portToUse);
 
   thread.socket.onopen = function(event) {
     thread.socket.send(api.boardUri + '-' + api.threadId);
