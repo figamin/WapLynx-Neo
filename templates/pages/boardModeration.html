@@ -71,6 +71,34 @@
 
         </form>
       </div>
+
+      <hr>
+      <div>
+        <p class="title">Uri change</p>
+        <form
+          method="post"
+          action="/changeBoardUri.js"
+          enctype="multipart/form-data">
+          <label>
+            New Uri:
+            <input
+              type="text"
+              name="newUri"
+              class="transferField"
+              id="fieldTransferLogin"
+              name="userLogin">
+          </label>
+          <input
+            type="hidden"
+            name="boardUri"
+            id="uriChangeIdentifier">
+          <button
+            type="submit"
+            id="uriChangeFormButton">Change Uri</button>
+
+        </form>
+      </div>
+
       <hr>
       <div>
         <p class="title">Board Deletion</p>
