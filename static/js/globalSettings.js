@@ -147,6 +147,10 @@ globalSettings.init = function() {
       type : 'string',
       setting : 'maxFilterLength',
     },
+    fieldAutoCaptchaLimit : {
+      type : 'string',
+      setting : 'autoCaptchaLimit',
+    },
     fieldImageFont : {
       type : 'string',
       setting : 'imageFont',
