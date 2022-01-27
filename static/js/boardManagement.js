@@ -278,6 +278,7 @@ boardManagement.saveSettings = function() {
   parameters.early404 = document.getElementById('early404Checkbox').checked;
   parameters.uniquePosts = document.getElementById('uniquePostsCheckbox').checked;
   parameters.uniqueFiles = document.getElementById('uniqueFilesCheckbox').checked;
+  parameters.threadR9k = document.getElementById('threadR9KCheckbox').checked;
   parameters.unindex = document.getElementById('unindexCheckbox').checked;
   parameters.forceAnonymity = document.getElementById('forceAnonymityCheckbox').checked;
   parameters.textBoard = document.getElementById('textBoardCheckbox').checked;
