@@ -5,6 +5,12 @@
   margin-left: 0.5em;
 }
 
+.trashIndicator::before {
+  content: "\E0CF";
+  font-family: Icons;
+  color: #A00;
+}
+
 .imgExpanded {
   max-width: 100%;
 }
