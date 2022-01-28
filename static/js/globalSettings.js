@@ -63,6 +63,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'useCacheControl',
     },
+    checkboxWebsocketData : {
+      type : 'boolean',
+      setting : 'websocketData',
+    },
     checkboxUnlockHistory : {
       type : 'boolean',
       setting : 'unlockHistory',

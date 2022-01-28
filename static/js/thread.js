@@ -634,6 +634,20 @@ thread.stopWs = function() {
 
 };
 
+thread.addWsPost = function(data) {
+
+  tooltips.knownData[api.boardUri + '/' + data.postId] = data;
+
+  var postCell = posting.addPost(data, api.boardUri, api.threadId);
+
+  thread.divPosts.appendChild(postCell);
+
+  thread.lastPost = postCell;
+
+  thread.lastReplyId = data.postId;
+
+};
+
 thread.startWs = function() {
 
   if (typeof (sideCatalog) !== 'undefined' && sideCatalog.loadingThread) {
@@ -645,7 +659,7 @@ thread.startWs = function() {
   var protocol = (thread.wssPort && !isOnion) ? 'wss' : 'ws';
 
   var portToUse = (thread.wssPort && !isOnion) ? thread.wssPort : thread.wsPort;
-  
+
   thread.socket = new WebSocket(protocol + '://' + window.location.hostname
       + ':' + portToUse);
 
@@ -659,6 +673,10 @@ thread.startWs = function() {
 
     switch (message.action) {
     case 'post': {
+
+      if (message.data) {
+        return thread.addWsPost(message.data);
+      }
 
       thread.expectedPosts.push(message.target[0]);
 
