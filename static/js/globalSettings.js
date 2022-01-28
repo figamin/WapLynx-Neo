@@ -47,6 +47,10 @@ globalSettings.init = function() {
       type : 'boolean',
       setting : 'disableBanCaptcha',
     },
+    checkboxAutoMediaBan : {
+      type : 'boolean',
+      setting : 'autoMediaBan',
+    },
     checkboxLowercaseBoardUris : {
       type : 'boolean',
       setting : 'lowercaseBoardUris',
