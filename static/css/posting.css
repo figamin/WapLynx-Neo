@@ -69,10 +69,6 @@ video {
   text-shadow: none;
 }
 
-.theme_clear .extraMenu, .theme_clear .hideMenu {
-  color: #ACACAC;
-}
-
 .theme_cyber .extraMenu, .theme_cyber .hideMenu {
   color: #ACACAC;
 }
