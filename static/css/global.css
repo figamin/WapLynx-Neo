@@ -238,11 +238,15 @@ input, select, textarea {
   background-color: rgba(200, 200, 200, 0.5);
   color: rgba(0, 0, 0, 0.5);
   padding-left: 0.25em;
-  font-family: 'Hack', monospace, sans-serif;
+  font-family: arial, helvetica, sans-serif;
   font-size: 80%;
   font-weight: bold;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+}
+
+.theme_cyber .dropzone, .theme_cyber .selectedCell {
+  font-family: 'Hack', monospace, sans-serif;
 }
 
 input[type=button], input[type=submit], button, .selectedCell {
