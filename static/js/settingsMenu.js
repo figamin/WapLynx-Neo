@@ -145,7 +145,7 @@ settingsMenu.addFilterDisplay = function(filter) {
   if (filter.regex) {
     contentToDisplay = '/' + contentToDisplay + '/';
   }
-  filterContentLabel.innerHTML = contentToDisplay;
+  filterContentLabel.textContent = contentToDisplay;
   filterContentLabel.className = 'existingFilterContentLabel';
   filterCell.appendChild(filterContentLabel);
 

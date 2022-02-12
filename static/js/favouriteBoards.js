@@ -69,7 +69,7 @@ favouriteBoards.setFavouriteBoards = function() {
 
       var link = document.createElement('a');
       link.href = '/' + savedFavouriteBoards[i];
-      link.innerHTML = savedFavouriteBoards[i];
+      link.textContent = savedFavouriteBoards[i];
       boardsSpan.appendChild(link);
 
       boardsSpan.appendChild(document.createTextNode(' '));

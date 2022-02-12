@@ -193,7 +193,7 @@ postCommon.addSelectedFile = function(file) {
   cell.innerHTML = postCommon.selectedCell;
 
   var nameLabel = cell.getElementsByClassName('nameLabel')[0];
-  nameLabel.innerHTML = file.name;
+  nameLabel.textContent = file.name;
 
   var removeButton = cell.getElementsByClassName('removeButton')[0];
 

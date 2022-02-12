@@ -61,7 +61,7 @@ asnBans.showNewAsnBan = function(typedRange, typedReason, nonBypassable, id) {
   form.appendChild(asnPara);
 
   var rangeLabel = document.createElement('span');
-  rangeLabel.innerHTML = typedRange;
+  rangeLabel.textContent = typedRange;
   rangeLabel.className = 'asnLabel';
   asnPara.appendChild(rangeLabel);
 
@@ -70,7 +70,7 @@ asnBans.showNewAsnBan = function(typedRange, typedReason, nonBypassable, id) {
   form.appendChild(reasonPara);
 
   var reasonLabel = document.createElement('span');
-  reasonLabel.innerHTML = typedReason;
+  reasonLabel.textContent = typedReason;
   reasonLabel.className = 'reasonLabel';
   reasonPara.appendChild(reasonLabel);
 

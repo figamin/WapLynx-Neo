@@ -32,7 +32,7 @@ accounts.addAccount = function() {
       if (status === 'ok') {
 
         var newLink = document.createElement('a');
-        newLink.innerHTML = typedLogin;
+        newLink.textContent = typedLogin;
         newLink.href = '/accountManagement.js?account=' + typedLogin;
         accounts.divAccounts.appendChild(newLink);
 

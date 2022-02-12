@@ -63,7 +63,7 @@ hashBans.showNewHashBan = function(typedHash, typedReason, id) {
 
   var hashLabel = document.createElement('span');
   hashLabel.className = 'hashLabel';
-  hashLabel.innerHTML = typedHash;
+  hashLabel.textContent = typedHash;
   hashPara.appendChild(hashLabel);
 
   var reasonPara = document.createElement('p');
@@ -72,7 +72,7 @@ hashBans.showNewHashBan = function(typedHash, typedReason, id) {
 
   var reasonLabel = document.createElement('span');
   reasonLabel.className = 'reasonLabel';
-  reasonLabel.innerHTML = typedReason;
+  reasonLabel.textContent = typedReason;
   reasonPara.appendChild(reasonLabel);
 
   var userPara = document.createElement('p');

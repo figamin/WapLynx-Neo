@@ -33,7 +33,7 @@ mimeThumbs.showNewThumb = function(mime, data) {
   label.appendChild(document.createTextNode('Mime: '));
 
   var mimeLabel = document.createElement('span');
-  mimeLabel.innerHTML = mime;
+  mimeLabel.textContent = mime;
   mimeLabel.className = 'mimeLabel';
 
   label.appendChild(mimeLabel);

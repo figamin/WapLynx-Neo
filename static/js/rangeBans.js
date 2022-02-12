@@ -62,7 +62,7 @@ rangeBans.showNewRangeBan = function(typedRange, typedReason, nonBypassable, id)
   form.appendChild(rangePara);
 
   var rangeLabel = document.createElement('span');
-  rangeLabel.innerHTML = typedRange;
+  rangeLabel.textContent = typedRange;
   rangeLabel.className = 'rangeLabel';
   rangePara.appendChild(rangeLabel);
 
@@ -71,7 +71,7 @@ rangeBans.showNewRangeBan = function(typedRange, typedReason, nonBypassable, id)
   form.appendChild(reasonPara);
 
   var reasonLabel = document.createElement('span');
-  reasonLabel.innerHTML = typedReason;
+  reasonLabel.textContent = typedReason;
   reasonLabel.className = 'reasonLabel';
   reasonPara.appendChild(reasonLabel);
 
