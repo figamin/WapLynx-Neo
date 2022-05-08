@@ -695,6 +695,8 @@ thread.startWs = function() {
       }, 200);
       break;
     }
+
+    case 'unlink':
     case 'delete': {
 
       for (var i = 0; i < message.target.length; i++) {
@@ -705,13 +707,23 @@ thread.startWs = function() {
           continue;
         }
 
-        var info = post.getElementsByClassName('postInfo')[0];
+        if ( message.action ==='unlink') {
+          
+          var uploads = post.getElementsByClassName('panelUploads')[0]; 
+          
+          uploads.remove();
+          
+        } else {
 
-        var deletedLabel = document.createElement('span');
-        deletedLabel.innerHTML = '(Deleted)';
+          var info = post.getElementsByClassName('postInfo')[0];
 
-        info.insertBefore(deletedLabel,
-            info.getElementsByClassName('linkName')[0]);
+          var deletedLabel = document.createElement('span');
+          deletedLabel.innerHTML = '(Deleted)';
+
+          info.insertBefore(deletedLabel, info
+              .getElementsByClassName('linkName')[0]);
+       
+        }
 
       }
 
