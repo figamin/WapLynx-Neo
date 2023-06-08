@@ -316,23 +316,27 @@
     </div>
 
     <div id="secondaryBar">
-
-      <span>[</span>
+      <span class="linkBarrierStart"></span>
       <a
-        href=".."
+        href="../"
         id="linkBack"
         class="coloredIcon"></a>
-      <span>/</span>
-      <a
-        href="#footer"
-        id="linkBottom"
-        class="coloredIcon"></a>
-      <span>/</span>
+      <span class="linkBarrierDivider"></span>
       <a
         href="../catalog.html"
         id="navCatalog"
         class="coloredIcon"></a>
-      <span>]</span>
+      <span class="linkBarrierDivider"></span>
+      <a
+        href="#footer"
+        id="linkBottom"
+        class="coloredIcon"></a>
+      <span class="linkBarrierDivider"></span>
+      <a
+        onclick="qr.showQrEmpty()"
+        id="linkRefresh"
+        class="coloredIcon"></a>
+      <span class="linkBarrierEnd"></span>
 
     </div>
 
@@ -365,16 +369,16 @@
         </div>
 
         <div id=boardContentLinks>
-          <span>[</span>
+          <span class="linkBarrierStart"></span>
           <a
             id="linkTop"
             class="coloredIcon"
             href="#"></a>
-          <span>/</span>
-          <a id="linkManagement">Manage Board</a>
-          <span>/</span>
-          <a id="linkMod">Moderate Thread</a>
-          <span>/</span> Unique posters: <span id="userCountLabel"></span> <span>]</span>
+          <span class="linkBarrierDivider"></span>
+          <a id="linkManagement">manage board</a>
+          <span class="linkBarrierDivider"></span>
+          <a id="linkMod">moderate thread</a>
+          <span class="linkBarrierDivider"></span> unique IPs: <span id="userCountLabel"></span> <span class="linkBarrierEnd"></span>
         </div>
 
         <div id="actionsForm"></div>

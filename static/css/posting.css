@@ -67,6 +67,8 @@ video {
   white-space: nowrap;
   cursor: default;
   text-shadow: none;
+  background-color: rgb(40, 42, 46);
+  border: 1px solid #c5c8c6;
 }
 
 .theme_cyber .extraMenu, .theme_cyber .hideMenu {
@@ -86,15 +88,19 @@ video {
 }
 
 .hideButton::before {
-  content: '\e017';
+  content: '';
 }
 
 .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
   .contentOmissionIndicator, .labelOmission, .labelId, .panelASN,
   .panelBypassId {
-  font-size: 80%;
+  font-size: 100%;
 }
-
+.theme_wc .postInfo, .theme_wc .opHead, .theme_wc .divMessage, .theme_wc .panelUploads, .theme_wc .panelIp, .theme_wc .panelProxyIp,
+.theme_wc .contentOmissionIndicator, .theme_wc .labelOmission, .theme_wc .labelId, .theme_wc .panelASN,
+.theme_wc .panelBypassId {
+  font-size: 13pt;
+}
 .divPosts {
   margin: 1em 0;
 }
@@ -108,6 +114,10 @@ video {
   color: #34345c;
 }
 
+.theme_digi .linkName {
+  color: #117743;
+}
+
 .theme_cyber .linkName {
   color: #34ED97;
 }
@@ -117,12 +127,14 @@ video {
 }
 
 .noEmailName, .noEmailName:hover {
-  color: #117743;
+  color: rgb(127, 237, 181);
   text-shadow: none;
   cursor: default;
   text-decoration: none;
 }
-
+.theme_wc .noEmailName, .theme_wc .noEmailName:hover {
+  color: #c5c8c6;
+}
 .theme_cyber .noEmailName, .noEmailName:hover {
   color: #117743;
 }
@@ -132,7 +144,7 @@ video {
 }
 
 .quoteLink, .theme_cyber .quoteLink {
-  color: #ff0000;
+  color: #4169E1;
 }
 
 .linkSelf {
@@ -160,9 +172,25 @@ video {
 }
 
 .labelSubject {
-  color: #0f0c5d;
+  color: rgb(154, 185, 242);
   font-weight: bold;
   word-wrap: break-word;
+}
+
+.theme_cel .labelSubject {
+  color: black;
+}
+
+.theme_lit .labelSubject {
+  color: black;
+}
+
+.theme_digi .labelSubject {
+  color: #cc1105;
+}
+
+.theme_pixl .labelSubject, .theme_th .labelSubject {
+  color: #FF1100;
 }
 
 .theme_cyber .labelSubject {
@@ -175,8 +203,7 @@ video {
 }
 
 .labelRole:before {
-  font-family: Icons;
-  content: "\e0dc";
+  content: " ";
   color: #A00;
 }
 
@@ -200,8 +227,9 @@ video {
 }
 
 .uploadCell {
-  margin: 0.25em 1em 0.25em 0.5em;
   float: none;
+  margin-left: 0px;
+  margin-right: 50px;
 }
 
 .uploadCell img {
@@ -212,7 +240,8 @@ video {
 
 /*Change the dimensions if you wish for larger thumbs*/
 .uploadCell img:not(.imgExpanded) {
-  max-width: 125px;
+  max-width: 200px;
+  max-height: 200px;
   object-fit: contain;
 }
 
@@ -226,7 +255,7 @@ video {
 }
 
 .multipleUploads .uploadCell:not(.expandedCell) {
-  max-width: 150px;
+  max-width: 170px;
   float: left;
 }
 
@@ -252,7 +281,7 @@ video {
 }
 
 .panelBacklinks a {
-  color: #AA0000;
+  color: #4169E1;
   text-decoration: none;
 }
 
@@ -289,7 +318,13 @@ video {
 
 /*Board header*/
 .boardHeader p {
-  color: #663E11;
+  color: #c5c8c6;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
+  
+}
+.theme_chill .boardHeader p, .theme_cel .boardHeader p, .theme_rumi .boardHeader p, .theme_lit .boardHeader p, .theme_mu .boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
 }
 
 .boardHeader p#labelName {
@@ -336,7 +371,7 @@ video {
 }
 
 .extraMenuButton::before {
-  content: '\e02f';
+  content: '⚑';
 }
 
 .nameLink::after {
@@ -404,9 +439,28 @@ video {
   font-size: 80%;
   padding-left: 0.3em;
   cursor: default;
-  background: #98E;
+  background: #282a2e;
+  border: 1px solid black;
 }
-
+.theme_digi #postingForm th, .theme_digi .modalTableBody th {
+  background: #ea8;
+}
+.theme_cel #postingForm th, .theme_cel .modalTableBody th, .theme_rumi #postingForm th, .theme_rumi .modalTableBody th {
+  background: transparent;
+}
+.theme_digi #postingForm th, .theme_digi .modalTableBody th {
+  background: #ea8;
+}
+.theme_pixl #postingForm th, .theme_pixl .modalTableBody th {
+  background: black;
+  border: 1px solid white;
+}
+.theme_wc #postingForm th, .theme_wc .modalTableBody th {
+  background: #282a2e;
+}
+.theme_hob #postingForm th, .theme_digi .modalTableBody th {
+  background: #705d4c;
+}
 .theme_cyber #postingForm th, .theme_cyber .modalTableBody th {
   border: 1px solid #117743;
   border-radius: 5px;

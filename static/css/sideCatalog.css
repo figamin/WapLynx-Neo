@@ -13,7 +13,7 @@
 }
 
 #navSideCatalog:before {
-  content: "\e088";
+  content: "side catalog";
 }
 
 #sideCatalogBody hr {

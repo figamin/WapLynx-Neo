@@ -1,16 +1,86 @@
-<span id="navLinkSpan"> <span>[</span> <a
-    href="/"
-    class="coloredIcon"
-    id="navLinkHome"></a> <span>/</span> <a
-    href="/boards.js"
-    class="coloredIcon"
-    id="navBoardList"></a> <span>/</span> <a
-    href="/overboard"
-    class="coloredIcon"
-    id="navOverboard"></a> <span>/</span> <a
-    href="/.static/pages/posting.html"
-    class="coloredIcon"
-    id="navPosting"></a> <span>]</span>
+<script src="/.static/js/jquery.min.js"></script>
+<audio id="player" src="https://radio.wapchan.org/wapfm"></audio>
+<span id="navLinkSpan">
+    <span class="linkBarrierStart"></span><a href="/" id="navLinkHome" title="Home"></a>
+    <span class="linkBarrierDivider"></span>
+    <a href="/latest" id="navOverboard" title="Latest Posts"></a><span class="linkBarrierEnd"></span>
+    <span class="linkBarrierStart"></span><span class="desktopLinks"><a href="/cel" title="Retro Anime">cel</a>
+      <span class="linkBarrierDivider"></span> 
+      <a href="/digi" title="2000s Anime">digi</a>
+      <span class="linkBarrierDivider"></span>
+      <a href="/pixl" title="Retro Vidya">pixl</a>
+      <span class="linkBarrierDivider"></span> 
+      <a href="/rumi" title="Rumic World">rumi</a>
+      <span class="linkBarrierDivider"></span>
+      <a href="/th" title="Touhou">th</a><span class="linkBarrierEnd"></span>
+      <span class="linkBarrierStart"></span><a href="/art" title="Artwork & Photography">art</a>
+      <span class="linkBarrierDivider"></span>
+      <a href="/hob" title="Hobbies">hob</a>
+      <span class="linkBarrierDivider"></span> 
+      <a href="/lit" title="Literature">lit</a>
+      <span class="linkBarrierDivider"></span>
+      <a href="/mu" title="Music">mu</a>
+      <span class="linkBarrierDivider"></span>
+      <a href="/tech" title="Technology">tech</a><span class="linkBarrierEnd"></span>
+      <span class="linkBarrierStart"></span><a href="/chill" title="Chill Out!">chill</a>
+      <span class="linkBarrierDivider"></span>
+      <a href="/wap" title="Site Meta">wap</a>
+    </span>
+    <span class="mobileLinks">
+      <span class="dropdown">
+        <a class="dropbtn">Otaku</a>
+          <div class="dropdown-content">
+            <a href="/cel" title="Retro Anime">/cel/</a>
+            <a href="/digi" title="2000s Anime">/digi/</a>
+            <a href="/pixl" title="Retro Vidya">/pixl/</a>
+            <a href="/rumi" title="Rumic World">/rumi/</a>
+            <a href="/th" title="Touhou">/th/</a>
+          </div>
+      </span>
+      <span class="linkBarrierDivider"></span>
+      <span class="dropdown">
+        <a class="dropbtn">Interests</a>
+          <div class="dropdown-content">
+            <a href="/art" title="Artwork & Photography">/art/</a>
+            <a href="/hob" title="Hobbies">/hob/</a>
+            <a href="/lit" title="Literature">/lit/</a>
+            <a href="/mu" title="Music">/mu/</a>
+            <a href="/tech" title="Technology">/tech/</a>
+          </div>
+      </span>
+      <span class="linkBarrierDivider"></span>
+      <span class="dropdown">
+        <a class="dropbtn">Other</a>
+          <div class="dropdown-content">
+            <a href="/chill" title="Chill Out!">/chill/</a>
+            <a href="/wap" title="Site Meta">/wap/</a>
+          </div>
+      </span>
+    </span>
+    <span class="linkBarrierEnd"></span>
+    <span class="linkBarrierStart"></span><span class="desktopLinks"><a href="https://radio.wapchan.org/">Radio:</a></span>
+    <button id="playButton" onclick="
+      if (document.getElementById('player').paused){
+        document.getElementById('player').play();
+        document.getElementById('playButton').innerText = ''
+      } else {
+        document.getElementById('player').pause();
+        document.getElementById('playButton').innerText = ''
+      }" title="Radio">
+      </button>
+      <span class="desktopLinks linkBarrierEnd"></span>
+      <span class="desktopLinks linkBarrierStart"></span>
+      <span class="mobileLinks linkBarrierDivider"></span>
+      <span id="lastHeader" class="desktopLinks">Style:</span>
+      <span class="desktopLinks">Font Override:</span>
+      <input type="checkbox" id="overrideCity" onclick="
+      var element = document.getElementsByTagName('body')[0];
+      element.classList.toggle('font_override');
+      " title="Font Override"/><label for="overrideCity"></label><span id="lastHeader2"></span><span class="linkBarrierEnd"></span>
 </span>
-<span id="navBoardsSpan"> </span>
-<span id="navOptionsSpan"> </span>
+<script>
+  var body = document.getElementsByTagName('body')[0];
+  if (document.getElementById('overrideCity').checked) {
+      body.className += ' font_override';
+    }
+</script>

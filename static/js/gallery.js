@@ -27,7 +27,7 @@ gallery.init = function() {
   backLink.parentNode.insertBefore(document.createTextNode(' '), backLink);
 
   var separator = document.createElement('span');
-  separator.innerHTML = '/';
+  separator.innerHTML = '<span class="linkBarrierDivider"></span>';
   backLink.parentNode.insertBefore(separator, backLink);
 
   backLink.parentNode.insertBefore(document.createTextNode(' '), backLink);

@@ -1,7 +1,7 @@
 <tbody>
 
   <tr id="divName">
-    <th>Name</th>
+    <th>name</th>
     <td><input
         type="text"
         class="postingInput"
@@ -10,7 +10,7 @@
   </tr>
 
   <tr>
-    <th>Subject</th>
+    <th>subject</th>
     <td><input
         type="text"
         class="postingInput"
@@ -60,12 +60,11 @@
           multiple
           class="fileBrowser">
       </div>
-      <input
+      <div style="display: inline-flex;"><input
         type="checkbox"
         name="spoiler"
         class="postingCheckbox"
-        id="checkboxSpoiler"> <label for="checkboxSpoiler"></label>
-
+        id="checkboxSpoiler"><label for="checkboxSpoiler" style="margin-top: 3px;"></label></div>
       <p class="small">
         Max file size: <span id="labelMaxFileSize"></span>
       </p>

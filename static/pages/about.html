@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>About</title>
+<title>｢faq and history｣</title>
 <meta charset="UTF-8" />
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0">
 <link
   href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+<link
+  href="/.static/css/watcher.css"
+  type="text/css"
+  rel="stylesheet" />
+<link
+  href="/.static/css/settingsMenu.css"
   type="text/css"
   rel="stylesheet" />
 </head>
@@ -17,24 +25,52 @@
 
   <nav id="dynamicHeader"></nav>
 
+  <div id="settingsWrapper">
+  
   <header>
     <img
-      src="/.static/logo.png"
+      src="/.static/logo.webp"
       class="logoImg"
       alt="logo" />
   </header>
-
-  <div id="settingsWrapper">
-    <fieldset id="settingsFieldset">
-      <legend>About</legend>
-      <p class="title">Title goes here</p>
-      <p>Text goes here.</p>
+  <h1>Wapchan's <b>F</b>requently <b>A</b>sked <b>Q</b>uestions:</h1>
+  <h3>Last updated on 11/13/22</h3>
+    <fieldset id="settingsFieldset" class="spacerFieldset">
+      <legend>｢what is wapchan?｣</legend>
+      <p>Wapchan is retro content imageboard consisting of mutliple different boards covering various topics, where we strive to make a place not unlike the forums of old.</p>
     </fieldset>
+    <fieldset id="settingsFieldset" class="spacerFieldset">
+      <legend>｢what does the name mean?｣</legend>
+    <p>The name "Wapchan" was inspired by the term "wapanese" that used to be common on the internet in the early 2000s that meant "white japanese", or someone obsessed with japanese culture, which eventually fell out of use and was replaced by "weaboo" due to a 4chan word filter. Since wapchan focuses on the older aspects of anime, it's a fitting name. Also, I didn't come up with it, as that honor goes to <a href=https://desuarchive.org/a/thread/229564359/#229604844">this</a> anon.</p>
+  </fieldset>
+    <fieldset id="settingsFieldset" class="spacerFieldset">
+    <legend>｢why are there so few boards?｣</legend>
+    <p>Wapchan is meant to be a more focused imageboard than say 4chan or other all encompassing imageboards. Popular suggestions will most likely be added provided they fit the theme of the site.</p>
+  </fieldset>
+  <h1>A brief history of Wapchan:</h1>
+  <fieldset id="settingsFieldset" class="spacerFieldset">
+    <legend>｢the lum connection｣</legend>
+    <p>Wapchan's roots can be traced back to (what was in my opinion) the golden age of /lum/ on 4chan's /a/nime board. I used to post a lot there, first starting in November 2020, and became a regular ranposter. After the threads started to go downhill back in March of 2021, I started the weekly UY storytime a month later, but that ultimately got abandoned due to the new manga translation being too far behind at the time. A few elements that would later become a part of wapchan (cytube streams and an IRC server) got their start there, and is part of the reason this site has a strong connection to Urusei Yatsura</p>
+  </fieldset>
+  <fieldset id="settingsFieldset" class="spacerFieldset">
+    <legend>｢starting out｣</legend>
+    <p>Wapchan itself was an idea I had after thinking about the decline of /lum/ and how much better it could be if there was a site that actually moderated the threads and wasn't beholden to 4chan's secretdiscord cabal. However, I knew that UY couldn't carry a site alone like it could 20 years ago, and since I was interested in other retro anime, the idea became focused around /ar/ - the nonexistant retro anime board. Back in October of 2021 I first started discussing this idea in one of the many pre 2000s threads on /a/, and while the idea stalled out for a while (the site was originally going to use tinyIB as shown in <a href="/.static/betawapchan.png">this</a> image, but I found that far too limiting), it eventually picked up steam, and was put together around the same time I also made a really dumb collage for /a/, with Wapchan officially going up on New Years 2022. The earliest archived version of Wapchan can be found <a href="https://web.archive.org/web/20220112234023/http://wapchan.org/">here</a>, in case you ever wondered how the site looked early on.</p>
+  </fieldset>
+  <fieldset id="settingsFieldset" class="spacerFieldset">
+    <legend>｢the first year｣</legend>
+    <p>Since then, Wapchan has grown steadily, and while the site has always been pretty slow, it has still managed to forge a nice little community, with seven boards covering different topics. Hopefully it will continue to grow!</p>
+  </fieldset>
   </div>
+
+  <footer id="dynamicFooter"></footer>
+  
 </body>
 
 <script src="/.static/js/api.js"></script>
 <script src="/.static/js/themes.js"></script>
 <script src="/.static/js/favouriteBoards.js"></script>
-
+<script src="/.static/js/draggable.js"></script>
+<script src="/.static/js/settingsMenu.js"></script>
+<script src="/.static/js/hiding.js"></script>
+<script src="/.static/js/watcher.js"></script>
 </html>

@@ -9,7 +9,7 @@
 
 #closeWatcherMenuButton::before, .close-btn::before,
   .watchedCellCloseButton::before {
-  content: '\e0db';
+  content: 'hide';
 }
 
 .watchedCell {

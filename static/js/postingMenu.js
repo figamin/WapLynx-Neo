@@ -1,7 +1,8 @@
 var postingMenu = {};
 
 postingMenu.init = function() {
-
+  postingMenu.reasonList = ['Politics', 'Frog/Jakposting','Unspoilered NSFW', 'Spam', 'Excessive Slurs','CP/Illegal Content'];
+  postingMenu.durationLengths = ['3d', '1w', '99y'];
   postingMenu.banLabels = [ 'IP/Bypass ban', 'Range ban (1/2 octects)',
       'Range ban (3/4 octects)', 'ASN ban', 'IP/Bypass warning' ];
   postingMenu.deletionOptions = [ 'Do not delete', 'Delete post',
@@ -62,7 +63,7 @@ postingMenu.init = function() {
 
 postingMenu.showReport = function(board, thread, post, global) {
 
-  var outerPanel = captchaModal.getCaptchaModal(global ? 'Global report'
+  var outerPanel = captchaModal.getCaptchaModal(global ? 'Report'
       : 'Report', api.noReportCaptcha);
 
   var reasonField = document.createElement('input');
@@ -250,7 +251,6 @@ postingMenu.applySingleBan = function(typedMessage, deletionOption,
   }
 
   params[key] = true;
-
   api.formApiRequest('contentActions', params, function requestComplete(status,
       data) {
 
@@ -287,16 +287,28 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
 
   var useCaptcha = !(postingMenu.globalRole < 4 || postingMenu.noBanCaptcha);
 
-  var outerPanel = captchaModal.getCaptchaModal(global ? 'Global ban' : 'Ban',
+  var outerPanel = captchaModal.getCaptchaModal(global ? 'Ban' : 'Ban',
       !useCaptcha);
 
   var okButton = outerPanel.getElementsByClassName('modalOkButton')[0];
 
-  var reasonField = document.createElement('input');
-  reasonField.type = 'text';
+  var reasonField = document.createElement('select');
+  for (var i = 0; i < postingMenu.reasonList.length; i++) {
 
-  var durationField = document.createElement('input');
-  durationField.type = 'text';
+    var option = document.createElement('option');
+    option.innerHTML = postingMenu.reasonList[i];
+    reasonField.appendChild(option);
+
+  }
+
+  var durationField = document.createElement('select');
+  for (var i = 0; i < postingMenu.durationLengths.length; i++) {
+
+    var option = document.createElement('option');
+    option.innerHTML = postingMenu.durationLengths[i];
+    durationField.appendChild(option);
+
+  }
 
   var messageField = document.createElement('input');
   messageField.type = 'text';
@@ -328,8 +340,9 @@ postingMenu.banSinglePost = function(innerPart, boardUri, thread, post, global) 
     captchaField = outerPanel.getElementsByClassName('modalAnswer')[0];
   }
 
-  var nonBypassableCheckbox = document.createElement('input');
-  nonBypassableCheckbox.type = 'checkbox';
+    var nonBypassableCheckbox = document.createElement('input');
+    nonBypassableCheckbox.type = 'checkbox';
+    nonBypassableCheckbox.checked = true;
 
   okButton.onclick = function() {
     postingMenu.applySingleBan(messageField.value.trim(),
@@ -719,7 +732,7 @@ postingMenu.setModFileOptions = function(extraMenu, innerPart, board, thread,
   extraMenu.appendChild(document.createElement('hr'));
 
   var spoilButton = document.createElement('div');
-  spoilButton.innerHTML = 'Spoil Files';
+  spoilButton.innerHTML = 'Spoiler Files';
   spoilButton.onclick = function() {
     postingMenu.spoilSinglePost(innerPart, board, thread, post);
   };
@@ -775,7 +788,7 @@ postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
 
   };
   extraMenu.appendChild(deleteByIpOnThreadButton);
-
+/*
   extraMenu.appendChild(document.createElement('hr'));
 
   var banButton = document.createElement('div');
@@ -786,17 +799,17 @@ postingMenu.setExtraMenuMod = function(innerPart, extraMenu, board, thread,
   extraMenu.appendChild(banButton);
 
   if (postingMenu.globalRole <= 2) {
-
+*/
     extraMenu.appendChild(document.createElement('hr'));
 
     var globalBanButton = document.createElement('div');
-    globalBanButton.innerHTML = 'Global Ban';
+    globalBanButton.innerHTML = 'Ban';
     globalBanButton.onclick = function() {
       postingMenu.banSinglePost(innerPart, board, thread, post, true);
     };
     extraMenu.appendChild(globalBanButton);
 
-  }
+//  }
 
   extraMenu.appendChild(document.createElement('hr'));
 
@@ -844,17 +857,8 @@ postingMenu.buildMenu = function(linkSelf, extraMenu) {
     post = undefined;
   }
 
-  var reportButton = document.createElement('div');
-  reportButton.innerHTML = 'Report';
-  reportButton.onclick = function() {
-    postingMenu.showReport(board, thread, post);
-  };
-  extraMenu.appendChild(reportButton);
-
-  extraMenu.appendChild(document.createElement('hr'));
-
   var globalReportButton = document.createElement('div');
-  globalReportButton.innerHTML = 'Global Report';
+  globalReportButton.innerHTML = 'Report';
   globalReportButton.onclick = function() {
     postingMenu.showReport(board, thread, post, true);
   };
@@ -869,7 +873,7 @@ postingMenu.buildMenu = function(linkSelf, extraMenu) {
     postingMenu.deleteSinglePost(board, thread, post, null, null, null,
         innerPart);
   };
-
+/*
   extraMenu.appendChild(document.createElement('hr'));
   var trashButton = document.createElement('div');
   trashButton.innerHTML = 'Trash Post';
@@ -878,7 +882,7 @@ postingMenu.buildMenu = function(linkSelf, extraMenu) {
     postingMenu.deleteSinglePost(board, thread, post, null, null, null,
         innerPart, null, null, true);
   };
-
+*/
   var hasFiles = linkSelf.parentNode.parentNode
       .getElementsByClassName('panelUploads')[0];
 

@@ -86,19 +86,6 @@
   clear: both;
 }
 
-input[type=checkbox].postingCheckbox {
-  display: none;
-}
-
-input[type=checkbox].postingCheckbox+label::before {
-  font-family: Icons;
-  content: "\e0db";
-  margin-right: 0.5em;
-  color: #117743;
-  display: inline-block;
-  cursor: pointer;
-}
-
 #checkboxSpoiler+label:after {
   content: "Spoiler";
 }
@@ -109,10 +96,6 @@ input[type=checkbox].postingCheckbox+label::before {
 
 #checkboxNoFlag+label:after {
   content: "No location";
-}
-
-input[type=checkbox].postingCheckbox:checked+label:before {
-  content: "\e033";
 }
 
 #boardContentLinks {

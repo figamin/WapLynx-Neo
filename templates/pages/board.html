@@ -85,26 +85,22 @@
 
   <div id="secondaryBar">
 
-    <span>[</span>
-    <a
-      href="#footer"
-      id="linkBottom"
-      class="coloredIcon"></a>
-    <span>/</span>
-    <a
-      class="coloredIcon"
-      id="linkLogs"></a>
-    <span>/</span>
+    <span class="linkBarrierStart"></span>
     <a
       href="./catalog.html"
       id="navCatalog"
       class="coloredIcon"></a>
-    <span>/</span>
+    <span class="linkBarrierDivider"></span>
     <a
-      href="index.rss"
+      href="#footer"
+      id="linkBottom"
+      class="coloredIcon"></a>
+    <span class="linkBarrierDivider"></span>
+    <a
       class="coloredIcon"
-      id="linkRss"></a>
-    <span>]</span>
+      id="linkRefresh"
+      onclick="location.reload()"></a>
+    <span class="linkBarrierEnd"></span>
   </div>
 
   <div id="threadList">
@@ -147,7 +143,8 @@
 
   </div>
 
-  <footer id="footer"></footer>
+  <footer id="dynamicFooter">
+  </footer>
 </body>
 
 <script src="/.static/js/crypto.js"></script>
@@ -170,5 +167,5 @@
 <script src="/.static/js/favouriteBoards.js"></script>
 <script src="/.static/js/bottomForms.js"></script>
 <script src="/.static/js/bypassUtils.js"></script>
-
+<script src="/.static/js/randomFooter.js"></script>
 </html>

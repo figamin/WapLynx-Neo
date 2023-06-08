@@ -27,97 +27,174 @@
   <script src="/.static/js/themeLoader.js"></script>
 
   <nav id="dynamicHeader"></nav>
+    <table width="100%" height="100%">
+      <tr>
+          <td class="leftmenu" valign="top">
+              <u><p style="margin-top: 10px;margin-bottom: 10px;">Otaku Boards</p></u>
+              <p>
+                <a href="/cel">/cel/ - Retro Anime</a><br><br>
+                <a href="/digi">/digi/ - 2000s Anime</a><br><br>
+                <a href="/pixl">/pixl/ - Retro Vidya</a><br><br>
+                <a href="/rumi">/rumi/ - Rumic World</a><br><br>
+                <a href="/th">/th/ - Touhou</a><br><br>
+              </p>
+              <u><p style="margin-top: 10px;margin-bottom: 10px;">Interest Boards</p></u>
+              <p>
+                <a href="/art">/art/ - Artwork & Photography</a><br><br>
+                <a href="/hob">/hob/ - Hobbies</a><br><br>
+                <a href="/lit">/lit/ - Literature</a><br><br>
+                <a href="/mu">/mu/ - Music</a><br><br>
+                <a href="/tech">/tech/ - Technology</a><br><br>
+              </p>
+              <u><p style="margin-top: 10px;margin-bottom: 10px;">Other Boards</p></u>
+              <p>
+                <a href="/chill">/chill/ - Chill Out!</a><br><br>
+                <a href="/wap">/wap/ - Site Meta</a><br><br>
+              </p>
+              <!--<u><p style="margin-top: 10px;margin-bottom: 10px;">Sitewide Stats</p></u>
+              <p>
+                <span id="labelTotalPosts"></span> posts across <span id="labelTotalBoards"></span> boards<br><br>
+                <span id="labelTotalFiles"></span> files totaling <span id="labelTotalSize"></span><br><br>
+              </p>-->
+              <p>
+                <u>Note</u>: These boards may or may not be worksafe. All users give up their right to a worksafe enviroment when entering these boards... you have been warned.</p>         
+          </td>
+          <td class="rightbody" valign="top">
+            <div id="indexWrapper">
+              <div
+              id="logoBox"
+              class="title">
+              <img
+                src="/.static/logo.png"
+                class="logoImg"
+                alt="logo" />
+                <img
+                src="/.static/rumilogo.png"
+                class="logoImgRumi"
+                alt="logo" />
+                <img
+                src="/.static/oldlogo.png"
+                class="logoImgOld"
+                alt="logo" />
+              <p class="logoText" title="wapanese channel"></p>
+              <p id="randomQuote" title="click me!"></p>
+              <br><br>
+              <span class="linkGroup">
+                <span class="linkBarrierStart"></span>
+                <a
+                  href="/.static/pages/about.html"
+                  id="linkAbout">
+                </a>
+                <span class="linkBarrierDivider"></span>
+                <a
+                  href="/.static/pages/rules.html"
+                  id="linkRules">
+                </a>
+                <span class="linkBarrierDivider"></span>
+                <a
+                  href="/.static/pages/banners.html"
+                  id="linkBanners">
+                </a>
+                <span class="linkBarrierDivider"></span>
+                <a
+                  href="https://cytu.be/r/wapchan"
+                  id="linkCinema">
+                </a>
+                <span class="linkBarrierDivider"></span>
+                <a
+                  href="/.static/pages/links.html"
+                  id="linkLinks">
+                </a>
+                <span class="linkBarrierEnd"></span>
+              </span>
+              <br><br>
+              <div class="box">
+                <div class="boxbar" id="newsBox">
+                  <p class="newsHeader"></p>
+                </div>
+                <div class="boxcontent">
+                  <p id="annoTitle">Loading...
+                  </p>
+                  <p style="display: flex;margin-left: 20px;
+                  margin-right: 20px;">
+                    <span id="annoMessage"></span>
+                      <img id="annoImage" style="width:auto;height:200px;margin-left:auto;"></p>
+                  <a id="annoLink"></a>
+                </div>
+              </div>
+              <div class="box">
+                <div class="boxbar">
+                  <p>Hello!</p>
+                </div>
+                <div class="boxcontent" id="descBox">
+                  <p>Welcome to ｢wapchan｣, the offbeat retro content forum. While most of our discussion boards are geared towards anime & manga, we also have boards where you can relax and shoot the breeze, as well as a number of chat services to keep you connected.<br><br>If you're new here, be sure to read the <a href="/.static/pages/rules.html">rules & guidelines</a> to get up to speed on how we do things around here, subscribe to one of our <a href="#postNotifs">post notification services</a>, and start posting! Whether you're a total newbie or a seasoned otaku, we hope you watch and read some new stuff during your time here.
+                  </p>
+                </div>
+              </div>
+              <div class="box" id="siteBoardBox">
+                <div class="boxbar" id="specialBoxBar">
+                  <p>Boards & Stats</p>
+                </div>
+                <div class="boxcontent">
+                  <table id="siteBoardTable1">
+                    <tr>
+                      <th class="siteBoardBody TableTop Left">Otaku Boards</th>
+                      <th class="siteBoardBody TableTop">Interest Boards</th>
+                      <th class="siteBoardBody TableTop">Other Boards</th>
+                      <th class="siteBoardBody TableTop TableRight">Sitewide Stats</th>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/cel">/cel/ - Retro Anime</a></td>
+                      <td class="siteBoardBody"><a href="/art">/art/ - Artwork & Photography</a></td>
+                      <td class="siteBoardBody"><a href="/chill">/chill/ - Chill Out!</a></td>
+                      <td class="siteBoardBody TableRight"><span id="labelTotalPosts"></span> posts across <span id="labelTotalBoards"></span> boards</td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/digi">/digi/ - 2000s Anime</a></td>
+                      <td class="siteBoardBody"><a href="/hob">/hob/ - Hobbies</a></td>
+                      <td class="siteBoardBody"><a href="/wap">/wap/ - Site Meta</a></td>
+                      <td class="siteBoardBody TableRight"><span id="labelTotalFiles"></span> files totaling <span id="labelTotalSize"></span></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/pixl">/pixl/ - Retro Vidya</a></td>
+                      <td class="siteBoardBody"><a href="/lit">/lit/ - Literature</a></td>
+                      <td class="siteBoardBody"></td>
+                      <td class="siteBoardBody TableRight"></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/rumi">/rumi/ - Rumic World</a></td>
+                      <td class="siteBoardBody"><a href="/mu">/mu/ - Music</a></td>
+                      <td class="siteBoardBody"></td>
+                      <td class="siteBoardBody TableRight"></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody TableBottom Left"><a href="/th">/th/ - Touhou</a></td>
+                      <td class="siteBoardBody TableBottom"><a href="/tech">/tech/ - Technology</a></td>
+                      <td class="siteBoardBody TableBottom"></td>
+                      <td class="siteBoardBody TableBottom TableRight"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              </div>
 
-  <div id="indexWrapper">
-
-    <div
-      id="logoBox"
-      class="title">
-      <img
-        src="/.static/logo.png"
-        class="logoImg"
-        alt="logo" />
-    </div>
-
-    <div
-      id="infoBox"
-      class="title">
-      <p>Insert title here</p>
-    </div>
-
-    <div
-      id="divBoards"
-      class="topBoards title"></div>
-
-    <div id="divLatestImages"></div>
-
-    <div id="divLatestPosts"></div>
-
-    <div
-      id="links"
-      class="title">
-      <span>[</span>
-      <a
-        href="/logs.js"
-        class="coloredIcon"
-        id="linkGlobalLogs"></a>
-      <span>/</span>
-      <a
-        href="/archives.js"
-        class="coloredIcon"
-        id="linkArchives"></a>
-      <span>/</span>
-      <a
-        href="/graphs.js"
-        class="coloredIcon"
-        id="linkGraphs"></a>
-      <span>/</span>
-      <a
-        href="/.static/pages/globalRules.html"
-        class="coloredIcon"
-        id="linkGlobalRules"></a>
-      <span>/</span>
-      <a
-        href="/.static/pages/links.html"
-        class="coloredIcon"
-        id="linkLinks"></a>
-      <span>/</span>
-      <a
-        href="/.static/pages/about.html"
-        class="coloredIcon"
-        id="linkAbout"></a>
-      <span>/</span>
-      <a
-        href="/.static/pages/contact.html"
-        class="coloredIcon"
-        id="linkContact"></a>
-      <span>/</span>
-      <a
-        href="/account.js"
-        class="coloredIcon"
-        id="linkAccount"></a>
-      <span>/</span>
-      <a
-        class="coloredIcon"
-        id="linkEngine"></a>
-      <span>]</span>
-    </div>
-
-    <div id="divStats">
-      <span>[</span> <span>Total posts: <span id="labelTotalPosts"></span></span>
-      <span>/</span> <span>Posts in last hour: <span id="labelTotalPPH"></span></span>
-      <span>/</span> <span>Unique recent IPs: <span id="labelTotalIps"></span></span>
-      <span>/</span> <span>Total boards: <span id="labelTotalBoards"></span></span>
-      <span>/</span> <span>Media files stored: <span id="labelTotalFiles"></span></span>
-      <span>/</span> <span>Total media size: <span id="labelTotalSize"></span></span>
-      <span>]</span>
-    </div>
-
-  </div>
-
-  <footer>
-    <span>Insert footer here</span>
-  </footer>
+              <table id="siteBoardTable2">
+                <tr>
+                  <th id="siteBoardTableLeft">Latest Images</th>
+                  <th id="siteBoardTableRight">Latest Posts</th>
+                </tr>
+                <tr>
+                  <td id="imageList"><div id="divLatestImages"></div></td>
+                  <td><div id="divLatestPosts"></div></td>
+                </tr>
+              </table>
+            </div>  
+          </td>
+        </tr>
+</table>
+    
+<footer id="dynamicFooter">
+</footer>
 
 </body>
 
@@ -126,5 +203,7 @@
 <script src="/.static/js/draggable.js"></script>
 <script src="/.static/js/watcher.js"></script>
 <script src="/.static/js/favouriteBoards.js"></script>
-
+<script src="/.static/js/randomFooter.js"></script>
+<script src="/.static/js/randomQuote.js"></script>
+<script src="/.static/js/announceIndex.js"></script
 </html>

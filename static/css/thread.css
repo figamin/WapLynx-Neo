@@ -10,7 +10,7 @@
 }
 
 #galleryLink:before {
-  content: "\e083";
+  content: "gallery";
 }
 
 .pinIndicator:after {

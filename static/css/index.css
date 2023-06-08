@@ -28,42 +28,6 @@
   text-decoration: none;
 }
 
-#linkGlobalLogs:before {
-  content: "\e069";
-}
-
-#linkArchives:before {
-  content: "\e021";
-}
-
-#linkGraphs:before {
-  content: "\e018";
-}
-
-#linkAccount:before {
-  content: "\e081";
-}
-
-#linkGlobalRules:before {
-  content: "\e06f";
-}
-
-#linkAbout:before {
-  content: "\e0b0";
-}
-
-#linkEngine:before {
-  content: "\e064";
-}
-
-#linkLinks:before {
-  content: "\e086";
-}
-
-#linkContact:before {
-  content: "\e05c";
-}
-
 .topBoards {
   width: 100%;
   text-align: center;
@@ -77,7 +41,13 @@
   display: inline-block;
   font-size: 90%;
 }
-
+#descBox {
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 #divLatestPosts {
   width: 100%;
   margin: 1em;
@@ -85,14 +55,13 @@
 }
 
 #divLatestPosts .latestPostCell {
-  display: inline-block;
   overflow: hidden;
-  padding: 0.5em;
-  margin: 0.5em;
-  max-width: 15%;
+  margin-right: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   max-height: 8em;
-  font-size: 75%;
-  vertical-align: middle;
+  font-size: 11pt;
+  text-align: left;
 }
 
 .latestPostCell a {
@@ -116,7 +85,18 @@
   max-height: 125px;
   padding: 5px;
 }
-
+#randomQuote {
+  color: #c5c8c6;
+}
+.theme_digi #randomQuote {
+  color: #800000;
+}
+.theme_pixl #randomQuote, .theme_th #randomQuote, .theme_tech #randomQuote {
+  color: white;
+}
+.theme_cel #randomQuote, .theme_mu #randomQuote, .theme_rumi #randomQuote, .theme_lit #randomQuote {
+  color: black;
+}
 .theme_cyber .topBoards a, .theme_cyber #divLatestImages img {
   border: none;
 }

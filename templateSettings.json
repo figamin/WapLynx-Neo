@@ -2,12 +2,14 @@
   "optional": {
     "dynamicHeader": "content/header.html",
     "postingTable": "content/postingForm.html",
-    "actionsForm": "content/actionsForm.html"
+    "actionsForm": "content/actionsForm.html",
+    "dynamicFooter": "content/footer.html"
   },
   "templated": [
     "pages/about.html",
+    "pages/banners.html",
     "pages/contact.html",
-    "pages/globalRules.html",
+    "pages/rules.html",
     "pages/links.html",
     "pages/moderation.html",
     "pages/posting.html"

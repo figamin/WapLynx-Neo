@@ -3,27 +3,60 @@ var themes = {};
 themes.init = function() {
 
   themes.themes = [ {
-    label : 'Clear',
-    id : 'clear'
+    label : 'Wapanese (for /wap/)',
+    id : 'wap'
   }, {
-    label : 'Cyberpunk',
-    id : 'cyber'
-  } ];
+    label : 'Shrine (for /cel/)',
+    id : 'cel'
+  }, {
+    label : 'Yotsuba (for /digi/)',
+    id : 'digi'
+  }, {
+    label : 'PC-98 (for /pixl/)',
+    id : 'pixl'
+  }, {
+    label : 'Rumic (for /rumi/)',
+    id : 'rumi'
+  }, {
+    label : 'Scarlet (for /th/)',
+    id : 'th'
+  }, {
+    label : 'Serenity (for /art/)',
+    id : 'art'
+  }, {
+    label : 'Bricks (for /hob/)',
+    id : 'hob'
+  }, {
+    label : 'Book (for /lit/)',
+    id : 'lit'
+  }, {
+    label : 'Walkman (for /mu/)',
+    id : 'mu'
+  }, {
+    label : 'Workbench (for /tech/)',
+    id : 'tech'
+  }, {
+    label : 'Sandbox (for /chill/)',
+    id : 'chill'
+  }, {
+    label : 'Wapchan Classic',
+    id : 'wc'
+  }, {
+    label : 'Yotsuba B',
+    id : 'digi2'
+  }];
 
-  var postingLink = document.getElementById('navPosting');
-
+  var postingLink = document.getElementById('lastHeader');
   if (!postingLink) {
     return;
   }
-
   var referenceNode = postingLink.nextSibling;
-
   postingLink.parentNode.insertBefore(document.createTextNode(' '),
       referenceNode);
 
-  var divider = document.createElement('span');
-  divider.innerHTML = '/';
-  postingLink.parentNode.insertBefore(divider, referenceNode);
+  /*var divider = document.createElement('span');
+  divider.innerHTML = 'Style:';
+  postingLink.parentNode.insertBefore(divider, referenceNode);*/
 
   postingLink.parentNode.insertBefore(document.createTextNode(' '),
       referenceNode);
@@ -32,7 +65,7 @@ themes.init = function() {
   themeSelector.id = 'themeSelector';
 
   var vanillaOption = document.createElement('option');
-  vanillaOption.innerHTML = 'Default';
+  vanillaOption.innerHTML = 'Board-specific CSS';
   themeSelector.appendChild(vanillaOption);
 
   for (var i = 0; i < themes.themes.length; i++) {
@@ -51,7 +84,6 @@ themes.init = function() {
     themeSelector.appendChild(themeOption);
 
   }
-
   themeSelector.onchange = function() {
 
     if (!themeSelector.selectedIndex) {
@@ -78,9 +110,8 @@ themes.init = function() {
     themeLoader.load();
 
   };
-
+  themeSelector.title = 'Themes'
   postingLink.parentNode.insertBefore(themeSelector, referenceNode);
-
 };
 
 themes.init();

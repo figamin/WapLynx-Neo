@@ -16,7 +16,7 @@
 
 #closeSettingsMenuButton::before, .filterDeleteButton::before,
   #closeSideCatalogButton::before {
-  content: '\e0db';
+  content: 'hide';
 }
 
 .settingsTab {
