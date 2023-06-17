@@ -1,0 +1,219 @@
+ /*
+    _____  __           _                  __ ____                   __             __    __ _ 
+  / ___/ / /_   _____ (_)____   ___     _/_// __/____   _____     _/_/_____ ___   / /  _/_/| |
+  \__ \ / __ \ / ___// // __ \ / _ \   / / / /_ / __ \ / ___/   _/_/ / ___// _ \ / / _/_/  / /
+ ___/ // / / // /   / // / / //  __/  / / / __// /_/ // /     _/_/  / /__ /  __// /_/_/   / / 
+/____//_/ /_//_/   /_//_/ /_/ \___/  / / /_/   \____//_/     /_/    \___/ \___//_//_/   _/_/  
+                                     |_|                                               /_/    
+Shrine is a theme that attempts to mimic the look and feel of Web 1.0 anime internet shrines. These were websites often hosted on geocities or personal univeristy pages, and though crude, they have a handcrafted charm about them. This is a light theme, though a dark variant may come later as many old anime shrines had dark themes (there was no real consistency).
+*/
+.theme_cel .leftmenu {
+  display: none;
+}
+
+.theme_cel .logoImg,
+.theme_cel .logoImgRumi,
+.theme_cel .logoImgOld {
+  display: none;
+}
+
+.theme_cel .logoText:before {
+  content: "Wapanese Channel";
+  display: block;
+  font-family: 'Times Pixelated 32';
+  font-size: 48px;
+  font-weight: bold;
+}
+  
+.theme_cel .topBoards a,
+.theme_cel .innerPost,
+.theme_cel .sideCatalogCell,
+.theme_cel .markedPost,
+.theme_cel .sideCatalogMarkedCell,
+.theme_cel .catalogCell,
+.theme_cel .floatingMenu,
+.theme_cel #quick-reply table {
+  background: url("https://wapchan.org/.static/dotsdark2.webp");
+}
+  
+.theme_cel .markedPost,
+.theme_cel .sideCatalogMarkedCell {
+  background: #868686;
+}
+  
+.theme_cel .innerPost,
+.theme_cel .sideCatalogCell,
+.theme_cel .markedPost,
+.theme_cel .sideCatalogMarkedCell,
+.theme_cel .catalogCell {
+  border: 1px solid black;
+}
+  
+.theme_cel #newPostFieldset,
+.theme_cel #quick-reply table,
+.theme_cel .modalDecorationPanel,
+.theme_cel .floatingMenu,
+.theme_cel #settingsFieldset,
+.theme_cel .reportFieldset {
+  border: 1px dashed black;
+}
+  
+.theme_cel hr {
+  border-color: #117743;
+}
+  
+.theme_cel a,
+.theme_cel,
+.theme_cel .unhideButton,
+.theme_cel .embedButton,
+.theme_cel #selectedTab,
+.theme_cel #showFormsButton {
+  color: #0000EE;
+}
+
+.theme_cel input,
+.theme_cel select,
+.theme_cel textarea {
+  background: white;
+  border: 1px double black;
+  color: black;
+}
+
+.theme_cel input[type=button],
+.theme_cel input[type=submit],
+.theme_cel button,
+.theme_cel .dropzone,
+.theme_cel .selectedCell {
+  border: 1px solid #000000;
+  background: transparent;
+  color: #000000;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+  font-family: 'Times Pixelated 16', "CozetteVector";
+}
+
+body.theme_cel {
+  background: url("https://wapchan.org/.static/dots.webp");
+  color: #000;
+  font-family: 'Times Pixelated 16', "CozetteVector";
+}
+
+.theme_cel nav {
+  background-color: #ffffff;
+}
+
+.theme_cel .box {
+  border: 0;
+  background-color: transparent;
+  color: black;
+}
+
+.theme_cel .boxbar {
+  font-family: 'Times Pixelated 32';
+  border: 0;
+  background-color: transparent;
+}
+
+.theme_cel .boxbar p {
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.theme_cel .linkBarrierStart:before {
+  content: '[';
+}
+
+.theme_cel .linkBarrierEnd:before {
+  content: ']';
+}
+
+.theme_cel .linkBarrierDivider:before {
+  content: ' | ';
+}
+
+.theme_cel .newsHeader:before,
+.theme_th {
+  content: 'News:';
+}
+
+.theme_cel #linkAbout:before {
+  content: 'About';
+}
+
+.theme_cel #linkRules:before {
+  content: 'Rules';
+}
+
+.theme_cel #linkBanners:before {
+  content: 'Banners';
+}
+
+.theme_cel #linkCinema:before {
+  content: 'Cinema';
+}
+
+.theme_cel #linkLinks:before {
+  content: 'Links';
+}
+
+.theme_cel input,
+.theme_cel select,
+.theme_cel textarea {
+  font-family: 'Times Pixelated 16', "CozetteVector";
+}
+
+.theme_cel #specialBoxBar {
+  border: 0;
+}
+
+.theme_cel #siteBoardTable2 {
+  border: 0;
+  background-color: transparent;
+}
+
+.theme_cel .siteBoardBody {
+  border-left: 0;
+}
+
+.theme_cel .TableTop {
+  border-top: 0;
+}
+
+.theme_cel .TableBottom {
+  border-bottom: 0;
+}
+
+.theme_cel .TableRight {
+  border-right: 0;
+}
+
+.theme_cel #siteBoardTableLeft,
+.theme_cel #siteBoardTableRight,
+.theme_cel #imageList {
+  border-bottom: 0;
+  border-right: 0;
+  background-color: transparent;
+}
+  
+.theme_cel .labelSubject {
+  color: black;
+}
+
+.theme_cel .boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
+}
+
+.theme_cel #postingForm th,
+.theme_cel .modalTableBody th {
+  background: transparent;
+}
+
+.theme_cel .boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
+}
+.theme_cel #randomQuote {
+  color: black;
+}

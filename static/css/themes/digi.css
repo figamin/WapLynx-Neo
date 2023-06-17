@@ -1,0 +1,307 @@
+/*
+ __  __        __                __               __ ____                   __     __ _         _     __ _ 
+\ \/ /____   / /_ _____ __  __ / /_   ____ _   _/_// __/____   _____     _/_/____/ /(_)____ _ (_)  _/_/| |
+ \  // __ \ / __// ___// / / // __ \ / __ `/  / / / /_ / __ \ / ___/   _/_/ / __  // // __ `// / _/_/  / /
+ / // /_/ // /_ (__  )/ /_/ // /_/ // /_/ /  / / / __// /_/ // /     _/_/  / /_/ // // /_/ // /_/_/   / / 
+/_/ \____/ \__//____/ \__,_//_.___/ \__,_/  / / /_/   \____//_/     /_/    \__,_//_/ \__, //_//_/   _/_/  
+                                            |_|                                     /____/         /_/
+Yotsuba is a theme largely based on the very early days of 4chan (circa 2003), since this where some of the best 2000s online anime discussions took place. As such, it's a oretty simple theme, and is mostly differentiated from the other themes by the sidebar on the front page, since this is actually how 4chan looked at the time. Here is the actual capture of 4chan.net that I used to help make the elements for this theme.
+https://web.archive.org/web/20031122004728/http://www.4chan.net/
+*/
+.theme_digi #postingForm th,
+.theme_digi .modalTableBody th {
+  background: #ea8;
+}
+
+.theme_digi .labelSubject {
+  color: #cc1105;
+}
+
+.theme_digi .linkName {
+  color: #117743;
+}
+
+.theme_digi #siteBoardTable2 {
+  border: 0;
+  background-color: transparent;
+}
+
+.theme_digi #siteBoardTableLeft,
+.theme_digi #siteBoardTableRight,
+.theme_digi #imageList {
+  border-bottom: 0;
+  border-right: 0;
+  background-color: transparent;
+}
+
+.theme_digi .leftmenu {
+  display: table-cell;
+}
+
+.theme_digi a:link {
+  color: #00e;
+}
+
+.theme_digi a:visited {
+  color: purple;
+}
+
+.theme_digi .logoImg,
+.theme_digi .logoImgRumi,
+.theme_digi .logoImgOld {
+  display: none;
+}
+
+.theme_digi .logoText:before {
+  content: "Wapchan";
+  display: block;
+  font-family: 'Arial Pixelated 32';
+  font-size: 48px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.theme_digi .topBoards a,
+.theme_digi .innerPost,
+.theme_digi .sideCatalogCell,
+.theme_digi .markedPost,
+.theme_digi .sideCatalogMarkedCell,
+.theme_digi .catalogCell,
+.theme_digi .floatingMenu,
+.theme_digi #quick-reply table {
+  background-color: #f0e0d6;
+}
+
+.theme_digi #divLatestPosts .latestPostCell,
+.theme_digi .innerPost,
+.theme_digi .sideCatalogCell,
+.theme_digi .markedPost,
+.theme_digi .sideCatalogMarkedCell,
+.theme_digi .catalogCell {
+  border: none;
+}
+
+.theme_digi #newPostFieldset,
+.theme_digi #quick-reply table,
+.theme_digi .modalDecorationPanel,
+.theme_digi .floatingMenu,
+.theme_digi #settingsFieldset,
+.theme_digi .reportFieldset {
+  border: 1px dashed #117743;
+}
+
+.theme_digi hr {
+  border-color: #117743;
+}
+
+.theme_digi a,
+.theme_digi,
+.theme_digi .unhideButton,
+.theme_digi .embedButton,
+.theme_digi #selectedTab,
+.theme_digi #showFormsButton {
+  color: maroon;
+}
+
+.theme_digi input,
+.theme_digi select,
+.theme_digi textarea {
+  background: #FFFFEE;
+  border: 1px double #800000;
+  color: #800000;
+  font-family: 'Arial Pixelated 16', "CozetteVector";
+}
+
+.theme_digi input[type="button"],
+.theme_digi input[type="submit"],
+.theme_digi button,
+.theme_digi .dropzone,
+.theme_digi .selectedCell {
+  border: 1px solid #800000;
+  background: transparent;
+  color: #800000;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+}
+
+body.theme_digi {
+  background: #FFFFEE;
+  color: #800000;
+  font-family: 'Arial Pixelated 16', "CozetteVector";
+}
+
+.theme_digi nav {
+  background-color: #FFFFEE;
+}
+
+.theme_digi .leftmenu {
+  font-size: 100%;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-right-color: black;
+  width: 15%;
+  padding: 20px 10px 10px 10px;
+}
+
+.theme_digi .rightbody {
+  width: 100%;
+}
+
+.theme_digi .box {
+  border-left: 0px solid black;
+  border-right: 0px solid black;
+  border-top: 0px solid black;
+  border-bottom: 1px solid black;
+  color: black;
+  background-color: #FFFFEE;
+}
+
+.theme_digi .boxbar {
+  border-left: 0px solid black;
+  border-right: 0px solid black;
+  border-top: 0px solid black;
+  border-bottom: 1px solid black;
+  color: #800000;
+  font-weight: 700;
+  padding: 5px;
+  background-color: transparent;
+}
+
+.theme_digi #randomQuote {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.theme_digi .linkBarrierStart:before {
+  content: '[';
+}
+
+.theme_digi .linkBarrierEnd:before {
+  content: ']';
+}
+
+.theme_digi .linkBarrierDivider:before {
+  content: ' | ';
+}
+
+.theme_digi .newsHeader:before {
+  content: 'NEWS';
+  text-decoration: underline;
+  font-style: italic;
+  font-size: 150%;
+}
+
+.theme_digi #newsBox {
+  text-align: center;
+}
+
+.theme_digi #linkAbout:before {
+  content: 'About';
+}
+
+.theme_digi #linkRules:before {
+  content: 'Rules';
+}
+
+.theme_digi #linkBanners:before {
+  content: 'Banners';
+}
+
+.theme_digi #linkCinema:before {
+  content: 'Cinema';
+}
+
+.theme_digi #linkLinks:before {
+  content: 'Links';
+}
+
+.theme_digi #siteBoardBox {
+  display: none;
+}
+
+.theme_digi .boardHeader p,
+.theme_digi #annoTitle,
+.theme_digi #randomQuote {
+  color: #800000;
+}
+.theme_digi a:link .linkQuote {
+  color: maroon;
+}
+.theme_digi .linkQuote:hover {
+  color: #d00;
+}
+/*
+__  __        __                __              ____ 
+\ \/ /____   / /_ _____ __  __ / /_   ____ _   / __ )
+ \  // __ \ / __// ___// / / // __ \ / __ `/  / __  |
+ / // /_/ // /_ (__  )/ /_/ // /_/ // /_/ /  / /_/ / 
+/_/ \____/ \__//____/ \__,_//_.___/ \__,_/  /_____/  
+This is just the blue version of Yotsuba, so it's in the same file.
+*/
+body.theme_digi2 {
+  background: #eef2ff;
+  color: #000;
+}
+.theme_digi2 .box {
+  background-color: #eef2ff;
+}
+.theme_digi2 .boxbar {
+  color: #000;
+}
+.theme_digi2 nav {
+  background-color: #eef2ff;
+}
+.theme_digi2 .topBoards a,
+.theme_digi2 .innerPost,
+.theme_digi2 .sideCatalogCell,
+.theme_digi2 .markedPost,
+.theme_digi2 .sideCatalogMarkedCell,
+.theme_digi2 .catalogCell,
+.theme_digi2 .floatingMenu,
+.theme_digi2 #quick-reply table {
+  background-color: #d6daf0;
+}
+.theme_digi2 a:link {
+  color: #34345c;
+}
+.theme_digi2 a:hover {
+  color: #d00;
+}
+.theme_digi2 #annoTitle {
+  color: #000;
+}
+.theme_digi2 input,
+.theme_digi2 select,
+.theme_digi2 textarea {
+  background: #eef2ff;
+  border: 1px double #000;
+  color: #000;
+}
+
+.theme_digi2 .boardHeader p,
+.theme_digi2 #annoTitle,
+.theme_digi2 #randomQuote {
+  color: #000;
+}
+.theme_digi2 #postingForm th,
+.theme_digi2 .modalTableBody th {
+  background: #98e;
+}
+.theme_digi2 input[type="button"],
+.theme_digi2 input[type="submit"],
+.theme_digi2 button,
+.theme_digi2 .dropzone,
+.theme_digi2 .selectedCell {
+  border: 1px solid #000;
+  color: #000;
+}
+.theme_digi2 .labelSubject {
+  color: #0f0c5d;
+}
+.theme_digi2 a:link .linkQuote {
+  color: #d00;
+}
+.theme_digi2 a:link .linkQuote:hover {
+  color: #d00;
+}

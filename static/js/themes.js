@@ -43,7 +43,7 @@ themes.init = function() {
     id : 'wc'
   }, {
     label : 'Yotsuba B',
-    id : 'digi2'
+    id : 'digi theme_digi2'
   }];
 
   var postingLink = document.getElementById('lastHeader');

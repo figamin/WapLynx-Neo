@@ -88,18 +88,6 @@
 #randomQuote {
   color: #c5c8c6;
 }
-.theme_digi #randomQuote {
-  color: #800000;
-}
-.theme_pixl #randomQuote, .theme_th #randomQuote, .theme_tech #randomQuote {
-  color: white;
-}
-.theme_cel #randomQuote, .theme_mu #randomQuote, .theme_rumi #randomQuote, .theme_lit #randomQuote {
-  color: black;
-}
-.theme_cyber .topBoards a, .theme_cyber #divLatestImages img {
-  border: none;
-}
 
 @media only screen and (max-width: 812px) {
   .topBoards, #divLatestPosts {

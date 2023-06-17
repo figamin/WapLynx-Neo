@@ -1,0 +1,86 @@
+/*
+ _       __              __    __                        __        __ ____                   __ __               __        __ _ 
+| |     / /____   _____ / /__ / /_   ___   ____   _____ / /_     _/_// __/____   _____     _/_// /_ ___   _____ / /_     _/_/| |
+| | /| / // __ \ / ___// //_// __ \ / _ \ / __ \ / ___// __ \   / / / /_ / __ \ / ___/   _/_/ / __// _ \ / ___// __ \  _/_/  / /
+| |/ |/ // /_/ // /   / ,<  / /_/ //  __// / / // /__ / / / /  / / / __// /_/ // /     _/_/  / /_ /  __// /__ / / / /_/_/   / / 
+|__/|__/ \____//_/   /_/|_|/_.___/ \___//_/ /_/ \___//_/ /_/  / / /_/   \____//_/     /_/    \__/ \___/ \___//_/ /_//_/   _/_/  
+                                                              |_|                                                        /_/
+Workbench looks like the Amiga Workbench 1.0. It's wonderfully garish.
+*/
+.theme_tech .leftmenu {
+  display: none;
+}
+
+.theme_tech .logoImg {
+  display: none;
+}
+
+.theme_tech .logoImgRumi {
+  display: none;
+}
+
+.theme_tech .logoImgOld {
+  display: none;
+}
+
+.theme_tech .logoText:before {
+  content: "Wapchan";
+  font-size: 100px;
+}
+
+body.theme_tech {
+  background: #0054aa;
+  color: white;
+  font-family: 'TopazPlus a500';
+}
+
+.theme_tech input,
+.theme_tech select,
+.theme_tech textarea {
+  font-family: 'TopazPlus a500';
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.theme_tech .box {
+  color: white;
+  border: 1px solid white;
+}
+
+.theme_tech .boxbar,
+.theme_tech nav {
+  background-color: #fc8703;
+}
+
+.theme_tech a:link,
+.theme_tech a:visited {
+  color: white;
+}
+
+.theme_tech .topBoards a,
+.theme_tech .innerPost,
+.theme_tech .sideCatalogCell,
+.theme_tech .markedPost,
+.theme_tech .sideCatalogMarkedCell,
+.theme_tech .catalogCell,
+.theme_tech .floatingMenu,
+.theme_tech #quick-reply table {
+  background: #fc8703;
+}
+
+.theme_tech input[type="button"],
+.theme_tech input[type="submit"],
+.theme_tech button,
+.theme_tech .dropzone,
+.theme_tech .selectedCell {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+}
+.theme_tech #randomQuote {
+  color: white;
+}

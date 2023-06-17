@@ -1,0 +1,77 @@
+/*
+   _____                    __ __                     __ ____                   __       __     _  __ __    __ _ 
+  / ___/ ____ _ ____   ____/ // /_   ____   _  __   _/_// __/____   _____     _/_/_____ / /_   (_)/ // /  _/_/| |
+  \__ \ / __ `// __ \ / __  // __ \ / __ \ | |/_/  / / / /_ / __ \ / ___/   _/_/ / ___// __ \ / // // / _/_/  / /
+ ___/ // /_/ // / / // /_/ // /_/ // /_/ /_>  <   / / / __// /_/ // /     _/_/  / /__ / / / // // // /_/_/   / / 
+/____/ \__,_//_/ /_/ \__,_//_.___/ \____//_/|_|  / / /_/   \____//_/     /_/    \___//_/ /_//_//_//_//_/   _/_/  
+                                                 |_|                                                      /_/
+Sandbox is a nice green/pink theme. This was actually the original "default" theme for WapLynx Neo, before user feedback prompted a change back to a dark theme.
+*/
+.theme_chill .topBoards a,
+.theme_chill .innerPost,
+.theme_chill .sideCatalogCell,
+.theme_chill .catalogCell,
+.theme_chill .floatingMenu,
+.theme_chill #quick-reply table {
+  background: #99c969;
+}
+
+.theme_chill a,
+.theme_chill .unhideButton,
+.theme_chill .embedButton,
+.theme_chill #selectedTab,
+.theme_chill #showFormsButton {
+  color: #0084ff;
+  cursor: pointer;
+}
+
+.theme_chill input[type="button"],
+.theme_chill input[type="submit"],
+.theme_chill input[type="checkbox"],
+.theme_chill button,
+.theme_chill .dropzone,
+.theme_chill .selectedCell {
+  border: 1px solid #000000;
+  background: transparent;
+  color: #000000;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-family: "CozetteVector";
+}
+
+body.theme_chill {
+  color: black;
+  background: linear-gradient(135deg, rgba(230, 255, 205, 1) 30%, rgba(255, 182, 193, 1) 100%);
+  font-family: "CozetteVector";
+  font-size: 100%;
+  margin: 0px;
+}
+
+.theme_chill .innerPost,
+.theme_chill .markedPost {
+  display: inline-block;
+  padding: 0.25em;
+  max-width: 100%;
+  border: 1px solid black;
+}
+
+.theme_chill input,
+.theme_chill select,
+.theme_chill textarea {
+  font-size: 100%;
+}
+
+.theme_chill .box {
+  color: black;
+  background-color: transparent;
+}
+
+.theme_chill .boxbar {
+  text-align: left;
+  background-color: #99c969;
+}
+
+.theme_chill .boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
+}

@@ -1,0 +1,131 @@
+/*
+    ____   ______      ____   ____      __ ____                   __        _        __    __ _ 
+   / __ \ / ____/     / __ \ ( __ )   _/_// __/____   _____     _/_/____   (_)_  __ / /  _/_/| |
+  / /_/ // /   ______/ /_/ // __  |  / / / /_ / __ \ / ___/   _/_/ / __ \ / /| |/_// / _/_/  / /
+ / ____// /___/_____/\__, // /_/ /  / / / __// /_/ // /     _/_/  / /_/ // /_>  < / /_/_/   / / 
+/_/     \____/      /____/ \____/  / / /_/   \____//_/     /_/   / .___//_//_/|_|/_//_/   _/_/  
+                                   |_|                          /_/                      /_/
+PC-98 is a theme based around an old command prompt interface, meant to resemble the localized MS-DOS that ran on these computers (using the same font).
+*/
+.theme_pixl #siteBoardTable2 {
+  border: 1px solid white;
+  background-color: transparent;
+}
+
+.theme_pixl .topBoards a,
+.theme_pixl .innerPost,
+.theme_pixl .sideCatalogCell,
+.theme_pixl .catalogCell {
+  background: black;
+  border: 1px solid white;
+}
+
+.theme_pixl .floatingMenu,
+.theme_pixl #quick-reply table {
+  background: black;
+  border: 1px solid white;
+}
+
+.theme_pixl #siteBoardTableLeft,
+.theme_pixl #siteBoardTableRight,
+.theme_pixl #imageList {
+  background-color: transparent;
+}
+
+.theme_pixl .leftmenu {
+  display: none;
+}
+
+.theme_pixl .logoImg,
+.theme_pixl .logoImgRumi,
+.theme_pixl .logoImgOld {
+  display: none;
+}
+
+.theme_pixl .logoText:before {
+  content: "WAPCHAN.ORG ワップちゃん";
+  display: block;
+  font-family: 'PC-98';
+  font-size: 24px;
+}
+
+body.theme_pixl {
+  background: #000000;
+  color: white;
+  font-family: 'PC-98', "CozetteVector";
+}
+
+.theme_pixl .box {
+  background-color: black;
+  color: white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.theme_pixl .boxbar {
+  text-align: left;
+  background-color: #000000;
+}
+
+.theme_pixl a:link {
+  color: #f5deb3;
+}
+
+.theme_pixl a:visited {
+  color: #c4b18f;
+}
+
+.theme_pixl .boardHeader p {
+  color: white;
+}
+
+.theme_pixl nav {
+  background-color: black;
+  border-bottom: 1px solid white;
+}
+
+.theme_pixl input,
+.theme_pixl select,
+.theme_pixl textarea {
+  font-family: 'PC-98', "CozetteVector";
+  background: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.theme_pixl a,
+.theme_pixl,
+.theme_pixl .unhideButton,
+.theme_pixl .embedButton,
+.theme_pixl #selectedTab,
+.theme_pixl #showFormsButton {
+  color: #30C8FF;
+}
+
+.theme_pixl input[type=button],
+.theme_pixl input[type=submit],
+.theme_pixl button,
+.theme_pixl .dropzone,
+.theme_pixl .selectedCell {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+}
+
+.theme_pixl .labelSubject {
+  color: #FF1100;
+}
+
+.theme_pixl #postingForm th,
+.theme_pixl .modalTableBody th {
+  background: black;
+  border: 1px solid white;
+}
+.theme_pixl #randomQuote {
+  color: white;
+}

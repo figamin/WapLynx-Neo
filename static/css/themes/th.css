@@ -1,0 +1,158 @@
+/*
+   _____                     __       __      __ ____                   __ __   __        __ _ 
+  / ___/ _____ ____ _ _____ / /___   / /_   _/_// __/____   _____     _/_// /_ / /_     _/_/| |
+  \__ \ / ___// __ `// ___// // _ \ / __/  / / / /_ / __ \ / ___/   _/_/ / __// __ \  _/_/  / /
+ ___/ // /__ / /_/ // /   / //  __// /_   / / / __// /_/ // /     _/_/  / /_ / / / /_/_/   / / 
+/____/ \___/ \__,_//_/   /_/ \___/ \__/  / / /_/   \____//_/     /_/    \__//_/ /_//_/   _/_/  
+                                         |_|                                            /_/
+Scarlet features PC-98 Touhou art and the font of Touhou 6: the Embodiment of Scarlet Devil.
+*/
+.theme_th .leftmenu {
+  display: none;
+}
+
+.theme_th .logoImg,
+.theme_th .logoImgRumi,
+.theme_th .logoImgOld {
+  display: none;
+}
+
+.theme_th .logoText:before {
+  content: "Wapchan!";
+  font-size: 100px;
+}
+
+body.theme_th {
+  background: url("https://wapchan.org/.static/tou4.png");
+  color: white;
+  font-family: 'DFPOCOC', "ArimoNerdFont";
+}
+
+.theme_th .box {
+  color: white;
+}
+
+.theme_th a:link {
+  color: #f5deb3;
+}
+
+.theme_th a:visited {
+  color: #c4b18f;
+}
+
+.theme_th .boardHeader p {
+  color: white;
+}
+
+.theme_th nav {
+  background-color: #010101;
+  border-bottom: 1px solid white;
+}
+
+.theme_th select {
+  font-family: 'DFPOCOC', "ArimoNerdFont";
+}
+
+.theme_th .innerPost,
+.theme_th .sideCatalogCell,
+.theme_th .markedPost,
+.theme_th .sideCatalogMarkedCell,
+.theme_th .catalogCell {
+  border: 1px solid white;
+}
+
+.theme_th .topBoards a,
+.theme_th #divLatestImages img,
+.theme_th #divLatestPosts .latestPostCell,
+.theme_th .innerPost,
+.theme_th .sideCatalogCell,
+.theme_th .markedPost,
+.theme_th .sideCatalogMarkedCell,
+.theme_th .catalogCell {
+  background-color: rgba(1, 1, 1, .6);
+}
+
+.theme_th input,
+.theme_th select,
+.theme_th textarea {
+  font-family: 'DFPOCOC', "ArimoNerdFont";
+  background-color: rgba(1, 1, 1, .6);
+  color: white;
+  border: 1px solid white;
+}
+
+.theme_th .quoteTooltip {
+  background-color: rgba(1, 1, 1, 1);
+}
+
+.theme_th .labelSubject {
+  color: #89CFF0;
+}
+
+.theme_th .noEmailName,
+.theme_th .noEmailName:hover {
+  color: #90EE90;
+}
+
+.theme_th #postingForm th,
+.theme_th .modalTableBody th {
+  background: transparent;
+  border: 1px solid white;
+}
+
+.theme_th input[type=button],
+.theme_th input[type=submit],
+.theme_th button,
+.theme_th .dropzone,
+.theme_th .selectedCell {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+}
+
+.theme_th .boxbar {
+  text-align: left;
+  background-color: transparent;
+}
+
+.theme_th .boxbar p {
+  margin-top: 5px;
+}
+
+.theme_th .box {
+  background-color: rgba(1, 1, 1, .6);
+  color: white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.theme_th a,
+.theme_th,
+.theme_th .unhideButton,
+.theme_th .embedButton,
+.theme_th #selectedTab,
+.theme_th #showFormsButton {
+  color: #30C8FF;
+}
+
+.theme_th #siteBoardTable2 {
+  background-color: rgba(1, 1, 1, .6);
+}
+
+.theme_th .labelSubject {
+  color: #FF1100;
+}
+
+.theme_th .floatingMenu,
+.theme_th #quick-reply table {
+  background: #010101;
+  border: 1px solid white;
+}
+.theme_th #randomQuote {
+  color: white;
+}

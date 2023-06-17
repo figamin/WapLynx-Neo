@@ -1,0 +1,105 @@
+/*
+    ____                 __       __ ____                   __ __ _  __      __ _ 
+   / __ ) ____   ____   / /__   _/_// __/____   _____     _/_// /(_)/ /_   _/_/| |
+  / __  |/ __ \ / __ \ / //_/  / / / /_ / __ \ / ___/   _/_/ / // // __/ _/_/  / /
+ / /_/ // /_/ // /_/ // ,<    / / / __// /_/ // /     _/_/  / // // /_ _/_/   / / 
+/_____/ \____/ \____//_/|_|  / / /_/   \____//_/     /_/   /_//_/ \__//_/   _/_/  
+                             |_|                                           /_/
+Book looks like a fancy paperback.
+*/
+.theme_lit a,
+.theme_lit .unhideButton,
+.theme_lit .embedButton,
+.theme_lit #selectedTab,
+#showFormsButton {
+  color: black;
+  cursor: pointer;
+}
+
+.theme_lit .leftmenu {
+  display: none;
+}
+
+.theme_lit .logoImg {
+  display: none;
+}
+
+.theme_lit .logoImgRumi {
+  display: none;
+}
+
+.theme_lit .logoImgOld {
+  display: none;
+}
+
+.theme_lit .logoText:before {
+  content: "Wapchan.";
+  font-size: 100px;
+}
+
+body.theme_lit {
+  font-family: 'Libre Baskerville', "ArimoNerdFont";
+  color: black;
+  background: url("https://wapchan.org/.static/lined_paper.png");
+}
+
+.theme_lit nav {
+  background-color: #f9f9f9;
+}
+
+.theme_lit input,
+.theme_lit select,
+.theme_lit textarea {
+  font-family: 'Libre Baskerville';
+  background-color: transparent;
+  color: black;
+}
+
+.theme_lit .boxbar {
+  background-color: transparent;
+}
+
+.theme_lit .innerPost,
+.theme_lit .sideCatalogCell,
+.theme_lit .markedPost,
+.theme_lit .sideCatalogMarkedCell,
+.theme_lit .catalogCell {
+  border: 1px solid black;
+}
+
+.theme_lit #newPostFieldset,
+.theme_lit #quick-reply table,
+.theme_lit .modalDecorationPanel,
+.theme_lit .floatingMenu,
+.theme_lit #settingsFieldset,
+.theme_lit .reportFieldset {
+  border: 1px dashed black;
+}
+
+.theme_lit .topBoards a,
+.theme_lit #divLatestImages img,
+.theme_lit #divLatestPosts .latestPostCell,
+.theme_lit .innerPost,
+.theme_lit .sideCatalogCell,
+.theme_lit .markedPost,
+.theme_lit .sideCatalogMarkedCell,
+.theme_lit .catalogCell {
+  background-color: transparent;
+}
+
+.theme_lit .box {
+  color: black;
+  background-color: transparent;
+}
+
+.theme_lit .labelSubject {
+  color: black;
+}
+
+.theme_lit .boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
+}
+.theme_lit #randomQuote {
+    color: black;
+  }

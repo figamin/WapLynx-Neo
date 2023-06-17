@@ -1,0 +1,120 @@
+/*
+ _       __                     __                     ______ __                    _      
+| |     / /____ _ ____   _____ / /_   ____ _ ____     / ____// /____ _ _____ _____ (_)_____
+| | /| / // __ `// __ \ / ___// __ \ / __ `// __ \   / /    / // __ `// ___// ___// // ___/
+| |/ |/ // /_/ // /_/ // /__ / / / // /_/ // / / /  / /___ / // /_/ /(__  )(__  )/ // /__  
+|__/|__/ \__,_// .___/ \___//_/ /_/ \__,_//_/ /_/   \____//_/ \__,_//____//____//_/ \___/  
+              /_/                                                                          
+Wapchan Classic is a slightly more "authentic" version of the old Wapchan UI, complete with the HAND DRAWN PREMIERE LOGO!
+*/
+body.theme_wc {
+    background: url("../../snow.gif") repeat, #1d1f21;
+    font-family: 'Nine By Five NBP', "CozetteVector";
+    color: #c5c8c6;
+    letter-spacing: 0.075em;
+  }
+  
+  .theme_wc .box {
+    color: #c5c8c6;
+    background-color: #282a2e;
+  }
+  
+  .theme_wc .boxbar {
+    background-color: #1d1f21;
+  }
+  
+  .theme_wc .logoImg,
+  .theme_wc .logoImgRumi {
+    display: none;
+  }
+  
+  .theme_wc .logoImgOld {
+    display: inline-block;
+    height: 250px;
+    min-width: 1px;
+  }
+  
+  .theme_wc input,
+  .theme_wc select,
+  .theme_wc textarea {
+    font-family: 'Nine By Five NBP', "CozetteVector";
+    background-color: transparent;
+    color: #c5c8c6;
+    letter-spacing: 0.075em;
+  }
+  
+  .theme_wc nav {
+    background-color: rgba(40, 42, 46, 0.9);
+  }
+  
+  .theme_wc a,
+  .theme_wc .unhideButton,
+  .theme_wc .embedButton,
+  .theme_wc #selectedTab,
+  .theme_wc #showFormsButton {
+    color: rgb(154, 185, 242);
+    cursor: pointer;
+  }
+  
+  .theme_wc .topBoards a,
+  .theme_wc .innerPost,
+  .theme_wc .sideCatalogCell,
+  .theme_wc .markedPost,
+  .theme_wc .sideCatalogMarkedCell,
+  .theme_wc .catalogCell {
+    background: #282a2e;
+  }
+  
+  .theme_wc .markedPost,
+  .theme_wc .sideCatalogMarkedCell {
+    background: rgba(20, 20, 20, 1);
+    border-width: 1px;
+    border-style: solid;
+    border-color: #111;
+  }
+  
+  .theme_wc input[type="button"],
+  .theme_wc input[type="submit"],
+  .theme_wc button,
+  .theme_wc .dropzone,
+  .theme_wc .selectedCell {
+    border: 1px solid #111;
+    background: #282a2e;
+    color: #c5c8c6;
+    padding-left: 0.25em;
+    font-size: 80%;
+    font-weight: bold;
+  }
+  
+  .theme_wc input,
+  .theme_wc select,
+  .theme_wc textarea {
+    background: #282a2e;
+    border: 1px solid #111;
+    color: #c5c8c6;
+  }
+  
+  .theme_wc .postInfo,
+  .theme_wc .opHead,
+  .theme_wc .divMessage,
+  .theme_wc .panelUploads,
+  .theme_wc .panelIp,
+  .theme_wc .panelProxyIp,
+  .theme_wc .contentOmissionIndicator,
+  .theme_wc .labelOmission,
+  .theme_wc .labelId,
+  .theme_wc .panelASN,
+  .theme_wc .panelBypassId {
+    font-size: 13pt;
+  }
+  
+  .theme_wc #postingForm th,
+  .theme_wc .modalTableBody th {
+    background: #282a2e;
+  }
+  
+  .theme_wc .noEmailName,
+  .theme_wc .noEmailName:hover {
+    color: #c5c8c6;
+  }
+  
