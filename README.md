@@ -1,12 +1,6 @@
-**PenumbraLynx** is an updated version of [8TailedLynx](https://gitgud.io/obongo/8TailedLynx)'s Penumbra version.
+**WapLynx Neo** is the current frontend for [wapchan.org](https://wapchan.org)
 
-Install by cloning anywhere and then pointing it to the engine on the global settings. Make sure to check out the correct tag.
+It features a number of highly customised themes, but for use on other sites a lot of work is needed, as many elements are specifically made for wapchan.
 
-To personalize your chan please read LynxChan's documentation on templates.
-
-The favicon in the static directory is served from mongo and will need to be uploaded into MongoDB manually. To do this you need to get the 
-mongofiles tool and run
-
-> mongofiles -h localhost -d {dbName} -l {/path/to/yourfavicon} put /favicon.ico
-
-This front end currently requires you to set the URI of the overboard as "overboard".
+## note
+This repo contains a number of fonts with varying licenses (mostly free to use with attribution). If you want to use this on a commercial project, please look those up.
