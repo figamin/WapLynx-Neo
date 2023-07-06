@@ -1,7 +1,7 @@
 var postingMenu = {};
 
 postingMenu.init = function() {
-  postingMenu.reasonList = ['Politics', 'Frog/Jakposting','Unspoilered NSFW', 'Spam', 'Excessive Slurs','CP/Illegal Content'];
+  postingMenu.reasonList = ['Politics', 'Frog/Jakposting','Unspoilered NSFW', 'Spam', 'Excessive Slurs','CP/Illegal Content', 'Imageboard ad on wrong board (read the rules!)', 'Off Topic'];
   postingMenu.durationLengths = ['3d', '1w', '99y'];
   postingMenu.banLabels = [ 'IP/Bypass ban', 'Range ban (1/2 octects)',
       'Range ban (3/4 octects)', 'ASN ban', 'IP/Bypass warning' ];

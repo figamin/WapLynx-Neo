@@ -1,0 +1,36 @@
+/*
+ _       __        __ __                                __ ____                   __                      __ _ 
+| |     / /____ _ / // /__ ____ ___   ____ _ ____     _/_// __/____   _____     _/_/____ ___   __  __   _/_/| |
+| | /| / // __ `// // //_// __ `__ \ / __ `// __ \   / / / /_ / __ \ / ___/   _/_/ / __ `__ \ / / / / _/_/  / /
+| |/ |/ // /_/ // // ,<  / / / / / // /_/ // / / /  / / / __// /_/ // /     _/_/  / / / / / // /_/ /_/_/   / / 
+|__/|__/ \__,_//_//_/|_|/_/ /_/ /_/ \__,_//_/ /_/  / / /_/   \____//_/     /_/   /_/ /_/ /_/ \__,_//_/   _/_/  
+                                                   |_|                                                  /_/
+Walkman is an 80s looking theme with a font resembiling the ones used in 70s/80s Sony print advertizing. 
+*/
+.boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
+}
+
+body{
+  font-family: 'Clarendon', "ArimoNerdFont";
+  color: black;
+  background: url("https://wapchan.org/.static/shapes-light.png");
+}
+
+.box,
+#siteBoardTable1,
+#siteBoardTable2 {
+  background-color: #ffffff;
+  color: black;
+}
+#randomQuote {
+  color: black;
+}
+nav, .dropdown-content {
+  background-color: #ffffff;
+  color: black;
+}
+.boxbar {
+  background-color: transparent;
+}

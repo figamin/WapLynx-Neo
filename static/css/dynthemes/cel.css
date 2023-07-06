@@ -1,0 +1,230 @@
+ /*
+    _____  __           _                  __ ____                   __             __    __ _ 
+  / ___/ / /_   _____ (_)____   ___     _/_// __/____   _____     _/_/_____ ___   / /  _/_/| |
+  \__ \ / __ \ / ___// // __ \ / _ \   / / / /_ / __ \ / ___/   _/_/ / ___// _ \ / / _/_/  / /
+ ___/ // / / // /   / // / / //  __/  / / / __// /_/ // /     _/_/  / /__ /  __// /_/_/   / / 
+/____//_/ /_//_/   /_//_/ /_/ \___/  / / /_/   \____//_/     /_/    \___/ \___//_//_/   _/_/  
+                                     |_|                                               /_/    
+Shrine is a theme that attempts to mimic the look and feel of Web 1.0 anime internet shrines. These were websites often hosted on geocities or personal univeristy pages, and though crude, they have a handcrafted charm about them. This is a light theme, though a dark variant may come later as many old anime shrines had dark themes (there was no real consistency).
+*/
+.leftmenu {
+  display: none;
+}
+
+.logoImg,
+.logoImgRumi,
+.logoImgOld {
+  display: none;
+}
+
+.logoText:before {
+  content: "Wapanese Channel";
+  display: block;
+  font-family: 'Times Pixelated 32';
+  font-size: 48px;
+  font-weight: bold;
+}
+  
+.topBoards a,
+.innerPost,
+.sideCatalogCell,
+.markedPost,
+.sideCatalogMarkedCell,
+.catalogCell,
+.floatingMenu,
+#quick-reply table,
+.quoteTooltip {
+  background: url("https://wapchan.org/.static/dotsdark2.webp");
+}
+  
+.markedPost,
+.sideCatalogMarkedCell {
+  background: #868686;
+}
+  
+.innerPost,
+.sideCatalogCell,
+.markedPost,
+.sideCatalogMarkedCell,
+.catalogCell {
+  border: 1px solid black;
+}
+  
+#newPostFieldset,
+#quick-reply table,
+.modalDecorationPanel,
+.floatingMenu,
+#settingsFieldset,
+.reportFieldset {
+  border: 1px dashed black;
+}
+  
+hr {
+  border-color: #117743;
+}
+  
+a,
+.theme_cel,
+.unhideButton,
+.embedButton,
+#selectedTab,
+#showFormsButton {
+  color: #0000EE;
+}
+
+input,
+select,
+textarea {
+  background: white;
+  border: 1px double black;
+  color: black;
+}
+
+input[type=button],
+input[type=submit],
+button,
+.dropzone,
+.selectedCell {
+  border: 1px solid #000000;
+  background: transparent;
+  color: #000000;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+  font-family: 'Times Pixelated 16', "CozetteVector";
+}
+
+body{
+  background: url("https://wapchan.org/.static/dots.webp");
+  color: #000;
+  font-family: 'Times Pixelated 16', "CozetteVector";
+}
+
+nav, .dropdown-content {
+  background-color: #ffffff;
+}
+.droptext {
+  background-color: #ffffff;
+  color: black;
+}
+.box {
+  border: 0;
+  background-color: transparent;
+  color: black;
+}
+
+.boxbar {
+  font-family: 'Times Pixelated 32';
+  border: 0;
+  background-color: transparent;
+}
+
+.boxbar p {
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.linkBarrierStart:before {
+  content: '[';
+}
+
+.linkBarrierEnd:before {
+  content: ']';
+}
+
+.linkBarrierDivider:before {
+  content: ' | ';
+}
+
+.newsHeader:before,
+.theme_th {
+  content: 'News:';
+}
+
+#linkAbout:before {
+  content: 'About';
+}
+
+#linkRules:before {
+  content: 'Rules';
+}
+
+#linkBanners:before {
+  content: 'Banners';
+}
+
+#linkEmotes:before {
+  content: 'Emotes';
+}
+
+#linkCinema:before {
+  content: 'Cinema';
+}
+
+#linkLinks:before {
+  content: 'Links';
+}
+#linkFrames:before {
+  content: 'Frames';
+}
+input,
+select,
+textarea {
+  font-family: 'Times Pixelated 16', "CozetteVector";
+}
+
+#specialBoxBar {
+  border: 0;
+}
+
+#siteBoardTable2 {
+  border: 0;
+  background-color: transparent;
+}
+
+.siteBoardBody {
+  border-left: 0;
+}
+
+.TableTop {
+  border-top: 0;
+}
+
+.TableBottom {
+  border-bottom: 0;
+}
+
+.TableRight {
+  border-right: 0;
+}
+
+#siteBoardTableLeft,
+#siteBoardTableRight,
+#imageList {
+  border-bottom: 0;
+  border-right: 0;
+  background-color: transparent;
+}
+  
+.labelSubject {
+  color: black;
+}
+
+.boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
+}
+
+#postingForm th,
+.modalTableBody th {
+  background: transparent;
+}
+
+.boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
+}
+#randomQuote {
+  color: black;
+}
+

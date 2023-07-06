@@ -13,9 +13,12 @@ body.theme_hob {
   font-family: 'TT Bricks Trial', "ArimoNerdFont";
 }
 
-.theme_hob nav {
+.theme_hob nav, .theme_hob .dropdown-content {
   background-color: #705d4c;
   border-bottom: 1px solid white;
+}
+.theme_hob .droptext {
+  background-color: white;
 }
 
 .theme_hob .boxbar {

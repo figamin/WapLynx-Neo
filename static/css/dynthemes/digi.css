@@ -1,0 +1,331 @@
+/*
+ __  __        __                __               __ ____                   __     __ _         _     __ _ 
+\ \/ /____   / /_ _____ __  __ / /_   ____ _   _/_// __/____   _____     _/_/____/ /(_)____ _ (_)  _/_/| |
+ \  // __ \ / __// ___// / / // __ \ / __ `/  / / / /_ / __ \ / ___/   _/_/ / __  // // __ `// / _/_/  / /
+ / // /_/ // /_ (__  )/ /_/ // /_/ // /_/ /  / / / __// /_/ // /     _/_/  / /_/ // // /_/ // /_/_/   / / 
+/_/ \____/ \__//____/ \__,_//_.___/ \__,_/  / / /_/   \____//_/     /_/    \__,_//_/ \__, //_//_/   _/_/  
+                                            |_|                                     /____/         /_/
+Yotsuba is a theme largely based on the very early days of 4chan (circa 2003), since this where some of the best 2000s online anime discussions took place. As such, it's a oretty simple theme, and is mostly differentiated from the other themes by the sidebar on the front page, since this is actually how 4chan looked at the time. Here is the actual capture of 4chan.net that I used to help make the elements for this theme.
+https://web.archive.org/web/20031122004728/http://www.4chan.net/
+*/
+#postingForm th,
+.modalTableBody th {
+  background: #ea8;
+}
+
+.labelSubject {
+  color: #cc1105;
+}
+
+.linkName {
+  color: #117743;
+}
+
+#siteBoardTable2 {
+  border: 0;
+  background-color: transparent;
+}
+
+#siteBoardTableLeft,
+#siteBoardTableRight,
+#imageList {
+  border-bottom: 0;
+  border-right: 0;
+  background-color: transparent;
+}
+
+.leftmenu {
+  display: table-cell;
+}
+
+a:link {
+  color: #00e;
+}
+
+a:visited {
+  color: purple;
+}
+
+.logoImg,
+.logoImgRumi,
+.logoImgOld {
+  display: none;
+}
+
+.logoText:before {
+  content: "Wapchan";
+  display: block;
+  font-family: 'Arial Pixelated 32';
+  font-size: 48px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.topBoards a,
+.innerPost,
+.sideCatalogCell,
+.markedPost,
+.sideCatalogMarkedCell,
+.catalogCell,
+.floatingMenu,
+#quick-reply table {
+  background-color: #f0e0d6;
+}
+.quoteTooltip {
+  background-color: #f0e0d6;
+  border: 1px solid #800000;
+}
+#divLatestPosts .latestPostCell,
+.innerPost,
+.sideCatalogCell,
+.markedPost,
+.sideCatalogMarkedCell,
+.catalogCell {
+  border: none;
+}
+
+#newPostFieldset,
+#quick-reply table,
+.modalDecorationPanel,
+.floatingMenu,
+#settingsFieldset,
+.reportFieldset {
+  border: 1px dashed #117743;
+}
+
+hr {
+  border-color: #117743;
+}
+
+a,
+.theme_digi,
+.unhideButton,
+.embedButton,
+#selectedTab,
+#showFormsButton {
+  color: maroon;
+}
+
+input,
+select,
+textarea {
+  background: #FFFFEE;
+  border: 1px double #800000;
+  color: #800000;
+  font-family: 'Arial Pixelated 16', "CozetteVector";
+}
+
+input[type="button"],
+input[type="submit"],
+button,
+.dropzone,
+.selectedCell {
+  border: 1px solid #800000;
+  background: #ea8;
+  color: #800000;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+}
+
+body{
+  background: #FFFFEE;
+  color: #800000;
+  font-family: 'Arial Pixelated 16', "CozetteVector";
+}
+
+nav, .dropdown-content {
+  background-color: #FFFFEE;
+}
+.droptext {
+  color: #800000;
+}
+.leftmenu {
+  font-size: 100%;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-right-color: black;
+  width: 15%;
+  padding: 20px 10px 10px 10px;
+}
+
+.rightbody {
+  width: 100%;
+}
+
+.box {
+  border-left: 0px solid black;
+  border-right: 0px solid black;
+  border-top: 0px solid black;
+  border-bottom: 1px solid black;
+  color: black;
+  background-color: #FFFFEE;
+}
+
+.boxbar {
+  border-left: 0px solid black;
+  border-right: 0px solid black;
+  border-top: 0px solid black;
+  border-bottom: 1px solid black;
+  color: #800000;
+  font-weight: 700;
+  padding: 5px;
+  background-color: transparent;
+}
+
+#randomQuote {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.linkBarrierStart:before {
+  content: '[';
+}
+
+.linkBarrierEnd:before {
+  content: ']';
+}
+
+.linkBarrierDivider:before {
+  content: ' | ';
+}
+
+.newsHeader:before {
+  content: 'NEWS';
+  text-decoration: underline;
+  font-style: italic;
+  font-size: 150%;
+}
+
+#newsBox {
+  text-align: center;
+}
+
+#linkAbout:before {
+  content: 'About';
+}
+
+#linkRules:before {
+  content: 'Rules';
+}
+
+#linkBanners:before {
+  content: 'Banners';
+}
+
+#linkEmotes:before {
+  content: 'Emotes';
+}
+
+#linkCinema:before {
+  content: 'Cinema';
+}
+
+#linkLinks:before {
+  content: 'Links';
+}
+#linkFrames:before {
+  content: 'Frames';
+}
+
+#siteBoardBox {
+  display: none;
+}
+
+.boardHeader p,
+#annoTitle,
+#randomQuote {
+  color: #800000;
+}
+a:link .linkQuote {
+  color: maroon;
+}
+.linkQuote:hover {
+  color: #d00;
+}
+/*
+__  __        __                __              ____ 
+\ \/ /____   / /_ _____ __  __ / /_   ____ _   / __ )
+ \  // __ \ / __// ___// / / // __ \ / __ `/  / __  |
+ / // /_/ // /_ (__  )/ /_/ // /_/ // /_/ /  / /_/ / 
+/_/ \____/ \__//____/ \__,_//_.___/ \__,_/  /_____/  
+This is just the blue version of Yotsuba, so it's in the same file.
+*/
+body.theme_digi2 {
+  background: #eef2ff;
+  color: #000;
+}
+.theme_digi2 .box {
+  background-color: #eef2ff;
+}
+.theme_digi2 .boxbar {
+  color: #000;
+}
+.theme_digi2 nav, .theme_digi2 .dropdown-content {
+  background-color: #eef2ff;
+}
+.theme_digi2 .droptext {
+  color: #000;
+}
+.theme_digi2 .topBoards a,
+.theme_digi2 .innerPost,
+.theme_digi2 .sideCatalogCell,
+.theme_digi2 .markedPost,
+.theme_digi2 .sideCatalogMarkedCell,
+.theme_digi2 .catalogCell,
+.theme_digi2 .floatingMenu,
+.theme_digi2 #quick-reply table {
+  background-color: #d6daf0;
+}
+.theme_digi2 a:link {
+  color: #34345c;
+}
+.theme_digi2 a:hover {
+  color: #d00;
+}
+.theme_digi2 #annoTitle {
+  color: #000;
+}
+.theme_digi2 input,
+.theme_digi2 select,
+.theme_digi2 textarea {
+  background: #eef2ff;
+  border: 1px double #000;
+  color: #000;
+}
+
+.theme_digi2 .boardHeader p,
+.theme_digi2 #annoTitle,
+.theme_digi2 #randomQuote {
+  color: #000;
+}
+.theme_digi2 #postingForm th,
+.theme_digi2 .modalTableBody th {
+  background: #98e;
+}
+.theme_digi2 input[type="button"],
+.theme_digi2 input[type="submit"],
+.theme_digi2 button,
+.theme_digi2 .dropzone,
+.theme_digi2 .selectedCell {
+  border: 1px solid #000;
+  color: #000;
+  background: #98e;
+}
+.theme_digi2 .labelSubject {
+  color: #0f0c5d;
+}
+.theme_digi2 a:link .linkQuote {
+  color: #d00;
+}
+.theme_digi2 a:link .linkQuote:hover {
+  color: #d00;
+}
+.theme_digi2 #newPostFieldset,
+.theme_digi2 #quick-reply table,
+.theme_digi2 .modalDecorationPanel,
+.theme_digi2 .floatingMenu,
+.theme_digi2 #settingsFieldset,
+.theme_digi2 .reportFieldset {
+  border: 1px dashed #117743;
+}

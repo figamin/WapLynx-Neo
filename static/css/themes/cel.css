@@ -32,7 +32,8 @@ Shrine is a theme that attempts to mimic the look and feel of Web 1.0 anime inte
 .theme_cel .sideCatalogMarkedCell,
 .theme_cel .catalogCell,
 .theme_cel .floatingMenu,
-.theme_cel #quick-reply table {
+.theme_cel #quick-reply table,
+.theme_cel .quoteTooltip {
   background: url("https://wapchan.org/.static/dotsdark2.webp");
 }
   
@@ -99,10 +100,13 @@ body.theme_cel {
   font-family: 'Times Pixelated 16', "CozetteVector";
 }
 
-.theme_cel nav {
+.theme_cel nav, .theme_cel .dropdown-content {
   background-color: #ffffff;
 }
-
+.theme_cel .droptext {
+  background-color: #ffffff;
+  color: black;
+}
 .theme_cel .box {
   border: 0;
   background-color: transparent;
@@ -149,6 +153,10 @@ body.theme_cel {
   content: 'Banners';
 }
 
+.theme_cel #linkEmotes:before {
+  content: 'Emotes';
+}
+
 .theme_cel #linkCinema:before {
   content: 'Cinema';
 }
@@ -156,7 +164,9 @@ body.theme_cel {
 .theme_cel #linkLinks:before {
   content: 'Links';
 }
-
+.theme_cel #linkFrames:before {
+  content: 'Frames';
+}
 .theme_cel input,
 .theme_cel select,
 .theme_cel textarea {
@@ -217,3 +227,4 @@ body.theme_cel {
 .theme_cel #randomQuote {
   color: black;
 }
+

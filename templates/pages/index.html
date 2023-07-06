@@ -21,6 +21,7 @@
   href="/.static/css/posting.css"
   type="text/css"
   rel="stylesheet" />
+<link rel="icon" type="image/x-icon" href="/.static/favicon.ico">
 </head>
 <body>
 
@@ -50,6 +51,7 @@
               <p>
                 <a href="/chill">/chill/ - Chill Out!</a><br><br>
                 <a href="/wap">/wap/ - Site Meta</a><br><br>
+                <a href="/doodle">/doodle/ - Wapchan Doodles!</a><br><br>
               </p>
               <!--<u><p style="margin-top: 10px;margin-bottom: 10px;">Sitewide Stats</p></u>
               <p>
@@ -64,7 +66,7 @@
               <div
               id="logoBox"
               class="title">
-              <img
+                <img
                 src="/.static/logo.png"
                 class="logoImg"
                 alt="logo" />
@@ -97,6 +99,11 @@
                 </a>
                 <span class="linkBarrierDivider"></span>
                 <a
+                  href="/.static/pages/emotes.html"
+                  id="linkEmotes">
+                </a>
+                <span class="linkBarrierDivider"></span>
+                <a
                   href="https://cytu.be/r/wapchan"
                   id="linkCinema">
                 </a>
@@ -104,6 +111,11 @@
                 <a
                   href="/.static/pages/links.html"
                   id="linkLinks">
+                </a>
+                <span class="linkBarrierDivider"></span>
+                <a
+                  href="/.static/pages/frames.html"
+                  id="linkFrames">
                 </a>
                 <span class="linkBarrierEnd"></span>
               </span>
@@ -127,7 +139,7 @@
                   <p>Hello!</p>
                 </div>
                 <div class="boxcontent" id="descBox">
-                  <p>Welcome to ｢wapchan｣, the offbeat retro content forum. While most of our discussion boards are geared towards anime & manga, we also have boards where you can relax and shoot the breeze, as well as a number of chat services to keep you connected.<br><br>If you're new here, be sure to read the <a href="/.static/pages/rules.html">rules & guidelines</a> to get up to speed on how we do things around here, subscribe to one of our <a href="#postNotifs">post notification services</a>, and start posting! Whether you're a total newbie or a seasoned otaku, we hope you watch and read some new stuff during your time here.
+                  <p>Welcome to ｢wapchan｣, the offbeat retro content forum. While most of our discussion boards are geared towards anime & manga, we also have boards where you can relax and shoot the breeze, as well as a number of chat services to keep you connected.<br><br>If you're new here, be sure to read the <a href="/.static/pages/rules.html">rules & guidelines</a> to get up to speed on how we do things around here, subscribe to one of our <a href="#postNotifs">post notification services</a>, and start posting! Whether you're a total newbie or a seasoned otaku, we hope you watch and read some new stuff during your time here. Also, check out our <a href="https://twitter.com/wapchanorg">twitter page</a> if you want to help spread the word about this site.
                   </p>
                 </div>
               </div>
@@ -151,25 +163,25 @@
                     </tr>
                     <tr>
                       <td class="siteBoardBody Left"><a href="/digi">/digi/ - 2000s Anime</a></td>
-                      <td class="siteBoardBody"><a href="/hob">/hob/ - Hobbies</a></td>
+                      <td class="siteBoardBody"><a href="/lit">/lit/ - Literature</a></td>
                       <td class="siteBoardBody"><a href="/wap">/wap/ - Site Meta</a></td>
                       <td class="siteBoardBody TableRight"><span id="labelTotalFiles"></span> files totaling <span id="labelTotalSize"></span></td>
                     </tr>
                     <tr>
                       <td class="siteBoardBody Left"><a href="/pixl">/pixl/ - Retro Vidya</a></td>
-                      <td class="siteBoardBody"><a href="/lit">/lit/ - Literature</a></td>
-                      <td class="siteBoardBody"></td>
-                      <td class="siteBoardBody TableRight"></td>
+                      <td class="siteBoardBody"><a href="/mu">/mu/ - Music</a></td>
+                      <td class="siteBoardBody"><a href="/doodle">/doodle/ - Wapchan Doodles!</a></td>
+                      <td class="siteBoardBody TableRight"><a href="https://stats.uptimerobot.com/nPvqBhXAO0" >Wapchan Uptime Monitor</a></td>
                     </tr>
                     <tr>
                       <td class="siteBoardBody Left"><a href="/rumi">/rumi/ - Rumic World</a></td>
-                      <td class="siteBoardBody"><a href="/mu">/mu/ - Music</a></td>
+                      <td class="siteBoardBody"><a href="/tech">/tech/ - Technology</a></td>
                       <td class="siteBoardBody"></td>
                       <td class="siteBoardBody TableRight"></td>
                     </tr>
                     <tr>
                       <td class="siteBoardBody TableBottom Left"><a href="/th">/th/ - Touhou</a></td>
-                      <td class="siteBoardBody TableBottom"><a href="/tech">/tech/ - Technology</a></td>
+                      <td class="siteBoardBody TableBottom"></td>
                       <td class="siteBoardBody TableBottom"></td>
                       <td class="siteBoardBody TableBottom TableRight"></td>
                     </tr>
@@ -188,6 +200,16 @@
                   <td><div id="divLatestPosts"></div></td>
                 </tr>
               </table>
+              <div class="box">
+                <div class="boxbar">
+                  <p>Latest 4 Doodles
+                  </p>
+                </div>
+                <div class="boxcontent">
+                  <div class="doodlebox">
+                  </div>
+                </div>
+              </div>
             </div>  
           </td>
         </tr>
@@ -205,5 +227,6 @@
 <script src="/.static/js/favouriteBoards.js"></script>
 <script src="/.static/js/randomFooter.js"></script>
 <script src="/.static/js/randomQuote.js"></script>
-<script src="/.static/js/announceIndex.js"></script
+<script src="/.static/js/announceIndex.js"></script>
+<script src="/.static/js/latestDoodles.js"></script>
 </html>

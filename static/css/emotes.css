@@ -1,0 +1,405 @@
+/*
+Proof of concept Emotes!
+*/
+.emote{
+    display: inline-table;
+}
+.emote:before{
+    height:19px;
+    width:24px;
+    display: inline-table;
+    content: '';
+    background-repeat: no-repeat;background-size: cover;
+}
+.ranEmote:before {
+    background-image: url(/.static/emotes/ranEmote.png);
+    background-repeat: no-repeat;background-size: cover;
+}
+.lumEmote:before {
+    background-image: url(/.static/emotes/lumEmote.png);
+    background-repeat: no-repeat;background-size: cover;
+}
+.shinobuEmote:before {
+    background-image: url(/.static/emotes/shinobuEmote.png);
+    background-repeat: no-repeat;background-size: cover;
+}
+.ataruEmote:before {
+    background-image: url(/.static/emotes/ataruEmote.png);
+    background-repeat: no-repeat;background-size: cover;
+}
+.smileyhappyEmote:before {
+    background-image: url(/.static/emotes/smileyhappy.gif);
+    background-repeat: no-repeat;background-size: cover;
+}
+.luvuEmote:before {
+    background-image: url(/.static/emotes/luvu.gif);
+    background-repeat: no-repeat;background-size: cover;
+}
+.smileyicoEmote:before {
+    background-image: url(/.static/emotes/smileyico.gif);
+    background-repeat: no-repeat;background-size: cover;
+}
+.lectureEmote:before {
+    background-image: url(/.static/emotes/Lecture.gif);
+    background-repeat: no-repeat;background-size: cover;
+}
+.afroEmote {
+    background-image: url(/.static/emotes/afro.jpg);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .ahhhEmote {
+    background-image: url(/.static/emotes/ahhh.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .bananaEmote {
+    background-image: url(/.static/emotes/banana.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .bandEmote {
+    background-image: url(/.static/emotes/band.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .bigsmileEmote {
+    background-image: url(/.static/emotes/bigsmile.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .bonkEmote {
+    background-image: url(/.static/emotes/bonk.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .cuccoanEmote {
+    background-image: url(/.static/emotes/cuccoan.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .dancingEmote {
+    background-image: url(/.static/emotes/dancing.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .drinkEmote {
+    background-image: url(/.static/emotes/drink.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .duckieEmote {
+    background-image: url(/.static/emotes/duckie.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .eekEmote {
+    background-image: url(/.static/emotes/eek.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-aaaEmote {
+    background-image: url(/.static/emotes/emot-aaa.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-abandonthreadEmote {
+    background-image: url(/.static/emotes/emot-abandonthread.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-awesomeEmote {
+    background-image: url(/.static/emotes/emot-awesome.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-barfEmote {
+    background-image: url(/.static/emotes/emot-barf.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-bobEmote {
+    background-image: url(/.static/emotes/emot-bob.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-canadaEmote {
+    background-image: url(/.static/emotes/emot-canada.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-cowjumpEmote {
+    background-image: url(/.static/emotes/emot-cowjump.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-derpEmote {
+    background-image: url(/.static/emotes/emot-derp.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-downswordsEmote {
+    background-image: url(/.static/emotes/emot-downswords.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-effortEmote {
+    background-image: url(/.static/emotes/emot-effort.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-eng101Emote {
+    background-image: url(/.static/emotes/emot-eng101.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-eng99Emote {
+    background-image: url(/.static/emotes/emot-eng99.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-firstpostEmote {
+    background-image: url(/.static/emotes/emot-firstpost.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-fryEmote {
+    background-image: url(/.static/emotes/emot-fry.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-getoutEmote {
+    background-image: url(/.static/emotes/emot-getout.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-googleEmote {
+    background-image: url(/.static/emotes/emot-google.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-kittyjigEmote {
+    background-image: url(/.static/emotes/emot-kittyjig.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-shroomEmote {
+    background-image: url(/.static/emotes/emot-shroom.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-smithEmote {
+    background-image: url(/.static/emotes/emot-smith.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-suicideEmote {
+    background-image: url(/.static/emotes/emot-suicide.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-tootEmote {
+    background-image: url(/.static/emotes/emot-toot.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  .emot-unsmithEmote {
+    background-image: url(/.static/emotes/emot-unsmith.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .emot-zoidEmote {
+    background-image: url(/.static/emotes/emot-zoid.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .fiestaEmote {
+    background-image: url(/.static/emotes/fiesta.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .heartEmote {
+    background-image: url(/.static/emotes/heart.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .hideEmote {
+    background-image: url(/.static/emotes/hide.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .hmmEmote {
+    background-image: url(/.static/emotes/hmm.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_biggrinEmote {
+    background-image: url(/.static/emotes/icon_biggrin.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_coolEmote {
+    background-image: url(/.static/emotes/icon_cool.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_cryEmote {
+    background-image: url(/.static/emotes/icon_cry.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_dissapointedEmote {
+    background-image: url(/.static/emotes/icon_dissapointed.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_eekEmote {
+    background-image: url(/.static/emotes/icon_eek.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_evilEmote {
+    background-image: url(/.static/emotes/icon_evil.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_redfaceEmote {
+    background-image: url(/.static/emotes/icon_redface.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_rolleyesEmote {
+    background-image: url(/.static/emotes/icon_rolleyes.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_sadEmote {
+    background-image: url(/.static/emotes/icon_sad.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_smile2Emote {
+    background-image: url(/.static/emotes/icon_smile2.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_spamEmote {
+    background-image: url(/.static/emotes/icon_spam.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .icon_twistedEmote {
+    background-image: url(/.static/emotes/icon_twisted.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .imawesomeEmote {
+    background-image: url(/.static/emotes/imawesome.png);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .indifferentEmote {
+    background-image: url(/.static/emotes/indifferent.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .liljizzEmote {
+    background-image: url(/.static/emotes/liljizz.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .littlemanEmote {
+    background-image: url(/.static/emotes/littleman.png);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .nononoEmote {
+    background-image: url(/.static/emotes/nonono.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .nopityEmote {
+    background-image: url(/.static/emotes/nopity.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .ownedEmote {
+    background-image: url(/.static/emotes/owned.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .pimpEmote {
+    background-image: url(/.static/emotes/pimp.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .plzdieEmote {
+    background-image: url(/.static/emotes/plzdie.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .popcornEmote {
+    background-image: url(/.static/emotes/popcorn.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .santaEmote {
+    background-image: url(/.static/emotes/santa.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .slapEmote {
+    background-image: url(/.static/emotes/slap.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .smokingEmote {
+    background-image: url(/.static/emotes/smoking.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .smugEmote {
+    background-image: url(/.static/emotes/smug.png);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .smugasfuckEmote {
+    background-image: url(/.static/emotes/smugasfuck.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .spammedEmote {
+    background-image: url(/.static/emotes/spammed.png);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .stareEmote {
+    background-image: url(/.static/emotes/stare.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .thefuckEmote {
+    background-image: url(/.static/emotes/thefuck.png);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .thumbsEmote {
+    background-image: url(/.static/emotes/thumbs.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .truckEmote {
+    background-image: url(/.static/emotes/truck.jpg);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .wellplayedEmote {
+    background-image: url(/.static/emotes/wellplayed.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+  
+  .winkEmote {
+    background-image: url(/.static/emotes/wink.gif);
+    background-repeat: no-repeat;background-size: cover;
+  }
+    
+  

@@ -30,7 +30,7 @@ body.theme_wc {
   
   .theme_wc .logoImgOld {
     display: inline-block;
-    height: 250px;
+    height: 150px;
     min-width: 1px;
   }
   
@@ -43,8 +43,11 @@ body.theme_wc {
     letter-spacing: 0.075em;
   }
   
-  .theme_wc nav {
+  .theme_wc nav, .theme_wc .dropdown-content {
     background-color: rgba(40, 42, 46, 0.9);
+  }
+  .theme_wc .droptext {
+    color: #c5c8c6;
   }
   
   .theme_wc a,

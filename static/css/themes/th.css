@@ -44,11 +44,13 @@ body.theme_th {
   color: white;
 }
 
-.theme_th nav {
+.theme_th nav, .theme_th .dropdown-content {
   background-color: #010101;
   border-bottom: 1px solid white;
 }
-
+.theme_th .droptext {
+  color: white;
+}
 .theme_th select {
   font-family: 'DFPOCOC', "ArimoNerdFont";
 }

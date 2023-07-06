@@ -15,14 +15,22 @@ Walkman is an 80s looking theme with a font resembiling the ones used in 70s/80s
 body.theme_mu {
   font-family: 'Clarendon', "ArimoNerdFont";
   color: black;
-  background: url("https://wapchan.org/.static/shapes.png");
+  background: url("https://wapchan.org/.static/shapes-light.png");
 }
 
 .theme_mu .box,
 .theme_mu #siteBoardTable1,
 .theme_mu #siteBoardTable2 {
   background-color: #ffffff;
+  color: black;
 }
 .theme_mu #randomQuote {
   color: black;
+}
+.theme_mu nav, .theme_mu .dropdown-content {
+  background-color: #ffffff;
+  color: black;
+}
+.theme_mu .boxbar {
+  background-color: transparent;
 }

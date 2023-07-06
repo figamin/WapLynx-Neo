@@ -9,9 +9,11 @@ Serenity is a really simple theme that looks like a clear sky.
 */
 body.theme_art {
   background: radial-gradient(circle, rgb(255, 246, 142) 18%, rgb(135, 206, 235) 40%);
+  color:black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
 }
 
-.theme_art nav {
+.theme_art nav, .theme_cel .dropdown-content {
   background-color: #87CEEB;
   border-bottom: 1px solid black;
 }
@@ -19,4 +21,32 @@ body.theme_art {
 .theme_art .boxbar {
   text-align: left;
   background-color: transparent;
+}
+
+.theme_art .box,
+.theme_art a:link,
+.theme_art a:visited {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
+}
+
+.theme_art #postingForm th,
+.theme_art .modalTableBody th,
+.theme_art .quoteTooltip,
+.theme_art #quick-reply table {
+  background: #0e68c7;
+  border: 1px solid white;
+}
+.theme_art .boardHeader p,
+.theme_art #randomQuote {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
+}
+.theme_art a,
+.theme_art,
+.theme_art .unhideButton,
+.theme_art .embedButton,
+.theme_art #selectedTab,
+.theme_art #showFormsButton {
+  color: royalblue;
 }

@@ -42,11 +42,15 @@ body.theme_lit {
   color: black;
   background: url("https://wapchan.org/.static/lined_paper.png");
 }
-
-.theme_lit nav {
+.theme_lit .quoteTooltip {
+  background: url("https://wapchan.org/.static/lined_paper.png");
+}
+.theme_lit nav, .theme_lit .dropdown-content {
   background-color: #f9f9f9;
 }
-
+.theme_lit .droptext {
+  color: black;
+}
 .theme_lit input,
 .theme_lit select,
 .theme_lit textarea {

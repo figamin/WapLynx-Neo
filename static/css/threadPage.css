@@ -118,6 +118,8 @@
   margin: 0;
   width: 100%;
   margin: 0;
+  background-color: #282A2E;
+  border: 1px solid #c5c8c6;
 }
 
 .handle {

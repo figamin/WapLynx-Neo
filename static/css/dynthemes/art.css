@@ -1,0 +1,52 @@
+/*
+   _____                           _  __             __ ____                   __              __      __ _ 
+  / ___/ ___   _____ ___   ____   (_)/ /_ __  __   _/_// __/____   _____     _/_/____ _ _____ / /_   _/_/| |
+  \__ \ / _ \ / ___// _ \ / __ \ / // __// / / /  / / / /_ / __ \ / ___/   _/_/ / __ `// ___// __/ _/_/  / /
+ ___/ //  __// /   /  __// / / // // /_ / /_/ /  / / / __// /_/ // /     _/_/  / /_/ // /   / /_ _/_/   / / 
+/____/ \___//_/    \___//_/ /_//_/ \__/ \__, /  / / /_/   \____//_/     /_/    \__,_//_/    \__//_/   _/_/  
+                                       /____/   |_|                                                  /_/
+Serenity is a really simple theme that looks like a clear sky.
+*/
+body{
+  background: radial-gradient(circle, rgb(255, 246, 142) 18%, rgb(135, 206, 235) 40%);
+  color:black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
+}
+
+nav, .theme_cel .dropdown-content {
+  background-color: #87CEEB;
+  border-bottom: 1px solid black;
+}
+
+.boxbar {
+  text-align: left;
+  background-color: transparent;
+}
+
+.box,
+a:link,
+a:visited {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
+}
+
+#postingForm th,
+.modalTableBody th,
+.quoteTooltip,
+#quick-reply table {
+  background: #0e68c7;
+  border: 1px solid white;
+}
+.boardHeader p,
+#randomQuote {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
+}
+a,
+.theme_art,
+.unhideButton,
+.embedButton,
+#selectedTab,
+#showFormsButton {
+  color: royalblue;
+}

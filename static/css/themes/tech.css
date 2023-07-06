@@ -49,10 +49,12 @@ body.theme_tech {
 }
 
 .theme_tech .boxbar,
-.theme_tech nav {
+.theme_tech nav, .theme_tech .dropdown-content {
   background-color: #fc8703;
 }
-
+.theme_tech .droptext {
+  color: white;
+}
 .theme_tech a:link,
 .theme_tech a:visited {
   color: white;

@@ -81,11 +81,13 @@ body.theme_pixl {
   color: white;
 }
 
-.theme_pixl nav {
+.theme_pixl nav, .theme_pixl .dropdown-content {
   background-color: black;
   border-bottom: 1px solid white;
 }
-
+.theme_pixl .droptext {
+  color: white;
+}
 .theme_pixl input,
 .theme_pixl select,
 .theme_pixl textarea {
@@ -122,10 +124,12 @@ body.theme_pixl {
 }
 
 .theme_pixl #postingForm th,
-.theme_pixl .modalTableBody th {
+.theme_pixl .modalTableBody th,
+.theme_pixl .quoteTooltip {
   background: black;
   border: 1px solid white;
 }
+
 .theme_pixl #randomQuote {
   color: white;
 }

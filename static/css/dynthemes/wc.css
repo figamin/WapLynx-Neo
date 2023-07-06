@@ -1,0 +1,123 @@
+/*
+ _       __                     __                     ______ __                    _      
+| |     / /____ _ ____   _____ / /_   ____ _ ____     / ____// /____ _ _____ _____ (_)_____
+| | /| / // __ `// __ \ / ___// __ \ / __ `// __ \   / /    / // __ `// ___// ___// // ___/
+| |/ |/ // /_/ // /_/ // /__ / / / // /_/ // / / /  / /___ / // /_/ /(__  )(__  )/ // /__  
+|__/|__/ \__,_// .___/ \___//_/ /_/ \__,_//_/ /_/   \____//_/ \__,_//____//____//_/ \___/  
+              /_/                                                                          
+Wapchan Classic is a slightly more "authentic" version of the old Wapchan UI, complete with the HAND DRAWN PREMIERE LOGO!
+*/
+body{
+    background: url("../../snow.gif") repeat, #1d1f21;
+    font-family: 'Nine By Five NBP', "CozetteVector";
+    color: #c5c8c6;
+    letter-spacing: 0.075em;
+  }
+  
+  .box {
+    color: #c5c8c6;
+    background-color: #282a2e;
+  }
+  
+  .boxbar {
+    background-color: #1d1f21;
+  }
+  
+  .logoImg,
+  .logoImgRumi {
+    display: none;
+  }
+  
+  .logoImgOld {
+    display: inline-block;
+    height: 150px;
+    min-width: 1px;
+  }
+  
+  input,
+  select,
+  textarea {
+    font-family: 'Nine By Five NBP', "CozetteVector";
+    background-color: transparent;
+    color: #c5c8c6;
+    letter-spacing: 0.075em;
+  }
+  
+  nav, .dropdown-content {
+    background-color: rgba(40, 42, 46, 0.9);
+  }
+  .droptext {
+    color: #c5c8c6;
+  }
+  
+  a,
+  .unhideButton,
+  .embedButton,
+  #selectedTab,
+  #showFormsButton {
+    color: rgb(154, 185, 242);
+    cursor: pointer;
+  }
+  
+  .topBoards a,
+  .innerPost,
+  .sideCatalogCell,
+  .markedPost,
+  .sideCatalogMarkedCell,
+  .catalogCell {
+    background: #282a2e;
+  }
+  
+  .markedPost,
+  .sideCatalogMarkedCell {
+    background: rgba(20, 20, 20, 1);
+    border-width: 1px;
+    border-style: solid;
+    border-color: #111;
+  }
+  
+  input[type="button"],
+  input[type="submit"],
+  button,
+  .dropzone,
+  .selectedCell {
+    border: 1px solid #111;
+    background: #282a2e;
+    color: #c5c8c6;
+    padding-left: 0.25em;
+    font-size: 80%;
+    font-weight: bold;
+  }
+  
+  input,
+  select,
+  textarea {
+    background: #282a2e;
+    border: 1px solid #111;
+    color: #c5c8c6;
+  }
+  
+  .postInfo,
+  .opHead,
+  .divMessage,
+  .panelUploads,
+  .panelIp,
+  .panelProxyIp,
+  .contentOmissionIndicator,
+  .labelOmission,
+  .labelId,
+  .panelASN,
+  .panelBypassId {
+    font-size: 13pt;
+  }
+  
+  #postingForm th,
+  .modalTableBody th {
+    background: #282a2e;
+  }
+  
+  .noEmailName,
+  .noEmailName:hover {
+    color: #c5c8c6;
+  }
+  

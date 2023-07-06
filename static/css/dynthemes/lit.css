@@ -1,0 +1,109 @@
+/*
+    ____                 __       __ ____                   __ __ _  __      __ _ 
+   / __ ) ____   ____   / /__   _/_// __/____   _____     _/_// /(_)/ /_   _/_/| |
+  / __  |/ __ \ / __ \ / //_/  / / / /_ / __ \ / ___/   _/_/ / // // __/ _/_/  / /
+ / /_/ // /_/ // /_/ // ,<    / / / __// /_/ // /     _/_/  / // // /_ _/_/   / / 
+/_____/ \____/ \____//_/|_|  / / /_/   \____//_/     /_/   /_//_/ \__//_/   _/_/  
+                             |_|                                           /_/
+Book looks like a fancy paperback.
+*/
+a,
+.unhideButton,
+.embedButton,
+#selectedTab,
+#showFormsButton {
+  color: black;
+  cursor: pointer;
+}
+
+.leftmenu {
+  display: none;
+}
+
+.logoImg {
+  display: none;
+}
+
+.logoImgRumi {
+  display: none;
+}
+
+.logoImgOld {
+  display: none;
+}
+
+.logoText:before {
+  content: "Wapchan.";
+  font-size: 100px;
+}
+
+body{
+  font-family: 'Libre Baskerville', "ArimoNerdFont";
+  color: black;
+  background: url("https://wapchan.org/.static/lined_paper.png");
+}
+.quoteTooltip {
+  background: url("https://wapchan.org/.static/lined_paper.png");
+}
+nav, .dropdown-content {
+  background-color: #f9f9f9;
+}
+.droptext {
+  color: black;
+}
+input,
+select,
+textarea {
+  font-family: 'Libre Baskerville';
+  background-color: transparent;
+  color: black;
+}
+
+.boxbar {
+  background-color: transparent;
+}
+
+.innerPost,
+.sideCatalogCell,
+.markedPost,
+.sideCatalogMarkedCell,
+.catalogCell {
+  border: 1px solid black;
+}
+
+#newPostFieldset,
+#quick-reply table,
+.modalDecorationPanel,
+.floatingMenu,
+#settingsFieldset,
+.reportFieldset {
+  border: 1px dashed black;
+}
+
+.topBoards a,
+#divLatestImages img,
+#divLatestPosts .latestPostCell,
+.innerPost,
+.sideCatalogCell,
+.markedPost,
+.sideCatalogMarkedCell,
+.catalogCell {
+  background-color: transparent;
+}
+
+.box {
+  color: black;
+  background-color: transparent;
+}
+
+.labelSubject {
+  color: black;
+}
+
+.boardHeader p {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
+}
+#randomQuote {
+    color: black;
+  }

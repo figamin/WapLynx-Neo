@@ -75,3 +75,9 @@ body.theme_chill {
   color: black;
   text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
 }
+.theme_chill nav, .theme_chill .dropdown-content {
+  background-color: #99c969;
+}
+.theme_chill .droptext {
+  color: black;
+}

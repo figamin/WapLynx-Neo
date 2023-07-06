@@ -1,0 +1,135 @@
+/*
+    ____   ______      ____   ____      __ ____                   __        _        __    __ _ 
+   / __ \ / ____/     / __ \ ( __ )   _/_// __/____   _____     _/_/____   (_)_  __ / /  _/_/| |
+  / /_/ // /   ______/ /_/ // __  |  / / / /_ / __ \ / ___/   _/_/ / __ \ / /| |/_// / _/_/  / /
+ / ____// /___/_____/\__, // /_/ /  / / / __// /_/ // /     _/_/  / /_/ // /_>  < / /_/_/   / / 
+/_/     \____/      /____/ \____/  / / /_/   \____//_/     /_/   / .___//_//_/|_|/_//_/   _/_/  
+                                   |_|                          /_/                      /_/
+PC-98 is a theme based around an old command prompt interface, meant to resemble the localized MS-DOS that ran on these computers (using the same font).
+*/
+#siteBoardTable2 {
+  border: 1px solid white;
+  background-color: transparent;
+}
+
+.topBoards a,
+.innerPost,
+.sideCatalogCell,
+.catalogCell {
+  background: black;
+  border: 1px solid white;
+}
+
+.floatingMenu,
+#quick-reply table {
+  background: black;
+  border: 1px solid white;
+}
+
+#siteBoardTableLeft,
+#siteBoardTableRight,
+#imageList {
+  background-color: transparent;
+}
+
+.leftmenu {
+  display: none;
+}
+
+.logoImg,
+.logoImgRumi,
+.logoImgOld {
+  display: none;
+}
+
+.logoText:before {
+  content: "WAPCHAN.ORG ワップちゃん";
+  display: block;
+  font-family: 'PC-98';
+  font-size: 24px;
+}
+
+body{
+  background: #000000;
+  color: white;
+  font-family: 'PC-98', "CozetteVector";
+}
+
+.box {
+  background-color: black;
+  color: white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.boxbar {
+  text-align: left;
+  background-color: #000000;
+}
+
+a:link {
+  color: #f5deb3;
+}
+
+a:visited {
+  color: #c4b18f;
+}
+
+.boardHeader p {
+  color: white;
+}
+
+nav, .dropdown-content {
+  background-color: black;
+  border-bottom: 1px solid white;
+}
+.droptext {
+  color: white;
+}
+input,
+select,
+textarea {
+  font-family: 'PC-98', "CozetteVector";
+  background: black;
+  color: white;
+  border: 1px solid white;
+}
+
+a,
+.theme_pixl,
+.unhideButton,
+.embedButton,
+#selectedTab,
+#showFormsButton {
+  color: #30C8FF;
+}
+
+input[type=button],
+input[type=submit],
+button,
+.dropzone,
+.selectedCell {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+}
+
+.labelSubject {
+  color: #FF1100;
+}
+
+#postingForm th,
+.modalTableBody th,
+.quoteTooltip {
+  background: black;
+  border: 1px solid white;
+}
+
+#randomQuote {
+  color: white;
+}

@@ -71,7 +71,10 @@ https://web.archive.org/web/20031122004728/http://www.4chan.net/
 .theme_digi #quick-reply table {
   background-color: #f0e0d6;
 }
-
+.theme_digi .quoteTooltip {
+  background-color: #f0e0d6;
+  border: 1px solid #800000;
+}
 .theme_digi #divLatestPosts .latestPostCell,
 .theme_digi .innerPost,
 .theme_digi .sideCatalogCell,
@@ -118,7 +121,7 @@ https://web.archive.org/web/20031122004728/http://www.4chan.net/
 .theme_digi .dropzone,
 .theme_digi .selectedCell {
   border: 1px solid #800000;
-  background: transparent;
+  background: #ea8;
   color: #800000;
   padding-left: 0.25em;
   font-size: 80%;
@@ -131,10 +134,12 @@ body.theme_digi {
   font-family: 'Arial Pixelated 16', "CozetteVector";
 }
 
-.theme_digi nav {
+.theme_digi nav, .theme_digi .dropdown-content {
   background-color: #FFFFEE;
 }
-
+.theme_digi .droptext {
+  color: #800000;
+}
 .theme_digi .leftmenu {
   font-size: 100%;
   border-right-style: solid;
@@ -208,12 +213,19 @@ body.theme_digi {
   content: 'Banners';
 }
 
+.theme_digi #linkEmotes:before {
+  content: 'Emotes';
+}
+
 .theme_digi #linkCinema:before {
   content: 'Cinema';
 }
 
 .theme_digi #linkLinks:before {
   content: 'Links';
+}
+.theme_digi #linkFrames:before {
+  content: 'Frames';
 }
 
 .theme_digi #siteBoardBox {
@@ -249,8 +261,11 @@ body.theme_digi2 {
 .theme_digi2 .boxbar {
   color: #000;
 }
-.theme_digi2 nav {
+.theme_digi2 nav, .theme_digi2 .dropdown-content {
   background-color: #eef2ff;
+}
+.theme_digi2 .droptext {
+  color: #000;
 }
 .theme_digi2 .topBoards a,
 .theme_digi2 .innerPost,
@@ -295,6 +310,7 @@ body.theme_digi2 {
 .theme_digi2 .selectedCell {
   border: 1px solid #000;
   color: #000;
+  background: #98e;
 }
 .theme_digi2 .labelSubject {
   color: #0f0c5d;
@@ -304,4 +320,12 @@ body.theme_digi2 {
 }
 .theme_digi2 a:link .linkQuote:hover {
   color: #d00;
+}
+.theme_digi2 #newPostFieldset,
+.theme_digi2 #quick-reply table,
+.theme_digi2 .modalDecorationPanel,
+.theme_digi2 .floatingMenu,
+.theme_digi2 #settingsFieldset,
+.theme_digi2 .reportFieldset {
+  border: 1px dashed #117743;
 }

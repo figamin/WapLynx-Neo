@@ -46,7 +46,8 @@ video {
 
 .quoteTooltip {
   position: absolute;
-  display: none
+  display: none;
+  background: #1d1f21;
 }
 
 #formMore, #qrFormMore, #qrCaptchaButton, #qrFilesButton {

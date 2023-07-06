@@ -25,7 +25,8 @@ themeLoader.load = function(init) {
     if (themeLoader.customCss && themeLoader.customCss.parentNode) {
       themeLoader.customCss.remove();
     }
-    body.className = 'theme_' + localStorage.selectedTheme;   
+    body.className = 'theme_' + localStorage.selectedTheme;
+    parent.frames[0].document.body.className = 'theme_' + localStorage.selectedTheme;
   } else {
 
     if (themeLoader.customCss && !themeLoader.customCss.parentNode) {

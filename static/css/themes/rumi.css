@@ -13,7 +13,7 @@ Rumic is a theme meant to look like a comic book/manga. The logo is based on the
 
 .theme_rumi .logoImgRumi {
   display: inline-block;
-  height: 250px;
+  height: 150px;
   min-width: 1px;
 }
 
@@ -42,7 +42,10 @@ body.theme_rumi {
   border: 4px solid black;
   background: rgba(256, 256, 256, .75);
 }
-
+.theme_rumi .quoteTooltip {
+  border: 4px solid black;
+  background: rgb(256, 256, 256);
+}
 .theme_rumi input,
 .theme_rumi select,
 .theme_rumi textarea {
@@ -63,11 +66,17 @@ body.theme_rumi {
   font-family: 'Komika', "ArimoNerdFont";
 }
 
-.theme_rumi nav {
+.theme_rumi nav, .theme_rumi .dropdown-content {
   background-color: #ffffff;
   border-bottom: 1px solid black;
 }
-
+.theme_rumi #quick-reply table {
+  background-color: #ffffff;
+  border: 4px solid black;
+}
+.theme_rumi .droptext {
+  color: black;
+}
 .theme_rumi .boxbar {
   text-align: left;
   background-color: transparent;
@@ -87,7 +96,11 @@ body.theme_rumi {
   border: 2px solid;
   background-color: rgba(256, 256, 256, .75);
 }
-
+.theme_rumi #siteBoardTableLeft,
+.theme_rumi #siteBoardTableRight,
+.theme_rumi #imageList {
+  background-color: transparent;
+}
 .theme_rumi a,
 .theme_rumi .unhideButton,
 .theme_rumi .embedButton,
