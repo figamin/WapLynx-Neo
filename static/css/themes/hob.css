@@ -37,7 +37,7 @@ body.theme_hob {
 .theme_hob .sideCatalogMarkedCell,
 .theme_hob .catalogCell,
 .theme_hob .floatingMenu,
-.theme_hob #quick-reply table {
+.theme_hob #post-form-inner {
   background-color: #705d4c;
 }
 

@@ -55,17 +55,18 @@ body.theme_th {
   font-family: 'DFPOCOC', "ArimoNerdFont";
 }
 
+.theme_th .innerOP,
 .theme_th .innerPost,
 .theme_th .sideCatalogCell,
 .theme_th .markedPost,
 .theme_th .sideCatalogMarkedCell,
-.theme_th .catalogCell {
+.theme_th .catalogCell,
+.theme_th #bannerImage {
   border: 1px solid white;
 }
 
 .theme_th .topBoards a,
-.theme_th #divLatestImages img,
-.theme_th #divLatestPosts .latestPostCell,
+.theme_th .innerOP,
 .theme_th .innerPost,
 .theme_th .sideCatalogCell,
 .theme_th .markedPost,
@@ -98,7 +99,7 @@ body.theme_th {
 
 .theme_th #postingForm th,
 .theme_th .modalTableBody th {
-  background: transparent;
+  background: rgba(1, 1, 1, .6);
   border: 1px solid white;
 }
 
@@ -113,6 +114,7 @@ body.theme_th {
   padding-left: 0.25em;
   font-size: 80%;
   font-weight: bold;
+  font-family: 'DFPOCOC', "ArimoNerdFont";
 }
 
 .theme_th .boxbar {
@@ -151,7 +153,8 @@ body.theme_th {
 }
 
 .theme_th .floatingMenu,
-.theme_th #quick-reply table {
+.theme_th #post-form-inner,
+.theme_th .galleryText {
   background: #010101;
   border: 1px solid white;
 }

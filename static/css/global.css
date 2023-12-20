@@ -11,6 +11,7 @@
 @import "themes/tech.css";
 @import "themes/chill.css";
 @import "themes/wc.css";
+@import "themes/kind.css";
 /*FONT IMPORT BEGIN*/
 @font-face {
   font-family: "TT Bricks Trial";
@@ -1032,23 +1033,12 @@ footer {
   text-align: left;
   font-size: 15pt;
 }
-.desktopLinks {
-  display: inline-block;
-}
-.mobileLinks {
-  display: none;
-}
+
 .doodlebox {
   display: inline-flex;
 }
 /* MOBILE STUFF */
-@media only screen and (max-width: 1270px) {
-  .desktopLinks {
-    display: none;
-  }
-  .mobileLinks {
-    display: inline-block;
-  }
+@media only screen and (max-width: 800px) {
   .doodlebox {
     display: inline-grid;
     margin-left: +25px;
@@ -1076,7 +1066,7 @@ footer {
   }
   
   #linkOverboard:before, #navOverboard:before {
-    content: "";
+    content: "";
   }
 
   #navLinkRadio:before {
@@ -1143,7 +1133,12 @@ footer {
   margin: 1em auto 1em auto;
 }
 
-
+.galleryText {
+  font-size: 80%;
+  display: inline-block;
+  background: #282A2E;
+  border: 1px solid #c5c8c6;
+}
 .linkBarrierStart:before {
   content: '｢';
 }
@@ -1176,6 +1171,9 @@ footer {
 }
 #linkFrames:before {
   content: 'frames';
+}
+#linkStaffApply:before {
+  content: 'apply for staff';
 }
 #linkGlobalLogs:before {
   content: "logs";

@@ -13,7 +13,8 @@
     "pages/links.html",
     "pages/moderation.html",
     "pages/posting.html",
-    "pages/emotes.html"
+    "pages/emotes.html",
+    "pages/staffapply.html"
   ],
   "logIndexCell": "cells/logIndexCell.html",
   "accountPage": "pages/account.html",

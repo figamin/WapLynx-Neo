@@ -32,11 +32,13 @@ Shrine is a theme that attempts to mimic the look and feel of Web 1.0 anime inte
 .theme_cel .sideCatalogMarkedCell,
 .theme_cel .catalogCell,
 .theme_cel .floatingMenu,
-.theme_cel #quick-reply table,
-.theme_cel .quoteTooltip {
+.theme_cel #post-form-inner,
+.theme_cel .quoteTooltip,
+.theme_cel .galleryText,
+.theme_cel #postingForm th,
+.theme_cel .modalTableBody th {
   background: url("https://wapchan.org/.static/dotsdark2.webp");
 }
-  
 .theme_cel .markedPost,
 .theme_cel .sideCatalogMarkedCell {
   background: #868686;
@@ -46,11 +48,12 @@ Shrine is a theme that attempts to mimic the look and feel of Web 1.0 anime inte
 .theme_cel .sideCatalogCell,
 .theme_cel .markedPost,
 .theme_cel .sideCatalogMarkedCell,
-.theme_cel .catalogCell {
+.theme_cel .catalogCell,
+.theme_cel #post-form-inner,
+.theme_cel #bannerImage {
   border: 1px solid black;
 }
-  
-.theme_cel #newPostFieldset,
+
 .theme_cel #quick-reply table,
 .theme_cel .modalDecorationPanel,
 .theme_cel .floatingMenu,
@@ -86,7 +89,7 @@ Shrine is a theme that attempts to mimic the look and feel of Web 1.0 anime inte
 .theme_cel .dropzone,
 .theme_cel .selectedCell {
   border: 1px solid #000000;
-  background: transparent;
+  background: url("https://wapchan.org/.static/dotsdark2.webp");
   color: #000000;
   padding-left: 0.25em;
   font-size: 80%;
@@ -215,10 +218,6 @@ body.theme_cel {
   text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
 }
 
-.theme_cel #postingForm th,
-.theme_cel .modalTableBody th {
-  background: transparent;
-}
 
 .theme_cel .boardHeader p {
   color: black;

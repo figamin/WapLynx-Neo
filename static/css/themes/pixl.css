@@ -21,7 +21,7 @@ PC-98 is a theme based around an old command prompt interface, meant to resemble
 }
 
 .theme_pixl .floatingMenu,
-.theme_pixl #quick-reply table {
+.theme_pixl #post-form-inner {
   background: black;
   border: 1px solid white;
 }
@@ -117,6 +117,7 @@ body.theme_pixl {
   padding-left: 0.25em;
   font-size: 80%;
   font-weight: bold;
+  font-family: 'PC-98', "CozetteVector";
 }
 
 .theme_pixl .labelSubject {
@@ -125,7 +126,9 @@ body.theme_pixl {
 
 .theme_pixl #postingForm th,
 .theme_pixl .modalTableBody th,
-.theme_pixl .quoteTooltip {
+.theme_pixl .quoteTooltip,
+.theme_pixl .galleryText,
+.theme_pixl #bannerImage {
   background: black;
   border: 1px solid white;
 }

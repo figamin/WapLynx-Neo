@@ -55,17 +55,18 @@ select {
   font-family: 'DFPOCOC', "ArimoNerdFont";
 }
 
+.innerOP,
 .innerPost,
 .sideCatalogCell,
 .markedPost,
 .sideCatalogMarkedCell,
-.catalogCell {
+.catalogCell,
+#bannerImage {
   border: 1px solid white;
 }
 
 .topBoards a,
-#divLatestImages img,
-#divLatestPosts .latestPostCell,
+.innerOP,
 .innerPost,
 .sideCatalogCell,
 .markedPost,
@@ -98,7 +99,7 @@ textarea {
 
 #postingForm th,
 .modalTableBody th {
-  background: transparent;
+  background: rgba(1, 1, 1, .6);
   border: 1px solid white;
 }
 
@@ -113,6 +114,7 @@ button,
   padding-left: 0.25em;
   font-size: 80%;
   font-weight: bold;
+  font-family: 'DFPOCOC', "ArimoNerdFont";
 }
 
 .boxbar {
@@ -151,7 +153,8 @@ a,
 }
 
 .floatingMenu,
-#quick-reply table {
+#post-form-inner,
+.galleryText {
   background: #010101;
   border: 1px solid white;
 }

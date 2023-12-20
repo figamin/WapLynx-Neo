@@ -54,7 +54,7 @@ nav, .dropdown-content {
 input,
 select,
 textarea {
-  font-family: 'Libre Baskerville';
+  font-family: 'Libre Baskerville', 'ArimoNerdFont';;
   background-color: transparent;
   color: black;
 }
@@ -71,8 +71,7 @@ textarea {
   border: 1px solid black;
 }
 
-#newPostFieldset,
-#quick-reply table,
+#post-form-inner,
 .modalDecorationPanel,
 .floatingMenu,
 #settingsFieldset,
@@ -107,3 +106,27 @@ textarea {
 #randomQuote {
     color: black;
   }
+
+#siteBoardTableLeft,
+#siteBoardTableRight,
+#imageList,
+#divLatestPosts,
+#siteBoardTable2 {
+  background-color: transparent;
+}
+#siteBoardTable2 {
+  border: 1px solid black;
+  
+}
+input[type="button"],
+input[type="submit"],
+button,
+.dropzone,
+.selectedCell {
+  background: transparent;
+  color: black;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+  font-family: 'Libre Baskerville', 'ArimoNerdFont';
+}

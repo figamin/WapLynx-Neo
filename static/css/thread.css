@@ -30,8 +30,8 @@
 }
 
 .galleryImage {
-  max-width: 100vw;
-  max-height: 100vh;
+  max-width: 80vw;
+  max-height: 80vh;
 }
 
 .contentAction label, .contentAction img {

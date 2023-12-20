@@ -105,11 +105,6 @@
                   href="/.static/pages/frames.html"
                   id="linkFrames">
                 </a>
-                <span class="linkBarrierDivider"></span>
-                <a
-                  href="/.static/pages/staffapply.html"
-                  id="linkStaffApply">
-                </a>
                 <span class="linkBarrierEnd"></span>
               </span>
               <br><br>
@@ -132,8 +127,9 @@
                   <p>Hello!</p>
                 </div>
                 <div class="boxcontent" id="descBox">
-                  <p>Welcome to ｢wapchan｣, the offbeat retro content forum. While most of our discussion boards are geared towards anime & manga, we also have boards where you can relax and shoot the breeze, as well as a number of chat services to keep you connected.<br><br>If you're new here, be sure to read the <a href="/.static/pages/rules.html">rules & guidelines</a> to get up to speed on how we do things around here, subscribe to one of our <a href="#postNotifs">post notification services</a>, and start posting! Whether you're a total newbie or a seasoned otaku, we hope you watch and read some new stuff during your time here.
+                  <p>Welcome to ｢wapchan｣, the offbeat retro content forum. While most of our discussion boards are geared towards anime & manga, we also have boards where you can relax and shoot the breeze, as well as a number of chat services to keep you connected.<br><br>If you're new here, be sure to read the <a href="/.static/pages/rules.html">rules & guidelines</a> to get up to speed on how we do things around here, subscribe to one of our <a href="#postNotifs">post notification services</a>, and start posting! Whether you're a total newbie or a seasoned otaku, we hope you watch and read some new stuff during your time here. Also, check out our <a href="https://twitter.com/wapchanorg">twitter page</a> if you want to help spread the word about this site.
                   </p>
+		  <h4 style="color: #fffe00;">The radio is being moved from <a href="https://radio.wapchan.org">radio.wapchan.org</a> to  <a href="https://wapchan.org/radio">wapchan.org/radio</a>. The radio might go down for a bit while I try to get everything working, I'll update this when the move is done.</h4>
                 </div>
               </div>
               <div class="box" id="siteBoardBox">
@@ -168,10 +164,6 @@
                     </tr>
                     <tr>
                       <td class="siteBoardBody TableBottom Left"><a href="/wap">/wap/ - Site Meta</a></td>
-                      <td class="siteBoardBody TableBottom TableRight"></td>
-                    </tr>
-                    <tr>
-                      <td class="siteBoardBody TableBottom Left"><a href="/kind">/kind/ - Random Acts Of Kindness</a></td>
                       <td class="siteBoardBody TableBottom TableRight"></td>
                     </tr>
                   </table>
@@ -219,3 +211,4 @@
 <script src="/.static/js/announceIndex.js"></script>
 <script src="/.static/js/latestDoodles.js"></script>
 </html>
+cd

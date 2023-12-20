@@ -17,7 +17,7 @@ gallery.init = function() {
   }
 
   var backLink = document.getElementById('linkBack');
-
+  
   var galleryLink = document.createElement('a');
   galleryLink.title = 'Gallery mode.\nLeft/right arrow: previous/next\nUp/down arrow: skip 10 previous/next\nHome/End: first/last\nEsc: exit\nDelete: remove from gallery';
   galleryLink.id = 'galleryLink';
@@ -33,7 +33,7 @@ gallery.init = function() {
   backLink.parentNode.insertBefore(document.createTextNode(' '), backLink);
 
   var outerPanel;
-
+  
   galleryLink.onclick = function() {
 
     if (!gallery.galleryFiles.length) {
@@ -48,11 +48,26 @@ gallery.init = function() {
     var innerPanel = document.createElement('div');
     innerPanel.className = 'modalInnerPanel';
     outerPanel.appendChild(innerPanel);
-
+    
     gallery.galleryImage = document.createElement('img');
     gallery.galleryImage.className = 'galleryImage';
     innerPanel.appendChild(gallery.galleryImage);
-
+    gallery.descBox = document.createElement('div');
+    var desc = document.createElement('p')
+    desc.innerHTML = 'Gallery mode<br>Left/right arrow: previous/next<br>Up/down arrow: skip 10 previous/next<br>Home/End: first/last<br>Esc: exit<br>Delete: remove from gallery';
+    desc.className = 'galleryText';
+    gallery.descBox.appendChild(desc);
+    innerPanel.appendChild(gallery.descBox);
+    gallery.leave = document.createElement('button');
+    gallery.leave.innerText = "Exit";
+    gallery.leave.className = 'galleryText';
+    gallery.leave.onclick = function() {
+      console.log("QUIT!");
+      outerPanel.remove();
+      gallery.viewingGallery = false;
+      event.preventDefault();
+    };
+    innerPanel.appendChild(gallery.leave);
     gallery.previousImage = document.createElement('img');
     gallery.previousImage.style.display = 'none';
     gallery.nextImage = document.createElement('img');
@@ -66,7 +81,7 @@ gallery.init = function() {
     gallery.viewingGallery = true;
 
   }
-
+  
   document.body.addEventListener('keydown', function clicked(event) {
 
     if (!gallery.viewingGallery) {
@@ -76,10 +91,10 @@ gallery.init = function() {
     switch (event.key) {
 
     case 'Escape': {
+      console.log("QUIT!");
       outerPanel.remove();
       gallery.viewingGallery = false;
       event.preventDefault();
-
       break;
     }
 
@@ -138,7 +153,6 @@ gallery.init = function() {
   });
 
 };
-
 gallery.displayImage = function(index) {
 
   if (index < 0) {

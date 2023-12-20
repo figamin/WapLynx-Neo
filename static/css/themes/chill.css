@@ -12,7 +12,7 @@ Sandbox is a nice green/pink theme. This was actually the original "default" the
 .theme_chill .sideCatalogCell,
 .theme_chill .catalogCell,
 .theme_chill .floatingMenu,
-.theme_chill #quick-reply table {
+.theme_chill #post-form-inner {
   background: #99c969;
 }
 

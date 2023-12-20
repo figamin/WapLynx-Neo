@@ -33,7 +33,7 @@ body.theme_art {
 .theme_art #postingForm th,
 .theme_art .modalTableBody th,
 .theme_art .quoteTooltip,
-.theme_art #quick-reply table {
+.theme_art #post-form-inner {
   background: #0e68c7;
   border: 1px solid white;
 }

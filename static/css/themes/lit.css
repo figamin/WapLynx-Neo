@@ -54,7 +54,7 @@ body.theme_lit {
 .theme_lit input,
 .theme_lit select,
 .theme_lit textarea {
-  font-family: 'Libre Baskerville';
+  font-family: 'Libre Baskerville', 'ArimoNerdFont';;
   background-color: transparent;
   color: black;
 }
@@ -71,8 +71,7 @@ body.theme_lit {
   border: 1px solid black;
 }
 
-.theme_lit #newPostFieldset,
-.theme_lit #quick-reply table,
+.theme_lit #post-form-inner,
 .theme_lit .modalDecorationPanel,
 .theme_lit .floatingMenu,
 .theme_lit #settingsFieldset,
@@ -107,3 +106,27 @@ body.theme_lit {
 .theme_lit #randomQuote {
     color: black;
   }
+
+.theme_lit #siteBoardTableLeft,
+.theme_lit #siteBoardTableRight,
+.theme_lit #imageList,
+.theme_lit #divLatestPosts,
+.theme_lit #siteBoardTable2 {
+  background-color: transparent;
+}
+.theme_lit #siteBoardTable2 {
+  border: 1px solid black;
+  
+}
+.theme_lit input[type="button"],
+.theme_lit input[type="submit"],
+.theme_lit button,
+.theme_lit .dropzone,
+.theme_lit .selectedCell {
+  background: transparent;
+  color: black;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+  font-family: 'Libre Baskerville', 'ArimoNerdFont';
+}

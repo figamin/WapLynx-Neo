@@ -81,108 +81,69 @@ qr.setQr = function() {
 
   var qrhtml = '<div id="quick-reply" style="right: 25px; top: 50px;">';
   qrhtml += '<div id="post-form-inner">';
-  qrhtml += '<table class="post-table"><tbody> <tr><th colspan="2">';
-  qrhtml += '<span class="handle">';
-  qrhtml += '<a class="close-btn coloredIcon"></a>';
-  qrhtml += 'Quick Reply</span></th> </tr>';
-
+  qrhtml += '<div class="handle">';
+  qrhtml += 'Quick Reply<a class="close-btn coloredIcon" style="float: right;"></a>';
+  qrhtml += '</div>';
+  qrhtml += '<form>'
+  qrhtml += '<div class="user-info" style="display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row; width: 100%;">'
   if (QRshowname) {
-    qrhtml += '<tr><td colspan="2"><input id="qrname" type="text"';
-    qrhtml += ' maxlength="35" autocomplete="off" placeholder="Name"></td> </tr>';
+    qrhtml += '<input id="qrname" type="text" maxlength="35" autocomplete="off" placeholder="Name" style="margin: 0px;">';
   }
+    qrhtml += '<input id="qrsubject" type="text" maxlength="100" autocomplete="off" placeholder="Subject" style="margin: 0px;">';
+  
+  qrhtml += '</div>';
 
-  qrhtml += '<tr><td colspan="2">';
-  qrhtml += '<input id="qrsubject" type="text" maxlength="100"';
-  qrhtml += 'autocomplete="off" placeholder="Subject ">';
-  qrhtml += '</td>';
-  qrhtml += '</tr>';
-
-  qrhtml += '<tr><td colspan="2"><textarea id="qrbody" rows="5" placeholder="Comment">';
-  qrhtml += '</textarea></td></tr> ';
-
-  if (!textBoard) {
-
-    if (api.mobile) {
-      qrhtml += '<tr id="qrFilesButton"><td class="small">Files</td></tr>';
-      qrhtml += '</tbody><tbody class="hidden" id="filesBody">';
-    }
-
-    qrhtml += ' <tr><td colspan="2"><div class="dropzone" id="dropzoneQr">';
-    qrhtml += 'Drag files to upload or<br> click here to select them</div>';
-    qrhtml += '<div id="selectedDivQr"></div></td> </tr>';
-
-    qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
-    qrhtml += 'id="qrcheckboxSpoiler" class="postingCheckbox">';
-    qrhtml += '<label for="qrcheckboxSpoiler" class="spoilerCheckbox">Spoiler</label></td> </tr>';
-
-    if (api.mobile) {
-      qrhtml += '</tbody><tbody>'
-    }
-
-  }
-
+  qrhtml += '<div class="textarea" style="display: flex;"><textarea id="qrbody" placeholder="Comment" style="height: 9em; margin: 0px;"></textarea></div>';
   if (!api.hiddenCaptcha) {
-
-    if (api.mobile) {
-      qrhtml += '<tr id="qrCaptchaButton"><td class="small">Captcha</td></tr>';
-      qrhtml += '</tbody><tbody class="hidden" id="captchaBody">'
-    }
-
+    qrhtml += '<div class="captchaBox" style="position: relative;"><div class="captchaID" style="display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row; width: 100%;">';
+    qrhtml += '<input class="reloadCaptchaButton" type="button" value="Get Captcha">';
+    qrhtml += '<input type="text" class="captchaField" id="QRfieldCaptcha" placeholder="Answer"></div>';
     var parts = document.getElementsByClassName('captchaImage')[0].src
         .split('/');
 
     var lastPart = '/' + parts[parts.length - 1];
 
-    qrhtml += '<tr><td colspan="2"><img src="' + lastPart;
-    qrhtml += '" class="captchaImage"/></td></tr>';
+    qrhtml += '<div id="captchaDiv"><img src="' + lastPart +'" class="captchaImage"/><a href="/noCookieCaptcha.js" target="_blank" class="small">No cookies?</a> <span class="captchaTimer"></span></div>';
+  }
+ 
+  if (!textBoard) {
+    qrhtml += '<div class="dropzone" id="dropzoneQr" style="display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;">Files</div>'
+    qrhtml += '<div id="selectedDivQr"></div></div>';
+    qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
+    qrhtml += 'id="qrcheckboxSpoiler" class="postingCheckbox">';
+    qrhtml += '<label for="qrcheckboxSpoiler" class="spoilerCheckbox">Spoiler</label>';
 
-    qrhtml += '<tr><td colspan="2"><input class="reloadCaptchaButton" type="button"';
-    qrhtml += ' value="Reload"> <span class="captchaTimer"></span></td></tr>';
-
-    qrhtml += '<tr><td><input type="text" class="captchaField" ';
-    qrhtml += 'id="QRfieldCaptcha" placeholder="Answer"></td>';
-    qrhtml += '<td><a href="/noCookieCaptcha.js" target="_blank" class="small">No cookies?</a></td></tr>';
-
-    if (api.mobile) {
-      qrhtml += '</tbody><tbody>'
-    }
   }
 
-  qrhtml += '<tr id="qrFormMore"><td class="small">Extra</td></tr>';
+  qrhtml += '<div class="user-info" style="display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row; width: 100%;">'
+  qrhtml += '<button accesskey="s" id="qrbutton" type="button">Submit</button>';
+  qrhtml += '<div id="qrFormMore">Extra</div>';
 
-  qrhtml += '</tbody><tbody class="hidden" id="qrExtra">';
+  qrhtml += '<div class="hidden" id="qrExtra">';
 
-  qrhtml += '<tr><td colspan="2">';
   qrhtml += '<input id="qremail" type="text" maxlength="40" ';
   qrhtml += 'autocomplete="off" placeholder="Email">';
-  qrhtml += '</td> </tr> ';
 
-  qrhtml += '<tr><td colspan="2">';
-  qrhtml += '<input id="qrpassword" type="password" placeholder="Password"></td></tr>';
+  qrhtml += '<input id="qrpassword" type="password" placeholder="Password">';
 
   if (flags) {
-    qrhtml += '<tr><td colspan="2"><div id="qrFlagsDiv"></div></td></tr>';
+    qrhtml += '<tr><td colspan="2"><div id="qrFlagsDiv"></div>';
   }
 
   var noFlagDiv = document.getElementById('noFlagDiv');
 
   if (noFlagDiv) {
-    qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
+    qrhtml += '<input type="checkbox" ';
     qrhtml += 'id="qrcheckboxNoFlag" class="postingCheckbox">';
     qrhtml += '<label for="qrcheckboxNoFlag" class="spoilerCheckbox">';
-    qrhtml += 'Don\'t show location</label></td></tr>';
+    qrhtml += 'Don\'t show location</label>';
   }
 
-  qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
+  qrhtml += '<input type="checkbox" ';
   qrhtml += 'id="qralwaysUseBypassCheckBox" class="postingCheckbox">';
   qrhtml += '<label for="qralwaysUseBypassCheckBox" class="spoilerCheckbox">';
-  qrhtml += 'Make sure I have a block bypass</label></td></tr>';
-
-  qrhtml += '</tbody><tbody> <tr> <td colspan="2" class="centered">';
-  qrhtml += '<button accesskey="s" id="qrbutton" type="button">Reply';
-  qrhtml += '</td></tr>';
-
-  qrhtml += '</tbody> </table></div></div>';
+  qrhtml += 'Make sure I have a block bypass</label>';
+  
 
   qr.qrPanel = document.createElement('div');
   qr.qrPanel.innerHTML = qrhtml;

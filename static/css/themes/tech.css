@@ -67,7 +67,7 @@ body.theme_tech {
 .theme_tech .sideCatalogMarkedCell,
 .theme_tech .catalogCell,
 .theme_tech .floatingMenu,
-.theme_tech #quick-reply table {
+.theme_tech #post-form-inner {
   background: #fc8703;
 }
 

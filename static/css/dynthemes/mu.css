@@ -34,3 +34,64 @@ nav, .dropdown-content {
 .boxbar {
   background-color: transparent;
 }
+.innerPost,
+#postingForm th,
+.markedPost {
+  background: rgba(256, 256, 256, .75)
+}
+input,
+select,
+textarea {
+  font-family: 'Clarendon', "ArimoNerdFont";
+  background-color: rgba(256, 256, 256, .75);
+  color: black;
+}
+.labelSubject {
+  color: rgb(0, 64, 255);
+}
+.noEmailName,
+.noEmailName:hover {
+  color: rgb(188, 3, 255);
+}
+a,
+.unhideButton,
+.embedButton,
+#selectedTab,
+#showFormsButton {
+  color: rgb(0, 64, 255);
+}
+#siteBoardTable2 {
+  border-spacing: 0px;
+  width: 100%;
+  border: 2px solid;
+  background-color: rgba(256, 256, 256, .75);
+}
+#siteBoardTableLeft,
+#siteBoardTableRight,
+#imageList {
+  background-color: transparent;
+}
+input[type=button],
+input[type=submit],
+input[type=checkbox],
+button,
+.dropzone,
+.selectedCell {
+  border: 1px solid #000000;
+  background: transparent;
+  color: #000000;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-family: 'Clarendon', "ArimoNerdFont";
+}
+.topBoards a,
+.innerPost,
+.sideCatalogCell,
+.markedPost,
+.sideCatalogMarkedCell,
+.catalogCell,
+.floatingMenu,
+#post-form-inner,
+.galleryText {
+  background-color: rgba(256, 256, 256, 1);
+}

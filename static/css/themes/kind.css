@@ -1,0 +1,113 @@
+body.theme_kind {
+  background: linear-gradient(to bottom, white, rgba(195,225,255,100)3%);
+  font-family: arial,helvetica,sans-serif,"ArimoNerdFont";
+  color: black;
+  text-shadow: none;
+  }
+  .theme_kind .boardHeader p#labelName {
+      font-family: tahoma;
+      color: #AF0A0F;
+      font-weight: bold;
+    }
+    .theme_kind .topBoards a,
+    .theme_kind .innerPost,
+    .theme_kind .sideCatalogCell,
+    .theme_kind .markedPost,
+    .theme_kind .sideCatalogMarkedCell,
+    .theme_kind .catalogCell,
+    .theme_kind .floatingMenu,
+    .theme_kind #post-form-inner,
+    .theme_kind .quoteTooltip,
+    .theme_kind .galleryText,
+    .theme_kind #postingForm th,
+    .theme_kind .modalTableBody th {
+      background: #ffe4b5;
+      border-left: 0;
+      border-top: 0;
+      border-right: 1px solid black;
+      border-bottom: 1px solid black;
+  }
+  .theme_kind .markedPost,
+.theme_kind .sideCatalogMarkedCell {
+background: #D6BAD0;
+}
+.theme_kind .labelSubject {
+  color: #0F0C5D;
+  font-weight: bold;
+  word-wrap: break-word;
+}
+.theme_kind a,
+.theme_kind,
+.theme_kind .unhideButton,
+.theme_kind .embedButton,
+.theme_kind #selectedTab,
+.theme_kind #showFormsButton {
+color: black;
+}
+.theme_kind .noEmailName, .theme_kind .noEmailName:hover {
+  color: #AF0A0F;
+  text-shadow: none;
+}
+.theme_kind .boardHeader p#labelDescription {
+color: black;
+}
+.theme_kind input,
+.theme_kind select,
+.theme_kind textarea {
+background: white;
+border: 1px solid black;
+color: black;
+font-family: arial,helvetica,sans-serif,"ArimoNerdFont";
+}
+.theme_kind [type=button], .theme_kind input[type=submit],
+.theme_kind button, .theme_kind .dropzone, .theme_kind .selectedCell
+  {
+    border: 1px solid #111;
+    background: white;
+    color: black;
+    padding-left: 0.25em;
+    font-size: 80%;
+    font-weight: normal;
+    font-family: arial,helvetica,sans-serif;
+}
+
+.theme_kind #postingForm th, .theme_kind .modalTableBody th {
+  font-weight: bold;
+  text-align: left;
+  width: 100px;
+  font-size: 80%;
+  padding-left: 0.3em;
+  cursor: default;
+  background: white;
+  border: 0;
+}
+.theme_kind nav, .theme_kind .dropdown-content {
+  background-color: white;
+  border-width: 1px;
+}
+.theme_kind .box {
+  color: black;
+  background-color: transparent;
+}
+.theme_kind #siteBoardTableLeft,
+.theme_kind #siteBoardTableRight,
+.theme_kind #imageList {
+  background-color: transparent;
+}
+.theme_kind #randomQuote {
+  color: black;
+}
+.theme_kind .boxbar {
+  background-color: transparent;
+  color: black
+}
+.theme_kind #siteBoardTable2 {
+  background-color: transparent;
+}
+.theme_kind .TableBottom {
+  border-bottom: 1px solid black;
+}
+
+.theme_kind .TableRight {
+  border-right: 1px solid black;
+}

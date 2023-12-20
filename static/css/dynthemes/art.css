@@ -33,7 +33,7 @@ a:visited {
 #postingForm th,
 .modalTableBody th,
 .quoteTooltip,
-#quick-reply table {
+#post-form-inner {
   background: #0e68c7;
   border: 1px solid white;
 }

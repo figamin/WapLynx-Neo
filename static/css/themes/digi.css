@@ -68,7 +68,8 @@ https://web.archive.org/web/20031122004728/http://www.4chan.net/
 .theme_digi .sideCatalogMarkedCell,
 .theme_digi .catalogCell,
 .theme_digi .floatingMenu,
-.theme_digi #quick-reply table {
+.theme_digi #post-form-inner,
+.theme_digi .galleryText {
   background-color: #f0e0d6;
 }
 .theme_digi .quoteTooltip {
@@ -84,13 +85,14 @@ https://web.archive.org/web/20031122004728/http://www.4chan.net/
   border: none;
 }
 
-.theme_digi #newPostFieldset,
-.theme_digi #quick-reply table,
+.theme_digi #post-form-inner,
 .theme_digi .modalDecorationPanel,
 .theme_digi .floatingMenu,
 .theme_digi #settingsFieldset,
-.theme_digi .reportFieldset {
-  border: 1px dashed #117743;
+.theme_digi .reportFieldset,
+.theme_digi .galleryText,
+.theme_digi #bannerImage {
+  border: 1px solid maroon;
 }
 
 .theme_digi hr {
@@ -126,6 +128,7 @@ https://web.archive.org/web/20031122004728/http://www.4chan.net/
   padding-left: 0.25em;
   font-size: 80%;
   font-weight: bold;
+  font-family: 'Arial Pixelated 16', "CozetteVector";
 }
 
 body.theme_digi {
@@ -227,6 +230,9 @@ body.theme_digi {
 .theme_digi #linkFrames:before {
   content: 'Frames';
 }
+.theme_digi #linkStaffApply:before {
+  content: 'Apply for Staff';
+}
 
 .theme_digi #siteBoardBox {
   display: none;
@@ -274,7 +280,8 @@ body.theme_digi2 {
 .theme_digi2 .sideCatalogMarkedCell,
 .theme_digi2 .catalogCell,
 .theme_digi2 .floatingMenu,
-.theme_digi2 #quick-reply table {
+.theme_digi2 #post-form-inner,
+.theme_digi2 .galleryText {
   background-color: #d6daf0;
 }
 .theme_digi2 a:link {
@@ -321,11 +328,13 @@ body.theme_digi2 {
 .theme_digi2 a:link .linkQuote:hover {
   color: #d00;
 }
-.theme_digi2 #newPostFieldset,
-.theme_digi2 #quick-reply table,
+
+.theme_digi2 #post-form-inner,
 .theme_digi2 .modalDecorationPanel,
 .theme_digi2 .floatingMenu,
 .theme_digi2 #settingsFieldset,
-.theme_digi2 .reportFieldset {
-  border: 1px dashed #117743;
+.theme_digi2 .reportFieldset,
+.theme_digi2 .galleryText,
+.theme_digi2 #bannerImage {
+  border: 1px solid black;
 }

@@ -34,3 +34,64 @@ body.theme_mu {
 .theme_mu .boxbar {
   background-color: transparent;
 }
+.theme_mu .innerPost,
+.theme_mu #postingForm th,
+.theme_mu .markedPost {
+  background: rgba(256, 256, 256, .75)
+}
+.theme_mu input,
+.theme_mu select,
+.theme_mu textarea {
+  font-family: 'Clarendon', "ArimoNerdFont";
+  background-color: rgba(256, 256, 256, .75);
+  color: black;
+}
+.theme_mu .labelSubject {
+  color: rgb(0, 64, 255);
+}
+.theme_mu .noEmailName,
+.theme_mu .noEmailName:hover {
+  color: rgb(188, 3, 255);
+}
+.theme_mu a,
+.theme_mu .unhideButton,
+.theme_mu .embedButton,
+.theme_mu #selectedTab,
+.theme_mu #showFormsButton {
+  color: rgb(0, 64, 255);
+}
+.theme_mu #siteBoardTable2 {
+  border-spacing: 0px;
+  width: 100%;
+  border: 2px solid;
+  background-color: rgba(256, 256, 256, .75);
+}
+.theme_mu #siteBoardTableLeft,
+.theme_mu #siteBoardTableRight,
+.theme_mu #imageList {
+  background-color: transparent;
+}
+.theme_mu input[type=button],
+.theme_mu input[type=submit],
+.theme_mu input[type=checkbox],
+.theme_mu button,
+.theme_mu .dropzone,
+.theme_mu .selectedCell {
+  border: 1px solid #000000;
+  background: transparent;
+  color: #000000;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-family: 'Clarendon', "ArimoNerdFont";
+}
+.theme_mu .topBoards a,
+.theme_mu .innerPost,
+.theme_mu .sideCatalogCell,
+.theme_mu .markedPost,
+.theme_mu .sideCatalogMarkedCell,
+.theme_mu .catalogCell,
+.theme_mu .floatingMenu,
+.theme_mu #post-form-inner,
+.theme_mu .galleryText {
+  background-color: rgba(256, 256, 256, 1);
+}

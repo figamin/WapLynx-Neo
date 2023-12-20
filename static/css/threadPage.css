@@ -32,7 +32,7 @@
 }
 
 #quick-reply #post-form-inner {
-  min-width: 310px;
+  min-width: 300px;
 }
 
 #quick-reply .post-table tr td:nth-child(2) {
@@ -113,7 +113,7 @@
   padding: 0 0 1px 0;
 }
 
-#quick-reply table {
+#post-form-inner {
   padding: 0.25em;
   margin: 0;
   width: 100%;

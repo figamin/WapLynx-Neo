@@ -44,6 +44,9 @@ themes.init = function() {
   }, {
     label : 'Yotsuba B',
     id : 'digi theme_digi2'
+  }, {
+    label : 'Kind',
+    id : 'kind'
   }];
 
   var postingLink = document.getElementById('lastHeader');

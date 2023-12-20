@@ -68,7 +68,8 @@ a:visited {
 .sideCatalogMarkedCell,
 .catalogCell,
 .floatingMenu,
-#quick-reply table {
+#post-form-inner,
+.galleryText {
   background-color: #f0e0d6;
 }
 .quoteTooltip {
@@ -84,13 +85,14 @@ a:visited {
   border: none;
 }
 
-#newPostFieldset,
-#quick-reply table,
+#post-form-inner,
 .modalDecorationPanel,
 .floatingMenu,
 #settingsFieldset,
-.reportFieldset {
-  border: 1px dashed #117743;
+.reportFieldset,
+.galleryText,
+#bannerImage {
+  border: 1px solid maroon;
 }
 
 hr {
@@ -126,6 +128,7 @@ button,
   padding-left: 0.25em;
   font-size: 80%;
   font-weight: bold;
+  font-family: 'Arial Pixelated 16', "CozetteVector";
 }
 
 body{
@@ -274,7 +277,8 @@ body.theme_digi2 {
 .theme_digi2 .sideCatalogMarkedCell,
 .theme_digi2 .catalogCell,
 .theme_digi2 .floatingMenu,
-.theme_digi2 #quick-reply table {
+.theme_digi2 #post-form-inner,
+.theme_digi2 .galleryText {
   background-color: #d6daf0;
 }
 .theme_digi2 a:link {
@@ -321,11 +325,13 @@ body.theme_digi2 {
 .theme_digi2 a:link .linkQuote:hover {
   color: #d00;
 }
-.theme_digi2 #newPostFieldset,
-.theme_digi2 #quick-reply table,
+
+.theme_digi2 #post-form-inner,
 .theme_digi2 .modalDecorationPanel,
 .theme_digi2 .floatingMenu,
 .theme_digi2 #settingsFieldset,
-.theme_digi2 .reportFieldset {
-  border: 1px dashed #117743;
+.theme_digi2 .reportFieldset,
+.theme_digi2 .galleryText,
+.theme_digi2 #bannerImage {
+  border: 1px solid black;
 }

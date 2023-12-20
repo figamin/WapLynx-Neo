@@ -1,0 +1,112 @@
+body {
+  background: linear-gradient(to bottom, white, rgba(195,225,255,100)3%);
+  font-family: arial,helvetica,sans-serif,"ArimoNerdFont";
+  color: black;
+  text-shadow: none;
+  }
+   .boardHeader p#labelName {
+      font-family: tahoma;
+      color: #AF0A0F;
+      font-weight: bold;
+    }
+     .topBoards a,
+     .innerPost,
+     .sideCatalogCell,
+     .markedPost,
+     .sideCatalogMarkedCell,
+     .catalogCell,
+     .floatingMenu,
+     #post-form-inner,
+     .quoteTooltip,
+     .galleryText,
+     #postingForm th,
+     .modalTableBody th {
+      background: #ffe4b5;
+      border-left: 0;
+      border-top: 0;
+      border-right: 1px solid black;
+      border-bottom: 1px solid black;
+  }
+   .markedPost,
+ .sideCatalogMarkedCell {
+background: #D6BAD0;
+}
+ .labelSubject {
+  color: #0F0C5D;
+  font-weight: bold;
+  word-wrap: break-word;
+}
+ a,
+ .unhideButton,
+ .embedButton,
+ #selectedTab,
+ #showFormsButton {
+color: black;
+}
+ .noEmailName,  .noEmailName:hover {
+  color: #AF0A0F;
+  text-shadow: none;
+}
+ .boardHeader p#labelDescription {
+color: black;
+}
+ input,
+ select,
+ textarea {
+background: white;
+border: 1px solid black;
+color: black;
+font-family: arial,helvetica,sans-serif,"ArimoNerdFont";
+}
+ [type=button],  input[type=submit],
+ button,  .dropzone,  .selectedCell
+  {
+    border: 1px solid #111;
+    background: white;
+    color: black;
+    padding-left: 0.25em;
+    font-size: 80%;
+    font-weight: normal;
+    font-family: arial,helvetica,sans-serif;
+}
+
+ #postingForm th,  .modalTableBody th {
+  font-weight: bold;
+  text-align: left;
+  width: 100px;
+  font-size: 80%;
+  padding-left: 0.3em;
+  cursor: default;
+  background: white;
+  border: 0;
+}
+nav, .dropdown-content {
+  background-color: white;
+  border-width: 1px;
+}
+ .box {
+  color: black;
+  background-color: transparent;
+}
+ #siteBoardTableLeft,
+ #siteBoardTableRight,
+ #imageList {
+  background-color: transparent;
+}
+ #randomQuote {
+  color: black;
+}
+ .boxbar {
+  background-color: transparent;
+  color: black
+}
+ #siteBoardTable2 {
+  background-color: transparent;
+}
+ .TableBottom {
+  border-bottom: 1px solid black;
+}
+
+ .TableRight {
+  border-right: 1px solid black;
+}

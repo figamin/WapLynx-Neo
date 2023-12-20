@@ -32,11 +32,13 @@ Shrine is a theme that attempts to mimic the look and feel of Web 1.0 anime inte
 .sideCatalogMarkedCell,
 .catalogCell,
 .floatingMenu,
-#quick-reply table,
-.quoteTooltip {
+#post-form-inner,
+.quoteTooltip,
+.galleryText,
+#postingForm th,
+.modalTableBody th {
   background: url("https://wapchan.org/.static/dotsdark2.webp");
 }
-  
 .markedPost,
 .sideCatalogMarkedCell {
   background: #868686;
@@ -46,11 +48,12 @@ Shrine is a theme that attempts to mimic the look and feel of Web 1.0 anime inte
 .sideCatalogCell,
 .markedPost,
 .sideCatalogMarkedCell,
-.catalogCell {
+.catalogCell,
+#post-form-inner,
+#bannerImage {
   border: 1px solid black;
 }
-  
-#newPostFieldset,
+
 #quick-reply table,
 .modalDecorationPanel,
 .floatingMenu,
@@ -86,7 +89,7 @@ button,
 .dropzone,
 .selectedCell {
   border: 1px solid #000000;
-  background: transparent;
+  background: url("https://wapchan.org/.static/dotsdark2.webp");
   color: #000000;
   padding-left: 0.25em;
   font-size: 80%;
@@ -215,10 +218,6 @@ textarea {
   text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
 }
 
-#postingForm th,
-.modalTableBody th {
-  background: transparent;
-}
 
 .boardHeader p {
   color: black;

@@ -49,7 +49,7 @@
   margin-right: 10px;
 }
 #divLatestPosts {
-  width: 100%;
+  width: 97%;
   margin: 1em;
   text-align: center;
 }
@@ -62,6 +62,7 @@
   max-height: 8em;
   font-size: 11pt;
   text-align: left;
+  padding: 5px;
 }
 
 .latestPostCell a {

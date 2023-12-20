@@ -38,12 +38,15 @@ body.theme_rumi {
 .theme_rumi .sideCatalogCell,
 .theme_rumi .markedPost,
 .theme_rumi .sideCatalogMarkedCell,
-.theme_rumi .catalogCell {
+.theme_rumi .catalogCell,
+.theme_rumi #bannerImage {
   border: 4px solid black;
+  border-radius: 4px;
   background: rgba(256, 256, 256, .75);
 }
 .theme_rumi .quoteTooltip {
   border: 4px solid black;
+  border-radius: 4px;
   background: rgb(256, 256, 256);
 }
 .theme_rumi input,
@@ -70,9 +73,11 @@ body.theme_rumi {
   background-color: #ffffff;
   border-bottom: 1px solid black;
 }
-.theme_rumi #quick-reply table {
+.theme_rumi #post-form-inner,
+.theme_rumi .galleryText {
   background-color: #ffffff;
   border: 4px solid black;
+  border-radius: 4px;
 }
 .theme_rumi .droptext {
   color: black;
@@ -88,18 +93,23 @@ body.theme_rumi {
   font-family: 'Komika', "ArimoNerdFont";
   background-color: transparent;
   color: black;
+  border: 4px solid black;
+  border-radius: 4px;
 }
 
 .theme_rumi #siteBoardTable2 {
   border-spacing: 0px;
   width: 100%;
-  border: 2px solid;
+  border: 4px solid black;
+  border-radius: 4px;
   background-color: rgba(256, 256, 256, .75);
 }
 .theme_rumi #siteBoardTableLeft,
 .theme_rumi #siteBoardTableRight,
 .theme_rumi #imageList {
   background-color: transparent;
+  border-bottom: 0;
+  border-right: 0;
 }
 .theme_rumi a,
 .theme_rumi .unhideButton,
@@ -113,8 +123,25 @@ body.theme_rumi {
 .theme_rumi .box {
   color: black;
   background-color: rgba(255, 255, 255, .7);
+  border: 4px solid black;
+  border-radius: 4px;
 }
-
+.theme_rumi #specialBoxBar {
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+}
+.theme_rumi .siteBoardBody {
+  border-left: 4px solid black;
+}
+.theme_rumi .TableTop {
+  border-top: 4px solid black;
+}
+.theme_rumi .TableBottom {
+  border-bottom: 4px solid black;
+}
+.theme_rumi .TableRight {
+  border-right: 4px solid black;
+}
 .theme_rumi .boardHeader p {
   color: black;
   text-shadow: 1px 1px 1px rgba(167,170,168,0.6);
@@ -122,6 +149,8 @@ body.theme_rumi {
 
 .theme_rumi #postingForm th, .theme_rumi .modalTableBody th {
   background: transparent;
+  border: 4px solid black;
+  border-radius: 4px;
 }
 .theme_rumi #randomQuote {
   color: black;
