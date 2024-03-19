@@ -13,15 +13,17 @@ Sandbox is a nice green/pink theme. This was actually the original "default" the
 .theme_chill .catalogCell,
 .theme_chill .floatingMenu,
 .theme_chill #post-form-inner {
-  background: #99c969;
+  background: black;
 }
 
 .theme_chill a,
 .theme_chill .unhideButton,
 .theme_chill .embedButton,
+.theme_chill .labelSubject,
+.theme_chill .panelBacklinks a,
 .theme_chill #selectedTab,
 .theme_chill #showFormsButton {
-  color: #0084ff;
+  color: #B200FF;
   cursor: pointer;
 }
 
@@ -31,18 +33,18 @@ Sandbox is a nice green/pink theme. This was actually the original "default" the
 .theme_chill button,
 .theme_chill .dropzone,
 .theme_chill .selectedCell {
-  border: 1px solid #000000;
+  border: 1px solid #57007F;
   background: transparent;
-  color: #000000;
+  color: white;
   padding-left: 0.25em;
   font-size: 80%;
-  font-family: "CozetteVector";
+  font-family: "CozetteVector", "SymbolsNerdFont";
 }
 
 body.theme_chill {
-  color: black;
-  background: linear-gradient(135deg, rgba(230, 255, 205, 1) 30%, rgba(255, 182, 193, 1) 100%);
-  font-family: "CozetteVector";
+  color: white;
+  background: url("https://wapchan.org/.static/oilsky.png");
+  font-family: "CozetteVector", "SymbolsNerdFont";
   font-size: 100%;
   margin: 0px;
 }
@@ -52,7 +54,7 @@ body.theme_chill {
   display: inline-block;
   padding: 0.25em;
   max-width: 100%;
-  border: 1px solid black;
+  border: 1px solid #57007F;
 }
 
 .theme_chill input,
@@ -62,22 +64,22 @@ body.theme_chill {
 }
 
 .theme_chill .box {
-  color: black;
-  background-color: transparent;
+  color: white;
+  background-color: black;
 }
 
 .theme_chill .boxbar {
   text-align: left;
-  background-color: #99c969;
+  background-color: black;
 }
 
 .theme_chill .boardHeader p {
-  color: black;
+  color: white;
   text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
 }
 .theme_chill nav, .theme_chill .dropdown-content {
-  background-color: #99c969;
+  background-color: black;
 }
 .theme_chill .droptext {
-  color: black;
+  color: white;
 }

@@ -1,0 +1,312 @@
+body.theme_tower {
+    display: flex;
+    flex-direction: column;
+    background: #555 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8AgMAAABHkjHhAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURSIiIkRERFVVVXd3d2WUC2gAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALiSURBVBgZXcFPaBxVHAfwX6sY6SLrwS3oQeghYnPzqKdN6QaSHjor7/vSGRAsdEPmd7BeehEq2pKKyUnJG7NTWrYls+77jk3uwT946MXeSjfQXLx0Jfty6KmFrsgYtD3o5yP/dVT+L2FOHFJlGVhINUbb7vSrQ4+r8k/BxyINcyRwRwtgUTTzsd2QnJeTybSLZYbZD+vx1ChdDq82EhXl8YFfru0WJmtMsy9M3x745dou4K59u0UZ8KPL3cHUwxiIoYV4zX1nozbsIIbtF6Jc/fHSoD6+cAEAvZDbuxzUwzemYZaowsHky7GvjRZNAeQQlrzy60Zt15oRwK70ab+472p73XOuAXVCsjjfrYX43Aow50SZ83a3Po5N0WkvUMg8vePr4zeNR5sUevVs1UZqAMtSSF4/uFH7Y67ok+FAXpmNXhaZWmmZ1htNeaFu5DmyIn/5vXq8XVUV7wuLbPO7iqHHn1ldvCvs9bPFXQ098sMtrgh75Pfb/OkZoUBL2AvXS5KBLmtgQbJbYTslS9zMvoZdELb3PElF4tW1FqQ8EfKnPISsAFri37v71hzZL2I62HnxJ9ZBUp0mSNOWxJ/u2x3eoffpSXRasvNoX1my6KijQ0vK3gP4CW97dUTSFG4+UP5WqvrATjoroRgujVedKj19Ajnw++UNMtB7dtMZCY/GJba3bvLipof5QP56J1STirn/vHeS/qrI0SYOtWddJE05IoLm6wLAFgC0J9U/9qp/TcQjc+itPgWiND41lPfh0I7qw+nu4F28tCJbLveIjo3UD5Ls2ozkru+KqP5kRvu5O21FAQNTexJ3zqfRaSshjucvRWeDJ9Nbpwph11iYtQnpgKsQ9THQvjf8bIHUK5BjFha4N9LXOpiej0QBGKw9JNe9xpGoA5bNV3sJM4ekLYwBmDOBzBILSAcGxpx9ph60xyGEgVk/M1oiOZdYSWOkiNYC2WeSFEKFs2YtkIXFJ/ZvCcK6f9EG6jIAAAAASUVORK5CYII=);
+    background-size: 120px;
+    color: #999;
+    font-family: 'OpenSans', tahoma;
+    text-shadow: none;
+  }
+  
+  .theme_tower .top-nav {
+    background: #555;
+    border-color: #777;
+    opacity: 0;
+    transition: opacity 1s 1s;
+  }
+  
+  .theme_tower .top-nav:hover {
+    opacity: 1;
+  }
+  
+  .theme_tower #labelName, .theme_tower #board-catalog .board-header {
+    font-size: 220%;
+    color: #555;
+    text-shadow: -1px 1px #ccc, 1px 1px 4px #000, 2px 2px 4px #000;
+  }
+  
+  .theme_tower #board-catalog .board-header a {
+    text-decoration: none;
+    text-shadow: none;
+  }
+  
+  .theme_tower #favouriteButton {
+    position: absolute;
+    font-size: 80%;
+    color: #555;
+  }
+  
+  .theme_tower #favouriteButton.checkedFavouriteButton {
+    color: #bf0;
+    text-shadow: -1px 1px #ccc, 1px 1px 4px #000, 2px 2px 4px #000, 0 0 8px #ae1, 0 0 8px #ae1;
+  }
+  
+  .theme_tower .fa-star {
+    font-weight: normal;
+    transform: rotateZ(14deg);
+  }
+  
+  .theme_tower #labelDescription {
+    font-size: 140%;
+  }
+  
+  .theme_tower #labelDescription, .theme_tower #panelMessage, .theme_tower #panelMessage .redText {
+    font-weight: bold;
+    color: #444;
+    text-shadow: -1px 1px #bbb, 1px 1px 4px #000, 2px 2px 4px #000;
+  }
+  
+  .theme_tower #panelMessage #divMessage {
+    margin-top: -1.5rem;
+  }
+  
+  .theme_tower .board-nav, .theme_tower #actionsForm details summary {
+    margin-right: 40px;
+    margin-left: 40px;
+    text-shadow: 1px 1px 4px #000, 2px 2px 4px #000;
+  }
+  
+  .theme_tower .opCell, .theme_tower .catalogCell {
+    margin: 48px 32px;
+  }
+  
+  .theme_tower #divThreads>.unhideButton {
+    margin-left: 32px;
+  }
+  
+  .theme_tower .catalogCell {
+    padding:8px 0;
+  }
+  
+  .theme_tower .opCell:first-of-type {
+    margin-top: 0;
+  }
+  
+  .theme_tower .opCell, .theme_tower #divThreads>.unhideButton, .theme_tower .catalogCell, .theme_tower .floatingMenu, .theme_tower .modalDecorationPanel, .theme_tower #actionsForm details[open], .theme_tower #postingForm {
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 10px;
+    box-shadow: 24px 24px 24px #000;
+  }
+  
+  .theme_tower .opCell>.unhideButton {
+    margin: 8px;
+    background: #222;
+    border: none;
+  }
+  
+  .theme_tower .postCell>.unhideButton {
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 10px;
+  }
+  
+  .theme_tower .unhideButton {
+    opacity: 1;
+    padding: 8px;
+  }
+  
+  .theme_tower .innerOP {
+    margin-left: 8px;
+  }
+  
+  .theme_tower #selectedTab {
+    background: #555;
+    border: 1px solid #555;
+  }
+  
+  .theme_tower .settingsTabs, .theme_tower #actionsForm details[open] summary {
+    padding-top: 8px;
+    text-shadow: none;
+  }
+  
+  .theme_tower #existingFiltersPanel > div:nth-child(2n), .theme_tower #watchedMenu div:nth-child(2n) .watchedCell {
+    background: #333;
+  }
+  
+  .theme_tower .settingsContentPanel div>button {
+    margin-top: 8px;
+  }
+  
+  .theme_tower #watchedMenu .header {
+    margin-bottom: 8px;
+  }
+  
+  .theme_tower .extraMenu div, .theme_tower .hideMenu div {
+    padding: 2px 0;
+  }
+  
+  .theme_tower .divPosts {
+    margin: 8px;
+  }
+  
+  .theme_tower .postCell {
+    display: flex;
+    margin: 8px 0;
+  }
+  
+  .theme_tower .innerPost {
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 10px;
+    width: 100%;
+  }
+  
+  .theme_tower .markedPost {
+    background: #555;
+    border: 1px solid #555;
+    border-radius: 10px;
+    width: 100%;
+  }
+  
+  .theme_tower a, .theme_tower .bracket-list, .theme_tower .bracket-list>:not(:last-child)::after, .theme_tower .bracket-button::before, .theme_tower .bracket-button::after, .theme_tower .extraMenu div, .theme_tower .hideMenu div, .theme_tower .unhideButton, .theme_tower .menuClose, .theme_tower .filterDeleteButton, .theme_tower .panelBacklinks a, .theme_tower .embedButton, .theme_tower .removeButton, .theme_tower .watchedCellCloseButton, .theme_tower .reloadCaptchaButton, .theme_tower .modalCaptchaControls, .theme_tower .captchaTimer, .theme_tower summary {
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  .theme_tower a:hover, .theme_tower .extraMenu div:hover, .theme_tower .hideMenu div:hover, .theme_tower .unhideButton:hover, .theme_tower .menuClose:hover, .theme_tower .filterDeleteButton:hover, .theme_tower .embedButton:hover, .theme_tower .removeButton:hover, .theme_tower .watchedCellCloseButton:hover, .theme_tower .reloadCaptchaButton:hover, .theme_tower .reloadCaptchaButton i:hover, .theme_tower .modalCaptchaControls:hover, .theme_tower .modalCaptchaControls i:hover, .theme_tower .captchaTimer:hover, .theme_tower summary:hover {
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .theme_tower .title * {
+    vertical-align: middle;
+  }
+  
+  .theme_tower [type="checkbox"] {
+    filter: brightness(60%);
+  }
+  
+  .theme_tower .deletionCheckBox {
+    margin-top: 0.25rem;
+  }
+  
+  .theme_tower .labelSubject {
+    font-size: 140%;
+    color: #592;
+  }
+  
+  .theme_tower .linkName.noEmailName, .theme_tower .linkName, .theme_tower .labelYou {
+    pointer-events: none;
+    color: #3d7;
+    text-decoration: none;
+  }
+  
+  .theme_tower .labelYou::after, .theme_tower .embedButton::before {
+    font-weight: bold;
+    content: "\00a0";
+  }
+  
+  .theme_tower .linkSelf, .theme_tower .linkQuote, .theme_tower .quoteLink {
+    color: #999;
+    text-decoration: none;
+  }
+  
+  .theme_tower .linkSelf:hover, .theme_tower .linkQuote:hover, .theme_tower .quoteLink:hover {
+    color: #3d7;
+    text-decoration: overline underline;
+  }
+  
+  .theme_tower .postInfo .panelBacklinks {
+    vertical-align: top;
+  }
+  
+  .theme_tower .greenText {
+    color: #bd6;
+  }
+  
+  .theme_tower .redText, .theme_tower .WebringButton {
+    font-size: 100%;
+  }
+  
+  .theme_tower .spoiler {
+    background: #999;
+    color: #999;
+    padding: 0;
+    transition: none;
+  }
+  
+  .theme_tower .spoiler:hover {
+    background: inherit;
+    color:inherit;
+  }
+  
+  .theme_tower select, .theme_tower [type="text"], .theme_tower [type="password"], .theme_tower textarea {
+    background: #333;
+    color: #ccc;
+    border: 1px solid #666;
+  }
+  
+  .theme_tower button, .theme_tower input[type="button"], .theme_tower .settingsTab {
+    background: #333;
+    border: 1px solid #888;
+    color: #ccc;
+  }
+  
+  .theme_tower button:hover, .theme_tower input[type="button"]:hover, .theme_tower .settingsTab:hover {
+    cursor: pointer;
+    background: #555;
+    border: 1px solid #888;
+    color: #3d7;
+  }
+  
+  .theme_tower #actionsForm {
+    display: table;
+    margin: 1rem auto;
+  }
+  
+  .theme_tower #actionsForm details[open] {
+    margin-bottom: 48px;
+  }
+  
+  .theme_tower .modalHeader, .theme_tower .reportFieldset, .theme_tower legend {
+    border: none!important;
+  }
+  
+  .theme_tower .reportFieldset {
+    background: #222;
+  }
+  
+  .theme_tower #reportFormButton {
+    position: absolute;
+    bottom: 1rem;
+  }
+  
+  .theme_tower #postingForm {
+    order: 1;
+    margin-top: 0;
+    padding: 8px;
+  }
+  
+  .theme_tower th {
+    background: #333 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADAQMAAABs5if8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURTk9RkRLU/egJ+AAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAOSURBVAgdY1BgcGBoAAAB5gDh4wDEigAAAABJRU5ErkJggg==)!important;
+  }
+  
+  .theme_tower .dropzone, .theme_tower .selectedCell {
+    background: #222;
+  }
+  
+  .theme_tower .captchaImage {
+    filter: invert(86.8%);
+  }
+  
+  .theme_tower .modalCaptchaControls {
+    left: 0.45rem;
+  }
+  
+  .theme_tower .modalCaptchaControls .captchaTimer {
+    margin-left: 0.05rem;
+  }
+  
+  .theme_tower #transferControls, .theme_tower #ipDelete {
+    order: 2;
+    margin: 0;
+  }
+  
+  .theme_tower footer {
+    order: 3;
+  }
+  
+  .theme_tower #globalAnnouncement, .theme_tower hr, .theme_tower .quoteLink.op::after, .theme_tower .quoteLink.you::after, .theme_tower .replyToThread, .theme_tower #quick-reply-container {
+    display: none!important;
+  }

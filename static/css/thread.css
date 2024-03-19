@@ -1,12 +1,16 @@
 /*Elements that show on threads on both catalogs and regular posting places*/
-
+@font-face {
+  font-family: "SymbolsNerdFont";
+  src: url("../fonts/SymbolsNerdFont-Regular.woff2") format("woff2"),
+  url("../fonts/SymbolsNerdFont-Regular.woff") format("woff");
+}
 .lockIndicator:before, .pinIndicator:after, .archiveIndicator:after, .cyclicIndicator:after, .bumpLockIndicator:after { 
-  font-family: Icons;
+  font-family: "SymbolsNerdFont";
   color: #A00;
 }
 
 .lockIndicator:before {
-  content: "\e08a";
+  content: "\f456";
 }
 
 #galleryLink:before {
@@ -14,19 +18,19 @@
 }
 
 .pinIndicator:after {
-  content: "\e0a8";
+  content: "\f435";
 }
 
 .archiveIndicator:after {
-  content: "\e023";
+  content: "\f411";
 }
 
 .cyclicIndicator:after {
-  content: "\e08c";
+  content: "\f139d";
 }
 
 .bumpLockIndicator:after {
-  content: "\e0db";
+  content: "\f0fcc";
 }
 
 .galleryImage {

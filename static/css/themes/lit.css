@@ -36,6 +36,25 @@ Book looks like a fancy paperback.
   content: "Wapchan.";
   font-size: 100px;
 }
+.theme_lit .topBoards a,
+.theme_lit .innerPost,
+.theme_lit .sideCatalogCell,
+.theme_lit .markedPost,
+.theme_lit .sideCatalogMarkedCell,
+.theme_lit .catalogCell,
+.theme_lit .floatingMenu,
+.theme_lit #post-form-inner,
+.theme_lit .quoteTooltip,
+.theme_lit .galleryText,
+.theme_lit #postingForm th,
+.theme_lit .modalTableBody th {
+  background: transparent;
+}
+
+.theme_lit #quick-reply {
+  background: white;
+  border: 1px solid black;
+}
 
 body.theme_lit {
   font-family: 'Libre Baskerville', "ArimoNerdFont";

@@ -36,6 +36,25 @@ a,
   content: "Wapchan.";
   font-size: 100px;
 }
+.topBoards a,
+.innerPost,
+.sideCatalogCell,
+.markedPost,
+.sideCatalogMarkedCell,
+.catalogCell,
+.floatingMenu,
+#post-form-inner,
+.quoteTooltip,
+.galleryText,
+#postingForm th,
+.modalTableBody th {
+  background: transparent;
+}
+
+#quick-reply {
+  background: white;
+  border: 1px solid black;
+}
 
 body{
   font-family: 'Libre Baskerville', "ArimoNerdFont";

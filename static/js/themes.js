@@ -3,50 +3,47 @@ var themes = {};
 themes.init = function() {
 
   themes.themes = [ {
-    label : 'Wapanese (for /wap/)',
+    label : 'Wapanese',
     id : 'wap'
   }, {
-    label : 'Shrine (for /cel/)',
+    label : 'Shrine',
     id : 'cel'
   }, {
-    label : 'Yotsuba (for /digi/)',
+    label : 'Yotsuba',
     id : 'digi'
   }, {
-    label : 'PC-98 (for /pixl/)',
+    label : 'Yotsuba B',
+    id : 'digi theme_digi2'
+  }, {
+    label : 'PC-98',
     id : 'pixl'
   }, {
-    label : 'Rumic (for /rumi/)',
+    label : 'Rumic',
     id : 'rumi'
   }, {
-    label : 'Scarlet (for /th/)',
+    label : 'Scarlet',
     id : 'th'
   }, {
-    label : 'Serenity (for /art/)',
-    id : 'art'
-  }, {
-    label : 'Bricks (for /hob/)',
-    id : 'hob'
-  }, {
-    label : 'Book (for /lit/)',
+    label : 'Book',
     id : 'lit'
   }, {
-    label : 'Walkman (for /mu/)',
-    id : 'mu'
-  }, {
-    label : 'Workbench (for /tech/)',
-    id : 'tech'
-  }, {
-    label : 'Sandbox (for /chill/)',
+    label : 'Oil',
     id : 'chill'
   }, {
     label : 'Wapchan Classic',
     id : 'wc'
   }, {
-    label : 'Yotsuba B',
-    id : 'digi theme_digi2'
-  }, {
     label : 'Kind',
     id : 'kind'
+  }, {
+    label : 'Ayashii',
+    id : 'ayashii'
+  }, {
+    label : '2channel',
+    id : '2channel'
+  }, {
+    label : 'Mage\'s Tower',
+    id : 'tower'
   }];
 
   var postingLink = document.getElementById('lastHeader');

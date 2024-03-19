@@ -1,0 +1,134 @@
+/*
+    ____   ______      ____   ____      __ ____                   __        _        __    __ _ 
+   / __ \ / ____/     / __ \ ( __ )   _/_// __/____   _____     _/_/____   (_)_  __ / /  _/_/| |
+  / /_/ // /   ______/ /_/ // __  |  / / / /_ / __ \ / ___/   _/_/ / __ \ / /| |/_// / _/_/  / /
+ / ____// /___/_____/\__, // /_/ /  / / / __// /_/ // /     _/_/  / /_/ // /_>  < / /_/_/   / / 
+/_/     \____/      /____/ \____/  / / /_/   \____//_/     /_/   / .___//_//_/|_|/_//_/   _/_/  
+                                   |_|                          /_/                      /_/
+PC-98 is a theme based around an old command prompt interface, meant to resemble the localized MS-DOS that ran on these computers (using the same font).
+*/
+.theme_2channel #siteBoardTable2 {
+  border: 1px double black;
+  background-color: #CCFFCC;
+}
+
+.theme_2channel .topBoards a,
+.theme_2channel .innerPost,
+.theme_2channel .innerOP,
+.theme_2channel .sideCatalogCell,
+.theme_2channel .catalogCell {
+  background: #EFEFEF;
+  border: 1px double black;
+}
+
+.theme_2channel .floatingMenu,
+.theme_2channel #post-form-inner {
+  background: url("https://wapchan.org/.static/2channel.gif");
+  border: 1px double black;
+}
+
+.theme_2channel #siteBoardTableLeft,
+.theme_2channel #siteBoardTableRight,
+.theme_2channel #imageList {
+  background-color: #CCFFCC;
+}
+
+.theme_2channel .leftmenu {
+  display: none;
+}
+
+.theme_2channel .logoImg,
+.theme_2channel .logoImgRumi,
+.theme_2channel .logoImgOld {
+  display: none;
+}
+
+.theme_2channel .logoText:before {
+  content: "Wapchannel";
+  display: block;
+  font-family: 'Saitamaar';
+  font-size: 24px;
+}
+
+body.theme_2channel {
+  background: url("https://wapchan.org/.static/2channel.gif");
+  color: black;
+  font-family: 'Saitamaar', "CozetteVector";
+}
+
+.theme_2channel .markedPost, .theme_2channel .sideCatalogMarkedCell {
+  border-left: 1px double black;
+  border-right: 1px double black;
+  border-top: 1px double black;
+  border-bottom: 1px double black;
+  background-color: #EFEFEF;
+}
+
+.theme_2channel .box {
+  background-color: #CCFFCC;
+  color: black;
+  border-left: 1px double black;
+  border-right: 1px double black;
+  border-top: 1px double black;
+  border-bottom: 1px double black;
+}
+
+.theme_2channel .boxbar {
+  text-align: left;
+  background-color: #CCFFCC;
+}
+
+.theme_2channel a {
+  color: #0000FF;
+}
+
+.theme_2channel .boardHeader p {
+  color: black;
+}
+
+.theme_2channel nav, .theme_2channel .dropdown-content {
+  background-color: #CCFFCC;
+  border-bottom: 1px solid black;
+}
+.theme_2channel .droptext {
+  color: black;
+}
+.theme_2channel input,
+.theme_2channel select,
+.theme_2channel textarea {
+  font-family: 'Saitamaar', "CozetteVector";
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.theme_2channel input[type=button],
+.theme_2channel input[type=submit],
+.theme_2channel button,
+.theme_2channel .dropzone,
+.theme_2channel .selectedCell {
+  border: 1px solid black;
+  background: #CCFFCC;
+  color: black;
+  padding-left: 0.25em;
+  font-size: 80%;
+  font-weight: bold;
+  font-family: 'Saitamaar', "CozetteVector";
+}
+
+.theme_2channel .labelSubject {
+  color: #FF0000;
+}
+
+.theme_2channel #postingForm th,
+.theme_2channel .modalTableBody th,
+.theme_2channel .quoteTooltip,
+.theme_2channel .galleryText,
+.theme_2channel #bannerImage {
+  background: #CCFFCC;
+  border: 1px solid black;
+}
+
+.theme_2channel #randomQuote {
+  color: black;
+}

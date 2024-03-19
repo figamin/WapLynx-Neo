@@ -7,77 +7,80 @@
                                                  |_|                                                      /_/
 Sandbox is a nice green/pink theme. This was actually the original "default" theme for WapLynx Neo, before user feedback prompted a change back to a dark theme.
 */
-.topBoards a,
-.innerPost,
-.sideCatalogCell,
-.catalogCell,
-.floatingMenu,
-#post-form-inner {
-  background: #99c969;
+ .topBoards a,
+ .innerPost,
+ .sideCatalogCell,
+ .catalogCell,
+ .floatingMenu,
+ #post-form-inner {
+  background: black;
 }
 
-a,
-.unhideButton,
-.embedButton,
-#selectedTab,
-#showFormsButton {
-  color: #0084ff;
+ a,
+ .noEmailName, .noEmailName:hover,
+ .unhideButton,
+ .embedButton,
+ .labelSubject,
+ .panelBacklinks a,
+ #selectedTab,
+ #showFormsButton {
+  color: #B200FF;
   cursor: pointer;
 }
 
-input[type="button"],
-input[type="submit"],
-input[type="checkbox"],
-button,
-.dropzone,
-.selectedCell {
-  border: 1px solid #000000;
+ input[type="button"],
+ input[type="submit"],
+ input[type="checkbox"],
+ button,
+ .dropzone,
+ .selectedCell {
+  border: 1px solid #57007F;
   background: transparent;
-  color: #000000;
+  color: white;
   padding-left: 0.25em;
   font-size: 80%;
-  font-family: "CozetteVector";
+  font-family: "CozetteVector", "SymbolsNerdFont";
 }
 
-body{
-  color: black;
-  background: linear-gradient(135deg, rgba(230, 255, 205, 1) 30%, rgba(255, 182, 193, 1) 100%);
-  font-family: "CozetteVector";
+body {
+  color: white;
+  background: url("https://wapchan.org/.static/oilsky.png");
+  font-family: "CozetteVector", "SymbolsNerdFont";
   font-size: 100%;
   margin: 0px;
 }
 
-.innerPost,
-.markedPost {
+ .innerPost,
+ .markedPost {
   display: inline-block;
   padding: 0.25em;
   max-width: 100%;
-  border: 1px solid black;
+  border: 1px solid #57007F;
 }
 
-input,
-select,
-textarea {
+ input,
+ select,
+ textarea {
   font-size: 100%;
 }
 
-.box {
-  color: black;
-  background-color: transparent;
+ .box {
+  color: white;
+  background-color: black;
 }
 
-.boxbar {
+ .boxbar {
   text-align: left;
-  background-color: #99c969;
+  background-color: black;
 }
 
-.boardHeader p {
-  color: black;
+ .boardHeader p {
+  color: white;
   text-shadow: 1px 1px 1px rgba(167, 170, 168, 0.6);
 }
-nav, .dropdown-content {
-  background-color: #99c969;
+ nav,  .dropdown-content {
+  background-color: black;
 }
-.droptext {
-  color: black;
+ .droptext {
+  color: white;
 }

@@ -12,7 +12,60 @@
 @import "themes/chill.css";
 @import "themes/wc.css";
 @import "themes/kind.css";
+@import "themes/ayashii.css";
+@import "themes/2channel.css";
+@import "themes/tower.css";
 /*FONT IMPORT BEGIN*/
+@font-face {
+  font-family: "SymbolsNerdFont";
+  src: url("../fonts/SymbolsNerdFont-Regular.woff2") format("woff2"),
+  url("../fonts/SymbolsNerdFont-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "OpenSans";
+  src: url("../fonts/OpenSans-Regular.woff2") format("woff2"),
+  url("../fonts/OpenSans-Regular.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenSans";
+  src: url("../fonts/OpenSans-Bold.woff2") format("woff2"),
+  url("../fonts/OpenSans-Bold.woff") format("woff");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Saitamaar";
+  src: url("../fonts/Saitamaar.woff2") format("woff2"),
+  url("../fonts/Saitamaar.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "IPA MonaP Gothic";
+  src: url("../fonts/IPAMonaPGothic-Regular.woff2") format("woff2"),
+  url("../fonts/IPAMonaPGothic-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Hiragino Kaku Gothic ProN";
+  src: url("../fonts/Hiragino-Kaku-Gothic-ProN-W3.woff2") format("woff2"),
+  url("../fonts/Hiragino-Kaku-Gothic-ProN-W3.woff") format("woff");
+}
+@font-face {
+  font-family: "Hiragino Kaku Gothic ProN";
+  src: url("../fonts/Hiragino-Kaku-Gothic-ProN-W6.woff2") format("woff2"),
+  url("../fonts/Hiragino-Kaku-Gothic-ProN-W6.woff") format("woff");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "BIZUDGothic";
+  src: url("../fonts/BIZUDGothic-Regular.woff2") format("woff2"),
+  url("../fonts/BIZUDGothic-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "BIZUDGothic";
+  src: url("../fonts/BIZUDGothic-Bold.woff2") format("woff2"),
+  url("../fonts/BIZUDGothic-Bold.woff") format("woff");
+  font-weight: bold;
+}
 @font-face {
   font-family: "TT Bricks Trial";
   src: url("../fonts/TT_Bricks_Trial_Medium.woff2") format("woff2"),
@@ -823,8 +876,8 @@ nav span, nav a {
 }
 
 a.rules:after {
-  font-family: "CozetteVector";
-  content: "\e052";
+  font-family: "SymbolsNerdFont";
+  content: "\f014c";
   margin-right: 0.5em;
   color: #117743;
   height: 80%;
@@ -1316,4 +1369,11 @@ td {
 .font_override, body.font_override, .font_override select, .font_override .dropzone {
   font-family: "ArimoNerdFont", Helvetica, sans-serif !important;
   letter-spacing: 0em !important;
+}
+
+.Saitamaar {
+  font-family: "Saitamaar";
+  white-space: pre;
+  font-size: 16px;
+  line-height: 18px;
 }

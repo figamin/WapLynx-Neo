@@ -1,12 +1,13 @@
 /*Elements used exclusively on board pages*/
 #linkPrevious:before {
-  font-family: Icons;
-  content: "\e035";
+  font-family: "SymbolsNerdFont";
+  content: "\f060";
   margin: 0 0.25em;
 }
 
 #linkLogs:before {
-  content: "\e069"
+  font-family: "SymbolsNerdFont";
+  content: "\f0bc1"
 }
 
 #linkPrevious, #linkNext {
@@ -14,8 +15,8 @@
 }
 
 #linkNext:after {
-  font-family: Icons;
-  content: "\e036";
+  font-family: "SymbolsNerdFont";
+  content: "\f061";
   margin: 0 0.25em;
 }
 
