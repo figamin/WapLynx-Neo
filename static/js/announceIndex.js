@@ -15,7 +15,7 @@ $.getJSON('https://wapchan.org/wap/res/713.json', function(data) {
     document.getElementById("annoTitle").innerHTML = data.posts[i].subject + "<span style='float:right'>" + "by " + data.posts[i].name + " on " + d.toLocaleDateString() + " at " + d.toLocaleTimeString() + "</span>";
     //document.getElementById("annoSubtitle").innerText = ;
     if (data.posts[i].message.length > 600) {
-        document.getElementById("annoMessage").innerText = data.posts[i].message.substring(0, 600) + "...";
+        document.getElementById("annoMessage").innerText = data.posts[i].message.substring(0, 600) + "…";
     }
     else {
         document.getElementById("annoMessage").innerText = data.posts[i].message;
@@ -28,5 +28,5 @@ $.getJSON('https://wapchan.org/wap/res/713.json', function(data) {
         document.getElementById("annoImage").hidden = "hidden"
     }
     document.getElementById("annoLink").href = "https://wapchan.org/wap/res/713.html#" + data.posts[i].postId;
-    document.getElementById("annoLink").innerText = "Discuss..."
+    document.getElementById("annoLink").innerText = "Discuss…"
 });

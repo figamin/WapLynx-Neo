@@ -17,6 +17,22 @@
 @import "themes/tower.css";
 /*FONT IMPORT BEGIN*/
 @font-face {
+  font-family: "NotoEmoji";
+  src: url("../fonts/NotoEmoji-Medium.woff2") format("woff2"),
+  url("../fonts/NotoEmoji-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: "NotoEmoji";
+  src: url("../fonts/NotoEmoji-Bold.woff2") format("woff2"),
+  url("../fonts/NotoEmoji-Bold.woff") format("woff");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "og-dcm-emoji";
+  src: url("../fonts/og-dcm-emoji.woff2") format("woff2"),
+  url("../fonts/og-dcm-emoji.woff") format("woff");
+}
+@font-face {
   font-family: "SymbolsNerdFont";
   src: url("../fonts/SymbolsNerdFont-Regular.woff2") format("woff2"),
   url("../fonts/SymbolsNerdFont-Regular.woff") format("woff");
@@ -900,6 +916,7 @@ a.rules:after {
 span.spoiler {
   background: #000;
   color: #000;
+  text-shadow: none;
   padding: 0 1px;
 }
 

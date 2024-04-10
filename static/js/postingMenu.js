@@ -1,7 +1,7 @@
 var postingMenu = {};
 
 postingMenu.init = function() {
-  postingMenu.reasonList = ['Politics', 'Frog/Jakposting','Unspoilered NSFW', 'Spam', 'Excessive Slurs','CP/Illegal Content', 'Imageboard ad on wrong board (read the rules!)', 'Off Topic'];
+  postingMenu.reasonList = ['Politics', 'Frog/Jakposting','Unspoilered NSFW', 'Spam', 'Excessive Slurs','CP/Illegal Content', 'Imageboard ad on wrong board (read the rules!)', 'Off Topic', 'Low Quality'];
   postingMenu.durationLengths = ['3d', '1w', '99y'];
   postingMenu.banLabels = [ 'IP/Bypass ban', 'Range ban (1/2 octects)',
       'Range ban (3/4 octects)', 'ASN ban', 'IP/Bypass warning' ];
@@ -681,7 +681,7 @@ postingMenu.sendArchiveRequest = function(board, thread, innerPart) {
 
 postingMenu.setExtraMenuThread = function(extraMenu, board, thread, innerPart) {
 
-  if (postingMenu.globalRole <= 1) {
+  if (postingMenu.globalRole <= 2) {
 
     extraMenu.appendChild(document.createElement('hr'));
 

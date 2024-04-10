@@ -9,7 +9,7 @@ $.ajax({
         console.log(giffen)
         for(let i = giffen.length - 1; i > giffen.length - 5; i--) {
             var filename = giffen[i].href.replace(window.location.host, "").replace("https://", "");
-            $(".doodlebox").append("<a href='https://wapchan.org/doodle'><img style='width: 300px;border:1px solid black;' src='" + dir + filename + "'></a>");
+            $(".doodlebox").append("<a href='https://wapchan.org/doodle'><img style='width: 200px;border:1px solid black;' src='" + dir + filename + "'></a>");
         }
     }
 });
