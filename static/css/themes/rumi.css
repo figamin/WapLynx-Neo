@@ -26,9 +26,11 @@ body.theme_rumi {
   background-size: cover;
   background-attachment: fixed;
   color: #000;
-  font-family: 'Komika', "ArimoNerdFont";
+  font-family: 'ComicSansUT', "ArimoNerdFont";
 }
-
+.theme_rumi .floatingMenu {
+  background-color: #ffffff;
+}
 .theme_rumi .labelSubject {
   color: black;
 }
@@ -52,7 +54,7 @@ body.theme_rumi {
 .theme_rumi input,
 .theme_rumi select,
 .theme_rumi textarea {
-  font-family: 'Komika', "ArimoNerdFont";
+  font-family: 'ComicSansUT', "ArimoNerdFont";
 }
 
 .theme_rumi input[type=button],
@@ -66,7 +68,7 @@ body.theme_rumi {
   color: #000000;
   padding-left: 0.25em;
   font-size: 80%;
-  font-family: 'Komika', "ArimoNerdFont";
+  font-family: 'ComicSansUT', "ArimoNerdFont";
 }
 
 .theme_rumi nav, .theme_rumi .dropdown-content {
@@ -90,7 +92,7 @@ body.theme_rumi {
 .theme_rumi input,
 .theme_rumi select,
 .theme_rumi textarea {
-  font-family: 'Komika', "ArimoNerdFont";
+  font-family: 'ComicSansUT', "ArimoNerdFont";
   background-color: transparent;
   color: black;
   border: 4px solid black;

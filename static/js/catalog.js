@@ -19,10 +19,10 @@ catalog.init = function() {
   catalog.searchField = document.getElementById('catalogSearchField');
 
   var catalogCellTemplate = '<a class="linkThumb"></a>';
-  catalogCellTemplate += '<p class="threadStats">R: ';
-  catalogCellTemplate += '<span class="labelReplies"></span> / I: ';
-  catalogCellTemplate += '<span class="labelImages"></span> / P: ';
-  catalogCellTemplate += '<span class="labelPage"></span> ';
+  catalogCellTemplate += '<p class="threadStats">';
+  catalogCellTemplate += '<span title="Posts / Files / Page"><span class="labelReplies"></span> / ';
+  catalogCellTemplate += '<span class="labelImages"></span> / ';
+  catalogCellTemplate += '<span class="labelPage"></span></span>';
   catalogCellTemplate += '<span class="lockIndicator" title="Locked"></span> ';
   catalogCellTemplate += '<span class="pinIndicator" title="Sticky"></span> ';
   catalogCellTemplate += '<span class="cyclicIndicator" title="Cyclical Thread"></span> ';
@@ -132,7 +132,7 @@ catalog.initCatalog = function() {
 
   document.getElementById('divTools').style.display = 'inline-block';
 
-  document.getElementById('catalogRefreshButton').onclick = function() {
+  document.getElementById('catalogRefreshLabel').onclick = function() {
     catalog.refreshCatalog(true)
   };
 

@@ -54,7 +54,9 @@ body.theme_th {
 .theme_th select {
   font-family: 'DFPOCOC', "ArimoNerdFont";
 }
-
+.theme_th .innerOP {
+  overflow: auto;
+}
 .theme_th .innerOP,
 .theme_th .innerPost,
 .theme_th .sideCatalogCell,

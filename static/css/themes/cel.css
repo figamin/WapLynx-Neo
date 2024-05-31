@@ -153,7 +153,7 @@ body.theme_cel {
 }
 
 .theme_cel #linkBanners:before {
-  content: 'Banners';
+  content: 'Gallery';
 }
 
 .theme_cel #linkEmotes:before {
@@ -165,7 +165,7 @@ body.theme_cel {
 }
 
 .theme_cel #linkLinks:before {
-  content: 'Links';
+  content: 'Net Friends';
 }
 .theme_cel #linkFrames:before {
   content: 'Frames';

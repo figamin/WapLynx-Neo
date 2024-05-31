@@ -17,20 +17,33 @@ sideCatalog.init = function() {
   sideCatalog.refreshSideCatalog();
 
   document.getElementById('closeSideCatalogButton').onclick = function() {
-    sideCatalog.sideCatalogDiv.style.display = 'none';
-    sideCatalog.mainBody.className = '';
-    localStorage.setItem('hideSideCatalog', true);
+    if(sideCatalog.sideCatalogDiv.style.display === 'none') {
+      sideCatalog.mainBody.className = 'mainPanelWithSideCatalog';
+      sideCatalog.sideCatalogDiv.style.display = 'block';
+      localStorage.removeItem('hideSideCatalog');
+    } 
+    else {
+      sideCatalog.sideCatalogDiv.style.display = 'none';
+      sideCatalog.mainBody.className = '';
+      localStorage.setItem('hideSideCatalog', true);
+    }
   }
 
   var catalogButton = document.getElementById('navCatalog');
 
-  var sideCatalogButton = document.createElement('a');
+  var sideCatalogButton = document.getElementById('navSideCatalog');
   sideCatalogButton.className = 'coloredIcon';
-  sideCatalogButton.id = 'navSideCatalog';
   sideCatalogButton.onclick = function() {
-    sideCatalog.mainBody.className = 'mainPanelWithSideCatalog';
-    sideCatalog.sideCatalogDiv.style.display = 'block';
-    localStorage.removeItem('hideSideCatalog');
+    if(sideCatalog.sideCatalogDiv.style.display === 'none') {
+      sideCatalog.mainBody.className = 'mainPanelWithSideCatalog';
+      sideCatalog.sideCatalogDiv.style.display = 'block';
+      localStorage.removeItem('hideSideCatalog');
+    } 
+    else {
+      sideCatalog.sideCatalogDiv.style.display = 'none';
+      sideCatalog.mainBody.className = '';
+      localStorage.setItem('hideSideCatalog', true);
+    }
   };
 
   catalogButton.parentNode.insertBefore(sideCatalogButton,
@@ -39,12 +52,12 @@ sideCatalog.init = function() {
   catalogButton.parentNode.insertBefore(document.createTextNode(' '),
       catalogButton.nextSibling);
 
-  var divider = document.createElement('span');
+  /*var divider = document.createElement('span');
   divider.innerHTML = '/';
   catalogButton.parentNode.insertBefore(divider, catalogButton.nextSibling);
 
   catalogButton.parentNode.insertBefore(document.createTextNode(' '),
-      catalogButton.nextSibling);
+      catalogButton.nextSibling);*/
 
 };
 

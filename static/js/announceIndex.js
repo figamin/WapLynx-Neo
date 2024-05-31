@@ -1,5 +1,16 @@
-$.getJSON('https://wapchan.org/wap/res/713.json', function(data) {
-    let i = data.posts.length - 1;
+api.localRequest('/wap/res/713.json', function gotBoardData(
+    error, rawData) {
+  if (error) {
+    if (callback) {
+      callback(error);
+    } else {
+      console.log(error);
+    }
+    return;
+  }
+
+  let data = JSON.parse(rawData);
+  let i = data.posts.length - 1;
     while (data.posts[i].signedRole !== "Admin" && data.posts[i].subject === null)
     {
         i -= 1;

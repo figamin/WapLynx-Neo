@@ -1,0 +1,63 @@
+<script>
+  function showBoardList() {
+      document.getElementById("smallNav").style.display = "none"
+      document.getElementById("bigNav").style.display = "block"
+  }
+  function hideBoardList() {
+    document.getElementById("smallNav").style.display = "block"
+    document.getElementById("bigNav").style.display = "none"
+  }
+</script>
+  <div id="smallNav" class="navLinkSpan">
+  <span class="navLeft">
+    <a class="showBoards" href="javascript:showBoardList();" title="View boards">[+]</a>
+    <a href="/.static/pages/about.html">[About]</a>
+          <a href="/.static/pages/rules.html">[Rules]</a>
+          <a href="/.static/pages/gallery.html">[Gallery]</a>
+          <a href="https://cytu.be/r/wapstreams">[Streams]</a>
+          <a href="/.static/pages/links.html">[Net Friends]</a>
+          <a href="https://rumiki.wapchan.org">[Rumiki]</a>
+   </span>
+  </div>
+  <div id="bigNav" class="navLinkSpan" style="display: none;">
+    <span class="navLeft">
+      <a class="showBoards" href="javascript:hideBoardList();">[-]</a>
+      <a href="/latest">[Latest Posts]</a>
+      [<a href="/cel" title="Retro Anime & Manga">cel</a>
+      / 
+      <a href="/digi" title="2000s Anime & Manga">digi</a>
+      / 
+      <a href="/lum" title="Rumic World">lum</a>
+      / 
+      <a href="/lit" title="Literature">lit</a>
+      / 
+      <a href="/vnt" title="Vidya & Tech">vnt</a>
+      /
+      <a href="/media" title="Mixed Media">media</a>
+      /
+      <a href="/ocvid" title="OC Videos">ocvid</a>
+      / 
+      <a href="/kind" title="Random Acts of Kindness">kind</a>
+      /
+      <a href="/doodle" title="Wapchan Doodles!">doodle</a>
+      /
+      <a href="/wap" title="Site Meta">wap</a>
+      /
+      <a href="https://dis.wapchan.org" title="text">text</a>]
+    </span>
+    </div>
+   <span class="navRight">
+    <span id="blankSpacer"></span>
+    <a class="fa-solid fa-hashtag" href="irc://irc.rizon.net:6697/wapchan" title="IRC" target="_blank"></a>
+    <a class="fa-brands fa-discord" href="https://discord.gg/crNSm7cQRz" title="Discord" target="_blank"></a>
+    <a class="fa-brands fa-twitter" href="https://twitter.com/wapchanorg" title="Twitter" target="_blank"></a>
+    <a class="fa-brands fa-bluesky" href="https://bsky.app/profile/wapchan.bsky.social" title="Bluesky" target="_blank"></a>
+    <a id="playButton" class="fa-solid fa-radio" href="/.static/pages/radio.html" title="Radio" target="_blank"></a>
+  </span>
+      
+<script>
+  var body = document.getElementsByTagName('body')[0];
+  if (document.getElementById('overrideCity').checked) {
+      body.className += ' font_override';
+    }
+</script>

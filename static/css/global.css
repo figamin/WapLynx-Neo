@@ -15,7 +15,40 @@
 @import "themes/ayashii.css";
 @import "themes/2channel.css";
 @import "themes/tower.css";
+@import "all.min.css";
 /*FONT IMPORT BEGIN*/
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  src: url("../fonts/fa-regular-400.woff2") format("woff2"),
+}
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/fa-solid-900.woff2") format("woff2");
+}
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/fa-brands-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "ComicSansUT";
+  src: url("../fonts/Comic-Sans-UT.woff") format("woff");
+}
+@font-face {
+  font-family: "PixelTimesNewRoman";
+  src: url("../fonts/pixelated-times-new-roman.woff2") format("woff2"),
+  url("../fonts/pixelated-times-new-roman.woff") format("woff");
+}
+@font-face {
+  font-family: "ComputerPixel";
+  src: url("../fonts/computer_pixel-7.woff2") format("woff2"),
+  url("../fonts/computer_pixel-7.woff") format("woff");
+}
 @font-face {
   font-family: "NotoEmoji";
   src: url("../fonts/NotoEmoji-Medium.woff2") format("woff2"),
@@ -653,13 +686,16 @@
   display: none;
   height: 150px;
   min-width: 1px;
+  margin-top: 20px;
 }
 .logoImgOld {
   display: none;
   height: 150px;
   min-width: 1px;
 }
-
+.logoText {
+  margin-top: 25px;
+}
 .captchaImage {
   width: 300px;
   height: 100px;
@@ -760,6 +796,20 @@ select {
   font-family: "CozetteVector";
 }
 
+nav ul {
+  /* Make the markers disappear */
+  list-style-type: none;
+  padding: 0;
+}
+.headerBar {
+  margin: 0;
+}
+nav ul li {
+  /* Puts the elements in a single line */
+  display: inline;
+  margin: 0.3em 1em;
+}
+
 .dropzone, .selectedCell {
   border: 2px dashed rgba(125, 125, 125, 0.4);
   background-color: rgba(200, 200, 200, 0.5);
@@ -822,12 +872,18 @@ nav span, nav a {
   text-decoration: none;
 }
 
-#navLinkSpan {
-  float: left;
+.navLinkSpan {
+  display: block;
   margin-left: 5px;
-  margin-top: 1px;
+  margin-top: 5px;
 }
-
+.navLeft {
+  float: left;
+}
+.navRight {
+  float: right;
+  margin-right: 12px;
+}
 #navOptionsSpan {
   float: right;
 }
@@ -848,16 +904,8 @@ nav span, nav a {
   content: "Radio:";
 }
 
-#settingsButton:before {
-  content: "settings";
-}
-
 #navPosting:before {
   content: "\e09a";
-}
-
-#navCatalog:before {
-  content: "catalog";
 }
 
 #linkRss:before {
@@ -949,6 +997,11 @@ span.spoiler {
   padding: 0.5em;
 }
 
+.bannerImageClass {
+  max-height: 100%;
+  width: 200px;
+}
+
 #settingsFieldset textarea {
   display: block;
   height: 5em;
@@ -1026,6 +1079,8 @@ footer {
 }
 
 .floatingMenu {
+  background-color: #282A2E;
+  font-family: "CozetteVector";
   padding: 0.25em;
 }
 
@@ -1054,10 +1109,6 @@ footer {
   content: 'help';
 }
 
-#watcherButton {
-  content: 'watched threads';
-}
-
 #linkGlobalLogs {
   content: 'logs';
 }
@@ -1075,7 +1126,7 @@ footer {
 }
 
 #linkLinks {
-  content: 'links';
+  content: 'net friends';
 }
 
 #linkFrames {
@@ -1124,7 +1175,7 @@ footer {
     font-size: 120%;
   }
 /* END NEW STUFF */
-  #navOptionsSpan span, legend, #settingsButton, #links span,
+  #navOptionsSpan span, legend, #links span,
     .hideMobile {
     display: none;
   }
@@ -1136,21 +1187,16 @@ footer {
   }
   
   #linkOverboard:before, #navOverboard:before {
-    content: "";
+    content: "Latest Posts";
   }
 
   #navLinkRadio:before {
     content: "";
   }
 
-  #settingsButton:before {
-    content: "\e041";
-  }
   nav {
-    font-size: 90%;
     height: auto;
     padding: 2px 2px;
-    letter-spacing: -.05em;
   }
   
   #themeSelector {
@@ -1228,7 +1274,7 @@ footer {
   content: 'rules';
 }
 #linkBanners:before {
-  content: 'banners';
+  content: 'gallery';
 }
 #linkEmotes:before {
   content: 'emotes';
@@ -1237,7 +1283,7 @@ footer {
   content: 'cinema';
 }
 #linkLinks:before {
-  content: 'links';
+  content: 'net friends';
 }
 #linkFrames:before {
   content: 'frames';
@@ -1262,7 +1308,7 @@ footer {
 }
 
 #linkLinks:before {
-  content: "links";
+  content: "net friends";
 }
 #linkFrames:before {
   content: 'frames';

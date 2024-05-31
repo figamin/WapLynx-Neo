@@ -913,12 +913,12 @@ postingMenu.buildMenu = function(linkSelf, extraMenu) {
 postingMenu.setExtraMenu = function(linkSelf) {
 
   var extraMenuButton = document.createElement('span');
-  extraMenuButton.className = 'extraMenuButton glowOnHover coloredIcon';
+  extraMenuButton.className = 'extraMenuButton fa-solid fa-angle-down';
   extraMenuButton.title = 'Post Menu';
 
   var parentNode = linkSelf.parentNode;
 
-  var checkbox = parentNode.getElementsByClassName('deletionCheckBox')[0];
+  var checkbox = parentNode.getElementsByClassName('linkQuote')[0];
 
   parentNode.insertBefore(extraMenuButton, checkbox ? checkbox.nextSibling
       : parentNode.childNodes[0]);

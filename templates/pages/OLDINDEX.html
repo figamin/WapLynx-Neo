@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
+<link
+  href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+<link
+  href="/.static/css/index.css"
+  type="text/css"
+  rel="stylesheet" />
+<link
+  href="/.static/css/watcher.css"
+  type="text/css"
+  rel="stylesheet" />
+<link
+  href="/.static/css/posting.css"
+  type="text/css"
+  rel="stylesheet" />
+<link rel="icon" type="image/x-icon" href="/.static/favicon.ico">
+</head>
+<body>
+
+  <script src="/.static/js/themeLoader.js"></script>
+
+  <nav id="indexHeader"></nav>
+    <table width="100%" height="100%">
+      <tr>
+          <td class="leftmenu" valign="top">
+              <u><pf style="margin-top: 10px;margin-bottom: 10px;">Boards</p></u>
+              <p>
+                <a href="/cel">/cel/ - Retro Anime & Manga</a><br><br>
+                <a href="/digi">/digi/ - 2000s Anime & Manga</a><br><br>
+                <a href="/lum">/lum/ - Rumic World</a><br><br>
+                <a href="/lit">/lit/ - Literature</a><br><br>
+                <a href="/vnt">/vnt/ - Vidya & Tech</a><br><br>
+                <a href="/media">/media/ - Mixed Media</a><br><br>
+                <a href="/ocvid">/ocvid/ - OC Videos</a><br><br>
+                <a href="/kind">/kind/ - Random Acts Of Kindness</a><br><br>
+                <a href="/doodle">/doodle/ - Wapchan Doodles!</a><br><br>
+                <a href="/wap">/wap/ - Site Meta</a><br><br>
+                <a href="https://dis.wapchan.org/">/text/ - Textboard</a><br><br>
+              </p>
+              <!--<u><p style="margin-top: 10px;margin-bottom: 10px;">Sitewide Stats</p></u>
+              <p>
+                <span id="labelTotalPosts"></span> posts across <span id="labelTotalBoards"></span> boards<br><br>
+                <span id="labelTotalFiles"></span> files totaling <span id="labelTotalSize"></span><br><br>
+              </p>-->
+              <p>
+                <u>Note</u>: These boards may or may not be worksafe. All users give up their right to a worksafe enviroment when entering these boards... you have been warned.</p>         
+          </td>
+          <td class="rightbody" valign="top">
+            <div id="indexWrapper">
+              <div
+              id="logoBox"
+              class="title">
+                <img
+                src="/.static/logo.png"
+                class="logoImg"
+                alt="logo" />
+                <img
+                src="/.static/rumilogo.png"
+                class="logoImgRumi"
+                alt="logo" />
+                <img
+                src="/.static/oldlogo.png"
+                class="logoImgOld"
+                alt="logo" />
+              <p class="logoText" title="wapanese channel"></p>
+              <p id="randomQuote" title="click me!"></p>
+              <div class="box">
+                <div class="boxbar" id="newsBox">
+                  <p class="newsHeader"></p>
+                </div>
+                <div class="boxcontent">
+                  <p id="annoTitle">Loading...
+                  </p>
+                  <p style="display: flex;margin-left: 20px;
+                  margin-right: 20px;">
+                    <span id="annoMessage"></span>
+                      <img id="annoImage" style="width:auto;height:200px;margin-left:auto;"></p>
+                  <a id="annoLink"></a>
+                </div>
+              </div>
+              <div class="box">
+                <div class="boxbar">
+                  <p>Hello!</p>
+                </div>
+                <div class="boxcontent" id="descBox">
+                  <p>Welcome to wapchan. We've got multiple discussion boards on various topics. Please read the <a href="/.static/pages/rules.html">rules</a> before posting.<br><br>NOTE: We have implemented more anti-spam measures. If you are unable to post, try a different IP or use <a href="https://www.torproject.org/download/">TOR</a>.<br><br>May Events: <a href="https://wapchan.org/vnt/res/544.html">Mokomo 120% / Lum's Wedding Bell contest</a>
+                  </p></b>
+                </div>
+              </div>
+              <div class="box" id="siteBoardBox">
+                <div class="boxbar" id="specialBoxBar">
+                  <p>Site Overview</p>
+                </div>
+                <div class="boxcontent">
+                  <table id="siteBoardTable1">
+                    <tr>
+                      <td class="siteBoardBody TableTop Left"><a href="/cel">Retro Anime & Manga</a></td>
+                      <td class="siteBoardBody TableTop Left"><a href="/lum">Rumic World</a></td>
+                      <td class="siteBoardBody TableTop TableRight"><a href="/kind">Random Acts Of Kindness</a></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/digi">2000s Anime & Manga</a></td>
+                      <td class="siteBoardBody TableRight"><a href="https://rumiki.wapchan.org">Rumiki</a> / <a href="https://stats.uptimerobot.com/nPvqBhXAO0" >Uptime</a></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><</td>
+                      <td class="siteBoardBody TableRight"><a href="irc://irc.rizon.net:6697/wapchan">IRC</a> / <a href="https://discord.gg/crNSm7cQRz">Discord</a></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/lit">Literature</a></td>
+                      <td class="siteBoardBody TableRight"><a href="https://bsky.app/profile/wapchan.bsky.social">Bluesky</a> / <a href="https://twitter.com/wapchanorg">Twitter</a></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/vnt">Vidya & Tech</a></td>
+                      <td class="siteBoardBody TableRight"><a href="http://wapchanssuskaph2zlit2wx6vs6u6rih7xnosg4cqt3uin7sl5cpf5yd.onion">Onion Service</a></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/media">Mixed Media</a></td>
+                      <td rowspan="7" class="siteBoardBody TableBottom TableRight"></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/ocvid">OC Videos</a></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/doodle">Wapchan Doodles!</a></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody eft"><a href="https://dis.wapchan.org">Textboard</a></td></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody Left"><a href="/wap">Site Meta</a></td>
+                    </tr>
+                    <tr>
+                      <td class="siteBoardBody TableBottom Left"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              </div>
+
+              <table id="siteBoardTable2">
+                <tr>
+                  <th id="siteBoardTableLeft">Latest Images</th>
+                  <th id="siteBoardTableRight">Latest Posts</th>
+                </tr>
+                <tr>
+                  <td id="imageList"><div id="divLatestImages"></div></td>
+                  <td><div id="divLatestPosts"></div></td>
+                </tr>
+              </table>
+              <!--
+              <div class="box">
+                <div class="boxbar">
+                  <p>Latest 4 Doodles
+                  </p>
+                </div>
+                <div class="boxcontent">
+                  <div class="doodlebox">
+                  </div>
+                </div>
+              </div>
+            -->
+            </div>  
+          </td>
+        </tr>
+</table>
+    
+<footer id="indexFooter">
+</footer>
+
+</body>
+
+<script src="/.static/js/api.js"></script>
+<script src="/.static/js/themes.js"></script>
+<script src="/.static/js/draggable.js"></script>
+<script src="/.static/js/watcher.js"></script>
+<script src="/.static/js/favouriteBoards.js"></script>
+<script src="/.static/js/randomFooter.js"></script>
+<script src="/.static/js/randomQuote.js"></script>
+<script src="/.static/js/announceIndex.js"></script>
+<script src="/.static/js/latestDoodles.js"></script>
+</html>

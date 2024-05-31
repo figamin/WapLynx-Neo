@@ -180,31 +180,33 @@ hiding.registerHiding = function(board, thread, post, unhiding) {
 
 hiding.hidePost = function(linkSelf, board, thread, post) {
 
-  hiding.toggleHidden(linkSelf.parentNode.parentNode, true);
-
-  hiding.registerHiding(board, thread, post);
-
-  var unhidePostButton = document.createElement('span');
-
-  var unhideHTML = '[Unhide ' + (post ? 'post' : 'OP') + ' ' + board + '/'
-      + post + ']';
-
-  unhidePostButton.innerHTML = unhideHTML;
-  unhidePostButton.className = 'unhideButton glowOnHover';
-
-  linkSelf.parentNode.parentNode.parentNode.insertBefore(unhidePostButton,
-      linkSelf.parentNode.parentNode);
-
-  unhidePostButton.onclick = function() {
-
-    hiding.registerHiding(board, thread, post, true);
-    unhidePostButton.remove();
-
-    hiding.toggleHidden(linkSelf.parentNode.parentNode, false);
-
+    hiding.toggleHidden(linkSelf.parentNode.parentNode, true);
+  
+    hiding.registerHiding(board, thread, post);
+    var unhideHolder = document.createElement('span');
+    var unhideBox = document.createElement('span');
+    unhideBox.className = 'unhideButton fa-regular fa-square-plus';  
+    var unhidePostButton = document.createElement('span');
+  
+    var unhideHTML = '['+ post + ']';
+  
+    unhidePostButton.innerHTML = unhideHTML;
+    
+    unhideHolder.appendChild(unhideBox);
+    unhideHolder.appendChild(unhidePostButton);
+    linkSelf.parentNode.parentNode.parentNode.insertBefore(unhideHolder,
+        linkSelf.parentNode.parentNode);
+  
+    unhideHolder.onclick = function() {
+  
+      hiding.registerHiding(board, thread, post, true);
+      unhideHolder.remove();
+  
+      hiding.toggleHidden(linkSelf.parentNode.parentNode, false);
+  
+    };
+  
   };
-
-};
 
 hiding.hideThread = function(linkSelf, board, thread) {
 
@@ -335,7 +337,7 @@ hiding.toggleHidden = function(element, hide) {
 hiding.setHideMenu = function(linkSelf) {
 
   var hideButton = document.createElement('span');
-  hideButton.className = 'hideButton glowOnHover coloredIcon';
+  hideButton.className = 'hideButton fa-regular fa-square-minus';
   hideButton.title = "Hide";
 
   var parentNode = linkSelf.parentNode;

@@ -1,13 +1,15 @@
 body.theme_tower {
     display: flex;
     flex-direction: column;
-    background: #555 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8AgMAAABHkjHhAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAMUExURSIiIkRERFVVVXd3d2WUC2gAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALiSURBVBgZXcFPaBxVHAfwX6sY6SLrwS3oQeghYnPzqKdN6QaSHjor7/vSGRAsdEPmd7BeehEq2pKKyUnJG7NTWrYls+77jk3uwT946MXeSjfQXLx0Jfty6KmFrsgYtD3o5yP/dVT+L2FOHFJlGVhINUbb7vSrQ4+r8k/BxyINcyRwRwtgUTTzsd2QnJeTybSLZYbZD+vx1ChdDq82EhXl8YFfru0WJmtMsy9M3x745dou4K59u0UZ8KPL3cHUwxiIoYV4zX1nozbsIIbtF6Jc/fHSoD6+cAEAvZDbuxzUwzemYZaowsHky7GvjRZNAeQQlrzy60Zt15oRwK70ab+472p73XOuAXVCsjjfrYX43Aow50SZ83a3Po5N0WkvUMg8vePr4zeNR5sUevVs1UZqAMtSSF4/uFH7Y67ok+FAXpmNXhaZWmmZ1htNeaFu5DmyIn/5vXq8XVUV7wuLbPO7iqHHn1ldvCvs9bPFXQ098sMtrgh75Pfb/OkZoUBL2AvXS5KBLmtgQbJbYTslS9zMvoZdELb3PElF4tW1FqQ8EfKnPISsAFri37v71hzZL2I62HnxJ9ZBUp0mSNOWxJ/u2x3eoffpSXRasvNoX1my6KijQ0vK3gP4CW97dUTSFG4+UP5WqvrATjoroRgujVedKj19Ajnw++UNMtB7dtMZCY/GJba3bvLipof5QP56J1STirn/vHeS/qrI0SYOtWddJE05IoLm6wLAFgC0J9U/9qp/TcQjc+itPgWiND41lPfh0I7qw+nu4F28tCJbLveIjo3UD5Ls2ozkru+KqP5kRvu5O21FAQNTexJ3zqfRaSshjucvRWeDJ9Nbpwph11iYtQnpgKsQ9THQvjf8bIHUK5BjFha4N9LXOpiej0QBGKw9JNe9xpGoA5bNV3sJM4ekLYwBmDOBzBILSAcGxpx9ph60xyGEgVk/M1oiOZdYSWOkiNYC2WeSFEKFs2YtkIXFJ/ZvCcK6f9EG6jIAAAAASUVORK5CYII=);
-    background-size: 120px;
-    color: #999;
-    font-family: 'OpenSans', tahoma;
+    background: url("../../magestower.png") repeat;
+    color: white;
+    font-family: "ComputerPixel", "CozetteVector";
     text-shadow: none;
+    letter-spacing: .05rem;
   }
-  
+  .theme_tower nav {
+    letter-spacing: .05rem;
+  }
   .theme_tower .top-nav {
     background: #555;
     border-color: #777;
@@ -21,8 +23,7 @@ body.theme_tower {
   
   .theme_tower #labelName, .theme_tower #board-catalog .board-header {
     font-size: 220%;
-    color: #555;
-    text-shadow: -1px 1px #ccc, 1px 1px 4px #000, 2px 2px 4px #000;
+    color: #FFBF00;
   }
   
   .theme_tower #board-catalog .board-header a {
@@ -49,10 +50,12 @@ body.theme_tower {
   .theme_tower #labelDescription {
     font-size: 140%;
   }
-  
+  .theme_tower #divLatestPosts .latestPostCell{
+    font-size: 100%;
+  }
   .theme_tower #labelDescription, .theme_tower #panelMessage, .theme_tower #panelMessage .redText {
     font-weight: bold;
-    color: #444;
+    color: #FFBF00;
     text-shadow: -1px 1px #bbb, 1px 1px 4px #000, 2px 2px 4px #000;
   }
   
@@ -83,21 +86,21 @@ body.theme_tower {
   }
   
   .theme_tower .opCell, .theme_tower #divThreads>.unhideButton, .theme_tower .catalogCell, .theme_tower .floatingMenu, .theme_tower .modalDecorationPanel, .theme_tower #actionsForm details[open], .theme_tower #postingForm {
-    background: #222;
-    border: 1px solid #444;
+    background: #262626;
+    border: 1px solid white;
     border-radius: 10px;
-    box-shadow: 24px 24px 24px #000;
+    box-shadow: 12px 12px 2px #070707;
   }
   
   .theme_tower .opCell>.unhideButton {
     margin: 8px;
-    background: #222;
+    background: #262626;
     border: none;
   }
   
   .theme_tower .postCell>.unhideButton {
     background: #333;
-    border: 1px solid #555;
+    border: 1px solid white;
     border-radius: 10px;
   }
   
@@ -112,7 +115,7 @@ body.theme_tower {
   
   .theme_tower #selectedTab {
     background: #555;
-    border: 1px solid #555;
+    border: 1px solid white;
   }
   
   .theme_tower .settingsTabs, .theme_tower #actionsForm details[open] summary {
@@ -146,31 +149,31 @@ body.theme_tower {
   }
   
   .theme_tower .innerPost {
-    background: #333;
-    border: 1px solid #555;
+    background: #4C4C4C;
+    border: 1px solid white;
     border-radius: 10px;
     width: 100%;
   }
   
   .theme_tower .markedPost {
     background: #555;
-    border: 1px solid #555;
+    border: 1px solid white;
     border-radius: 10px;
     width: 100%;
   }
   
   .theme_tower a, .theme_tower .bracket-list, .theme_tower .bracket-list>:not(:last-child)::after, .theme_tower .bracket-button::before, .theme_tower .bracket-button::after, .theme_tower .extraMenu div, .theme_tower .hideMenu div, .theme_tower .unhideButton, .theme_tower .menuClose, .theme_tower .filterDeleteButton, .theme_tower .panelBacklinks a, .theme_tower .embedButton, .theme_tower .removeButton, .theme_tower .watchedCellCloseButton, .theme_tower .reloadCaptchaButton, .theme_tower .modalCaptchaControls, .theme_tower .captchaTimer, .theme_tower summary {
-    color: #ccc;
+    color: #FFBF00;
     text-decoration: none;
   }
   
   .theme_tower a:hover, .theme_tower .extraMenu div:hover, .theme_tower .hideMenu div:hover, .theme_tower .unhideButton:hover, .theme_tower .menuClose:hover, .theme_tower .filterDeleteButton:hover, .theme_tower .embedButton:hover, .theme_tower .removeButton:hover, .theme_tower .watchedCellCloseButton:hover, .theme_tower .reloadCaptchaButton:hover, .theme_tower .reloadCaptchaButton i:hover, .theme_tower .modalCaptchaControls:hover, .theme_tower .modalCaptchaControls i:hover, .theme_tower .captchaTimer:hover, .theme_tower summary:hover {
     cursor: pointer;
-    color: #fff;
+    color: #FFBF00;
   }
-  
-  .theme_tower .title * {
-    vertical-align: middle;
+
+  .theme_tower .innerOP {
+    overflow: auto;
   }
   
   .theme_tower [type="checkbox"] {
@@ -183,12 +186,12 @@ body.theme_tower {
   
   .theme_tower .labelSubject {
     font-size: 140%;
-    color: #592;
+    color: #FFBF00;
   }
   
   .theme_tower .linkName.noEmailName, .theme_tower .linkName, .theme_tower .labelYou {
     pointer-events: none;
-    color: #3d7;
+    color: #FFBF00;
     text-decoration: none;
   }
   
@@ -198,17 +201,13 @@ body.theme_tower {
   }
   
   .theme_tower .linkSelf, .theme_tower .linkQuote, .theme_tower .quoteLink {
-    color: #999;
+    color: white;
     text-decoration: none;
   }
   
   .theme_tower .linkSelf:hover, .theme_tower .linkQuote:hover, .theme_tower .quoteLink:hover {
-    color: #3d7;
+    color: #FFBF00;
     text-decoration: overline underline;
-  }
-  
-  .theme_tower .postInfo .panelBacklinks {
-    vertical-align: top;
   }
   
   .theme_tower .greenText {
@@ -240,7 +239,7 @@ body.theme_tower {
   .theme_tower button, .theme_tower input[type="button"], .theme_tower .settingsTab {
     background: #333;
     border: 1px solid #888;
-    color: #ccc;
+    color: #FFBF00;
   }
   
   .theme_tower button:hover, .theme_tower input[type="button"]:hover, .theme_tower .settingsTab:hover {
@@ -264,12 +263,7 @@ body.theme_tower {
   }
   
   .theme_tower .reportFieldset {
-    background: #222;
-  }
-  
-  .theme_tower #reportFormButton {
-    position: absolute;
-    bottom: 1rem;
+    background: #262626;
   }
   
   .theme_tower #postingForm {
@@ -283,7 +277,7 @@ body.theme_tower {
   }
   
   .theme_tower .dropzone, .theme_tower .selectedCell {
-    background: #222;
+    background: #262626;
   }
   
   .theme_tower .captchaImage {

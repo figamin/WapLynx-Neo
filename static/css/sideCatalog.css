@@ -13,7 +13,7 @@
 }
 
 #navSideCatalog:before {
-  content: "side catalog";
+  content: "[Side Catalog]";
 }
 
 #sideCatalogBody hr {

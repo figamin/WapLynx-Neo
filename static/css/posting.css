@@ -54,7 +54,7 @@ video {
   cursor: pointer;
 }
 
-.unhideButton, .embedButton {
+.embedButton {
   font-size: 80%;
 }
 
@@ -79,10 +79,6 @@ video {
 
 .extraMenuButton, .hideButton {
   position: relative;
-}
-
-.hideButton::before {
-  content: '';
 }
 
 .postInfo, .opHead, .divMessage, .panelUploads, .panelIp, .panelProxyIp,
@@ -288,11 +284,6 @@ video {
   text-decoration: none;
 }
 
-.unhideButton {
-  clear: left;
-  display: block;
-}
-
 /*Actions form*/
 #threadList {
   margin: 1em;
@@ -310,10 +301,6 @@ video {
 .contentAction label, #divControls label, #transferControls label,
   #ipDelete label, #divArchive label, #divMerge label {
   font-size: 80%;
-}
-
-.extraMenuButton::before {
-  content: '⚑';
 }
 
 .nameLink::after {
@@ -370,7 +357,6 @@ video {
   font-weight: bold;
   text-align: left;
   width: 100px;
-  font-size: 80%;
   padding-left: 0.3em;
   cursor: default;
   background: #282a2e;
@@ -420,7 +406,7 @@ video {
   .hiddenFile::after {
     content: '(Show)';
   }
-  .originalNameLink, .labelCreated, .sizeLabel, .dimensionLabel {
+  .originalNameLink, .sizeLabel, .dimensionLabel {
     display: none;
   }
   .divMessage {

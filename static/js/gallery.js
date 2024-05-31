@@ -16,19 +16,13 @@ gallery.init = function() {
     }
   }
 
-  var backLink = document.getElementById('linkBack');
+  var backLink = document.getElementById('quickReplyIcon');
   
   var galleryLink = document.createElement('a');
-  galleryLink.title = 'Gallery mode.\nLeft/right arrow: previous/next\nUp/down arrow: skip 10 previous/next\nHome/End: first/last\nEsc: exit\nDelete: remove from gallery';
+  galleryLink.title = 'Gallery';
   galleryLink.id = 'galleryLink';
-  galleryLink.className = 'coloredIcon';
+  galleryLink.className = 'fa-regular fa-image';
   backLink.parentNode.insertBefore(galleryLink, backLink);
-
-  backLink.parentNode.insertBefore(document.createTextNode(' '), backLink);
-
-  var separator = document.createElement('span');
-  separator.innerHTML = '<span class="linkBarrierDivider"></span>';
-  backLink.parentNode.insertBefore(separator, backLink);
 
   backLink.parentNode.insertBefore(document.createTextNode(' '), backLink);
 

@@ -1,5 +1,30 @@
-<p></p>
-  Powered by <a href="https://github.com/figamin/WapLynx-Neo">WapLynx Neo</a> and <a href="https://gitgud.io/LynxChan/LynxChan">LynxChan</a>
-</p>
-<p id="randomFooter" title="click me!"></p>
-<p><a href="https://twitter.com/wapchanorg">Wapchan Twitter</a> | <a href="https://horus.wapchan.org">Horus</a></p>
+
+<span id="lastHeader">Style:</span>
+      <span >Font Override:</span>
+      <input type="checkbox" id="overrideCity" onclick="checkToggle()" title="Font Override"/><label for="overrideCity"></label><span id="lastHeader2"></span>
+<br><p>- <a href="https://github.com/figamin/WapLynx-Neo">WapLynx Neo</a> + <a href="https://gitgud.io/LynxChan/LynxChan">LynxChan</a> -</p>
+<script>
+      function checkToggle() {
+            let element = document.getElementsByTagName('body')[0];
+            if(document.getElementById("overrideCity").checked) {
+                  element.classList.add('font_override');
+                  localStorage.setItem("fontOverriden", true);
+            } 
+            else {
+                  element.classList.remove('font_override'); 
+                  localStorage.setItem("fontOverriden", false);
+            }
+      }
+      if(localStorage.getItem("fontOverriden") == "true"){
+            document.getElementById("overrideCity").checked = true;
+            let element = document.getElementsByTagName('body')[0];
+            console.log("Activated")
+            element.classList.add('font_override');
+      }
+      else if(localStorage.getItem("fontOverriden") == "false"){
+            document.getElementById("overrideCity").checked = false;
+            let element = document.getElementsByTagName('body')[0];
+            console.log("Deactivated")
+            element.classList.remove('font_override'); 
+      }
+</script>

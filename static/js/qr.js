@@ -30,6 +30,10 @@ qr.removeQr = function() {
   qr.qrPanel.style.display = 'none';
 };
 
+qr.showQrBasic = function() {
+  qr.qrPanel.style.display = 'block';
+};
+
 qr.showQr = function(quote) {
 
   qr.qrPanel.style.display = 'block';
@@ -108,7 +112,7 @@ qr.setQr = function() {
  
   if (!textBoard) {
     qrhtml += '<div class="dropzone" id="dropzoneQr" style="display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;">Files</div>'
-    qrhtml += '<div id="selectedDivQr"></div></div>';
+    qrhtml += '<div id="selectedDivQr"></div>';
     qrhtml += '<tr><td class="centered" colspan="2"><input type="checkbox" ';
     qrhtml += 'id="qrcheckboxSpoiler" class="postingCheckbox">';
     qrhtml += '<label for="qrcheckboxSpoiler" class="spoilerCheckbox">Spoiler</label>';
@@ -188,14 +192,13 @@ qr.setQr = function() {
 
     if (api.mobile) {
       var fileBodyBody = document.getElementById('filesBody');
-      document.getElementById('qrFilesButton').onclick = function() {
+      /*document.getElementById('qrFilesButton').onclick = function() {
         fileBodyBody.classList.toggle('hidden');
-      };
+      };*/
 
     }
 
-    qr
-        .registerSync('checkboxSpoiler', 'qrcheckboxSpoiler', 'checked',
+    qr.registerSync('checkboxSpoiler', 'qrcheckboxSpoiler', 'checked',
             'change');
     postCommon.setDragAndDrop(true);
 
@@ -225,7 +228,11 @@ qr.setQr = function() {
   }
 
   if (QRshowname) {
+    console.log("showName")
     qr.registerSync('fieldName', 'qrname', 'value', 'input');
+  }
+  else {
+    console.log("DontName")
   }
 
   if (!api.hiddenCaptcha) {

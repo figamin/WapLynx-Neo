@@ -42,7 +42,7 @@
 
   <script src="/.static/js/themeLoader.js"></script>
 
-  <nav id="dynamicHeader"></nav>
+  <nav id="threadHeader"></nav>
 
   <div
     class="hidden"
@@ -64,7 +64,7 @@
   <div id="mainPanel">
 
     <header class="boardHeader">
-      <img id="bannerImage" />
+      <img id="bannerImage" class="bannerImageClass"/>
       <div>
         <p id="labelName"></p>
       </div>
@@ -74,8 +74,6 @@
     <div id="postingForm">
 
       <fieldset id="newPostFieldset">
-        <legend>Mode: Reply</legend>
-
         <form
           action="/replyThread.js"
           enctype="multipart/form-data"
@@ -316,28 +314,7 @@
     </div>
 
     <div id="secondaryBar">
-      <span class="linkBarrierStart"></span>
-      <a
-        href="../"
-        id="linkBack"
-        class="coloredIcon"></a>
-      <span class="linkBarrierDivider"></span>
-      <a
-        href="../catalog.html"
-        id="navCatalog"
-        class="coloredIcon"></a>
-      <span class="linkBarrierDivider"></span>
-      <a
-        href="#footer"
-        id="linkBottom"
-        class="coloredIcon"></a>
-      <span class="linkBarrierDivider"></span>
-      <a
-        onclick="qr.showQrEmpty()"
-        id="linkRefresh"
-        class="coloredIcon"></a>
-      <span class="linkBarrierEnd"></span>
-
+      <a href="#dynamicFooter">[Bottom]</a>
     </div>
 
     <div id="threadList">
@@ -351,34 +328,10 @@
 
         <hr class="clearer" />
 
-        <div class="divRefresh hidden">
-
-          <input
-            type="button"
-            id="refreshButton"
-            value="Refresh">
-
-          <label>
-            <input
-              id="checkboxChangeRefresh"
-              type="checkbox"
-              checked>
-            Auto <span id="labelRefresh"></span>
-          </label>
-
-        </div>
+        <div class="divRefresh hidden"></div>
 
         <div id=boardContentLinks>
-          <span class="linkBarrierStart"></span>
-          <a
-            id="linkTop"
-            class="coloredIcon"
-            href="#"></a>
-          <span class="linkBarrierDivider"></span>
-          <a id="linkManagement">manage board</a>
-          <span class="linkBarrierDivider"></span>
-          <a id="linkMod">moderate thread</a>
-          <span class="linkBarrierDivider"></span> unique IPs: <span id="userCountLabel"></span> <span class="linkBarrierEnd"></span>
+          <a href="#">[Top]</a>
         </div>
 
         <div id="actionsForm"></div>
@@ -387,7 +340,7 @@
 
     </div>
 
-    <footer id="footer"></footer>
+    <footer id="dynamicFooter"></footer>
   </div>
 
 </body>
@@ -411,10 +364,10 @@
 <script src="/.static/js/postingMenu.js"></script>
 <script src="/.static/js/watcher.js"></script>
 <script src="/.static/js/gallery.js"></script>
-<script src="/.static/js/favouriteBoards.js"></script>
+<!--<script src="/.static/js/favouriteBoards.js"></script>-->
 <script src="/.static/js/sideCatalog.js"></script>
 <script src="/.static/js/bottomForms.js"></script>
 <script src="/.static/js/bypassUtils.js"></script>
 <script src="/.static/js/sauce.js" defer></script>
-
+<script src="/.static/js/threadHelper.js"></script>
 </html>

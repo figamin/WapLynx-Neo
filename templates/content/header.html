@@ -1,35 +1,30 @@
-<script src="/.static/js/jquery.min.js"></script>
 <audio id="player" src="https://radio.wapchan.org/wapfm"></audio>
-<span id="navLinkSpan">
-  <a href="/" title="Home" style="color: #fffe00; text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; letter-spacing: +0em; font-weight: bold;">Wapchan! </a>
-    <span class="linkBarrierStart"></span><a href="/latest" id="navOverboard" title="Latest Posts"></a><span class="linkBarrierEnd"></span>
-    <span class="linkBarrierStart"></span><a href="/cel" title="Retro Anime & Manga">cel</a>
-      <span class="linkBarrierDivider"></span> 
+<span class="navLinkSpan">
+  <span class="navLeft">
+    [<a href="/latest" id="navOverboard" title="Latest Posts"></a>]
+    [<a href="/cel" title="Retro Anime & Manga">cel</a>
+      /
       <a href="/digi" title="2000s Anime & Manga">digi</a>
-      <span class="linkBarrierDivider"></span> 
+      /
       <a href="/lum" title="Rumic World">lum</a>
-      <span class="linkBarrierDivider"></span> 
+      /
       <a href="/lit" title="Literature">lit</a>
-      <span class="linkBarrierDivider"></span> 
+      /
       <a href="/vnt" title="Vidya & Tech">vnt</a>
-      <span class="linkBarrierDivider"></span>
+      /
       <a href="/media" title="Mixed Media">media</a>
-      <span class="linkBarrierDivider"></span> 
-      <a href="/chill" title="Chill Out!">chill</a>
-      <span class="linkBarrierDivider"></span>
+      /
+      <a href="/ocvid" title="OC Videos">ocvid</a>
+      /
+      <a href="/kind" title="Random Acts of Kindness">kind</a>
+      /
       <a href="/doodle" title="Wapchan Doodles!">doodle</a>
-      <span class="linkBarrierDivider"></span>
+      /
       <a href="/wap" title="Site Meta">wap</a>
-      <span class="linkBarrierDivider"></span>
-      <a href="/kind" title="Kind">kind</a>
-      <span class="linkBarrierDivider"></span>
-      <a href="/vrev" title="Video Reviews (experimental)">vrev</a>
-      <span class="linkBarrierDivider"></span>
-      <a href="https://dis.wapchan.org" title="text">text</a><span 
-      class="linkBarrierEnd"></span>
-    <span class="linkBarrierStart"></span><a href="https://rumiki.wapchan.org" title="Rumiki">Rumiki</a><span 
-      class="linkBarrierEnd"></span>
-      <span class="linkBarrierStart"></span><span class="desktopLinks"><a href="https://radio.wapchan.org/">Radio:</a></span>
+      /
+      <a href="https://dis.wapchan.org" title="text">text</a>]
+   </span>
+   <span class="navRight">
     <button id="playButton" onclick="
       if (document.getElementById('player').paused){
         document.getElementById('player').play();
@@ -39,16 +34,9 @@
         document.getElementById('playButton').innerText = ''
       }" title="Radio">
       </button>
-      <span class="desktopLinks linkBarrierEnd"></span>
-      <span class="desktopLinks linkBarrierStart"></span>
-      <span class="mobileLinks linkBarrierDivider"></span>
-      <span id="lastHeader" class="desktopLinks">Style:</span>
-      <span class="desktopLinks">Font Override:</span>
-      <input type="checkbox" id="overrideCity" onclick="
-      var element = document.getElementsByTagName('body')[0];
-      element.classList.toggle('font_override');
-      " title="Font Override"/><label for="overrideCity"></label><span id="lastHeader2"></span><span class="linkBarrierEnd"></span>
-</span>
+  </span>
+  </span>
+      
 <script>
   var body = document.getElementsByTagName('body')[0];
   if (document.getElementById('overrideCity').checked) {

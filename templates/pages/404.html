@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
+  <title>404</title>
+  <meta charset="UTF-8" />
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0">
 <link
   href="/.static/css/global.css"
+  type="text/css"
+  rel="stylesheet" />
+<link
+  href="/.static/css/watcher.css"
+  type="text/css"
+  rel="stylesheet" />
+<link
+  href="/.static/css/settingsMenu.css"
   type="text/css"
   rel="stylesheet" />
 </head>
@@ -16,21 +25,36 @@
 
   <nav id="dynamicHeader"></nav>
 
-  <header>
-    <img
-    src="/.static/404box.png"
-    alt="ran"
-    width="229"
-    height="224"/>
-  <div id="errorPage">
-  <h1><span class="greenText">&gt;mfw 404</span></h1>
-    <p>Sorry, Ran-chan couldn't find what you were looking for :(</p>
-  </div>
-  </header>
-</body>
+  <div id="settingsWrapper">
 
+  <header>
+    <img id="randImg" style="width: 300px;"/>
+    <div id="errorPage">
+    <h1><span class="greenText">&gt;mfw 404</span></h1>
+      <p>Sorry, Ran-chan couldn't find what you were looking for :(</p>
+    </div>
+  </header>
+
+  </div>
+
+  <footer id="dynamicFooter"></footer>
+  
+</body>
+<script>
+  const images = ["/.static/404box.png",
+"/.static/Th07Ran.png"
+];
+
+document.addEventListener('DOMContentLoaded', _ => {
+  const randImageIndex = ~~(Math.random() * images.length);
+  document.getElementById('randImg').src = images[randImageIndex];
+});
+</script>
 <script src="/.static/js/api.js"></script>
 <script src="/.static/js/themes.js"></script>
 <script src="/.static/js/favouriteBoards.js"></script>
-
+<script src="/.static/js/draggable.js"></script>
+<script src="/.static/js/settingsMenu.js"></script>
+<script src="/.static/js/hiding.js"></script>
+<script src="/.static/js/watcher.js"></script>
 </html>

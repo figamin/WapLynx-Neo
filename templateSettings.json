@@ -1,8 +1,14 @@
 {
   "optional": {
     "dynamicHeader": "content/header.html",
+    "latestHeader": "content/latestHeader.html",
+    "indexHeader": "content/indexHeader.html",
+    "boardHeader": "content/boardHeader.html",
+    "catalogHeader": "content/catalogHeader.html",
+    "threadHeader": "content/threadHeader.html",
     "postingTable": "content/postingForm.html",
     "actionsForm": "content/actionsForm.html",
+    "indexFooter": "content/indexFooter.html",
     "dynamicFooter": "content/footer.html"
   },
   "templated": [
@@ -14,7 +20,9 @@
     "pages/moderation.html",
     "pages/posting.html",
     "pages/emotes.html",
-    "pages/staffapply.html"
+    "pages/staffapply.html",
+    "pages/gallery.html",
+    "pages/radio.html"
   ],
   "logIndexCell": "cells/logIndexCell.html",
   "accountPage": "pages/account.html",

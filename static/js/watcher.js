@@ -7,23 +7,16 @@ watcher.init = function() {
   watcher.watcherAlertCounter = 0;
   watcher.elementRelation = {};
 
-  var postingLink = document.getElementById('navPosting');
+  var postingLink = document.getElementById('blankSpacer');
   var referenceNode = postingLink.nextSibling;
-
-  postingLink.parentNode.insertBefore(document.createTextNode(' '),
-      referenceNode);
-
-  var divider = document.createElement('span');
-  divider.innerHTML = '/';
-  postingLink.parentNode.insertBefore(divider, referenceNode);
 
   postingLink.parentNode.insertBefore(document.createTextNode(' '),
       referenceNode);
 
   var watcherButton = document.createElement('a');
   watcherButton.id = 'watcherButton';
-  watcherButton.className = 'coloredIcon';
-
+  watcherButton.className = 'fa-regular fa-eye';
+  watcherButton.title = 'Thread Watcher';
   watcher.watcherCounter = document.createElement('span');
 
   watcherButton.appendChild(watcher.watcherCounter);
@@ -66,7 +59,8 @@ watcher.init = function() {
   watcherButton.onclick = function() {
 
     if (showingWatched) {
-      return;
+      showingWatched = false;
+      watcher.watchedMenu.style.display = 'none';
     }
 
     showingWatched = true;
@@ -335,14 +329,19 @@ watcher.processOP = function(op) {
   var thread = nameParts[1];
 
   var watchButton = document.createElement('span');
-  watchButton.className = 'watchButton glowOnHover coloredIcon';
+  watchButton.className = 'watchButton fa-regular fa-eye';
   watchButton.title = "Watch Thread";
 
   checkBox.parentNode.insertBefore(watchButton,
-      checkBox.nextSibling.nextSibling.nextSibling);
+      checkBox.nextSibling.nextSibling);
 
   watchButton.onclick = function() {
-
+    if(watchButton.style.color == "red") {
+      watchButton.style.removeProperty("color");
+    }
+    else {
+      watchButton.style.color = "red";
+    }
     var storedWatchedData = watcher.getStoredWatchedData();
 
     var boardThreads = storedWatchedData[board] || {};

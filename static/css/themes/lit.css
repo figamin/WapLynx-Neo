@@ -57,15 +57,25 @@ Book looks like a fancy paperback.
 }
 
 body.theme_lit {
-  font-family: 'Libre Baskerville', "ArimoNerdFont";
+  font-family: 'PixelTimesNewRoman', "ArimoNerdFont";
+  font-size: 150%;
   color: black;
-  background: url("https://wapchan.org/.static/lined_paper.png");
+  background-color: #FFFAE5;
+}
+@media only screen and (max-width: 800px) {
+  body.theme_lit {
+    font-size: 150%;
+  }
+}
+.theme_lit .linkSelf, .theme_lit .linkQuote {
+  color: #7FC9FF;
+  font-style: italic;
 }
 .theme_lit .quoteTooltip {
-  background: url("https://wapchan.org/.static/lined_paper.png");
+  background-color: #FFFAE5;
 }
 .theme_lit nav, .theme_lit .dropdown-content {
-  background-color: #f9f9f9;
+  background-color: #f8f8f8;
 }
 .theme_lit .droptext {
   color: black;
@@ -73,7 +83,7 @@ body.theme_lit {
 .theme_lit input,
 .theme_lit select,
 .theme_lit textarea {
-  font-family: 'Libre Baskerville', 'ArimoNerdFont';;
+  font-family: 'PixelTimesNewRoman', 'ArimoNerdFont';;
   background-color: transparent;
   color: black;
 }
@@ -96,6 +106,7 @@ body.theme_lit {
 .theme_lit #settingsFieldset,
 .theme_lit .reportFieldset {
   border: 1px dashed black;
+  background: #f8f8f8;
 }
 
 .theme_lit .topBoards a,
@@ -106,8 +117,18 @@ body.theme_lit {
 .theme_lit .markedPost,
 .theme_lit .sideCatalogMarkedCell,
 .theme_lit .catalogCell {
-  background-color: transparent;
+  background-color: #A09D90;
 }
+
+.theme_lit .extraMenuButton:first-of-type, .theme_lit .hideButton:first-of-type {
+  color: #6D6B62;
+}
+
+.theme_lit .extraMenuButton, .theme_lit .hideButton {
+  color: #3F3E39;
+}
+
+
 
 .theme_lit .box {
   color: black;
@@ -147,5 +168,5 @@ body.theme_lit {
   padding-left: 0.25em;
   font-size: 80%;
   font-weight: bold;
-  font-family: 'Libre Baskerville', 'ArimoNerdFont';
+  font-family: 'PixelTimesNewRoman', 'ArimoNerdFont';
 }

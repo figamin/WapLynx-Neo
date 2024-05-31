@@ -34,7 +34,7 @@ thread.init = function() {
   thread.messageLimit = +document.getElementById('labelMessageLength').innerHTML;
   thread.refreshLabel = document.getElementById('labelRefresh');
 
-  thread.refreshButton = document.getElementById('refreshButton');
+  thread.refreshButton = document.getElementById('labelRefresh');
 
   thread.refreshButton.onclick = function() {
     thread.refreshPosts(true)
@@ -356,7 +356,7 @@ thread.refreshCallback = function(error, receivedData) {
   if (posts && posts.length) {
     var lastReceivedPost = posts[posts.length - 1];
 
-    if (lastReceivedPost.postId > thread.lastReplyId) {
+    if (lastReceivedPost.postId > thread.lastReplyId){
       foundPosts = true;
 
       for (var i = 0; i < posts.length; i++) {

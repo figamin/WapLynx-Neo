@@ -57,15 +57,15 @@ a,
 }
 
 body{
-  font-family: 'Libre Baskerville', "ArimoNerdFont";
+  font-family: 'PixelTimesNewRoman', "ArimoNerdFont";
   color: black;
-  background: url("https://wapchan.org/.static/lined_paper.png");
+  background-color: #FFFAE5;
 }
 .quoteTooltip {
-  background: url("https://wapchan.org/.static/lined_paper.png");
+  background-color: #FFFAE5;
 }
 nav, .dropdown-content {
-  background-color: #f9f9f9;
+  background-color: #f8f8f8;
 }
 .droptext {
   color: black;
@@ -73,7 +73,7 @@ nav, .dropdown-content {
 input,
 select,
 textarea {
-  font-family: 'Libre Baskerville', 'ArimoNerdFont';;
+  font-family: 'PixelTimesNewRoman', 'ArimoNerdFont';;
   background-color: transparent;
   color: black;
 }
@@ -96,6 +96,7 @@ textarea {
 #settingsFieldset,
 .reportFieldset {
   border: 1px dashed black;
+  background: #f8f8f8;
 }
 
 .topBoards a,
@@ -147,5 +148,5 @@ button,
   padding-left: 0.25em;
   font-size: 80%;
   font-weight: bold;
-  font-family: 'Libre Baskerville', 'ArimoNerdFont';
+  font-family: 'PixelTimesNewRoman', 'ArimoNerdFont';
 }

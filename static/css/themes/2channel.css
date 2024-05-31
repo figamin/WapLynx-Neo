@@ -11,7 +11,9 @@ PC-98 is a theme based around an old command prompt interface, meant to resemble
   border: 1px double black;
   background-color: #CCFFCC;
 }
-
+.theme_2channel .floatingMenu {
+  background-color: #EFEFEF;
+}
 .theme_2channel .topBoards a,
 .theme_2channel .innerPost,
 .theme_2channel .innerOP,
@@ -20,8 +22,9 @@ PC-98 is a theme based around an old command prompt interface, meant to resemble
   background: #EFEFEF;
   border: 1px double black;
 }
-
-.theme_2channel .floatingMenu,
+.theme_2channel .innerOP {
+  overflow: auto;
+}
 .theme_2channel #post-form-inner {
   background: url("https://wapchan.org/.static/2channel.gif");
   border: 1px double black;

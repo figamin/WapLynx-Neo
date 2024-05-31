@@ -13,10 +13,6 @@
   content: "\f456";
 }
 
-#galleryLink:before {
-  content: "gallery";
-}
-
 .pinIndicator:after {
   content: "\f435";
 }

@@ -1,0 +1,55 @@
+<audio id="player" src="https://radio.wapchan.org/wapfm"></audio>
+<script>
+  function showBoardList() {
+      document.getElementById("smallNav").style.display = "none"
+      document.getElementById("bigNav").style.display = "block"
+  }
+  function hideBoardList() {
+    document.getElementById("smallNav").style.display = "block"
+    document.getElementById("bigNav").style.display = "none"
+  }
+  function doStuff() {
+    if(document.URL.indexOf("mod.js") > 0)
+    {
+      let urlParms = new URLSearchParams(window.location.search)
+      document.getElementById("catalogLink").href = "/" + urlParms.get("boardUri") + "/catalog.html"
+    }
+  }
+</script>
+<div id="smallNav" class="navLinkSpan">
+<span class="navLeft">
+  <a class="showBoards" href="javascript:showBoardList();">[+]</a>
+  <a href="/">[Home]</a> <a href="/.static/pages/posting.html">[Help]</a>
+  <script>doStuff()</script>
+</span>
+</div>
+<div id="bigNav" class="navLinkSpan" style="display: none;">
+<span class="navLeft">
+  <a class="showBoards" href="javascript:hideBoardList();">[-]</a>
+  <a href="/latest">[Latest Posts]</a>
+  [<a href="/cel" title="Retro Anime & Manga">cel</a>
+      / 
+      <a href="/digi" title="2000s Anime & Manga">digi</a>
+      / 
+      <a href="/lum" title="Rumic World">lum</a>
+      / 
+      <a href="/lit" title="Literature">lit</a>
+      / 
+      <a href="/vnt" title="Vidya & Tech">vnt</a>
+      /
+      <a href="/media" title="Mixed Media">media</a>
+      /
+      <a href="/ocvid" title="OC Videos">ocvid</a>
+      / 
+      <a href="/kind" title="Random Acts of Kindness">kind</a>
+      /
+      <a href="/doodle" title="Wapchan Doodles!">doodle</a>
+      /
+      <a href="/wap" title="Site Meta">wap</a>
+      /
+      <a href="https://dis.wapchan.org" title="text">text</a>]
+</span>
+</div>
+<span class="navRight">
+  <a class="fa-solid fa-radio" href="/.static/pages/radio.html" title="Radio" target="_blank"></a>
+</span>

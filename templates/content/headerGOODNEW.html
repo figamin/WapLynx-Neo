@@ -1,0 +1,35 @@
+<script src="/.static/js/jquery.min.js"></script>
+<audio id="player" src="https://radio.wapchan.org/wapfm"></audio>
+<span id="navLinkSpan">
+  <ul></ul><a href="/" title="Home" style="color: #fffe00; text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; letter-spacing: +0em; font-weight: bold;">Wapchan! </a>
+    <span class="linkBarrierStart"></span><a href="/latest" id="navOverboard" title="Latest Posts"></a><span class="linkBarrierDivider"></span>
+      <a href="/.static/pages/boards.html" title="Boards">Boards</a>
+      <span class="linkBarrierDivider"></span>
+      <a href="/.static/pages/rules.html" title="Boards">Rules</a>
+      <span class="linkBarrierDivider"></span>
+    <a href="https://rumiki.wapchan.org" title="Rumiki">Rumiki</a><span 
+      class="linkBarrierDivider"></span>
+      <span><a href="https://radio.wapchan.org/">Radio:</a></span>
+    <button id="playButton" onclick="
+      if (document.getElementById('player').paused){
+        document.getElementById('player').play();
+        document.getElementById('playButton').innerText = ''
+      } else {
+        document.getElementById('player').pause();
+        document.getElementById('playButton').innerText = ''
+      }" title="Radio">
+      </button>
+      <span class="mobileLinks linkBarrierDivider"></span>
+      <span id="lastHeader" class="desktopLinks">Style:</span>
+      <span class="desktopLinks">Font Override:</span>
+      <input type="checkbox" id="overrideCity" onclick="
+      var element = document.getElementsByTagName('body')[0];
+      element.classList.toggle('font_override');
+      " title="Font Override"/><label for="overrideCity"></label><span id="lastHeader2"></span><span class="linkBarrierEnd"></span>
+</span>
+<script>
+  var body = document.getElementsByTagName('body')[0];
+  if (document.getElementById('overrideCity').checked) {
+      body.className += ' font_override';
+    }
+</script>

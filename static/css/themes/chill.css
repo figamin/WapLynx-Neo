@@ -15,7 +15,9 @@ Sandbox is a nice green/pink theme. This was actually the original "default" the
 .theme_chill #post-form-inner {
   background: black;
 }
-
+.theme_chill .floatingMenu {
+  border: 1px solid #57007F;
+}
 .theme_chill a,
 .theme_chill .unhideButton,
 .theme_chill .embedButton,

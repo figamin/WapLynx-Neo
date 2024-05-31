@@ -96,12 +96,13 @@ settingsMenu.registerTab = function(text, content, select) {
 };
 
 settingsMenu.placeNavBarButton = function(settingsMenuDiv) {
-    var postingLink2 = document.getElementById('lastHeader2');
-    var referenceNode2 = postingLink2.nextSibling;
+    var postingLink2 = document.getElementById('playButton');
     var settingsButton = document.createElement('a');
     settingsButton.id = 'settingsButton';
-    settingsButton.className = 'la';
-    postingLink2.parentNode.insertBefore(settingsButton, referenceNode2);
+    settingsButton.className = 'fa fa-wrench';
+    settingsButton.title = 'Settings';
+    settingsButton.style["margin-right"] = '5px';
+    postingLink2.parentNode.insertBefore(settingsButton, postingLink2);
 
     settingsButton.onclick = function() {
 

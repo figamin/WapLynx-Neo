@@ -255,7 +255,7 @@ posting.addRelativeTime = function(time) {
 
   var timeObject = new Date(time.innerHTML + (posting.localTimes ? '' : ' UTC'));
 
-  if (time.nextSibling.nextSibling.className !== 'relativeTime') {
+  /*if (time.nextSibling.nextSibling.className !== 'relativeTime') {
 
     var newRelativeLabel = document.createElement('span');
 
@@ -265,7 +265,7 @@ posting.addRelativeTime = function(time) {
     time.parentNode
         .insertBefore(document.createTextNode(' '), time.nextSibling);
 
-  }
+  }*/
 
   var now = new Date();
 
@@ -294,7 +294,7 @@ posting.addRelativeTime = function(time) {
     content = 'Just now'
   }
 
-  time.nextSibling.nextSibling.innerHTML = '(' + content + ')';
+  time.title = content;
 
 };
 
