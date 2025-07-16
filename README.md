@@ -1,3 +1,5 @@
+**Wapchan moved to a fork of vichan so this is no longer in active development**
+
 **WapLynx Neo** is the current frontend for [wapchan.org](https://wapchan.org)
 
 It features a number of highly customised themes, but for use on other sites a lot of work is needed, as many elements are specifically made for wapchan.
